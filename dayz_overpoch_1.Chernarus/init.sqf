@@ -56,7 +56,7 @@ if (!isDedicated) then {
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
 	_playerMonitor = 	[] execVM "system\player_monitor.sqf";	
-	
+	[] execVM "system\SafeZone.sqf";	
 	//anti Hack
 	//[] execVM "system\antihack.sqf";
 
