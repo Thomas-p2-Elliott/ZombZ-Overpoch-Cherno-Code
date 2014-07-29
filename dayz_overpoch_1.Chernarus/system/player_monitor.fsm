@@ -190,7 +190,7 @@ link96[] = {87,88};
 link97[] = {88,79};
 link98[] = {88,85};
 globals[] = {25.000000,1,0,0,0,640,480,1,153,6316128,1,-250.776825,447.996002,648.454712,-90.085701,861,910,1};
-window[] = {2,-1,-1,-1,-1,888,130,1582,130,3,879};
+window[] = {2,-1,-1,-1,-1,940,182,1634,182,3,879};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -1655,9 +1655,9 @@ class FSM
     {
       name = "Server_Loading";
       init = /*%FSM<STATEINIT""">*/"_myTime = diag_tickTime;" \n
-       "dayz_loadScreenMsg = (""ZombZ.net to start authentication"");" \n
+       "dayz_loadScreenMsg = (""Waiting for ZombZ.net to start authentication"");" \n
        "if (_debug) then {" \n
-       "diag_log ""PLOGIN: ZombZ.net to start authentication"";" \n
+       "diag_log ""PLOGIN: Waiting for ZombZ.net to start authentication"";" \n
        "};" \n
        "progressLoadingScreen 0.5;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
