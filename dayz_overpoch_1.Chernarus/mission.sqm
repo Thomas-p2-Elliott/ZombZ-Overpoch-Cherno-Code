@@ -40,13 +40,13 @@ class Mission
 		"glt_m300t",
 		"pook_h13",
 		"csj_gyroac",
-		"map_eu",
+		"map_eu"
 	};
 	addOnsAuto[]=
 	{
 		"dayz_weapons",
 		"ca_modules_functions",
-		"chernarus"
+		"chernarus",
 		"gms_k98",
 		"RH_m14",
 		"FHQ_Remington",
