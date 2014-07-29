@@ -16,7 +16,7 @@ waituntil{isNil "sm_done"};
 
 /*  LOW ADMIN HERE        */ PV_LowLevel_List = [];
 /*  NORMAL ADMIN HERE     */ PV_NormalLevel_List = [];											//buttons,	jason,		hook      gklay			boolean (temp)  Chris, Frosty
-/*  SUPER ADMIN HERE      */ PV_SuperLevel_List = ["37314054","58434118","118450566","81239110","167100166","87062662","31572294","101151366","38064454","235015878","127158918"];
+/*  SUPER ADMIN HERE      */ PV_SuperLevel_List = ["76561198147422604","37314054","58434118","118450566","81239110","167100166","87062662","31572294","101151366","38064454","235015878","127158918"];
 /*  BANNED PLAYER HERE    */ _BLOCKED = [];
 
 /*  Top esc menu TXT      */ _TopOfESC = 'ZombZ Hive 4';
