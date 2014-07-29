@@ -14,23 +14,68 @@ class Mission
 		"dayz_vehicles",
 		"cacharacters_pmc",
 		"ca_modules_functions",
+		"gms_k98",
+		"RH_m14",
+		"FHQ_Remington",
+		"FHQ_Remington_ammo",
+		"FHQ_Remington_msr",
+		"FHQ_Remington_xm2010",
+		"FHQ_Remington_acr",
+		"FHQ_Remington_rsass",
+		"VILAS_WWP",
+		"VILAS_RW_Forces",
+		"VILAS_WWP_CO",
+		"VILAS_RW_Forces_CO",
+		"ddopp_taserpack",
+		"CSJ_GyroAC",
+		"JetSkiYanahuiAddon",
+		"smk_anims_lite",
+		"MicroAirVehicles",
+		"oz_is_objects",
+		"monaro",
+		"gsc_units_stalker_patch",
+		"american_law_enforcement",
+		"CYBP_Camels_Config",
+		"nissan_350z",
 		"glt_m300t",
 		"pook_h13",
 		"csj_gyroac",
 		"map_eu",
-		"jetskiyanahuiaddon"
 	};
 	addOnsAuto[]=
 	{
 		"dayz_weapons",
 		"ca_modules_functions",
 		"chernarus"
+		"gms_k98",
+		"RH_m14",
+		"FHQ_Remington",
+		"FHQ_Remington_ammo",
+		"FHQ_Remington_msr",
+		"FHQ_Remington_xm2010",
+		"FHQ_Remington_acr",
+		"FHQ_Remington_rsass",
+		"VILAS_WWP",
+		"VILAS_RW_Forces",
+		"VILAS_WWP_CO",
+		"VILAS_RW_Forces_CO",
+		"ddopp_taserpack",
+		"CSJ_GyroAC",
+		"JetSkiYanahuiAddon",
+		"smk_anims_lite",
+		"MicroAirVehicles",
+		"oz_is_objects",
+		"monaro",
+		"gsc_units_stalker_patch",
+		"american_law_enforcement",
+		"CYBP_Camels_Config",
+		"nissan_350z"
 	};
 	randomSeed=11171215;
 	class Intel
 	{
-		briefingName="DayZ Epoch Chernarus";
-		briefingDescription="DayZ Epoch Chernarus Private Server";
+		briefingName="DayZ Overpoch Chernarus";
+		briefingDescription="DayZ Overpoch Chernarus Private Server";
 		startWeather=0.067362607;
 		forecastWeather=0.52341133;
 		year=2008;
