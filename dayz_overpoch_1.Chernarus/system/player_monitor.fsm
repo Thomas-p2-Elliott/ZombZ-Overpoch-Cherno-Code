@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "C:\Users\Player2\DayZ\Tools\BI Tool Drive\FSM Editor Personal Edition\scriptedFSM.cfg, DayZ Player Monitor">*/
+/*%FSM<COMPILE "D:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, DayZ Player Monitor">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"init",0,250,-75.000000,-350.000000,25.000000,-300.000000,0.000000,"init"};
@@ -26,7 +26,7 @@ item21[] = {"Phase_Two",2,250,-75.000000,700.000000,25.000000,750.000000,0.00000
 item22[] = {"Dead_Player",4,218,50.000000,700.000000,150.000000,750.000000,0.000000,"Dead" \n "Player"};
 item23[] = {"ERROR__Player_Already",2,250,175.000000,700.000000,275.000000,750.000000,0.000000,"ERROR:" \n "Player Already" \n "Dead"};
 item24[] = {"Alive",4,218,-175.000000,750.000000,-75.000000,800.000000,0.000000,"Alive"};
-item25[] = {"Position",2,4346,-75.000000,800.000000,25.000000,850.000000,0.000000,"Position"};
+item25[] = {"Position",2,250,-75.000000,800.000000,25.000000,850.000000,0.000000,"Position"};
 item26[] = {"Version_Ok",4,218,-175.000000,850.000000,-75.000000,900.000000,0.000000,"Version" \n "Ok"};
 item27[] = {"Load_In",2,250,-75.000000,1000.000000,25.000000,1050.000000,0.000000,"Load In"};
 item28[] = {"Bad_Version",4,218,50.000000,800.000000,150.000000,850.000000,0.000000,"Bad" \n "Version"};
@@ -64,7 +64,7 @@ item59[] = {"ERROR__No_Date_",2,250,175.000000,1150.000000,275.000000,1200.00000
 item60[] = {"Too_Long",4,218,300.000000,1150.000000,400.000000,1200.000000,0.000000,"Too" \n "Long"};
 item61[] = {"get_ready_to_clo_1",2,250,450.000000,800.000000,550.000000,850.000000,0.000000,"get ready to close"};
 item62[] = {"sleep_",4,218,600.000000,800.000000,700.000000,850.000000,0.000000,"sleep" \n ""};
-item63[] = {"Server_Loading",2,250,-75.000000,250.000000,25.000000,300.000000,0.000000,"Server Loading"};
+item63[] = {"Server_Loading",2,4346,-75.000000,250.000000,25.000000,300.000000,0.000000,"Server Loading"};
 item64[] = {"Too_Long",4,218,50.000000,250.000000,150.000000,300.000000,0.000000,"Too" \n "Long"};
 item65[] = {"Server_Ready",4,218,-75.000000,325.000000,25.000000,375.000000,0.000000,"Server Ready"};
 item66[] = {"New_Infected_Cha",4,218,-325.000000,475.000000,-225.000000,525.000000,5.000000,"New" \n "Infected" \n "Character"};
@@ -189,8 +189,8 @@ link95[] = {85,80};
 link96[] = {87,88};
 link97[] = {88,79};
 link98[] = {88,85};
-globals[] = {25.000000,1,0,0,0,640,480,1,153,6316128,1,-592.703857,789.923523,2781.312988,1350.510498,861,891,1};
-window[] = {2,-1,-1,-1,-1,808,50,1502,50,3,879};
+globals[] = {25.000000,1,0,0,0,640,480,1,153,6316128,1,-250.776825,447.996002,648.454712,-90.085701,861,910,1};
+window[] = {2,-1,-1,-1,-1,888,130,1582,130,3,879};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -1655,9 +1655,9 @@ class FSM
     {
       name = "Server_Loading";
       init = /*%FSM<STATEINIT""">*/"_myTime = diag_tickTime;" \n
-       "dayz_loadScreenMsg = (""Waiting for server to start authentication"");" \n
+       "dayz_loadScreenMsg = (""ZombZ.net to start authentication"");" \n
        "if (_debug) then {" \n
-       "diag_log ""PLOGIN: Waiting for server to start authentication"";" \n
+       "diag_log ""PLOGIN: ZombZ.net to start authentication"";" \n
        "};" \n
        "progressLoadingScreen 0.5;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
