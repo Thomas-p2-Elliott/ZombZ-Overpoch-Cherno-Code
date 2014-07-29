@@ -32,6 +32,7 @@ if (!isDedicated) then {
 
 	//pure custom
 	snap_build = 					compile preprocessFileLineNumbers "compile\snap_build.sqf";
+	[] execVM "compile\fn_deployActions.sqf";		//Checks with actions for deploys
 
 
 	BIS_Effects_Burn = 				compile preprocessFile "\ca\Data\ParticleEffects\SCRIPTS\destruction\burn.sqf";

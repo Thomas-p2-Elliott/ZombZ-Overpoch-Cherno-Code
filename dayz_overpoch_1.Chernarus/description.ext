@@ -149,5 +149,7 @@ class DayZ_loadingScreen
 	};
 };
 
-
+//##Snap Build Pro##
 #include "compile\snappoints.hpp"
+//## p2 Extra Right Clickables ##
+#include "configs\rc.hpp"
