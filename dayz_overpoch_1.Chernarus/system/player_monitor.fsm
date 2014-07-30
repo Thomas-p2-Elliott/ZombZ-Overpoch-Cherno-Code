@@ -189,8 +189,8 @@ link95[] = {85,80};
 link96[] = {87,88};
 link97[] = {88,79};
 link98[] = {88,85};
-globals[] = {25.000000,1,0,0,0,640,480,1,153,6316128,1,-250.776825,447.996002,648.454712,-90.085701,861,910,1};
-window[] = {2,-1,-1,-1,-1,940,182,1634,182,3,879};
+globals[] = {25.000000,1,0,0,0,640,480,1,153,6316128,1,-311.591736,508.810547,971.895996,104.804176,861,910,1};
+window[] = {2,-1,-1,-1,-1,914,156,1608,156,3,879};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -545,6 +545,8 @@ class FSM
        "_version	= _msg select 5;" \n
        "_model		= _msg select 6;" \n
        "" \n
+       "_spawnSelection = 9;" \n
+       "" \n
        "_isHiveOk = false;" \n
        "_newPlayer = false;" \n
        "_isInfected = false;" \n
@@ -580,7 +582,7 @@ class FSM
        "_isHack = false;" \n
        "if (_model == ""hacker"") then {" \n
        "	_isHack = true;" \n
-       ""/*%FSM</STATEINIT""">*/;
+       "};"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -656,13 +658,18 @@ class FSM
     class Phase_One
     {
       name = "Phase_One";
-      init = /*%FSM<STATEINIT""">*/"if (_debug) then {" \n
-       "diag_log ""Executing system\login.sqf..."";" \n
+      init = /*%FSM<STATEINIT""">*/"if ((!isNil ""DZE_defaultSkin"") && _isNew && (_isInfected == 0)) then {" \n
+       "	if (dayz_selectGender == ""Survivor2_DZ"") then {" \n
+       "		_rand = floor(random (count (DZE_defaultSkin select 0)));" \n
+       "		_model = getText (configFile >> ""CfgSurvival"" >> ""Skins"" >> ((DZE_defaultSkin select 0) select _rand) >> ""playerModel""); //MALE" \n
+       "	} else {" \n
+       "		_rand = floor(random (count (DZE_defaultSkin select 1)));" \n
+       "		_model = getText (configFile >> ""CfgSurvival"" >> ""Skins"" >> ((DZE_defaultSkin select 1) select _rand) >> ""playerModel""); //FEMALE" \n
+       "	};" \n
        "};" \n
        "" \n
-       "[] execVM ""system\login.sqf"";" \n
-       "" \n
        "dayz_playerName = name player;" \n
+       "_model call player_switchModel;" \n
        "" \n
        "gear_done= true;" \n
        "player allowDamage false;" \n
