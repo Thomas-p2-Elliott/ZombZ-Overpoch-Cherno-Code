@@ -13,17 +13,17 @@ waituntil{isNil "sm_done"}; // prevent server_monitor be called twice (bug durin
 	
 // Custom Configs
 if(isnil "MaxVehicleLimit") then {
-	MaxVehicleLimit = 50;
+	MaxVehicleLimit = 600;
 };
 
 if(isnil "MaxDynamicDebris") then {
-	MaxDynamicDebris = 100;
+	MaxDynamicDebris = 50;
 };
 if(isnil "MaxAmmoBoxes") then {
-	MaxAmmoBoxes = 3;
+	MaxAmmoBoxes = 50;
 };
 if(isnil "MaxMineVeins") then {
-	MaxMineVeins = 50;
+	MaxMineVeins = 25;
 };
 // Custon Configs End
 
@@ -315,10 +315,16 @@ if (isServer && isNil "sm_done") then {
 		_vehLimit = MaxVehicleLimit - _totalvehicles;
 		if(_vehLimit > 0) then {
 			diag_log ("HIVE: Spawning # of Vehicles: " + str(_vehLimit));
-			for "_x" from 1 to _vehLimit do {
-				[] spawn spawn_vehicles;
+			if (DZE_FS_UseStaticVehicleSpawn) then {
+				[_vehLimit] spawn fs_spawnVehicles;
+			}
+			else {
+				for "_x" from 1 to _vehLimit do {
+					[] spawn spawn_vehicles;
+				};
 			};
-		} else {
+		}
+		else {
 			diag_log "HIVE: Vehicle Spawn limit reached!";
 		};
 	};

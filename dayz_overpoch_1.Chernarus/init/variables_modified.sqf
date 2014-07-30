@@ -64,6 +64,7 @@ Player/Spawn Settings
 	//backpack gaurd, wipes backpack if you log out near another player (anti-duping measure)
 	if(isServer) then {
 		DZE_BackpackGuard = true;
+		DZE_FS_UseStaticVehicleSpawn = true;
 	};
 
 	if(!isDedicated) then {
@@ -223,11 +224,14 @@ Trader Settings
 Misc Settings
 ---------------------------------------------------------------------------*/
 
-	MaxVehicleLimit = 10; // Default = 50
-	MaxDynamicDebris = 10; // Default = 100
+	MaxVehicleLimit = 600; // Default = 50
+	MaxDynamicDebris = 50; // Default = 100
 
 	DynamicVehicleDamageLow = 		0; // Default: 0
 	DynamicVehicleDamageHigh = 		0; // Default: 100
+
+	MaxAmmoBoxes = 100;
+	MaxMineVeins = 25;
 
 	// epoch Heli lifting
 	DZE_HeliLift = false;

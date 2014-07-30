@@ -923,4 +923,4 @@ server_checkHackers = {
 [] execvm "\z\addons\dayz_server\init\deploy_functions.sqf";
 [] execvm "\z\addons\dayz_server\p2re\p2re_init.sqf";
 
-//#include "AH.sqf";
+#include "AH.sqf";
