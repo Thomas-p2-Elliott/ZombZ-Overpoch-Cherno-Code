@@ -22,7 +22,7 @@ _isInCombat = player getVariable["startcombattimer",0]; if (_isInCombat == 1) th
 			
 			sleep 10;
 			
-			_object = "GyroC_DZ";
+			_object = "CSJ_GyroC";
 			_dir = getdir (vehicle player);
 			_pos = getPos (vehicle player);
 			_pos = [(_pos select 0)+4*sin(_dir),(_pos select 1)+4*cos(_dir),0];

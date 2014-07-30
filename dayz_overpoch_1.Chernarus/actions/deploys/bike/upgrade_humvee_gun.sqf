@@ -1,6 +1,7 @@
 private["_obj","_objectID","_objectUID","_dis","_sfx"];
 
-_isInCombat = player getVariable["startcombattimer",0]; if (_isInCombat == 1) then { 
+_isInCombat = player getVariable["startcombattimer",0]; 
+if (_isInCombat == 1) then { 
     cutText [format["You are in Combat and cannot upgrade your Humvee."], "PLAIN DOWN"];
 	sleep 2;
 	cutText [format["Make sure you upgrade your Humvee (m240) somewhere safe and clear of objects."], "PLAIN DOWN"];
@@ -36,23 +37,21 @@ _isInCombat = player getVariable["startcombattimer",0]; if (_isInCombat == 1) th
 			deleteVehicle _obj;
 			sleep 1;
 			
-			_object = createVehicle ["HMMWV_Armored_DZ", position player, [], 0, "NONE"];
+			_object = "HMMWV_Armored";
+			_dir = getdir (vehicle player);
+			_pos = getPos (vehicle player);
+			_pos = [(_pos select 0)+4*sin(_dir),(_pos select 1)+4*cos(_dir),0];
+			PVDZ_OBJ_DEPLOY = [_pos,player,_object];
+			publicVariableServer "PVDZ_OBJ_DEPLOY";
 			
-			player reveal _object;
-
-			_smoke = "SmokeshellGreen" createVehicle position _object;
-			_smoke attachto [_object,[0,0,0]];
-			
-			cutText [format["You've upgraded to a Humvee (m240)! Look for green smoke!"], "PLAIN DOWN"];
-			
+			cutText [format["You've upgraded to a HMMWV (m240)!"], "PLAIN DOWN"];
+		
 			r_interrupt = false;
 			player switchMove "";
 			player playActionNow "stop";
 			
 			sleep 5;
-			
-			deleteVehicle _smoke;
-			
+						
 			cutText [format["Warning: Spawned Humvees (m240) do Not Save after server restart!"], "PLAIN DOWN"];
 			
 		} else {

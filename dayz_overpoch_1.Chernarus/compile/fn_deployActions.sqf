@@ -36,9 +36,9 @@ while {true} do {
 				_isMoto = typeOf _cursorTarget in ["TT650_TK_CIV_EP1"]; 
 				_isBtr = typeOf _cursorTarget in ["BTR40_TK_GUE_EP1"]; 
 				_isHumvee = typeOf _cursorTarget in ["HMMWV_DZ"]; 
-				_isGyro = typeOf _cursorTarget in ["GyroC_DZ"]; 
+				_isGyro = typeOf _cursorTarget in ["CSJ_GyroC"]; 
 				_isLittlebird = typeOf _cursorTarget in ["MH6J_DZ"]; 
-				_isMerlin = typeOf _cursorTarget in ["BAF_Merlin_DZ"]; 
+				_isMerlin = typeOf _cursorTarget in ["Mi17_Civilian_DZ"]; 
 				
 				if (s_player_packOBJ < 0) then {
 					s_player_packOBJ = player addaction [("<t color=""#00FF04"">" + ("Pack "+typeOf _cursorTarget+"") +"</t>"),"actions\deploys\pack.sqf",_cursorTarget,6,false,true,"", ""]			
@@ -82,7 +82,7 @@ while {true} do {
 				
 				if ((_isLittlebird) && {_hasToolbox} && {_canDo}) then {				
 					if (s_player_upgradelittlebird < 0) then {					
-						s_player_upgradelittlebird = player addaction[("<t color=""#007ab7"">" + ("Upgrade to Merlin") +"</t>"),"actions\deploys\gyro\upgrade2.sqf",_cursorTarget, -1, true, true, "", ""]; 
+						s_player_upgradelittlebird = player addaction[("<t color=""#007ab7"">" + ("Upgrade to Mi17 Civ") +"</t>"),"actions\deploys\gyro\upgrade2.sqf",_cursorTarget, -1, true, true, "", ""]; 
 					}; 
 				} else {				
 					player removeAction s_player_upgradelittlebird; 
