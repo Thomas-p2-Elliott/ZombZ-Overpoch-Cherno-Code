@@ -65,9 +65,18 @@ Player/Spawn Settings
 	if(isServer) then {
 		DZE_BackpackGuard = true;
 		DZE_FS_UseStaticVehicleSpawn = true;
+
+		//enable debug output for static vehicle spawns?
+		P2DZ_Debug_StaticVehSpawns = true;
+
+		//Static vehicle spawns duplicate vehicle distance check (meters)
+		P2DZ_StaticVehSpawns_DupeDistanceCheck = 7.5;
 	};
 
 	if(!isDedicated) then {
+
+		//Loadscreen Timeout Length (Seconds) (Default: 120)
+		P2DZ_LoadingTimeOut = 30;
 
 		//Allow force save option
 		DZE_AllowForceSave = false;
@@ -224,7 +233,7 @@ Trader Settings
 Misc Settings
 ---------------------------------------------------------------------------*/
 
-	MaxVehicleLimit = 600; // Default = 50
+	MaxVehicleLimit = 5000; // Default = 50
 	MaxDynamicDebris = 50; // Default = 100
 
 	DynamicVehicleDamageLow = 		0; // Default: 0
