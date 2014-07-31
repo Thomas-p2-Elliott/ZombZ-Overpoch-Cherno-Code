@@ -429,7 +429,7 @@ if (!isDedicated) then {
 
 	//This is still needed but the fsm should terminate if any errors pop up.
 	[] spawn {
-        private["_timeOut","_display","_control1","_control2"];
+        private["_timeOut","_timeOutMax","_display","_control1","_control2"];
         disableSerialization;
         _timeOut = 0;
         dayz_loadScreenMsg = "";
@@ -443,8 +443,11 @@ if (!isDedicated) then {
 			waitUntil {!dayz_DisplayGenderSelect};
 		};
 
-        // 120 sec timeout (12000 * 0.01)
-        while { _timeOut < 12000 } do {
+        // 90 secc timeout (9000 * 0.01)
+        //time out gloal var
+        _timeOutmax = P2DZ_LoadingTimeOut * 100;
+
+        while { _timeOut < _timeOutmax } do {
             if (dayz_clientPreload && dayz_authed) exitWith { diag_log "PLOGIN: Login loop completed!"; };
             if (!isNil "_display") then {
                 if ( isNull _display ) then {
@@ -465,9 +468,9 @@ if (!isDedicated) then {
 
             _timeOut = _timeOut + 1;
 
-            if (_timeOut >= 12000) then {
-                1 cutText [localize "str_player_login_timeout", "PLAIN DOWN"];
-                sleep 10;
+            if (_timeOut >= _timeOutmax) then {
+                1 cutText [("ZombZ: " + localize "str_player_login_timeout" + " Please Try Again!"), "PLAIN DOWN"];
+                sleep 5;
                 endLoadingScreen;
                 endMission "END1";
             };
