@@ -26,7 +26,7 @@ _dir = 		_worldspace select 0;
 _location = _worldspace select 1;
 
 //Generate UID test using time
-_uid = _worldspace call dayz_objectUID3;
+_uid = [random(100),_worldspace select 1] call dayz_objectUID3;
 
 // TODO: check if uid already exists && if so increment by 1 && check again as soon as we find nothing continue.
 

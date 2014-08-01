@@ -16,7 +16,7 @@ _location = _worldspace select 1;
 
 //Generate UID test using time
 // _uid = str( round (dateToNumber date)) + str(round time);
-_uid = _worldspace call dayz_objectUID2;
+_uid = [random(100),_worldspace select 1] call dayz_objectUID2;
 //_uid = format["%1%2",(round time),_uid];
 
 if (_spawnDMG) then { 

@@ -101,7 +101,7 @@ _fnc_spawn_vehicle = {
 				clearMagazineCargoGlobal  _veh;
 				// _veh setVehicleAmmo DZE_vehicleAmmo;
 
-				[_veh,[random(100),_objPosition],_vehicle,true,"0"] call server_publishVeh;
+				[_veh,[_dir,_objPosition],_vehicle,true,"0"] call server_publishVeh;
 			} else {
 				diag_log("Static Veh Spawn: Position Failed: " + str _x);
 			};

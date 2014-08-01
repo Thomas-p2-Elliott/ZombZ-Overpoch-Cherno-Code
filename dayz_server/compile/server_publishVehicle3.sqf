@@ -16,7 +16,7 @@ _dir = 		_worldspace select 0;
 _location = _worldspace select 1;
 
 //Generate UID test using time
-_uid = _worldspace call dayz_objectUID3;
+_uid = [random(100),_worldspace select 1] call dayz_objectUID3;
 
 //Send request
 _key = format["CHILD:308:%1:%2:%3:%4:%5:%6:%7:%8:%9:",dayZ_instance, _class, 0 , _characterID, _worldspace, [], [], 1,_uid];
