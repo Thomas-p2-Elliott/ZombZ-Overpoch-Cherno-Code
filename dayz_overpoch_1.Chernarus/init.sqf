@@ -70,7 +70,7 @@ if (!isDedicated) then {
 
 	[] execVM "system\SafeZone.sqf";	
 	//anti Hack
-	[] execVM "system\antihack.sqf";
+	//[] execVM "system\antihack.sqf";
 
 	//Lights
 	//[false,12] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";

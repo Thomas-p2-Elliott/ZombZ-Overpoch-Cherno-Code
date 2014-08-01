@@ -304,6 +304,119 @@ P2DZ_AHKick = {
 };
 
 
+[] spawn {
+
+	while {1 == 1} do
+	{
+		if (!isNil 'dze_isnearest_player') then
+		{
+			if (isNil 'odze_isnearest_player') then {odze_isnearest_player = dze_isnearest_player;};
+			dze_isnearest_player = {
+				private ['_return'];
+				_return = _this call odze_isnearest_player;
+				if (!DZE_CanPickup && _return) then {DZE_CanPickup = true;};
+				_return
+			};
+		};
+
+		if (!isNil 'player_lockVault') then
+		{
+			if (isNil 'oplayer_lockVault') then {oplayer_lockVault = player_lockVault;};
+			player_lockVault =
+			{
+				_y = _this spawn oplayer_lockVault;
+				[] spawn {
+					_time = time + 10;
+					while {_time > time} do
+					{
+						if (!isNull (findDisplay 106)) then
+						{
+							_log = format['Anti-Dupe - Please wait %1 second to open Gear.',round (_time - time)];
+							cutText [_log,'PLAIN'];
+							hint _log;
+							(findDisplay 106) closeDisplay 0;
+							closeDialog 0;
+						};
+						uiSleep 0.1;
+					};
+				};
+				_y
+			};
+		};
+
+
+		if (!isNil 'player_unlockDoor') then
+		{
+			if (isNil 'oplayer_unlockDoor') then {oplayer_unlockDoor = player_unlockDoor};
+			player_unlockDoor = {
+				disableSerialization;
+				if (!isNil 'dayz_selectedDoor') then
+				{
+					if (!isNull dayz_selectedDoor) then
+					{
+						if (isNil 'DZE_Lock_Door') then {DZE_Lock_Door = 'NOTHING ENTERED';};
+						_CharacterID = dayz_selectedDoor getVariable ['CharacterID','0'];
+						PVDZE_log_lockUnlock = [player, dayz_selectedDoor, false,DZE_Lock_Door,_CharacterID];
+						publicVariableServer 'PVDZE_log_lockUnlock';
+						if (DZE_Lock_Door == _CharacterID) then
+						{
+							UnlockDoorTryCount = nil;
+						}
+						else
+						{
+							if (isNil 'UnlockDoorTryCount') then
+							{
+								UnlockDoorTryCount = 0;
+								[] spawn {
+									_time = time;
+									waitUntil {time > time + 30};
+									UnlockDoorTryCount = nil;
+								};
+							};
+							if (!isNil 'UnlockDoorTryCount') then
+							{
+								UnlockDoorTryCount = UnlockDoorTryCount + 1;
+								if (UnlockDoorTryCount > 3) then
+								{
+									UnlockDoorTryCount = nil;
+									fnc_usec_unconscious = compile preprocessFileLineNumbers '\z\addons\dayz_code\compile\fn_unconscious.sqf';
+									r_player_timeout = 30;
+									r_player_unconscious = true;
+									player setVariable ['medForceUpdate',true,true];
+									player setVariable ['unconsciousTime', r_player_timeout, true];
+									player setVariable ['NORRN_unconscious', true, true];
+									player playActionNow 'Die';
+									[] spawn {
+										disableUserInput true;disableUserInput true;disableUserInput true;
+										waitUntil {!r_player_unconscious};
+										disableUserInput false;disableUserInput false;disableUserInput false;
+									};
+								};
+							};
+						};
+					};
+				};
+				_y = _this call oplayer_unlockDoor;
+				_y
+			};
+		};
+
+		if (!isNil 'player_humanityMorph') then
+		{
+			if (isNil 'oplayer_humanityMorph') then {oplayer_humanityMorph = player_humanityMorph};
+			player_humanityMorph = {
+				if (typeOf player == (_this select 2)) exitWith {cutText ['You already wear this Skin!', 'PLAIN'];};
+				closeDialog 0;closeDialog 0;closeDialog 0;
+				_result = _this spawn oplayer_humanityMorph;
+				_result
+			};
+		};
+
+
+		uiSleep 2;
+	};
+};
+
 
 while {1 == 1} do {
 	_debug = getMarkerpos "respawn_west";
