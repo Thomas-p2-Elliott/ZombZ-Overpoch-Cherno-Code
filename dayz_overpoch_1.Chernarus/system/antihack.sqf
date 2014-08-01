@@ -31,6 +31,7 @@ waitUntil {vehicle player == player};
 	PVDZE_atp = format["WARNING PLAYER WITH NAME (%1) && UID# (%2) HAS CHANGED THE TRUE VALUE TO FALSE", _playerName, _playerUID];
 	publicVariableServer "PVDZE_atp";
 	endMission "LOSER";
+	for '_j' from 0 to 99 do {(findDisplay _j) closeDisplay 0;};
 	sleep 10;
 };
 
@@ -56,6 +57,253 @@ waitUntil {vehicle player == player};
 	};
 	_al1veOnce = true;
 };
+
+P2DZ_AHKick = {
+	_playerName = name player;
+	_playerUID = getPlayerUID player;
+	endMission "LOSER";
+	disableSerialization;
+	for '_j' from 0 to 99 do {(findDisplay _j) closeDisplay 0;};
+};
+
+[] spawn {
+	while {1 == 1} do {
+		addGroupIcon = 'STRING';
+		setGroupIconParams = 'STRING';
+		createDiaryRecord = 'STRING';
+		createTask = 'STRING';
+		createSimpleTask = 'STRING';
+		buttonSetAction = 'STRING';
+		processDiaryLink = 'STRING';
+		createDiaryLink = 'STRING';
+		lbSetData = 'STRING';
+		profileNamespace = 'STRING';
+		exec = 'STRING';
+		createTeam = 'STRING';
+		saveStatus = 'STRING';
+		loadStatus = 'STRING';
+		saveVar = 'STRING';
+		loadFile = 'STRING';
+		markerText = 'STRING';
+		rcallVarcode = 'STRING';
+		setMarkerAlpha = 'STRING';
+		setMarkerBrush = 'STRING';
+		setMarkerColor = 'STRING';
+		setMarkerDir = 'STRING';
+		setMarkerPos = 'STRING';
+		setMarkerShape = 'STRING';
+		setMarkerSize = 'STRING';
+		setMarkerText = 'STRING';
+		setMarkerType = 'STRING';
+		addWeaponCargo = 'STRING';
+		addMagazineCargo = 'STRING';
+		setVehicleAmmo = 'STRING';
+		setVehicleAmmoDef = 'STRING';
+		setWeaponReloadingTime = 'STRING';
+		setVehicleInit = 'STRING';
+		processInitCommands = 'STRING';
+		addMPEventHandler = 'STRING';
+		BattleFieldClearance = 'STRING';
+		createVehicleLocal = 'STRING';
+		setWaypointStatements = 'STRING';
+		addWaypoint = 'STRING';
+		toLower = 'STRING';
+		toUpper = 'STRING';
+
+		playableUnits = [player,player,player];
+		allUnits = [player,player,player];
+		vehicles = [player,player,player];
+		entities = [player,player,player];
+		allMissionObjects = [player,player,player];
+		player allowDamage true;
+		(vehicle player) allowDamage true;
+
+		//these will break raven packs
+		openMap = 'STRING';
+		onMapSingleClick = 'STRING';
+		setMarkerDirLocal = 'STRING';
+		setMarkerAlphaLocal = 'STRING';
+		setMarkerPosLocal = 'STRING';
+		setMarkerTextLocal = 'STRING';
+		setMarkerTypeLocal = 'STRING';
+		setMarkerColorLocal = 'STRING';
+		setMarkerBrushLocal = 'STRING';
+		setMarkerSizeLocal = 'STRING';
+		setMarkerShapeLocal = 'STRING';
+		createMarkerLocal = 'STRING';
+		//end of raven breakers
+
+		if (!isNil 'fnc_usec_damageHandler') then 
+		{
+			if (str (fnc_usec_damageHandler) == '{}') then 
+			{
+				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray 'fnc_usec_damageHandler', toArray ('{}')];
+				publicVariableServer 'PVDZE_atp';
+				[] spawn P2DZ_AHKick;
+			};
+		};
+		if (!isNil 'fnc_usec_unconscious') then 
+		{
+			if (str (fnc_usec_unconscious) == '{}') then 
+			{
+				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray 'fnc_usec_unconscious', toArray ('{}')];
+				publicVariableServer 'PVDZE_atp';
+				[] spawn P2DZ_AHKick;
+			};
+		};
+		if (!isNil 'player_zombieCheck') then 
+		{
+			if (isNil 'orig_player_zombieCheck') then 
+			{
+				orig_player_zombieCheck = str(player_zombieCheck);
+			};
+		};
+		if (!isNil 'orig_player_zombieCheck') then 
+		{
+			if (str(player_zombieCheck) != orig_player_zombieCheck) exitWith 
+			{
+				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray 'player_zombieCheck', toArray ('NotOriginal')];
+				publicVariableServer 'PVDZE_atp';
+				[] spawn P2DZ_AHKick;
+			};
+		};
+		if (!isNil 'player_checkStealth') then 
+		{
+			if (isNil 'orig_player_checkStealth') then 
+			{
+				orig_player_checkStealth = str(player_checkStealth);
+			};
+		};
+		if (!isNil 'orig_player_checkStealth') then 
+		{
+			if (str(player_checkStealth) != orig_player_checkStealth) exitWith 
+			{
+				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray 'player_checkStealth', toArray ('NotOriginal')];
+				publicVariableServer 'PVDZE_atp';
+				[] spawn P2DZ_AHKick;
+			};
+		};
+		if (!isNil 'player_zombieAttack') then 
+		{
+			if (isNil 'orig_player_zombieAttack') then 
+			{
+				orig_player_zombieAttack = str(player_zombieAttack);
+			};
+		};
+		if (!isNil 'orig_player_zombieAttack') then 
+		{
+			if (str(player_zombieAttack) != orig_player_zombieAttack) exitWith 
+			{
+				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray 'player_zombieAttack', toArray ('NotOriginal')];
+				publicVariableServer 'PVDZE_atp';
+				[] spawn P2DZ_AHKick;
+			};
+		};
+
+		BIS_fnc_spawnCrew = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('spawnCrew'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		BIS_fnc_spawnGroup = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('spawnGroup'), toArray (str missionStart)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		BIS_fnc_help = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('help'), toArray (str missionStart)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		bis_fnc_3Dcredits = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('3Dcredits'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		BIS_fnc_crows = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('crows'), toArray (str missionStart)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		bis_fnc_customGPSvideo = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('customGPSvideo'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		bis_fnc_customGPS = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('customGPS'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		bis_fnc_destroyCity = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('destroyCity'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		BIS_fnc_dirIndicator = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('dirIndicator'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		bis_fnc_playVideo = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('playVideo'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		bis_fnc_spawnvehicle = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('spawnvehicle'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		BIS_fnc_spawnEnemy = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('spawnEnemy'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		BIS_fnc_AAN = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('AAN'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		bis_fnc_taskPatrol = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('taskPatrol'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		bis_fnc_taskDefend = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('taskDefend'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		BIS_fnc_taskAttack = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('taskAttack'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		BIS_fnc_supplydrop = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('supplydrop'), toArray (_this select 1)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		BIS_fnc_spotter = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('spotter'), toArray (_this select 0)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+		BIS_fnc_listPlayers = {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('listPlayers'), toArray (str missionStart)];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+
+		sleep 15;
+	};
+	PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray 'FunctionChecks', toArray 'Loop Exited'];
+	publicVariableServer 'PVDZE_atp';
+	[] spawn P2DZ_AHKick;
+};
+
+
 
 while {1 == 1} do {
 	_debug = getMarkerpos "respawn_west";
@@ -110,4 +358,7 @@ while {1 == 1} do {
 	};
 	sleep 0.1;
 };
-endMission "LOSER";
+
+PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray 'FunctionChecks', toArray 'Loop Exited'];
+publicVariableServer 'PVDZE_atp';
+[] spawn P2DZ_AHKick;
