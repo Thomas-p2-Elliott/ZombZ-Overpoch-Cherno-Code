@@ -20,9 +20,10 @@ if (!isDedicated) then {
 	player_unlockVault =			compile preprocessFileLineNumbers "compile\player_unlockVault.sqf";
 	player_zombieCheck = 			compile preprocessFileLineNumbers "compile\player_zombieCheck.sqf";		//Run on a players computer, checks if the player is near a zombie
 	player_zombieAttack = 			compile preprocessFileLineNumbers "compile\player_zombieAttack.sqf";	//Run on a players computer, causes a nearby zombie to attack them
+	player_death =					compile preprocessFileLineNumbers "compile\player_death.sqf";
+	player_checkStealth =			compile preprocessFileLineNumbers "compile\player_checkStealth.sqf";
 
 	//unmodified
-	player_checkStealth =			compile preprocessFileLineNumbers "compile\player_checkStealth.sqf";
 	player_throwObject = 			compile preprocessFileLineNumbers "compile\player_throwObject.sqf";
 	player_traderCity = 			compile preprocessFileLineNumbers "compile\player_traderCity.sqf";
 	ui_changeDisplay = 				compile preprocessFileLineNumbers "compile\ui_changeDisplay.sqf";
@@ -33,7 +34,6 @@ if (!isDedicated) then {
 	//pure custom
 	snap_build = 					compile preprocessFileLineNumbers "compile\snap_build.sqf";
 	[] execVM "compile\fn_deployActions.sqf";		//Checks with actions for deploys
-
 
 	BIS_Effects_Burn = 				compile preprocessFile "\ca\Data\ParticleEffects\SCRIPTS\destruction\burn.sqf";
 	player_zombieCheck = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieCheck.sqf";	//Run on a players computer, checks if the player is near a zombie
@@ -77,7 +77,6 @@ if (!isDedicated) then {
 
 	player_crossbowBolt =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_crossbowBolt.sqf";
 	player_music = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_music.sqf";			//Used to generate ambient music
-	player_death =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_death.sqf";
 
 	world_sunRise =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_sunRise.sqf";
 	world_surfaceNoise =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_surfaceNoise.sqf";
@@ -499,6 +498,7 @@ if (!isDedicated) then {
 	spawn_loot =					compile preprocessFileLineNumbers "compile\spawn_loot.sqf";
 	spawn_loot_small = 				compile preprocessFileLineNumbers "compile\spawn_loot_small.sqf";
 
+	fn_lootCheck = 				compile preprocessFileLineNumbers "compile\fn_lootCheck.sqf";
 
 	BIS_fnc_selectRandom =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\BIS_fnc\fn_selectRandom.sqf";
 	BIS_fnc_vectorAdd =         compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\BIS_fnc\fn_vectorAdd.sqf";

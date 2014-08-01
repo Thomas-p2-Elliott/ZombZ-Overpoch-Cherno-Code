@@ -32,6 +32,7 @@ progressLoadingScreen 0.2;
 call compile preprocessFileLineNumbers "\z\addons\dayz_code\medical\setup_functions_med.sqf";	//Functions used by CLIENT for medical
 progressLoadingScreen 0.4;
 call compile preprocessFileLineNumbers "init\compiles.sqf";										//Compile regular functions
+call compile preprocessFileLineNumbers "compile\string_functions.sqf";							//Compile extra string functions
 progressLoadingScreen 0.5;
 call compile preprocessFileLineNumbers "server_traders.sqf";									//Compile trader configs
 progressLoadingScreen 1.0;
@@ -57,6 +58,7 @@ if (isServer) then {
 };
 
 if (!isDedicated) then {
+	[] execVM "system\login.sqf";	
 	//Conduct map operations
 	0 fadeSound 0;
 	waitUntil {!isNil "dayz_loadScreenMsg"};
@@ -65,9 +67,10 @@ if (!isDedicated) then {
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
 	_playerMonitor = 	[] execVM "system\player_monitor.sqf";	
+
 	[] execVM "system\SafeZone.sqf";	
 	//anti Hack
-	//[] execVM "system\antihack.sqf";
+	[] execVM "system\antihack.sqf";
 
 	//Lights
 	//[false,12] execVM "\z\addons\dayz_code\compile\local_lights_init.sqf";

@@ -107,6 +107,13 @@ Player/Spawn Settings
 /*---------------------------------------------------------------------------
 Loot & Zombie & Animal Settings
 ---------------------------------------------------------------------------*/
+	P2DZ_lootCheck_centerPoint = [0,0,0];	//Center point for where the 'improved' loot should spawn (type: position array)
+	P2DZ_lootCheck_radius = 10000;			//Radius for this dome for the size of the imrpoved loot zone (type: number, meters)
+	P2DZ_lootCheck_debug = true;			//Toggles debugging logs (type: boolean)
+
+	//Pistols List (Pistols listed here will spawn 4 - 8 mags)
+	P2DZ_pistolList = ["Makarov","MakarovSD","M9","Colt1911","revolver_EP1","revolver_gold_EP1","glock17_EP1","M9SD","MakarovSD","Sa61_EP1","UZI_EP1","UZI_SD_EP1"];
+
 	//how long after a building has bbeen looted can it respawn loot?
 	DZE_LootSpawnTimer = 10;
 
@@ -238,7 +245,8 @@ Misc Settings
 
 	DynamicVehicleDamageLow = 		0; // Default: 0
 	DynamicVehicleDamageHigh = 		0; // Default: 100
-
+	DynamicVehicleFuelHigh	= 		15;
+	DynamicVehicleFuelLow =			0;
 	MaxAmmoBoxes = 100;
 	MaxMineVeins = 25;
 
@@ -283,6 +291,20 @@ p2_humanitySkinsFemale = ["SurvivorW2_DZ","SurvivorWcombat_DZ","SurvivorWdesert_
 /*---------------------------------------------------------------------------
 							Functions
 ---------------------------------------------------------------------------*/
+
+/* KillzoneKid's More Accurate Distance Function 
+Source: http://killzonekid.com/arma-scripting-tutorials-distance/	*/
+
+KK_fnc_distanceASL = {
+    private ["_v0","_v1"];
+    _v0 = _this select 0;
+    _v1 = _this select 1;
+    sqrt (
+        ((_v0 select 0) - (_v1 select 0)) ^ 2 + 
+        ((_v0 select 1) - (_v1 select 1)) ^ 2 + 
+        ((_v0 select 2) - (_v1 select 2)) ^ 2
+    )
+};
 
 /*---------------------------------------------------------------------------
 Function: Checks if a players skin should be upgraded/downgraded depending
