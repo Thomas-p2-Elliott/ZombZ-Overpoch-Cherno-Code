@@ -1,10 +1,12 @@
 /*
 	Anti-Teleport - Created By Razor / Refactored By Alby & CopyPasted to Epoch by Skaronator
+	Modified by [ZombZ.net] Player2 & xDeejayCrazyx
 */
-
 private ["_log","_playerName","_playerUID","_al1veOnce","_debug","_lastpos","_lastheight","_lasttime","_lastVehicle","_v","_h","_topv","_toph","_curpos","_distance","_acceptableDistance","_curtime","_difftime","_plant","_curheight","_speed","_topSpeed","_terrainHeight","_differenceCheck","_lastPosVar","_safetyVehicle","_curPos"];
-
 waitUntil {vehicle player == player};
+
+//Because we don't have rules!
+if ((getPlayerUID player) in ["76561198147422604","76561197994454413","76561198143011904"]) exitWith {};
 
 [] spawn {
 	private ["_playerName","_playerUID"];

@@ -1,33 +1,35 @@
-diag_log ( "[ZombZ] Starting Trader City Safezone Commander!" );
+diag_log ( "[ZombZ] Starting Safezone Commander!" );
  
 if (isDedicated || isServer) exitWith {diag_log ( "Error: Attempting to start SafeZone products on a server where it should not be!" );}; 
 
 Private ["_EH_Fired", "_ehID", "_fix","_inVehicle","_inVehicleLast","_EH_Fired_Vehicle","_inVehicleDamage","_antiBackpackThread","_antiBackpackThread2","_msgLock","_slimit","_maxspeed","_vehicle","_curspeed","_vel","_dir","_speed"];
 		
-private ["_ZombZ_safeZoneGodmode","_ZombZ_safeZoneMessages","_ZombZ_safeZone_Players_DisableClothing","_ZombZ_safeZone_Zombie_Zapper","_ZombZ_safeZone_Backpack_AllowGearFromLootPiles","_ZombZ_safeZone_LessZ_Build_Spawn",
-"_ZombZ_safeZone_Vehicle_Speed_Limit","_ZombZ_safeZone_Backpack_AllowGearFromVehicles","_ZombZ_safeZone_Backpack_AllowGearFromDeadPlayers","_ZombZ_safeZone_Vehicles_DisableMountedGuns","_ZombZ_safeZone_Players_DisableWeaponFiring",
-"_ZombZ_safeZone_Backpack_EnableAntiBackpack","_ZombZ_safeZone_Vehicles_AllowGearFromWithinVehicles"];
+private ["_ZombZ_SZ_Godmode","_ZombZ_SZ_Messages","_ZombZ_SZ_Clothing","_ZombZ_SZ_Zombie_Zapper","_ZombZ_SZ_LootPiles","_ZombZ_SZ_NoZeds",
+"_ZombZ_SZ_SpeedLimit","_ZombZ_SZ_GearFromVehicles","_ZombZ_SZ_DeadPlayers","_ZombZ_SZ_DisableMountedGuns","_ZombZ_SZ_DisableWeaponFiring",
+"_ZombZ_SZ_Backpack_EnableAntiBackpack","_ZombZ_SZ_GearFromWithinVehicles"];
 
-//SCRIPT SETTINGS
-_ZombZ_safeZoneDebug = false; 									//Debug notes on screen.
-_ZombZ_safeZoneGodmode = true; 								//Should safezone Godmode be enabled?
-_ZombZ_safeZoneMessages = true;								//Should players get messages when entering and exiting the safe zone?
-_ZombZ_safeZone_Players_DisableClothing = true;				//Should players not be able to change clothes in safe zone?
-_ZombZ_safeZone_LessZ_Build_Spawn = true;						//Should zombies not be able to spawn in safezones?
-_ZombZ_safeZone_Vehicle_Speed_Limit = true;					//Should players vehicles be limited to 25km/h in safezones?
-_ZombZ_safeZone_Backpack_AllowGearFromLootPiles = true;		//Should players be able to loot from loot piles?
-_ZombZ_safeZone_Backpack_AllowGearFromVehicles = false;		//Should players be able to loot from a vehicles gear?
-_ZombZ_safeZone_Backpack_AllowGearFromDeadPlayers = true;		//Should players be able to loot from a dead players corpse?
-_ZombZ_safeZone_Backpack_AllowFriendlyTaggedAccess = true;		//Should players who are tagged friendly be able to access eachothers bags?
-_ZombZ_safeZone_Vehicles_DisableMountedGuns = true;			//Should players not be able to shoot bullets/projectiles from mounted guns?
-_ZombZ_safeZone_Vehicles_AllowGearFromWithinVehicles = true;	//Should players be able to open the gear screen while they are inside a vehicle?
-_ZombZ_safeZone_Players_DisableWeaponFiring = true;			//Should players not be able to shoot bullets/projectiles from their weapon(s)?
+//Main Settings
+_ZombZ_SZ_Debug 				 = false;//Debug notes on screen.
+_ZombZ_SZ_Godmode				 = true; //Should safezone Godmode be enabled?
+_ZombZ_SZ_Messages				 = true; //Should players get messages when entering and exiting the safe zone?
 
-//Probs not needed, but meh :)
+//Script Settings
+_ZombZ_SZ_Clothing				 = true; //Should players not be able to change clothes in safe zone?
+_ZombZ_SZ_DeadPlayers 			 = true; //Should players be able to loot from a dead players corpse?
+_ZombZ_SZ_DisableMountedGuns 	 = true; //Should players not be able to shoot bullets/projectiles from mounted guns?
+_ZombZ_SZ_DisableWeaponFiring 	 = true; //Should players not be able to shoot bullets/projectiles from their weapon(s)?
+_ZombZ_SZ_GearFromVehicles 		 = false;//Should players be able to loot from a vehicles gear?
+_ZombZ_SZ_GearFromWithinVehicles = true; //Should players be able to open the gear screen while they are inside a vehicle?
+_ZombZ_SZ_LootPiles 			 = true; //Should players be able to loot from loot piles?
+_ZombZ_SZ_NoZeds				 = true; //Should zombies not be able to spawn in safezones?
+_ZombZ_SZ_SpeedLimit 			 = true; //Should players vehicles be limited to 25km/h in safezones?
+_ZombZ_SZ_VehicleSalvage 		 = true; //Should we allow salavage options in the trader cities?
+
+//Main Script Coding
 disableSerialization;
 
 waitUntil {!isNil "dayz_animalCheck"};
-if (_ZombZ_safeZoneMessages) then {systemChat ("[ZombZ] Safezone Commander Loaded!");};
+if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] Safezone Commander Loaded!");};
 
 _inVehicle = objNull;
 _inVehicleLast = objNull;
@@ -37,10 +39,10 @@ while {true} do {
 	waitUntil {!canBuild};
 
 	_inSafezoneFinished = false;
-	if (_ZombZ_safeZoneMessages) then {systemChat ("[ZombZ] Entering Safezone Trader - God Mode Enabled"); };
+	if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] Entering Safezone Trader - God Mode Enabled"); };
 	_thePlayer = player;
 
-	if (_ZombZ_safeZoneGodmode ) then
+	if (_ZombZ_SZ_Godmode ) then
 	{
 		player_zombieCheck = {};
 		fnc_usec_damageHandler = {};
@@ -50,21 +52,21 @@ while {true} do {
 		_thePlayer allowDamage false;
 	};
 
-	if (_ZombZ_safeZone_Players_DisableClothing) then
+	if (_ZombZ_SZ_Clothing) then
 	{
 		player_wearClothes = {systemChat ("[ZombZ] Changing clothes is disabled in Safezone Trader Area"); };
 	};
 
-	if (_ZombZ_safeZone_LessZ_Build_Spawn ) then
+	if (_ZombZ_SZ_NoZeds ) then
 	{
 		building_spawnZombies =	{};
 	};
 	
-	if (_ZombZ_safeZone_Vehicle_Speed_Limit ) then
+	if (_ZombZ_SZ_SpeedLimit ) then
 	{
 		if ( vehicle player != player and !((vehicle player) isKindOf 'Air') ) then
 		{
-			if (_ZombZ_safeZoneMessages) then {systemChat ("[ZombZ] Safezone 25-KMPH Speed Limit Enabled");};
+			if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] Safezone 25-KMPH Speed Limit Enabled");};
 		}; 
 		
 		_slimit = [] spawn 
@@ -87,7 +89,7 @@ while {true} do {
 		};
 	};
 	
-	if (_ZombZ_safeZone_Players_DisableWeaponFiring) then
+	if (_ZombZ_SZ_DisableWeaponFiring) then
 	{
 		_EH_Fired = _thePlayer addEventHandler ["Fired", {
 			systemChat ("[ZombZ] You can not fire your weapon in a Safezone Trader Area");
@@ -95,7 +97,7 @@ while {true} do {
 		}];
 	};
 
-	if (_ZombZ_safeZone_Vehicles_DisableMountedGuns) then
+	if (_ZombZ_SZ_DisableMountedGuns) then
 	{
 		while {!canBuild} do
 		{
@@ -110,7 +112,7 @@ while {true} do {
 			
 			if ( vehicle player != player && isNull _inVehicle) then
 			{
-				if (_ZombZ_safeZoneMessages) then {systemChat ("[ZombZ] No Firing Vehicle Guns Enabled");};
+				if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] No Firing Vehicle Guns Enabled");};
 				_inVehicle = vehicle player;
 				_inVehicleDamage = getDammage _inVehicle;
 				_EH_Fired_Vehicle = _inVehicle addEventHandler ["Fired", {
@@ -123,52 +125,48 @@ while {true} do {
 		waitUntil {canBuild};
 	};
 
-	_ZombZ_LastPlayerLookedAt = objNull;
-	_ZombZ_LastPlayerLookedAtCountDown = 5;
-	terminate _antiBackpackThread;
-	terminate _antiBackpackThread2;
-	if (_ZombZ_safeZoneMessages) then {systemChat ("[ZombZ] Exiting Safezone Trader Area - God Mode Disabled"); };
+	if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] Exiting Safezone Trader Area - God Mode Disabled"); };
 	
-	if (_ZombZ_safeZone_Vehicles_DisableMountedGuns) then
+	if (_ZombZ_SZ_DisableMountedGuns) then
 	{
 		if ( !(isNull _inVehicle) ) then
 		{
-			if (_ZombZ_safeZoneMessages) then {systemChat ("[ZombZ] No Firing Vehicle Guns Disabled");};
+			if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] No Firing Vehicle Guns Disabled");};
 			_inVehicle removeEventHandler ["Fired", _EH_Fired_Vehicle];
 		};
 		
 		if (!(isNull _inVehicleLast)) then
 		{
-			if (_ZombZ_safeZoneMessages) then {systemChat ("[ZombZ] No Firing Vehicle Guns Disabled");};
+			if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] No Firing Vehicle Guns Disabled");};
 			_inVehicleLast removeEventHandler ["Fired", _EH_Fired_Vehicle];
 		};
 	};
 
-	if (_ZombZ_safeZone_Players_DisableWeaponFiring) then
+	if (_ZombZ_SZ_DisableWeaponFiring) then
 	{
 		_thePlayer removeEventHandler ["Fired", _EH_Fired];
 	};
 	
-	if (_ZombZ_safeZone_Vehicle_Speed_Limit) then
+	if (_ZombZ_SZ_SpeedLimit) then
 	{
 		if ( vehicle player != player and !((vehicle player) isKindOf 'Air')) then
 		{
-			if (_ZombZ_safeZoneMessages) then {systemChat ("[ZombZ] Safezone Speed Limit Disabled");};
+			if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] Safezone Speed Limit Disabled");};
 		}; 
 		terminate _slimit;
 	};
 	
-	if (_ZombZ_safeZone_LessZ_Build_Spawn) then
+	if (_ZombZ_SZ_NoZeds) then
 	{
 		building_spawnZombies =	compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\building_spawnZombies.sqf";
 	};
 	
-	if (_ZombZ_safeZone_Players_DisableClothing) then
+	if (_ZombZ_SZ_Clothing) then
 	{
 		player_wearClothes = compile preprocessFileLineNumbers "actions\player_wearClothes.sqf";
 	};
 	
-	if (_ZombZ_safeZoneGodmode) then
+	if (_ZombZ_SZ_Godmode) then
 	{
 		player_zombieCheck = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieCheck.sqf";
 		fnc_usec_damageHandler = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageHandler.sqf";
