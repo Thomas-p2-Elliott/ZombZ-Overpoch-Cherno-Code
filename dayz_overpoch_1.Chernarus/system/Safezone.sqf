@@ -14,6 +14,7 @@ _ZombZ_SZ_Godmode				 = true; //Should safezone Godmode be enabled?
 _ZombZ_SZ_Messages				 = true; //Should players get messages when entering and exiting the safe zone?
 
 //Script Settings
+_ZombZ_SZ_AntiGear				 = true; //Should players be able open their gear near other players?
 _ZombZ_SZ_Clothing				 = true; //Should players not be able to change clothes in safe zone?
 _ZombZ_SZ_DeadPlayers 			 = true; //Should players be able to loot from a dead players corpse?
 _ZombZ_SZ_DisableMountedGuns 	 = true; //Should players not be able to shoot bullets/projectiles from mounted guns?
@@ -123,6 +124,27 @@ while {true} do {
 		};
 	} else {
 		waitUntil {canBuild};
+	};
+
+	if (_ZombZ_SZ_AntiGear) then
+	{
+		[] spawn {
+			while {!canbuild} do
+			{
+				_cnt = {isPlayer _x && _x != player} count (player nearEntities [['CAManBase'], 3]);
+				if ((_cnt > 0) && (!isNull (findDisplay 106))) then
+				{
+					(findDisplay 106) closedisplay 0;
+					closeDialog 0;
+					_log = format ["%1 You are not allowed to open Gear while near another player!",name player];
+					cutText [_log,"PLAIN"];
+				};
+			}
+			else
+			{
+				waitUntil {canbuild};
+			};
+		};
 	};
 
 	if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] Exiting Safezone Trader Area - God Mode Disabled"); };
