@@ -6,11 +6,6 @@ _rExec = compile ("
 	_gps = P2DZ_mH select 2;
 	_vehicleName = P2DZ_mH select 3;
 
-	if (debugMonitor) then 	{
-		debugMonitor = false;
-	    [] spawn { sleep 10; [] spawn fnc_debug; };
-	};
-
 	_pic = getText (configFile >> ""cfgVehicles"" >> _vehicleName >> ""picture"");
 
 	switch (_hintType) do {

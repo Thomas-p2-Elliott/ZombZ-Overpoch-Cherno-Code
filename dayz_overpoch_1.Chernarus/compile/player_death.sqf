@@ -117,6 +117,10 @@ if (count _array > 0) then {
 			//i'm "guilty" - kill me as bandit
 			_killsV = _source getVariable ["banditKills",0];
 			_source setVariable ["banditKills",(_killsV + 1),true];
+			//Give humanity for killing as bandit
+			_humanityHit = 500;
+			PVDZE_send = [_source,"Humanity",[_source,_humanityHit,300]];
+			publicVariableServer "PVDZE_send";
 		};
 	};
 	_body setVariable ["deathType",_method,true];

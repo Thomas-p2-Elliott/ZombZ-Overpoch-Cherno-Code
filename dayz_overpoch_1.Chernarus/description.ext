@@ -153,3 +153,8 @@ class DayZ_loadingScreen
 #include "compile\snappoints.hpp"
 //## p2 Extra Right Clickables ##
 #include "configs\rc.hpp"
+
+class RscTitles
+{
+	#include "mando_hint.h"
+};

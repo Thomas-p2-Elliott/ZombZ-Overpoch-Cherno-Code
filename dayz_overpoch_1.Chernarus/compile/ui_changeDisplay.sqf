@@ -8,7 +8,7 @@ if (dayzState != 0) then {
 	//Update GUI
 	call player_updateGui;
 	call ui_initDisplay;
-	hintSilent "";
+	//hintSilent "";
 };
 dayzDebug = false;
 

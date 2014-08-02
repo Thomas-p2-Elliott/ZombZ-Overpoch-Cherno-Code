@@ -35,6 +35,134 @@ if (!isDedicated) then {
 	snap_build = 					compile preprocessFileLineNumbers "compile\snap_build.sqf";
 	[] execVM "compile\fn_deployActions.sqf";		//Checks with actions for deploys
 
+	//Custom Hint Messages:
+	P2DZ_hintFull						= {
+		private["_continue"];
+		if (isNil "mando_hintFull_last_title") then
+		{
+		   mando_hintFull_last_title = "";
+		};
+		if (isNil "mando_hintFull_last_text") then
+		{
+		   mando_hintFull_last_text = "";
+		};
+
+		_continue = true;
+		if (count _this > 4) then
+		{
+		   if (((_this select 4) select 1) != 35) then
+		   {
+		      _continue = false;
+		   }
+		   else
+		   {
+		      if (!isNull (uiNamespace getVariable 'mando_hintFull')) then
+		      { 
+		         _continue = false;
+		         titleText["", "PLAIN"]; 
+		      };
+		   };
+		};
+
+		if (_continue) then
+		{
+		   uiNamespace setVariable ["mando_hintFull", displayNull];
+		   titleRsc["mando_hintFull", "PLAIN"];
+		   waitUntil {!isNull (uiNamespace getVariable 'mando_hintFull')};
+		   mando_hintFull_last_title = _this select 0;
+		   mando_hintFull_last_text = _this select 1;
+		   mando_hintFull_color = _this select 2;
+		   ((uiNamespace getVariable 'mando_hintFull') displayCtrl 105) ctrlSetBackgroundColor mando_hintFull_color;
+		   ((uiNamespace getVariable 'mando_hintFull') displayCtrl 106) ctrlSetStructuredText parseText(mando_hintFull_last_title);
+		   ((uiNamespace getVariable 'mando_hintFull') displayCtrl 107) ctrlSetStructuredText parseText(mando_hintFull_last_text);
+		};
+	};
+
+	P2DZ_hintMini						= {
+		private["_continue"];
+		if (isNil "mando_hintMini_last_title") then
+		{
+		   mando_hintMini_last_title = "";
+		};
+		if (isNil "mando_hintMini_last_text") then
+		{
+		   mando_hintMini_last_text = "";
+		};
+
+		_continue = true;
+		if (count _this > 4) then
+		{
+		   if (((_this select 4) select 1) != 35) then
+		   {
+		      _continue = false;
+		   }
+		   else
+		   {
+		      if (!isNull (uiNamespace getVariable 'mando_hintMini')) then
+		      { 
+		         _continue = false;
+		         titleText["", "PLAIN"]; 
+		      };
+		   };
+		};
+
+		if (_continue) then
+		{
+		   uiNamespace setVariable ["mando_hintMini", displayNull];
+		   titleRsc["mando_hintMini", "PLAIN"];
+		   waitUntil {!isNull (uiNamespace getVariable 'mando_hintMini')};
+		   mando_hintMini_last_title = _this select 0;
+		   mando_hintMini_last_text = _this select 1;
+		   mando_hintMini_color = _this select 2;
+		   ((uiNamespace getVariable 'mando_hintMini') displayCtrl 101) ctrlSetBackgroundColor mando_hintMini_color;
+		   ((uiNamespace getVariable 'mando_hintMini') displayCtrl 102) ctrlSetStructuredText parseText(mando_hintMini_last_title);
+		   ((uiNamespace getVariable 'mando_hintMini') displayCtrl 103) ctrlSetStructuredText parseText(mando_hintMini_last_text);
+		};
+	};
+
+
+	P2DZ_hint						= {
+		private["_continue"];
+		if (isNil "mando_hintMini_last_title") then
+		{
+		   mando_hintMini_last_title = "";
+		};
+		if (isNil "mando_hintMini_last_text") then
+		{
+		   mando_hintMini_last_text = "";
+		};
+
+		_continue = true;
+		if (count _this > 4) then
+		{
+		   if (((_this select 4) select 1) != 35) then
+		   {
+		      _continue = false;
+		   }
+		   else
+		   {
+		      if (!isNull (uiNamespace getVariable 'mando_hintMini')) then
+		      { 
+		         _continue = false;
+		         titleText["", "PLAIN"]; 
+		      };
+		   };
+		};
+
+		if (_continue) then
+		{
+		   uiNamespace setVariable ["mando_hintMini", displayNull];
+		   titleRsc["mando_hintMini", "PLAIN"];
+		   waitUntil {!isNull (uiNamespace getVariable 'mando_hintMini')};
+		   mando_hintMini_last_title = _this select 0;
+		   mando_hintMini_last_text = _this select 1;
+		   mando_hintMini_color = _this select 2;
+		   ((uiNamespace getVariable 'mando_hintMini') displayCtrl 101) ctrlSetBackgroundColor mando_hintMini_color;
+		   ((uiNamespace getVariable 'mando_hintMini') displayCtrl 102) ctrlSetStructuredText parseText(mando_hintMini_last_title);
+		   ((uiNamespace getVariable 'mando_hintMini') displayCtrl 103) ctrlSetStructuredText parseText(mando_hintMini_last_text);
+		};
+	};
+
 	BIS_Effects_Burn = 				compile preprocessFile "\ca\Data\ParticleEffects\SCRIPTS\destruction\burn.sqf";
 	player_zombieCheck = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieCheck.sqf";	//Run on a players computer, checks if the player is near a zombie
 	player_zombieAttack = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieAttack.sqf";	//Run on a players computer, causes a nearby zombie to attack them

@@ -56,7 +56,9 @@ if (_isNew) then {
 
 	//Intro Credits Finished
 
-	//Display Full Stats Debug Monitor
+	//Display Full Debug Monitor
+	waitUntil{!isNil 'dayz_gui'};
+	[] execVM "compile\fnc_debugMon.sqf";			//Debug Monitor	
 
 } else {
 	//Player is not a freshspawn
@@ -85,4 +87,16 @@ if (_isNew) then {
 	};
 
 	diag_log(P2DZ_humanityLevelText);
+	
+	//Provide option for re-para-drop if they land in ocean?
+
+	//Show Intro Credits
+
+	//Intro Credits Finished
+
+
+	//Display Full Debug Monitor
+	waitUntil{!isNil 'dayz_gui'};
+	[] execVM "compile\fnc_debugMon.sqf";			//Debug Monitor	
+
 };
