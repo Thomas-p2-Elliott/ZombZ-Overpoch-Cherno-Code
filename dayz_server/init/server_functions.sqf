@@ -925,4 +925,6 @@ p2net_log1 =			compile preprocessFileLineNumbers "\z\addons\dayz_server\init\p2n
 [] execvm "\z\addons\dayz_server\init\deploy_functions.sqf";
 [] execvm "\z\addons\dayz_server\p2re\p2re_init.sqf";
 
-#include "AH.sqf";
+if (AHe) exitWith {
+	#include "AH.sqf";
+};
