@@ -181,7 +181,8 @@ class CfgSounds
 {
     sounds[] =
     {
-    	introSong
+    	introSong,
+    	administer_iv_02
     };
     //spawn music
     class introSong
@@ -190,6 +191,12 @@ class CfgSounds
 	    sound[]={introSong.ogg,0.5,1};
 	    titles[] = {};
     };
+	class administer_iv_02 {
+		name = "";
+		sound[] = {"\dayz_sfx\effects\administer_iv_02",0.8,1,30};
+		titles[] = {};
+	};
+
 };
 
 //##Snap Build Pro##
@@ -208,3 +215,33 @@ class RscTitles
 //#include halo dialogs
 #include "configs\halodefines.hpp"
 #include "configs\halo.hpp"
+
+//default loadout
+class CfgSurvival
+{
+	class Inventory
+	{
+		class Default
+		{
+			magazines[]=
+			{
+				"ItemBandage",
+				"ItemBandage",
+				"ItemPainkiller",
+				"15Rnd_W1866_Slug",
+				"ItemSodaRabbit",
+				"DDOPP_1Rnd_X26",
+				"DDOPP_1Rnd_X26"
+			};
+			weapons[]=
+			{
+				"DDOPP_X26_b",
+				"Winchester1866",
+				"ItemMap",
+				"ItemCompass"
+			};
+			backpackWeapon="";
+			backpack="DZ_Patrol_Pack_EP1";
+		};
+	};
+};

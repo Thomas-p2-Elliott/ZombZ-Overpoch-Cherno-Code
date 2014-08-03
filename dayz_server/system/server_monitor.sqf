@@ -49,8 +49,10 @@ if (isServer && isNil "sm_done") then {
 			_hiveResponse = ["",0];
 		} 
 		else {
-			diag_log ("HIVE: found "+str(_hiveResponse select 1)+" objects" );
-			_i = 99; // break
+			if (P2DZE_serverStreamObjsEnabled) then {
+				diag_log ("HIVE: found "+str(_hiveResponse select 1)+" objects" );
+				_i = 99; // break
+			};
 		};
 	};
 	

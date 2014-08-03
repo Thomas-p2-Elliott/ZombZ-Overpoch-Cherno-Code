@@ -52,12 +52,12 @@ uiNamespace setVariable ["altiHudOpened",true];
 	player setvariable ["bis_fnc_halo_now",false];
 };
 
-//Wait until player has chute open!
-waitUntil{(P2DZE_paraOpened)};
+//Wait until player has chute open or is below 120 altitude
+waitUntil{(P2DZE_paraOpened) || P2DZE_hasLanded};
 
 //hide halo altimeter
 [] call ALTIMETER_fnc_HideCtrl;
-1 cutText ["","PLAIN"];
+666 cutText ["","PLAIN"];
 uiNamespace setVariable ["altiHudOpened",false];
 
 //enable debug monitor

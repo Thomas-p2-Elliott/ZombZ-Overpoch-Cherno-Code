@@ -37,8 +37,8 @@ _n = 0;
 	_line = _x;
 	_textArray = _textArray + _line + ["\n"];
 	{
-		//_emptyArray = _emptyArray + [_line call bis_fnc_selectrandom]; //--- Shuffled text
-		_emptyArray = _emptyArray + [str floor random 2]; //--- Binary Solo
+		_emptyArray = _emptyArray + [_line call bis_fnc_selectrandom]; //--- Shuffled text
+		//_emptyArray = _emptyArray + [str floor random 2]; //--- Binary Solo
 		//_emptyArray = _emptyArray + [""]; //--- Rolling text
 		//_emptyArray = _emptyArray + [" "]; //--- Space
 		_nArrayTemp = _nArrayTemp + [_n];
@@ -77,11 +77,11 @@ sleep 1;
 	_textControl ctrlsettext str _text;
 	_textControl ctrlcommit 0.01;
 	playsound "counter";
-	if (random 1 > 0.9) then {sleep 0.1};
-	sleep 0.01;
+	if (random 1 > 0.7) then {sleep 0.1};
+	sleep 0.03;
 } foreach _nArray;
 
-sleep 2;
+sleep 4;
 
 
 //--- Fade away
@@ -91,8 +91,8 @@ sleep 2;
 	_textControl ctrlsettext str _text;
 	_textControl ctrlcommit 0.01;
 	playsound "counter";
-	//if (random 1 > 0.9) then {sleep 0.2};
-	sleep 0.01;
+	if (random 1 > 0.9) then {sleep 0.2};
+	sleep 0.03;
 } foreach _nArray;
 
 

@@ -20,6 +20,9 @@ dayz_previousID = 0;
 //Enabble AntiHack on TestServer
 AHe = false;
 
+//enable object streaming from db
+P2DZE_serverStreamObjsEnabled = false;
+
 //disable greeting menu 
 player setVariable ["BIS_noCoreConversations", true];
 //disable radio messages to be heard and shown in the left lower corner of the screen

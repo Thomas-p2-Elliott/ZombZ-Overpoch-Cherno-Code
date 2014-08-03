@@ -66,7 +66,10 @@ Player/Spawn Settings
 
 	//backpack gaurd, wipes backpack if you log out near another player (anti-duping measure)
 	if(isServer) then {
+		//enable backpack gaurd
 		DZE_BackpackGuard = true;
+
+		//enable static veh spawns
 		DZE_FS_UseStaticVehicleSpawn = true;
 
 		//enable debug output for static vehicle spawns?
