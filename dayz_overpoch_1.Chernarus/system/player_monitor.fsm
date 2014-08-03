@@ -34,7 +34,7 @@ item29[] = {"ERROR__Bad_Versi",2,250,175.000000,800.000000,275.000000,850.000000
 item30[] = {"Display_Ready",4,218,-175.000000,1050.000000,-75.000000,1100.000000,0.000000,"Display" \n "Ready"};
 item31[] = {"Preload_Display",2,250,-75.000000,1100.000000,25.000000,1150.000000,0.000000,"Preload" \n "Display"};
 item32[] = {"Preload_Done",4,218,-175.000000,1150.000000,-75.000000,1200.000000,0.000000,"Preload" \n "Done"};
-item33[] = {"Initialize",2,4346,-75.000000,1200.000000,25.000000,1250.000000,0.000000,"Initialize"};
+item33[] = {"Initialize",2,250,-75.000000,1200.000000,25.000000,1250.000000,0.000000,"Initialize"};
 item34[] = {"Finish",1,250,-75.000000,1300.000000,25.000000,1350.000000,0.000000,"Finish"};
 item35[] = {"True",8,218,25.000000,1250.000000,125.000000,1300.000000,0.000000,"True"};
 item36[] = {"Too_Long",4,218,300.000000,150.000000,400.000000,200.000000,0.000000,"Too" \n "Long"};
@@ -85,11 +85,13 @@ item80[] = {"Spawn_Selection",4,218,-875.000000,625.000000,-775.000000,675.00000
 item81[] = {"Process_1",2,250,-725.000000,550.000000,-625.000000,600.000000,0.000000,"Process"};
 item82[] = {"Region_Selection",2,250,-725.000000,625.000000,-625.000000,675.000000,0.000000,"Region Selection" \n "Dialog"};
 item83[] = {"Selected",4,218,-575.000000,625.000000,-475.000000,675.000000,0.000000,"Selected"};
-item84[] = {"Process_2",2,250,-450.000000,625.000000,-350.000000,675.000000,0.000000,"Process"};
+item84[] = {"Process_2",2,4346,-450.000000,625.000000,-350.000000,675.000000,0.000000,"Process"};
 item85[] = {"",7,210,-929.000000,646.000000,-921.000000,654.000000,0.000000,""};
 item86[] = {"",7,210,-904.000000,571.000000,-896.000000,579.000000,0.000000,""};
 item87[] = {"",7,210,-929.000000,496.000000,-921.000000,504.000000,0.000000,""};
 item88[] = {"",7,210,-929.000000,571.000000,-921.000000,579.000000,0.000000,""};
+item89[] = {"Halo__Selection",2,250,-575.000000,700.000000,-475.000000,750.000000,0.000000,"Halo" \n " Selection Dialog"};
+item90[] = {"Selected",4,218,-450.000000,700.000000,-350.000000,750.000000,0.000000,"Selected"};
 link0[] = {0,1};
 link1[] = {0,5};
 link2[] = {1,2};
@@ -183,14 +185,16 @@ link89[] = {79,81};
 link90[] = {80,82};
 link91[] = {81,71};
 link92[] = {82,83};
-link93[] = {83,84};
+link93[] = {83,89};
 link94[] = {84,71};
 link95[] = {85,80};
 link96[] = {87,88};
 link97[] = {88,79};
 link98[] = {88,85};
-globals[] = {25.000000,1,0,0,0,640,480,1,153,6316128,1,40.172573,105.613136,1035.780396,968.059631,861,891,1};
-window[] = {2,-1,-1,-1,-1,783,25,1477,25,3,879};
+link99[] = {89,90};
+link100[] = {90,84};
+globals[] = {25.000000,1,0,0,0,640,480,1,157,6316128,1,-745.800476,-287.644714,1014.911377,183.855392,618,1121,1};
+window[] = {2,-1,-1,-1,-1,754,1805,3257,-4,3,636};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -1762,7 +1766,7 @@ class FSM
         class Selected
         {
           priority = 0.000000;
-          to="Process_2";
+          to="Halo__Selection";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
           condition=/*%FSM<CONDITION""">*/"!dialog"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
@@ -1775,7 +1779,8 @@ class FSM
     class Process_2
     {
       name = "Process_2";
-      init = /*%FSM<STATEINIT""">*/"_spawnSelection = dayz_selectRegion;"/*%FSM</STATEINIT""">*/;
+      init = /*%FSM<STATEINIT""">*/"_spawnSelection = dayz_selectRegion;" \n
+       "diag_log(""P2DEBUG: Finished halo selection dialog"");"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -1786,6 +1791,34 @@ class FSM
           to="Phase_One";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
           condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "Halo__Selection">*/
+    class Halo__Selection
+    {
+      name = "Halo__Selection";
+      init = /*%FSM<STATEINIT""">*/"1 cutText ["""", ""BLACK"",0];" \n
+       "endLoadingScreen;" \n
+       "" \n
+       "if (DZE_haloSpawn) then {" \n
+       " createDialog ""halo_dialog"";" \n
+       "diag_log(""P2DEBUG: Created halo selection dialog"");" \n
+       "};" \n
+       ""/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
+        /*%FSM<LINK "Selected">*/
+        class Selected
+        {
+          priority = 0.000000;
+          to="Process_2";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"!dialog"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/

@@ -148,6 +148,49 @@ class DayZ_loadingScreen
 		};
 	};
 };
+//altimeter functions
+class CfgFunctions
+{
+	class ALTIMETER
+	{
+		tag="ALTIMETER";
+		class ALTIMETER
+		{
+			file="compile";
+			class Init
+			{
+				postInit=1;
+			};
+			class KeyPressed
+			{
+			};
+			class AltimData
+			{
+			};
+			class AltimGetData
+			{
+			};
+			class HideCtrl
+			{
+			};
+		};
+	};
+};
+//custom sounds 
+class CfgSounds
+{
+    sounds[] =
+    {
+    	introSong
+    };
+    //spawn music
+    class introSong
+    {
+	    name="introSong";
+	    sound[]={introSong.ogg,0.5,1};
+	    titles[] = {};
+    };
+};
 
 //##Snap Build Pro##
 #include "compile\snappoints.hpp"
@@ -156,5 +199,12 @@ class DayZ_loadingScreen
 
 class RscTitles
 {
-	#include "mando_hint.h"
+	//hintui
+	#include "configs\zombz_hint.h" 
+	//altimeter
+	#include "configs\altimeter.h"  
 };
+
+//#include halo dialogs
+#include "configs\halodefines.hpp"
+#include "configs\halo.hpp"
