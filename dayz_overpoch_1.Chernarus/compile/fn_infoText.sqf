@@ -1,14 +1,3 @@
-/*
-	File: infoText.sqf
-	Author: Karel Moricky
-
-	Description:
-	Info with some ffect.
-
-	Parameter(s):
-	_this: Array containing lines of text (String)
-*/
-
 3100 cutrsc ["rscInfoText","plain"];
 
 

@@ -182,7 +182,10 @@ class CfgSounds
     sounds[] =
     {
     	introSong,
-    	administer_iv_02
+    	administer_iv_02,
+    	morphine_01,
+    	painkiller_01,
+    	fracture_1
     };
     //spawn music
     class introSong
@@ -191,12 +194,30 @@ class CfgSounds
 	    sound[]={introSong.ogg,0.5,1};
 	    titles[] = {};
     };
-	class administer_iv_02 {
-		name = "";
-		sound[] = {"\dayz_sfx\effects\administer_iv_02",0.8,1,30};
-		titles[] = {};
+	class administer_iv_02
+	{
+		name="administer_iv_02";
+		sound[]={administer_iv_02.ogg,1,1};
+		titles[]={};
 	};
-
+	class morphine_01
+	{
+		name="morphine_01";
+		sound[]={morphine_01.ogg,1,1};
+		titles[]={};
+	};
+	class painkiller_01
+	{
+		name="painkiller_01";
+		sound[]={painkiller_01.ogg,1,1};
+		titles[]={};
+	};
+	class fracture_1
+	{
+		name="fracture_1";
+		sound[]={fracture_1.wss,1,1};
+		titles[]={};
+	};
 };
 
 //##Snap Build Pro##

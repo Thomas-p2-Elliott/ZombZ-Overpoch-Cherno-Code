@@ -16,19 +16,24 @@ switch (_item) do {
 	};
 	case "ItemMorphine": {
 		_id = [0,0,0,[player]] execVM "\z\addons\dayz_code\medical\morphine.sqf";
+		playSound "morphine_01"; addCamShake [2, 0.5, 25]; sleep 1; playSound "heartbeat_1"; sleep 1; playSound "heartbeat_1";
 	};
 	case "ItemPainkiller": {
 		_id = [0,0,0,[player]] execVM "\z\addons\dayz_code\medical\painkiller.sqf";
+		playSound "painkiller_01";
 	};
 	case "ItemAntibiotic": {
 		_id = [0,0,0,[player]] execVM "\z\addons\dayz_code\medical\antibiotics.sqf";
+		playSound "painkiller_01";
 	};
 	case "ItemBloodbag": {
-		_id = [0,0,0,[player]] execVM "\z\addons\dayz_code\medical\self_transfusion.sqf";
+		_id = [0,0,0,[player]] execVM "actions\self_transfusion.sqf";
+		playSound "administer_iv_02"; addCamShake [2, 3, 25]; sleep 1; playSound "heartbeat_1"; sleep 0.1; playSound "heartbeat_1"; sleep 0.1; playSound "heartbeat_1"; sleep 0.2; playSound "heartbeat_1"; sleep 0.5; playSound "heartbeat_1"; sleep 0.7; playSound "heartbeat_1"; sleep 0.7; playSound "heartbeat_1";
 	};
 	case "ItemHeatPack": {
 		player removeMagazine "ItemHeatPack";
 		dayz_temperatur = (dayz_temperatur + 5) min dayz_temperaturmax;
 		cutText [localize "str_player_27", "PLAIN DOWN"];
+		playSound "morphine_01";
 	};
 };
