@@ -71,7 +71,7 @@ class ATM_Altimeter
 		font="Bitstream";
 		sizeEx=0.031;
 		x="safezoneX - 0.005";
-		y="safeZoneY + safeZoneH - 0.83"; //795
+		y="safeZoneY + safeZoneH - 0.81"; //795
 		h="0.4 * safezoneH";
 		w="0.225 * safezoneW";
 	};
