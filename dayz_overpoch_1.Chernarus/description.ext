@@ -203,7 +203,8 @@ class CfgSounds
 #include "compile\snappoints.hpp"
 //## p2 Extra Right Clickables ##
 #include "configs\rc.hpp"
-
+//##DJ Skin System##
+#include "configs\ZombZSkins.hpp"
 class RscTitles
 {
 	//hintui

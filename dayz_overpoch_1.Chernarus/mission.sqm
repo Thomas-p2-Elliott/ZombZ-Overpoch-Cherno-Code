@@ -14,6 +14,7 @@ class Mission
 		"dayz_vehicles",
 		"cacharacters_pmc",
 		"ca_modules_functions",
+		"bb_mercenary",
 		"gms_k98",
 		"RH_m14",
 		"FHQ_Remington",
