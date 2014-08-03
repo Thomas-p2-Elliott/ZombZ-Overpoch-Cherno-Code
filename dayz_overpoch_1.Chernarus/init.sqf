@@ -18,7 +18,7 @@ initialized = false;
 dayz_previousID = 0;
 
 //Enabble AntiHack on TestServer
-AHe = false;
+AHe = true;
 
 //enable object streaming from db
 P2DZE_serverStreamObjsEnabled = false;

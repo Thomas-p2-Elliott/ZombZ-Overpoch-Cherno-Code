@@ -23,49 +23,7 @@ Soldier1_DZ = 	"Soldier1_DZ";
 Rocket_DZ = 	"Rocket_DZ";
 
 AllPlayers = ["Survivor2_DZ","SurvivorWcombat_DZ","SurvivorWdesert_DZ","SurvivorWurban_DZ","SurvivorWsequishaD_DZ","SurvivorWsequisha_DZ","SurvivorWpink_DZ","SurvivorW3_DZ","SurvivorW2_DZ","Bandit1_DZ","Bandit2_DZ","BanditW1_DZ","BanditW2_DZ","Soldier_Crew_PMC","Sniper1_DZ","Camo1_DZ","Soldier1_DZ","Rocket_DZ","Rocker1_DZ","Rocker2_DZ","Rocker3_DZ","Rocker4_DZ","Priest_DZ","Functionary1_EP1_DZ","GUE_Commander_DZ","Ins_Soldier_GL_DZ","Haris_Press_EP1_DZ","Pilot_EP1_DZ","RU_Policeman_DZ","pz_policeman","pz_suit1","pz_suit2","pz_worker1","pz_worker2","pz_worker3","pz_doctor","pz_teacher","pz_hunter","pz_villager1","pz_villager2","pz_villager3","pz_priest","Soldier_TL_PMC_DZ","Soldier_Sniper_PMC_DZ","Soldier_Bodyguard_AA12_PMC_DZ","Drake_Light_DZ","CZ_Special_Forces_GL_DES_EP1_DZ","TK_INS_Soldier_EP1_DZ","TK_INS_Warlord_EP1_DZ","FR_OHara_DZ","FR_Rodriguez_DZ","CZ_Soldier_Sniper_EP1_DZ","Graves_Light_DZ","GUE_Soldier_MG_DZ","GUE_Soldier_Sniper_DZ","GUE_Soldier_Crew_DZ","GUE_Soldier_CO_DZ","GUE_Soldier_2_DZ","TK_Special_Forces_MG_EP1_DZ","TK_Soldier_Sniper_EP1_DZ","TK_Commander_EP1_DZ","RU_Soldier_Crew_DZ","INS_Lopotev_DZ","INS_Soldier_AR_DZ","INS_Soldier_CO_DZ","INS_Bardak_DZ","INS_Worker2_DZ"];
-//Custom Skins
-AllPlayers set [count AllPlayers, "gsc_scientist2"];
-AllPlayers set [count AllPlayers, "gsc_scientist1"];
-AllPlayers set [count AllPlayers, "gsc_military_head_grey_AT"];
-AllPlayers set [count AllPlayers, "gsc_military_helmet_wdl"];
-AllPlayers set [count AllPlayers, "SFSG_des_tl"];
-AllPlayers set [count AllPlayers, "Desert_SOF_AC"];
-AllPlayers set [count AllPlayers, "Desert_SOF_AT"];
-AllPlayers set [count AllPlayers, "frb_mark"];
-AllPlayers set [count AllPlayers, "frb_tl_mask"];
-AllPlayers set [count AllPlayers, "SFSG_mtp_tl"];
-AllPlayers set [count AllPlayers, "SFSG_wdl_tl"];
-AllPlayers set [count AllPlayers, "Mercenary_Default20b"];
-AllPlayers set [count AllPlayers, "SBH_Alpha_Soldier1"];
-AllPlayers set [count AllPlayers, "SBH_Alpha_Soldier2"];
-AllPlayers set [count AllPlayers, "MVD_Soldier_AT"];
-AllPlayers set [count AllPlayers, "Navy_SEAL_diver"];
-AllPlayers set [count AllPlayers, "Navy_SEAL_TL"];
-AllPlayers set [count AllPlayers, "RU_Soldier2"];
-AllPlayers set [count AllPlayers, "USMC_Soldier_Pilot"];
-AllPlayers set [count AllPlayers, "SBH_Alpha_Soldier5"];
-AllPlayers set [count AllPlayers, "gsc_eco_stalker_head_neutral"];
-AllPlayers set [count AllPlayers, "gsc_eco_stalker_mask_camo"];
-AllPlayers set [count AllPlayers, "gsc_eco_stalker_mask_duty"];
-AllPlayers set [count AllPlayers, "gsc_eco_stalker_mask_fred"];
-AllPlayers set [count AllPlayers, "gsc_eco_stalker_mask_neutral"];
-AllPlayers set [count AllPlayers, "US_Delta_Force_Marksman_EP1"];
-AllPlayers set [count AllPlayers, "arma1_us_soldier_sabass"];
-AllPlayers set [count AllPlayers, "SFSG_wdl_mrk"];
-AllPlayers set [count AllPlayers, "gsc_eco_stalker_head_fred"];
-AllPlayers set [count AllPlayers, "gsc_scientist1_head"];
-AllPlayers set [count AllPlayers, "gsc_scientist2_head"];
-AllPlayers set [count AllPlayers, "Desert_SOF_DA1a"];
-AllPlayers set [count AllPlayers, "FR_Commander"];
-AllPlayers set [count AllPlayers, "Soldier_Bodyguard_M4_PMC"];
-AllPlayers set [count AllPlayers, "UKSF_des_mrk"];
-AllPlayers set [count AllPlayers, "UKSF_des_mrk_l"];
-AllPlayers set [count AllPlayers, "UKSF_wdl_mrk_l"];
-AllPlayers set [count AllPlayers, "UKSF_des_demo_l"];
-AllPlayers set [count AllPlayers, "UN_CDF_Soldier_Officer_EP1"];
-AllPlayers set [count AllPlayers, "UN_CDF_Soldier_EP1"];
-AllPlayers set [count AllPlayers, "Winter_SOF_DA1b"];
-AllPlayers set [count AllPlayers, "Winter_SOF_Marksman"];
+
 
 /*---------------------------------------------------------------------------
 Debugging Settings
