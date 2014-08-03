@@ -22,17 +22,17 @@ while {1 == 1} do {
 	_timeToSpawn = time + _frequency + _timeAdjust;
 
 	//Adding some Random systems
-	_crashModel = ["UH60Wreck_DZ","UH1Wreck_DZ","UH60_NAVY_Wreck_DZ","UH60_ARMY_Wreck_DZ","UH60_NAVY_Wreck_burned_DZ","UH60_ARMY_Wreck_burned_DZ","Mass_grave_DZ"] call BIS_fnc_selectRandom;
+	_crashModel = ["UH60Wreck_DZ","UH1Wreck_DZ","UH60_NAVY_Wreck_DZ","UH60_ARMY_Wreck_DZ","UH60_NAVY_Wreck_burned_DZ","UH60_ARMY_Wreck_burned_DZ"] call BIS_fnc_selectRandom;
 
 
-	if(_crashModel == "Mass_grave_DZ") then {
-		_lootTable = "MassGrave";
-	} else {
-		//Crash loot just uncomment the one you wish to use by default with 50cals is enabled.
-		//Table including 50 cals
-		_lootTable = ["Military","HeliCrash","MilitarySpecial"] call BIS_fnc_selectRandom;
-		//Table without 50 cals
-		//_lootTable = ["Military","HeliCrash_No50s","MilitarySpecial"] call BIS_fnc_selectRandom;
+	switch (_crashModel) do {
+		default 							{_lootTable = [1,1] call fnc_specialLoot; };
+		case "UH60Wreck_DZ": 				{_lootTable = [1,1] call fnc_specialLoot; };
+		case "UH1Wreck_DZ": 				{_lootTable = [1,1] call fnc_specialLoot; };
+		case "UH60_NAVY_Wreck_DZ": 			{_lootTable = [1,2] call fnc_specialLoot; };
+		case "UH60_NAVY_Wreck_burned_DZ": 	{_lootTable = [1,2] call fnc_specialLoot; };
+		case "UH60_ARMY_Wreck_DZ": 			{_lootTable = [1,3] call fnc_specialLoot; };
+		case "UH60_ARMY_Wreck_burned_DZ": 	{_lootTable = [1,3] call fnc_specialLoot; };
 	};
 
 	_crashName	= getText (configFile >> "CfgVehicles" >> _crashModel >> "displayName");
