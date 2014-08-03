@@ -229,7 +229,9 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		
 		//Allow owners to delete modulars
 
-  		diag_log format["fn_actons: [PlayerUID: %1] [_ownerID: %2] [_isModular: %3] [typeOfCursorTarget: %4]",_playerUID, _ownerID, _isModular, _typeOfCursorTarget];
+  		if (P2DZE_debugSelfActions) then {
+  			diag_log format["fn_actons: [PlayerUID: %1] [_ownerID: %2] [_isModular: %3] [typeOfCursorTarget: %4]",_playerUID, _ownerID, _isModular, _typeOfCursorTarget];
+  		};
 
 		if(_isModular && (_playerUID == _ownerID)) then {
              if(_hasToolbox && "ItemCrowbar" in _itemsPlayer) then {
@@ -238,8 +240,9 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
              };
          };
 		//Allow owners to delete modular doors without locks
-		
-		diag_log format["fn_actons: [PlayerUID: %1] [_ownerID: %2] [_isModularDoor: %3] [typeOfCursorTarget: %4]",_playerUID, _ownerID, _isModularDoor, _typeOfCursorTarget];
+		if (P2DZE_debugSelfActions) then {
+			diag_log format["fn_actons: [PlayerUID: %1] [_ownerID: %2] [_isModularDoor: %3] [typeOfCursorTarget: %4]",_playerUID, _ownerID, _isModularDoor, _typeOfCursorTarget];
+		};
 		
 		if(_isModularDoor && (_playerUID == _ownerID)) then {
             if(_hasToolbox && "ItemCrowbar" in _itemsPlayer) then {
@@ -719,16 +722,16 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	//Repairing Vehicles
 	if ((dayz_myCursorTarget != _cursorTarget) && _isVehicle && !_isMan && _hasToolbox && (damage _cursorTarget < 1) && !_isDisallowRepair) then {
 		if (s_player_repair_crtl < 0) then {
-            dayz_myCursorTarget = _cursorTarget;
-            _menu = dayz_myCursorTarget addAction [localize "STR_EPOCH_PLAYER_REPAIRV", "\z\addons\dayz_code\actions\repair_vehicle.sqf",_cursorTarget, 0, true, false, "",""];
-            if (canBuild) then { _menu1 = dayz_myCursorTarget addAction [localize "STR_EPOCH_PLAYER_SALVAGEV", "\z\addons\dayz_code\actions\salvage_vehicle.sqf",_cursorTarget, 0, true, false, "",""]; };
-            s_player_repairActions set [count s_player_repairActions,_menu];
-            if (canBuild) then { s_player_repairActions set [count s_player_repairActions,_menu1]; };
-            s_player_repair_crtl = 1;
-        } else {
-            {dayz_myCursorTarget removeAction _x} count s_player_repairActions;s_player_repairActions = [];
-            s_player_repair_crtl = -1;
-        };
+			dayz_myCursorTarget = _cursorTarget;
+			_menu = dayz_myCursorTarget addAction [localize "STR_EPOCH_PLAYER_REPAIRV", "\z\addons\dayz_code\actions\repair_vehicle.sqf",_cursorTarget, 0, true, false, "",""];
+			if (canBuild) then { _menu1 = dayz_myCursorTarget addAction [localize "STR_EPOCH_PLAYER_SALVAGEV", "\z\addons\dayz_code\actions\salvage_vehicle.sqf",_cursorTarget, 0, true, false, "",""]; };
+			s_player_repairActions set [count s_player_repairActions,_menu];
+			if (canBuild) then { s_player_repairActions set [count s_player_repairActions,_menu1]; };
+			s_player_repair_crtl = 1;
+		} else {
+			{dayz_myCursorTarget removeAction _x} count s_player_repairActions;s_player_repairActions = [];
+			s_player_repair_crtl = -1;
+		};
 	};
 
 	// All Traders
