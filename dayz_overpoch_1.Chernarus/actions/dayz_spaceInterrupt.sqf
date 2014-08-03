@@ -118,8 +118,20 @@ if (_dikCode in (actionKeys "GetOver")) then {
 };
 //if (_dikCode == 57) then {_handled = true}; // space
 //if (_dikCode in actionKeys 'MoveForward' || _dikCode in actionKeys 'MoveBack') then {r_interrupt = true};
-if (_dikCode == 210) then {
-		[] call fnc_debugMon;
+if (_dikCode == 210 && (diag_tickTime - dayz_lastCheckBit > 1)) then {
+	dayz_lastCheckBit = diag_tickTime;
+	if (isNil "P2DZ_dbCurMode") then {
+		P2DZ_dbCurMode = 2;
+		P2DZ_dbCurMode = P2DZ_DebugMonDefault;
+		diag_log("Debug Mon Start!");
+	} else {
+		diag_log("Debug Mon Pressed (Insert)! Mode: " + str P2DZ_dbCurMode);
+		if (P2DZ_dbCurMode < 3) then {
+			P2DZ_dbCurMode = P2DZ_dbCurMode + 1;
+		} else {
+			P2DZ_dbCurMode = 1;
+		};
+	};
 };
 
 if (_dikCode in actionKeys "ForceCommandingMode") then {_handled = true};
@@ -130,6 +142,7 @@ if (_dikCode in actionKeys "PushToTalk" && (diag_tickTime - dayz_lastCheckBit > 
 if (_dikCode in actionKeys "VoiceOverNet" && (diag_tickTime - dayz_lastCheckBit > 10)) then {
 	dayz_lastCheckBit = diag_tickTime;
 	[player,50,true,(getPosATL player)] spawn player_alertZombies;
+	diag_log("SideChat?");
 };
 if (_dikCode in actionKeys "PushToTalkDirect" && (diag_tickTime - dayz_lastCheckBit > 10)) then {
 	dayz_lastCheckBit = diag_tickTime;
@@ -139,9 +152,20 @@ if (_dikCode in actionKeys "Chat" && (diag_tickTime - dayz_lastCheckBit > 10)) t
 	dayz_lastCheckBit = diag_tickTime;
 	[player,15,false,(getPosATL player)] spawn player_alertZombies;
 };
-if (_dikCode in actionKeys "User20" && (diag_tickTime - dayz_lastCheckBit > 5)) then {
+if (_dikCode in actionKeys "User20" && (diag_tickTime - dayz_lastCheckBit > 1)) then {
 	dayz_lastCheckBit = diag_tickTime;
-	[] call fnc_debugMon;
+	if (isNil "P2DZ_dbCurMode") then {
+		P2DZ_dbCurMode = 2;
+		P2DZ_dbCurMode = P2DZ_DebugMonDefault;
+		diag_log("Debug Mon Start!");
+	} else {
+		diag_log("Debug Mon Pressed (User20)! Mode: " + str P2DZ_dbCurMode);
+		if (P2DZ_dbCurMode < 3) then {
+			P2DZ_dbCurMode = P2DZ_dbCurMode + 1;
+		} else {
+			P2DZ_dbCurMode = 1;
+		};
+	};
 };
 
 // numpad 8 0x48 now pgup 0xC9 1

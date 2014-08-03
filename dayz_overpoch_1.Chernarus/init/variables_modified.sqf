@@ -36,7 +36,10 @@ Debugging Settings
 	DZEdebug = true;
 
 	//epoch damage debugging
-	DZE_Debug_Damage = true;
+	DZE_Debug_Damage = false;
+
+	//self actions debugging
+	P2DZE_debugSelfActions = false;
 
 /*---------------------------------------------------------------------------
 Player/Spawn Settings
@@ -271,6 +274,14 @@ Misc Settings
 		DZE_DeathMsgSide = false;
 	};
 
+
+	P2DZ_dbCurMode = 1;
+	P2DZ_debugMonitor = false;
+	//leave as false
+	P2DZE_hasLanded = false;
+	P2DZE_paraOpened = false;
+	//leave as -1
+	P2DZE_HaloReSpawnAction = -1;
 
 /*---------------------------------------------------------------------------
 							Skin Level Configuration

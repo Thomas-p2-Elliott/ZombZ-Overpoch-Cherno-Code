@@ -23,6 +23,7 @@ if (!isDedicated) then {
 	player_death =					compile preprocessFileLineNumbers "compile\player_death.sqf";
 	player_checkStealth =			compile preprocessFileLineNumbers "compile\player_checkStealth.sqf";
 
+
 	//unmodified
 	player_throwObject = 			compile preprocessFileLineNumbers "compile\player_throwObject.sqf";
 	player_traderCity = 			compile preprocessFileLineNumbers "compile\player_traderCity.sqf";
@@ -34,134 +35,9 @@ if (!isDedicated) then {
 	//pure custom
 	snap_build = 					compile preprocessFileLineNumbers "compile\snap_build.sqf";
 	[] execVM "compile\fn_deployActions.sqf";		//Checks with actions for deploys
-
-	//Custom Hint Messages:
-	P2DZ_hintFull						= {
-		private["_continue"];
-		if (isNil "mando_hintFull_last_title") then
-		{
-		   mando_hintFull_last_title = "";
-		};
-		if (isNil "mando_hintFull_last_text") then
-		{
-		   mando_hintFull_last_text = "";
-		};
-
-		_continue = true;
-		if (count _this > 4) then
-		{
-		   if (((_this select 4) select 1) != 35) then
-		   {
-		      _continue = false;
-		   }
-		   else
-		   {
-		      if (!isNull (uiNamespace getVariable 'mando_hintFull')) then
-		      { 
-		         _continue = false;
-		         titleText["", "PLAIN"]; 
-		      };
-		   };
-		};
-
-		if (_continue) then
-		{
-		   uiNamespace setVariable ["mando_hintFull", displayNull];
-		   titleRsc["mando_hintFull", "PLAIN"];
-		   waitUntil {!isNull (uiNamespace getVariable 'mando_hintFull')};
-		   mando_hintFull_last_title = _this select 0;
-		   mando_hintFull_last_text = _this select 1;
-		   mando_hintFull_color = _this select 2;
-		   ((uiNamespace getVariable 'mando_hintFull') displayCtrl 105) ctrlSetBackgroundColor mando_hintFull_color;
-		   ((uiNamespace getVariable 'mando_hintFull') displayCtrl 106) ctrlSetStructuredText parseText(mando_hintFull_last_title);
-		   ((uiNamespace getVariable 'mando_hintFull') displayCtrl 107) ctrlSetStructuredText parseText(mando_hintFull_last_text);
-		};
-	};
-
-	P2DZ_hintMini						= {
-		private["_continue"];
-		if (isNil "mando_hintMini_last_title") then
-		{
-		   mando_hintMini_last_title = "";
-		};
-		if (isNil "mando_hintMini_last_text") then
-		{
-		   mando_hintMini_last_text = "";
-		};
-
-		_continue = true;
-		if (count _this > 4) then
-		{
-		   if (((_this select 4) select 1) != 35) then
-		   {
-		      _continue = false;
-		   }
-		   else
-		   {
-		      if (!isNull (uiNamespace getVariable 'mando_hintMini')) then
-		      { 
-		         _continue = false;
-		         titleText["", "PLAIN"]; 
-		      };
-		   };
-		};
-
-		if (_continue) then
-		{
-		   uiNamespace setVariable ["mando_hintMini", displayNull];
-		   titleRsc["mando_hintMini", "PLAIN"];
-		   waitUntil {!isNull (uiNamespace getVariable 'mando_hintMini')};
-		   mando_hintMini_last_title = _this select 0;
-		   mando_hintMini_last_text = _this select 1;
-		   mando_hintMini_color = _this select 2;
-		   ((uiNamespace getVariable 'mando_hintMini') displayCtrl 101) ctrlSetBackgroundColor mando_hintMini_color;
-		   ((uiNamespace getVariable 'mando_hintMini') displayCtrl 102) ctrlSetStructuredText parseText(mando_hintMini_last_title);
-		   ((uiNamespace getVariable 'mando_hintMini') displayCtrl 103) ctrlSetStructuredText parseText(mando_hintMini_last_text);
-		};
-	};
-
-
-	P2DZ_hint						= {
-		private["_continue"];
-		if (isNil "mando_hintMini_last_title") then
-		{
-		   mando_hintMini_last_title = "";
-		};
-		if (isNil "mando_hintMini_last_text") then
-		{
-		   mando_hintMini_last_text = "";
-		};
-
-		_continue = true;
-		if (count _this > 4) then
-		{
-		   if (((_this select 4) select 1) != 35) then
-		   {
-		      _continue = false;
-		   }
-		   else
-		   {
-		      if (!isNull (uiNamespace getVariable 'mando_hintMini')) then
-		      { 
-		         _continue = false;
-		         titleText["", "PLAIN"]; 
-		      };
-		   };
-		};
-
-		if (_continue) then
-		{
-		   uiNamespace setVariable ["mando_hintMini", displayNull];
-		   titleRsc["mando_hintMini", "PLAIN"];
-		   waitUntil {!isNull (uiNamespace getVariable 'mando_hintMini')};
-		   mando_hintMini_last_title = _this select 0;
-		   mando_hintMini_last_text = _this select 1;
-		   mando_hintMini_color = _this select 2;
-		   ((uiNamespace getVariable 'mando_hintMini') displayCtrl 101) ctrlSetBackgroundColor mando_hintMini_color;
-		   ((uiNamespace getVariable 'mando_hintMini') displayCtrl 102) ctrlSetStructuredText parseText(mando_hintMini_last_title);
-		   ((uiNamespace getVariable 'mando_hintMini') displayCtrl 103) ctrlSetStructuredText parseText(mando_hintMini_last_text);
-		};
-	};
+	player2_haloSpawn =				compile preprocessFileLineNumbers "actions\player2_haloSpawn.sqf";
+	call compile preprocessFileLineNumbers "compile\fn_hintMsg.sqf";
+	call compile preprocessFileLineNumbers "compile\fnc_debugMon.sqf";
 
 	BIS_Effects_Burn = 				compile preprocessFile "\ca\Data\ParticleEffects\SCRIPTS\destruction\burn.sqf";
 	player_zombieCheck = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieCheck.sqf";	//Run on a players computer, checks if the player is near a zombie
@@ -620,24 +496,27 @@ if (!isDedicated) then {
 	progressLoadingScreen 0.8;
 };
 
-	//Both
+/*---------------------------------------------------------------------------
+Both Server & Client Side Scripts
+---------------------------------------------------------------------------*/
 
 	//modified
 	spawn_loot =					compile preprocessFileLineNumbers "compile\spawn_loot.sqf";
 	spawn_loot_small = 				compile preprocessFileLineNumbers "compile\spawn_loot_small.sqf";
+	BIS_fnc_halo =             		compile preprocessFileLineNumbers "compile\fn_halo.sqf";
+	BIS_fnc_infoText =				compile preprocessFileLineNumbers "compile\fn_infoText.sqf";
+	//custom
+	fn_lootCheck = 					compile preprocessFileLineNumbers "compile\fn_lootCheck.sqf";
 
-	fn_lootCheck = 				compile preprocessFileLineNumbers "compile\fn_lootCheck.sqf";
-
+	//default
 	BIS_fnc_selectRandom =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\BIS_fnc\fn_selectRandom.sqf";
 	BIS_fnc_vectorAdd =         compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\BIS_fnc\fn_vectorAdd.sqf";
-	BIS_fnc_halo =              compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\BIS_fnc\fn_halo.sqf";
+
 	BIS_fnc_findNestedElement =	compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\BIS_fnc\fn_findNestedElement.sqf";
 	BIS_fnc_param = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\BIS_fnc\fn_param.sqf";
 	player_humanityChange =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_humanityChange.sqf";
-
 	fnc_buildWeightedArray = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_buildWeightedArray.sqf";		//Checks which actions for nearby casualty
 	fnc_usec_damageVehicle =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageHandlerVehicle.sqf";		//Event handler run on damage
-
 	// object_vehicleKilled =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_vehicleKilled.sqf";		//Event handler run on damage
 	object_setHitServer =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_setHitServer.sqf";	//process the hit as a NORMAL damage (useful for persistent vehicles)
 	object_setFixServer =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_setFixServer.sqf";	//process the hit as a NORMAL damage (useful for persistent vehicles)
