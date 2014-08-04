@@ -175,6 +175,18 @@ class CfgFunctions
 			};
 		};
 	};
+	class A3
+	{
+		class ArmaServerMonitor
+		{
+			file="ASM";
+			class ASM
+			{
+				ext=".fsm";
+				preInit=1;
+			};
+		};
+	};
 };
 //custom sounds 
 class CfgSounds
@@ -233,12 +245,18 @@ class RscTitles
 	#include "configs\altimeter.h"  
 };
 
+//inspect vehicle
+#include "configs\inspectvehicles.hpp"
+
+//debug mon config dialogs
+#include "configs\zombz_hintc.hpp"
+
 //#include halo dialogs
 #include "configs\halodefines.hpp"
 #include "configs\halo.hpp"
 
 //default loadout
-class CfgSurvival
+class CfgNewSpawn
 {
 	class Inventory
 	{
@@ -261,7 +279,7 @@ class CfgSurvival
 				"ItemMap",
 				"ItemCompass"
 			};
-			backpackWeapon="";
+			backpackItemsAndWeps="";
 			backpack="DZ_Patrol_Pack_EP1";
 		};
 	};

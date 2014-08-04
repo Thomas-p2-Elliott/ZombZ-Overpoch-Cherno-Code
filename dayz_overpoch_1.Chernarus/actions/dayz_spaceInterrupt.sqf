@@ -1,9 +1,9 @@
-private ["_dikCode","_handled","_primaryWeapon","_secondaryWeapon","_nearbyObjects","_nill","_shift","_ctrl","_alt","_dropPrimary","_dropSecondary","_iItem","_removed","_iPos","_radius","_item"];
+private ["_dikCode","_handled","_primaryWeapon","_secondaryWeapon","_nearbyObjects","_shift","_ctrl","_alt","_dropPrimary","_dropSecondary","_iItem","_removed","_iPos","_radius","_item","_vehicle","_inVehicle","_onLadder","_canDo"];
 _dikCode = 	_this select 1;
 
 _handled = false;
 
-if (_dikCode in[0x02,0x03,0x04,0x58,0x57,0x44,0x43,0x42,0x41,0x40,0x3F,0x3E,0x3D,0x3C,0x3B,0x0B,0x0A,0x09,0x08,0x07,0x06,0x05]) then {
+if (_dikCode in[0x02,0x03,0x04,0x58,0x57,0x44,0x43,0x42,0x41,0x3E,0x3D,0x3C,0x3B,0x0B,0x0A,0x09,0x08,0x07,0x06,0x05]) then {
 	_handled = true;
 };
 
@@ -118,20 +118,31 @@ if (_dikCode in (actionKeys "GetOver")) then {
 };
 //if (_dikCode == 57) then {_handled = true}; // space
 //if (_dikCode in actionKeys 'MoveForward' || _dikCode in actionKeys 'MoveBack') then {r_interrupt = true};
-if (_dikCode == 210 && (diag_tickTime - dayz_lastCheckBit > 1)) then {
+if (_dikCode == 0x3F && (diag_tickTime - dayz_lastCheckBit > 1)) then {
 	dayz_lastCheckBit = diag_tickTime;
 	if (isNil "P2DZ_dbCurMode") then {
 		P2DZ_dbCurMode = 2;
 		P2DZ_dbCurMode = P2DZ_DebugMonDefault;
 		diag_log("Debug Mon Start!");
+		_handled = true;
 	} else {
 		diag_log("Debug Mon Pressed (Insert)! Mode: " + str P2DZ_dbCurMode);
 		if (P2DZ_dbCurMode < 3) then {
 			P2DZ_dbCurMode = P2DZ_dbCurMode + 1;
+			P2DZ_debugMonitor = true;
+			_handled = true;
 		} else {
 			P2DZ_dbCurMode = 1;
+			P2DZ_debugMonitor = true;
+			_handled = true;
 		};
 	};
+};
+
+if (_dikCode == 0x40 && (diag_tickTime - dayz_lastCheckBit > 3)) then {
+	dayz_lastCheckBit = diag_tickTime;
+	[] call fnc_p2debugMonColorGUI;
+	_handled = true;
 };
 
 if (_dikCode in actionKeys "ForceCommandingMode") then {_handled = true};
@@ -158,12 +169,18 @@ if (_dikCode in actionKeys "User20" && (diag_tickTime - dayz_lastCheckBit > 1)) 
 		P2DZ_dbCurMode = 2;
 		P2DZ_dbCurMode = P2DZ_DebugMonDefault;
 		diag_log("Debug Mon Start!");
+		_handled = true;
 	} else {
 		diag_log("Debug Mon Pressed (User20)! Mode: " + str P2DZ_dbCurMode);
 		if (P2DZ_dbCurMode < 3) then {
 			P2DZ_dbCurMode = P2DZ_dbCurMode + 1;
+			P2DZ_debugMonitor = true;
+			_handled = true;
+
 		} else {
 			P2DZ_dbCurMode = 1;
+			P2DZ_debugMonitor = true;
+			_handled = true;
 		};
 	};
 };
