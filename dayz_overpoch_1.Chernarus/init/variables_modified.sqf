@@ -38,8 +38,17 @@ Debugging Settings
 	//epoch damage debugging
 	DZE_Debug_Damage = false;
 
-	//self actions debugging
+	//fn_selfActions.sqf
 	P2DZE_debugSelfActions = false;
+
+	//vehicleinspect.sqf
+	P2DZE_deugVehIns = true;
+
+	//fn_lootCheck.sqf
+	P2DZ_lootCheck_debug = false;			//Toggles debugging logs (type: boolean)
+
+	//fnc_debugMon.sqf
+	P2DZE_debugColoutput = true;
 
 /*---------------------------------------------------------------------------
 Player/Spawn Settings
@@ -50,16 +59,11 @@ Player/Spawn Settings
 	dayz_spawnselection = 1; // Spawn selection screen
 	spawnArea= 1500; // Default = 1500
 
-	//player as zed enabled?
-	DZE_PlayerZed = false;
-
-	//self bloodbabg enabbled?
-	DZE_SelfTransfuse = true;
-	//blood amount, infection %, cooldown time
-	DZE_selfTransfuse_Values = [12000, 5, 120];
-
-	//parachute spawn
+	//parachute spawn (keep disabled, deprecated)
 	dayz_paraSpawn = false;
+
+	//debug freshspawn loadouts
+	P2DZE_loadoutsDebug = true;
 
 	//nametag distance
 	DZE_HumanityTargetDistance = 25;
@@ -79,7 +83,18 @@ Player/Spawn Settings
 		P2DZ_StaticVehSpawns_DupeDistanceCheck = 7.5;
 	};
 
-	if(!isDedicated) then {
+	if(!isDedicated || hasInterface) then {
+
+		//debug monitor colour
+		P2DZE_debugCol = [0,0,1,0.1];
+
+		//player as zed enabled?
+		DZE_PlayerZed = false;
+
+		//self bloodbabg enabbled?
+		DZE_SelfTransfuse = true;
+		//deprecated
+		DZE_selfTransfuse_Values = [12000, 5, 120];
 
 		//Loadscreen Timeout Length (Seconds) (Default: 120)
 		P2DZ_LoadingTimeOut = 30;
@@ -115,7 +130,6 @@ Loot & Zombie & Animal Settings
 ---------------------------------------------------------------------------*/
 	P2DZ_lootCheck_centerPoint = [0,0,0];	//Center point for where the 'improved' loot should spawn (type: position array)
 	P2DZ_lootCheck_radius = 10000;			//Radius for this dome for the size of the imrpoved loot zone (type: number, meters)
-	P2DZ_lootCheck_debug = true;			//Toggles debugging logs (type: boolean)
 
 	//Pistols List (Pistols listed here will spawn 4 - 8 mags)
 	P2DZ_pistolList = ["Makarov","MakarovSD","M9","Colt1911","revolver_EP1","revolver_gold_EP1","glock17_EP1","M9SD","MakarovSD","Sa61_EP1","UZI_EP1","UZI_SD_EP1"];
@@ -164,7 +178,7 @@ Loot & Zombie & Animal Settings
 	//Zombie attack speed, 1 = default (fast)
 	p2_zAttackSpeed = 1;
 
-	if(!isDedicated) then {
+	if(!isDedicated || hasInterface) then {
 
 		//loot and zed spawn delay settings
 		dayz_spawnDelay =		120;
@@ -268,7 +282,7 @@ Misc Settings
 	dayz_dawn = 6;
 	dayz_dusk = 18;
 
-	if(isServer) then {
+	if(isServer && !hasInterface) then {
 		//full moon nights
 		dayz_fullMoonNights = false;
 		//dayz epoch death messages
