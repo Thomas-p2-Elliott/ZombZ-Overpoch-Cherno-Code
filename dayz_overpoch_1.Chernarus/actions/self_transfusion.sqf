@@ -1,4 +1,4 @@
-private ["_timeout","_inCombat","_started","_finished","_animState","_isMedic","_num_removed","_lastUsed","_infectionChance","_disallowinVehicle","_bloodAmount","_useTime","_hospitalDistance","_ambulanceDistance","_hospitalEnable","_ambulanceEnable","_anywhereEnable"];
+private ["_timeout","_inCombat","_started","_finished","_animState","_isMedic","_num_removed","_infectionChance","_disallowinVehicle","_bloodAmount","_useTime","_hospitalDistance","_ambulanceDistance","_hospitalEnable","_ambulanceEnable","_anywhereEnable","_nearHospital","_bloodMultiplier","_infectionMultiplier","_decke","_hospitalFound","_ambulanceFound","_display","_playerASL1","_playerASLx","_playerASLy","_playerASLz","_playerASLz2","_playerASL2"];
 disableserialization;
 _timeout = player getVariable["combattimeout", 0];
 _inCombat = if (_timeout >= diag_tickTime) then { true } else { false };
@@ -59,7 +59,7 @@ if (_hospitalEnable == 1)  then {
     _playerASLz = _playerASL1  select 2;
     _playerASLz2 = _playerASLz + 40;
     _playerASL2 = [_playerASLx,_playerASLy,_playerASLz2];
-    _decke = lineIntersects[_playerASL1,_playerASL2];
+    _decke = lineIntersects [_playerASL1,_playerASL2];
     _hospitalFound = count nearestObjects[player,["Land_A_Hospital","MASH_EP1","USMC_WarfareBFieldhHospital","Camp", "Land_Church_01", "Land_Church_03", "Land_Church_02", "Land_Church_02a", "Land_Church_05R", "Land_A_TVTower_Base", "Land_Barrack2", "Land_Destroyer", "Land_Fregata", "Land_HouseB_Tenement", "Land_telek1", "GUE_WarfareBFieldhHospital", "CDF_WarfareBFieldhHospital", "INS_WarfareBFieldhHospital", "RU_WarfareBFieldhHospital", "TK_GUE_WarfareBFieldhHospital_EP1", "TK_GUE_WarfareBFieldhHospital_Base_EP1", "TK_WarfareBFieldhHospital_Base_EP1", "TK_WarfareBFieldhHospital_EP1", "US_WarfareBFieldhHospital_EP1", "US_WarfareBFieldhHospital_Base_EP1", "ACamp_EP1", "Land_Campfire", "Land_Campfire_burning", "Plastic_Pole_EP1_DZ"],_hospitalDistance];
     if (_hospitalFound > 0 && _decke) then {
         _nearHospital = true;
@@ -144,7 +144,7 @@ if (_finished) then {
         
         [player,25] call player_humanityChange; 
 
-        if (floor(random(100)+1) <= _infectionChance) then {
+        if (floor((random(100))+1) <= _infectionChance) then {
             r_player_infected = true;
             player setVariable["USEC_infected",true,true];
             cutText [format["You gave yourself blood, but got infected in the process!"], "PLAIN DOWN"];

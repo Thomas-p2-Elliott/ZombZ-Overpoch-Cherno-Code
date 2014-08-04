@@ -1,3 +1,5 @@
+
+private ["_display"];
 disableSerialization;
 
 _display = uiNamespace getVariable "ATM_Altimeter";

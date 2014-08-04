@@ -1,8 +1,10 @@
+
+
 scopeName "main";
 
 [_display] spawn {
-	_SunOrMoon = sunOrMoon;
-	disableSerialization;
+private ["_data"];
+disableSerialization;
 	_display = uiNamespace getVariable "ATM_Altimeter";
 
 	(_display displayCtrl 5100) ctrlShow false; //Altimeter Night

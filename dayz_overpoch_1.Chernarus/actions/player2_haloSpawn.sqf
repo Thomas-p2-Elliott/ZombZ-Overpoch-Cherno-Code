@@ -2,6 +2,8 @@
 Halo Spawn Function
 By Player2 for www.zombz.net
 ---------------------------------------------------------------------------*/
+
+private ["_position"];
 P2DZE_paraOpened = false;
 P2DZE_hasLanded = false;
 P2DZ_dbCurMode = 1;

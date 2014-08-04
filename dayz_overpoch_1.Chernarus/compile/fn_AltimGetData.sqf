@@ -1,3 +1,5 @@
+
+private ["_hours","_minutes","_myAlt","_mybearing","_date","_transitionMoon","_data"];
 _myAlt = round((getPosATL player) select 2);
 _mybearing = round(getDir player);
 

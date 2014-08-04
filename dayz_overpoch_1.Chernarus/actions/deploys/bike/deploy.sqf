@@ -1,3 +1,5 @@
+
+private ["_dis","_sfx","_object","_dir","_pos","_isInCombat"];
 _isInCombat = player getVariable["startcombattimer",0]; if (_isInCombat == 1) then { 
     cutText [format["You are in Combat and cannot build a bike."], "PLAIN DOWN"];
 } else {

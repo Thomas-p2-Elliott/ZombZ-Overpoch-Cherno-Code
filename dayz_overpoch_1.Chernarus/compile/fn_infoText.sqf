@@ -1,3 +1,5 @@
+
+private ["_textArrayUnicode","_textArrayTemp","_line","_emptyArray","_nArrayTemp","_n","_textArray","_element","_nArray","_text","_textArrayLines","_finalArray","_display","_textControl"];
 3100 cutrsc ["rscInfoText","plain"];
 
 

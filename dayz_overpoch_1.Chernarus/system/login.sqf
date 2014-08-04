@@ -1,18 +1,45 @@
-private ["_parsedLogin1","_isNew","_model","_humanity","_humanityLevel","_humanityPrefix"];
+private ["_parsedLogin1","_isNew","_model","_isHiveOk","_newPlayer","_isInfected","_mags","_wpns","_bcpk","_bcpkItems","_isOK","_config","_backpackMagTypes","_backpackMagQty","_backpackWpnTypes","_backpackWpnQtys","_countr","_backpackType","_backpackWpn","_backpackWater","_first","_worldspace","_state","_setDir","_setPos","_backpack","_world","_nearestCity","_survivalTimeText","_charID","_inventory","_survival","_version","_totalMins","_days","_hours","_mins","_p2_didYouKnow","_randomSelection","_p2_selectedMsg"];
 diag_log("P2DEBUG: " + __FILE__);
 
 waitUntil{!isNil "dayzPlayerLogin"};
 waitUntil{count (dayzPlayerLogin) > 1};
 _parsedLogin1 = dayzPlayerLogin;
-diag_log("P2DEBUG: dayzPlayerLogin: " + str(_parsedLogin1));
+_charID		= _parsedLogin1 select 0;
+_inventory	= _parsedLogin1 select 1;
+_backpack	= _parsedLogin1 select 2;
+_survival 	= _parsedLogin1 select 3;
 _isNew 		= _parsedLogin1 select 4;
+_version	= _parsedLogin1 select 5;
+_model		= _parsedLogin1 select 6;
 
+if (count _parsedLogin1 > 7) then {
+	_isHiveOk = _parsedLogin1 select 7;
+	_newPlayer = _parsedLogin1 select 8;
+	_isInfected = _parsedLogin1 select 9;
+	diag_log ("P2DEBUG: PLAYER EXISTS: " + str(_isHiveOk));
+	diag_log format ["P2DEBUG: dayzPlayerLogin:	_charID (%1)	_inventory (%2)	_backpack (%3)	_survival (%4)	_isNew (%5)	_version (%6)	_model (%7)	_isHiveOk (%8)	_newPlayer (%9)	_isInfected (%10)",
+												_charID,	_inventory,		_backpack,		_survival,		_isNew,			_version,		_model,		_isHiveOk,		_newPlayer,		_isInfected];
+} else {
+	diag_log format ["P2DEBUG: dayzPlayerLogin:	_charID (%1)	_inventory (%2)	_backpack (%3)	_survival (%4)	_isNew (%5)	_version (%6)	_model (%7)",
+												_charID,	_inventory,		_backpack,		_survival,		_isNew,			_version,		_model];
+};
+
+//Work out survival time
+_totalMins = _survival select 0;
+_days = floor (_totalMins / 1440);
+_totalMins = (_totalMins - (_days * 1440));
+_hours = floor (_totalMins / 60);
+_mins =  (_totalMins - (_hours * 60));
+dayz_Survived = [_days,_hours,_mins];
 
 //	Removed for now
 //_model		= _parsedLogin1 select 6;
 //[_model,_humanity] call p2_fnc_skinLvlCheck;
 
 if (_isNew) then {
+
+	//Give player random loadout (Leave backpack slots empty for bandit/hero additions)
+
 	DZE_haloSpawn = true; //enable halo spawn
 	haloSelect = -1;
 
@@ -20,8 +47,13 @@ if (_isNew) then {
 	diag_log("P2DEBUG: Freshspawn!");
 	waitUntil{!isNil "dayzPlayerLogin2"};
 	waitUntil{count (dayzPlayerLogin2) > 0};
-	diag_log("P2DEBUG: dayzPlayerLogin2: " + str(dayzPlayerLogin2));
+	_worldspace = 	dayzPlayerLogin2 select 0;
+	_state =		dayzPlayerLogin2 select 1;
+	_setDir = 		_worldspace select 0;
+	_setPos = 		_worldspace select 1;
 	P2DZ_humanity = dayzPlayerLogin2 select 2;
+	diag_log format ["P2DEBUG: dayzPlayerLogin2:_worldspace (%1)	_state (%2)	P2DZ_humanity (%3)	_setDir (%4)	_setPos (%5)",
+												_worldspace,		_state,		P2DZ_humanity,		_setDir,		_setPos];
 
 	P2DZ_humanityLevel = floor(P2DZ_humanity / 5000);
 
@@ -44,21 +76,38 @@ if (_isNew) then {
 
 	//Check if player has purchased loadout 
 
+	//load newspawn loadout
+	if(!isNil "DefaultMagazines") then {
+		diag_log("P2DEBUG: Login: DefaultMagazines" + str DefaultMagazines);
+	};
+	if(!isNil "DefaultWeapons") then {
+		diag_log("P2DEBUG: Login: DefaultWeapons" + str DefaultWeapons);
+	};
+	if(!isNil "DefaultBackpack") then {
+		diag_log("P2DEBUG: Login: DefaultBackpack" + str DefaultBackpack);
+	};
+	if(!isNil "DefaultBackpackItems") then {
+		diag_log("P2DEBUG: Login: DefaultBackpackItems" + str DefaultBackpackWeapons);
+	};
+
 	//Wait until they're fully loaded in
 	waitUntil{!isNil 'dayz_gui'};
 
-	//Give player random loadout (Leave backpack slots empty for bandit/hero additions)
-	[] execVM "loadouts.sqf";						//newspawn loadouts
+	_world = toUpper(worldName); //toUpper(getText (configFile >> "CfgWorlds" >> (worldName) >> "description"));
+	_nearestCity = nearestLocations [([player] call FNC_GetPos), ["NameCityCapital","NameCity","NameVillage","NameLocal"],1000];
+	Dayz_logonTown = "Wilderness";
+	_survivalTimeText = "Days: " + str(_days) + " Hours: " + str(_hours) + "Minutes: " + str(_mins);
 
-	//hero items
-	if (P2DZ_humanityLevel > 0) then {
-			player addMagazine "ItemBloodbag";
-			player addMagazine "ItemBloodbag";
-			(unitBackpack player) addMagazineCargoGlobal "PartEngine";
-			(unitBackpack player) addMagazineCargoGlobal "PartGeneric";
-			(unitBackpack player) addWeaponCargoGlobal "ItemToolbox";
-			dayz_myBackpackMags =	getMagazineCargo dayz_myBackpack;
-			dayz_myBackpackWpns =	getWeaponCargo dayz_myBackpack;
+	if (count _nearestCity > 0) then {Dayz_logonTown = text (_nearestCity select 0)};
+
+	if (!isNil "P2DZ_humanityLevelText") then {
+		_first = [
+			Dayz_logonTown,
+			_survivalTimeText,
+			P2DZ_humanityLevelText
+		] spawn BIS_fnc_infoText;
+	} else {
+		_first = [_world,Dayz_logonTown,_survivalTimeText] spawn BIS_fnc_infoText;
 	};
 
 	//Check if player has base
@@ -115,6 +164,7 @@ waitUntil{(P2DZE_paraOpened)};
 
 //show debug monitor
 P2DZ_dbCurMode = 2;
+P2DZ_debugMonitor = true;
 [] call fnc_debugMon;
 //wait until Player has Landed!
 waitUntil{(P2DZE_hasLanded)};

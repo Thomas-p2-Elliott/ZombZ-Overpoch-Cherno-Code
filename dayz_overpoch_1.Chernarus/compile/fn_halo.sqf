@@ -1,3 +1,5 @@
+
+private ["_brightness","_pos","_unit","_parachute","_dir","_alt","_para","_vel"];
 scriptName "modules_e\Functions\objects\fn_HALO.sqf";
 sleep 0.01;
 
@@ -30,7 +32,8 @@ if (typename _this == typename objnull) then {
 		bis_fnc_halo_action = _unit addaction [localize "STR_HALO_OPEN_CHUTE","compile\fn_halo.sqf",[],1,true,true,"Eject"];
 
 		bis_fnc_halo_keydown = {
-			_key = _this select 1;
+            private ["_key"];
+            _key = _this select 1;
 			if (_key in (actionkeys 'MoveForward')) then {
 				if (bis_fnc_halo_vel < +bis_fnc_halo_velLimit) then {bis_fnc_halo_vel = bis_fnc_halo_vel + bis_fnc_halo_velAdd};
 			};
@@ -54,7 +57,8 @@ if (typename _this == typename objnull) then {
 		bis_fnc_halo_dirAdd = 0.06;
 
 		[] spawn {
-			_time = time - 0.1;
+            private ["_vAnim","_hAnim","_anim","_fpsCoef","_time","_dir","_vel","_v","_h","_vLimit","_hLimit"];
+            _time = time - 0.1;
 			while {alive player && vehicle player == player && isnil {player getvariable "bis_fnc_halo_terminate"}} do {
 			
 				_fpsCoef = ((time - _time) * 60) / acctime; //Script is optimized for 60 FPS
@@ -165,7 +169,8 @@ if (typename _this == typename []) then {
 		bis_fnc_halo_para_dirAdd = 0.03;
 
 		bis_fnc_halo_para_keydown = {
-			_key = _this select 1;
+            private ["_key"];
+            _key = _this select 1;
 
 			if (_key in (actionkeys 'MoveForward')) then {
 				if (bis_fnc_halo_para_vel < +bis_fnc_halo_para_velLimit) then {bis_fnc_halo_para_vel = bis_fnc_halo_para_vel + bis_fnc_halo_para_velAdd};
@@ -186,7 +191,8 @@ if (typename _this == typename []) then {
 		bis_fnc_halo_para_loop_time = time - 0.1;
 		bis_fnc_halo_para_velZ = velocity _para select 2;
 		bis_fnc_halo_para_loop = {
-				if (!isnil {player getvariable "bis_fnc_halo_terminate"}) exitwith {};
+            private ["_para","_fpsCoef","_dir"];
+            if (!isnil {player getvariable "bis_fnc_halo_terminate"}) exitwith {};
 				if (time == bis_fnc_halo_para_loop_time) exitwith {}; //--- FPS too high
 
 				_para = vehicle player;

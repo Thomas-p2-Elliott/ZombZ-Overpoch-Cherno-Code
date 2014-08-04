@@ -723,9 +723,12 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	if ((dayz_myCursorTarget != _cursorTarget) && _isVehicle && !_isMan && _hasToolbox && (damage _cursorTarget < 1) && !_isDisallowRepair) then {
 		if (s_player_repair_crtl < 0) then {
 			dayz_myCursorTarget = _cursorTarget;
+			_hitpoints = _cursorTarget call vehicle_getHitpoints;
 			_menu = dayz_myCursorTarget addAction [localize "STR_EPOCH_PLAYER_REPAIRV", "\z\addons\dayz_code\actions\repair_vehicle.sqf",_cursorTarget, 0, true, false, "",""];
+			_handle = dayz_myCursorTarget addAction ["Inspect Vehicle", "actions\inspectvehicle.sqf",[_cursorTarget,_hitpoints], 0, false, true, "",""];
 			if (canBuild) then { _menu1 = dayz_myCursorTarget addAction [localize "STR_EPOCH_PLAYER_SALVAGEV", "\z\addons\dayz_code\actions\salvage_vehicle.sqf",_cursorTarget, 0, true, false, "",""]; };
 			s_player_repairActions set [count s_player_repairActions,_menu];
+			s_player_repairActions set [count s_player_repairActions, _handle];
 			if (canBuild) then { s_player_repairActions set [count s_player_repairActions,_menu1]; };
 			s_player_repair_crtl = 1;
 		} else {

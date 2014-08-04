@@ -1,4 +1,4 @@
-private ["_time","_vehicle","_inVehicle","_cursorTarget","_onLadder","_hasToolbox","_canDo","_isVehicle","_isDeployed","_isVehicletype","_isBike","_isATV","_isMoto","_isBtr","_isHumvee","_isGyro","_isLittlebird","_isMerlin","_dObj"];
+private ["_time","_vehicle","_inVehicle","_cursorTarget","_onLadder","_hasToolbox","_canDo","_isDeployed","_isBike","_isATV","_isMoto","_isBtr","_isHumvee","_isGyro","_isLittlebird","_isMerlin"];
 if (p2SpT) then { _time = diag_tickTime;  diag_log format ['s.sqf started, Time: %1',_time];  }; 
 
 s_player_packOBJ = -1; 
@@ -29,8 +29,7 @@ while {true} do {
 
 				_onLadder = (getNumber (configFile >> "CfgMovesMaleSdr" >> "States" >> (animationState player) >> "onLadder")) == 1; 
 				_hasToolbox = "ItemToolbox" in items player; 
-				_canDo = (!r_drag_sqf and !r_player_unconscious and !_onLadder); 
-				_isVehicletype = typeOf _cursorTarget in ["ATV_US_EP1","ATV_CZ_EP1"]; 
+				_canDo = (!r_drag_sqf and !r_player_unconscious and !_onLadder);  
 				_isBike = typeOf _cursorTarget in ["Old_bike_TK_INS_EP1","Old_bike_TK_CIV_EP1"]; 
 				_isATV = typeOf _cursorTarget in ["ATV_US_EP1"]; 
 				_isMoto = typeOf _cursorTarget in ["TT650_TK_CIV_EP1"]; 

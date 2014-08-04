@@ -1,4 +1,4 @@
-private ["_debug","_nearby","_count","_inCombat","_timeout","_txt","_obj","_objPos","_sfx","_origMat","_bag"];
+private ["_nearby","_count","_txt","_obj","_sfx"];
 
 _nearby = {isPlayer _x} count (nearestObjects [player, ["CAManBase"], 5]);
 _count = (_nearby - 1);

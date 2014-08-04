@@ -13,7 +13,7 @@ class ATM_Altimeter
 		"AltiNightShow",
 		"AltiAlt",
 		"AltiDir",
-		"AltiTime",
+		"AltiTime"
 	};
 	class AltiShow
 	{

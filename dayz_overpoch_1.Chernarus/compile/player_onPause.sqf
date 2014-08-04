@@ -1,4 +1,4 @@
-private ["_display","_btnRespawn","_btnAbort","_timeOut","_timeMax","_btnAbortText"];
+private ["_display","_btnRespawn","_btnAbort","_timeOut","_timeMax","_btnAbortText","_sleep"];
 disableSerialization;
 waitUntil {
 	_display = findDisplay 49;

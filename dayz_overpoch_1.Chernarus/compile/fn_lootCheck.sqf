@@ -168,5 +168,5 @@ if (_inZone) then {
 };
 _timeEnd = diag_tickTime;
 _timeBetween = _timeEnd - _timeStart;
-diag_log("fn_lootCheck:	_loot:	" + str _loot + "	_inZone:	" + str _inZone + "	_out:	" + str _out + "	Ticks Taken: " + str _timeBetween);
+if (_p2d) then { diag_log("fn_lootCheck:	_loot:	" + str _loot + "	_inZone:	" + str _inZone + "	_out:	" + str _out + "	Ticks Taken: " + str _timeBetween); };
 _out
