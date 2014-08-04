@@ -85,16 +85,17 @@ if (typeName _minutes == "STRING") then
 };
 
 diag_log ("PDEATH: Player Died " + _playerID);
-
-if (_characterID != "0") then
-{
-	_key = format["CHILD:202:%1:%2:%3:",_characterID,_minutes,_infected];
-	#ifdef DZE_SERVER_DEBUG_HIVE
-	diag_log ("HIVE: WRITE: "+ str(_key));
-	#endif
-	_key call server_hiveWrite;
-}
-else
-{
-	deleteVehicle _newObject;
+if (!isNil '_characterID') then {
+	if (_characterID != "0") then
+	{
+		_key = format["CHILD:202:%1:%2:%3:",_characterID,_minutes,_infected];
+		#ifdef DZE_SERVER_DEBUG_HIVE
+		diag_log ("HIVE: WRITE: "+ str(_key));
+		#endif
+		_key call server_hiveWrite;
+	}
+	else
+	{
+		deleteVehicle _newObject;
+	};
 };
