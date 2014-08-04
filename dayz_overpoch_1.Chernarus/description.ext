@@ -188,7 +188,7 @@ class CfgFunctions
 		};
 	};
 };
-//custom sounds 
+/*Custom Sounds + DayZ_Sfx sounds fix by DJ*/
 class CfgSounds
 {
     sounds[] =
@@ -209,25 +209,25 @@ class CfgSounds
 	class administer_iv_02
 	{
 		name="administer_iv_02";
-		sound[]={administer_iv_02.ogg,1,1};
+		sound[]={\z\addons\dayz_sfx\effects\administer_iv_02.ogg,1,1};
 		titles[]={};
 	};
 	class morphine_01
 	{
 		name="morphine_01";
-		sound[]={morphine_01.ogg,1,1};
+		sound[]={\z\addons\dayz_sfx\effects\morphine_01.ogg,1,1};
 		titles[]={};
 	};
 	class painkiller_01
 	{
 		name="painkiller_01";
-		sound[]={painkiller_01.ogg,1,1};
+		sound[]={\z\addons\dayz_sfx\effects\painkiller_01.ogg,1,1};
 		titles[]={};
 	};
 	class fracture_1
 	{
 		name="fracture_1";
-		sound[]={fracture_1.wss,1,1};
+		sound[]={\z\addons\dayz_sfx\gore\fracture_1.wss,1,1};
 		titles[]={};
 	};
 };
@@ -236,7 +236,8 @@ class CfgSounds
 #include "compile\snappoints.hpp"
 //## p2 Extra Right Clickables ##
 #include "configs\rc.hpp"
-
+//##DJ Skin System##
+#include "configs\ZombZSkins.hpp"
 class RscTitles
 {
 	//hintui

@@ -267,7 +267,6 @@ fnc_p2debugMonColorGUI = {
 				_textCtrl = ((uiNamespace getVariable 'ZombZHintColour_Dialog') displayCtrl 169691);
 				_text = ctrlText (_textCtrl);
 				_P2DZE_debugMon_array = _text;
-				//diag_log(_text);
 				_P2DZE_debugMon_array = call compile str _P2DZE_debugMon_array;
 				_string = _P2DZE_debugMon_array;
 				_result = [_string] 			 call KRON_strToArray;
@@ -276,8 +275,7 @@ fnc_p2debugMonColorGUI = {
 				_result4 = [ _result3,',,,',','] call KRON_Replace;
 				_result5 = [ _result4,',]]',']'] call KRON_Replace;
 				_result6 = [ _result5,'[[,','['] call KRON_Replace;
-				_P2DZE_debugMon_array = call compile _result6;
-				//diag_log(_P2DZE_debugMon_array);     
+				_P2DZE_debugMon_array = call compile _result6;     
 				P2DZE_allowDebugColInputTimeLeft = P2DZE_allowDebugColInputTime - _x;
 
 				if (!isNil '_P2DZE_debugMon_array' && {(count _P2DZE_debugMon_array == 4)}) then {

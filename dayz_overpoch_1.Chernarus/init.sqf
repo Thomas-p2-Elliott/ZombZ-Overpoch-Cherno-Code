@@ -53,7 +53,7 @@ dayz_previousID = 0;
 
 //Enabble AntiHack on TestServer
 if (isServer) then {
-	AHe = false;
+	AHe = true;
 };
 
 //enable object streaming from db
