@@ -1,4 +1,4 @@
-private ["_isInfected","_doLoop","_hiveVer","_isHiveOk","_playerID","_playerObj","_primary","_key","_charID","_playerName","_backpack","_isNew","_inventory","_survival","_model","_mags","_wpns","_bcpk","_config","_newPlayer"];
+private ["_doLoop","_hiveVer","_isHiveOk","_playerID","_playerObj","_primary","_key","_charID","_playerName","_backpack","_isNew","_inventory","_survival","_model","_mags","_wpns","_bcpk","_config","_newPlayer"];
 
 #ifdef DZE_SERVER_DEBUG
 diag_log ("STARTING LOGIN: " + str(_this));
@@ -24,7 +24,6 @@ if (count _this > 2) then {
 _inventory =	[];
 _backpack = 	[];
 _survival =		[0,0,0];
-_isInfected =   0;
 _model =		"";
 
 if (_playerID == "") then {
@@ -91,11 +90,6 @@ if (!_isNew) then {
 	};
 	
 } else {
-	if (DZE_PlayerZed) then {
-		_isInfected = _primary select 3;
-	} else {
-		_isInfected = 0;
-	};
 	_model =		_primary select 4;
 	_hiveVer =		_primary select 5;
 	
@@ -112,27 +106,34 @@ if (!_isNew) then {
 
 	
 	//Record initial inventory only if not player zombie 
-	if(_isInfected != 1) then {
-		_config = (configFile >> "CfgSurvival" >> "Inventory" >> "Default");
-		_mags = getArray (_config >> "magazines");
-		_wpns = getArray (_config >> "weapons");
-		_bcpk = getText (_config >> "backpack");
+	_config = (missionConfigFile >> "CfgNewSpawn" >> "Inventory" >> "Default");
+	_mags = getArray (_config >> "magazines");
+	_wpns = getArray (_config >> "weapons");
+	_bcpk = getText (_config >> "backpack");
+	_bcpkItems = getText (_config >> "backpackItemsAndWeps");
 
-		if(!isNil "DefaultMagazines") then {
-			_mags = DefaultMagazines;
-		};
-		if(!isNil "DefaultWeapons") then {
-			_wpns = DefaultWeapons;
-		};
-		if(!isNil "DefaultBackpack") then {
-			_bcpk = DefaultBackpack;
-		};
-		//_randomSpot = true;
-	
-		//Wait for HIVE to be free
-		_key = format["CHILD:203:%1:%2:%3:",_charID,[_wpns,_mags],[_bcpk,[],[]]];
-		_key call server_hiveWrite;
+	if(!isNil "DefaultMagazines") then {
+		diag_log("P2DEBUG: Login: DefaultMagazines" + str DefaultMagazines);
+		_mags = DefaultMagazines;
 	};
+	if(!isNil "DefaultWeapons") then {
+		diag_log("P2DEBUG: Login: DefaultWeapons" + str DefaultWeapons);
+		_wpns = DefaultWeapons;
+	};
+	if(!isNil "DefaultBackpack") then {
+		diag_log("P2DEBUG: Login: DefaultBackpack" + str DefaultBackpack);
+		_bcpk = DefaultBackpack;
+	};
+	if(!isNil "DefaultBackpackWeapons") then {
+		diag_log("P2DEBUG: Login: DefaultBackpackItems" + str DefaultBackpackWeapons);
+		_bcpkItems = DefaultBackpackItems;
+	};
+	//_randomSpot = true;
+
+	//Wait for HIVE to be free
+	_key = format["CHILD:203:%1:%2:%3:",_charID,[_wpns,_mags],[_bcpk,[],[]]];
+	diag_log("P2DEBUG: " + _key);
+	_key call server_hiveWrite;
 };
 
 #ifdef DZE_SERVER_DEBUG
@@ -149,5 +150,5 @@ if (worldName == "chernarus") then {
 	([4654,9595,0] nearestObject 145260) setDamage 1;
 };
 
-dayzPlayerLogin = [_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,_isInfected];
+dayzPlayerLogin = [_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,0];
 (owner _playerObj) publicVariableClient "dayzPlayerLogin";
