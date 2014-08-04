@@ -75,7 +75,7 @@ DefaultBackpackWeapons = [];
 
 if (isServer || !isDedicated || hasInterface) then {
 	DefaultMagazines = _loadout5_items;
-	DefaultWeapons = _loadout1_weapons + _loadout1_tools;
+	DefaultWeapons = _loadout5_weapons + _loadout5_tools;
 	DefaultBackpack =  _loadout5_backpack;
 	DefaultBackpackWeapons = _loadout5_backpack_weapons + _loadout5_backpack_items;	
 	randomvar = 5;
