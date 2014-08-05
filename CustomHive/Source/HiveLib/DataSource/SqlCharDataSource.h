@@ -31,6 +31,7 @@ public:
 	Sqf::Value fetchCharacterInitial( string playerId, int serverId, const string& playerName ) override;
 	Sqf::Value fetchCharacterDetails( int characterId ) override;
 	Sqf::Value fetchTraderObject( int traderObjectId, int action) override;
+	bool updateDebugMonSettings(string playerUID, const Sqf::Value& debugMonSettings) override;
 	bool updateCharacter( int characterId, int serverId, const FieldsType& fields ) override;
 	bool initCharacter( int characterId, const Sqf::Value& inventory, const Sqf::Value& backpack ) override;
 	bool killCharacter( int characterId, int duration, int infected ) override;
@@ -47,6 +48,7 @@ private:
 	SqlStatementID _stmtInsertNewCharacter;
 	SqlStatementID _stmtInitCharacter;
 	SqlStatementID _stmtKillCharacter;
+	SqlStatementID _stmtupdateDebugMonSettings;
 	SqlStatementID _stmtRecordLogin;
 	SqlStatementID _stmtTradeObjectBuy;
 	SqlStatementID _stmtTradeObjectSell;

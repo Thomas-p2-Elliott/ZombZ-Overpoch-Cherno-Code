@@ -34,12 +34,22 @@ SqlCharDataSource::~SqlCharDataSource() {}
 Sqf::Value SqlCharDataSource::fetchCharacterInitial( string playerId, int serverId, const string& playerName )
 {
 	bool newPlayer = false;
+	Sqf::Value debugMonSettings = lexical_cast<Sqf::Value>("[0,0,1,0.2]"); //Default blue debug monitor
 	//make sure player exists in db
 	{
-		auto playerRes(getDB()->queryParams(("SELECT `PlayerName`, `PlayerSex` FROM `Player_DATA` WHERE `"+_idFieldName+"`='%s'").c_str(), getDB()->escape(playerId).c_str()));
+		auto playerRes(getDB()->queryParams(("SELECT `PlayerName`, `PlayerSex`, `DebugSetting` FROM `Player_DATA` WHERE `"+_idFieldName+"`='%s'").c_str(), getDB()->escape(playerId).c_str()));
 		if (playerRes && playerRes->fetchRow())
 		{
 			newPlayer = false;
+			//get debug monitor settings
+			try
+			{
+				debugMonSettings = lexical_cast<Sqf::Value>(playerRes->at(2).getString());
+			}
+			catch (bad_lexical_cast)
+			{
+				_logger.warning("Invalid DebugSetting for CharacterID('" + playerId + "'): " + playerRes->at(2).getString());
+			}
 			//update player name if not current
 			if (playerRes->at(0).getString() != playerName)
 			{
@@ -223,7 +233,7 @@ Sqf::Value SqlCharDataSource::fetchCharacterInitial( string playerId, int server
 	retVal.push_back(model);
 	//hive interface version
 	retVal.push_back(0.96f);
-	
+	retVal.push_back(debugMonSettings);
 
 	return retVal;
 }
@@ -343,28 +353,27 @@ bool SqlCharDataSource::updateCharacter( int characterId, int serverId, const Fi
 		else if (name == "Model")
 			sqlFields[name] = "'"+getDB()->escape(boost::get<string>(val))+"'";
 	}
-
 	if (sqlFields.size() > 0)
 	{
-		string query = "UPDATE `Character_DATA` SET ";
-		for (auto it=sqlFields.begin();it!=sqlFields.end();)
-		{
-			string fieldName = it->first;
-			if (fieldName == "Worldspace")
-				fieldName = _wsFieldName;
 
-			query += "`" + fieldName + "` = " + it->second;
-			++it;
-			if (it != sqlFields.end())
-				query += " , ";
-		}
-		query += ", `InstanceID` = " + lexical_cast<string>(serverId) + "  WHERE `CharacterID` = " + lexical_cast<string>(characterId);
-		bool exRes = getDB()->execute(query.c_str());
-		poco_assert(exRes == true);
+			string query = "UPDATE `Character_DATA` SET ";
+			for (auto it = sqlFields.begin(); it != sqlFields.end();)
+			{
+				string fieldName = it->first;
+				if (fieldName == "Worldspace")
+					fieldName = _wsFieldName;
 
-		return exRes;
+				query += "`" + fieldName + "` = " + it->second;
+				++it;
+				if (it != sqlFields.end())
+					query += " , ";
+			}
+			query += ", `InstanceID` = " + lexical_cast<string>(serverId)+"  WHERE `CharacterID` = " + lexical_cast<string>(characterId);
+			bool exRes = getDB()->execute(query.c_str());
+			poco_assert(exRes == true);
+
+			return exRes;
 	}
-
 	return true;
 }
 
@@ -387,6 +396,18 @@ bool SqlCharDataSource::killCharacter( int characterId, int duration, int infect
 	stmt->addInt32(infected);
 	stmt->addInt32(duration);
 	stmt->addInt32(characterId);
+	bool exRes = stmt->execute();
+	poco_assert(exRes == true);
+
+	return exRes;
+}
+
+bool SqlCharDataSource::updateDebugMonSettings(string playerUID, const Sqf::Value& debugMonSettings)
+{
+
+	auto stmt = getDB()->makeStatement(_stmtInitCharacter, "UPDATE `player_data` SET `DebugSetting` = ? WHERE `PlayerUID` = ?");
+	stmt->addString(lexical_cast<string>(debugMonSettings));
+	stmt->addString(lexical_cast<string>(playerUID));
 	bool exRes = stmt->execute();
 	poco_assert(exRes == true);
 

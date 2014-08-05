@@ -153,6 +153,7 @@ HiveExtApp::HiveExtApp(string suffixDir) : AppServer("HiveExt",suffixDir), _serv
 	handlers[201] = boost::bind(&HiveExtApp::playerUpdate,this,_1);
 	handlers[202] = boost::bind(&HiveExtApp::playerDeath,this,_1);
 	handlers[203] = boost::bind(&HiveExtApp::playerInit,this,_1);
+	handlers[222] = boost::bind(&HiveExtApp::playerUpdateDebugMon, this, _1);
 }
 
 #include <boost/lexical_cast.hpp>
@@ -592,6 +593,15 @@ Sqf::Value HiveExtApp::playerUpdate( Sqf::Parameters params )
 	return ReturnBooleanStatus(true);
 }
 
+Sqf::Value HiveExtApp::playerUpdateDebugMon(Sqf::Parameters params)
+{
+	string playerId = Sqf::GetStringAny(params.at(0));
+	Sqf::Value debugMonSettings = boost::get<Sqf::Parameters>(params.at(1));
+
+	return ReturnBooleanStatus(_charData->updateDebugMonSettings(playerId, debugMonSettings));
+}
+
+
 Sqf::Value HiveExtApp::playerInit( Sqf::Parameters params )
 {
 	int characterId = Sqf::GetIntAny(params.at(0));
@@ -609,6 +619,8 @@ Sqf::Value HiveExtApp::playerDeath( Sqf::Parameters params )
 	
 	return ReturnBooleanStatus(_charData->killCharacter(characterId,duration,infected));
 }
+
+
 
 namespace
 {

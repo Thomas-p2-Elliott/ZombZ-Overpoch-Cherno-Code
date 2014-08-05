@@ -30,6 +30,7 @@ public:
 	virtual Sqf::Value fetchTraderObject( int traderObjectId, int action ) = 0;
 	typedef map<string,Sqf::Value> FieldsType;
 	virtual bool updateCharacter( int characterId, int serverId, const FieldsType& fields ) = 0;
+	virtual bool updateDebugMonSettings(string playerUID, const Sqf::Value& debugMonSettings) = 0;
 	virtual bool initCharacter( int characterId, const Sqf::Value& inventory, const Sqf::Value& backpack ) = 0;
 	virtual bool killCharacter( int characterId, int duration, int infected ) = 0;
 	virtual bool recordLogin( string playerId, int characterId, int action ) = 0;
