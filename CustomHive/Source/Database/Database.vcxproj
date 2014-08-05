@@ -80,11 +80,13 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Development\Libraries\boost_1_55_0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Development\Libraries\boost_1_55_0\lib\x86\v120\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>X:\_HiveExt\boost-1_56_0_b1\boost;X:\_HiveExt\boost-1_56_0_b1\include;C:\Development\Libraries\boost_1_55_0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>X:\_HiveExt\boost-1_56_0_b1\out\x86\v120\boost\bin.v2\libs;C:\Development\Libraries\boost_1_55_0\lib\x86\v120\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>X:\_HiveExt\boost-1_56_0_b1\lib\x86\v120\lib;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86)</LibraryPath>
+    <IncludePath>$(DETOURS_DIR)\src;$(POCO_DIR);$(MYSQL_DIR)$(TBB_DIR);X:\DayZhiveEpoch\Hive\boost-1_56_0_b1\include;$(IncludePath);$(WindowsSDK_IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
