@@ -206,9 +206,7 @@ if (_characterID != "0") then {
 
 				//update debug mon settings
 				_key2 = format["CHILD:222:%1:%2:",_playerUID,_debugMonSettings];
-				diag_log(format["P2DEBUG: Hive:CHILD:222:%1:%2:",_playerUID,_debugMonSettings]);
-				_result = _key2 call server_hiveWrite;
-				diag_log("P2DEBUG: Hive:CHILD:222: Result: " + str _result);
+				_key2 call server_hiveWrite;
 			};
 		};
 

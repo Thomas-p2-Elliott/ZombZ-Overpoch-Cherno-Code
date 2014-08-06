@@ -35,12 +35,12 @@ diag_log ("P2DEBUG: LOGIN ATTEMPT: " + str(_playerID) + " " + _playerName);
 
 //Do Connection Attempt
 _doLoop = 0;
-while {_doLoop < 5} do {
+while {_doLoop < 6} do {
 	_key = format["CHILD:101:%1:%2:%3:",_playerID,dayZ_instance,_playerName];
 	_primary = _key call server_hiveReadWrite;
 	if (count _primary > 0) then {
 		if ((_primary select 0) != "ERROR") then {
-			_doLoop = 9;
+			_doLoop = 10;
 		};
 	};
 	_doLoop = _doLoop + 1;
@@ -56,7 +56,7 @@ if ((_primary select 0) == "ERROR") exitWith {
 
 //Process request
 _newPlayer = 	_primary select 1;
-_isNew = 		count _primary < 7; //_result select 1;
+_isNew = 		count _primary < 8; //_result select 1;
 _charID = 		_primary select 2;
 
 diag_log ("P2DEBUG: LOGIN RESULT: " + str(_primary));
@@ -66,19 +66,19 @@ _hiveVer = 0;
 
 if (!_isNew) then {
 	//RETURNING CHARACTER		
-	_inventory = 	_primary select 4;
-	_backpack = 	_primary select 5;
-	_survival =		_primary select 6;
-	_model =		_primary select 7;
-	_hiveVer =		_primary select 8;
+	_inventory = 			_primary select 4;
+	_backpack = 			_primary select 5;
+	_survival =				_primary select 6;
+	_model =				_primary select 7;
+	_hiveVer =				_primary select 8;
 	_debugMonSettings = 	_primary select 9;
 	if (!(_model in AllPlayers)) then {
 		_model = "Survivor2_DZ";
 	};
 
 } else {
-	_model =		_primary select 4;
-	_hiveVer =		_primary select 5;
+	_model =				_primary select 4;
+	_hiveVer =				_primary select 5;
 	_debugMonSettings = 	_primary select 6;
 	if (isNil "_model") then {
 		_model = "Survivor2_DZ";
@@ -96,7 +96,7 @@ if (!_isNew) then {
 	_mags = getArray (_config >> "magazines");
 	_wpns = getArray (_config >> "weapons");
 	_bcpk = getText (_config >> "backpack");
-	_bcpkItems = getText (_config >> "backpackItemsAndWeps");
+	DefaultBackpackItems = "ItemToolbox";
 
 	if(!isNil "DefaultMagazines") then {
 		diag_log("P2DEBUG: Login: DefaultMagazines" + str DefaultMagazines);
@@ -122,14 +122,7 @@ if (!_isNew) then {
 	_key call server_hiveWrite;
 };
 
-#ifdef DZE_SERVER_DEBUG
-diag_log ("LOGIN LOADED: " + str(_playerObj) + " Type: " + (typeOf _playerObj) + " at location: " + (getPosATL _playerObj));
-#endif
-
-_isHiveOk = false;
-if (_hiveVer >= dayz_hiveVersionNo) then {
-	_isHiveOk = true;
-};
+_isHiveOk = true;
 
 if (worldName == "chernarus") then {
 	([4654,9595,0] nearestObject 145259) setDamage 1;
