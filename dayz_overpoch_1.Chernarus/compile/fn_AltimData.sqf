@@ -3,7 +3,7 @@
 scopeName "main";
 
 [_display] spawn {
-private ["_data"];
+private ["_data","_displayedHint","_display"];
 disableSerialization;
 	_display = uiNamespace getVariable "ATM_Altimeter";
 
@@ -17,6 +17,7 @@ disableSerialization;
 
 	(_display displayCtrl 5100) ctrlShow true; //Altimeter Night
 
+	_displayedHint = false;
 
 	while {uiNamespace GetVariable ["altiHudOpened",true]} do
 	{
@@ -30,6 +31,7 @@ disableSerialization;
 			};
 			if (((_data select 0) < 300) && ((_data select 0) > 130)) then {
 				(_display displayCtrl 5102) ctrlSetTextColor [0, 1, 0, 1];
+				if !(_displayedHint) then { titleText ["Open your Parachute!", "PLAIN"]; _displayedHint = true; };
 			};
 			if (((_data select 0) < 130) && ((_data select 0) > 50) || ((_data select 0) > 600)) then {
 				(_display displayCtrl 5102) ctrlSetTextColor [0.7, 0, 0, 1];
