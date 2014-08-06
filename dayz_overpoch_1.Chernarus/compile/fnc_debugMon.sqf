@@ -114,10 +114,10 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	hintSilent "";
 	["<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Mode: " + P2DZ_debugMon_Mode + "</t><t size='1' font='Bitstream' align='right'>Key: " + P2DZ_debugMon_ToggleKey + "</t>", 
 	"<img align='center' size=" + str _p2ps + " image=" + str _p2p + "/><br/>
-	<t size='1' font='Bitstream' align='left' color='#FF0000'>Players:</t><t size='1' font='Bitstream' align='right' color='#FF0000'>" + str _p2totalPlayers + "</t><br/>
-	<t size='1' font='Bitstream' align='left' color='#99FF99'> Players (2500m): </t><t size='1' font='Bitstream' align='right' color='#99FF99'>" + str _p2within2500 + "</t><br/>
-	<t size='1' font='Bitstream' align='left' color='#FF0000'>Murders: </t><t size='1' font='Bitstream' align='right' color='#FF0000'>" + str _p2mkills + "</t><br/>
-	<t size='1' font='Bitstream' align='left' color='#99FF99'>Bandit Kills: </t><t size='1' font='Bitstream' align='right' color='#99FF99'>" + str _p2bKills + "</t><br/>
+	<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Players:</t><t size='1' font='Bitstream' align='right' color='#FFFFFF'>" + str _p2totalPlayers + "</t><br/>
+	<t size='1' font='Bitstream' align='left' color='#FFFFFF'> Players (2500m): </t><t size='1' font='Bitstream' align='right' color='#FFFFFF'>" + str _p2within2500 + "</t><br/>
+	<t size='1' font='Bitstream' align='left' color='#FC473A'>Murders: </t><t size='1' font='Bitstream' align='right' color='#FC473A'>" + str _p2mkills + "</t><br/>
+	<t size='1' font='Bitstream' align='left' color='#8BFF6B'>Bandit Kills: </t><t size='1' font='Bitstream' align='right' color='#8BFF6B'>" + str _p2bKills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Blood: </t><t size='1' font='Bitstream' align='right' color=" + str _p2c + ">" + str r_player_blood + "</t><br/><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Gun: </t><t size='0.75' font='Bitstream' align='right' color='#01DFD7'>" + _p2wep + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Headshots / Z Kills: </t><t size='1' font='Bitstream' align='right' color='#01DFD7'>" + str _p2zKills + "/" + str _p2zKills + "</t><br/>
@@ -183,9 +183,9 @@ private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
 
 	hintSilent "";
 	["<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Mode: " + P2DZ_debugMon_Mode + "</t><t size='1' font='Bitstream' align='right'>Key: " + P2DZ_debugMon_ToggleKey + "</t>", 
-	"<t size='1' font='Bitstream' align='left' color='#99FF99'> Players (2500m): </t><t size='1' font='Bitstream' align='right' color='#99FF99'>" + str _p2within2500 + "</t><br/>
-	<t size='1' font='Bitstream' align='left' color='#FE2E2E'>Murders:</t><t size='1' font='Bitstream' align='right' color='#FE2E2E'>" + str _p2mkills + "</t><br/>
-	<t size='1' font='Bitstream' align='left' color='#99FF99'>Bandit Kills:</t><t size='1' font='Bitstream' align='right' color='#99FF99'>" + str _p2bKills + "</t><br/>
+	"<t size='1' font='Bitstream' align='left' color='#FFFFFF'> Players (2500m): </t><t size='1' font='Bitstream' align='right' color='#FFFFFF'>" + str _p2within2500 + "</t><br/>
+	<t size='1' font='Bitstream' align='left' color='#FC473A'>Murders:</t><t size='1' font='Bitstream' align='right' color='#FC473A'>" + str _p2mkills + "</t><br/>
+	<t size='1' font='Bitstream' align='left' color='#8BFF6B'>Bandit Kills:</t><t size='1' font='Bitstream' align='right' color='#8BFF6B'>" + str _p2bKills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Blood: </t><t size='1' font='Bitstream' align='right' color=" + str _p2c + ">" + str r_player_blood + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#F7F2E0'>DIR: "+ str _pDir + "</t><t size='1' font='Bitstream' align='right' color='#F7F2E0'>GPS: " + _gpsP2osZombZ + "</t>", 
 	P2DZE_debugCol, //debug design by player2
