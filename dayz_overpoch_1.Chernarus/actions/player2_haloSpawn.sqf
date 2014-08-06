@@ -29,7 +29,7 @@ uiNamespace setVariable ["altiHudOpened",true];
 		_alt = _position select 2;
 		_position2 = getPosASL player;
 		_alt2 = _position2 select 2;
-		uiSleep 0.5;
+		sleep 0.5;
 		_alt > 120 || _alt2 > 120
 	} do {
 		setViewdistance 2750;

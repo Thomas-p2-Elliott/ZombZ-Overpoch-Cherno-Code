@@ -1,11 +1,12 @@
-private ["_characterID","_playerObj","_playerID","_spawnSelection","_dummy","_worldspace","_state","_doLoop","_key","_primary","_medical","_stats","_humanity","_lastinstance","_friendlies","_randomSpot","_position","_debug","_distance","_hit","_fractures","_score","_findSpot","_pos","_isIsland","_w","_clientID","_spawnMC","_namespace"];
+private ["_debugMonSettings","_characterID","_playerObj","_playerID","_spawnSelection","_dummy","_worldspace","_state","_doLoop","_key","_primary","_medical","_stats","_humanity","_lastinstance","_friendlies","_randomSpot","_position","_debug","_distance","_hit","_fractures","_score","_findSpot","_pos","_isIsland","_w","_clientID","_spawnMC","_namespace"];
 
 diag_log ("SETUP: attempted with " + str(_this));
 
 _characterID = _this select 0;
 _playerObj = _this select 1;
 _playerID = getPlayerUID _playerObj;
-_spawnSelection = _this select 3; // added 4 spawnselection
+_spawnSelection = 9;
+_debugMonSettings  = _this select 3;
 
 if (isNull _playerObj) exitWith {
 	diag_log ("SETUP INIT FAILED: Exiting, player object null: " + str(_playerObj));
@@ -94,6 +95,33 @@ if (count _worldspace > 0) then {
 };
 
 diag_log ("LOGIN: Location: " + str(_worldspace) + " doRnd?: " + str(_randomSpot));
+
+//set debug mon settings values
+if (isNil '_debugMonSettings') then {
+	diag_log("P2DEBUG: server_playerSetup: _debugMonSettings: " + str _debugMonSettings);
+	_debugMode = _debugMonSettings select 4;
+	_debugColours = [(_debugMonSettings select 0), (_debugMonSettings select 1), (_debugMonSettings select 2), (_debugMonSettings select 3)];
+
+	//Vaildate settings before saving to player
+
+	if (((_debugMonSettings select 4) > 3) || ((_debugMonSettings select 4) < 1) ) then {
+		diag_log("Invalid Debug Mon Mode: " + str (_debugMode));
+		_debugMode = 2;
+	} else {
+		_debugMode = _debugMonSettings select 4;
+	};
+
+	_debugColours = [(_debugMonSettings select 0), (_debugMonSettings select 1), (_debugMonSettings select 2), (_debugMonSettings select 3)];
+	
+	//save for client and save for JIP checks
+	_playerObj setVariable["P2_DebugMonMode",(_debugMode),true];
+	_playerObj setVariable["P2_DebugMonMode_CHK",(_debugMode),true];
+	//save for client and save for serverJIP checks
+	_playerObj setVariable["P2_DebugMonColours",(_debugColours),true];
+	_playerObj setVariable["P2_DebugMonColours_CHK",(_debugColours),true];
+
+
+};
 
 //set medical values
 if (count _medical > 0) then {

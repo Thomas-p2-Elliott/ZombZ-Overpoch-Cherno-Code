@@ -1,8 +1,5 @@
-private ["_doLoop","_hiveVer","_isHiveOk","_playerID","_playerObj","_primary","_key","_charID","_playerName","_backpack","_isNew","_inventory","_survival","_model","_mags","_wpns","_bcpk","_config","_newPlayer"];
-
-#ifdef DZE_SERVER_DEBUG
-diag_log ("STARTING LOGIN: " + str(_this));
-#endif
+private ["_doLoop","_hiveVer","_isHiveOk","_playerID","_playerObj","_primary","_key","_charID","_playerName","_backpack","_isNew","_inventory","_survival","_model","_mags","_wpns","_bcpk","_config","_newPlayer","_debugMonSettings"];
+diag_log("P2DEBUG: server_playerLogin.sqf: " + str _this);
 
 _playerID = _this select 0;
 _playerObj = _this select 1;
@@ -10,10 +7,9 @@ _playerName = name _playerObj;
 
 if (_playerName == '__SERVER__' || _playerID == '' || local player) exitWith {};
 
+
 if (isNil "sm_done") exitWith { 
-#ifdef DZE_SERVER_DEBUG
 	diag_log ("Login cancelled, server is not ready. " + str(_playerObj)); 
-#endif
 };
 
 if (count _this > 2) then {
@@ -25,20 +21,17 @@ _inventory =	[];
 _backpack = 	[];
 _survival =		[0,0,0];
 _model =		"";
+_debugMonSettings =	[0,0,1,0.2,2];
 
 if (_playerID == "") then {
 	_playerID = getPlayerUID _playerObj;
 };
 
 if ((_playerID == "") || (isNil "_playerID")) exitWith {
-#ifdef DZE_SERVER_DEBUG
 	diag_log ("LOGIN FAILED: Player [" + _playerName + "] has no login ID");
-#endif
 };
 
-#ifdef DZE_SERVER_DEBUG
-diag_log ("LOGIN ATTEMPT: " + str(_playerID) + " " + _playerName);
-#endif
+diag_log ("P2DEBUG: LOGIN ATTEMPT: " + str(_playerID) + " " + _playerName);
 
 //Do Connection Attempt
 _doLoop = 0;
@@ -54,15 +47,11 @@ while {_doLoop < 5} do {
 };
 
 if (isNull _playerObj || !isPlayer _playerObj) exitWith {
-#ifdef DZE_SERVER_DEBUG
 	diag_log ("LOGIN RESULT: Exiting, player object null: " + str(_playerObj));
-#endif
 };
 
 if ((_primary select 0) == "ERROR") exitWith {
-#ifdef DZE_SERVER_DEBUG
     diag_log format ["LOGIN RESULT: Exiting, failed to load _primary: %1 for player: %2 ",_primary,_playerID];
-#endif
 };
 
 //Process request
@@ -70,9 +59,7 @@ _newPlayer = 	_primary select 1;
 _isNew = 		count _primary < 7; //_result select 1;
 _charID = 		_primary select 2;
 
-#ifdef DZE_SERVER_DEBUG
-diag_log ("LOGIN RESULT: " + str(_primary));
-#endif
+diag_log ("P2DEBUG: LOGIN RESULT: " + str(_primary));
 
 /* PROCESS */
 _hiveVer = 0;
@@ -84,15 +71,15 @@ if (!_isNew) then {
 	_survival =		_primary select 6;
 	_model =		_primary select 7;
 	_hiveVer =		_primary select 8;
-	
+	_debugMonSettings = 	_primary select 9;
 	if (!(_model in AllPlayers)) then {
 		_model = "Survivor2_DZ";
 	};
-	
+
 } else {
 	_model =		_primary select 4;
 	_hiveVer =		_primary select 5;
-	
+	_debugMonSettings = 	_primary select 6;
 	if (isNil "_model") then {
 		_model = "Survivor2_DZ";
 	} else {
@@ -104,7 +91,6 @@ if (!_isNew) then {
 		};
 	};
 
-	
 	//Record initial inventory only if not player zombie 
 	_config = (missionConfigFile >> "CfgNewSpawn" >> "Inventory" >> "Default");
 	_mags = getArray (_config >> "magazines");
@@ -150,5 +136,5 @@ if (worldName == "chernarus") then {
 	([4654,9595,0] nearestObject 145260) setDamage 1;
 };
 
-dayzPlayerLogin = [_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,0];
+dayzPlayerLogin = [_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,0,_debugMonSettings];
 (owner _playerObj) publicVariableClient "dayzPlayerLogin";

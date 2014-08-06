@@ -141,7 +141,7 @@ if (_dikCode == 0x3F && (diag_tickTime - dayz_lastCheckBit > 1)) then {
 
 if (_dikCode == 0x40 && (diag_tickTime - dayz_lastCheckBit > 3)) then {
 	dayz_lastCheckBit = diag_tickTime;
-	[] call fnc_p2debugMonColorGUI;
+	[] spawn fnc_p2debugMonColorGUI;
 	_handled = true;
 };
 

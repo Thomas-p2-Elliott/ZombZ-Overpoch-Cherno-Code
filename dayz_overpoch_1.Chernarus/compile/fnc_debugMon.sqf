@@ -12,10 +12,8 @@ Configuration Options
 ---------------------------------------------------------------------------*/
 /* CONFIGURATION START */
 //Default setting for when a player loads into the server
-P2DZ_DebugMonDefault = 2; //Valid Inputs: 1 (Off), 2 (Full), 3 (Minimal), 4 (Stats) - Disabled for Now
 P2DZ_debugMonitor = false;
-P2DZ_dbCurMode = 1;
-diag_log("P2DEBUG: Spawning Debug Monitor in Mode: " + str P2DZ_DebugMonDefault);
+diag_log("P2DEBUG: Spawning Debug Monitor in Mode: " + str P2DZ_dbCurMode);
 
 fnc_debugFull = {
 private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills","_p2zKills","_p2wep","_p2skin","_zombzVehCount","_zombzZedCount","_zombztimeToRestart","_pDir","_gpsP2osZombZ","_p2bl","_p2c"];
@@ -230,6 +228,7 @@ fnc_debugMon = {
 					P2DZ_debugMonitor = true;
 				};
 			};
+			sleep 0.5;
 		};
 	};
 };
@@ -238,31 +237,24 @@ fnc_p2debugMonColorGUI = {
     private ["_handle1","_handle2"];
 	disableSerialization;
 	uiNamespace setVariable ['ZombZHintColour_Dialog', displayNull];
-
 	createDialog 'ZombZHintColour_Dialog';
-
 	ctrlSetText [169691, str P2DZE_debugCol];
-
 	hintSilent "";
-
 	P2DZ_debugMon_Mode = "BackGround Color Setting: ";
 	P2DZ_debugMon_ToggleKey = str P2DZE_debugCol;
-
 	P2DZ_updateDebugMonCol = true;
 	P2DZE_allowDebugColInputTime = 30;
 	_handle1 = [] spawn {
 		private ["_P2DZE_debugMon_array","_textCtrl","_text","_string","_result","_result2","_result3","_result4","_result5","_result6","_display"];
 		disableSerialization;
 		_P2DZE_debugMon_array = [];
-
 		for "_x" from 0 to P2DZE_allowDebugColInputTime do {
 			if (_x < P2DZE_allowDebugColInputTime / 4) then {
 				P2DZ_dbCurMode = 2;
 				P2DZ_debugMonitor = true;
 			};
-			uiSleep 1;
+			sleep 1;
 			_display = findDisplay 10666;
-
 			if (str (_display) != "no display") then {
 				_textCtrl = ((uiNamespace getVariable 'ZombZHintColour_Dialog') displayCtrl 169691);
 				_text = ctrlText (_textCtrl);
@@ -275,9 +267,8 @@ fnc_p2debugMonColorGUI = {
 				_result4 = [ _result3,',,,',','] call KRON_Replace;
 				_result5 = [ _result4,',]]',']'] call KRON_Replace;
 				_result6 = [ _result5,'[[,','['] call KRON_Replace;
-				_P2DZE_debugMon_array = call compile _result6;     
+				_P2DZE_debugMon_array = call compile _result6;
 				P2DZE_allowDebugColInputTimeLeft = P2DZE_allowDebugColInputTime - _x;
-
 				if (!isNil '_P2DZE_debugMon_array' && {(count _P2DZE_debugMon_array == 4)}) then {
 					P2DZE_debugMon_array_r = _P2DZE_debugMon_array select 0;
 					P2DZE_debugMon_array_g = _P2DZE_debugMon_array select 1; 
@@ -292,16 +283,14 @@ fnc_p2debugMonColorGUI = {
 				};
 			};
 		};
-
 		closeDialog 0;
 	};
-
 	_handle2 = [] spawn {
 		private ["_display"];
 		disableSerialization;
 
 		for "_x" from 0 to P2DZE_allowDebugColInputTime do {
-			uiSleep 1;
+			sleep 1;
 			_display = findDisplay 169691;
 
 			if (str (_display) != "no display") then {
@@ -317,26 +306,21 @@ fnc_p2debugMonColorGUI = {
 			};
 		};
 	}; 
-		 
-
 	titleText ["You have 15 seconds to pick a color and transparency setting!", "PLAIN"];
-
-
 	systemChat("You have 15 seconds to pick a color and transparency setting!");
 	systemChat(" ");
 	systemChat("Input:   [0 - 1,		0 - 1,   	0 - 1,   	0 - 1]");
 	systemChat("Format: [RED,   GREEN,  BLUE,   ALPHA]");
 	systemChat("E.g:     [1,      0.1,      0.2,     0.3]  ");
 	systemChat("Result: 100% Red, 10% Green, 20% Blue, 0% Transparent");
-
 	waitUntil{scriptDone _handle1 || scriptDone _handle2};
-
 	if ((count P2DZE_debugCol != 4)) exitWith {
 		terminate _handle1; terminate _handle2;
 		P2DZE_debugCol = [0,0,1,0.1];
 		diag_log(format['DebugMon: ChatCheck: INVALID: RESET P2DZE_debugCol: %1	', P2DZE_debugCol]);
 	};
-
 	systemChat("Debug Monitor Input Valid and Accepted!");  
+	player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true];
+	player setVariable ["P2_DebugMonColours", P2DZE_debugCol, true];
 };
 

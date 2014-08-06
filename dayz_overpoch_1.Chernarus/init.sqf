@@ -6,6 +6,10 @@ p2d_client = false;
 p2d_server = false;
 p2d_headless = false;
 
+//enable player2 custom hive dll debugging
+P2D_H = true;
+P2D_Hp = "P2DEBUG: HIVE DEBUG: ";
+
 if (ASM_Enabled) then {
 	diag_log("P2DEBUG: ASM_Enabled: " + str ASM_Enabled);
 };
@@ -53,11 +57,10 @@ dayz_previousID = 0;
 
 //Enabble AntiHack on TestServer
 if (isServer) then {
-	AHe = true;
+	AHe = false;
+	//enable object streaming from db
+	P2DZE_serverStreamObjsEnabled = true;
 };
-
-//enable object streaming from db
-P2DZE_serverStreamObjsEnabled = false;
 
 //disable greeting menu 
 player setVariable ["BIS_noCoreConversations", true];

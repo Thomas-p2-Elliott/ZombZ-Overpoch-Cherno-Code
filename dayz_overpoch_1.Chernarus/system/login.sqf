@@ -1,4 +1,4 @@
-private ["_parsedLogin1","_isNew","_model","_isHiveOk","_newPlayer","_isInfected","_mags","_wpns","_bcpk","_bcpkItems","_isOK","_config","_backpackMagTypes","_backpackMagQty","_backpackWpnTypes","_backpackWpnQtys","_countr","_backpackType","_backpackWpn","_backpackWater","_first","_worldspace","_state","_setDir","_setPos","_backpack","_world","_nearestCity","_survivalTimeText","_charID","_inventory","_survival","_version","_totalMins","_days","_hours","_mins","_p2_didYouKnow","_randomSelection","_p2_selectedMsg"];
+private ["_debugMonSettings","_parsedLogin1","_isNew","_model","_isHiveOk","_newPlayer","_isInfected","_mags","_wpns","_bcpk","_bcpkItems","_isOK","_config","_backpackMagTypes","_backpackMagQty","_backpackWpnTypes","_backpackWpnQtys","_countr","_backpackType","_backpackWpn","_backpackWater","_first","_worldspace","_state","_setDir","_setPos","_backpack","_world","_nearestCity","_survivalTimeText","_charID","_inventory","_survival","_version","_totalMins","_days","_hours","_mins","_p2_didYouKnow","_randomSelection","_p2_selectedMsg"];
 diag_log("P2DEBUG: " + __FILE__);
 
 waitUntil{!isNil "dayzPlayerLogin"};
@@ -11,17 +11,21 @@ _survival 	= _parsedLogin1 select 3;
 _isNew 		= _parsedLogin1 select 4;
 _version	= _parsedLogin1 select 5;
 _model		= _parsedLogin1 select 6;
+_debugMonSettings = _parsedLogin1 select 7;
 
-if (count _parsedLogin1 > 7) then {
+if (count _parsedLogin1 > 8) then {
 	_isHiveOk = _parsedLogin1 select 7;
 	_newPlayer = _parsedLogin1 select 8;
 	_isInfected = _parsedLogin1 select 9;
-	diag_log ("P2DEBUG: PLAYER EXISTS: " + str(_isHiveOk));
-	diag_log format ["P2DEBUG: dayzPlayerLogin:	_charID (%1)	_inventory (%2)	_backpack (%3)	_survival (%4)	_isNew (%5)	_version (%6)	_model (%7)	_isHiveOk (%8)	_newPlayer (%9)	_isInfected (%10)",
-												_charID,	_inventory,		_backpack,		_survival,		_isNew,			_version,		_model,		_isHiveOk,		_newPlayer,		_isInfected];
+	_debugMonSettings = _parsedLogin1 select 10;
+
+	diag_log ("P2DEBUG: PLAYER EXISTS! HiveOK: " + str(_isHiveOk));
+	diag_log format ["P2DEBUG: dayzPlayerLogin:	_charID (%1)	_inventory (%2)	_backpack (%3)	_survival (%4)	_isNew (%5)	_version (%6)	_model (%7)	_isHiveOk (%8)	_newPlayer (%9)	_isInfected (%10) _debugMonSettings: (%11)",
+												_charID,	_inventory,		_backpack,		_survival,		_isNew,			_version,		_model,		_isHiveOk,		_newPlayer,		_isInfected, _debugMonSettings];
 } else {
-	diag_log format ["P2DEBUG: dayzPlayerLogin:	_charID (%1)	_inventory (%2)	_backpack (%3)	_survival (%4)	_isNew (%5)	_version (%6)	_model (%7)",
-												_charID,	_inventory,		_backpack,		_survival,		_isNew,			_version,		_model];
+	diag_log ("P2DEBUG: NEW PLAYER! HiveOK: " + str(_isHiveOk));
+	diag_log format ["P2DEBUG: dayzPlayerLogin:	_charID (%1)	_inventory (%2)	_backpack (%3)	_survival (%4)	_isNew (%5)	_version (%6)	_model (%7) _debugMonSettings (%8)",
+												_charID,	_inventory,		_backpack,		_survival,		_isNew,			_version,		_model, _debugMonSettings];
 };
 
 //Work out survival time
@@ -163,8 +167,15 @@ if (_isNew) then {
 waitUntil{(P2DZE_paraOpened)};
 
 //show debug monitor
-P2DZ_dbCurMode = 2;
+P2DZ_dbCurMode = _debugMonSettings select 4;
+P2DZE_debugCol = [(_debugMonSettings select 0), (_debugMonSettings select 1), (_debugMonSettings select 2), (_debugMonSettings select 3)];
 P2DZ_debugMonitor = true;
+
+diag_log(format["P2DEBUG: login.sqf: P2DZ_dbCurMode (%1) P2DZE_debugCol (%2)", P2DZ_dbCurMode, P2DZE_debugCol]);
+
+player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true];
+player setVariable ["P2_DebugMonColours", P2DZE_debugCol, true];
+
 [] call fnc_debugMon;
 //wait until Player has Landed!
 waitUntil{(P2DZE_hasLanded)};
