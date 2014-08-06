@@ -25,6 +25,15 @@ disableSerialization;
 		if (_data select 3 == 1) Then {
 			(_display displayCtrl 5102) ctrlShow true; //Altitude
 			(_display displayCtrl 5102) ctrlSetText format["%1m",_data select 0]; //Altitude
+			if (((_data select 0) < 600) && ((_data select 0) > 300)) then {
+				(_display displayCtrl 5102) ctrlSetTextColor [1, 0.6, 0, 1];
+			};
+			if (((_data select 0) < 300) && ((_data select 0) > 130)) then {
+				(_display displayCtrl 5102) ctrlSetTextColor [0, 1, 0, 1];
+			};
+			if (((_data select 0) < 130) && ((_data select 0) > 50) || ((_data select 0) > 600)) then {
+				(_display displayCtrl 5102) ctrlSetTextColor [0.7, 0, 0, 1];
+			};
 		};
 
 		if (_data select 3 == 1) Then {

@@ -59,7 +59,7 @@ dayz_previousID = 0;
 if (isServer) then {
 	AHe = false;
 	//enable object streaming from db
-	P2DZE_serverStreamObjsEnabled = true;
+	P2DZE_serverStreamObjsEnabled = false;
 };
 
 //disable greeting menu 
