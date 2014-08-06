@@ -138,7 +138,7 @@ Loot & Zombie & Animal Settings
 	DZE_LootSpawnTimer = 10;
 
 	//use loot tables from mission file?
-	DZE_MissionLootTable = false;
+	DZE_MissionLootTable = true;
 
 	// max quantity of Man models (player || Z, dead || alive) around players. Below this limit we can spawn Z 
 	// max quantity of loot piles around players. Below this limit we can spawn some loot
