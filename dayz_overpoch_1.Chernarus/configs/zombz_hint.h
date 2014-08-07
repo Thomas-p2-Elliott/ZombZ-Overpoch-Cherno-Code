@@ -33,9 +33,9 @@ class zombz_hintMini
 {
    idd = 9100;
    movingEnable =  1;
-   duration     =  2;
+   duration     =  1;
    fadein       =  0;
-   fadeout      =  0.1;
+   fadeout      =  0;
    name = "zombz_hintMini";
 
    onLoad="uiNamespace setVariable ['zombz_hintMini', _this select 0]";
@@ -129,9 +129,9 @@ class zombz_hintFull
 {
    idd = 9104;
    movingEnable =  1;
-   duration     =  2;
+   duration     =  1;
    fadein       =  0;
-   fadeout      =  0.1;
+   fadeout      =  0;
    name = "zombz_hintFull";
 
    onLoad="uiNamespace setVariable ['zombz_hintFull', _this select 0]";

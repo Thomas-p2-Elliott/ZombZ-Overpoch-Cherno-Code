@@ -60,7 +60,7 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	_p2zKills = (player getVariable['zombieKills', 0]); _p2zKills = (player getVariable['headShots', 0]);
 
 	r_player_blood;
-	_p2wep = (currentWeapon player);
+	_p2wep = toUpper(currentWeapon player);
 	if ((isNil '_p2wep') || (_p2wep == "")) then {
 		_p2wep = "Direct Chat";
 	};
@@ -130,7 +130,7 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	<t size='1' font='Bitstream' align='left' color='#F7F2E0'>DIR: "+ str _pDir + "</t><t size='1' font='Bitstream' align='right' color='#F7F2E0'>GPS: " + _gpsP2osZombZ + "</t>", 
 	P2DZE_debugCol, //debug design by player2
 	false
-	] spawn P2DZ_hintFull;
+	] call P2DZ_hintFull;
 };
 
 fnc_debugMini = {
@@ -190,7 +190,7 @@ private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
 	<t size='1' font='Bitstream' align='left' color='#F7F2E0'>DIR: "+ str _pDir + "</t><t size='1' font='Bitstream' align='right' color='#F7F2E0'>GPS: " + _gpsP2osZombZ + "</t>", 
 	P2DZE_debugCol, //debug design by player2
 	false
-	] spawn P2DZ_hintMini;
+	] call P2DZ_hintMini;
 };
 
 fnc_debugOff = {
@@ -201,7 +201,7 @@ fnc_debugOff = {
 	"<t size='1' font='Bitstream' align='center' color='#FFFFFF'><br/> Re-Enable with the "+ P2DZ_debugMon_ToggleKey + " button.</t>", 
 	P2DZE_debugCol, //debug design by player2
 	false
-	] spawn P2DZ_hintMini;
+	] call P2DZ_hintMini;
 };
 
  /* CONFIGURATION END */
@@ -214,21 +214,21 @@ fnc_debugMon = {
 		_handle2 = -1;
 		_handle3 = -1;
 		while {true} do {
-			while {P2DZ_debugMonitor} do {
+			if (P2DZ_debugMonitor) then {
 				if (P2DZ_dbCurMode == 1) then  {
-					_handle1 = [] spawn fnc_debugOff;
+					_handle1 = [] call fnc_debugOff;
 					P2DZ_debugMonitor = false;
 				};
 				if (P2DZ_dbCurMode == 2) then {
-					_handle2 = [] spawn fnc_debugFull;
+					_handle2 = [] call fnc_debugFull;
 					P2DZ_debugMonitor = true;
 				};
 				if (P2DZ_dbCurMode == 3) then {
-					_handle3 = [] spawn fnc_debugMini;
+					_handle3 = [] call fnc_debugMini;
 					P2DZ_debugMonitor = true;
 				};
 			};
-			sleep 0.5;
+			uiSleep 0.33;
 		};
 	};
 };
@@ -301,7 +301,7 @@ fnc_p2debugMonColorGUI = {
 					"<t size='1' font='Bitstream' align='center' color='#FFFFFF'><br/><br/> You have " + str(P2DZE_allowDebugColInputTimeLeft) + " seconds to pick a color and transparency setting! <br/></t>",
 					P2DZE_debugCol, 
 					false
-					] spawn P2DZ_hintMini;
+					] call P2DZ_hintMini;
 				};
 			};
 		};
