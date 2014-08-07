@@ -12,18 +12,18 @@ _text = getText (_config >> "displayName");
 if (!_hasmeditem) exitWith {cutText [format[(localize "str_player_31"),_text,"use"] , "PLAIN DOWN"]};
 switch (_item) do {
 	case "ItemBandage": {
-		_id = [0,0,0,[player]] execVM "actions\bandage.sqf";
+		_id = [0,0,0,[player]] execVM "\z\addons\dayz_code\medical\bandage.sqf";
 	};
 	case "ItemMorphine": {
-		_id = [0,0,0,[player]] execVM "actions\morphine.sqf";
+		_id = [0,0,0,[player]] execVM "\z\addons\dayz_code\medical\morphine.sqf";
 		playSound "morphine_01"; addCamShake [2, 0.5, 25]; sleep 1; playSound "heartbeat_1"; sleep 1; playSound "heartbeat_1";
 	};
 	case "ItemPainkiller": {
-		_id = [0,0,0,[player]] execVM "actions\painkiller.sqf";
+		_id = [0,0,0,[player]] execVM "\z\addons\dayz_code\medical\painkiller.sqf";
 		playSound "painkiller_01";
 	};
 	case "ItemAntibiotic": {
-		_id = [0,0,0,[player]] execVM "actions\antibiotics.sqf";
+		_id = [0,0,0,[player]] execVM "\z\addons\dayz_code\medical\antibiotics.sqf";
 		playSound "painkiller_01";
 	};
 	case "ItemBloodbag": {
