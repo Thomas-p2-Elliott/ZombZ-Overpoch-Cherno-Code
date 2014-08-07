@@ -22,7 +22,7 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	P2DZ_humanityLevel = floor(P2DZ_humanity / 5000);
 
 	_p2p = "img\logo.paa";
-	_p2ps = "6.0";
+	_p2ps = "3.0";
 
 	if (P2DZ_humanityLevel < 0) then {
 		P2DZ_humanityPrefix = "Bandit Level: ";
@@ -48,7 +48,7 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 		_p2ps = "3.0";
 	};
 
-	if (_p2p == "") then { _p2p = "img\logo.paa"; _p2ps = "6.0"; };
+	if (_p2p == "") then { _p2p = "img\logo.paa"; _p2ps = "3.0"; };
 
 	P2DZ_debugMon_Mode = "Full"; P2DZ_debugMon_ToggleKey = "F5";
 
@@ -306,8 +306,8 @@ fnc_p2debugMonColorGUI = {
 			};
 		};
 	}; 
-	titleText ["You have 15 seconds to pick a color and transparency setting!", "PLAIN"];
-	systemChat("You have 15 seconds to pick a color and transparency setting!");
+	titleText ["You have 30 seconds to pick a color and transparency setting!", "PLAIN"];
+	systemChat("You have 30 seconds to pick a color and transparency setting!");
 	systemChat(" ");
 	systemChat("Input:   [0 - 1,		0 - 1,   	0 - 1,   	0 - 1]");
 	systemChat("Format: [RED,   GREEN,  BLUE,   ALPHA]");
