@@ -9,10 +9,62 @@
 	player_addToolbelt =		compile preprocessFileLineNumbers "actions\player_addToolbelt.sqf";
 
 
+	ui_goldInit = {
+		private ["_ctrlText","_len"];
+		disableSerialization;
+		waitUntil {ctrlShown ((findDisplay 106) displayCtrl 105)};
+		((findDisplay 106) displayCtrl 105) ctrlSetEventHandler ["LBSelChanged","private [""_dummy""]; _dummy = [_this,""onLBSelChanged""] execVM ""system\handleGear.sqf""; [] call ui_displayGold; _dummy;"];
+		waitUntil {
+			_ctrlText = ctrlText ((findDisplay 106) displayCtrl 1101);
+			_len=[_ctrlText] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {
+					private["_in","_i","_arr","_out"];
+					call compile toString [95, 105, 110, 61, 95, 116, 104, 105, 115, 32, 115, 101, 108, 101, 99, 116, 32, 48, 59, 10, 9, 9, 9, 9, 95, 97, 114, 114, 32, 61, 32, 116, 111, 65, 114, 114, 97, 121, 40, 95, 105, 110, 41, 59, 10, 9, 9, 9, 9, 95, 111, 117, 116, 61, 91, 93, 59, 10, 9, 9, 9, 9, 102, 111, 114, 32, 34, 95, 105, 34, 32, 102, 114, 111, 109, 32, 48, 32, 116, 111, 32, 40, 99, 111, 117, 110, 116, 32, 95, 97, 114, 114, 41, 45, 49, 32, 100, 111, 32, 123, 10, 9, 9, 9, 9, 9, 95, 111, 117, 116, 61, 95, 111, 117, 116, 43, 91, 116, 111, 83, 116, 114, 105, 110, 103, 40, 91, 95, 97, 114, 114, 32, 115, 101, 108, 101, 99, 116, 32, 95, 105, 93, 41, 93, 59, 10, 9, 9, 9, 9, 125, 59];
+					_out
+				};
+				_len=count (_arr);
+				_len
+			};
+			_len > 3
+		};
+		waitUntil {
+			_ctrlText = ctrlText ((findDisplay 106) displayCtrl 1106);
+			_len=[_ctrlText] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {
+					private["_in","_i","_arr","_out"];
+					call compile toString [95, 105, 110, 61, 95, 116, 104, 105, 115, 32, 115, 101, 108, 101, 99, 116, 32, 48, 59, 10, 9, 9, 9, 9, 95, 97, 114, 114, 32, 61, 32, 116, 111, 65, 114, 114, 97, 121, 40, 95, 105, 110, 41, 59, 10, 9, 9, 9, 9, 95, 111, 117, 116, 61, 91, 93, 59, 10, 9, 9, 9, 9, 102, 111, 114, 32, 34, 95, 105, 34, 32, 102, 114, 111, 109, 32, 48, 32, 116, 111, 32, 40, 99, 111, 117, 110, 116, 32, 95, 97, 114, 114, 41, 45, 49, 32, 100, 111, 32, 123, 10, 9, 9, 9, 9, 9, 95, 111, 117, 116, 61, 95, 111, 117, 116, 43, 91, 116, 111, 83, 116, 114, 105, 110, 103, 40, 91, 95, 97, 114, 114, 32, 115, 101, 108, 101, 99, 116, 32, 95, 105, 93, 41, 93, 59, 10, 9, 9, 9, 9, 125, 59];
+					_out
+				};
+				_len=count (_arr);
+				_len
+			};
+			_len > 3
+		};
+		waitUntil {
+			_ctrlText = ctrlText ((findDisplay 106) displayCtrl 1104);
+			_len=[_ctrlText] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {
+					private["_in","_i","_arr","_out"];
+					call compile toString [95, 105, 110, 61, 95, 116, 104, 105, 115, 32, 115, 101, 108, 101, 99, 116, 32, 48, 59, 10, 9, 9, 9, 9, 95, 97, 114, 114, 32, 61, 32, 116, 111, 65, 114, 114, 97, 121, 40, 95, 105, 110, 41, 59, 10, 9, 9, 9, 9, 95, 111, 117, 116, 61, 91, 93, 59, 10, 9, 9, 9, 9, 102, 111, 114, 32, 34, 95, 105, 34, 32, 102, 114, 111, 109, 32, 48, 32, 116, 111, 32, 40, 99, 111, 117, 110, 116, 32, 95, 97, 114, 114, 41, 45, 49, 32, 100, 111, 32, 123, 10, 9, 9, 9, 9, 9, 95, 111, 117, 116, 61, 95, 111, 117, 116, 43, 91, 116, 111, 83, 116, 114, 105, 110, 103, 40, 91, 95, 97, 114, 114, 32, 115, 101, 108, 101, 99, 116, 32, 95, 105, 93, 41, 93, 59, 10, 9, 9, 9, 9, 125, 59];
+					_out
+				};
+				_len=count (_arr);
+				_len
+			};
+			_len > 3
+		};
+		[] call ui_displayGold;
+	};
+
 	ui_displayGold = {
 		disableSerialization;
-		private["_gearControl","_itemName","_itemPic","_itemDesc","_imageText","_itemDesc","_ticksTaken","_tickStart","_gold"];
-		_tickStart = diag_tickTime;
+		private["_gearControl","_itemName","_itemPic","_itemDesc","_imageText","_itemDesc","_gold"];
 
 		_gold = (player getVariable ["ZombZGold", 0]);
 
@@ -27,10 +79,7 @@
 		<img size='1.5' image='\z\addons\dayz_epoch\pictures\equip_gold_bar_CA.paa' />x	%1
 		<br/><t size='0.74'>Gold bars, the only currency in Chernarus. They use one slot no matter how many you carry.", _gold];
 		_itemDesc ctrlSetStructuredText _imageText;
-
-		_ticksTaken = _tickStart - diag_tickTime;
-
-		[_ticksTaken, _gold]
+		true
 	};
 
 	dayz_losChance = {
@@ -38,7 +87,6 @@
 		_agent = 	_this select 0;
 		_dis =		_this select 1;
 		_maxDis = 	_this select 2;
-		// diag_log ("VAL:  " + str(_this));
 		_val = 		(_maxDis - _dis) max 0;
 		_maxExp = 	((exp 2) * _maxDis);
 		_myExp = 	((exp 2) * (_val)) / _maxExp;
