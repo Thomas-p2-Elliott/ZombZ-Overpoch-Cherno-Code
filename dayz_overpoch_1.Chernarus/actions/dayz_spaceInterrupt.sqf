@@ -94,8 +94,8 @@ _alt =		_this select 4;
 
 //diag_log format["Keypress: %1", _this];
 if ((_dikCode in actionKeys "Gear") && (vehicle player != player) && !_shift && !_ctrl && !_alt && !dialog) then {
-			createGearDialog [player, "RscDisplayGear"];
-			_handled = true;
+	createGearDialog [player, "RscDisplayGear"];
+	_handled = true;
 };
 
 if (_dikCode in (actionKeys "GetOver")) then {
