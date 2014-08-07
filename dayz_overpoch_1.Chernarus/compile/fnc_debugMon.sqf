@@ -228,7 +228,7 @@ fnc_debugMon = {
 					P2DZ_debugMonitor = true;
 				};
 			};
-			uiSleep 0.33;
+			uiSleep 0.4;
 		};
 	};
 };

@@ -161,8 +161,8 @@ if (_isNew) then {
 
 	//Intro Credits Finished
 };
-
-
+//double check this one m8
+waitUntil{!isNil 'dayz_gui'};
 //Wait until player has chute open!
 waitUntil{(P2DZE_paraOpened)};
 

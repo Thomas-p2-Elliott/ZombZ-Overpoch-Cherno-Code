@@ -31,7 +31,7 @@ class zombz_structuredText
 };
 class zombz_hintMini
 {
-   idd = 9100;
+   idd          = 9100;
    movingEnable =  1;
    duration     =  1;
    fadein       =  0;
@@ -127,7 +127,7 @@ class zombz_hintMini
 };
 class zombz_hintFull
 {
-   idd = 9104;
+   idd          = 9104;
    movingEnable =  1;
    duration     =  1;
    fadein       =  0;
