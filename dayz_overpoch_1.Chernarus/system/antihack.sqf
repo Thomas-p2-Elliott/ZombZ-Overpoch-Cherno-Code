@@ -66,6 +66,7 @@ P2DZ_AHKick = {
 	endMission "LOSER";
 	disableSerialization;
 	for '_j' from 0 to 99 do {(findDisplay _j) closeDisplay 0;};
+	createCenter sideEnemy;
 };
 
 [] spawn {
