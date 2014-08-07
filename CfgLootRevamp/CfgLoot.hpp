@@ -284,13 +284,8 @@ class CfgLoot {
 		,{"Skin_SurvivorWpink_DZ",0.09}
 		,{"Skin_SurvivorWurban_DZ",0.07}
 		,{"Skin_INS_Bardak_DZ",0.02}
-		,{"Skin_INS_Worker2_DZ",0.02},
-		{"Skin_Sniper1_DZ","magazine",0.01},
-		{"Skin_Sniper2_DZ","magazine",0.01},
-		{"Skin_Sniper3_DZ","magazine",0.01},
-		{"Skin_Sniper4_DZ","magazine",0.01},
-		{"Skin_Sniper5_DZ","magazine",0.01},
-		{"Skin_Sniper6_DZ","magazine",0.01},
+		,{"Skin_INS_Worker2_DZ",0.02}
+		,{"Skin_Sniper1_DZ","magazine",0.01}
 	};
 	militaryclothes[] = {
 		{"Skin_Camo1_DZ",0.09}
