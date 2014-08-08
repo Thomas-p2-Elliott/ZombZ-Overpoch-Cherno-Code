@@ -2,9 +2,9 @@ private ["_activatingplayerUID","_class","_uid","_charID","_object","_worldspace
 //[dayz_characterID,_tent,[_dir,_location],"TentStorage"]
 _charID =		_this select 0;
 _object = 		_this select 1;
-_worldspace = 	_this select 2;
+_worldspace = 		_this select 2;
 _class = 		_this select 3;
-_obj = 		_this select 4;
+_obj = 			_this select 4;
 _activatingplayer = 		_this select 5;
 _activatingplayerUID = 		(getPlayerUID _activatingplayer);
 
@@ -72,6 +72,15 @@ if (DZE_GodModeBase) then {
 // Test disabling simulation server side on buildables only.
 _object enableSimulation false;
 
-PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor,_object];
+_object call {
+	_this setVariable [
+	    (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])),
+	    "hash_id" callExtension format [
+	        "%1:%2",
+	        netId _this,
+	        typeOf _this
+	    ]
+	];
+};
 
 diag_log ("PUBLISH: " + str(_activatingPlayer) + " upgraded " + (_class) + " with ID " + str(_uid));

@@ -82,8 +82,32 @@ _key call server_hiveWrite;
 		_object_para = createVehicle ["ParachuteMediumWest", [0,0,0], [], 0, "CAN_COLLIDE"];
 		_object_para setPos [_location select 0, _location select 1,(_location select 2) + 65];
 		_object = createVehicle [_class, [0,0,0], [], 0, "CAN_COLLIDE"];
+
+		_veh call {
+		    _this setVariable [
+		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+		        "hash_id" callExtension format [
+		            "%1:%2",
+		            netId _this,
+		            typeOf _this
+		        ]
+		    ];
+		};	
+		
 	} else {
 		_object = createVehicle [_class, _location, [], 0, "CAN_COLLIDE"];
+
+		_veh call {
+		    _this setVariable [
+		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+		        "hash_id" callExtension format [
+		            "%1:%2",
+		            netId _this,
+		            typeOf _this
+		        ]
+		    ];
+		};	
+
 	};
 
 	if(!_donotusekey) then {
@@ -108,8 +132,6 @@ _key call server_hiveWrite;
 		detach _object;
 		deleteVehicle _object_para;
 	};
-
-	PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor,_object];
 
 	_object call fnc_veh_ResetEH;
 	
