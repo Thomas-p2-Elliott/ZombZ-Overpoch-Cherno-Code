@@ -188,11 +188,9 @@ class CfgLootSmall {
 		{"SmokeShell",0.04},
 		{"ItemHotwireKit",0.01}
 	};
-
 	hunter[] = {
 		{"FoodMRE",0.01}
 	};
-
 	worker[] = {
 		{"FoodCanUnlabeled",0.09},
 		{"TrashJackDaniels",0.10},
