@@ -1,10 +1,10 @@
 private ["_object","_worldspace","_location","_dir","_class","_uid","_dam","_hitpoints","_selection","_array","_damage","_fuel","_key","_totaldam","_spawnDMG","_characterID"];
 //[_veh,[_dir,_location],"V3S_Civ",true]
 _object = 		_this select 0;
-_worldspace = 		_this select 1;
+_worldspace = 	_this select 1;
 _class = 		_this select 2;
 _spawnDMG =		_this select 3;
-_characterID =  	_this select 4;
+_characterID =  _this select 4;
 
 _fuel = 1;
 _damage = 0;
@@ -55,6 +55,8 @@ if (_spawnDMG) then {
 _key = format["CHILD:308:%1:%2:%3:%4:%5:%6:%7:%8:%9:",dayZ_instance, _class, _damage , _characterID, _worldspace, [], _array, _fuel,_uid];
 diag_log ("HIVE: WRITE: "+ str(_key)); 
 _key call server_hiveWrite;
+
+PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor,_object];
 
 // Switched to spawn so we can wait a bit for the ID
 [_object,_uid,_fuel,_damage,_array,_characterID,_class] spawn {

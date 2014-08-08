@@ -133,18 +133,6 @@ if (isServer && isNil "sm_done") then {
 			
 			//Create it
 			_object = createVehicle [_type, _pos, [], 0, "CAN_COLLIDE"];
-
-			_object call {
-			    _this setVariable [
-			        (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])),
-			        "hash_id" callExtension format [
-			            "%1:%2",
-			            netId _this,
-			            typeOf _this
-			        ]
-			    ];
-			};
-
 			_object setVariable ["lastUpdate",time];
 			_object setVariable ["ObjectID", _idKey, true];
 			_object setVariable ["OwnerPUID", _ownerPUID, true];
@@ -278,6 +266,9 @@ if (isServer && isNil "sm_done") then {
 				};
 				[_object] execVM "\z\addons\dayz_server\compile\server_SZClean.sqf";
 			};
+
+			//Monitor the object
+			PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor,_object];
 		};
 	} count (_BuildingQueue + _objectQueue);
 	// # END SPAWN OBJECTS #
@@ -376,7 +367,7 @@ if (isServer && isNil "sm_done") then {
 		// server cleanup
 		[] spawn {
 			private ["_id"];
-			sleep 60; //Sleep Lootcleanup, don't need directly cleanup on startup + fix some performance issues on serverstart
+			sleep 200; //Sleep Lootcleanup, don't need directly cleanup on startup + fix some performance issues on serverstart
 			waitUntil {!isNil "server_spawnCleanAnimals"};
 			_id = [] execFSM "\z\addons\dayz_server\system\server_cleanup.fsm";
 		};
@@ -385,18 +376,6 @@ if (isServer && isNil "sm_done") then {
 		_debugMarkerPosition = getMarkerPos "respawn_west";
 		_debugMarkerPosition = [(_debugMarkerPosition select 0),(_debugMarkerPosition select 1),1];
 		_vehicle_0 = createVehicle ["DebugBox_DZ", _debugMarkerPosition, [], 0, "CAN_COLLIDE"];
-		
-		_vehicle_0 call {
-		    _this setVariable [
-		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-		        "hash_id" callExtension format [
-		            "%1:%2",
-		            netId _this,
-		            typeOf _this
-		        ]
-		    ];
-		};
-
 		_vehicle_0 setPos _debugMarkerPosition;
 		_vehicle_0 setVariable ["ObjectID","1",true];
 

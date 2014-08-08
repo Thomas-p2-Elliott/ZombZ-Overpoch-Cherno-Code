@@ -27,16 +27,6 @@ fnc_p2_RemoteExecute = {
 		_rCodeDesc = _this select 2;
 		diag_log ( format [ "[P2_REXEC] Monitoring Agent '%1' (%2) - Time: %3", _agent, _rCodeDesc, diag_tickTime ] );
 		waitUntil {isNull _agent;};
-		_agent call {
-		    _this setVariable [
-		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-		        "hash_id" callExtension format [
-		            "%1:%2",
-		            netId _this,
-		            typeOf _this
-		        ]
-		    ];
-		};	
 		diag_log ( format [ "[P2_REXEC] Monitor: Agent %1 has become null - Time: %2", _rCodeDesc, diag_ticktime ] );
 		systemChat ( format [ "[P2_REXEC] Monitor: Agent %1 has become null - Time: %2", _rCodeDesc, diag_ticktime ] );
 	};
@@ -69,16 +59,6 @@ fnc_p2_RemoteExecute2 = {
 		_rCodeDesc = _this select 2;
 		diag_log ( format [ "[P2_REXEC] Monitoring Agent '%1' (%2) - Time: %3", _agent, _rCodeDesc, diag_tickTime ] );
 		waitUntil {isNull _agent;};
-		_agent call {
-		    _this setVariable [
-		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-		        "hash_id" callExtension format [
-		            "%1:%2",
-		            netId _this,
-		            typeOf _this
-		        ]
-		    ];
-		};	
 		diag_log ( format [ "[P2_REXEC] Monitor: Agent %1 has become null - Time: %2", _rCodeDesc, diag_ticktime ] );
 		systemChat ( format [ "[P2_REXEC] Monitor: Agent %1 has become null - Time: %2", _rCodeDesc, diag_ticktime ] );
 	};

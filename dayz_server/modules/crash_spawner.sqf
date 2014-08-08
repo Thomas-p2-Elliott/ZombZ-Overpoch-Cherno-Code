@@ -33,17 +33,6 @@ if (_spawnRoll <= _spawnChance) then {
 	//diag_log(format["CRASHSPAWNER: Spawning '%1' with loot table '%2' NOW! (%3) at: %4", _crashName, _lootTable, time, str(_position)]);
 
 	_crash = createVehicle [_crashModel,_position, [], 0, "CAN_COLLIDE"];
-	_crash call {
-		    _this setVariable [
-		        (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])),
-		        "hash_id" callExtension format [
-		            "%1:%2",
-		            netId _this,
-		            typeOf _this
-		        ]
-		    ];
-		};
-
 	// Randomize the direction the wreck is facing
 	_crash setDir round(random 360);
 
@@ -62,6 +51,9 @@ if (_spawnRoll <= _spawnChance) then {
 	_adjustedPos = [(_position select 0), (_position select 1), _newHeight];
 	//diag_log(format["DIAG: Designated Position: %1", str(_adjustedPos)]);
 	_crash setPos _adjustedPos;
+
+	// I don't think this is needed (you can't get "in" a crash), but it was in the original DayZ Crash logic
+	PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor,_crash];
 
 	_crash setVariable ["ObjectID","1",true];
 

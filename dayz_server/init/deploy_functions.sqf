@@ -8,27 +8,18 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
         _select = _array select 2;
         if (_select in ['Old_bike_TK_CIV_EP1','ATV_US_EP1','TT650_TK_CIV_EP1','350z_white_DZ','BTR40_TK_GUE_EP1','BTR40_MG_TK_GUE_EP1','HMMWV_DZ','HMMWV_Armored','CSJ_GyroC','MH6J_DZ','Mi17_Civilian_DZ','UH1H_TK_EP1']) then {
                 _object = _select createVehicle _positn;
+                if (!isNil "dayz_serverObjectMonitor") then {dayz_serverObjectMonitor set [count dayz_serverObjectMonitor, _object];};
+                if (!isNil "PVDZE_serverObjectMonitor") then {PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor, _object];};
                 _object setVariable ["ObjectID", "1", true];
                 _object setVariable ["ObjectUID", "1", true];
                 _object setVariable ["Deployed", true, true];
-
-                _object call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
-
                 _log = format ["OBJECT DEPLOY LOG: %1 spanwed a %2 at %3.", name _player,_select,mapGridPosition _positn];
                 diag_log (_log);
         } else {
 	         if (_select in ['ArmedLittlebird']) then {
 	           	_object = "MH6J_DZ" createVehicle _positn;
+	            if (!isNil "dayz_serverObjectMonitor") then {dayz_serverObjectMonitor set [count dayz_serverObjectMonitor, _object];};
+	            if (!isNil "PVDZE_serverObjectMonitor") then {PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor, _object];};
 	            _object setVariable ["ObjectID", "1", true];
 	            _object setVariable ["ObjectUID", "1", true];
 	            _object setVariable ["Deployed", true, true];
@@ -37,19 +28,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_object addMagazine "500Rnd_145x115_KPVT";
 				_object addMagazine "500Rnd_145x115_KPVT";
 				_object addWeapon "KPVT";
-
-                _object call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
-
 	           	_log = format ["OBJECT DEPLOY LOG: %1 spanwed a %2 at %3.", name _player,_select,mapGridPosition _positn];
 	            diag_log (_log);
 	        } else {
@@ -67,10 +45,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 		_objPos = getPosATL _obj;
 		_armedLittleBird = _obj getVariable ["ArmedLittlebird", false];
 		_debug = getMarkerpos "respawn_west";
-		diag_log(str _obj);
-		
-		/* Check hash of object trying to pack */
-		_obj call KK_fnc_checkHash;
 
 		if (typeOf _obj == "Old_bike_TK_CIV_EP1") then {
 			_origMat = ["ItemToolbox"];
@@ -79,18 +53,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
-
-                _bag call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
 			} forEach _origMat;
 		};
 		if (typeOf _obj == "ATV_US_EP1") then {
@@ -100,19 +62,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
-
-                _bag call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
-
 			} forEach _origMat;
 		};
 		if (typeOf _obj == "TT650_TK_CIV_EP1") then {
@@ -122,19 +71,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
-
-
-                _bag call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
 			} forEach _origMat;
 		};
 		if (typeOf _obj == "350z_white_DZ") then {
@@ -144,18 +80,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
-
-                _bag call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
 			} forEach _origMat;
 		};
 		if (typeOf _obj == "BTR40_TK_GUE_EP1") then {
@@ -165,18 +89,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
-
-                _bag call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
 			} forEach _origMat;
 		};
 		if (typeOf _obj == "BTR40_MG_TK_GUE_EP1") then {
@@ -186,18 +98,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
-
-                _bag call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
 			} forEach _origMat;
 			_tempclutter = createVehicle ["ClutterCutter_EP1",_objPos,[], 1, "CAN_COLLIDE"];
 		};
@@ -208,18 +108,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
-
-                _bag call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
 			} forEach _origMat;
 		};
 		if (typeOf _obj == "HMMWV_Armored_DZ") then {
@@ -229,18 +117,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
-
-                _bag call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
 			} forEach _origMat;
 		};
 		if (typeOf _obj == "CSJ_GyroC") then {
@@ -250,18 +126,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
-
-                _bag call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
 			} forEach _origMat;
 		};
 		if (typeOf _obj == "MH6J_DZ") then {
@@ -272,18 +136,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
-
-                _bag call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
 			} forEach _origMat;
 		};
 		if (typeOf _obj == "Mi17_Civilian_DZ") then {
@@ -293,18 +145,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
-
-                _bag call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
 			} forEach _origMat;
 		};
 		if (typeOf _obj == "UH1H_TK_EP1") then {
@@ -314,18 +154,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				_bag modelToWorld getPosATL player;
 				_bag setdir (getDir player);
 				player reveal _bag;
-
-                _bag call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-
 			} forEach _origMat;
 		};
 
