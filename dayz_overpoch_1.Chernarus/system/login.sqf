@@ -100,7 +100,7 @@ if (_isNew) then {
 	_world = toUpper(worldName); //toUpper(getText (configFile >> "CfgWorlds" >> (worldName) >> "description"));
 	_nearestCity = nearestLocations [([player] call FNC_GetPos), ["NameCityCapital","NameCity","NameVillage","NameLocal"],1000];
 	Dayz_logonTown = "Wilderness";
-	_survivalTimeText = "Days: " + str(_days) + " Hours: " + str(_hours) + "Minutes: " + str(_mins);
+	_survivalTimeText = "Hour: " + str(_hours);
 
 	if (count _nearestCity > 0) then {Dayz_logonTown = text (_nearestCity select 0)};
 
@@ -120,6 +120,9 @@ if (_isNew) then {
 	if (haloSelect == 1) then {
 		playsound "introSong";						//Start Intro Music
 		[] execVM "actions\player2_haloSpawn.sqf"; 	//paradrop them
+	} else {
+		P2DZE_paraOpened = true;
+		P2DZE_hasLanded = true;
 	};
 
 } else {

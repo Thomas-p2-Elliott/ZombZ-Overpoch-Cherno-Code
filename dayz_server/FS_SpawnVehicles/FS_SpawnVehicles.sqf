@@ -86,6 +86,17 @@ _fnc_spawn_vehicle = {
 				_veh setdir _dir;
 				_veh setpos (_x select 1);		
 
+				_veh call {
+				    _this setVariable [
+				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+				        "hash_id" callExtension format [
+				            "%1:%2",
+				            netId _this,
+				            typeOf _this
+				        ]
+				    ];
+				};
+				
 				if(DZEdebug) then {
 					_marker = createMarker [str((_x select 1)) , (_x select 1)];
 					_marker setMarkerShape "ICON";

@@ -84,7 +84,7 @@ _object_damage = {
 	private["_hitpoints","_array","_hit","_selection","_key","_damage"];
 		_hitpoints = _object call vehicle_getHitpoints;
 		_damage = damage _object;
-		if (_damage >= 1) exitWith {sleep 5; deleteVehicle _object};
+		if (_damage >= 1) exitWith { [_object] spawn { sleep 5; deleteVehicle (_this select 0); }; };
 		_array = [];
 		{
 			_hit = [_object,_x] call object_getHit;

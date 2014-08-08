@@ -10,17 +10,28 @@ p2d_headless = false;
 P2D_H = true;
 P2D_Hp = "P2DEBUG: HIVE DEBUG: ";
 
-if (ASM_Enabled) then {
-	diag_log("P2DEBUG: ASM_Enabled: " + str ASM_Enabled);
-};
-
 if (hasInterface && !isDedicated) then {
 	p2d_client = true;
 };
 
 if (isDedicated && !hasInterface || isServer) then {
 	p2d_server = true;
+
+	P2DZE_randHashVar = "hash_id" callExtension "id";
+	P2DZE_randHashVar = ("_" + P2DZE_randHashVar);
+	diag_log("P2DEBUG: hashIdVar" + P2DZE_randHashVar);
+
+	call compile ("
+		with uiNamespace do {
+		    if (isNil 'hashIdVar" + P2DZE_randHashVar + "') then {
+		        uiNamespace setVariable ['hashIdVar" + P2DZE_randHashVar + "', 'hash_id' callExtension 'rID'];
+		        diag_log(format['P2DEBUG: %1', hashIdVar" + P2DZE_randHashVar + "]);
+		    };
+		};
+	");
+
 	if (ASM_Enabled) then {
+		diag_log("P2DEBUG: ASM_Enabled: " + str ASM_Enabled);
 		["OverPoch_Server"] execFSM  "\ASM\fn_ASM.fsm"
 	};
 };
@@ -59,7 +70,7 @@ dayz_previousID = 0;
 if (isServer) then {
 	AHe = false;
 	//enable object streaming from db
-	P2DZE_serverStreamObjsEnabled = false;
+	P2DZE_serverStreamObjsEnabled = true;
 };
 
 //disable greeting menu 

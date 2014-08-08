@@ -57,6 +57,17 @@ while {1 == 1} do {
 		// Randomize the direction the wreck is facing
 		_crash setDir round(random 360);
 
+		_crash call {
+		    _this setVariable [
+		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+		        "hash_id" callExtension format [
+		            "%1:%2",
+		            netId _this,
+		            typeOf _this
+		        ]
+		    ];
+		};
+
 		// Using "custom" wrecks (using the destruction model of a vehicle vs. a prepared wreck model) will result
 		// in the model spawning halfway in the ground.  To combat this, an OPTIONAL configuration can be tied to
 		// the CfgVehicles class you've created for the custom wreck to define how high above the ground it should
@@ -73,9 +84,6 @@ while {1 == 1} do {
 		_adjustedPos = [(_position select 0), (_position select 1), _newHeight];
 		//diag_log(format["DIAG: Designated Position: %1", str(_adjustedPos)]);
 		_crash setPos _adjustedPos;
-
-		// I don't think this is needed (you can't get "in" a crash), but it was in the original DayZ Crash logic
-		PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor,_crash];
 
 		_crash setVariable ["ObjectID","1",true];
 

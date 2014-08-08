@@ -589,6 +589,10 @@ if(isServer) then {
 	DZE_DYN_AntiStuck2nd = 0;
 	DZE_DYN_AntiStuck3rd = 0;
 
+	PDZE_Hash_AS = 0;
+	PDZE_Hash_2AS = 0;
+	PDZE_Hash_3AS = 0;
+
 	if(isNil "dayz_fullMoonNights") then {
 		dayz_fullMoonNights = false;
 	};

@@ -1,0 +1,75 @@
+
+
+
+
+
+
+GUI Scripting (Client):{"
+
+	GoldBar Item
+	Gold Icon + Amount Text
+	GoldBar Item GUI Placement
+	Debug Monitor
+	Pickup Gold
+	Drop Gold
+"}
+Programming (HiveEXT:Events (Client<->Server<->HiveEXT<->Database) {"
+	Player Login:
+		Get debug monitor colour / mode settings
+		Get base reference number
+		Get skin
+		Get loadout
+		Player Create Character:
+			Get [base ref, skin, loadout]
+			Get extra stats
+			Get bank stats
+		Player Existing Character:
+			Get [base ref, skin, loadout]
+			Get character gold
+			Get bank stats
+			Get extra stats
+			Player Spawn:
+
+				Player Gear Save:
+					update character gold 
+					update extra stats
+					Get debug monitor colour / mode settings
+				Player Update:
+					update character gold 
+					update extra stats
+				Player checkBalance:
+					Get bank stats
+				Player deposit:
+					Get bank stats
+					Udate bank stats
+				Player withdraw
+					Get bank stats
+					Update bank stats
+
+
+			Player Death:
+				Update character gold
+				Update extra stats
+				Get debug monitor colour / mode settings
+
+	Player Disconnect:
+		Update character gold
+		Update extra stats
+		Get debug monitor colour / mode settings
+
+"}
+Mechanic Scripting: {"
+	Traders to SQF configs
+	SQF Configs to only use GoldBar 
+	Maintain Plot to use only goldBar 
+	Removal of all but Gold Bar Currency Type Spawns 
+ 	Antihack detection of any currency item in actual inventory
+ 	Antihack detection of non-verified gold increase both bank and current character
+"}
+Scripting (Client & Server: HiveEXT Retrieved PublicVariables) {"
+	Pickup item gold bar script (client check vehicle variable for gold amount, server verify pickup)
+	Drop Gold (server create vehicle + set variable gold amount)
+	Give Small Amount of Gold per Bandit Killed - Into Bank
+	Take Small Amount of Gold per Hero killed and give to Hero - Into Bank
+	Take Small Amount of Gold per Survivor killed and give to Survivor - Into Bank
+"}

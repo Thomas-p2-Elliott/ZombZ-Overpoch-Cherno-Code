@@ -86,6 +86,17 @@ _key call server_hiveWrite;
 	// switch var to new vehicle at this point.
 	_object = _newobject;
 
+	_object call {
+	    _this setVariable [
+	        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+	        "hash_id" callExtension format [
+	            "%1:%2",
+	            netId _this,
+	            typeOf _this
+	        ]
+	    ];
+	};
+
 	_object setDir _dir;
 	_object setPosATL _location;
 						
@@ -121,8 +132,6 @@ _key call server_hiveWrite;
 	_object setVariable ["lastUpdate",time];
 	
 	_object setVariable ["CharacterID", _characterID, true];
-
-	PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor,_object];
 
 	_object call fnc_veh_ResetEH;
 	

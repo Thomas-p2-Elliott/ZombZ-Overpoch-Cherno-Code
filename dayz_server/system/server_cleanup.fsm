@@ -1,4 +1,4 @@
-/*%FSM<COMPILE "D:\Programme\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, DayZ Server Cleanup">*/
+/*%FSM<COMPILE "C:\Users\Player2\DayZ\Tools\BI Tool Drive\FSM Editor Personal Edition\scriptedFSM.cfg, DayZ Server Cleanup">*/
 /*%FSM<HEAD>*/
 /*
 item0[] = {"init",0,250,-25.000000,-350.000000,75.000000,-300.000000,0.000000,"init"};
@@ -22,7 +22,7 @@ item17[] = {"cleanup_animals",2,250,700.000000,25.000000,800.000000,75.000000,0.
 item18[] = {"cleanup_dead",2,250,575.000000,0.000000,675.000000,50.000000,0.000000,"cleanup" \n "dead"};
 item19[] = {"sync_time",2,250,450.000000,-25.000000,550.000000,25.000000,0.000000,"sync time"};
 item20[] = {"cleanup_loot",2,250,300.000000,-25.000000,400.000000,25.000000,0.000000,"cleanup" \n "loot"};
-item21[] = {"group_cleanup",2,250,50.000000,25.000000,150.000000,75.000000,0.000000,"group" \n "cleanup"};
+item21[] = {"group_cleanup",2,4346,50.000000,25.000000,150.000000,75.000000,0.000000,"group" \n "cleanup"};
 item22[] = {"update_objects",2,250,175.000000,0.000000,275.000000,50.000000,0.000000,"update objects"};
 link0[] = {0,2};
 link1[] = {1,3};
@@ -53,8 +53,8 @@ link25[] = {19,5};
 link26[] = {20,5};
 link27[] = {21,5};
 link28[] = {22,5};
-globals[] = {25.000000,1,0,0,0,640,480,1,136,6316128,1,-53.328339,954.791992,443.544983,-436.145996,1044,911,1};
-window[] = {2,-1,-1,-1,-1,912,100,1392,100,3,1062};
+globals[] = {25.000000,1,0,0,0,640,480,1,136,6316128,1,-53.328339,954.791992,443.544983,-436.145996,1044,859,1};
+window[] = {2,-1,-1,-1,-1,862,50,1342,50,3,1062};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -317,7 +317,7 @@ class FSM
     class group_cleanup
     {
       name = "group_cleanup";
-      init = /*%FSM<STATEINIT""">*/"[] spawn server_checkHackers;" \n
+      init = /*%FSM<STATEINIT""">*/"[] spawn server_checkHashIds;" \n
        "[] spawn server_cleanupGroups;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -342,7 +342,9 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"{" \n
        "	needUpdate_objects = needUpdate_objects - [_x];" \n
        "	[_x,""damage"",true] call server_updateObject;" \n
-       "} count needUpdate_objects;"/*%FSM</STATEINIT""">*/;
+       "} count needUpdate_objects;" \n
+       "" \n
+       ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {

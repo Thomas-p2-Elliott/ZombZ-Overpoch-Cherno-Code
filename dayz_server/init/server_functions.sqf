@@ -327,7 +327,18 @@ spawn_vehicles = {
 			//place vehicle 
 			_veh = createVehicle [_vehicle, _position, [], 0, "CAN_COLLIDE"];
 			_veh setdir _dir;
-			_veh setpos _position;		
+			_veh setpos _position;
+
+			_veh call {
+			    _this setVariable [
+			        (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])),
+			        "hash_id" callExtension format [
+			            "%1:%2",
+			            netId _this,
+			            typeOf _this
+			        ]
+			    ];
+			};
 			
 			if(DZEdebug) then {
 				_marker = createMarker [str(_position) , _position];
@@ -403,6 +414,18 @@ spawn_ammosupply = {
 			};
 			
 			_veh = createVehicle [_spawnveh,_position, [], 0, "CAN_COLLIDE"];
+
+			_veh call {
+			    _this setVariable [
+			        (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])),
+			        "hash_id" callExtension format [
+			            "%1:%2",
+			            netId _this,
+			            typeOf _this
+			        ]
+			    ];
+			};	
+
 			_veh enableSimulation false;
 			_veh setDir round(random 360);
 			_veh setpos _position;
@@ -447,6 +470,17 @@ spawn_roadblocks = {
 			_veh = createVehicle [_spawnveh,_position, [], 0, "CAN_COLLIDE"];
 			_veh enableSimulation false;
 
+			_veh call {
+			    _this setVariable [
+			        (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])),
+			        "hash_id" callExtension format [
+			            "%1:%2",
+			            netId _this,
+			            typeOf _this
+			        ]
+			    ];
+			};	
+
 			_veh setDir round(random 360); // Randomize placement a bit
 			_veh setpos _position;
 
@@ -489,6 +523,17 @@ spawn_mineveins = {
 			//diag_log("DEBUG: Spawning a crashed " + _spawnveh + " with " + _spawnloot + " at " + str(_position));
 			_veh = createVehicle [_spawnveh,_position, [], 0, "CAN_COLLIDE"];
 			_veh enableSimulation false;
+
+			_veh call {
+			    _this setVariable [
+			        (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])),
+			        "hash_id" callExtension format [
+			            "%1:%2",
+			            netId _this,
+			            typeOf _this
+			        ]
+			    ];
+			};
 
 			// Randomize placement a bit
 			_veh setDir round(random 360);
@@ -656,6 +701,18 @@ dayz_perform_purge_player = {
 		_dir = getDir _this;
 
 		_holder = createVehicle ["GraveDZE", _location, [], 0, "CAN_COLLIDE"];
+
+		_veh call {
+		    _this setVariable [
+		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+		        "hash_id" callExtension format [
+		            "%1:%2",
+		            netId _this,
+		            typeOf _this
+		        ]
+		    ];
+		};	
+
 		_holder setDir _dir;
 		_holder setPosATL _location;
 
@@ -800,7 +857,7 @@ server_cleanupGroups = {
 
 
 server_spawnCleanFire = {
-	private ["_delQtyFP","_qty","_delQtyNull","_missionFires"];
+	private ["_delQtyFP","_qty","_missionFires"];
 	_missionFires = allMissionObjects "Land_Fire_DZ";
 	_delQtyFP = 0;
 	{
@@ -813,7 +870,7 @@ server_spawnCleanFire = {
 	} count _missionFires;
 	if (_delQtyFP > 0) then {
 		_qty = count _missionFires;
-		diag_log (format["CLEANUP: Deleted %1 fireplaces out of %2",_delQtyNull,_qty]);
+		diag_log (format["CLEANUP: Deleted %1 fireplaces out of %2",_delQtyFP,_qty]);
 	};
 };
 server_spawnCleanLoot = {
@@ -848,7 +905,7 @@ server_spawnCleanLoot = {
 			};
 		};
 		sleep 0.001;
-	} count _missionObjs;
+	} forEach _missionObjs;
 	if (_delQty > 0) then {
 		_qty = count _missionObjs;
 		diag_log (format["CLEANUP: Deleted %1 Loot Piles out of %2",_delQty,_qty]);
@@ -879,7 +936,7 @@ server_spawnCleanAnimals = {
 			};
 		};
 		sleep 0.001;
-	} count _missonAnimals;
+	} forEach _missonAnimals;
 	if (_delQtyAnimal > 0) then {
 		_qty = count _missonAnimals;
 		diag_log (format["CLEANUP: Deleted %1 Animals out of %2",_delQtyAnimal,_qty]);
@@ -887,7 +944,7 @@ server_spawnCleanAnimals = {
 };
 
 server_logUnlockLockEvent = {
-	private["_player", "_obj", "_objectID", "_objectUID", "_statusText", "_status"];
+	private["_player", "_obj", "_objectID", "_objectUID", "_statusText", "_PUID", "_status"];
 	_player = _this select 0;
 	_obj = _this select 1;
 	_status = _this select 2;
@@ -899,31 +956,15 @@ server_logUnlockLockEvent = {
 			[_obj, "gear"] call server_updateObject;
 			_statusText = "LOCKED";
 		};
-		diag_log format["SAFE %5: ID:%1 UID:%2 BY %3(%4)", _objectID, _objectUID, (name _player), (getPlayerUID _player), _statusText];
+		_PUID = [_killer] call FNC_GetPlayerUID;
+		diag_log format["SAFE %5: ID:%1 UID:%2 BY %3(%4)", _objectID, _objectUID, (name _player), _PUID, _statusText];
 	};
 };
 
 
-server_checkHackers = {
-	/*if (DZE_DYN_AntiStuck2nd > 3) then { DZE_DYN_HackerCheck = nil; DZE_DYN_AntiStuck2nd = 0; };
-	if(!isNil "DZE_DYN_HackerCheck") exitWith {  DZE_DYN_AntiStuck2nd = DZE_DYN_AntiStuck2nd + 1;};
-	DZE_DYN_HackerCheck = true;
-	{
-	if (!((isNil "_x") || {(isNull _x)})) then {
-		if(vehicle _x != _x && !(vehicle _x in PVDZE_serverObjectMonitor) && (isPlayer _x)  && !((typeOf vehicle _x) in DZE_safeVehicle)) then {
-			diag_log ("CLEANUP: KILLING A HACKER " + (name _x) + " " + str(_x) + " IN " + (typeOf vehicle _x));
-			(vehicle _x) setDamage 1;
-			_x setDamage 1;
-			sleep 0.25;
-		};
-	};
-		sleep 0.001;
-	} count allUnits;
-	DZE_DYN_HackerCheck = nil;*/
-};
 
-p2net_log1 =			compile preprocessFileLineNumbers "\z\addons\dayz_server\init\p2net_logFunction.sqf";
-
+p2net_log1 =	compile preprocessFileLineNumbers "\z\addons\dayz_server\init\p2net_logFunction.sqf";
+[] call 	compile preprocessFileLineNumbers "\z\addons\dayz_server\system\antihack_functions.sqf";
 [] execvm "\z\addons\dayz_server\init\deploy_functions.sqf";
 [] execvm "\z\addons\dayz_server\p2re\p2re_init.sqf";
 
