@@ -10,19 +10,45 @@ p2d_headless = false;
 P2D_H = true;
 P2D_Hp = "P2DEBUG: HIVE DEBUG: ";
 
-if (ASM_Enabled) then {
-	diag_log("P2DEBUG: ASM_Enabled: " + str ASM_Enabled);
-};
-
 if (hasInterface && !isDedicated) then {
 	p2d_client = true;
+
+	//enable uid whitelist
+	P2DZE_clientAHWhitelistEnabled = false
 };
 
 if (isDedicated && !hasInterface || isServer) then {
 	p2d_server = true;
+
+	//enable antihack on test server?
+	AHe = false;
+	//enable object streaming from db?
+	P2DZE_serverStreamObjsEnabled = true;
+
+	//dze performance testing settings
+	DZE_DiagFpsSlow = true;
+	DZE_DiagFpsFast = false;
+	DZE_DiagVerbose = false;
+
+	//asm performance testing setting
 	if (ASM_Enabled) then {
+		diag_log("P2DEBUG: ASM_Enabled: " + str ASM_Enabled);
 		["OverPoch_Server"] execFSM  "\ASM\fn_ASM.fsm"
 	};
+
+	//generate hash for vehicles
+	P2DZE_randHashVar = "hash_id" callExtension "id";
+	P2DZE_randHashVar = ("_" + P2DZE_randHashVar);
+	diag_log("P2DEBUG: hashIdVar" + P2DZE_randHashVar);
+
+	call compile ("
+		with uiNamespace do {
+		    if (isNil 'hashIdVar" + P2DZE_randHashVar + "') then {
+		        uiNamespace setVariable ['hashIdVar" + P2DZE_randHashVar + "', 'hash_id' callExtension 'rID'];
+		        diag_log(format['P2DEBUG: %1', hashIdVar" + P2DZE_randHashVar + "]);
+		    };
+		};
+	");
 };
 
 if (!hasInterface && !isDedicated) then {
@@ -54,13 +80,6 @@ dayZ_instance =	11;					//The instance
 dayzHiveRequest = [];
 initialized = false;
 dayz_previousID = 0;
-
-//Enabble AntiHack on TestServer
-if (isServer) then {
-	AHe = false;
-	//enable object streaming from db
-	P2DZE_serverStreamObjsEnabled = false;
-};
 
 //disable greeting menu 
 player setVariable ["BIS_noCoreConversations", true];
@@ -109,7 +128,7 @@ if (!isDedicated) then {
 	//Conduct map operations
 	0 fadeSound 0;
 	waitUntil {!isNil "dayz_loadScreenMsg"};
-	dayz_loadScreenMsg = (localize "STR_AUTHENTICATING");
+	dayz_loadScreenMsg = ("ZombZ: " + localize "STR_AUTHENTICATING");
 	
 	//Run the player monitor
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
@@ -117,7 +136,7 @@ if (!isDedicated) then {
 
 	[] execVM "system\SafeZone.sqf";	
 	//anti Hack
-	[] execVM "system\antihack.sqf";
+	//[] execVM "system\antihack.sqf"; //requires re-work before re-enable due to setdamage issue! diagnose by commenting out sections.
 };
 
 #include "\z\addons\dayz_code\system\REsec.sqf"
