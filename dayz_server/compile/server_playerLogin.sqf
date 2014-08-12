@@ -59,12 +59,14 @@ _newPlayer = 	_primary select 1;
 _isNew = 		count _primary < 8; //_result select 1;
 _charID = 		_primary select 2;
 
-diag_log ("P2DEBUG: LOGIN RESULT: " + str(_primary));
 
 /* PROCESS */
 _hiveVer = 0;
 
 if (!_isNew) then {
+	diag_log ("P2DEBUG: LOGIN RESULT: !isNew: " + str(_primary));
+
+
 	//RETURNING CHARACTER		
 	_inventory = 			_primary select 4;
 	_backpack = 			_primary select 5;
@@ -77,6 +79,8 @@ if (!_isNew) then {
 	};
 
 } else {
+	diag_log ("P2DEBUG: LOGIN RESULT: isNew: " + str(_primary));
+
 	_model =				_primary select 4;
 	_hiveVer =				_primary select 5;
 	_debugMonSettings = 	_primary select 6;
@@ -131,3 +135,4 @@ if (worldName == "chernarus") then {
 
 dayzPlayerLogin = [_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,0,_debugMonSettings];
 (owner _playerObj) publicVariableClient "dayzPlayerLogin";
+diag_log ("P2DEBUG: FINAL LOGIN RESULT: " + str([_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,0,_debugMonSettings]));

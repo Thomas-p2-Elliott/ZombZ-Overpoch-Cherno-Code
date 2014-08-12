@@ -55,12 +55,16 @@ if (isNull _playerObj || !isPlayer _playerObj) exitWith {
 //Wait for HIVE to be free
 diag_log ("P2DEBUG: SETUP: RESULT: Successful with " + str(_primary));
 
-_medical =		_primary select 1;
-_stats =		_primary select 2;
-_state =		_primary select 3;
-_worldspace = 	_primary select 4;
-_humanity =		_primary select 5;
-_lastinstance =	_primary select 6;
+_medical =				_primary select 1;
+_stats =				_primary select 2;
+_state =				_primary select 3;
+_worldspace = 			_primary select 4;
+_humanity =				_primary select 5;
+_lastinstance =			_primary select 6;
+_currentCharGoldArr =	_primary select 7;
+
+_currentCharGold =	_currentCharGoldArr select 0;
+_currentCharATM = 	_currentCharGoldArr select 1;
 
 //Set position
 _randomSpot = false;
@@ -120,6 +124,17 @@ if (isNil '_debugMonSettings') then {
 	_playerObj setVariable["P2_DebugMonColours_CHK",(_debugColours),true];
 
 
+};
+
+//set gold values
+if (count _currentCharGoldArr > 0) then {
+	_playerObj setVariable["ZombZGold", (_currentCharGold), true];
+	_playerObj setVariable["ZombZATMCard", (_currentCharATM), true];
+
+//reset gold values to [0,0]...data has been broken and is no longer in array format of [currentGold,currentATMCard]
+} else {
+	_playerObj setVariable["ZombZGold", 0, true];
+	_playerObj setVariable["ZombZATMCard", 0, true];
 };
 
 //set medical values

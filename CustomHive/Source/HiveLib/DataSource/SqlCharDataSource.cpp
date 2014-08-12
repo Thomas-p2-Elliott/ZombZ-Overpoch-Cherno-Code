@@ -243,13 +243,16 @@ Sqf::Value SqlCharDataSource::fetchCharacterDetails( int characterId )
 	Sqf::Parameters retVal;
 	//get details from db
 	auto charDetRes = getDB()->queryParams(
-		"SELECT `%s`, `Medical`, `Generation`, `KillsZ`, `HeadshotsZ`, `KillsH`, `KillsB`, `CurrentState`, `Humanity`, `InstanceID` "
+		"SELECT `%s`, `Medical`, `Generation`, `KillsZ`, `HeadshotsZ`, `KillsH`, `KillsB`, `CurrentState`, `Humanity`, `InstanceID`, `Gold` "
 		"FROM `Character_DATA` WHERE `CharacterID`=%d", _wsFieldName.c_str(), characterId);
 
 	if (charDetRes && charDetRes->fetchRow())
 	{
 		Sqf::Value worldSpace = Sqf::Parameters(); //empty worldspace
 		Sqf::Value medical = Sqf::Parameters(); //script will fill this in if empty
+
+		Sqf::Value currentCharGoldArr = Sqf::Parameters(); //handle this in script if empty so it will be [0,0] (0 gold, 0 atm card)
+
 		int generation = 1;
 		Sqf::Value stats = lexical_cast<Sqf::Value>("[0,0,0,0]"); //killsZ, headZ, killsH, killsB
 		Sqf::Value currentState = Sqf::Parameters(); //empty state (aiming, etc)
@@ -292,6 +295,14 @@ Sqf::Value SqlCharDataSource::fetchCharacterDetails( int characterId )
 			}
 			humanity = charDetRes->at(8).getInt32();
 			instance = charDetRes->at(9).getInt32();
+			try
+			{
+				currentCharGoldArr = lexical_cast<Sqf::Value>(charDetRes->at(10).getString());
+			}
+			catch (bad_lexical_cast)
+			{
+				_logger.warning("Invalid Gold (detail load) for CharacterID(" + lexical_cast<string>(characterId)+"): " + charDetRes->at(0).getString());
+			}
 		}
 
 		retVal.push_back(string("PASS"));
@@ -301,6 +312,7 @@ Sqf::Value SqlCharDataSource::fetchCharacterDetails( int characterId )
 		retVal.push_back(worldSpace);
 		retVal.push_back(humanity);
 		retVal.push_back(instance);
+		retVal.push_back(currentCharGoldArr);
 	}
 	else
 	{
@@ -320,7 +332,7 @@ bool SqlCharDataSource::updateCharacter( int characterId, int serverId, const Fi
 		const Sqf::Value& val = it->second;
 
 		//arrays
-		if (name == "Worldspace" || name == "Inventory" || name == "Backpack" || name == "Medical" || name == "CurrentState")
+		if (name == "Worldspace" || name == "Inventory" || name == "Backpack" || name == "Medical" || name == "CurrentState" || "Gold")
 			sqlFields[name] = "'"+getDB()->escape(lexical_cast<string>(val))+"'";
 		//booleans
 		else if (name == "JustAte" || name == "JustDrank")

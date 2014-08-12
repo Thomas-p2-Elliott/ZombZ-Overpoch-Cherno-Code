@@ -581,6 +581,15 @@ Sqf::Value HiveExtApp::playerUpdate( Sqf::Parameters params )
 			int humanityDiff = static_cast<int>(Sqf::GetDouble(params.at(15)));
 			if (humanityDiff != 0) fields["Humanity"] = humanityDiff;
 		}
+		if (!Sqf::IsNull(params.at(16)))
+		{
+			Sqf::Parameters currentCharGoldArr = boost::get<Sqf::Parameters>(params.at(16));
+			if (currentCharGoldArr.size() > 0)
+			{
+				Sqf::Value currentCharGold = currentCharGoldArr;
+				fields["Gold"] = currentCharGold;
+			}
+		}
 	}
 	catch (const std::out_of_range&)
 	{

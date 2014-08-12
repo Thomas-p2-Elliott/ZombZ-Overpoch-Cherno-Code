@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50616
 File Encoding         : 65001
 
-Date: 2014-08-07 01:59:55
+Date: 2014-08-12 11:00:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,8 +28,3 @@ CREATE TABLE `player_data` (
   `GUID` int(64) NOT NULL DEFAULT '0',
   PRIMARY KEY (`PlayerUID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- ----------------------------
--- Records of player_data
--- ----------------------------
-INSERT INTO `player_data` VALUES ('76561197994454413', 'p2_OWtest', '0', '0', '[1,1,1,0.2,2]', '0');

@@ -1,4 +1,4 @@
-private ["_playerUID","_key2","_result","_debugMonSettings","_empty","_name","_playerwasNearby","_character","_magazines","_force","_characterID","_charPos","_isInVehicle","_timeSince","_humanity","_debug","_distance","_isNewMed","_isNewPos","_isNewGear","_playerPos","_playerGear","_playerBackp","_medical","_distanceFoot","_lastPos","_backpack","_kills","_killsB","_killsH","_headShots","_lastTime","_timeGross","_timeLeft","_currentWpn","_currentAnim","_config","_onLadder","_isTerminal","_currentModel","_modelChk","_muzzles","_temp","_currentState","_array","_key","_pos","_forceGear","_friendlies"];
+private ["_currentCharATMCard","_currentCharGoldArr","_currentCharGold","_playerUID","_key2","_result","_debugMonSettings","_empty","_name","_playerwasNearby","_character","_magazines","_force","_characterID","_charPos","_isInVehicle","_timeSince","_humanity","_debug","_distance","_isNewMed","_isNewPos","_isNewGear","_playerPos","_playerGear","_playerBackp","_medical","_distanceFoot","_lastPos","_backpack","_kills","_killsB","_killsH","_headShots","_lastTime","_timeGross","_timeLeft","_currentWpn","_currentAnim","_config","_onLadder","_isTerminal","_currentModel","_modelChk","_muzzles","_temp","_currentState","_array","_key","_pos","_forceGear","_friendlies"];
 
 _character = 	_this select 0;
 _magazines = _this select 1;
@@ -56,6 +56,9 @@ if (_characterID != "0") then {
 	_medical =		[];
 	_distanceFoot =	0;
 	_playerUID = getPlayerUID _character;
+	_currentCharGoldArr = [];
+	_currentCharGold = 0;
+	_currentCharATMCard = 0;
 	//diag_log ("Found Character...");
 	
 	//Check if update is requested
@@ -112,22 +115,25 @@ if (_characterID != "0") then {
 			be recording  results from their local objects (such as agent zombies)
 		*/
 
-		//Retrieve for client and Retrieve for JIP checks
 		_debugMode = 		_character getVariable ["P2_DebugMonMode",2]; 
-		//Retrieve for client and Retrieve for serverJIP checks
 		_debugColours = 	_character getVariable ["P2_DebugMonColours",[0,0,0,0.2]]; 
-
-
 		//set variable to save to db
 		_debugMonSettings = [(_debugColours select 0), (_debugColours select 1), (_debugColours select 2), (_debugColours select 3), _debugMode];
+
+
+		_currentCharGold = 		_character getVariable ["ZombZGold",0]; 
+		_currentCharATMCard = 	_character getVariable ["ZombZATMCard",0]; 
+		//Save in array for db
+		_currentCharGoldArr = [_currentCharGold,_currentCharATMCard];
+
 
 		_kills = 		["zombieKills",_character] call server_getDiff;
 		_killsB = 		["banditKills",_character] call server_getDiff;
 		_killsH = 		["humanKills",_character] call server_getDiff;
 		_headShots = 	["headShots",_character] call server_getDiff;
 		_humanity = 	["humanity",_character] call server_getDiff2;
-		diag_log("P2DEBUG: server_playerSync:" + str _debugMode);
-		diag_log("P2DEBUG: server_playerSync:" + str _debugColours);
+		diag_log("P2DEBUG: server_playerSync: " + str _currentCharGoldArr);
+		diag_log("P2DEBUG: server_playerSync: " + str _debugMonSettings);
 
 		//_humanity = 	_character getVariable ["humanity",0];
 		_character addScore _kills;		
@@ -200,8 +206,8 @@ if (_characterID != "0") then {
 			if (alive _character) then {
 				//Wait for HIVE to be free
 				//Send request
-				_key = format["CHILD:201:%1:%2:%3:%4:%5:%6:%7:%8:%9:%10:%11:%12:%13:%14:%15:%16:",_characterID,_playerPos,_playerGear,_playerBackp,_medical,false,false,_kills,_headShots,_distanceFoot,_timeSince,_currentState,_killsH,_killsB,_currentModel,_humanity];
-				//diag_log ("HIVE: WRITE: "+ str(_key) + " / " + _characterID);
+				_key = format["CHILD:201:%1:%2:%3:%4:%5:%6:%7:%8:%9:%10:%11:%12:%13:%14:%15:%16:%17:",_characterID,_playerPos,_playerGear,_playerBackp,_medical,false,false,_kills,_headShots,_distanceFoot,_timeSince,_currentState,_killsH,_killsB,_currentModel,_humanity,_currentCharGoldArr];
+				diag_log ("HIVE: WRITE: "+ str(_key) + " / " + _characterID);
 				_key call server_hiveWrite;
 
 				//update debug mon settings
