@@ -1,4 +1,3 @@
-
 private ["_brightness","_pos","_unit","_parachute","_dir","_alt","_para","_vel"];
 scriptName "modules_e\Functions\objects\fn_HALO.sqf";
 sleep 0.01;
@@ -26,8 +25,8 @@ if (typename _this == typename objnull) then {
 		_brightness = 0.99;
 		_pos = position player;
 
-		bis_fnc_halo_soundLoop = time;
-		playsound "BIS_HALO_Flapping";
+		//bis_fnc_halo_soundLoop = time;	//removed sound testing as enhancement
+		//playsound "BIS_HALO_Flapping";	//removed sound testing as enhancement
 
 		bis_fnc_halo_action = _unit addaction [localize "STR_HALO_OPEN_CHUTE","compile\fn_halo.sqf",[],1,true,true,"Eject"];
 
@@ -98,12 +97,12 @@ if (typename _this == typename objnull) then {
 				};
 
 				player playmovenow _anim;
-
-				if ((time - bis_fnc_halo_soundLoop) > 4.5) then {
-					playsound "BIS_HALO_Flapping";
-					bis_fnc_halo_soundLoop = time;
-				};
-
+				/*
+					if ((time - bis_fnc_halo_soundLoop) > 4.5) then {
+						playsound "BIS_HALO_Flapping";						//removed sound testing as enhancement
+						bis_fnc_halo_soundLoop = time;
+					};
+				*/
 				sleep 0.01;
 			};
 			//--- End

@@ -121,7 +121,7 @@ while {1 == 1} do {
 			_itemType = _itemTypes select _index;
 			[_itemType select 0, _itemType select 1, _position, 5] call spawn_loot;
 
-			diag_log(format["CRASHSPAWNER: Loot spawn at '%1' with loot table '%2'", _crashName, _lootTable]);
+			diag_log(format["P2DEBUG: CRASHSPAWNER: Loot spawn at '%1' with loot table '%2'", _crashName, _lootTable]);
 
 			// ReammoBox is preferred parent class here, as WeaponHolder wouldn't match MedBox0 && other such items.
 			_nearby = _position nearObjects ["ReammoBox", sizeOf(_crashModel)];
