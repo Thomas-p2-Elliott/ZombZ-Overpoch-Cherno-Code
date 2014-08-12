@@ -73,6 +73,19 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	_zombztimeToRestart = 	(90 - (round(serverTime / 60)));
 
 	_pDir = (round(getDir player)); _gpsP2osZombZ = (mapGridPosition getPos player);
+	_pDirT = switch (true) do {
+	 		default { (format["N %1", _pDir]) };
+	 		case (((_pDir >= 355) && (_pDir <=359)) || ((_pDir >= 0) && (_pDir <= 5))): { (format["N %1", _pDir]) };
+		    case ((_pDir > 5) && (_pDir < 85)): { (format["NE %1", _pDir]) };
+		    case ((_pDir >= 85) && (_pDir <= 95)): { (format["E %1", _pDir]) };
+		    case ((_pDir > 95) && (_pDir < 175)): { (format["SE %1", _pDir]) };
+		    case ((_pDir >= 175) && (_pDir <= 185)): { (format["S %1", _pDir]) };
+		    case ((_pDir > 185) && (_pDir < 265)): { (format["SW %1", _pDir]) };
+		    case ((_pDir >= 265) && (_pDir <= 275)): { (format["W %1", _pDir]) };
+		    case ((_pDir > 275) && (_pDir < 355)): { (format["NW %1", _pDir]) };
+	};
+
+
 	_p2bl = round((r_player_blood * 2) / 1000);
 
 	_p2c = switch (_p2bl) do {
@@ -127,7 +140,7 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	<t size='1' font='Bitstream' align='left' color='#FFBF00'>Active Vehicles: </t><t size='1' font='Bitstream' align='right' color='#FFBF00'>" + str _zombzVehCount + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#FFBF00'>Active Zombies: </t><t size='1' font='Bitstream' align='right' color='#FFBF00'>" + str _zombzZedCount + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#FFBF00'>Restart In: </t><t size='1' font='Bitstream' align='right' color='#FFBF00'>" + str _zombztimeToRestart + " Mins</t><br/><br/>
-	<t size='1' font='Bitstream' align='left' color='#F7F2E0'>DIR: "+ str _pDir + "</t><t size='1' font='Bitstream' align='right' color='#F7F2E0'>GPS: " + _gpsP2osZombZ + "</t>", 
+	<t size='1' font='Bitstream' align='left' color='#F7F2E0'>DIR: "+ _pDirT + "</t><t size='1' font='Bitstream' align='right' color='#F7F2E0'>GPS: " + _gpsP2osZombZ + "</t>", 
 	P2DZE_debugCol, //debug design by player2
 	false
 	] call P2DZ_hintFull;
@@ -144,7 +157,17 @@ private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
 	_pDir = (round(getDir player));
 	_gpsP2osZombZ = (mapGridPosition getPos player);
 	_p2bl = round((r_player_blood * 2) / 1000);
-
+	_pDirT = switch (true) do {
+	 		default { (format["N %1", _pDir]) };
+	 		case (((_pDir >= 355) && (_pDir <=359)) || ((_pDir >= 0) && (_pDir <= 5))): { (format["N %1", _pDir]) };
+		    case ((_pDir > 5) && (_pDir < 85)): { (format["NE %1", _pDir]) };
+		    case ((_pDir >= 85) && (_pDir <= 95)): { (format["E %1", _pDir]) };
+		    case ((_pDir > 95) && (_pDir < 175)): { (format["SE %1", _pDir]) };
+		    case ((_pDir >= 175) && (_pDir <= 185)): { (format["S %1", _pDir]) };
+		    case ((_pDir > 185) && (_pDir < 265)): { (format["SW %1", _pDir]) };
+		    case ((_pDir >= 265) && (_pDir <= 275)): { (format["W %1", _pDir]) };
+		    case ((_pDir > 275) && (_pDir < 355)): { (format["NW %1", _pDir]) };
+	};
 	_p2c = switch (_p2bl) do {
 		//dead
  		default { "#210000" };
@@ -187,7 +210,7 @@ private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
 	<t size='1' font='Bitstream' align='left' color='#FC473A'>Murders:</t><t size='1' font='Bitstream' align='right' color='#FC473A'>" + str _p2mkills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#8BFF6B'>Bandit Kills:</t><t size='1' font='Bitstream' align='right' color='#8BFF6B'>" + str _p2bKills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Blood: </t><t size='1' font='Bitstream' align='right' color=" + str _p2c + ">" + str r_player_blood + "</t><br/>
-	<t size='1' font='Bitstream' align='left' color='#F7F2E0'>DIR: "+ str _pDir + "</t><t size='1' font='Bitstream' align='right' color='#F7F2E0'>GPS: " + _gpsP2osZombZ + "</t>", 
+	<t size='1' font='Bitstream' align='left' color='#F7F2E0'>DIR: "+ _pDir + "</t><t size='1' font='Bitstream' align='right' color='#F7F2E0'>GPS: " + _gpsP2osZombZ + "</t>", 
 	P2DZE_debugCol, //debug design by player2
 	false
 	] call P2DZ_hintMini;
