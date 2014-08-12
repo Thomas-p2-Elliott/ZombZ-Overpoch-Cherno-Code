@@ -276,7 +276,7 @@ if (isServer && isNil "sm_done") then {
 					// total each vehicle
 					serverVehicleCounter set [count serverVehicleCounter,_type];
 				};
-				[_object] execVM "\z\addons\dayz_server\compile\server_SZClean.sqf";
+				//[_object] execVM "\z\addons\dayz_server\compile\server_SZClean.sqf"; // not working: Error Type Script, expected Bool
 			};
 		};
 	} count (_BuildingQueue + _objectQueue);
