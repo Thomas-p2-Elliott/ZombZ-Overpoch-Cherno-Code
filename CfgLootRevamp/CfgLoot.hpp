@@ -348,239 +348,104 @@ class CfgLoot {
 		{"DZ_Backpack_EP1",0.15},
 		{"DZ_LargeGunBag_EP1",0.1}
 	};
-	militaryammo[] = {
-		{"2000Rnd_762x51_M134",0.1},
-		{"29Rnd_30mm_AGS30",0.2},
-		{"50Rnd_127x107_DSHKM",0.2},
-		{"48Rnd_40mm_MK19",0.2},
-		{"100Rnd_127x99_M2",0.3}
-	};
 	pistols[] = {
-		{"MakarovSD","weapon",0.04},, 
-		{"Sa61_EP1","weapon",0.04},, 
-		{"vil_SKS","weapon",0.04},, 
-		{"vil_Tt33","weapon",0.04},, 
-		{"Vil_PYA","weapon",0.04},, 
-		{"vil_M76","weapon",0.04},, 
-		{"vil_B_HP","weapon",0.04},, 
-		{"vil_USP","weapon",0.04},, 
-		{"vil_APS","weapon",0.04},, 
-		{"RH_g18","weapon",0.04},, 
-		{"RH_g17","weapon",0.04},, 
-		{"RH_g19","weapon",0.04},, 
-		{"RH_g19t","weapon",0.04},, 
-		{"RH_vz61","weapon",0.04},, 
-		{"RH_tec9","weapon",0.04},, 
-		{"RH_mk2","weapon",0.04},, 
-		{"RH_m1911","weapon",0.04},, 
-		{"RH_usp","weapon",0.04},, 
-		{"RH_browninghp","weapon",0.04},, 
-		{"RH_p226","weapon",0.04},, 
-		{"Colt1911","weapon",0.04},, 
-		{"RH_p226s","weapon",0.04},, 
-		{"RH_p38","weapon",0.04},, 
-		{"RH_ppk","weapon",0.04},, 
-		{"RH_mk22","weapon",0.04},, 
-		{"DDOPP_X3","weapon",0.04},, 
-		{"DDOPP_X3_b","weapon",0.04},, 
-		{"RH_uspm","weapon",0.04},, 
-		{"RH_anac","weapon",0.04},, 
-		{"RH_python","weapon",0.04},, 
-		{"RH_deagle","weapon",0.04},, 
-		{"revolver_gold_EP1","weapon",0.04}
+		{"MakarovSD",0.04}, 
+		{"Sa61_EP1",0.04}, 
+		{"vil_SKS",0.04}, 
+		{"vil_Tt33",0.04}, 
+		{"Vil_PYA",0.04}, 
+		{"vil_M76",0.04}, 
+		{"vil_B_HP",0.04}, 
+		{"vil_USP",0.04}, 
+		{"vil_APS",0.04}, 
+		{"RH_g18",0.04}, 
+		{"RH_g17",0.04}, 
+		{"RH_g19",0.04}, 
+		{"RH_g19t",0.04}, 
+		{"RH_vz61",0.04}, 
+		{"RH_tec9",0.04}, 
+		{"RH_mk2",0.04}, 
+		{"RH_m1911",0.04}, 
+		{"RH_usp",0.04}, 
+		{"RH_browninghp",0.04}, 
+		{"RH_p226",0.04}, 
+		{"Colt1911",0.04}, 
+		{"RH_p226s",0.04}, 
+		{"RH_p38",0.04}, 
+		{"RH_ppk",0.04}, 
+		{"RH_mk22",0.04}, 
+		{"DDOPP_X3",0.04}, 
+		{"DDOPP_X3_b",0.04}, 
+		{"RH_uspm",0.04}, 
+		{"RH_anac",0.04}, 
+		{"RH_python",0.04}, 
+		{"revolver_gold_EP1",0.04}
 	};
 	shotgunsingleshot[] = {
-		{"Winchester1866",0.25},,
-		{"LeeEnfield",0.2},,
-		{"MR43",0.2},,
-		{"Saiga12K",0.13},,
-		{"Remington870_lamp",0.1},,
-		{"Crossbow_DZ",0.07},,
-		{"M1014",0.05},,
-		{"Crossbow_DZ","weapon",0.1},, 
-		{"MR43","weapon",0.1},, 
-		{"Remington870","weapon",0.1},, 
-		{"Remington870_lamp","weapon",0.1},, 
-		{"Winchester1866","weapon",0.1},, 
-		{"vil_uzimini","weapon",0.1},, 
-		{"vil_uzi_c","weapon",0.1},, 
-		{"vil_uzi","weapon",0.1},,
-	},;
+		{"Winchester1866",0.25},
+		{"LeeEnfield",0.2},
+		{"MR43",0.2},
+		{"Saiga12K",0.13},
+		{"Remington870_lamp",0.1},
+		{"Crossbow_DZ",0.07},
+		{"M1014",0.05},
+		{"Crossbow_DZ",0.1}, 
+		{"MR43",0.1}, 
+		{"Remington870",0.1}, 
+		{"Remington870_lamp",0.1}, 
+		{"Winchester1866",0.1}
+	};
 	farmweapons[] = {
-		{"Winchester1866",0.25},,
-		{"LeeEnfield",0.2},,
-		{"MR43",0.19},,
-		{"Saiga12K",0.13},,
-		{"Remington870_lamp",0.1},,
-		{"Crossbow_DZ",0.07},,
-		{"huntingrifle",0.05},,
-		{"Chainsaw",0.01},,
-		{"gms_k98","weapon",0.02},, 
-		{"gms_k98zf39","weapon",0.02},, 
-		{"huntingrifle","weapon",0.02},, 
-		{"vil_M14","weapon",0.02},, 
-		{"vil_M70","weapon",0.02},, 
-		{"vil_SKS","weapon",0.02}
+		{"Winchester1866",0.25},
+		{"LeeEnfield",0.2},
+		{"MR43",0.19},
+		{"Saiga12K",0.13},
+		{"Remington870_lamp",0.1},
+		{"Crossbow_DZ",0.07},
+		{"huntingrifle",0.05},
+		{"Chainsaw",0.01},
+		{"huntingrifle",0.02},  
+		{"vil_M70",0.02}, 
+		{"vil_SKS",0.02}
 	};
 	sniperrifles[] = {
-		{"AK_107_PSO",0.1},
-		{"M4SPR",0.09},
-		{"M40A3",0.09},
-		{"SVD_CAMO",0.07},
-		{"SVD_des_EP1",0.07},
-		{"SVD",0.07},
 		{"huntingrifle",0.09},
-		{"M24_des_EP1",0.08},
-		{"M24",0.07},
 		{"BAF_LRR_scoped",0.07},
 		{"M107_DZ",0.05},
 		{"KSVK_DZE",0.05},
-		{"VSS_vintorez",0.04},
-		{"SCAR_H_LNG_Sniper_SD",0.03},
-		{"M14_EP1",0.02},
-		{"DMR",0.01}
+		{"VSS_vintorez",0.04}
 	};
-	sniperriflesammo[] = {
-		{"30Rnd_545x39_AKSD",0.18},
-		{"5Rnd_127x108_KSVK",0.08},
-		{"5Rnd_86x70_L115A1",0.07},
-		{"10Rnd_127x99_m107",0.15},
-		{"10Rnd_762x54_SVD",0.2},
-		{"20Rnd_762x51_DMR",0.1},
-		{"5Rnd_762x51_M24",0.15},
-		{"5x_22_LR_17_HMR",0.1},
-		{"20Rnd_762x51_SB_SCAR",0.07},
-		{"20Rnd_9x39_SP5_VSS",0.05}
-	};
-
 	submachinegun[] = {
-		{"UZI_EP1",0.25},
 		{"bizon",0.2},
 		{"Sa61_EP1",0.2},
 		{"MP5A5",0.13},
 		{"bizon_silenced",0.1},
-		{"UZI_SD_EP1",0.07},
 		{"MP5SD",0.05}
-	};
-	assaultrifles[] = {
-		{"FN_FAL",0.03},,
-		{"FN_FAL_ANPVS4",0.01},,
-		{"M16A2",0.05},,
-		{"M16A2GL",0.02},,
-		{"M16A4_ACG",0.01},,
-		{"Sa58P_EP1",0.02},,
-		{"Sa58V_CCO_EP1",0.04},,
-		{"Sa58V_EP1",0.02},,
-		{"Sa58V_RCO_EP1",0.04},,
-		{"BAF_L85A2_RIS_SUSAT",0.02},,
-		{"BAF_L85A2_RIS_Holo",0.01},,	
-		{"vil_AKS_47","weapon",0.01},, 
-		{"vil_AK_47_49","weapon",0.01},, 
-		{"vil_AK_47","weapon",0.01},, 
-		{"vil_AKM","weapon",0.01},, 
-		{"vil_AKMS","weapon",0.01},, 
-		{"vil_AK_47_m1","weapon",0.01},, 
-		{"vil_AK_nato_m1","weapon",0.01},, 
-		{"vil_M70B","weapon",0.01},, 
-		{"vil_M64","weapon",0.01},, 
-		{"vil_ASH82","weapon",0.01},, 
-		{"vil_AMD","weapon",0.01},, 
-		{"vil_AMD63","weapon",0.01},, 
-		{"vil_PMI","weapon",0.01},, 
-		{"vil_PMIS","weapon",0.01},, 
-		{"vil_MPi","weapon",0.01},, 
-		{"vil_AKs_74_u","weapon",0.01},, 
-		{"vil_AKs_74_u45","weapon",0.01},, 
-		{"vil_M91","weapon",0.01},, 
-		{"vil_Abakan","weapon",0.01},, 
-		{"vil_ak12","weapon",0.01},, 
-		{"vil_AEK1","weapon",0.01},, 
-		{"vil_AEK2","weapon",0.01},, 
-		{"vil_G3a3","weapon",0.01},, 
-		{"vil_G3a2","weapon",0.01},, 
-		{"vil_AG3","weapon",0.01},,
-		{"AK_47_M","weapon",0.01},, 
-		{"AK_74","weapon",0.01},, 
-		{"vil_Galil","weapon",0.01},, 
-		{"vil_Galil_arm","weapon",0.01}
-	};
-	//extra gorsy assault weapons
-	sdassault[] = {
-		 {"M4A1_AIM_SD_camo",0.01},
-		{"m8_holo_sd",0.02},
-		{"G36_C_SD_camo",0.03},
-		{"M4A1_HWS_GL_SD_Camo",0.01}
-	};
-	m4assault[] = {
-		 {"M4A1",0.05},
-		{"M4A1_Aim",0.04},
-		{"M4A1_HWS_GL_camo",0.01},
-		{"M4A3_CCO_EP1",0.04}
-	};
-	g36assault[] ={
-		 {"G36A_camo",0.05},
-		{"G36C",0.05},
-		{"G36C_camo",0.05},
-		{"G36K_camo",0.05},	
-	};
-	akassault[] = {
-		 {"AKS_74_kobra",0.05},
-		{"AKS_74_U",0.05},
-		{"AKS_GOLD",0.01},
-		{"AK_47_M",0.05},
-		{"AK_74",0.05}
-	};
-	m8assault[]={
-		 {"m8_compact",0.03},
-		{"m8_sharpshooter",0.04},
-		{"m8_carbine",0.05}
-	};
-	//end of gorsy extra assault weapons
-	assaultrifleammo[] = {
-		{"30Rnd_762x39_SA58",0.25},
-		{"30Rnd_762x39_AK47",0.2},
-		{"30Rnd_556x45_Stanag",0.2},
-		{"30Rnd_545x39_AK",0.11},
-		{"30Rnd_556x45_StanagSD",0.12},
-		{"20Rnd_762x51_FNFAL",0.07}
-	};
-	machineguns[] = {
-		{"RPK_74",0.11},
-		{"M8_SAW",0.11},
-		{"Pecheneg_DZ",0.1},
-		{"PK_DZ",0.1},
-		{"MG36_camo",0.1},
-		{"M60A4_EP1_DZE",0.1},
-		{"MG36",0.1},
-		{"M249_m145_EP1_DZE",0.1},
-		{"m240_scoped_EP1_DZE",0.1},
-		{"M240_DZ",0.08},
-		{"M249_EP1_DZ",0.05},
-		{"Mk_48_DZ",0.05}
-	};
-	machinegunammo[] = {
-		{"100Rnd_556x45_BetaCMag",0.2},
-		{"75Rnd_545x39_RPK",0.2},
-		{"100Rnd_556x45_M249",0.15},
-		{"100Rnd_762x51_M240",0.15},
-		{"100Rnd_762x54_PK",0.15},
-		{"200Rnd_556x45_M249",0.15}
-	};
-	machinegunammoexpl[] = {
-		{"100Rnd_556x45_BetaCMag",0.2},
-		{"75Rnd_545x39_RPK",0.2},
-		{"100Rnd_556x45_M249",0.15},
-		{"100Rnd_762x51_M240",0.15},
-		{"100Rnd_762x54_PK",0.14},
-		{"200Rnd_556x45_M249",0.14},
-		{"MAAWS_HEAT",0.01},
-		{"PipeBomb",0.01}
 	};
 	militaryshotguns[] = {
 		{"Saiga12K",0.25},
 		{"Remington870_lamp",0.35},
 		{"M1014",0.4}
 	};
+	miscguns[] = {
+		//gorsy additions   
+		{"RH_ctar21",0.01}, 
+		{"RH_m21",0.01},
+		{"vil_apssd",0.01}, 
+		{"vil_VAL_C",0.01}, 
+		{"vil_Vikhr",0.01}, 
+		{"vil_vsk94",0.01},   
+		{"vil_AKMSB",0.01}, 
+		{"vil_SVU_A",0.01}, 
+		{"vil_PSL1",0.01}, 
+		{"vil_M76",0.01}, 
+		{"vil_M91",0.01},  
+		{"vil_Abakan_P29",0.01}, 
+		{"vil_ak12_ap",0.01},  
+		{"vil_sg542f",0.01},   
+		{"vil_SR25",0.01} 
+	};
+	//^Need To Change These Above!^
 	//Start of Deejay's Custom Loot Modifications
 	ACR_Weaps[] = {
 		{"FHQ_ACR_BLK_CCO_F",0.05}, 
@@ -765,6 +630,7 @@ class CfgLoot {
 		{"gms_k98zf39",0.02}
 	};
 	AK_Weaps[] = {
+		{"AKS_GOLD",0.01},
 		{"AKS_74_kobra",0.01},
 		{"AKS_74_U",0.02},
 		{"AK_107_kobra",0.01}, 
@@ -807,7 +673,8 @@ class CfgLoot {
 	};
 	AEK_Weaps[] = {
 		{"vil_AEK1",0.01}, 
-		{"vil_AEK2",0.01} 
+		{"vil_AEK2",0.01},
+		{"vil_AeK_3_K",0.01}
 	};
 	Galil_Weaps[] = {
 		{"vil_Galil",0.01}, 
@@ -824,6 +691,8 @@ class CfgLoot {
 		{"vil_AG36KA4",0.01}
 	};
 	SVD_Weaps[] = {
+		{"SVD_des_EP1",0.07},
+		{"SVD",0.07},
 		{"SVD_CAMO",0.01},
 		{"vil_SVD_63",0.01}, 
 		{"vil_SVD_S",0.01}, 
@@ -897,6 +766,7 @@ class CfgLoot {
 		{"Sa58V_EP1",0.02},
 	};
 	M8_Weaps[] = {
+		{"M8_SAW",0.11},
 		{"m8_compact",0.03},
 		{"m8_sharpshooter",0.04},
 		{"m8_carbine",0.05},
@@ -905,12 +775,97 @@ class CfgLoot {
 	HMG_Weaps[] = {
 		{"Pecheneg_DZ",0.02},
 		{"Mk_48_DZ",0.01},
-		{"M240_DZ",0.02},
-		{"m240_scoped_EP1_DZE",0.01}
+		{"m240_scoped_EP1_DZE",0.1},
+		{"M240_DZ",0.08},
+		{"M60A4_EP1_DZE",0.1},
+		{"Pecheneg_DZ",0.1},
+		{"PK_DZ",0.1}
 	};
 	LMG_Weaps[] = {
 		{"M249_DZ",0.01},
-		{"M249_EP1_DZ",0.01}
+		{"M249_EP1_DZ",0.01},
+		{"MG36_camo",0.1},
+		{"MG36",0.1}
+	};
+	FAL_Weaps[] = {
+		{"FN_FAL",0.03},
+		{"FN_FAL_ANPVS4",0.01},
+		{"vil_Fal",0.01}
+	};
+	RPK_Weaps[] = {
+		{"RPK_74",0.11},
+		{"vil_RPK75_Romania",0.01}, 
+		{"vil_RPD",0.01}, 
+		{"vil_RPK74M_P29",0.01}, 
+		{"vil_RPK74M",0.01}
+	};
+	M24_Weaps[] = {
+		{"M24_des_EP1",0.08},
+		{"M24",0.07}
+	};
+	M21_Weaps[] = {
+		{"vil_M21",0.01}, 
+		{"vil_M21G",0.01}
+	};
+	MP5_Weaps[] = {
+		{"MP5A5",0.13},
+		{"MP5SD",0.05}
+		{"vil_MP5SD_EOTech",0.01}
+	};
+	DMR_Weaps[] = {
+		{"DMR",0.01},
+		{"DMR_DZ",0.01} 
+	};
+	M40_Weaps[] = {
+		{"M40A3",0.01}, 
+		{"vil_m40a3",0.01}
 	};
 	//End of Deejay's Custom Loot Modifications
+	//Ammo Configs Start
+	assaultrifleammo[] = {
+		{"30Rnd_762x39_SA58",0.25},
+		{"30Rnd_762x39_AK47",0.2},
+		{"30Rnd_556x45_Stanag",0.2},
+		{"30Rnd_545x39_AK",0.11},
+		{"30Rnd_556x45_StanagSD",0.12},
+		{"20Rnd_762x51_FNFAL",0.07}
+	};
+	machinegunammo[] = {
+		{"100Rnd_556x45_BetaCMag",0.2},
+		{"75Rnd_545x39_RPK",0.2},
+		{"100Rnd_556x45_M249",0.15},
+		{"100Rnd_762x51_M240",0.15},
+		{"100Rnd_762x54_PK",0.15},
+		{"200Rnd_556x45_M249",0.15}
+	};
+	machinegunammoexpl[] = {
+		{"100Rnd_556x45_BetaCMag",0.2},
+		{"75Rnd_545x39_RPK",0.2},
+		{"100Rnd_556x45_M249",0.15},
+		{"100Rnd_762x51_M240",0.15},
+		{"100Rnd_762x54_PK",0.14},
+		{"200Rnd_556x45_M249",0.14},
+		{"MAAWS_HEAT",0.01},
+		{"PipeBomb",0.01}
+	};
+	sniperriflesammo[] = {
+		{"30Rnd_545x39_AKSD",0.18},
+		{"5Rnd_127x108_KSVK",0.08},
+		{"5Rnd_86x70_L115A1",0.07},
+		{"10Rnd_127x99_m107",0.15},
+		{"10Rnd_762x54_SVD",0.2},
+		{"20Rnd_762x51_DMR",0.1},
+		{"5Rnd_762x51_M24",0.15},
+		{"5x_22_LR_17_HMR",0.1},
+		{"20Rnd_762x51_SB_SCAR",0.07},
+		{"20Rnd_9x39_SP5_VSS",0.05}
+	};
+	militaryammo[] = {
+		{"2000Rnd_762x51_M134",0.1},
+		{"29Rnd_30mm_AGS30",0.2},
+		{"50Rnd_127x107_DSHKM",0.2},
+		{"48Rnd_40mm_MK19",0.2},
+		{"100Rnd_127x99_M2",0.3}
+	};
+	//Ammo Configs End
 };

@@ -287,7 +287,6 @@ class CfgBuildingLoot {
 		lootChance = 0.5;
 		lootPos[] = {};
 		lootType[] = {
-			{"assaultrifles","cfglootweapon",0.10},
 			{"submachinegun","cfglootweapon",0.04},
 			{"sniperrifles","cfglootweapon",0.07},
 			{"machineguns","cfglootweapon",0.06},
@@ -309,7 +308,6 @@ class CfgBuildingLoot {
 		lootChance = 0.5;
 		lootPos[] = {};
 		lootType[] = {
-			{"assaultrifles","cfglootweapon",0.10},
 			{"submachinegun","cfglootweapon",0.04},
 			{"sniperrifles","cfglootweapon",0.07},
 			{"machineguns","cfglootweapon",0.06},
@@ -349,7 +347,6 @@ class CfgBuildingLoot {
 		lootPos[] = {};
 		lootType[] = {
 			{"pistols","cfglootweapon",0.04},
-			{"assaultrifles","cfglootweapon",0.13},
 			{"sniperrifles","cfglootweapon",0.04},
 			{"shotgunsingleshot","cfglootweapon",0.06},
 			{"submachinegun","cfglootweapon",0.07},
@@ -386,7 +383,6 @@ class CfgBuildingLoot {
 		lootPos[] = {};
 		lootType[] = {
 			{"pistols","cfglootweapon",0.02},
-			{"assaultrifles","cfglootweapon",0.05},
 			{"PartGeneric","magazine",0.03},
 			{"sniperrifles","cfglootweapon",0.01},
 			{"shotgunsingleshot","cfglootweapon",0.05},
@@ -430,7 +426,6 @@ class CfgBuildingLoot {
 		lootPos[] = {};
 		lootType[] = {
 			{"pistols","cfglootweapon",0.02},
-			{"assaultrifles","cfglootweapon",0.05},
 			{"PartGeneric","magazine",0.03},
 			{"sniperrifles","cfglootweapon",0.01},
 			{"shotgunsingleshot","cfglootweapon",0.05},
@@ -477,7 +472,6 @@ class CfgBuildingLoot {
 		lootChance = 0.4;
 		lootPos[] = {};
 		lootType[] = {
-			{"assaultrifles","cfglootweapon",0.1},
 			{"machineguns","cfglootweapon",0.04},
 			{"pistols","cfglootweapon",0.08},
 			{"sniperrifles","cfglootweapon",0.03},
@@ -652,36 +646,7 @@ class CfgBuildingLoot {
 			{"","militaryclothes",0.05},
 			{"WeaponHolder_ItemMachete","object",0.02},
 			{"2000Rnd_762x51_M134","magazine",0.01},
-			{"KSVK_DZE","weapon",0.01},
-			//gorsy additions 
-			{"M24","weapon",0.01}, 
-			{"M40A3","weapon",0.01},   
-			{"RH_ctar21","weapon",0.01}, 
-			{"RH_m21","weapon",0.01}, 
-			{"DMR_DZ","weapon",0.01}, 
-			{"vil_apssd","weapon",0.01}, 
-			{"vil_RPK75_Romania","weapon",0.01}, 
-			{"vil_RPD","weapon",0.01}, 
-			{"vil_RPK74M_P29","weapon",0.01}, 
-			{"vil_RPK74M","weapon",0.01}, 
-			{"vil_VAL_C","weapon",0.01}, 
-			{"vil_Vikhr","weapon",0.01}, 
-			{"vil_vsk94","weapon",0.01},   
-			{"vil_AKMSB","weapon",0.01}, 
-			{"vil_SVU_A","weapon",0.01}, 
-			{"vil_PSL1","weapon",0.01}, 
-			{"vil_M76","weapon",0.01}, 
-			{"vil_M91","weapon",0.01},  
-			{"vil_Abakan_P29","weapon",0.01}, 
-			{"vil_ak12_ap","weapon",0.01}, 
-			{"vil_AeK_3_K","weapon",0.01}, 
-			{"vil_MP5SD_EOTech","weapon",0.01},  
-			{"vil_M21","weapon",0.01}, 
-			{"vil_M21G","weapon",0.01}, 
-			{"vil_m40a3","weapon",0.01},  
-			{"vil_Fal","weapon",0.01}, 
-			{"vil_sg542f","weapon",0.01},   
-			{"vil_SR25","weapon",0.01} 
+			{"KSVK_DZE","weapon",0.01}
 		};
 	};
 	#include "CfgBuildingPos.hpp"
