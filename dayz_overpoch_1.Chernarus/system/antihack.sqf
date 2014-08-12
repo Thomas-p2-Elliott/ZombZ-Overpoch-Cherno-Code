@@ -5,8 +5,8 @@
 private ["_log","_playerName","_playerUID","_al1veOnce","_debug","_lastpos","_lastheight","_lasttime","_lastVehicle","_v","_h","_topv","_toph","_curpos","_distance","_acceptableDistance","_curtime","_difftime","_plant","_curheight","_speed","_topSpeed","_terrainHeight","_differenceCheck","_lastPosVar","_safetyVehicle","_curPos"];
 waitUntil {vehicle player == player};
 
-//Because we don't have rules!
-if ((getPlayerUID player) in ["76561198147422604","76561197994454413","76561198143011904"]) exitWith {};
+//Because we don't have rules on the test server!
+if ((getPlayerUID player) in ["76561198147422604","76561197994454413","76561198143011904"] && P2DZE_clientAHWhitelistEnabled) exitWith {};
 
 [] spawn {
 	private ["_playerName","_playerUID"];
@@ -71,47 +71,160 @@ P2DZ_AHKick = {
 
 [] spawn {
 	while {1 == 1} do {
-		addGroupIcon = 'STRING';
-		setGroupIconParams = 'STRING';
-		createDiaryRecord = 'STRING';
-		createTask = 'STRING';
-		createSimpleTask = 'STRING';
-		buttonSetAction = 'STRING';
-		processDiaryLink = 'STRING';
-		createDiaryLink = 'STRING';
-		lbSetData = 'STRING';
-		profileNamespace = 'STRING';
-		exec = 'STRING';
-		createTeam = 'STRING';
-		saveStatus = 'STRING';
-		loadStatus = 'STRING';
-		saveVar = 'STRING';
-		loadFile = 'STRING';
-		markerText = 'STRING';
-		rcallVarcode = 'STRING';
-		setMarkerAlpha = 'STRING';
-		setMarkerBrush = 'STRING';
-		setMarkerColor = 'STRING';
-		setMarkerDir = 'STRING';
-		setMarkerPos = 'STRING';
-		setMarkerShape = 'STRING';
-		setMarkerSize = 'STRING';
-		setMarkerText = 'STRING';
-		setMarkerType = 'STRING';
-		addWeaponCargo = 'STRING';
-		addMagazineCargo = 'STRING';
-		setVehicleAmmo = 'STRING';
-		setVehicleAmmoDef = 'STRING';
-		setWeaponReloadingTime = 'STRING';
-		setVehicleInit = 'STRING';
-		processInitCommands = 'STRING';
-		addMPEventHandler = 'STRING';
-		BattleFieldClearance = 'STRING';
-		createVehicleLocal = 'STRING';
-		setWaypointStatements = 'STRING';
-		addWaypoint = 'STRING';
-		toLower = 'STRING';
-		toUpper = 'STRING';
+
+addGroupIcon = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: addGroupIcon', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setGroupIconParams = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setGroupIconParams', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+createDiaryRecord = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: createDiaryRecord', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+createTask = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: createTask', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+createSimpleTask = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: createSimpleTask', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+buttonSetAction = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: buttonSetAction', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+processDiaryLink = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: processDiaryLink', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+createDiaryLink = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: createDiaryLink', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+lbSetData = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: lbSetData', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+profileNamespace = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: profileNamespace', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+exec = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: exec', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+createTeam = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: createTeam', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+saveStatus = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: saveStatus', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+loadStatus = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: loadStatus', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+saveVar = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: saveVar', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+loadFile = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: loadFile', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+markerText = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: markerText', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+rcallVarcode = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: rcallVarcode', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerAlpha = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerAlpha', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerBrush = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerBrush', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerColor = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerColor', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerDir = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerDir', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerPos = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerPos', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerShape = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerShape', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerSize = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerSize', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerText = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerText', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerType = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerType', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+addWeaponCargo = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: addWeaponCargo', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+addMagazineCargo = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: addMagazineCargo', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setVehicleAmmo = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setVehicleAmmo', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setVehicleAmmoDef = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setVehicleAmmoDef', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setWeaponReloadingTime = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setWeaponReloadingTime', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setVehicleInit = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setVehicleInit', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+processInitCommands = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: processInitCommands', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+addMPEventHandler = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: BattleFieldClearance', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+BattleFieldClearance = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: createVehicleLocal', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+createVehicleLocal = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setWaypointStatements', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setWaypointStatements = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: addWaypoint', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+addWaypoint = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: toLower', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+openMap = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: onMapSingleClick', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+onMapSingleClick = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerDirLocal', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerDirLocal = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerAlphaLocal', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerAlphaLocal = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerAlphaLocal', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerPosLocal = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerPosLocal', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerTextLocal = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerTextLocal', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerTypeLocal = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerTypeLocal', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerColorLocal = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerColorLocal', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerBrushLocal = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerBrushLocal', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerSizeLocal = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerSizeLocal', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+setMarkerShapeLocal = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: setMarkerShapeLocal', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
+createMarkerLocal = 	{		    PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'BlackListedCommand: createMarkerLocal', toArray (_this select 0)];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick; };
 
 		playableUnits = [player,player,player];
 		allUnits = [player,player,player];
@@ -120,21 +233,6 @@ P2DZ_AHKick = {
 		allMissionObjects = [player,player,player];
 		player allowDamage true;
 		(vehicle player) allowDamage true;
-
-		//these will break raven packs
-		openMap = 'STRING';
-		onMapSingleClick = 'STRING';
-		setMarkerDirLocal = 'STRING';
-		setMarkerAlphaLocal = 'STRING';
-		setMarkerPosLocal = 'STRING';
-		setMarkerTextLocal = 'STRING';
-		setMarkerTypeLocal = 'STRING';
-		setMarkerColorLocal = 'STRING';
-		setMarkerBrushLocal = 'STRING';
-		setMarkerSizeLocal = 'STRING';
-		setMarkerShapeLocal = 'STRING';
-		createMarkerLocal = 'STRING';
-		//end of raven breakers
 
 		if (!isNil 'fnc_usec_damageHandler') then 
 		{
@@ -423,25 +521,21 @@ P2DZ_AHKick = {
 
 while {1 == 1} do {
 	_debug = getMarkerpos "respawn_west";
-	_lastpos = getPosATL (vehicle player);
+	_lastpos = getPosASL (vehicle player);
 	_lastheight = (ATLtoASL _lastpos) select 2;
 	_lasttime = diag_ticktime;
 	_lastVehicle = vehicle player;
-
-	// freefall detection:
-	_v = 0;
-	_h = 0;
-	_topv = 0;
-	_toph = 0;
+	_isHalo = false;
 
 	while {((typeName player == "OBJECT") && {((player in playableUnits) || {(alive player)})})} do {
-		_curpos = getPosATL (vehicle player);
-		_distance = _lastpos distance _curpos;
+		_curpos = getPosASL (vehicle player);
+		//_distance = _lastpos distance _curpos; kk's function is more accurate
+ 		_distance = [_lastpos, _curpos] call KK_fnc_distanceASL;
 		_curtime = diag_ticktime;
 		_difftime = _curtime - _lasttime;
 		_acceptableDistance = if (_lastVehicle isKindOf "Plane") then { 15; } else { 10; };
 
-		if ((_distance > _acceptableDistance) || {(_difftime > 1)}) then {
+		if ((_distance > _acceptableDistance) || {(_difftime > 2)}) then {
 			_curheight = (ATLtoASL _curpos) select 2;
 			_speed = _distance / _difftime;
 			_topSpeed = if (_acceptableDistance == 15) then { 20; } else { 10; };
@@ -455,10 +549,38 @@ while {1 == 1} do {
 			_terrainHeight = getTerrainHeightASL [_curpos select 0, _curpos select 1];
 			_safetyVehicle = vehicle player;
 			if (_lastVehicle == vehicle player) then {
-				if ((_speed > _topSpeed) && (alive player) && ((driver (vehicle player) == player) || (isNull (driver (vehicle player)))) && (_debug distance _lastpos > 3000) && !((vehicle player == player) && (_curheight < _lastheight) && ((_curheight - _terrainHeight) > 1))) then {
-					(vehicle player) setposATL  _lastpos;
-					PVDZE_atp = format["TELEPORT REVERT for player UID#%1 from %2 to %3, %4 meters, now at %5", getPlayerUID player, _lastpos, _curPos, round(_lastpos distance _curpos), getPosATL player];
-					publicVariableServer "PVDZE_atp";
+				if (_lastVehicle in ["ParachuteWest","ParachuteC"] || {(!isnil {player getvariable "bis_fnc_halo_now"}) && {player getvariable "bis_fnc_halo_now"}}) then {	_isHalo = true; } else { _isHalo = false; };
+				diag_log(format[
+					"P2DEBUG: antihack: antiTP: ...Eval:  (alive player): (%4) && ((driver (vehicle player): (%5)	(isNull (driver (vehicle player)))): (%6) !(vehicle player == player): (%8)	 _curHeight / _lastHeight : (%9 / %10)	 _curHeight / _terrainHeight : (%13/%14)"
+					, _terrainHeight, _speed, _topSpeed, str (alive player), str (driver (vehicle player)), str (isNull (driver (vehicle player))), str !(vehicle player == player), _curheight,  _lastheight, str (_curheight < _lastheight), _curHeight, _terrainHeight, str ((_curheight - _terrainHeight) > 1)
+					]);
+				diag_log(format[
+					"P2DEBUG: antihack: antiTP: ...Eval:   (alive player): (%4)"
+					, _terrainHeight, _speed, _topSpeed, str (alive player), str (driver (vehicle player)), str (isNull (driver (vehicle player))), str !(vehicle player == player), _curheight,  _lastheight, str (_curheight < _lastheight), _curHeight, _terrainHeight, str ((_curheight - _terrainHeight) > 1)
+					]);
+				diag_log(format[
+					"P2DEBUG: antihack: antiTP: ...Eval: ((driver (vehicle player): (%5)	(isNull (driver (vehicle player)))): (%6) !(vehicle player == player): (%8)	"
+					, _terrainHeight, _speed, _topSpeed, str (alive player), str (driver (vehicle player)), str (isNull (driver (vehicle player))), str !(vehicle player == player), _curheight,  _lastheight, str (_curheight < _lastheight), _curHeight, _terrainHeight, str ((_curheight - _terrainHeight) > 1)
+					]);
+				diag_log(format[
+					"P2DEBUG: antihack: antiTP: ...Eval: _curHeight / _lastHeight : (%9 / %10)	 _curHeight / _terrainHeight : (%13/%14)"
+					, _terrainHeight, _speed, _topSpeed, str (alive player), str (driver (vehicle player)), str (isNull (driver (vehicle player))), str !(vehicle player == player), _curheight,  _lastheight, str (_curheight < _lastheight), _curHeight, _terrainHeight, str ((_curheight - _terrainHeight) > 1)
+					]);
+				if ((_speed > _topSpeed) && (alive player) && !(_isHalo) && ((driver (vehicle player) == player) || (isNull (driver (vehicle player)))) && !((vehicle player == player) && (_curheight < _lastheight) && ((_curheight - _terrainHeight) > 1))) then {
+						_debugDist = [_debug, getPosATL player] call KK_fnc_distanceASL;
+						_debugDist2 = [_debug, _lastPos] call KK_fnc_distanceASL;
+						_debugFurtherThan3kAway = (_debugDist > 3000);
+						_debugFurtherThan3kAway2 = (_debugDist2 > 3000);
+					if (_debugFurtherThan3kAway || _debugFurtherThan3kAway2) then {
+						diag_log("Attempted tele-revert denied (player in debug). ");
+						diag_log(format["P2DEBUG: LastPosClose(%1) CurPosClose(%2) Pos(%3) _lastPos(%4) _curPos(%5), PosDist(%6) lPosDist(%7) ", _debugFurtherThan3kAway2, _debugFurtherThan3kAway, getPosATL player, _lastPos, _curPos, _debugDist, _debugDist2]);
+						diag_log("");
+					} else {
+						(vehicle player) setposATL  _lastpos;
+						PVDZE_atp = format["TELEPORT REVERT for player UID#%1 from %2 to %3, %4 meters, now at %5", getPlayerUID player, _lastpos, _curPos, round(_lastpos distance _curpos), getPosATL player];
+						diag_log(format["TELEPORT REVERT for player UID#%1 from %2 to %3, %4 meters, now at %5", getPlayerUID player, _lastpos, _curPos, round(_lastpos distance _curpos), getPosATL player]);
+						publicVariableServer "PVDZE_atp";
+					};
 				} else {
 					_lastpos = _curpos;
 					_lastheight = _curheight;
@@ -470,9 +592,9 @@ while {1 == 1} do {
 			};
 
 		};
-		sleep 0.25;
+		uisleep 0.00001;
 	};
-	sleep 0.1;
+	uisleep 0.00001;
 };
 
 PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray 'FunctionChecks', toArray 'Loop Exited'];
