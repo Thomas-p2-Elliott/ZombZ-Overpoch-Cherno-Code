@@ -298,13 +298,13 @@ Both Server & Client Side Scripts
 		_vehicle setFuel _qty;
 	};
 	zombie_initialize = {
-		private ["_unit","_position"];
+		private ["_unit","_position","_id"];
 		_unit = _this select 0;
 		if (isServer) then {
 			_unit addEventHandler ["local", {_this call zombie_findOwner}];
 		};
-		_id = _unit addeventhandler["HandleDamage", { _this call local_zombieDamage }];
-		_id = _unit addeventhandler["Killed", { [_this, "zombieKills"] call local_eventKill }];
+		_id = _unit addeventhandler ["HandleDamage",{_this call local_zombieDamage;_this call DDOPP_taser_handleHit;}];
+		_id = _unit addeventhandler ["Killed",{[_this,"zombieKills"] call local_eventKill}];
 	};
 
 	dayz_EjectPlayer = {
