@@ -964,10 +964,16 @@ server_logUnlockLockEvent = {
 
 
 p2net_log1 =	compile preprocessFileLineNumbers "\z\addons\dayz_server\init\p2net_logFunction.sqf";
-[] call 	compile preprocessFileLineNumbers "\z\addons\dayz_server\system\antihack_functions.sqf";
+[] execVM "\z\addons\dayz_server\system\antihack_functions.sqf";
 [] execvm "\z\addons\dayz_server\init\deploy_functions.sqf";
 [] execvm "\z\addons\dayz_server\p2re\p2re_init.sqf";
 
 if (AHe) exitWith {
-	#include "AH.sqf";
+	[] spawn {
+		waituntil{!isNil "sm_done"};
+		waituntil{(sm_done)};
+		diag_log("P2DEBUG: server: sm_done = true");
+		diag_log("loading antihack on test server");
+		#include "AH.sqf";
+	};
 };
