@@ -22,8 +22,10 @@ item17[] = {"cleanup_animals",2,250,700.000000,25.000000,800.000000,75.000000,0.
 item18[] = {"cleanup_dead",2,250,575.000000,0.000000,675.000000,50.000000,0.000000,"cleanup" \n "dead"};
 item19[] = {"sync_time",2,250,450.000000,-25.000000,550.000000,25.000000,0.000000,"sync time"};
 item20[] = {"cleanup_loot",2,250,300.000000,-25.000000,400.000000,25.000000,0.000000,"cleanup" \n "loot"};
-item21[] = {"group_cleanup",2,4346,50.000000,25.000000,150.000000,75.000000,0.000000,"group" \n "cleanup"};
+item21[] = {"group_cleanup",2,250,50.000000,25.000000,150.000000,75.000000,0.000000,"group" \n "cleanup"};
 item22[] = {"update_objects",2,250,175.000000,0.000000,275.000000,50.000000,0.000000,"update objects"};
+item23[] = {"__0s_loop",4,218,250.000000,-200.000000,350.000000,-150.000000,0.000000,"30s" \n "loop"};
+item24[] = {"____spawn_server",2,4346,125.000000,-200.000000,225.000000,-150.000000,0.000000,"[] spawn server" \n "_checkHashIds;"};
 link0[] = {0,2};
 link1[] = {1,3};
 link2[] = {2,1};
@@ -35,26 +37,28 @@ link7[] = {4,13};
 link8[] = {4,14};
 link9[] = {4,15};
 link10[] = {4,16};
-link11[] = {5,6};
-link12[] = {6,7};
-link13[] = {7,8};
-link14[] = {8,3};
-link15[] = {9,10};
-link16[] = {10,5};
-link17[] = {11,21};
-link18[] = {12,22};
-link19[] = {13,20};
-link20[] = {14,19};
-link21[] = {15,18};
-link22[] = {16,17};
-link23[] = {17,5};
-link24[] = {18,5};
-link25[] = {19,5};
-link26[] = {20,5};
-link27[] = {21,5};
-link28[] = {22,5};
-globals[] = {25.000000,1,0,0,0,640,480,1,136,6316128,1,-53.328339,954.791992,443.544983,-436.145996,1044,859,1};
-window[] = {2,-1,-1,-1,-1,862,50,1342,50,3,1062};
+link11[] = {4,23};
+link12[] = {5,6};
+link13[] = {6,7};
+link14[] = {7,8};
+link15[] = {8,3};
+link16[] = {9,10};
+link17[] = {10,5};
+link18[] = {11,21};
+link19[] = {12,22};
+link20[] = {13,20};
+link21[] = {14,19};
+link22[] = {15,18};
+link23[] = {16,17};
+link24[] = {17,5};
+link25[] = {18,5};
+link26[] = {19,5};
+link27[] = {20,5};
+link28[] = {21,5};
+link29[] = {22,5};
+link30[] = {23,24};
+globals[] = {25.000000,1,0,0,0,640,480,1,143,6316128,1,-53.328339,954.791992,443.544983,-436.145996,1044,859,1};
+window[] = {2,-1,-1,-1,-1,987,175,1467,175,3,1062};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -93,7 +97,7 @@ class FSM
        "_lastCleanupVehicles = diag_tickTime;" \n
        "_lastCleanupGroups = diag_tickTime;" \n
        "_lastCleanupNull = diag_tickTime;" \n
-       "" \n
+       "_lastHashCheck = diag_tickTime;" \n
        "_lastCleanup900 = diag_tickTime;" \n
        "" \n
        ""/*%FSM</STATEINIT""">*/;
@@ -190,6 +194,16 @@ class FSM
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
           condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
+        /*%FSM<LINK "__0s_loop">*/
+        class __0s_loop
+        {
+          priority = 0.000000;
+          to="____spawn_server";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _lastHashCheck) > 30)"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/"_lastHashCheck = diag_tickTime;"/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
       };
@@ -317,8 +331,7 @@ class FSM
     class group_cleanup
     {
       name = "group_cleanup";
-      init = /*%FSM<STATEINIT""">*/"[] spawn server_checkHashIds;" \n
-       "[] spawn server_cleanupGroups;"/*%FSM</STATEINIT""">*/;
+      init = /*%FSM<STATEINIT""">*/"[] spawn server_cleanupGroups;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -358,6 +371,17 @@ class FSM
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
+      };
+    };
+    /*%FSM</STATE>*/
+    /*%FSM<STATE "____spawn_server">*/
+    class ____spawn_server
+    {
+      name = "____spawn_server";
+      init = /*%FSM<STATEINIT""">*/"[] spawn server_checkHashIds;"/*%FSM</STATEINIT""">*/;
+      precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
+      class Links
+      {
       };
     };
     /*%FSM</STATE>*/

@@ -15,8 +15,8 @@ P2DZE_alreadyChecked = [];
 
 server_checkHashIds = {
 private["_missionVehicles"];
- if (PDZE_Hash_2AS > 3) then { PDZE_Hash_Check = nil; PDZE_Hash_2AS = 0; };
-    if(!isNil "PDZE_Hash_Check") exitWith {  PDZE_Hash_2AS = PDZE_Hash_2AS + 1;};
+ if (PDZE_Hash_2AS > 3) then { PDZE_Hash_Check = nil; PDZE_Hash_2AS = 0; };         //these 
+    if(!isNil "PDZE_Hash_Check") exitWith {  PDZE_Hash_2AS = PDZE_Hash_2AS + 1;};   //two lines just make SURE it is running and doesn't get stuck.
         PDZE_Hash_Check = true;
 
         _missionVehicles = [];
@@ -24,7 +24,7 @@ private["_missionVehicles"];
         _missionVehicles = _missionVehicles + allMissionObjects "air";
         _missionVehicles = _missionVehicles + allMissionObjects "sea";
         { 
-            if !(_x in P2DZE_alreadyChecked) then {
+            if (!(_x in P2DZE_alreadyChecked) || {!((typeOf _x) in dayz_allowedObjects)} || {!((typeOf _x) in DZE_safeVehicle)} || {!((typeOf _x) in AllPlayers)}) then {
                 _x call KK_fnc_checkHash;
                 P2DZE_alreadyChecked = P2DZE_alreadyChecked + [_x];
             };
