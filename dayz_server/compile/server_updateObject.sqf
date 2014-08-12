@@ -1,7 +1,7 @@
 /*
 [_object,_type] spawn server_updateObject;
 */
-private ["_object","_type","_objectID","_uid","_lastUpdate","_needUpdate","_object_position","_object_inventory","_object_damage","_isNotOk","_parachuteWest","_firstTime","_object_killed","_object_repair","_isbuildable"];
+private ["_null","_object","_type","_objectID","_uid","_lastUpdate","_needUpdate","_object_position","_object_inventory","_object_damage","_isNotOk","_parachuteWest","_firstTime","_object_killed","_object_repair","_isbuildable"];
 
 _object = 	_this select 0;
 
@@ -84,7 +84,13 @@ _object_damage = {
 	private["_hitpoints","_array","_hit","_selection","_key","_damage"];
 		_hitpoints = _object call vehicle_getHitpoints;
 		_damage = damage _object;
-		if (_damage >= 1) exitWith { [_object] spawn { sleep 5; deleteVehicle (_this select 0); }; };
+		if (_damage >= 1) exitWith { 
+			_null = _object spawn {
+				sleep 5;
+				deleteVehicle _this; 
+				true
+			}; 
+		};  
 		_array = [];
 		{
 			_hit = [_object,_x] call object_getHit;
