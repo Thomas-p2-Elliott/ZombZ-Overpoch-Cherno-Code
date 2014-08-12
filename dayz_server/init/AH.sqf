@@ -1,5 +1,5 @@
 waitUntil {!isNil "BIS_fnc_init"};
-waituntil{isNil "sm_done"};
+
 /* ********************************************************************************* */
 /* *******************Developer : infiSTAR (infiSTAR23@gmail.com)******************* */
 /* ******************Copr. ©2012-2014 infiSTAR all rights reserved****************** */
