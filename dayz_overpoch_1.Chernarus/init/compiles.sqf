@@ -221,6 +221,8 @@ Both Server & Client Side Scripts
 	spawn_loot_small = 				compile preprocessFileLineNumbers "compile\spawn_loot_small.sqf";
 	BIS_fnc_halo =             		compile preprocessFileLineNumbers "compile\fn_halo.sqf";
 	BIS_fnc_infoText =				compile preprocessFileLineNumbers "compile\fn_infoText.sqf";
+	fnc_usec_damageHandler =		compile preprocessFileLineNumbers "compile\fn_damageHandler.sqf";			//Event handler run on damage
+
 	//custom
 	fn_lootCheck = 					compile preprocessFileLineNumbers "compile\fn_lootCheck.sqf";
 
@@ -241,7 +243,6 @@ Both Server & Client Side Scripts
 	object_processHit =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_processHit.sqf";			//process the hit in the REVO damage system (records && sets hit)
 	object_delLocal =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_delLocal.sqf";
 	// object_cargoCheck =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_cargoCheck.sqf";			//Run by the player || server to monitor changes in cargo contents
-	fnc_usec_damageHandler =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageHandler.sqf";			//Event handler run on damage
 	fnc_veh_ResetEH = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\init\veh_ResetEH.sqf";				//Initialize vehicle
 	// Vehicle damage fix
 	vehicle_handleDamage    = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\vehicle_handleDamage.sqf";
