@@ -1,12 +1,11 @@
-
+﻿
 ███████╗ ██████╗ ███╗   ███╗██████╗ ███████╗
 ╚══███╔╝██╔═══██╗████╗ ████║██╔══██╗╚══███╔╝
   ███╔╝ ██║   ██║██╔████╔██║██████╔╝  ███╔╝ 
  ███╔╝  ██║   ██║██║╚██╔╝██║██╔══██╗ ███╔╝  
 ███████╗╚██████╔╝██║ ╚═╝ ██║██████╔╝███████╗
 ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝ ╚══════╝
-DayZ OverPoch Mission file & Server File by Player2 
-
+DayZ OverPoch Mission file & Server File by Player2 & Deejay & Jason
                                
 Custom Settings/Features:
 	- Plot Poles/Buildables per Player not per Life
