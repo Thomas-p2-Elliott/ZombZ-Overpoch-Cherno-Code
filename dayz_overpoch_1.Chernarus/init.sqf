@@ -20,6 +20,12 @@ if (hasInterface && !isDedicated) then {
 if (isDedicated && !hasInterface || isServer) then {
 	p2d_server = true;
 
+	//##Debug Console##
+	#include "configs\debug_console.hpp";
+	conBeep(); //makes console beep
+	conFileTime("Server Started");
+	diag_log ("debug_console" callExtension ("i")); //max_output_size
+
 	//enable antihack on test server?
 	AHe = false;
 	//enable object streaming from db?
@@ -39,17 +45,18 @@ if (isDedicated && !hasInterface || isServer) then {
 	//generate hash for vehicles
 	P2DZE_randHashVar = "hash_id" callExtension "id";
 	P2DZE_randHashVar = ("_" + P2DZE_randHashVar);
-	diag_log("P2DEBUG: hashIdVar" + P2DZE_randHashVar);
+    "debug_console" callExtension (format["Random Hash Variable: (%1)",P2DZE_randHashVar]);
 
 	call compile ("
 		with uiNamespace do {
 		    if (isNil 'hashIdVar" + P2DZE_randHashVar + "') then {
 		        uiNamespace setVariable ['hashIdVar" + P2DZE_randHashVar + "', 'hash_id' callExtension 'rID'];
-		        diag_log(format['P2DEBUG: %1', hashIdVar" + P2DZE_randHashVar + "]);
+    			'debug_console' callExtension (format['Hash Generated (rID): (%1)', hashIdVar" + P2DZE_randHashVar + "]);
 		    };
 		};
 	");
 };
+
 
 if (!hasInterface && !isDedicated) then {
 	p2d_headless = true;
@@ -141,7 +148,7 @@ if (!isDedicated) then {
 
 	[] execVM "system\SafeZone.sqf";	
 	//anti Hack
-	//[] execVM "system\antihack.sqf"; //requires re-work before re-enable due to setdamage issue! diagnose by commenting out sections.
+	[] execVM "system\antihack.sqf"; //requires re-work before re-enable due to setdamage issue! diagnose by commenting out sections.
 };
 
 #include "\z\addons\dayz_code\system\REsec.sqf"
