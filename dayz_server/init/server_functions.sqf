@@ -30,6 +30,9 @@ server_maintainArea = 			compile preprocessFileLineNumbers "\z\addons\dayz_serve
 //Loot tables for heli crash sites and care packages and infected camp and any other server events
 fnc_specialLoot = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fnc_specialLoot.sqf";
 
+//deejayCrazy crazy safezone cleaner
+fn_SZclean = 					compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_SZClean.sqf";
+
 /* PVS/PVC - Skaronator */
 server_sendToClient =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_sendToClient.sqf";
 
