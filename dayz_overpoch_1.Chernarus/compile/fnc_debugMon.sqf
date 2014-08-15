@@ -52,12 +52,13 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 
 	P2DZ_debugMon_Mode = "Full"; P2DZ_debugMon_ToggleKey = "F5";
 
-	_p2totalPlayers = (count playableUnits);
+	_p2totalPlayers = (({isPlayer _x} count (getPos vehicle player nearEntities [["AllVehicles"], 14000]))-1);
 	_p2within2500 = (({isPlayer _x} count (getPos vehicle player nearEntities [["AllVehicles"], 2500]))-1);
 
 	_p2mkills = (player getVariable['humanKills', 0]);
 	_p2bKills = (player getVariable['banditKills', 0]);
-	_p2zKills = (player getVariable['zombieKills', 0]); _p2zKills = (player getVariable['headShots', 0]);
+	_p2zKills = (player getVariable['zombieKills', 0]); 
+	_p2zHSKills = (player getVariable['headShots', 0]);
 
 	r_player_blood;
 	_p2wep = toUpper(currentWeapon player);
@@ -68,8 +69,9 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	P2DZ_humanity;
 	P2DZ_humanityPrefix; P2DZ_humanityLevel;
 
-	_zombzVehCount = ((count vehicles) + 100);
-	_zombzZedCount = ({alive _x} count entities "zZombie_Base");
+	_zombzVehCount = (count (player nearEntities [["LandVehicle", "Ship", "Air"], 14500]) + 100);
+	_zombzZedCount = (({alive _x} count (getPos vehicle player nearEntities [["zZombie_Base"], 12000]))-1);
+
 	_zombztimeToRestart = 	(90 - (round(serverTime / 60)));
 
 	_pDir = (round(getDir player)); _gpsP2osZombZ = (mapGridPosition getPos player);
@@ -133,7 +135,7 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	<t size='1' font='Bitstream' align='left' color='#8BFF6B'>Bandit Kills: </t><t size='1' font='Bitstream' align='right' color='#8BFF6B'>" + str _p2bKills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Blood: </t><t size='1' font='Bitstream' align='right' color=" + str _p2c + ">" + str r_player_blood + "</t><br/><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Gun: </t><t size='0.75' font='Bitstream' align='right' color='#01DFD7'>" + _p2wep + "</t><br/>
-	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Headshots / Z Kills: </t><t size='1' font='Bitstream' align='right' color='#01DFD7'>" + str _p2zKills + "/" + str _p2zKills + "</t><br/>
+	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Headshots / Z Kills: </t><t size='1' font='Bitstream' align='right' color='#01DFD7'>" + str _p2zKills + "/" + str _p2zHSKills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Skin: </t><t size='0.8' font='Bitstream' align='right' color='#01DFD7'>" + _p2skin + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Humanity: </t><t size='1' font='Bitstream' align='right' color='#01DFD7'>" + str P2DZ_humanity + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>"+ P2DZ_humanityPrefix + "</t><t size='1' font='Bitstream' align='right' color='#01DFD7'>" + str P2DZ_humanityLevel + "</t><br/><br/>
