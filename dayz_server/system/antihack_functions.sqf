@@ -24,9 +24,13 @@ private["_missionVehicles"];
         _missionVehicles = _missionVehicles + allMissionObjects "air";
         _missionVehicles = _missionVehicles + allMissionObjects "sea";
         { 
-            if (!(_x in P2DZE_alreadyChecked) || {!((typeOf _x) in dayz_allowedObjects)} || {!((typeOf _x) in DZE_safeVehicle)} || {!((typeOf _x) in AllPlayers)}) then {
+            if (!(_x in P2DZE_alreadyChecked) && {(!((typeOf _x) in ["ParachuteWest","ParachuteC"]))} && {(!((typeOf _x) in AllPlayers))} && {(!((typeOf _x) in dayz_allowedObjects))}) then {
                 _x call KK_fnc_checkHash;
                 P2DZE_alreadyChecked = P2DZE_alreadyChecked + [_x];
+                "debug_console" callExtension format["Obj: %1 Added to Safe List #0101", typeOf _x];
+
+            } else {
+                "debug_console" callExtension format["Obj: %1 Has already been Checked #0101", typeOf _x];
             };
             sleep 0.0001;
         } forEach _missionVehicles;
@@ -60,6 +64,8 @@ KK_fnc_makeRandomId = {
 };
 
 KK_fnc_checkHash = {
+    "debug_console" callExtension format["Obj: %1 hash check", typeOf _this];
+
     if ("hash_id" callExtension format [
         "%1:%2#%3", 
         netId _this, 
@@ -67,13 +73,15 @@ KK_fnc_checkHash = {
         _this getVariable [
             (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])), "NULL"
         ]
-    ] == "PASS") exitWith {true};
+    ] == "PASS") exitWith {"debug_console" callExtension format["Obj: %1 PASSED #0101", typeOf _this]; true};
     0 = _this spawn KK_fnc_logFailed;
+    "debug_console" callExtension format["Obj: %1 FAILED #1001", typeOf _this];
     false
 };
 
 KK_fnc_logFailed = {
     _dcout = {
+        "debug_console" callExtension (format _this);
         //log it
         ["hashCheckFails",format _this] call p2net_log1; 
     };
