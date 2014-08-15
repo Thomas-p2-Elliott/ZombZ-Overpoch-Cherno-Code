@@ -48,7 +48,7 @@ fnc_SwitchOffUsageConfig = {
 // Spawn a vehicle.
 // Parameter: vehicle and array containing location configuration name, usage (bool) & index of usage config.
 _fnc_spawn_vehicle = {
-	private ["_vehicle","_usageConfig","_position","_p2d","_dir","_veh","_marker","_objPosition"];	
+	private ["_vehicle","_usageConfig","_position","_p2d","_dir","_veh","_marker","_objPosition","_dontSpawn","_reasonForNoSpawn","_nearbyList","_nearbyCount"];	
 	if (!isDedicated) exitWith { }; // Be sure to run this
 	
 	_vehicle = _this select 0;
@@ -81,38 +81,51 @@ _fnc_spawn_vehicle = {
 		
 				_dir = _x select 0;
 
-				//place vehicle 
-				_veh = createVehicle [_vehicle, (_x select 1), [], 0, "CAN_COLLIDE"];
-				_veh setdir _dir;
-				_veh setpos (_x select 1);		
-
-				_veh call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
+				_nearbyList = (_x select 1) nearEntities [["Air","LandVehicle","Ship"], P2DZ_StaticVehSpawns_DupeDistanceCheck];
+				_nearbyCount = count _nearbyList;
+				if ((_nearbyCount) > 0) then {
+					_dontSpawn = true;
+					_reasonForNoSpawn = "Vehicle already at spawnpoint";
+				} else {
+					_dontSpawn = false;
 				};
+
+				if (_dontSpawn) then {
+					if (_p2d) then {	diag_log("Static Vehicle Spawn: Failed for Vehicles: " + str _vehicle + " Reason: " + str _reasonForNoSpawn); };
+				} else {
+					//place vehicle 
+					_veh = createVehicle [_vehicle, (_x select 1), [], 0, "CAN_COLLIDE"];
+					_veh setdir _dir;
+					_veh setpos (_x select 1);		
+
+					_veh call {
+					    _this setVariable [
+					        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+					        "hash_id" callExtension format [
+					            "%1:%2",
+					            netId _this,
+					            typeOf _this
+					        ]
+					    ];
+					};
+					
+					if(DZEdebug) then {
+						_marker = createMarker [str((_x select 1)) , (_x select 1)];
+						_marker setMarkerShape "ICON";
+						_marker setMarkerType "DOT";
+						_marker setMarkerText _vehicle;
+					};	
 				
-				if(DZEdebug) then {
-					_marker = createMarker [str((_x select 1)) , (_x select 1)];
-					_marker setMarkerShape "ICON";
-					_marker setMarkerType "DOT";
-					_marker setMarkerText _vehicle;
-				};	
-			
-				// Get position with ground
-				_objPosition = getPosATL _veh;
-				if (_p2d) then {	diag_log(" "); diag_log("Static Spawn Vehicle of Type: " + str _veh + " Created At: " + str _objPosition + " With Direction: " + str _dir); };
+					// Get position with ground
+					_objPosition = getPosATL _veh;
+					if (_p2d) then {	diag_log(" "); diag_log("Static Spawn Vehicle of Type: " + str _veh + " Created At: " + str _objPosition + " With Direction: " + str _dir); };
 
-				clearWeaponCargoGlobal  _veh;
-				clearMagazineCargoGlobal  _veh;
-				// _veh setVehicleAmmo DZE_vehicleAmmo;
+					clearWeaponCargoGlobal  _veh;
+					clearMagazineCargoGlobal  _veh;
+					// _veh setVehicleAmmo DZE_vehicleAmmo;
 
-				[_veh,[_dir,_objPosition],_vehicle,true,"0"] call server_publishVeh;
+					[_veh,[_dir,_objPosition],_vehicle,true,"0"] call server_publishVeh;
+				};
 			} else {
 				diag_log("Static Veh Spawn: Position Failed: " + str _x);
 			};
@@ -200,35 +213,28 @@ if (count StaticVehicleSpawnConfig > 0 && (count StaticVehicleUsageConfig == 0))
 if(_vehLimit > 0) then {
 	private ["_allowedVehicleCount"];
 	if (_p2d) then {	diag_log("count StaticVehicleSpawnConfig: " + str(count StaticVehicleSpawnConfig)); };
+	_dontSpawn = false;
+	_reasonForNoSpawn = "None";
 
 	{
-			private ["_vehicle","_locationConfig","_locationArray","_existingVehicles","_locationArrayCount","_nearbyList","_nearbyCount","_usageConfig","_useHandle","_inUse","_index"];			_vehicle = (_x select 0);
+			private ["_vehicle","_locationConfig","_locationArray","_existingVehicles","_locationArrayCount","_usageConfig","_useHandle","_inUse","_index"];
+			_vehicle = (_x select 0);
 			_locationConfig = [_vehicle] call _fnc_GetStaticVehicleLocationConfig;
 			_locationArray = call compile _locationConfig;
 			_existingVehicles = allMissionObjects (_vehicle);
 			_existingVehicles = count _existingVehicles;
 			_locationArrayCount = count _locationArray;               
 			if (_existingVehicles < _locationArrayCount) then {
-				{	
-					_nearbyList = (_x select 1) nearEntities [["Air","LandVehicle","Ship"], P2DZ_StaticVehSpawns_DupeDistanceCheck];
-					_nearbyCount = count _nearbyList;
-					if ((_nearbyCount) > 0) then {
-						dontSpawn = true;
-						reasonForNoSpawn = "Vehicle already at spawnpoint";
-					} else {
-						dontSpawn = false;
-					}
-
-				} forEach _locationArray;
-
+				//is ok
+				_dontSpawn = false;
 			} else {
-				dontSpawn = true;
-				reasonForNoSpawn = "Too many existing";
+				_dontSpawn = true;
+				_reasonForNoSpawn = "Too many existing: CurrentAmount ("+ str(_existingVehicles) +") not < ("+ str(_locationArrayCount) +") spawnPointAmount.";
 			};
 
-			if (dontSpawn) then {
+			if (_dontSpawn) then {
 
-				if (_p2d) then {	diag_log("Static Vehicle Spawn: Failed for Vehicles: " + str _vehicle + " Reason: " + str reasonForNoSpawn); };
+				if (_p2d) then {	diag_log("Static Vehicle Spawn: Failed for Vehicles: " + str _vehicle + " Reason: " + str _reasonForNoSpawn); };
 
 			} else {
 
