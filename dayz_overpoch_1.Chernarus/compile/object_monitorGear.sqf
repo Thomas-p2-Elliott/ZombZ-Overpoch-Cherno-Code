@@ -67,6 +67,15 @@ waitUntil { !(isNull (findDisplay 106)) || (_timeout < time) };
 
 //diag_log format["object_monitorGear.sqf: _object: %1 _isStorage: %4 _isVehicle: %2 _isMan: %3 _display: %5", _object, _isVehicle, _isMan, _isStorage, findDisplay 106];
 
+[] spawn {
+	if ((!(isNull (findDisplay 106)))) then {
+		while {!(isNull (findDisplay 106))} do {
+			[] call player_checkGoldItems;
+			sleep 0.01;
+		};
+	};
+};
+
 if ((_isVehicle || _isStorage || _isnewstorage) && (!_isMan) && (!(isNull (findDisplay 106)))) then {
 	_objectName = getText (configFile >> "CfgVehicles" >> (typeof _object) >> "displayName");
 	_controlText = [] call _getControlText;
@@ -77,6 +86,7 @@ if ((_isVehicle || _isStorage || _isnewstorage) && (!_isMan) && (!(isNull (findD
 		_backpacksMax = getNumber (configFile >> "CfgVehicles" >> (typeof _object) >> "transportMaxBackpacks");
 		
 		while {!(isNull (findDisplay 106))} do {
+			P2DZE_gearOnContainer = true;
 			_weapons = [] call _countWeapons;
 			_magazines = [] call _countMagazines;
 			_backpacks = [] call _countBackpacks;
@@ -86,4 +96,6 @@ if ((_isVehicle || _isStorage || _isnewstorage) && (!_isMan) && (!(isNull (findD
 			sleep 0.01;
 		};
 	};
+} else {
+	P2DZE_gearOnContainer = false;
 };

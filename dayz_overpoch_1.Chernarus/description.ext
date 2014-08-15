@@ -234,8 +234,7 @@ class CfgSounds
 	};
 };
 
-//##Debug Console##
-#include "configs\debug_console.hpp"
+
 
 //##Snap Build Pro##
 #include "compile\snappoints.hpp"
