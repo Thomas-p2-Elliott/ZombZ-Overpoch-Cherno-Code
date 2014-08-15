@@ -79,6 +79,7 @@ if (!isDedicated) then {
 		};
 	};
 
+
 	player_unlockDoor =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_unlockDoor.sqf";
 	player_changeCombo =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_changeCombo.sqf";
 
@@ -226,6 +227,24 @@ Both Server & Client Side Scripts
 	//custom
 	fn_lootCheck = 					compile preprocessFileLineNumbers "compile\fn_lootCheck.sqf";
 
+	//coming soon to epoch
+	FNC_GetPlayerUID = {
+		private ["_object","_version","_PID"];
+		_object = _this select 0;
+		_version = productVersion select 3;
+		if (DayZ_UseSteamID) then {
+			_PID = GetPlayerUID _object;
+			if (_version >= 125548) then {
+				_PID = call (compile "GetPlayerUIDOld _object");
+			} else {
+				_PID = GetPlayerUID _object;
+				diag_log format["Your game version, %1, is less than the required for the old UID system; using Steam ID system instead. Update to 1.63.125548 (or latest steam beta)", _version];
+			};
+		};
+		_PID;
+	};
+
+
 	//default
 	BIS_fnc_selectRandom =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\BIS_fnc\fn_selectRandom.sqf";
 	BIS_fnc_vectorAdd =        			 compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\BIS_fnc\fn_vectorAdd.sqf";
@@ -298,13 +317,13 @@ Both Server & Client Side Scripts
 		_vehicle setFuel _qty;
 	};
 	zombie_initialize = {
-		private ["_unit","_position","_id"];
+		private ["_unit","_position"];
 		_unit = _this select 0;
 		if (isServer) then {
 			_unit addEventHandler ["local", {_this call zombie_findOwner}];
 		};
-		_id = _unit addeventhandler ["HandleDamage",{_this call local_zombieDamage;_this call DDOPP_taser_handleHit;}];
-		_id = _unit addeventhandler ["Killed",{[_this,"zombieKills"] call local_eventKill}];
+		_id = _unit addeventhandler["HandleDamage", { _this call local_zombieDamage }];
+		_id = _unit addeventhandler["Killed", { [_this, "zombieKills"] call local_eventKill }];
 	};
 
 	dayz_EjectPlayer = {
