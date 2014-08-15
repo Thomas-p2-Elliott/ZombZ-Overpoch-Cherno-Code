@@ -170,7 +170,7 @@ waitUntil{!isNil 'dayz_gui'};
 waitUntil{(P2DZE_paraOpened)};
 
 //show debug monitor
-P2DZ_dbCurMode = _debugMonSettings select 4;
+P2DZ_dbCurMode = 2;
 P2DZE_debugCol = [(_debugMonSettings select 0), (_debugMonSettings select 1), (_debugMonSettings select 2), (_debugMonSettings select 3)];
 P2DZ_debugMonitor = true;
 
