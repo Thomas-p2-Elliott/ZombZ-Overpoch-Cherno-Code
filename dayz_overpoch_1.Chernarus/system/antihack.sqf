@@ -602,19 +602,22 @@ P2DZ_AHKick = {
 /* anti-teleport */
 [] spawn {
 	while {1 == 1} do {
-	private ["_debug","_lastpos","_lastheight","_lasttime","_lastVehicle","_isHalo","_debugDistance","_debugDistanceBool","_curpos","_distance","_curtime","_difftime","_acceptableDistance","_curheight","_speed","_topSpeed","_terrainHeight","_safetyVehicle","_debugDistCalc","_PUID","_curPos"];
 		_debug = getMarkerpos "respawn_west";
 		_lastpos = getPosATL (vehicle player);
 		_lastheight = (ATLtoASL _lastpos) select 2;
 		_lasttime = diag_ticktime;
 		_lastVehicle = vehicle player;
+
+		// freefall detection:
+		_v = 0;
+		_h = 0;
+		_topv = 0;
+		_toph = 0;
 		_isHalo = false;
-		_debugDistance = 0;
-		_debugDistanceBool = false;
 
 		while {((typeName player == "OBJECT") && {((player in playableUnits) || {(alive player)})})} do {
 			_curpos = getPosATL (vehicle player);
-			_distance = [_lastpos, _curpos] call KK_fnc_distanceASL;
+			_distance = _lastpos distance _curpos;
 			_curtime = diag_ticktime;
 			_difftime = _curtime - _lasttime;
 			_acceptableDistance = if (_lastVehicle isKindOf "Plane") then { 15; } else { 10; };
@@ -633,10 +636,7 @@ P2DZ_AHKick = {
 				_terrainHeight = getTerrainHeightASL [_curpos select 0, _curpos select 1];
 				_safetyVehicle = vehicle player;
 				if (_lastVehicle == vehicle player) then {
-					if (_lastVehicle in ["ParachuteWest","ParachuteC"] || {(!isnil {player getvariable "bis_fnc_halo_now"}) && {player getvariable "bis_fnc_halo_now"}}) then {	_isHalo = true; } else { _isHalo = false; };
-					_debugDistance = [_debug, _lastpos] call KK_fnc_distanceASL;
-					_debugDistanceBool = _debugDistance > 3000;
-					if (!(_isHalo) && (_speed > _topSpeed) && (alive player) && ((driver (vehicle player) == player) || (isNull (driver (vehicle player)))) && (_debugDistanceBool) && !((vehicle player == player) && (_curheight < _lastheight) && ((_curheight - _terrainHeight) > 1))) then {
+					if ((_speed > _topSpeed) && (alive player) && !(_lastVehicle in ["ParachuteWest","ParachuteC"]) && ((driver (vehicle player) == player) || (isNull (driver (vehicle player)))) && ((_debug distance _lastpos > 3000)) && !((vehicle player == player) && (_curheight < _lastheight) && ((_curheight - _terrainHeight) > 1))) then {
 						(vehicle player) setposATL  _lastpos;
 						_PUID = [player] call FNC_GetPlayerUID;
 						PVDZE_atp = format["TELEPORT REVERT for player UID#%1 from %2 to %3, %4 meters, now at %5", _PUID, _lastpos, _curPos, round(_lastpos distance _curpos), getPosATL player];
@@ -656,7 +656,7 @@ P2DZ_AHKick = {
 		};
 		sleep 0.1;
 	};
-	PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray 'FunctionChecks', toArray 'Loop Exited'];
+	PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray 'AntiTeleport', toArray 'Loop Exited'];
 	publicVariableServer 'PVDZE_atp';
 	[] spawn P2DZ_AHKick;
 };
