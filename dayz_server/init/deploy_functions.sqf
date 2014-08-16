@@ -23,7 +23,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				    ];
 				};
 
-
                 _log = format ["OBJECT DEPLOY LOG: %1 spanwed a %2 at %3.", name _player,_select,mapGridPosition _positn];
                 diag_log (_log);
         } else {

@@ -1,17 +1,4 @@
-/*****************************************************************
-Copyright © 2013 Double Doppler
-
-File: fnc_server.sqf
-Date: 21/1/2013
-Author: Double Doppler/D.Doppler
-Contact: doubledoppler@live.co.uk
-Description: N/A.
-Parameter(s): None.
-
-UNAUTHORIZED USE OR REPRODUCTION OF THIS MATERIAL WITHOUT THE 
-PERMISSION OF THE AUTHOR IS PROHIBITED.
-*****************************************************************/
-// Functions executed on server
+// Taser Functions executed on server
 // If run in single player mode functions are executed on client
 DDOPP_taser_babel = {
 	if (isNil "DDOPP_taser_globalChat") then {
@@ -26,6 +13,3 @@ DDOPP_taser_babel = {
 		diag_log "D.DOPPLER Taser Mod: Global chat logic created.";	
 	};
 };
-
-
-

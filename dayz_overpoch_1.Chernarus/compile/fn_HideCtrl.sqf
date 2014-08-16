@@ -1,4 +1,3 @@
-
 private ["_display"];
 disableSerialization;
 

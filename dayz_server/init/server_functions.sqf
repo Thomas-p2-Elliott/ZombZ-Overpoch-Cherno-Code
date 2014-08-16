@@ -208,6 +208,7 @@ server_characterSync = {
 	
 	_key = format["CHILD:201:%1:%2:%3:%4:%5:%6:%7:%8:%9:%10:%11:%12:%13:%14:%15:%16:",_characterID,_playerPos,_playerGear,_playerBackp,_medical,false,false,0,0,0,0,_currentState,0,0,_currentModel,0];
 	_key call server_hiveWrite;
+	diag_log("Ran character server_characterSync! (has no gold var, is it used? tell me if you see this message!");
 };
 
 if(isnil "dayz_MapArea") then {
