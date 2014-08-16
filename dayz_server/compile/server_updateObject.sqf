@@ -1,7 +1,7 @@
 /*
 [_object,_type] spawn server_updateObject;
 */
-private ["_null","_object","_type","_objectID","_uid","_lastUpdate","_needUpdate","_object_position","_object_inventory","_object_damage","_isNotOk","_parachuteWest","_firstTime","_object_killed","_object_repair","_isbuildable"];
+private ["_object_gold","_null","_object","_type","_objectID","_uid","_lastUpdate","_needUpdate","_object_position","_object_inventory","_object_damage","_isNotOk","_parachuteWest","_firstTime","_object_killed","_object_repair","_isbuildable"];
 
 _object = 	_this select 0;
 
@@ -159,6 +159,25 @@ _object_repair = {
 	_key call server_hiveWrite;
 	_object setVariable ["needUpdate",false,true];
 };
+
+
+_object_gold = {
+	private["_objGoldVar","_key"];
+	_objGoldVar = _object getVariable ["ZombZGold", 0];
+	_objGoldVar = [_objGoldVar,0];
+	if (_objectID == "0") then {
+		_key = format["CHILD:323:%1:%2:",_uid,_objGoldVar];
+		diag_log("P2DEBUG: _object_gold by UID");
+		diag_log("HIVE: Data Sent:" + str _key);
+	} else {
+		_key = format["CHILD:322:%1:%2:",_objectID,_objGoldVar];
+		diag_log("P2DEBUG: _object_gold by objectID");
+		diag_log("HIVE: Data Sent:" + str _key);
+	};
+	_key call server_hiveWrite;
+};
+
+
 // TODO ----------------------
 
 _object setVariable ["lastUpdate",time,true];
@@ -167,6 +186,7 @@ switch (_type) do {
 		call _object_position;
 		call _object_inventory;
 		call _object_damage;
+		call _object_gold;
 		};
 	case "position": {
 		if (!(_object in needUpdate_objects)) then {
