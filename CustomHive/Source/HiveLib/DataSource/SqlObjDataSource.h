@@ -34,6 +34,7 @@ public:
 	void populateTraderObjects( int characterId, ServerObjectsQueue& queue ) override;
 
 	bool updateObjectInventory( int serverId, Int64 objectIdent, bool byUID, const Sqf::Value& inventory ) override;
+	bool updateObjectGold(int serverId, Int64 objectIdent, bool byUID, const Sqf::Value& goldArray) override;
 	bool deleteObject( int serverId, Int64 objectIdent, bool byUID ) override;
 	bool updateDatestampObject( int serverId, Int64 objectIdent, bool byUID ) override;
 	bool updateVehicleMovement( int serverId, Int64 objectIdent, const Sqf::Value& worldspace, double fuel ) override;
@@ -50,6 +51,8 @@ private:
 	SqlStatementID _stmtDeleteOldObject;
 	SqlStatementID _stmtUpdateObjectbyUID;
 	SqlStatementID _stmtUpdateObjectByID;
+	SqlStatementID _stmtUpdateObjectGoldbyUID;
+	SqlStatementID _stmtUpdateObjectGoldbyID;
 	SqlStatementID _stmtDeleteObjectByUID;
 	SqlStatementID _stmtDeleteObjectByID;
 	SqlStatementID _stmtUpdateDatestampObjectByUID;

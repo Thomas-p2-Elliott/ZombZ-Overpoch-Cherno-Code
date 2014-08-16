@@ -131,6 +131,9 @@ HiveExtApp::HiveExtApp(string suffixDir) : AppServer("HiveExt",suffixDir), _serv
 	handlers[306] = boost::bind(&HiveExtApp::vehicleDamaged,this,_1);
 	handlers[307] = boost::bind(&HiveExtApp::getDateTime,this,_1);
 	handlers[308] = boost::bind(&HiveExtApp::objectPublish,this,_1);
+	//object gold by player2
+	handlers[322] = boost::bind(&HiveExtApp::objectGold, this, _1, false); //by uid = false
+	handlers[323] = boost::bind(&HiveExtApp::objectGold, this, _1, true); //by uid = true
 
 	// Custom to just return db ID for object UID
 	handlers[388] = boost::bind(&HiveExtApp::objectReturnId,this,_1);
@@ -351,6 +354,19 @@ Sqf::Value HiveExtApp::objectInventory( Sqf::Parameters params, bool byUID /*= f
 
 	return ReturnBooleanStatus(true);
 }
+
+
+Sqf::Value HiveExtApp::objectGold(Sqf::Parameters params, bool byUID /*= false*/)
+{
+	Int64 objectIdent = Sqf::GetBigInt(params.at(0));
+	Sqf::Value goldArray = boost::get<Sqf::Parameters>(params.at(1));
+
+	if (objectIdent != 0) //all the vehicles have objectUID = 0, so it would be bad to update those
+		return ReturnBooleanStatus(_objData->updateObjectGold(getServerId(), objectIdent, byUID, goldArray));
+
+	return ReturnBooleanStatus(true);
+}
+
 
 Sqf::Value HiveExtApp::objectDelete( Sqf::Parameters params, bool byUID /*= false*/ )
 {

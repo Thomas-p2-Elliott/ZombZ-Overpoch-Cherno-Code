@@ -115,7 +115,7 @@ void SqlObjDataSource::populateObjects( int serverId, ServerObjectsQueue& queue 
 		}
 	}
 	
-	auto worldObjsRes = getDB()->queryParams("SELECT `ObjectID`, `Classname`, `CharacterID`, `Worldspace`, `Inventory`, `Hitpoints`, `Fuel`, `Damage` FROM `%s` WHERE `Instance`=%d AND `Classname` IS NOT NULL", _objTableName.c_str(), serverId);
+	auto worldObjsRes = getDB()->queryParams("SELECT `ObjectID`, `Classname`, `CharacterID`, `Worldspace`, `Inventory`, `Hitpoints`, `Fuel`, `Damage`, `Gold` FROM `%s` WHERE `Instance`=%d AND `Classname` IS NOT NULL", _objTableName.c_str(), serverId);
 	if (!worldObjsRes)
 	{
 		_logger.error("Failed to fetch objects from database");
@@ -156,6 +156,16 @@ void SqlObjDataSource::populateObjects( int serverId, ServerObjectsQueue& queue 
 			objParams.push_back(lexical_cast<Sqf::Value>(row[5].getCStr()));
 			objParams.push_back(row[6].getDouble());
 			objParams.push_back(row[7].getDouble());
+
+			//Gold can be NULL
+			{
+				string goldStr = "[]";
+				if (!row[8].isNull())
+					goldStr = row[8].getString();
+
+				objParams.push_back(lexical_cast<Sqf::Value>(goldStr));
+			}
+
 		}
 		catch (const bad_lexical_cast&)
 		{
@@ -208,6 +218,24 @@ bool SqlObjDataSource::updateObjectInventory( int serverId, Int64 objectIdent, b
 		stmt = getDB()->makeStatement(_stmtUpdateObjectByID, "UPDATE `"+_objTableName+"` SET `Inventory` = ? WHERE `ObjectID` = ? AND `Instance` = ?");
 
 	stmt->addString(lexical_cast<string>(inventory));
+	stmt->addInt64(objectIdent);
+	stmt->addInt32(serverId);
+
+	bool exRes = stmt->execute();
+	poco_assert(exRes == true);
+
+	return exRes;
+}
+
+bool SqlObjDataSource::updateObjectGold(int serverId, Int64 objectIdent, bool byUID, const Sqf::Value& goldArray )
+{
+	unique_ptr<SqlStatement> stmt;
+	if (byUID)
+		stmt = getDB()->makeStatement(_stmtUpdateObjectGoldbyUID, "UPDATE `" + _objTableName + "` SET `Gold` = ? WHERE `ObjectUID` = ? AND `Instance` = ?");
+	else
+		stmt = getDB()->makeStatement(_stmtUpdateObjectGoldbyID, "UPDATE `" + _objTableName + "` SET `Gold` = ? WHERE `ObjectID` = ? AND `Instance` = ?");
+
+	stmt->addString(lexical_cast<string>(goldArray));
 	stmt->addInt64(objectIdent);
 	stmt->addInt32(serverId);
 

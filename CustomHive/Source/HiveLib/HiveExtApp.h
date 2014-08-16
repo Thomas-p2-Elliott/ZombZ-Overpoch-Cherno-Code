@@ -80,6 +80,8 @@ private:
 	Sqf::Value objectPublish(Sqf::Parameters params);
 	Sqf::Value objectReturnId(Sqf::Parameters params);
 	Sqf::Value objectInventory(Sqf::Parameters params, bool byUID = false);
+	Sqf::Value objectGold(Sqf::Parameters params, bool byUID = false);
+
 	Sqf::Value objectDelete(Sqf::Parameters params, bool byUID = false);
 
 	Sqf::Value vehicleMoved(Sqf::Parameters params);
