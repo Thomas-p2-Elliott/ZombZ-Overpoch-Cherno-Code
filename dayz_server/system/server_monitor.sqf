@@ -1,4 +1,4 @@
-private ["_nul","_result","_pos","_wsDone","_dir","_isOK","_countr","_objWpnTypes","_objWpnQty","_dam","_selection","_totalvehicles","_object","_idKey","_type","_ownerID","_worldspace","_intentory","_hitPoints","_fuel","_damage","_key","_vehLimit","_hiveResponse","_objectCount","_codeCount","_data","_status","_val","_traderid","_retrader","_traderData","_id","_lockable","_debugMarkerPosition","_vehicle_0","_bQty","_vQty","_BuildingQueue","_objectQueue","_superkey","_shutdown","_res","_hiveLoaded","_ownerPUID"];
+private ["_goldArray","_gold","_nul","_result","_pos","_wsDone","_dir","_isOK","_countr","_objWpnTypes","_objWpnQty","_dam","_selection","_totalvehicles","_object","_idKey","_type","_ownerID","_worldspace","_intentory","_hitPoints","_fuel","_damage","_key","_vehLimit","_hiveResponse","_objectCount","_codeCount","_data","_status","_val","_traderid","_retrader","_traderData","_id","_lockable","_debugMarkerPosition","_vehicle_0","_bQty","_vQty","_BuildingQueue","_objectQueue","_superkey","_shutdown","_res","_hiveLoaded","_ownerPUID"];
 
 dayz_versionNo = 		getText(configFile >> "CfgMods" >> "DayZ" >> "version");
 dayz_hiveVersionNo = 	getNumber(configFile >> "CfgMods" >> "DayZ" >> "hiveVersion");
@@ -97,7 +97,10 @@ if (isServer && isNil "sm_done") then {
 		_hitPoints =	_x select 6;
 		_fuel =			_x select 7;
 		_damage = 		_x select 8;
-		
+
+		_goldArray = 		_x select 9;
+		_gold =				_goldArray select 0;
+
 		_dir = 0;
 		_pos = [0,0,0];
 		_wsDone = false;
@@ -128,6 +131,8 @@ if (isServer && isNil "sm_done") then {
 		
 		// diag_log format["Server_monitor: [ObjectID = %1]  [ClassID = %2] [_ownerPUID = %3]", _idKey, _type, _ownerPUID];
 		
+
+
 		if (_damage < 1) then {
 			//diag_log format["OBJ: %1 - %2", _idKey,_type];
 			
@@ -251,7 +256,19 @@ if (isServer && isNil "sm_done") then {
 					} count _objWpnTypes;
 				};
 			};	
-			
+
+
+			if ((_gold) < 1) then {
+				_gold = 0;
+				_object removeMagazines "ItemGoldBar10oz";
+			} else {
+				_object removeMagazines "ItemGoldBar10oz";
+				_object addMagazineCargoGlobal ["ItemGoldBar10oz", 1];
+				diag_log(format["P2DEBUG: HiveStream: GoldSet on Obj, _gold: " + str _gold]);
+			};
+
+			_object setVariable ["ZombZGold", _gold, true];
+
 			if (_object isKindOf "AllVehicles") then {
 				{
 					_selection = _x select 0;
