@@ -259,11 +259,19 @@ Trader Settings
 	//spawn purchased vehicle in with parachute?
 	DZE_TRADER_SPAWNMODE = false;
 
+/*---------------------------------------------------------------------------
+Gold Settings
+---------------------------------------------------------------------------*/
+P2DZE_goldItemHandlingDebug = true; 	//enable debug messages
+P2DZE_Gold_MaxPickup = 	(500 * 1000);	//max gold pickup (500k)
+P2DZE_goldRunning = false;
 
 /*---------------------------------------------------------------------------
 Misc Settings
 ---------------------------------------------------------------------------*/
-
+	P2DZE_hasGold = false;			// - gets modified by checkGoldItems & pickupgold & dropgold
+	P2DZE_gearOnContainer = false; // - gets modified in object_monitorGear.sqf
+	s_player_takeGold = -1;
 	MaxVehicleLimit = 5000; // Default = 50
 	MaxDynamicDebris = 50; // Default = 100
 

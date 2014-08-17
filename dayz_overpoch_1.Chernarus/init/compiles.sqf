@@ -24,8 +24,8 @@ if (!isDedicated) then {
 	player_checkStealth =			compile preprocessFileLineNumbers "compile\player_checkStealth.sqf";
 	player_monitor =				compile preprocessFileLineNumbers "system\player_monitor.sqf";
 
-	/*	Gear Menu	*/
-	[] execVM "init\gearMenuCompiles.sqf";
+	/*	Gear Menu Compiles	*/
+	[] execVM 						"init\gearMenuCompiles.sqf";
 
 	//unmodified
 	player_throwObject = 			compile preprocessFileLineNumbers "compile\player_throwObject.sqf";

@@ -68,10 +68,19 @@ waitUntil { !(isNull (findDisplay 106)) || (_timeout < time) };
 //diag_log format["object_monitorGear.sqf: _object: %1 _isStorage: %4 _isVehicle: %2 _isMan: %3 _display: %5", _object, _isVehicle, _isMan, _isStorage, findDisplay 106];
 
 [] spawn {
+private["_result","_return","_result2"];
 	if ((!(isNull (findDisplay 106)))) then {
 		while {!(isNull (findDisplay 106))} do {
-			[] call player_checkGoldItems;
-			sleep 0.01;
+			_return = [];
+			_return = [] call player_checkGoldItems;
+			waitUntil{!isNil '_return'};
+			waitUntil{
+				_result2 = 0;
+				sleep 0.1;
+				_result = _return;
+				_result2 = _return select 1;
+				_result2 > 1 && !P2DZE_goldRunning
+			};
 		};
 	};
 };
