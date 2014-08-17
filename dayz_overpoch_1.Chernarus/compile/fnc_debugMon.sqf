@@ -253,7 +253,7 @@ fnc_debugMon = {
 					P2DZ_debugMonitor = true;
 				};
 			};
-			sleep 10;
+			sleep 3.5;
 		};
 	};
 };

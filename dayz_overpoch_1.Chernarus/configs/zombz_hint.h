@@ -33,7 +33,7 @@ class zombz_hintMini
 {
    idd          = 9100;
    movingEnable =  1;
-   duration     =  10;
+   duration     =  3.55;
    fadein       =  0;
    fadeout      =  0;
    name = "zombz_hintMini";
@@ -129,7 +129,7 @@ class zombz_hintFull
 {
    idd          = 9104;
    movingEnable =  1;
-   duration     =  10;
+   duration     =  3.55;
    fadein       =  0;
    fadeout      =  0;
    name = "zombz_hintFull";
