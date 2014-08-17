@@ -1221,47 +1221,53 @@ class Mission
 		items=18;
 		class Item0
 		{
-			position[]={7839.6055,381.33774,8414.7324};
-			name="center";
+			position[]={7839.60,0,8414.73};
+			name="center"; //NE of Novy Sobor
 			type="Empty";
 		};
 		class Item1
 		{
-			position[]={-7245.377,365.98782,19535.367};
-			name="respawn_west";
+			position[]={-7245.37,0,19535.36};
+			name="respawn_west"; //Debug
 			type="Empty";
 		};
 		class Item2
 		{
-			position[]={5340.98,0,1949.72}; //OLD 4932,0,1989
+			position[]={4061.40,0,2325.03};
 			name="spawn0"; //spawn_balota
 			type="Empty";
 		};
 		class Item3
 		{
-			position[]={2236,0,1923};
+			position[]={2189.54,0,2090.20};
 			name="spawn1"; //spawn_kamenka
 			type="Empty";
 		};
 		class Item4
 		{
-			position[]={6901,0,2509}; //OLD 8738,0,2122
+			position[]={6692.25,0,2527.57};
 			name="spawn2"; //spawn_cherno
 			type="Empty";
 		};
 		class Item5
 		{
-			position[]={10294,0,2191}; // OLD 10909,0,2422
+			position[]={10360.75,0,2179.79};
 			name="spawn3"; //spawn_elektro
 			type="Empty";
 		};
 		class Item6
 		{
-			position[]={13510,0,5249};
+			position[]={13455.94,0,5905.62};
 			name="spawn4"; //spawn_sol
 			type="Empty";
 		};
 		class Item7
+		{
+			position[]={11941.82,0,8874.15};
+			name="spawn5"; //spawn_berezino
+			type="Empty";
+		};
+		class Item8
 		{
 			position[]={6326.4805,304.99265,7809.4888};
 			name="Tradercitystary";
@@ -1269,7 +1275,7 @@ class Mission
 			type="mil_circle";
 			colorName="ColorBlack";
 		};
-		class Item8
+		class Item9
 		{
 			position[]={4361.4937,3,2259.9526};
 			name="wholesaleSouth";
@@ -1277,7 +1283,7 @@ class Mission
 			type="mil_dot";
 			colorName="ColorBlack";
 		};
-		class Item9
+		class Item10
 		{
 			position[]={13532.614,3.0083523,6355.9497};
 			name="boatTraderEast";
@@ -1285,7 +1291,7 @@ class Mission
 			type="mil_dot";
 			colorName="ColorBlack";
 		};
-		class Item10
+		class Item11
 		{
 			position[]={7989.3354,0.30462033,2900.9946};
 			name="BoatDealerSouth";
@@ -1293,7 +1299,7 @@ class Mission
 			type="mil_dot";
 			colorName="ColorBlack";
 		};
-		class Item11
+		class Item12
 		{
 			position[]={12060.471,158.85699,12638.533};
 			name="AirVehicles";
@@ -1301,7 +1307,7 @@ class Mission
 			type="mil_dot";
 			colorName="ColorGreen";
 		};
-		class Item12
+		class Item13
 		{
 			position[]={1606.6443,289.70795,7803.5156};
 			name="BanditDen";
@@ -1309,7 +1315,7 @@ class Mission
 			type="mil_dot";
 			colorName="ColorRed";
 		};
-		class Item13
+		class Item14
 		{
 			position[]={11447.91,317.27109,11364.536};
 			name="Klen";
@@ -1317,7 +1323,7 @@ class Mission
 			type="mil_circle";
 			colorName="ColorGreen";
 		};
-		class Item14
+		class Item15
 		{
 			position[]={13441.16,1.1406164,5429.3013};
 			name="BoatDealerEast";
@@ -1325,7 +1331,7 @@ class Mission
 			type="mil_dot";
 			colorName="ColorBlack";
 		};
-		class Item15
+		class Item16
 		{
 			position[]={4064.2258,365.13501,11665.938};
 			name="TradercityBash";
@@ -1333,19 +1339,13 @@ class Mission
 			type="mil_circle";
 			colorName="ColorBlack";
 		};
-		class Item16
+		class Item17
 		{
 			position[]={12944.227,210.19823,12766.889};
 			name="HeroTrader";
 			text="Hero Camp";
 			type="mil_dot";
 			colorName="ColorBlue";
-		};
-		class Item17
-		{
-			position[]={12048,0,8352};
-			name="spawn5"; //spawn_berezino
-			type="Empty";
 		};
 	};
 	class Sensors
