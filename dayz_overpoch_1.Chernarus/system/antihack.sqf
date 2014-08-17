@@ -69,8 +69,6 @@ if ((getPlayerUID player) in ["76561198147422604","76561197994454413","765611981
 /* antihack boot player function */
 
 P2DZ_AHKick = {
-	_playerName = name player;
-	_playerUID = getPlayerUID player;
 	endMission "LOSER";
 	disableSerialization;
 	for '_j' from 0 to 99 do {(findDisplay _j) closeDisplay 0;};
