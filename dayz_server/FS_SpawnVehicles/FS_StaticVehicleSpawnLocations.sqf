@@ -201,7 +201,7 @@ SPAWNLOC_Ural_INS = [
 [224,[11486.751,7543.9404,3.0517578e-005]]
 ];
 
-SPAWNLOC_SUV_PMC = [
+SPAWNLOC_SUV_DZ = [
 
 [-147,[4810.6377,2586.6306,3.1471252e-005]],
 [-72,[9457.8896,1855.4465,-4.0054321e-005]],
@@ -696,11 +696,6 @@ SPAWNLOC_Civcarbu = [
 [141,[8761.0107,11576.627,1.5258789e-005]]
 ];
 
-SPAWNLOC_ArmoredSUV_PMC = [
-
-[75,[13358.335,12862.116,3.8146973e-005]]
-];
-
 SPAWNLOC_hilux1_civil_1_open = [
 
 [0,[12674.885,12888.044,-1.5258789e-005]],
@@ -929,7 +924,7 @@ StaticVehicleSpawnConfig = [
 	["350z_mod","SPAWNLOC_350z_mod"],
 	["350z_silver","SPAWNLOC_350z_silver"],
 	["Ural_INS","SPAWNLOC_Ural_INS"],
-	["SUV_PMC","SPAWNLOC_SUV_PMC"],
+	["SUV_DZ","SPAWNLOC_SUV_DZ"],
 	["Pickup_PK_INS","SPAWNLOC_Pickup_PK_INS"],
 	["UAZ_MG_TK_EP1","SPAWNLOC_UAZ_MG_TK_EP1"],
 	["KamazOpen","SPAWNLOC_KamazOpen"],
@@ -990,7 +985,6 @@ StaticVehicleSpawnConfig = [
 	["V3S_Open_TK_EP1","SPAWNLOC_V3S_Open_TK_EP1"],
 	["350z_gold","SPAWNLOC_350z_gold"],
 	["Civcarbu","SPAWNLOC_Civcarbu"],
-	["ArmoredSUV_PMC","SPAWNLOC_ArmoredSUV_PMC"],
 	["hilux1_civil_1_open","SPAWNLOC_hilux1_civil_1_open"],
 	["HMMWV_M2","SPAWNLOC_HMMWV_M2"],
 	["Policecar","SPAWNLOC_Policecar"],
