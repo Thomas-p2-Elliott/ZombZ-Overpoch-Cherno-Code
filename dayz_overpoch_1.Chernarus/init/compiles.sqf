@@ -24,6 +24,7 @@ if (!isDedicated) then {
 	player_checkStealth =			compile preprocessFileLineNumbers "compile\player_checkStealth.sqf";
 	player_monitor =				compile preprocessFileLineNumbers "system\player_monitor.sqf";
 
+
 	/*	Gear Menu Compiles	*/
 	[] execVM 						"init\gearMenuCompiles.sqf";
 
@@ -37,17 +38,17 @@ if (!isDedicated) then {
 
 	//pure custom
 	snap_build = 					compile preprocessFileLineNumbers "compile\snap_build.sqf";
-	[] execVM "compile\fn_deployActions.sqf";		//Checks with actions for deploys
+	[] 	execVM 						"compile\fn_deployActions.sqf";	
 	player2_haloSpawn =				compile preprocessFileLineNumbers "actions\player2_haloSpawn.sqf";
-	call compile preprocessFileLineNumbers "compile\fn_hintMsg.sqf";
-	call compile preprocessFileLineNumbers "compile\fnc_debugMon.sqf";
+	call 							compile preprocessFileLineNumbers "compile\fn_hintMsg.sqf";
+	call 							compile preprocessFileLineNumbers "compile\fnc_debugMon.sqf";
 
 	BIS_Effects_Burn = 				compile preprocessFile "\ca\Data\ParticleEffects\SCRIPTS\destruction\burn.sqf";
-	player_zombieCheck = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieCheck.sqf";			//Run on a players computer, checks if the player is near a zombie
+	player_zombieCheck = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieCheck.sqf";			//Run on a players computer, checks if the player is near a zombie
 	player_zombieAttack = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieAttack.sqf";	//Run on a players computer, causes a nearby zombie to attack them
 	fnc_inAngleSector =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_inAngleSector.sqf";		//Checks which actions for nearby casualty
 	fnc_usec_unconscious =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_unconscious.sqf";
-	player_temp_calculation	=			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_temperatur.sqf";			//Temperatur System	//TeeChange
+	player_temp_calculation	=		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_temperatur.sqf";			//Temperatur System	//TeeChange
 	player_weaponFiredNear =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_weaponFiredNear.sqf";
 	player_animalCheck =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_animalCheck.sqf";
 	player_spawnCheck = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_spawnCheck.sqf";
@@ -84,7 +85,7 @@ if (!isDedicated) then {
 	player_changeCombo =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_changeCombo.sqf";
 
 	player_crossbowBolt =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_crossbowBolt.sqf";
-	player_music = 					compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_music.sqf";			//Used to generate ambient music
+	player_music = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_music.sqf";			//Used to generate ambient music
 
 	world_sunRise =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_sunRise.sqf";
 	world_surfaceNoise =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_surfaceNoise.sqf";
@@ -99,7 +100,7 @@ if (!isDedicated) then {
 
 	//Zombies
 	zombie_findTargetAgent = 	compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\zombie_findTargetAgent.sqf";
-	zombie_loiter = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\zombie_loiter.sqf";			//Server compile, used for loiter behaviour
+	zombie_loiter = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\zombie_loiter.sqf";			//Server compile, used for loiter behaviour
 	zombie_generate = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\zombie_generate.sqf";			//Server compile, used for loiter behaviour
 	wild_spawnZombies = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\wild_spawnZombies.sqf";			//Server compile, used for loiter behaviour
 
@@ -225,7 +226,8 @@ Both Server & Client Side Scripts
 	fnc_usec_damageHandler =		compile preprocessFileLineNumbers "compile\fn_damageHandler.sqf";			//Event handler run on damage
 
 	//custom
-	fn_lootCheck = 					compile preprocessFileLineNumbers "compile\fn_lootCheck.sqf";
+	p2_lootCheck = 					compile preprocessFileLineNumbers "compile\p2_lootCheck.sqf";
+	p2_checkWepBpSlot = 			compile preprocessFileLineNumbers "compile\p2_checkWepBpSlot.sqf"; 
 
 	//coming soon to epoch
 	FNC_GetPlayerUID = {

@@ -34,7 +34,8 @@ switch (_iClass) do
 	    _index = floor(random _cntWeights);
 		_index = _weights select _index;
 		_canType = _itemTypes select _index;
-		_canType = [_canType,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+		_canType = [_canType,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+		[_iItem] call p2_checkWepBpslot;
 		_item addMagazineCargoGlobal [_canType,1];
 	};
 	case "single":
@@ -60,7 +61,8 @@ switch (_iClass) do
 	    _index = floor(random _cntWeights);
 		_index = _weights select _index;
 		_canType = _itemTypes select _index;
-		_canType = [_canType,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+		_canType = [_canType,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+		[_iItem] call p2_checkWepBpslot;
 		_item addMagazineCargoGlobal [_canType,1];
 	};
 	case "cfglootweapon":
@@ -90,21 +92,24 @@ switch (_iClass) do
 		_iItem = _itemTypes select _index;
 
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_iItem = [_iItem,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+		[_iItem] call p2_checkWepBpslot;
 		_item addWeaponCargoGlobal [_iItem,1];
 		
 	};
 	case "weapon":
 	{
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_iItem = [_iItem,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+		[_iItem] call p2_checkWepBpslot;
 		_item addWeaponCargoGlobal [_iItem,1];
 	};
 	case "magazine":
 	{
 		//Item is one magazine
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_iItem = [_iItem,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+		[_iItem] call p2_checkWepBpslot;
 		_item addMagazineCargoGlobal [_iItem,1];
 	};
 	

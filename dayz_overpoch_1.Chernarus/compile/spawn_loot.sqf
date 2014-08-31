@@ -47,7 +47,8 @@ switch (_iClass) do {
 				};
 				if (_tQty > 0) then {
 					if (!(_canType in _uniq)) then {
-						_canType = [_canType,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+						_canType = [_canType,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+						[_canType] call p2_checkWepBpslot;
 						_item addMagazineCargoGlobal [_canType,1];
 						_uniq set [count _uniq, _canType];
 						_qty = _qty + 1;
@@ -55,7 +56,8 @@ switch (_iClass) do {
 				};
 			};
 			if ((_iItem != "") && (isClass(configFile >> "CfgWeapons" >> _iItem))) then {
-				_iItem = [_iItem,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+				_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+				[_iItem] call p2_checkWepBpslot;
 				_item addWeaponCargoGlobal [_iItem,1];
 			};
 		}
@@ -70,7 +72,7 @@ switch (_iClass) do {
 				_index = _weights select _index;
 				_item2 = _itemTypes select _index;
 				if ((_item2 != "") && (isClass(configFile >> "CfgWeapons" >> _item2))) then{
-					_item2 = [_item2,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+					_item2 = [_item2,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 					_item = createVehicle["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
 					_item addWeaponCargoGlobal[_item2, 1];
 					if ((count _mags) > 0) then{
@@ -87,11 +89,13 @@ switch (_iClass) do {
 				};
 				if ((_item2 != "") && (isClass(configFile >> "CfgMagazines" >> _item2))) then{
 					_item = createVehicle["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-					_item2 = [_item2,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+					_item2 = [_item2,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+					[_item2] call p2_checkWepBpslot;
 					_item addMagazineCargoGlobal[_item2, 1];
 				};
 				if ((_item2 != "") && (isClass(configFile >> "CfgVehicles" >> _item2))) then{
-					_item2 = [_item2,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+					_item2 = [_item2,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+					[_item2] call p2_checkWepBpslot;
 					_item = createVehicle[_item2, _iPos, [], _radius, "CAN_COLLIDE"];
 				};
 			};
@@ -120,7 +124,8 @@ switch (_iClass) do {
 	    _index = floor(random _cntWeights);
 		_index = _weights select _index;
 		_canType = _itemTypes select _index;
-		_canType = [_canType,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+		_canType = [_canType,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+		[_canType] call p2_checkWepBpslot;
 		_item addMagazineCargoGlobal [_canType,1];
 	};
 	case "backpack":
@@ -138,7 +143,8 @@ switch (_iClass) do {
 	    _index = floor(random _cntWeights);
 		_index = _weights select _index;
 		_iItem = _itemTypes select _index;
-		_iItem = [_iItem,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+		[_iItem] call p2_checkWepBpslot;
 
 		_item = createVehicle [_iItem, _iPos, [], _radius, "CAN_COLLIDE"];
 	};
@@ -167,7 +173,8 @@ switch (_iClass) do {
 			_iItem = ["ChainSaw","ChainSawB","ChainSawG","ChainSawP","ChainSawR"] call BIS_fnc_selectRandom;
 		};
 
-		_iItem = [_iItem,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+		[_iItem] call p2_checkWepBpslot;
 
 		//Item is a weapon, add it && a random quantity of magazines
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
@@ -187,7 +194,8 @@ switch (_iClass) do {
 	{
 		//Item is a weapon, add it && a random quantity of magazines
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_iItem = [_iItem,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+		[_iItem] call p2_checkWepBpslot;
 		_item addWeaponCargoGlobal [_iItem,1];
 		_mags = [] + getArray (configFile >> "cfgWeapons" >> _iItem >> "magazines");
 		if ((count _mags) > 0) then
@@ -208,18 +216,21 @@ switch (_iClass) do {
 	{
 		//Item is a weapon, && spawns no mags
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_iItem = [_iItem,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+		[_iItem] call p2_checkWepBpslot;
 		_item addWeaponCargoGlobal [_iItem,1];
 	};
 	case "magazine":
 	{
 		//Item is one magazine
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_iItem = [_iItem,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+		[_iItem] call p2_checkWepBpslot;
 		_item addMagazineCargoGlobal [_iItem,1];
 	};
 	case "object": {
-		_iItem = [_iItem,_iPos] call fn_lootCheck; //Checks loot pos and changes loot item if needed
+		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+		[_iItem] call p2_checkWepBpslot;
 		_item = createVehicle [_iItem, _iPos, [], _radius, "CAN_COLLIDE"];
 		if ((count _iPos) > 2) then {
 			_item setPosATL _iPos;

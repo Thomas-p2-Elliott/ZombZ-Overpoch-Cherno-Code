@@ -1,5 +1,5 @@
 /*---------------------------------------------------------------------------
-fn_lootCheck.sqf
+p2_lootCheck.sqf
 Version 0.4
 Author: Player2
 
@@ -12,7 +12,7 @@ Parameters & Use:
 	Param 1: Item Classname (_loot, _this select 0)
 	Param 2: Worldspace (_position, _this select 1)
 
-	["M4A1",[2500,5000,1]] call fn_lootCheck
+	["M4A1",[2500,5000,1]] call p2_lootCheck
 
 Outputs:
 
