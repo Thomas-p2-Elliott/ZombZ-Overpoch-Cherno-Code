@@ -221,6 +221,10 @@ Both Server & Client Side Scripts
 	//modified
 	spawn_loot =					compile preprocessFileLineNumbers "compile\spawn_loot.sqf";
 	spawn_loot_small = 				compile preprocessFileLineNumbers "compile\spawn_loot_small.sqf";
+	if (isServer) then {
+		spawn_loot_server =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\spawn_loot_server.sqf";
+	};
+	
 	BIS_fnc_halo =             		compile preprocessFileLineNumbers "compile\fn_halo.sqf";
 	BIS_fnc_infoText =				compile preprocessFileLineNumbers "compile\fn_infoText.sqf";
 	fnc_usec_damageHandler =		compile preprocessFileLineNumbers "compile\fn_damageHandler.sqf";			//Event handler run on damage

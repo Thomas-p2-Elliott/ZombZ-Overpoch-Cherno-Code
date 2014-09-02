@@ -380,13 +380,15 @@ if (isServer && isNil "sm_done") then {
 		HeliCrashArea = dayz_MapArea / 2;
 	};
 	if(isnil "OldHeliCrash") then {
-		OldHeliCrash = false;
+		OldHeliCrash = true;
 	};
 
-	// [_guaranteedLoot, _randomizedLoot, _frequency, _variance, _spawnChance, _spawnMarker, _spawnRadius, _spawnFire, _fadeFire]
 	if(OldHeliCrash) then {
-		_nul = [3, 4, (50 * 60), (15 * 60), 0.75, 'center', HeliCrashArea, true, false] spawn server_spawnCrashSite;
+		// 		[_guaranteedLoot, 	_randomizedLoot, 	 _frequency,		 _variance, 	_spawnChance, 	_spawnMarker, 	_spawnRadius,	 _spawnFire, 	_fadeFire]
+		_nul = 	[6, 				2, 					(5 * 60), 			(10 * 60), 				0.5, 		'center', 	HeliCrashArea, 			true, 		false] spawn server_spawnCrashSite;
+		//_nul = 	[6, 				2, 					(0.1 * 60), 				(0.1 * 60), 				1, 		'center', 	HeliCrashArea, 			true, 		false] spawn server_spawnCrashSite;
 	};
+
 	if (isDedicated) then {
 		// Epoch Events
 		_id = [] spawn server_spawnEvents;

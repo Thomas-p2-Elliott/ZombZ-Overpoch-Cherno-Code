@@ -26,18 +26,18 @@ while {1 == 1} do {
 
 
 	switch (_crashModel) do {
-		default 							{_lootTable = [1,1] call fnc_specialLoot; };
-		case "UH60Wreck_DZ": 				{_lootTable = [1,1] call fnc_specialLoot; };
-		case "UH1Wreck_DZ": 				{_lootTable = [1,1] call fnc_specialLoot; };
-		case "UH60_NAVY_Wreck_DZ": 			{_lootTable = [1,2] call fnc_specialLoot; };
-		case "UH60_NAVY_Wreck_burned_DZ": 	{_lootTable = [1,2] call fnc_specialLoot; };
-		case "UH60_ARMY_Wreck_DZ": 			{_lootTable = [1,3] call fnc_specialLoot; };
-		case "UH60_ARMY_Wreck_burned_DZ": 	{_lootTable = [1,3] call fnc_specialLoot; };
+		default 							{ _lootTable = [1,1] call fnc_specialLoot; };
+		case "UH60Wreck_DZ": 				{ _lootTable = [1,1] call fnc_specialLoot; };
+		case "UH1Wreck_DZ": 				{ _lootTable = [1,1] call fnc_specialLoot; };
+		case "UH60_NAVY_Wreck_DZ": 			{ _lootTable = [1,2] call fnc_specialLoot; };
+		case "UH60_NAVY_Wreck_burned_DZ": 	{ _lootTable = [1,2] call fnc_specialLoot; };
+		case "UH60_ARMY_Wreck_DZ": 			{ _lootTable = [1,3] call fnc_specialLoot; };
+		case "UH60_ARMY_Wreck_burned_DZ": 	{ _lootTable = [1,3] call fnc_specialLoot; };
 	};
 
 	_crashName	= getText (configFile >> "CfgVehicles" >> _crashModel >> "displayName");
 
-	diag_log(format["CRASHSPAWNER: %1%2 chance to spawn '%3' with loot table '%4' in %5 seconds", round(_spawnChance * 100), '%', _crashName, _lootTable, _timeToSpawn]);
+	diag_log(format["CRASHSPAWNER: %1%2 chance to spawn '%3' with loot table '%4' in %5 seconds", round(_spawnChance * 100), '%', _crashName, _crashModel, _timeToSpawn]);
 
 	// Apprehensive about using one giant long sleep here given server time variances over the life of the server daemon
 	while {time < _timeToSpawn} do {
@@ -92,11 +92,6 @@ while {1 == 1} do {
 
         _num = (round(random _randomizedLoot)) + _guaranteedLoot;
 
-		if(_crashModel == "Mass_grave_DZ") then {
-			_spawnFire = false;
-			_num = _num * 2;
-		};
-
 		if (_spawnFire) then {
 			//["PVDZE_obj_Fire",[_crash,2,time,false,_fadeFire]] call broadcastRpcCallAll;
 			PVDZE_obj_Fire = [_crash,2,time,false,_fadeFire];
@@ -104,29 +99,42 @@ while {1 == 1} do {
 			_crash setvariable ["fadeFire",_fadeFire,true];
 		};
 
-		_config = 		configFile >> "CfgBuildingLoot" >> _lootTable;
-		if (DZE_MissionLootTable) then {
-			_config = missionConfigFile >> "CfgBuildingLoot" >> _lootTable;
-		};
-
-		_itemTypes =	[] + getArray (_config >> "itemType");
-		_index =        dayz_CBLBase find toLower(_lootTable);
-		_weights =		dayz_CBLChances select _index;
-		_cntWeights = count _weights;
+		_itemTypes =	_lootTable select 0;
+		_itemChance =	_lootTable select 1;
+        _weights = [_itemTypes,_itemChance] call fnc_buildWeightedArray;
+        _cntWeights = count _weights;
+        _index = _weights call BIS_fnc_selectRandom;
+		_lootRadius = 0.45;
+		_radiusMultiplier = 12;
 
 		for "_x" from 1 to _num do {
-			//create loot
+			//Create loot
 			_index = floor(random _cntWeights);
 			_index = _weights select _index;
+			if (_index > 0) then {
+				_index = _index - 1;
+			};
 			_itemType = _itemTypes select _index;
-			[_itemType select 0, _itemType select 1, _position, 5] call spawn_loot;
+			_lootPos = [_position, ((random 2) + (sizeOf(_crashModel) * _lootRadius)), random 360] call BIS_fnc_relPos;
 
-			diag_log(format["P2DEBUG: CRASHSPAWNER: Loot spawn at '%1' with loot table '%2'", _crashName, _lootTable]);
+			[_itemType select 0, _itemType select 1, _lootPos, 2] call spawn_loot_server;
+
+			diag_log(format["P2DEBUG: CRASHSPAWNER: Loot spawn at '%1' with loot table '%2' and chance array '%3'", _crashName, _lootTable select 0, _lootTable select 1]);
 
 			// ReammoBox is preferred parent class here, as WeaponHolder wouldn't match MedBox0 && other such items.
 			_nearby = _position nearObjects ["ReammoBox", sizeOf(_crashModel)];
 			{
 				_x setVariable ["permaLoot",true];
+				_x call {
+				    _this setVariable [
+				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+				        "hash_id" callExtension format [
+				            "%1:%2",
+				            netId _this,
+				            typeOf _this
+				        ]
+				    ];
+				};
 			} count _nearBy;
 		};
 
