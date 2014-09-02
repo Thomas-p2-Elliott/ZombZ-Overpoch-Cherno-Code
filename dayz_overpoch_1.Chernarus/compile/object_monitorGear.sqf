@@ -55,6 +55,11 @@ if (vehicle player != player) then {
 	_object = vehicle player;
 } else {
 	_object = cursorTarget;
+	if (_object isKindOf "WeaponHolder" && {(str(getMagazineCargo cursorTarget select 0) == "[""ItemGoldBar10oz""]")}) then {
+		P2DZE_gearOnWeaponHolder = true;
+	} else {
+		P2DZE_gearOnWeaponHolder = false;
+	};
 };
 
 _isVehicle = _object isKindOf "AllVehicles";

@@ -10,11 +10,8 @@ _strResult = false;
 _text = "";
 _nearObjects = [];
 
-//get player gold
-_plyrGoldVar = player getVariable ["ZombZGold", 0];
-
-//If gear is coming from vehicle/storage (+<storage gold amount> in gold)
-if (P2DZE_gearOnContainer) then {
+//If gear is coming from vehicle/storage/weaponholder (+<storage gold amount> in gold)
+if (P2DZE_gearOnContainer || P2DZE_gearOnWeaponHolder) then {
 
 	//get object
 	if (vehicle player != player) then {
@@ -25,21 +22,9 @@ if (P2DZE_gearOnContainer) then {
 
 	//ensure object isnt null
 	if !(isNull _object) then {
-		//get object gold
-		_objGoldVar = _object getVariable ["ZombZGold", 0];
-
-		//remove gold from object
-		_object setVariable ["ZombZGold", 0, true];
-		_object removeMagazines "ItemGoldBar10oz";
-
-		waitUntil{!isNil '_plyrGoldVar'};
-		waitUntil{!isNil '_objGoldVar'};
-
-		//new gold = objects gold + players gold
-		_newGold = _objGoldVar + _plyrGoldVar;
-
-		//set players gold
-		player setVariable ["ZombZGold", _newGold, true];
+		
+		P2DZE_plr_pickupGold = [player,_object];
+		publicVariableServer "P2DZE_plr_pickupGold";
 
 	//if object is null, get nearest object that matches name from gear menu
 	} else {
@@ -53,16 +38,8 @@ if (P2DZE_gearOnContainer) then {
 
 			if (_strResult) then {
 				_object = _x;
-				_objGoldVar = _object getVariable ["ZombZGold", 0];
-				//remove gold from object
-				_object setVariable ["ZombZGold", 0, true];
-				_object removeMagazines "ItemGoldBar10oz";
-				waitUntil{!isNil '_plyrGoldVar'};
-				waitUntil{!isNil '_objGoldVar'};
-				//new gold = objects gold + players gold
-				_newGold = _objGoldVar + _plyrGoldVar;
-				//set players gold
-				player setVariable ["ZombZGold", _newGold, true];
+				P2DZE_plr_pickupGold = [player,_object];
+				publicVariableServer "P2DZE_plr_pickupGold";
 			};
 
 		} forEach _nearObjects;
@@ -75,13 +52,13 @@ if (P2DZE_gearOnContainer) then {
 
 	};
 
+	if (P2DZE_goldItemHandlingDebug) then {
+		diag_log(format[" pickupGold: onContainer: (true) Container/Type: %1 / %2", _object, typeOf _object]);
+	};
+
 //if gear is coming from ground (+1 in gold)
 } else {
-	_newGold = _plyrGoldVar + 1;
-	if (P2DZE_goldItemHandlingDebug) then {
-		diag_log(format[" pickupGold: onContainer: (false) _plyrGoldVar: (%1) _newGold: (%2)", _plyrGoldVar, _newGold]);
-	};
-	player setVariable ["ZombZGold", _newGold, true];
+	systemChat("ERROR: Gold was not spawned correctly or hacked in and has no value! Sorry to get your hopes up!");
 };
 
 //set has gold var

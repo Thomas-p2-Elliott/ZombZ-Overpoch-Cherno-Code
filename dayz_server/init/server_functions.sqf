@@ -970,6 +970,7 @@ server_logUnlockLockEvent = {
 p2net_log1 =	compile preprocessFileLineNumbers "\z\addons\dayz_server\init\p2net_logFunction.sqf";
 [] execVM "\z\addons\dayz_server\system\antihack_functions.sqf";
 [] execvm "\z\addons\dayz_server\init\deploy_functions.sqf";
+[] execvm "\z\addons\dayz_server\init\goldEventHandlers.sqf";
 [] execvm "\z\addons\dayz_server\p2re\p2re_init.sqf";
 
 if (AHe) exitWith {

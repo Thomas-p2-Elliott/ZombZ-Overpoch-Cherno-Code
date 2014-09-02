@@ -1,18 +1,10 @@
-private ["_objGoldVar","_plyrGoldVar","_newGold","_object","_objectName","_strResult","_control","_text","_nearObjects","_iPos","_radius","_item"];
+private ["_object","_objectName","_strResult","_text","_nearObjects","_control"];
 _object = objNull;
-_plyrGoldVar = 0;
-_objGoldVar = 0;
-_newGold = 0;
 _objectName = "";
 _strResult = false;
 _text = "";
 _nearObjects = [];
-_iPos = [];
-_radius = 0.0;
-_item = "";
 
-//get player gold
-_plyrGoldVar = player getVariable ["ZombZGold", 0];
 
 //If gear is going into vehicle/storage
 if (P2DZE_gearOnContainer) then {
@@ -27,24 +19,8 @@ if (P2DZE_gearOnContainer) then {
 	//ensure object isnt null
 	if !(isNull _object) then {
 
-		//get object gold
-		_objGoldVar = _object getVariable ["ZombZGold", 0];
-
-		if ("ItemGoldBar10oz" in (getMagazineCargo _object)) then {
-			_object removeMagazine "ItemGoldBar10oz";
-			_object addMagazineCargoGlobal ["ItemGoldBar10oz", 1];
-		};
-
-		waitUntil{!isNil '_plyrGoldVar'};
-		waitUntil{!isNil '_objGoldVar'};
-
-		//new gold = objects gold + players gold
-		_newGold = _objGoldVar + _plyrGoldVar;
-
-		//set objects gold
-		_object setVariable ["ZombZGold", _newGold, true];
-		//set players gold
-		player setVariable ["ZombZGold", 0, true];
+		P2DZE_plr_dropGold = [player,_object,-1];
+		publicVariableServer "P2DZE_plr_dropGold";
 
 	} else {
 
@@ -58,24 +34,9 @@ if (P2DZE_gearOnContainer) then {
 
 			if (_strResult) then {
 				_object = _x;
-				//get object gold
-				_objGoldVar = _object getVariable ["ZombZGold", 0];
-
-				if ("ItemGoldBar10oz" in (getMagazineCargo _object)) then {
-					_object removeMagazines "ItemGoldBar10oz";
-					_object addMagazineCargoGlobal ["ItemGoldBar10oz", 1];
-				};
-
-				waitUntil{!isNil '_plyrGoldVar'};
-				waitUntil{!isNil '_objGoldVar'};
-
-				//new gold = objects gold + players gold
-				_newGold = _objGoldVar + _plyrGoldVar;
-
-				//set objects gold
-				_object setVariable ["ZombZGold", _newGold, true];
-				//set players gold
-				player setVariable ["ZombZGold", 0, true];
+				
+				P2DZE_plr_dropGold = [player,_object,-1];
+				publicVariableServer "P2DZE_plr_dropGold";
 
 			};
 
@@ -91,27 +52,8 @@ if (P2DZE_gearOnContainer) then {
 //If gear is going to ground
 } else {
 	
-	_newGold = 0;
-	waitUntil{!isNil '_plyrGoldVar'};
-
-	//remove gold item
-	player removeMagazine "ItemGoldBar10oz";
-	//take one away as it will drop 2 items
-	if (_plyrGoldVar > 1) then {
-		_plyrGoldVar = _plyrGoldVar - 1;
-		//create gold pile
-		_iPos = getPosATL player;
-		_radius = 0.0;
-		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_item setposATL _iPos;
-		_item addMagazineCargoGlobal ["ItemGoldBar10oz",_plyrGoldVar];
-	};
-
-	if (P2DZE_goldItemHandlingDebug) then {
-		diag_log(format[" DropGold: onContainer: (false) _plyrGoldVar: (%1) _newGold: (%2)", _plyrGoldVar, _newGold]);
-	};
-	//set player gold
-	player setVariable ["ZombZGold", _newGold, true];
+		P2DZE_plr_dropGold = [player,objNull,-1];
+		publicVariableServer "P2DZE_plr_dropGold";
 };
 
 //set has gold var
