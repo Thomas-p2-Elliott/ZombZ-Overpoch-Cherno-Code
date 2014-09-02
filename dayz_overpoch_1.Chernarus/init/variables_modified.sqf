@@ -39,6 +39,12 @@ Debugging Settings
 	//epoch debugging
 	DZEdebug = true;
 
+	//define rate of fps deugging
+	DZE_DiagFpsSlow = true;
+	DZE_DiagFpsFast = false;
+	//enable full FPS output
+	DZE_DiagVerbose = true;
+
 	//epoch damage debugging
 	DZE_Debug_Damage = false;
 
@@ -52,7 +58,7 @@ Debugging Settings
 	P2DZ_lootCheck_debug = false;			//Toggles debugging logs (type: boolean)
 
 	//fnc_debugMon.sqf
-	P2DZE_debugColoutput = true;
+	P2DZE_debugColoutput = false;
 
 /*---------------------------------------------------------------------------
 Player/Spawn Settings
@@ -81,7 +87,7 @@ Player/Spawn Settings
 		DZE_FS_UseStaticVehicleSpawn = true;
 
 		//enable debug output for static vehicle spawns?
-		P2DZ_Debug_StaticVehSpawns = true;
+		P2DZ_Debug_StaticVehSpawns = false;
 
 		//Static vehicle spawns duplicate vehicle distance check (meters)
 		P2DZ_StaticVehSpawns_DupeDistanceCheck = 7.5;
@@ -265,12 +271,13 @@ Gold Settings
 P2DZE_goldItemHandlingDebug = true; 	//enable debug messages
 P2DZE_Gold_MaxPickup = 	(500 * 1000);	//max gold pickup (500k)
 P2DZE_goldRunning = false;
-
 /*---------------------------------------------------------------------------
 Misc Settings
 ---------------------------------------------------------------------------*/
 	P2DZE_hasGold = false;			// - gets modified by checkGoldItems & pickupgold & dropgold
 	P2DZE_gearOnContainer = false; // - gets modified in object_monitorGear.sqf
+	P2DZE_gearOnWeaponHolder = false; // - gets modified in object_monitorGear.sqf
+
 	s_player_takeGold = -1;
 	MaxVehicleLimit = 5000; // Default = 50
 	MaxDynamicDebris = 50; // Default = 100
@@ -301,6 +308,7 @@ Misc Settings
 		DZE_DeathMsgGlobal = false;
 		DZE_DeathMsgTitleText = false;
 		DZE_DeathMsgSide = false;
+		OldHeliCrash = true;
 	};
 
 

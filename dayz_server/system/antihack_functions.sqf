@@ -27,7 +27,7 @@ private["_missionVehicles"];
             if (!(_x in P2DZE_alreadyChecked) && {(!((typeOf _x) in ["ParachuteWest","ParachuteC"]))} && {(!((typeOf _x) in AllPlayers))} && {(!((typeOf _x) in dayz_allowedObjects))}) then {
                 _x call KK_fnc_checkHash;
                 P2DZE_alreadyChecked = P2DZE_alreadyChecked + [_x];
-                "debug_console" callExtension format["Obj: %1 Added to Safe List #0101", typeOf _x];
+                "debug_console" callExtension format["Obj: %1 Added to Safe List #1111", typeOf _x];
 
             } else {
                 "debug_console" callExtension format["Obj: %1 Has already been Checked #0101", typeOf _x];
