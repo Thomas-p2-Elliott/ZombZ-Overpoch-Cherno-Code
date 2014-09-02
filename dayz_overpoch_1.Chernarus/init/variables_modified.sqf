@@ -255,7 +255,7 @@ Trader Settings
 ---------------------------------------------------------------------------*/
 
 	//trader config mode, true = non-database method!
-	DZE_ConfigTrader = false;
+	DZE_ConfigTrader = true;
 
 	//trader sell distances
 	dayz_sellDistance_vehicle = 10;

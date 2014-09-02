@@ -1,5 +1,6 @@
 /*Custom Loot Tables By ZombZ.net Gorsy & DJ*/
 #include "CfgLoot\CfgBuildingLoot.hpp"
+#include "CfgServerTrader\CfgServerTrader.hpp"
 respawn = "BASE";
 respawndelay = 5;
 onLoadMission= "DayZ Epoch Chernarus";
