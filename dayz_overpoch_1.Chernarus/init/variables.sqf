@@ -251,6 +251,7 @@ dayz_resetSelfActions = {
 	s_player_heli_lift = -1;
 	s_player_heli_detach = -1;
 	s_player_lockUnlock_crtl = -1;
+	s_player_clothes = -1; //Take Clothes
 };
 call dayz_resetSelfActions;
 
