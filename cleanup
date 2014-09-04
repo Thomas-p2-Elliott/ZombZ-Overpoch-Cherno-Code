@@ -1,0 +1,69 @@
+#!/usr/bin/perl
+# PERL MODULES WE WILL BE USING
+use DBI;
+use DBD::mysql;
+# CONFIG VARIABLES
+$platform = "mysql";
+$database = "dayz_epochtest";
+$host = "";
+$port = "";
+$tablename = "character_data";
+$user = "";
+$pw = "";
+
+# DATA SOURCE NAME
+$dsn = "dbi:$platform:$database:$host:$port";
+
+# PERL DBI CONNECT
+$connect = DBI->connect($dsn, $user, $pw);
+
+#PLAYER CLEANUP (leaves last life alive)
+
+#doing the player cleanup
+$vehicle = "SELECT PlayerUID FROM character_data group by PlayerUID having count(*) > 1";
+$query_handle = $connect->prepare($vehicle);
+# EXECUTE THE QUERY
+$query_handle->execute();
+#create the query @row2
+my @row2 = qw();
+#push all the rows into an array @row2
+while(@row = $query_handle->fetchrow_array) {
+       
+       push (@row2, @row); 
+}
+#foreach thing in the array run this
+foreach (@row2){ 
+	#run the query
+	$query= "SELECT CharacterID FROM character_data WHERE PlayerUID='$_' ORDER BY Datestamp;";
+	$query_handle2 = $connect->prepare($query);
+	$query_handle2->execute();
+	#create the array
+	my @row3 = qw();
+	#reset count to 0
+	$count=0;
+	#create the array
+	my @row4 = qw();
+	#create our array of character IDs only for the searched PlayerUID store each row into the new array @row4
+	while(@row3 = $query_handle2->fetchrow_array) {
+       push (@row4, @row3);
+       #tell the code we added to the array
+       $count = $count +1; 
+	}
+	#reset array string just incase
+	$arraystring ="";
+	#remove the last entry from the array (the last life)
+	my $safe = pop @row4;
+	#implode the array into a string, so it can be used in the query (add speechmarks and comma between each)
+	my $arraystring = join('","', @row4);
+	#add the speechmarks at the start and end
+	$arraystring = "\"$arraystring\"";
+	print $_ . " UID Scanning.... $count Entrys Found... \n";
+	print $arraystring . " Deleting Lives... \n";
+	#run the query
+	$query="DELETE from character_data WHERE CharacterID IN ($arraystring);";
+	$query_handle3 = $connect->prepare($query);
+	$query_handle3->execute();
+	print $safe . " Life left safe... Completed \n \n";
+
+}
+
