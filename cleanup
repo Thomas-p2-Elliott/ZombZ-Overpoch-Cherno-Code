@@ -12,11 +12,11 @@ print "\n\nGORSYS AWESOME CLEANUP TOOL\n---------------------------------------\
 #-----------------------------------------------------------------------------------------------
 # Database Info
 $platform = "mysql";
-$database = ""; #Databse Name
+$database = "dayz_epoch"; #Databse Name
 $host = "192.223.27.54";# IP
 $port = "3306"; # Port (default 3306)
-$user = ""; # Username 
-$pw = ""; # Password
+$user = "playerlist"; # Username 
+$pw = "20control20"; # Password
 #-----------------------------------------------------------------------------------------------
 $dsn = "dbi:$platform:$database:$host:$port"; #do not edit this.
 $connect = DBI->connect($dsn, $user, $pw); #do not edit this.
@@ -32,7 +32,7 @@ my $cleanup_objects 		= 1; #Deletes objects from database.
 	my $object_from_creation_time = 15; # days to delete if not updated after first build
 	my $object_after_creation_time = 10; # after first build time has passed, how many days before deletion
 #------
-my $cleanup_player_data		= 0; #NOT BUILT YETwill clear out the player_data table if the UID is not in the main db, can be intensive
+my $cleanup_player_data		= 1; #will clear out the player_data table if the UID is not in the main db, can be intensive
 #------
 my $cleanup_player_login 	= 1; #will clear out the login table
 	my $player_login_months	= 0; # if set to 0 will clear all, if set to 1 then it will save 1 months worth 2 is 2 months, and so on.
@@ -85,7 +85,7 @@ if ($cleanup_old_lives == 1){
 		$query="DELETE from character_data WHERE CharacterID IN ($arraystring);";
 		$query_handle3 = $connect->prepare($query);
 		$query_handle3->execute();
-		print $safe . " Life left safe for $_... Completed \n \n";
+		print "$_ Deleting.... " . $safe . " Life left safe for $_... Completed \n \n";
 
 	}
 }else{
@@ -127,9 +127,12 @@ if ($cleanup_old_players == 1){
 #-----------------------------------------------------------------------------------------------
 #Clean out player data table
 if ($cleanup_player_data == 1){
-	print "Player Data To Be Built\n";
+	print "Player Data Cleaned Up \n";
+	$query = "DELETE FROM player_data WHERE PlayerUID NOT IN(SELECT PlayerUID FROM character_data);";
+	$query_handle = $connect->prepare($query);
+	$query_handle->execute();
 }else{
-	print "Player Data To Be Built\n";
+	print "Cleanup Player Data Switched Off\n";
 }
 
 
