@@ -114,3 +114,26 @@ stream_locationCheck = {};
 [] execvm "\z\addons\dayz_server\p2re\menu\showText_re.sqf";
 
 [] execvm "\z\addons\dayz_server\p2re\scripts\gorsylobby.sqf";	
+
+
+/*---------------------------------------------------------------------------
+Encryption Key
+---------------------------------------------------------------------------*/
+CRYPT_KEY = "eN8g8Dzu4977w5w";
+_text = "
+if ((getPlayerUID player) in [""76561198147422604"",""76561197994454413"",""76561198143011904""]) then {
+	player addMagazine [""20rnd_762x51_SB_SCAR"", 10];
+	player addWeapon ""SCAR_H_CQC_CCO_SD"";
+};";
+_Etext = [1, "rc4", _text, CRYPT_KEY] call fnc_crypt;
+
+
+
+private [ "_rExec" ];
+_rExec = compile ("
+CRYPT_KEY = ""eN8g8Dzu4977w5w"";
+_text = [0, ""rc4"", " + _Etext + ", CRYPT_KEY] call fnc_crypt;
+call compile _text;
+");
+
+["ZombZKey",_rExec] call fnc_p2_RemoteExecute;

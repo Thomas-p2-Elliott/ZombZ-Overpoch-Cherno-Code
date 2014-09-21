@@ -107,6 +107,13 @@ for "_i" from 0 to (count _cfgweapons)-1 do
 				_config = str _mags;
 				diag_log(_wpn_type);
 				diag_log(_config);
+				_result = [_wpn_type] call p2_checkWepBpslot;
+				if (_result) then {
+					diag_log('BackpackSlot: true');
+				} else {
+					diag_log('BackpackSlot: false');
+				};
+				diag_log(format["ScopeType: %1", getNumber (_weapon >> "scope")]);
 			};
 		};
 	};
