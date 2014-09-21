@@ -2,6 +2,7 @@ private ["_display","_body","_playerID","_array","_source","_method","_canHitFre
 disableSerialization;
 if (deathHandled) exitWith {};
 deathHandled = true;
+[] spawn player_dropGold;
 if ((alive player) && {isNil {dayz_playerName}}) then {
 	dayz_playerName = name player;
 };

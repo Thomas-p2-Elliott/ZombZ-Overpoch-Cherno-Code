@@ -2,6 +2,18 @@ private ["_gearControl","_itemName","_itemPic","_itemDesc","_imageText","_gold",
 disableSerialization;
 
 _gold = (player getVariable ["ZombZGold", 0]);
+_gearControl = controlNull;
+_itemName = controlNull;
+_itemPic = controlNull;
+_itemDesc = controlNull;
+_lbIDC = 105;
+_inCargo = "";
+_onPlayer = "";
+_itemText = "";
+_object = objNull;
+_lbcontrol = controlNull;
+_lbsize = [];
+_lbRows = 0;
 
 _gearControl = (findDisplay 106); 
 _itemName = ((_gearControl) displayCtrl 1101);
@@ -15,11 +27,7 @@ _imageText = parseText format["
 <br/><t size='0.74'>Gold bars, the only currency in Chernarus. They use one slot no matter how many you carry.", _gold];
 _itemDesc ctrlSetStructuredText _imageText;
 
-_lbIDC = 105;
-_inCargo = "";
-_onPlayer = "";
-_itemText = "";
-_object = objNull;
+
 
 _lbcontrol = _gearControl displayctrl _lbIDC;
 _lbsize = lnbSize _lbControl;
