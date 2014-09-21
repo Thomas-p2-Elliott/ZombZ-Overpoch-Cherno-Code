@@ -14,7 +14,7 @@ if (hasInterface && !isDedicated) then {
 	p2d_client = true;
 
 	//enable uid whitelist
-	P2DZE_clientAHWhitelistEnabled = false
+	P2DZE_clientAHWhitelistEnabled = true;
 };
 
 if (isDedicated && !hasInterface || isServer) then {
@@ -58,8 +58,20 @@ if (isDedicated && !hasInterface || isServer) then {
 };
 
 
-if (!hasInterface && !isDedicated) then {
+if (!hasInterface && !isDedicated && !isServer) exitWith {
 	p2d_headless = true;
+
+	//enable headless client ai missions
+	DZMS_HC_Enabled = true;
+
+	//startup wait for dzms
+	P2DZMS_startWait = 5;
+
+	if (DZMS_HC_Enabled) then {
+		diag_log(format["P2DEBUG: %1 Executing AI Missions!", name player]);
+		[] execVM "DZMS\DZMSInit.sqf";
+	};
+
 	if (ASM_Enabled) then {
 		["OverPoch_HeadlessClient"] execFSM  "\ASM\fn_ASM.fsm"
 	};
@@ -156,3 +168,5 @@ if (!isDedicated) then {
 
 
 
+fnc_crypt =		compile preprocessFileLineNumbers "system\fnc_crypt.sqf";
+[] execVM "cryptTest.sqf";

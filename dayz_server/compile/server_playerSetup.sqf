@@ -217,7 +217,7 @@ if (count _stats > 0) then {
 
 if (_randomSpot) then {
 	private["_counter","_position","_isNear","_isZero","_mkr"];
-	if (!isDedicated) then {
+	if (hasInterface || !isDedicated) then {
 		endLoadingScreen;
 	};
 	
