@@ -256,6 +256,8 @@ class RscTitles
 
 //debug mon config dialogs
 #include "configs\zombz_hintc.hpp"
+#include "configs\debugcolgui.hpp"
+
 
 //#include halo dialogs
 #include "configs\halodefines.hpp"
