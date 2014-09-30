@@ -156,7 +156,7 @@ if(_possiblematch)then{
 					//update to HIVE?
 					if(_updateHIVE)then{
 					private["_position","_worldspace","_fuel","_key"];
-						_position = getPosATL _obj;
+						_position = getPos _obj;
 						_worldspace = [
 							round(direction _obj),
 							_position
@@ -174,7 +174,7 @@ if(_possiblematch)then{
 					//update to HIVE?
 					if(_updateHIVE)then{
 					private["_position","_worldspace","_fuel","_key"];
-						_position = getPosATL _obj;
+						_position = getPos _obj;
 						_worldspace = [
 							round(direction _obj),
 							_position

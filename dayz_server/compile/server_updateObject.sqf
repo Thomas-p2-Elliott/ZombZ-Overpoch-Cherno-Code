@@ -28,7 +28,7 @@ if ((typeName _objectID != "string") || (typeName _uid != "string")) then
 if (!_parachuteWest && !(locked _object)) then {
 	if (_objectID == "0" && _uid == "0") then
 	{
-		_object_position = getPosATL _object;
+		_object_position = getPos _object;
     	_isNotOk = true;
 	};
 };
@@ -46,7 +46,7 @@ _needUpdate = _object in needUpdate_objects;
 // TODO ----------------------
 _object_position = {
 	private["_position","_worldspace","_fuel","_key"];
-		_position = getPosATL _object;
+		_position = getPos _object;
 		_worldspace = [
 			round(direction _object),
 			_position
@@ -132,7 +132,7 @@ _object_killed = {
 		_charID = _object getVariable ['CharacterID','0'];
 		_objID 	= _object getVariable['ObjectID','0'];
 		_objUID	= _object getVariable['ObjectUID','0'];
-		_worldSpace = getPosATL _object;
+		_worldSpace = getPos _object;
 		if (getPlayerUID _killer != "") then {
 			_name = if (alive _killer) then { name _killer; } else { format["OBJECT %1", _killer]; };
 			diag_log format["Vehicle killed: Vehicle %1 (TYPE: %2), CharacterID: %3, ObjectID: %4, ObjectUID: %5, Position: %6, Killer: %7 (UID: %8)", _object, (typeOf _object), _charID, _objID, _objUID, _worldSpace, _name, (getPlayerUID _killer)];

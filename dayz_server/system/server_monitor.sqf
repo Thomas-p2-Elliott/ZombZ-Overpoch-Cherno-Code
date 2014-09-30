@@ -1,4 +1,4 @@
-private ["_goldArray","_gold","_nul","_result","_pos","_wsDone","_dir","_isOK","_countr","_objWpnTypes","_objWpnQty","_dam","_selection","_totalvehicles","_object","_idKey","_type","_ownerID","_worldspace","_intentory","_hitPoints","_fuel","_damage","_key","_vehLimit","_hiveResponse","_objectCount","_codeCount","_data","_status","_val","_traderid","_retrader","_traderData","_id","_lockable","_debugMarkerPosition","_vehicle_0","_bQty","_vQty","_BuildingQueue","_objectQueue","_superkey","_shutdown","_res","_hiveLoaded","_ownerPUID"];
+private ["_goldArray","_gold","_nul","_result","_pos","_wsDone","_dir","_isOK","_countr","_objWpnTypes","_objWpnQty","_dam","_selection","_totalvehicles","_object","_idKey","_type","_ownerID","_worldspace","_intentory","_hitPoints","_fuel","_damage","_key","_vehLimit","_hiveResponse","_objectCount","_codeCount","_data","_status","_val","_traderid","_retrader","_traderData","_id","_lockable","_debugMarkerPosition","_vehicle_0","_bQty","_vQty","_BuildingQueue","_objectQueue","_superkey","_shutdown","_res","_hiveLoaded","_ownerPUID","_contents","_itemCount","_goldBarCount","_itemType","_addBackCount"];
 
 dayz_versionNo = 		getText(configFile >> "CfgMods" >> "DayZ" >> "version");
 dayz_hiveVersionNo = 	getNumber(configFile >> "CfgMods" >> "DayZ" >> "hiveVersion");
@@ -190,7 +190,7 @@ if (isServer && isNil "sm_done") then {
 			// _object setVehicleAmmo DZE_vehicleAmmo;
 			
 			_object setdir _dir;
-			_object setposATL _pos;
+			_object setpos _pos;
 			_object setDamage _damage;
 			
 			if ((typeOf _object) in dayz_allowedObjects) then {
@@ -260,12 +260,14 @@ if (isServer && isNil "sm_done") then {
 
 			if ((_gold) < 1) then {
 				_gold = 0;
-				_object removeMagazines "ItemGoldBar10oz";
+				//make sure there no gold item in the object
+				[_object,false] call fnc_removeExtraBars;
 			} else {
-				_object removeMagazines "ItemGoldBar10oz";
-				_object addMagazineCargoGlobal ["ItemGoldBar10oz", 1];
-				diag_log(format["P2DEBUG: HiveStream: GoldSet on Obj, _gold: " + str _gold]);
+				//make sure there is only one gold item in the object
+				[_object,true] call fnc_removeExtraBars;
 			};
+
+			diag_log(format["P2DEBUG: HiveStream: GoldSet on Obj, _gold: " + str _gold]);
 
 			_object setVariable ["ZombZGold", _gold, true];
 

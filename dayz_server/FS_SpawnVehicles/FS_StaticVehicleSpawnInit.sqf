@@ -33,10 +33,11 @@ if (_useStatic) then {
 		_errored = true;
 		StaticVehicleUsageConfig set [(_usageConfig select 3), [_staticLocationsName, false, false]];
 	};
-	
-	// if valid position retrieved. Return valid coordinates.
-	if (count _staticPosition > 0) then {
-		diag_log("Static Vehicle Spawn: Valid _staticSpawnPosition: " + str(_staticPosition));
+	if (P2DZ_Debug_StaticVehSpawns) then {
+		// if valid position retrieved. Return valid coordinates.
+		if (count _staticPosition > 0) then {
+			diag_log("Static Vehicle Spawn: Valid _staticSpawnPosition: " + str(_staticPosition));
+		};		
 	};
 };
 

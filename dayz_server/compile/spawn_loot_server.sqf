@@ -233,13 +233,13 @@ switch (_iClass) do {
 		[_iItem] call p2_checkWepBpslot;
 		_item = createVehicle [_iItem, _iPos, [], _radius, "CAN_COLLIDE"];
 		if ((count _iPos) > 2) then {
-			_item setPosATL _iPos;
+			_item setPos _iPos;
 		};
 	};
 };
 if (!isNull(_item)) then{
 	if ((count _iPos) > 2) then{
-		_item setPosATL _iPos;
+		_item setPos _iPos;
 	};
 
 	_item call {

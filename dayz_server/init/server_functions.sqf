@@ -33,6 +33,9 @@ fnc_specialLoot = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\c
 //deejayCrazy crazy safezone cleaner
 fn_SZclean = 					compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_SZClean.sqf";
 
+//remove extra gold bars (p2)
+fnc_removeExtraBars = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fnc_removeExtraBars.sqf";
+
 /* PVS/PVC - Skaronator */
 server_sendToClient =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_sendToClient.sqf";
 
@@ -352,7 +355,7 @@ spawn_vehicles = {
 			};	
 		
 			// Get position with ground
-			_objPosition = getPosATL _veh;
+			_objPosition = getPos _veh;
 		
 			clearWeaponCargoGlobal  _veh;
 			clearMagazineCargoGlobal  _veh;
@@ -633,7 +636,7 @@ server_getDiff2 =	{
 dayz_objectUID = {
 	private["_position","_dir","_key","_object"];
 	_object = _this;
-	_position = getPosATL _object;
+	_position = getPos _object;
 	_dir = direction _object;
 	_key = [_dir,_position] call dayz_objectUID2;
     _key
@@ -701,7 +704,7 @@ dayz_perform_purge_player = {
 
 	if(!isNull(_this)) then {
 
-		_location = getPosATL _this;
+		_location = getPos _this;
 		_dir = getDir _this;
 
 		_holder = createVehicle ["GraveDZE", _location, [], 0, "CAN_COLLIDE"];
@@ -718,7 +721,7 @@ dayz_perform_purge_player = {
 		};	
 
 		_holder setDir _dir;
-		_holder setPosATL _location;
+		_holder setPos _location;
 
 		_holder enableSimulation false;
 
@@ -928,7 +931,7 @@ server_spawnCleanAnimals = {
 			_delQtyAnimal = _delQtyAnimal + 1;
 		} else {
 			if (!alive _x) then {
-				_pos = getPosATL _x;
+				_pos = getPos _x;
 				if (count _pos > 0) then {
 					_nearby = {(isPlayer _x) && (alive _x)} count (_pos nearEntities [["CAManBase","AllVehicles"], 130]);
 					if (_nearby==0) then {

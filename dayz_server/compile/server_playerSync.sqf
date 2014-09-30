@@ -17,7 +17,7 @@ if (isNull _character) exitWith {
 };
 
 _characterID =	_character getVariable ["CharacterID","0"];
-_charPos = 		getPosATL _character;
+_charPos = 		getPos _character;
 _isInVehicle = 	vehicle _character != _character;
 _timeSince = 	0;
 _humanity =		0;

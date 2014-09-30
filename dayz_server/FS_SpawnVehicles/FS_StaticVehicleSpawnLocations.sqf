@@ -201,7 +201,22 @@ SPAWNLOC_Ural_INS = [
 [224,[11486.751,7543.9404,3.0517578e-005]]
 ];
 
-SPAWNLOC_SUV_DZ = [
+//will pick at random when spawning SUV
+SUV_VEHICLE_LIST = [
+	"SUV_TK_CIV_EP1_DZE1",
+	"SUV_Camo_DZE1",
+	"SUV_Blue_DZE1",
+	"SUV_Green_DZE1",
+	"SUV_Yellow_DZE1",
+	"SUV_Red_DZE1",
+	"SUV_White_DZE1",
+	"SUV_Pink_DZE1",
+	"SUV_Charcoal_DZE1",
+	"SUV_Orange_DZE1",
+	"SUV_Silver_DZE1"
+];
+
+SPAWNLOC_SUV_TK_CIV_EP1_DZE1 = [
 
 [-147,[4810.6377,2586.6306,3.1471252e-005]],
 [-72,[9457.8896,1855.4465,-4.0054321e-005]],
@@ -804,7 +819,7 @@ SPAWNLOC_UH1H_DZ = [
 
 [-147,[4796.0215,2582.3313,1.4305115e-005]],
 [-117,[4902.0439,10139.771,3.0517578e-005]],
-[7,[13699.1,2936.1,30.465]]
+[7,[13699.1,2936.1,0.465]]
 ];
 
 SPAWNLOC_AH6J_EP1_DZE = [
@@ -924,7 +939,7 @@ StaticVehicleSpawnConfig = [
 	["350z_mod","SPAWNLOC_350z_mod"],
 	["350z_silver","SPAWNLOC_350z_silver"],
 	["Ural_INS","SPAWNLOC_Ural_INS"],
-	["SUV_DZ","SPAWNLOC_SUV_DZ"],
+	["SUV_TK_CIV_EP1_DZE1","SPAWNLOC_SUV_TK_CIV_EP1_DZE1"],
 	["Pickup_PK_INS","SPAWNLOC_Pickup_PK_INS"],
 	["UAZ_MG_TK_EP1","SPAWNLOC_UAZ_MG_TK_EP1"],
 	["KamazOpen","SPAWNLOC_KamazOpen"],

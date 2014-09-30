@@ -20,26 +20,20 @@ if (hasInterface && !isDedicated) then {
 if (isDedicated && !hasInterface || isServer) then {
 	p2d_server = true;
 
-	//##Debug Console##
 	#include "configs\debug_console.hpp";
-	conBeep(); //makes console beep
+	conBeep();
 	conFileTime("Server Started");
-	diag_log ("debug_console" callExtension ("i")); //max_output_size
+	diag_log ("debug_console" callExtension ("i"));
 
 	//enable antihack on test server?
-	AHe = false;
+	AHe = true;
 	//enable object streaming from db?
 	P2DZE_serverStreamObjsEnabled = true;
-
-	//dze performance testing settings
-	DZE_DiagFpsSlow = true;
-	DZE_DiagFpsFast = false;
-	DZE_DiagVerbose = false;
 
 	//asm performance testing setting
 	if (ASM_Enabled) then {
 		diag_log("P2DEBUG: ASM_Enabled: " + str ASM_Enabled);
-		["OverPoch_Server"] execFSM  "\ASM\fn_ASM.fsm"
+		["OverPoch_Server"] execFSM  "\ASM\fn_ASM.fsm";
 	};
 
 	//generate hash for vehicles
@@ -169,4 +163,6 @@ if (!isDedicated) then {
 
 
 fnc_crypt =		compile preprocessFileLineNumbers "system\fnc_crypt.sqf";
-[] execVM "cryptTest.sqf";
+//[] execVM "cryptTest.sqf";
+
+diag_log("P2DEBUG: " + str CRYPT_KEY);

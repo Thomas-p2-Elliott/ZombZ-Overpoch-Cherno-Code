@@ -93,6 +93,18 @@ _fnc_spawn_vehicle = {
 				if (_dontSpawn) then {
 					if (_p2d) then {	diag_log("Static Vehicle Spawn: Failed for Vehicles: " + str _vehicle + " Reason: " + str _reasonForNoSpawn); };
 				} else {
+					
+					if ((_vehicle) == "SUV_TK_CIV_EP1_DZE1") then {
+						private["_randCount","_randSel"];
+						_randCount = 0;
+						_randSel = 0;
+						_randCount = count SUV_VEHICLE_LIST;
+						_randSel = (random(_randCount));
+						_randSel = floor _randSel;
+						_vehicle = SUV_VEHICLE_LIST select _randSel;
+						if (_p2d) then { diag_log("P2DEBUG: Random SUV Selected: " + str _vehicle)};
+					};
+
 					//place vehicle 
 					_veh = createVehicle [_vehicle, (_x select 1), [], 0, "CAN_COLLIDE"];
 					_veh setdir _dir;
@@ -116,8 +128,8 @@ _fnc_spawn_vehicle = {
 						_marker setMarkerText _vehicle;
 					};	
 				
-					// Get position with ground
-					_objPosition = getPosATL _veh;
+					// Get position
+					_objPosition = GetPos _veh;
 					if (_p2d) then {	diag_log(" "); diag_log("Static Spawn Vehicle of Type: " + str _veh + " Created At: " + str _objPosition + " With Direction: " + str _dir); };
 
 					clearWeaponCargoGlobal  _veh;
@@ -125,6 +137,7 @@ _fnc_spawn_vehicle = {
 					// _veh setVehicleAmmo DZE_vehicleAmmo;
 
 					[_veh,[_dir,_objPosition],_vehicle,true,"0"] call server_publishVeh;
+					_vehicle = _this select 0; // just in case it was modified by suv changes...
 				};
 			} else {
 				diag_log("Static Veh Spawn: Position Failed: " + str _x);
@@ -217,13 +230,14 @@ if(_vehLimit > 0) then {
 	_reasonForNoSpawn = "None";
 
 	{
-			private ["_vehicle","_locationConfig","_locationArray","_existingVehicles","_locationArrayCount","_usageConfig","_useHandle","_inUse","_index"];
+			private ["_randCount","_randSel","_vehicle","_locationConfig","_locationArray","_existingVehicles","_locationArrayCount","_usageConfig","_useHandle","_inUse","_index"];
 			_vehicle = (_x select 0);
 			_locationConfig = [_vehicle] call _fnc_GetStaticVehicleLocationConfig;
 			_locationArray = call compile _locationConfig;
 			_existingVehicles = allMissionObjects (_vehicle);
 			_existingVehicles = count _existingVehicles;
-			_locationArrayCount = count _locationArray;               
+			_locationArrayCount = count _locationArray;  
+
 			if (_existingVehicles < _locationArrayCount) then {
 				//is ok
 				_dontSpawn = false;
