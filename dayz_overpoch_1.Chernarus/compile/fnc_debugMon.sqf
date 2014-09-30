@@ -13,11 +13,54 @@ Configuration Options
 /* CONFIGURATION START */
 //Default setting for when a player loads into the server
 P2DZ_debugMonitor = false;
-diag_log("P2DEBUG: Spawning Debug Monitor in Mode: " + str P2DZ_dbCurMode);
+
+diag_log("P2DEBUG: Spawning Debug Monitor in Mode: " + str P2DZ_dbCurMode + " Refresh Time: " + str P2DZ_debugMonSleep);
+
+
+fnc_bloodCol = {
+	private["_input","_output"];
+	_input = round((r_player_blood * 2) / 1000);
+
+	_output = switch (_input) do {
+		//dead
+ 		default { "#210000" };
+	    case 0: { "#210000" };
+	    //reds
+	    case 1: { "#330000" };
+	    case 2: { "#630000" };
+	    case 3: { "#910000" };
+	    case 4: { "#BF0000" };
+	    case 5: { "#E30000" };
+	    case 6: { "#FF0000" };
+	    //oranges
+	    case 7: { "#FF3700" };
+	    case 8: { "#FF4800" };
+	    case 9: { "#FF6200" };
+	    case 10: { "#FF8400" };
+	    case 11: { "#FF9D00" };
+	    case 12: { "#FFCC00" };
+	    //yellows
+	    case 13: { "#FFDD00" };
+	    case 14: { "#FFEA00" };
+	    case 15: { "#E8E800" };
+	    case 16: { "#C9E800" };
+	    case 17: { "#DDFF00" };
+	    case 18: { "#CCFF00" };
+	    //greens
+	    case 19: { "#BFFF00" };
+	    case 20: { "#A2FF00" };
+	    case 21: { "#91FF00" };
+	    case 22: { "#5EFF00" };
+	    case 23: { "#15FF00" };
+	    case 24: { "#00FF2F" };
+	};
+
+	_output
+};
+
 
 fnc_debugFull = {
 private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills","_p2zKills","_p2wep","_p2skin","_zombzVehCount","_zombzZedCount","_zombztimeToRestart","_pDir","_gpsP2osZombZ","_p2bl","_p2c"];
-
 	P2DZ_humanity = (player getVariable['humanity', 0]);
 	P2DZ_humanityLevel = floor(P2DZ_humanity / 5000);
 
@@ -87,45 +130,6 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 		    case ((_pDir > 275) && (_pDir < 355)): { (format["NW %1", _pDir]) };
 	};
 
-
-	_p2bl = round((r_player_blood * 2) / 1000);
-
-	_p2c = switch (_p2bl) do {
-		//dead
- 		default { "#210000" };
-	    case 0: { "#210000" };
-	    //reds
-	    case 1: { "#330000" };
-	    case 2: { "#630000" };
-	    case 3: { "#910000" };
-	    case 4: { "#BF0000" };
-	    case 5: { "#E30000" };
-	    case 6: { "#FF0000" };
-	    //oranges
-	    case 7: { "#FF3700" };
-	    case 8: { "#FF4800" };
-	    case 9: { "#FF6200" };
-	    case 10: { "#FF8400" };
-	    case 11: { "#FF9D00" };
-	    case 12: { "#FFCC00" };
-	    //yellows
-	    case 13: { "#FFDD00" };
-	    case 14: { "#FFEA00" };
-	    case 15: { "#E8E800" };
-	    case 16: { "#C9E800" };
-	    case 17: { "#DDFF00" };
-	    case 18: { "#CCFF00" };
-	    //greens
-	    case 19: { "#BFFF00" };
-	    case 20: { "#A2FF00" };
-	    case 21: { "#91FF00" };
-	    case 22: { "#5EFF00" };
-	    case 23: { "#15FF00" };
-	    case 24: { "#00FF2F" };
-	};
-
-
-	 
 	hintSilent "";
 	["<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Mode: " + P2DZ_debugMon_Mode + "</t><t size='1' font='Bitstream' align='right'>Key: " + P2DZ_debugMon_ToggleKey + "</t>", 
 	"<img align='center' size=" + str _p2ps + " image=" + str _p2p + "/><br/>
@@ -133,7 +137,7 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	<t size='1' font='Bitstream' align='left' color='#FFFFFF'> Players (2500m): </t><t size='1' font='Bitstream' align='right' color='#FFFFFF'>" + str _p2within2500 + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#FC473A'>Murders: </t><t size='1' font='Bitstream' align='right' color='#FC473A'>" + str _p2mkills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#8BFF6B'>Bandit Kills: </t><t size='1' font='Bitstream' align='right' color='#8BFF6B'>" + str _p2bKills + "</t><br/>
-	<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Blood: </t><t size='1' font='Bitstream' align='right' color=" + str _p2c + ">" + str r_player_blood + "</t><br/><br/>
+	<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Blood: </t><t size='1' font='Bitstream' align='right' color=" + str P2DZ_debugBloodCol + ">" + str r_player_blood + "</t><br/><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Gun: </t><t size='0.75' font='Bitstream' align='right' color='#01DFD7'>" + _p2wep + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Headshots / Z Kills: </t><t size='1' font='Bitstream' align='right' color='#01DFD7'>" + str _p2zKills + "/" + str _p2zHSKills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Skin: </t><t size='0.8' font='Bitstream' align='right' color='#01DFD7'>" + _p2skin + "</t><br/>
@@ -150,7 +154,6 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 
 fnc_debugMini = {
 private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
-
 	P2DZ_debugMon_Mode = "Mini";
 	P2DZ_debugMon_ToggleKey = "F5";
 	_p2within2500 = (({isPlayer _x} count (getPos vehicle player nearEntities [["AllVehicles"], 2500]))-1);
@@ -158,7 +161,6 @@ private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
 	_p2bKills = (player getVariable['banditKills', 0]);
 	_pDir = (round(getDir player));
 	_gpsP2osZombZ = (mapGridPosition getPos player);
-	_p2bl = round((r_player_blood * 2) / 1000);
 	_pDirT = switch (true) do {
 	 		default { (format["N %1", _pDir]) };
 	 		case (((_pDir >= 355) && (_pDir <=359)) || ((_pDir >= 0) && (_pDir <= 5))): { (format["N %1", _pDir]) };
@@ -170,40 +172,6 @@ private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
 		    case ((_pDir >= 265) && (_pDir <= 275)): { (format["W %1", _pDir]) };
 		    case ((_pDir > 275) && (_pDir < 355)): { (format["NW %1", _pDir]) };
 	};
-	_p2c = switch (_p2bl) do {
-		//dead
- 		default { "#210000" };
-	    case 0: { "#210000" };
-	    //reds
-	    case 1: { "#330000" };
-	    case 2: { "#630000" };
-	    case 3: { "#910000" };
-	    case 4: { "#BF0000" };
-	    case 5: { "#E30000" };
-	    case 6: { "#FF0000" };
-	    //oranges
-	    case 7: { "#FF3700" };
-	    case 8: { "#FF4800" };
-	    case 9: { "#FF6200" };
-	    case 10: { "#FF8400" };
-	    case 11: { "#FF9D00" };
-	    case 12: { "#FFCC00" };
-	    //yellows
-	    case 13: { "#FFDD00" };
-	    case 14: { "#FFEA00" };
-	    case 15: { "#E8E800" };
-	    case 16: { "#C9E800" };
-	    case 17: { "#DDFF00" };
-	    case 18: { "#CCFF00" };
-	    //greens
-	    case 19: { "#BFFF00" };
-	    case 20: { "#A2FF00" };
-	    case 21: { "#91FF00" };
-	    case 22: { "#5EFF00" };
-	    case 23: { "#15FF00" };
-	    case 24: { "#00FF2F" };
-	};
-
 
 
 	hintSilent "";
@@ -211,7 +179,7 @@ private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
 	"<t size='1' font='Bitstream' align='left' color='#FFFFFF'> Players (2500m): </t><t size='1' font='Bitstream' align='right' color='#FFFFFF'>" + str _p2within2500 + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#FC473A'>Murders:</t><t size='1' font='Bitstream' align='right' color='#FC473A'>" + str _p2mkills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#8BFF6B'>Bandit Kills:</t><t size='1' font='Bitstream' align='right' color='#8BFF6B'>" + str _p2bKills + "</t><br/>
-	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Blood: </t><t size='1' font='Bitstream' align='right' color=" + str _p2c + ">" + str r_player_blood + "</t><br/>
+	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Blood: </t><t size='1' font='Bitstream' align='right' color=" + str P2DZ_debugBloodCol + ">" + str r_player_blood + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#F7F2E0'>DIR: "+ _pDirT + "</t><t size='1' font='Bitstream' align='right' color='#F7F2E0'>GPS: " + _gpsP2osZombZ + "</t>", 
 	P2DZE_debugCol, //debug design by player2
 	false
@@ -234,79 +202,81 @@ fnc_debugOff = {
 
 fnc_debugMon = {
 	[] spawn {
-		private["_handle1","_handle2","_handle3"];
+		private["_handle0","_handle1","_handle2","_handle3"];
+		_handle0 = -1;
 		_handle1 = -1;
 		_handle2 = -1;
 		_handle3 = -1;
 		while {true} do {
 			if (P2DZ_debugMonitor) then {
-				if (P2DZ_dbCurMode == 1) then  {
-					_handle1 = [] call fnc_debugOff;
-					P2DZ_debugMonitor = false;
-				};
-				if (P2DZ_dbCurMode == 2) then {
-					_handle2 = [] call fnc_debugFull;
-					P2DZ_debugMonitor = true;
-				};
-				if (P2DZ_dbCurMode == 3) then {
-					_handle3 = [] call fnc_debugMini;
-					P2DZ_debugMonitor = true;
+				switch (P2DZ_dbCurMode) do
+				{
+				    case 1:
+				    {
+				        _handle1 = [] call fnc_debugOff;
+						P2DZ_debugMonitor = false;
+				    };
+				    case 2:
+				    {
+
+				    	P2DZ_debugBloodCol = [] call fnc_bloodCol;
+				        _handle2 = [] call fnc_debugFull;
+						P2DZ_debugMonitor = true;
+				    };
+				    case 3:
+				    {
+				    	P2DZ_debugBloodCol = [] call fnc_bloodCol;
+						_handle3 = [] call fnc_debugMini;
+						P2DZ_debugMonitor = true;
+					};
+					default
+					{
+						_handle0 = [] call fnc_debugOff;
+						P2DZ_debugMonitor = false;
+					};
 				};
 			};
-			sleep 3.5;
+			sleep P2DZ_debugMonSleep;
 		};
 	};
 };
+
+
 
 fnc_p2debugMonColorGUI = {
-	private ["_rSliderIdc","_gSliderIdc","_bSliderIdc","_aSliderIdc","_sliderIdcArray"];
+	private ["_dialog","_rSliderIdc","_gSliderIdc","_bSliderIdc","_aSliderIdc","_sliderIdcArray"];
 	disableSerialization;
 	uiNamespace setVariable ['DEBUGSMON', displayNull];
-	createDialog 'DEBUGSMON';
-	_rSliderIdc = 501900;
-	_gSliderIdc = 501901;
-	_bSliderIdc = 501902;
-	_aSliderIdc = 501903; 
-	_sliderIdcArray = [_rSliderIdc,_gSliderIdc,_bSliderIdc,_aSliderIdc];
-
-	{
-	 	sliderSetRange [_x, 0, 10];
-	} forEach _sliderIdcArray;
-
-	sliderSetPosition [_rSliderIdc, (P2DZE_debugCol select 0) * 10];
-	sliderSetPosition [_gSliderIdc, (P2DZE_debugCol select 1) * 10];
-	sliderSetPosition [_bSliderIdc, (P2DZE_debugCol select 2) * 10];
-	sliderSetPosition [_aSliderIdc, (P2DZE_debugCol select 3) * 10];
-
-	_thread = [] spawn {
-	private ["_rSliderVal","_rSliderIdc","_gSliderVal","_gSliderIdc","_bSliderVal","_bSliderIdc","_aSliderVal","_aSliderIdc","_sliderIdcArray"];
-		_rSliderIdc = 501900;
-		_gSliderIdc = 501901;
-		_bSliderIdc = 501902;
-		_aSliderIdc = 501903; 
+	_dialog = createDialog 'DEBUGSMON';
+	
+	if (_dialog) then {
+		_rSliderIdc = 501900;	_gSliderIdc = 501901;	_bSliderIdc = 501902;	_aSliderIdc = 501903; 
 		_sliderIdcArray = [_rSliderIdc,_gSliderIdc,_bSliderIdc,_aSliderIdc];
-
-		while {dialog} do {
-			_rSliderVal = ((sliderPosition _rSliderIdc) / 10);
-			_gSliderVal = ((sliderPosition _gSliderIdc) / 10);
-			_bSliderVal = ((sliderPosition _bSliderIdc) / 10);
-			_aSliderVal = ((sliderPosition _aSliderIdc) / 10);
-
-			 if (!isNil '_sliderIdcArray' && {(count _sliderIdcArray == 4)}) then {
-				P2DZE_debugMon_array_r = _rSliderVal;
-				P2DZE_debugMon_array_g = _gSliderVal; 
-				P2DZE_debugMon_array_b = _bSliderVal;
-				P2DZE_debugMon_array_a = _aSliderVal;   
-				if (P2DZE_debugColoutput) then { diag_log(format['DebugMon: ChatCheck: VALID: Red:	(%1)	Green:	(%2)	Blue:	(%3)	Alpha:	(%4)	', 
-										P2DZE_debugMon_array_r,P2DZE_debugMon_array_g,P2DZE_debugMon_array_b,P2DZE_debugMon_array_a]); };
-				P2DZE_debugCol = [P2DZE_debugMon_array_r,P2DZE_debugMon_array_g,P2DZE_debugMon_array_b,P2DZE_debugMon_array_a];
+		{
+		 	sliderSetRange [_x, 0, P2DZ_debugSliderRange];
+		} forEach _sliderIdcArray;
+		sliderSetPosition [_rSliderIdc, (P2DZE_debugCol select 0) * P2DZ_debugSliderRange];	sliderSetPosition [_gSliderIdc, (P2DZE_debugCol select 1) * P2DZ_debugSliderRange];
+		sliderSetPosition [_bSliderIdc, (P2DZE_debugCol select 2) * P2DZ_debugSliderRange];	sliderSetPosition [_aSliderIdc, (P2DZE_debugCol select 3) * P2DZ_debugSliderRange];
+		_thread = [] spawn {
+			private ["_rSliderVal","_rSliderIdc","_gSliderVal","_gSliderIdc","_bSliderVal","_bSliderIdc","_aSliderVal","_aSliderIdc","_sliderIdcArray"];
+			_rSliderIdc = 501900;		_gSliderIdc = 501901;		_bSliderIdc = 501902;		_aSliderIdc = 501903; 
+			_sliderIdcArray = [_rSliderIdc,_gSliderIdc,_bSliderIdc,_aSliderIdc];
+			while {dialog} do {
+				_rSliderVal = ((sliderPosition _rSliderIdc) / P2DZ_debugSliderRange);			_gSliderVal = ((sliderPosition _gSliderIdc) / P2DZ_debugSliderRange);
+				_bSliderVal = ((sliderPosition _bSliderIdc) / P2DZ_debugSliderRange);			_aSliderVal = ((sliderPosition _aSliderIdc) / P2DZ_debugSliderRange);
+				if (!isNil '_sliderIdcArray' && {(count _sliderIdcArray == 4)}) then {
+					P2DZE_debugMon_array_r = _rSliderVal;				P2DZE_debugMon_array_g = _gSliderVal; 
+					P2DZE_debugMon_array_b = _bSliderVal;				P2DZE_debugMon_array_a = _aSliderVal;   
+					P2DZE_debugCol = [P2DZE_debugMon_array_r,P2DZE_debugMon_array_g,P2DZE_debugMon_array_b,P2DZE_debugMon_array_a];
+				};
+				sleep 0.33;
 			};
-			sleep 0.33;
+			systemChat("Debug Monitor Input Valid and Accepted!");  
+			player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true];
+			player setVariable ["P2_DebugMonColours", P2DZE_debugCol, true];
 		};
-		
-		systemChat("Debug Monitor Input Valid and Accepted!");  
-		player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true];
-		player setVariable ["P2_DebugMonColours", P2DZE_debugCol, true];
+	} else {
+		systemChat("Error: Debug Monitor Colour Dialog failed to open!");
+		diag_log("Error: Debug Monitor Colour Dialog failed to open!");
 	};
 };
-

@@ -326,7 +326,7 @@ class DebugColGuiRscFrame
 	idc = -1;
 	style = 128;
 	shadow = 2;
-	colorBackground[] = {0,0,1,0.2};
+	colorBackground[] = {1,1,1,0.2};
 	colorText[] = {0,0,0,0.5};
 	font = "Zeppelin32";
 	sizeEx = 0.02;
@@ -338,8 +338,8 @@ class DebugColGuiRscSlider
 	type = 3;
 	style = 1024;
 	w = 0.3;
-	color[] = {0,0,0,1};
-	colorActive[] = {1,1,1,1};
+	color[] = {0,0,1,0.8};
+	colorActive[] = {0,1,0,1};
 	shadow = 0;
 	h = 0.025;
 };
@@ -352,7 +352,7 @@ class DebugColGuiRscSlider
 class DEBUGSMON
 {
 	idd=-1;
-	movingenable=false;
+	movingenable=true;
 
 	class controls
 	{

@@ -25,6 +25,7 @@ if (_dikCode == 0x01 && r_player_dead) then {
 	_handled = true;
 };
 
+
 // surrender 
 if (_dikCode in actionKeys "Surrender") then {
 	
@@ -98,27 +99,7 @@ if ((_dikCode in actionKeys "Gear") && (vehicle player != player) && !_shift && 
 	_handled = true;
 };
 
-if (_dikCode in (actionKeys "GetOver")) then {
-	
-	if (player isKindOf  "PZombie_VB") then {
-		_handled = true;
-		DZE_PZATTACK = true;
-	} else {
-		_nearbyObjects = nearestObjects[getPosATL player, dayz_disallowedVault, 8];
-		if (count _nearbyObjects > 0) then {
-			if((diag_tickTime - dayz_lastCheckBit > 4)) then {
-				[objNull, player, rSwitchMove,"GetOver"] call RE;
-				player playActionNow "GetOver";
-				dayz_lastCheckBit = diag_tickTime;
-			} else {
-				_handled = true;
-			};
-		};
-	};
-};
-//if (_dikCode == 57) then {_handled = true}; // space
-//if (_dikCode in actionKeys 'MoveForward' || _dikCode in actionKeys 'MoveBack') then {r_interrupt = true};
-if (_dikCode == 0x3F && (diag_tickTime - dayz_lastCheckBit > 1)) then {
+if (_dikCode == 0x3F && (diag_tickTime - dayz_lastCheckBit > 0)) then {
 	dayz_lastCheckBit = diag_tickTime;
 	if (isNil "P2DZ_dbCurMode") then {
 		P2DZ_dbCurMode = 2;
@@ -139,11 +120,29 @@ if (_dikCode == 0x3F && (diag_tickTime - dayz_lastCheckBit > 1)) then {
 	};
 };
 
+if (_dikCode in (actionKeys "GetOver")) then {
+	_nearbyObjects = nearestObjects[getPosATL player, dayz_disallowedVault, 8];
+	if (count _nearbyObjects > 0) then {
+		if((diag_tickTime - dayz_lastCheckBit > 2)) then {
+			[objNull, player, rSwitchMove,"GetOver"] call RE;
+			player playActionNow "GetOver";
+			dayz_lastCheckBit = diag_tickTime;
+		} else {
+			_handled = true;
+		};
+	};
+};
+
+
 if (_dikCode == 0x40 && (diag_tickTime - dayz_lastCheckBit > 3)) then {
 	dayz_lastCheckBit = diag_tickTime;
 	[] spawn fnc_p2debugMonColorGUI;
 	_handled = true;
 };
+
+//if (_dikCode == 57) then {_handled = true}; // space
+//if (_dikCode in actionKeys 'MoveForward' || _dikCode in actionKeys 'MoveBack') then {r_interrupt = true};
+
 
 if (_dikCode in actionKeys "ForceCommandingMode") then {_handled = true};
 if (_dikCode in actionKeys "PushToTalk" && (diag_tickTime - dayz_lastCheckBit > 10)) then {
