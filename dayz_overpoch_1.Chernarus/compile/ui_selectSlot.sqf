@@ -53,24 +53,52 @@ if (_button == 1) then {
 			_menu ctrlSetText format[_type,_name];
 			_menu ctrlSetEventHandler ["ButtonClick",_compile];
 		};
+
+		//block extra rc actions for gold bars!
+		_erc_cfgActions = (missionConfigFile >> "ExtraRc" >> _item);
+		_erc_numActions = (count _erc_cfgActions);
+		if (isClass _erc_cfgActions) then {
+		    for "_j" from 0 to (_erc_numActions - 1) do 
+		    {
+		        _menu =  _parent displayCtrl (1600 + _j + _numActions);
+		        _menu ctrlShow true;
+		        _config =  (_erc_cfgActions select _j);
+		        _text =  getText (_config >> "text");
+		        _script =  getText (_config >> "script");
+		        _height = _height + (0.025 * safezoneH);
+		        uiNamespace setVariable ['uiControl', _control];
+		        _menu ctrlSetText _text;
+		        _menu ctrlSetEventHandler ["ButtonClick",_script];
+		    };
+		};
+	} else {
+		//if item is gold bar
+		if (P2DZE_goldItemHandlingDebug) then { diag_log("P2DEBUG: GearMenu, Gold Right Clicked!"); };
+		//spawn gold drop amount slider dialog
+		disableSerialization;
+		uiNamespace setVariable ['goldDropUISMON', displayNull];
+		_ok = createDialog 'goldDropUISMON';
+		if (_ok) then {
+			if (P2DZE_goldDropUIFirstRun) then {
+				if (P2DZE_goldItemHandlingDebug) then { diag_log("P2DEBUG: GearMenu, Gold Dialog UI Handler Spawned. First run."); };
+				[(uiNamespace getVariable 'ZombZ_goldDropUISMON'),nil] spawn ui_goldDrop;
+				if (P2DZE_goldItemHandlingDebug) then { diag_log("P2DEBUG: GearMenu, Gold Dialog UI Handler First run! Gonna run again with delay in 0.5secs!"); };
+				P2DZE_goldDropUIFirstRun = false;
+				[] spawn {
+					sleep 0.5;
+					if (P2DZE_goldItemHandlingDebug) then { diag_log("P2DEBUG: GearMenu, Gold Dialog UI Handler Re-run!"); };
+					[(uiNamespace getVariable 'ZombZ_goldDropUISMON'),nil] spawn ui_goldDrop;
+				};
+			} else {
+				if (P2DZE_goldItemHandlingDebug) then { diag_log("P2DEBUG: GearMenu, Gold Dialog UI Handler Spawned."); };
+				[(uiNamespace getVariable 'ZombZ_goldDropUISMON'),nil] spawn ui_goldDrop;
+			};
+		} else {
+			systemChat("Error: Drop gold dialog failed to open! Sorry about that...Please try again!");
+		};
 	};
 
-	_erc_cfgActions = (missionConfigFile >> "ExtraRc" >> _item);
-	_erc_numActions = (count _erc_cfgActions);
-	if (isClass _erc_cfgActions) then {
-	    for "_j" from 0 to (_erc_numActions - 1) do 
-	    {
-	        _menu =  _parent displayCtrl (1600 + _j + _numActions);
-	        _menu ctrlShow true;
-	        _config =  (_erc_cfgActions select _j);
-	        _text =  getText (_config >> "text");
-	        _script =  getText (_config >> "script");
-	        _height = _height + (0.025 * safezoneH);
-	        uiNamespace setVariable ['uiControl', _control];
-	        _menu ctrlSetText _text;
-	        _menu ctrlSetEventHandler ["ButtonClick",_script];
-	    };
-	};
+
 	
 	_pos set [3,_height];
 
