@@ -38,10 +38,11 @@ if (!isDedicated) then {
 
 	//pure custom
 	snap_build = 					compile preprocessFileLineNumbers "compile\snap_build.sqf";
-	[] 	execVM 						"compile\fn_deployActions.sqf";	
+	fnc_removeExtraBars =			compile preprocessFileLineNumbers "compile\fnc_removeExtraBars.sqf";
 	player2_haloSpawn =				compile preprocessFileLineNumbers "actions\player2_haloSpawn.sqf";
 	call 							compile preprocessFileLineNumbers "compile\fn_hintMsg.sqf";
 	call 							compile preprocessFileLineNumbers "compile\fnc_debugMon.sqf";
+	[] 	execVM 						"compile\fn_deployActions.sqf";	
 
 	BIS_Effects_Burn = 				compile preprocessFile "\ca\Data\ParticleEffects\SCRIPTS\destruction\burn.sqf";
 	player_zombieCheck = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieCheck.sqf";			//Run on a players computer, checks if the player is near a zombie
@@ -158,42 +159,27 @@ if (!isDedicated) then {
 		dayz_thirst = dayz_thirst + (_this select 1);
 	};
 
+	epoch_itemCost = {
+		_cost = 0;
+		_cost = (_this select 0) select 1;
+		diag_log format["DEBUG TRADER epoch_itemCost: _this 0-0 (%1) _this (%2)", _cost, _this];
+		_cost
+	};
+
 	epoch_totalCurrency = {
-		// total currency
 		_total_currency = 0;
-		{
-			_part =  (configFile >> "CfgMagazines" >> _x);
-			_worth =  (_part >> "worth");
-			if isNumber (_worth) then {
-				_total_currency = _total_currency + getNumber(_worth);
-			};
-		} count (magazines player);
+		_total_currency = player getVariable ["ZombZGold", 0];
+		diag_log format["DEBUG TRADER epoch_totalCurrency: %1", _total_currency];
 		_total_currency
 	};
 
-	epoch_itemCost = {
-		_trade_total = 0;
-		{
-			_part_in_configClass =  configFile >> "CfgMagazines" >> (_x select 0);
-			if (isClass (_part_in_configClass)) then {
-				_part_inWorth = (_part_in_configClass >> "worth");
-				if isNumber (_part_inWorth) then {
-					_trade_total = _trade_total + (getNumber(_part_inWorth) * (_x select 1));
-				};
-			};
-		} count _this;
-
-		//diag_log format["DEBUG TRADER ITEMCOST: %1", _this];
-		_trade_total
-	};
-
-	epoch_returnChange =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\epoch_returnChange.sqf";
+	epoch_returnChange = compile preprocessFileLineNumbers "compile\epoch_returnChange.sqf";
 	// usage [["partinclassname",4]] call epoch_returnChange;
 
 
 	// trader menu code
 	if (DZE_ConfigTrader) then {
-		call compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_traderMenuConfig.sqf";
+		call compile preprocessFileLineNumbers "compile\player_traderMenuConfig.sqf";
 	}else{
 		call compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_traderMenuHive.sqf";
 	};
