@@ -45,28 +45,17 @@ P2DZE_dropGold = {
 				//gold going to object
 				_objGoldVar = _object getVariable ["ZombZGold", 0];
 
-				//make sure object only has 1 gold bar
-				if ("ItemGoldBar10oz" in (getMagazineCargo _object)) then {
-					_object removeMagazine "ItemGoldBar10oz";
-					_object addMagazineCargoGlobal ["ItemGoldBar10oz", 1];
-				} else {
-					_object addMagazineCargoGlobal ["ItemGoldBar10oz", 1];
-				};
+				//make sure there is only one gold item in the object
+				[_object,true] call fnc_removeExtraBars;
 
 				waitUntil{!isNil '_plyrGoldVar'};
 				waitUntil{!isNil '_objGoldVar'};
-
-				//if amount is -1 or greater than the players total gold then drop all gold
-				if (_amount < 0 || _amount > _plyrGoldVar) then {
-					_amount = _plyrGoldVar;
-					_unit removeMagazine "ItemGoldBar10oz";
-				};
 
 				//new player gold = player gold - gold dropped
 				_newPlyrGold = _plyrGoldVar - _amount;
 
 				//new object gold = objects gold + ammount of gold dropped
-				_newObjGold = _objGoldVar + (_plyrGoldVar - _amount);
+				_newObjGold = _objGoldVar + _amount;
 
 				//set objects gold
 				_object setVariable ["ZombZGold", _newObjGold, true];
@@ -74,24 +63,30 @@ P2DZE_dropGold = {
 				_unit setVariable ["ZombZGold", _newPlyrGold, true];
 
 				if (P2DZE_goldItemHandlingDebug) then {
-					diag_log(format[" DropGold: onContainer: (true) _newPlyrGold: (%1) _newObjGold: (%2) _object / _unit: (%3/%4)", _plyrGoldVar, _newObjGold, _object, _unit]);
+					diag_log(format[" DropGold: onContainer: (true) _newPlyrGold: (%1) _newObjGold: (%2) _object / _unit: (%3/%4) _plyrGoldVar: (%5)", _newPlyrGold, _newObjGold, _object, _unit, _plyrGoldVar]);
 				};
 
 			} else {
+
+				[_unit] spawn {
+					private ["_unit","_near"];
+					_unit = _this select 0;
+					_near = (position _unit) nearObjects ["WeaponHolder",5];
+					{
+						if ((((getMagazineCargo _x) select 0)select 0) == "ItemGoldBar10oz") then {
+							_x call KK_fnc_checkHashGold;
+						};
+					} forEach _near;
+				};
+
 				//gold going to ground
 				waitUntil{!isNil '_plyrGoldVar'};
 
-				//if amount is -1 or greater than the players total gold then drop all gold
-				if (_amount < 0 || _amount > _plyrGoldVar) then {
-					_amount = _plyrGoldVar;
-					_unit removeMagazine "ItemGoldBar10oz";
-				};
-
 				if (_amount > 0) then {
 					//create gold pile
-					_iPos = getPosATL _unit;
+					_iPos = getPos _unit;
 					_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-					_item setposATL _iPos;
+					_item setpos _iPos;
 					_item addMagazineCargoGlobal ["ItemGoldBar10oz",1];
 
 					//obj gold = amount dropped
@@ -117,10 +112,13 @@ P2DZE_dropGold = {
 
 					//set player gold
 					_unit setVariable ["ZombZGold", _newPlyrGold, true];
+
+					//reveal object to unit
+					_unit reveal _item;
 				};
 
 				if (P2DZE_goldItemHandlingDebug) then {
-					diag_log(format[" DropGold: onContainer: (false) _newPlyrGold: (%1) _newObjGold: (%2) _object / _unit: (%3/%4)", _newPlyrGold, _newObjGold, objNull, _unit]);
+					diag_log(format[" DropGold: onContainer: (false) _newPlyrGold: (%1) _newObjGold: (%2) _object / _unit: (%3/%4) _plyrGoldVar: (%5)", _newPlyrGold, _newObjGold, objNull, _unit, _plyrGoldVar]);
 				};
 			};
 		};
@@ -158,6 +156,9 @@ P2DZE_pickupGold = {
 				//make sure object isnt hacked in
 				_object call KK_fnc_checkHash;
 
+				//make sure there is no gold left
+				[_object,false] call fnc_removeExtraBars;
+
 				//get object gold
 				_objGoldVar = _object getVariable ["ZombZGold", 0];
 
@@ -169,11 +170,10 @@ P2DZE_pickupGold = {
 
 				//remove gold from object
 				_object setVariable ["ZombZGold", 0, true];
-				_object removeMagazines "ItemGoldBar10oz";
 
 				//if weapon holder / ground item then delete after this
 				if (_object isKindOf "WeaponHolder") then {
-					deleteVehicle _object
+					deleteVehicle _object;
 				};
 
 				//set players gold
@@ -181,6 +181,40 @@ P2DZE_pickupGold = {
 
 				if (P2DZE_goldItemHandlingDebug) then {
 					diag_log(format[" pickupGold: _object / _unit: (%3/%4) _plyrGoldVar: (%1) _newPlyrGold: (%2)", _plyrGoldVar, _newPlyrGold,_object,_unit]);
+				};
+			};
+		};
+	};
+};
+
+
+/*---------------------------------------------------------------------------
+Give Trader Change
+
+Inputs:
+
+Player
+Change
+---------------------------------------------------------------------------*/
+"P2DZE_plr_giveChange"		addPublicVariableEventHandler {_id = (_this select 1) spawn P2DZE_giveChange};
+
+P2DZE_giveChange = {
+	private ["_unit","_object","_newPlyrGold","_input","_plyrGoldVar","_objGoldVar"];
+
+	_unit = objNull;
+	_input = _this;
+	_unit = _input select 0;
+	_change = _input select 1;
+
+	if (!isNil '_input') then {
+		if !(isNull _unit) then {
+			if (!isNil '_change') then {
+
+				//set players gold
+				_unit setVariable ["ZombZGold", _change, true];
+
+				if (P2DZE_goldItemHandlingDebug) then {
+					diag_log(format[" P2DZE_giveChange: _unit / _change: (%1 / %2)", _unit, _change]);
 				};
 			};
 		};

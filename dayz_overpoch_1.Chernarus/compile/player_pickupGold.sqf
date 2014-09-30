@@ -46,7 +46,7 @@ if (P2DZE_gearOnContainer || P2DZE_gearOnWeaponHolder) then {
 
 		if !(isNull _object) then {
 			//output error info (they will get 1 free gold per reproduction of this bug)
-			diag_log("P2DEBUG: player_dropGold: ERROR: _object is Null!");
+			if (P2DZE_goldItemHandlingDebug) then {diag_log("P2DEBUG: player_pickupGold: ERROR: _object is Null!"); };
 			systemChat("Drop Gold Error: Cursor Target is Null!");
 		};
 
@@ -58,11 +58,24 @@ if (P2DZE_gearOnContainer || P2DZE_gearOnWeaponHolder) then {
 
 //if gear is coming from ground (+1 in gold)
 } else {
-	systemChat("ERROR: Gold was not spawned correctly or hacked in and has no value! Sorry to get your hopes up!");
+	if (P2DZE_goldItemHandlingDebug) then {
+		diag_log("ERROR: Gold has no value or was hacked in and has no value! Sorry to get your hopes up!");
+	};/*
+	[] spawn {
+		private["_plyrGoldVar"];
+		_plyrGoldVar = player getVariable ["ZombZGold", nil];
+		waitUntil{!isNil "_plyrGoldVar"};
+		if (P2DZE_goldItemHandlingDebug) then { diag_log("P2DEBUG player_pickupGold: _plyrGoldVar: " + str _plyrGoldVar); };
+		if (_plyrGoldVar < 1) then {
+			if (P2DZE_goldItemHandlingDebug) then { diag_log("P2DEBUG player_pickupGold: _plyrGoldVar < 1: " + str _plyrGoldVar); };
+			P2DZE_hasGold = false;
+		};
+	};*/
 };
-
+//close gear menu
+closeDialog 0;
 //set has gold var
 P2DZE_hasGold = true;
-
+if (P2DZE_goldItemHandlingDebug) then { diag_log("P2DEBUG player_pickupGold: P2DZE_hasGold: " + str P2DZE_hasGold); };
 [] call ui_displayGold;
 P2DZE_goldRunning = false;

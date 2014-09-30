@@ -57,8 +57,6 @@ _obj call {
 
 */
 
-
-
 KK_fnc_makeRandomId = {
      "hash_id" callExtension "rID"
 };
@@ -79,6 +77,27 @@ KK_fnc_checkHash = {
     false
 };
 
+KK_fnc_checkHashGold = {
+   // "debug_console" callExtension format["Gold: %1 hash check", typeOf _this];
+
+    if ("hash_id" callExtension format [
+        "%1:%2#%3", 
+        netId _this, 
+        typeOf _this, 
+        _this getVariable [
+            (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])), "NULL"
+        ]
+    ] == "PASS") exitWith {"debug_console" callExtension format["Gold: %1 PASSED #0101", typeOf _this]; true};
+    0 = _this spawn KK_fnc_logFailedGold;
+    //"debug_console" callExtension format["Gold: %1 FAILED #1001", typeOf _this];
+    false
+};
+
+KK_fnc_logFailedGold = {
+    _this setDamage 1; //destroy it
+    deleteVehicle _this; //delete it
+};
+
 KK_fnc_logFailed = {
     _dcout = {
         "debug_console" callExtension (format _this);
@@ -86,39 +105,50 @@ KK_fnc_logFailed = {
         ["hashCheckFails",format _this] call p2net_log1; 
     };
     [
-        "Vehicle => OBJ:%1, TYPE:%2, NETID:%1",
-        _this, typeOf _this, netId _this
+        "Vehicle => OBJ:%1, TYPE:%2, WEPS:%5 MAGS:%5",
+        _this, typeOf _this, netId _this, getWeaponCargo _this, getMagazineCargo _this
     ] call _dcout; //log vehicle and netId
+
     [
         "Position => POS:%1, MAP:%2", 
         position _this, mapGridPosition _this
     ] call _dcout; //log veh position and map grid
+
     {
         if (owner _x == owner _this) then {
+
             [
                 "Owner => ID:%1, NETID:%2, UID:%3, NAME:%4, OBJ:%5",
                 owner _x, netId _x, getPlayerUID _x, name _x, _x 
             ] call _dcout; //log current owner
+
         };
     } count playableUnits;
     {
+
         [
             "Crew => OBJ:%1, NAME:%2, UID:%3, SEAT:%4", 
             _x, name _x, getPlayerUID _x, assignedVehicleRole _x
         ] call _dcout; //log current vehicle crew and vehicle seat
+
     } count crew _this;
     {
+
         if (
             isPlayer _x && 
             {_x distance _this <= 100} && 
             {!(_x in _this)}
         ) then {
+
             [
                 "Near => OBJ:%1, NAME:%2, UID:%3, DISTANCE:%4",
                 _x, name _x, getPlayerUID _x, _x distance _this
             ] call _dcout; //log near players and distance
+
         };
     } count playableUnits;
+
+
     _this setDamage 1; //destroy it
     deleteVehicle _this; //delete it
     "debug_console" callExtension "A"; //alert beep

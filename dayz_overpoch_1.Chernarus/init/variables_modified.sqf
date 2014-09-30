@@ -37,13 +37,13 @@ Debugging Settings
 	p2SpT = true;
 
 	//epoch debugging
-	DZEdebug = true;
+	DZEdebug = false;
 
 	//define rate of fps deugging
-	DZE_DiagFpsSlow = true;
+	DZE_DiagFpsSlow = false;
 	DZE_DiagFpsFast = false;
 	//enable full FPS output
-	DZE_DiagVerbose = true;
+	DZE_DiagVerbose = false;
 
 	//epoch damage debugging
 	DZE_Debug_Damage = false;
@@ -268,17 +268,16 @@ Trader Settings
 /*---------------------------------------------------------------------------
 Gold Settings
 ---------------------------------------------------------------------------*/
-P2DZE_goldItemHandlingDebug = true; 	//enable debug messages
-P2DZE_Gold_MaxPickup = 	(500 * 1000);	//max gold pickup (500k)
-P2DZE_goldRunning = false;
-/*---------------------------------------------------------------------------
-Misc Settings
----------------------------------------------------------------------------*/
+	P2DZE_goldItemHandlingDebug = true; 	//enable debug messages
+	P2DZE_Gold_MaxPickup = 	(500 * 1000);	//max gold pickup (500k)
+	P2DZE_goldRunning = false;
 	P2DZE_hasGold = false;			// - gets modified by checkGoldItems & pickupgold & dropgold
 	P2DZE_gearOnContainer = false; // - gets modified in object_monitorGear.sqf
 	P2DZE_gearOnWeaponHolder = false; // - gets modified in object_monitorGear.sqf
-
 	s_player_takeGold = -1;
+/*---------------------------------------------------------------------------
+Misc Settings
+---------------------------------------------------------------------------*/
 	MaxVehicleLimit = 5000; // Default = 50
 	MaxDynamicDebris = 50; // Default = 100
 
@@ -311,7 +310,8 @@ Misc Settings
 		OldHeliCrash = true;
 	};
 
-
+	P2DZ_debugMonSleep = 0.667;
+	P2DZ_debugSliderRange = 100;
 	P2DZ_dbCurMode = 1;
 	P2DZ_debugMonitor = false;
 	//leave as false
@@ -319,7 +319,8 @@ Misc Settings
 	P2DZE_paraOpened = false;
 	//leave as -1
 	P2DZE_HaloReSpawnAction = -1;
-
+	P2DZE_removeExtra_lastRunTime = 0;
+	P2DZE_goldDropUIFirstRun = true;
 /*---------------------------------------------------------------------------
 							Skin Level Configuration
 ---------------------------------------------------------------------------*/

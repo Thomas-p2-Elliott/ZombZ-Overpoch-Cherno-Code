@@ -12,6 +12,7 @@ player_pickupGold =			compile preprocessFileLineNumbers "compile\player_pickupGo
 /* Gold Interface */
 ui_goldInit =				compile preprocessFileLineNumbers "compile\ui_goldInit.sqf";
 ui_displayGold =			compile preprocessFileLineNumbers "compile\ui_displayGold.sqf";
+ui_goldDrop = 				compile preprocessFileLineNumbers "compile\ui_goldDrop.sqf";
 /* Gold Scroll Actions */
 [] execVM 					"compile\fn_goldActions.sqf";
 
@@ -25,6 +26,7 @@ dayz_losChance = {
 	_myExp = _myExp * 0.7;
 	_myExp
 };
+
 
 ui_initDisplay = {
 	private["_control","_ctrlBleed","_display","_ctrlFracture","_ctrlDogFood","_ctrlDogWater","_ctrlDogWaterBorder", "_ctrlDogFoodBorder"];
