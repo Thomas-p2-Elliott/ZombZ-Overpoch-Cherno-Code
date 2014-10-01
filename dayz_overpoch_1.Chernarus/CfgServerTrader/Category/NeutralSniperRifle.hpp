@@ -1,94 +1,147 @@
+
+
 class Category_605 {
-	class SVD_CAMO {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
-	class M40A3 {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
-	class M14_EP1 {
-		type = "trade_weapons";
-		buy[] = {2,"ItemGoldBar10oz"};
-		sell[] = {1,"ItemGoldBar10oz"};
-	};
-	class huntingrifle {
-		type = "trade_weapons";
-		buy[] = {2,"ItemGoldBar"};
-		sell[] = {1,"ItemGoldBar"};
-	};
-	class M4SPR {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
-	class SVD {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
-	class SVD_des_EP1 {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
-	class M24 {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
-	class M24_des_EP1 {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
+             class RH_sc2acog {type="trade_weapons";buy[]={160};sell[]={150};};
+             class RH_sc2sp {type="trade_weapons";buy[]={160};sell[]={150};};
+             class RH_hk417sp {type="trade_weapons";buy[]={160};sell[]={150};};
+             class RH_hk417sdsp {type="trade_weapons";buy[]={160};sell[]={150};};
+             class vil_M110 {type="trade_weapons";buy[]={160};sell[]={150};};
+             class vil_M110sd {type="trade_weapons";buy[]={170};sell[]={160};};
+             class vil_SR25 {type="trade_weapons";buy[]={160};sell[]={150};};
+             class vil_SR25SD {type="trade_weapons";buy[]={170};sell[]={160};};
+             class FHQ_RSASS_TAN {type="trade_weapons";buy[]={160};sell[]={150};};
+             class FHQ_RSASS_SD_TAN {type="trade_weapons";buy[]={170};sell[]={160};};
+             class DMR_SKN {type="trade_weapons";buy[]={160};sell[]={150};};
+             class vil_DRM_BASE {type="trade_weapons";buy[]={160};sell[]={150};};
+             class vil_SV_98 {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SV_98_69 {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SV_98_SD {type="trade_weapons";buy[]={140};sell[]={130};};
+             class SVD_des_EP1 {type="trade_weapons";buy[]={140};sell[]={130};};
+             class SVD_CAMO {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SVD_63 {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SVD_S {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SVD_M {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SVD_P21 {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SVDK {type="trade_weapons";buy[]={140};sell[]={130};};
+             class SVD {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SVU {type="trade_weapons";buy[]={140};sell[]={130};};
+             class gms_k98zf39 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_Groza_SC {type="trade_weapons";buy[]={90};sell[]={80};};
+             class M24_des_EP1 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_M21 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_M21G {type="trade_weapons";buy[]={90};sell[]={80};};
+             class M40A3 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_m40a3 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class huntingrifle {type="trade_weapons";buy[]={90};sell[]={80};};
+             class VSS_vintorez {type="trade_weapons";buy[]={90};sell[]={80};};
+             class RH_m21 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_vsk94 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_PSL1 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_M76 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_M91 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class M24 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_VSS_PSO {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_M24b {type="trade_weapons";buy[]={90};sell[]={80};};
+             class revolver_gold_EP1 {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class RH_Deagleg {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class RH_anacg {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class Javelin {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class AKS_GOLD {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class AA12_PMC {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class BAF_LRR_scoped {type="trade_weapons";buy[]={360};sell[]={350};};
+             class KSVK_DZE {type="trade_weapons";buy[]={310};sell[]={300};};
+             class USSR_cheytacM200 {type="trade_weapons";buy[]={460};sell[]={450};};
+             class USSR_cheytacM200_sd {type="trade_weapons";buy[]={510};sell[]={500};};
+             class BAF_AS50_scoped_DZ {type="trade_weapons";buy[]={610};sell[]={600};};
+             class m107_SKN {type="trade_weapons";buy[]={560};sell[]={550};};
+             class BAF_LRR_scoped_W {type="trade_weapons";buy[]={360};sell[]={350};};
+             class FHQ_MSR_DESERT {type="trade_weapons";buy[]={410};sell[]={400};};
+             class FHQ_MSR_SD_DESERT {type="trade_weapons";buy[]={460};sell[]={450};};
+             class FHQ_XM2010_SD_DESERT {type="trade_weapons";buy[]={460};sell[]={450};};
+             class BAF_L85A2_RIS_CWS {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class M249_TWS_EP1 {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class AKS_74_GOSHAWK {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class SCAR_L_STD_EGLM_TWS {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class SCAR_H_STD_TWS_SD {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class m8_tws_sd {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class FHQ_ACR_WDL_TWS_F {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class FHQ_ACR_BLK_TWS_SD {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class FHQ_ACR_TAN_TWS_GL_SD {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class FHQ_ACR_SNW_TWS {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class FHQ_ACR_SNW_TWS_GL {type="trade_weapons";buy[]={1510};sell[]={1500};};
+
 };
+
+
+
 class Category_640 {
-	class SVD_CAMO {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
-	class M40A3 {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
-	class M14_EP1 {
-		type = "trade_weapons";
-		buy[] = {2,"ItemGoldBar10oz"};
-		sell[] = {1,"ItemGoldBar10oz"};
-	};
-	class huntingrifle {
-		type = "trade_weapons";
-		buy[] = {2,"ItemGoldBar"};
-		sell[] = {1,"ItemGoldBar"};
-	};
-	class M4SPR {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
-	class SVD {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
-	class SVD_des_EP1 {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
-	class M24 {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
-	class M24_des_EP1 {
-		type = "trade_weapons";
-		buy[] = {1,"ItemGoldBar10oz"};
-		sell[] = {6,"ItemGoldBar"};
-	};
+             class RH_sc2acog {type="trade_weapons";buy[]={160};sell[]={150};};
+             class RH_sc2sp {type="trade_weapons";buy[]={160};sell[]={150};};
+             class RH_hk417sp {type="trade_weapons";buy[]={160};sell[]={150};};
+             class RH_hk417sdsp {type="trade_weapons";buy[]={160};sell[]={150};};
+             class vil_M110 {type="trade_weapons";buy[]={160};sell[]={150};};
+             class vil_M110sd {type="trade_weapons";buy[]={170};sell[]={160};};
+             class vil_SR25 {type="trade_weapons";buy[]={160};sell[]={150};};
+             class vil_SR25SD {type="trade_weapons";buy[]={170};sell[]={160};};
+             class FHQ_RSASS_TAN {type="trade_weapons";buy[]={160};sell[]={150};};
+             class FHQ_RSASS_SD_TAN {type="trade_weapons";buy[]={170};sell[]={160};};
+             class DMR_SKN {type="trade_weapons";buy[]={160};sell[]={150};};
+             class vil_DRM_BASE {type="trade_weapons";buy[]={160};sell[]={150};};
+             class vil_SV_98 {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SV_98_69 {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SV_98_SD {type="trade_weapons";buy[]={140};sell[]={130};};
+             class SVD_des_EP1 {type="trade_weapons";buy[]={140};sell[]={130};};
+             class SVD_CAMO {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SVD_63 {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SVD_S {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SVD_M {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SVD_P21 {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SVDK {type="trade_weapons";buy[]={140};sell[]={130};};
+             class SVD {type="trade_weapons";buy[]={140};sell[]={130};};
+             class vil_SVU {type="trade_weapons";buy[]={140};sell[]={130};};
+             class gms_k98zf39 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_Groza_SC {type="trade_weapons";buy[]={90};sell[]={80};};
+             class M24_des_EP1 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_M21 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_M21G {type="trade_weapons";buy[]={90};sell[]={80};};
+             class M40A3 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_m40a3 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class huntingrifle {type="trade_weapons";buy[]={90};sell[]={80};};
+             class VSS_vintorez {type="trade_weapons";buy[]={90};sell[]={80};};
+             class RH_m21 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_vsk94 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_PSL1 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_M76 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_M91 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class M24 {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_VSS_PSO {type="trade_weapons";buy[]={90};sell[]={80};};
+             class vil_M24b {type="trade_weapons";buy[]={90};sell[]={80};};
+             class revolver_gold_EP1 {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class RH_Deagleg {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class RH_anacg {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class Javelin {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class AKS_GOLD {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class AA12_PMC {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class BAF_LRR_scoped {type="trade_weapons";buy[]={360};sell[]={350};};
+             class KSVK_DZE {type="trade_weapons";buy[]={310};sell[]={300};};
+             class USSR_cheytacM200 {type="trade_weapons";buy[]={460};sell[]={450};};
+             class USSR_cheytacM200_sd {type="trade_weapons";buy[]={510};sell[]={500};};
+             class BAF_AS50_scoped_DZ {type="trade_weapons";buy[]={610};sell[]={600};};
+             class m107_SKN {type="trade_weapons";buy[]={560};sell[]={550};};
+             class BAF_LRR_scoped_W {type="trade_weapons";buy[]={360};sell[]={350};};
+             class FHQ_MSR_DESERT {type="trade_weapons";buy[]={410};sell[]={400};};
+             class FHQ_MSR_SD_DESERT {type="trade_weapons";buy[]={460};sell[]={450};};
+             class FHQ_XM2010_SD_DESERT {type="trade_weapons";buy[]={460};sell[]={450};};
+             class BAF_L85A2_RIS_CWS {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class M249_TWS_EP1 {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class AKS_74_GOSHAWK {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class SCAR_L_STD_EGLM_TWS {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class SCAR_H_STD_TWS_SD {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class m8_tws_sd {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class FHQ_ACR_WDL_TWS_F {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class FHQ_ACR_BLK_TWS_SD {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class FHQ_ACR_TAN_TWS_GL_SD {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class FHQ_ACR_SNW_TWS {type="trade_weapons";buy[]={1510};sell[]={1500};};
+             class FHQ_ACR_SNW_TWS_GL {type="trade_weapons";buy[]={1510};sell[]={1500};};
+
 };
