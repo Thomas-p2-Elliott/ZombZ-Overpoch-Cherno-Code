@@ -1,4 +1,130 @@
 class CfgLootSmall {
+PistolTopWeaps[] = {
+
+{"RH_deagle",0.50}, 
+{"RH_Deaglem",0.50}, 
+{"RH_Deaglemz",0.50}, 
+{"RH_Deaglemzb",0.50}, 
+{"RH_Deagles",0.50}, 
+{"UZI_SD_EP1",0.50}, 
+{"RH_uspm",0.50}, 
+{"RH_bull",0.50}, 
+{"vil_apssd",0.50}, 
+{"vil_APS",0.50} 
+};
+
+
+PistolMilWeaps[] = {
+
+{"glock17_EP1",0.50}, 
+{"RH_g18",0.50}, 
+{"RH_g17",0.50}, 
+{"RH_g19",0.50}, 
+{"RH_g19t",0.50}, 
+{"RH_g17sd",0.50}, 
+{"UZI_EP1",0.50}, 
+{"M9SD",0.50}, 
+{"RH_m9sd",0.50}, 
+{"RH_m9csd",0.50}, 
+{"vil_USPSD",0.50}, 
+{"vil_USP45",0.50}, 
+{"vil_USP45SD",0.50}, 
+{"RH_anac",0.50}, 
+{"RH_uspsd",0.50}, 
+{"RH_vz61",0.50}, 
+{"RH_tec9",0.50}, 
+{"vil_Glock",0.50}, 
+{"vil_Glock_o",0.50}, 
+{"Sa61_EP1",0.50}, 
+{"M9",0.50}, 
+{"RH_usp",0.50}, 
+{"RH_m9",0.50}, 
+{"RH_m9c",0.50}, 
+{"vil_USP",0.50} 
+};
+
+ShotgunWeaps[] = {
+
+{"Winchester1866",0.50}, 
+{"MR43",0.50}, 
+{"Saiga12K",0.50}, 
+{"Remington870_lamp",0.50}, 
+{"Crossbow_DZ",0.50}, 
+{"M1014",0.50}, 
+{"Remington870",0.50} 
+};
+
+MeleeWeaps[] = {
+
+{"Chainsaw",0.01}, 
+{"MeleeBaseBallBat",0.50}, 
+{"MeleeCrowbar",0.50}, 
+{"MeleeFishingPole",0.50}, 
+{"MeleeSledge",0.50}, 
+{"MeleeHatchet_DZE",0.50}, 
+{"MeleeMachete",0.50}, 
+{"ChainSawB",0.01}, 
+{"ChainSawG",0.01}, 
+{"ChainSawP",0.01}, 
+{"ChainSawR",0.01} 
+};
+
+
+
+SubWeaps[] = {
+
+{"vil_uzimini",0.50}, 
+{"vil_uzi_c",0.50}, 
+{"vil_uzi_SD",0.50}, 
+{"vil_uzimini_SD",0.50}, 
+{"vil_9a91_c",0.50}, 
+{"vil_9a91_csd",0.50}, 
+{"MP5A5",0.50}, 
+{"MP5SD",0.50}, 
+{"vil_MP5SD_EOTech",0.50}, 
+{"vil_MP5_EOTech",0.50}, 
+{"bizon",0.50}, 
+{"bizon_silenced",0.50}, 
+{"vil_VAL_C",0.50}, 
+{"vil_Vikhr",0.50}, 
+{"vil_VAL",0.50}, 
+{"vil_9a91",0.50}, 
+{"vil_Groza_GL",0.50}, 
+{"vil_uzi",0.50} 
+};
+
+
+PistolsLow[] = {
+
+{"DDOPP_X3",0.50}, 
+{"DDOPP_X3_b",0.50}, 
+{"RH_mk22sd",0.50}, 
+{"RH_mk22vsd",0.50}, 
+{"Makarov",0.50}, 
+{"Colt1911",0.50}, 
+{"revolver_EP1",0.50}, 
+{"MakarovSD",0.50}, 
+{"RH_python",0.50}, 
+{"RH_browninghp",0.50}, 
+{"RH_p226",0.50}, 
+{"RH_p226s",0.50}, 
+{"RH_p38",0.50}, 
+{"RH_ppk",0.50}, 
+{"RH_m1911",0.50}, 
+{"RH_m1911sd",0.50}, 
+{"RH_m1911old",0.50}, 
+{"RH_tt33",0.50}, 
+{"RH_m93r",0.50}, 
+{"vil_B_HP",0.50}, 
+{"DDOPP_X26",0.50}, 
+{"DDOPP_X26_b",0.50}, 
+{"RH_mk22",0.50}, 
+{"RH_mk22v",0.50}, 
+{"RH_mk2",0.50}, 
+{"vil_Tt33",0.50}, 
+{"Vil_PYA",0.50} 
+};
+
 	trash[] = {		
 		{"TrashTinCan",0.5},
 		{"TrashJackDaniels",0.05},
@@ -262,15 +388,5 @@ class CfgLootSmall {
 		{"200Rnd_556x45_M249",0.14},
 		{"MAAWS_HEAT",0.01},
 		{"PipeBomb",0.01}
-	};
-	pistols[] = {
-		{"Makarov",0.25},
-		{"Colt1911",0.23},
-		{"revolver_EP1",0.20},
-		{"glock17_EP1",0.10},
-		{"MakarovSD",0.10},
-		{"M9",0.07},
-		{"M9SD",0.04},
-		{"revolver_gold_EP1",0.01}
 	};
 };

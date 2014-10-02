@@ -1,0 +1,4 @@
+todo: antihack
+
+
+build generator to whitelist all mission file script paths then instead of using infistar script name blacklist scan, use a whitelist scan.

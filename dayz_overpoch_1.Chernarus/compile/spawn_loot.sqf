@@ -10,7 +10,7 @@ _item = objNull;
 _iPosZ = _iPos select 2;
 if((isNil "_iPosZ") || {( _iPosZ < 0)}) then { _iPos = [_iPos select 0,_iPos select 1,0]; };
 if (isNil "_iClass") exitWith {diag_log "_iClass isNil, exiting loot spawn!";};
-
+//diag_log("P2DEBUG: spawn_loot: _this: " + str _this);
 switch (_iClass) do {
 	default {
 		_itemTypes = [];
@@ -58,45 +58,63 @@ switch (_iClass) do {
 			if ((_iItem != "") && (isClass(configFile >> "CfgWeapons" >> _iItem))) then {
 				_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 				[_iItem] call p2_checkWepBpslot;
+
+				if (_iItem == "Chainsaw") then {
+					_iItem = ["ChainSaw","ChainSawB","ChainSawG","ChainSawP","ChainSawR"] call BIS_fnc_selectRandom;
+				};
+
 				_item addWeaponCargoGlobal [_iItem,1];
 			};
 		}
 		else {
-			// diag_log format["DEBUG dayz_CLBase: %1", dayz_CLBase];
-			_index = dayz_CLBase find _iClass;
-			if (_index > 0) then {
-				_weights = dayz_CLChances select _index;
-				//diag_log format["DEBUG dayz_CLChances: %1", dayz_CLChances];
-				_cntWeights = count _weights;
-				_index = floor(random _cntWeights);
-				_index = _weights select _index;
-				_item2 = _itemTypes select _index;
-				if ((_item2 != "") && (isClass(configFile >> "CfgWeapons" >> _item2))) then{
-					_item2 = [_item2,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
-					_item = createVehicle["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-					_item addWeaponCargoGlobal[_item2, 1];
-					if ((count _mags) > 0) then{
-						if (_mags select 0 == "20Rnd_556x45_Stanag") then{ _mags set[0, "30Rnd_556x45_Stanag"] };
-						if (_mags select 0 == "30Rnd_556x45_G36") then{ _mags set[0, "30Rnd_556x45_Stanag"] };
-						if (_mags select 0 == "30Rnd_556x45_G36SD") then{ _mags set[0, "30Rnd_556x45_StanagSD"] };
-						if (!(_item2 in MeleeWeapons)) then{
-							_magQty = round(random 10);
-							if (_magQty > 3) then{
-								_item addMagazineCargoGlobal[(_mags select 0), (round(random 1) + 1)];
+			if (_iClass in ["ACRHighWeaps","ScarLowWeaps","ScarHighWeaps","SniperMedWeaps","RiflesMedWeaps","HK416Weaps","HK417Weaps","MasWeaps","G36Weaps","PistolTopWeaps","SVDWeaps","PistolMilWeaps","PistolsLow","SubWeaps","RiflesLowWeaps","SniperLowWeaps","AKLowWeaps","AKHighWeaps","LMGWeaps","L85Weaps","M4Weaps","M8Weaps","HMGWeaps","NVweaps","UltraWeaps","ShotgunWeaps","MeleeWeaps","SniperTopWeaps","RocketWeaps","TWSWeaps","LauncherWeaps"]) then {
+				if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: CustomClass, Line: %1", __LINE__]; };
+				_index = dayz_CLBase find _iClass;
+				if (_index > 0) then {
+					_weights = dayz_CLChances select _index;
+					_cntWeights = count _weights;
+					_index = floor(random _cntWeights);
+					_index = _weights select _index;
+					_item2 = _itemTypes select _index;
+
+					if ((_item2 != "") && (isClass(configFile >> "CfgWeapons" >> _item2))) then {
+						_item2 = [_item2,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+
+						if (_item2 == "Chainsaw") then {
+							_item2 = ["ChainSaw","ChainSawB","ChainSawG","ChainSawP","ChainSawR"] call BIS_fnc_selectRandom;
+						};
+
+						_item = createVehicle["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
+						_item addWeaponCargoGlobal[_item2, 1];
+						_mags = [] + getArray (configFile >> "cfgWeapons" >> _item2 >> "magazines");
+						if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: Weapon: %1", _item2]; };
+						if (((count _mags) > 0) && (!(_item2 in MeleeWeapons))) then{
+
+							for "_x" from 1 to (round(random 3) + 1) do {
+								private["_p2mag"];
+
+								_p2mag = [_item2,_mags,[false,false]] call p2_randomMags;
+
+								if (_p2mag == "20Rnd_556x45_Stanag") then { _p2mag = "30Rnd_556x45_Stanag"; };
+								if (_p2mag == "30Rnd_556x45_G36") then { _p2mag =  "30Rnd_556x45_Stanag"; };
+								if (_p2mag == "30Rnd_556x45_G36SD") then { _p2mag =  "30Rnd_556x45_StanagSD"; };
+								_item addMagazineCargoGlobal[_p2mag, 1];
 							};
+
+							if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: Mags: %1", (getMagazineCargo _item)]; };
 						};
 					};
-				};
-				if ((_item2 != "") && (isClass(configFile >> "CfgMagazines" >> _item2))) then{
-					_item = createVehicle["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-					_item2 = [_item2,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
-					[_item2] call p2_checkWepBpslot;
-					_item addMagazineCargoGlobal[_item2, 1];
-				};
-				if ((_item2 != "") && (isClass(configFile >> "CfgVehicles" >> _item2))) then{
-					_item2 = [_item2,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
-					[_item2] call p2_checkWepBpslot;
-					_item = createVehicle[_item2, _iPos, [], _radius, "CAN_COLLIDE"];
+
+					if ((_item2 != "") && (isClass(configFile >> "CfgMagazines" >> _item2))) then{
+						_item = createVehicle["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
+						_item2 = [_item2,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+						_item addMagazineCargoGlobal[_item2, 1];
+					};
+					if ((_item2 != "") && (isClass(configFile >> "CfgVehicles" >> _item2))) then{
+						_item2 = [_item2,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
+						[_item2] call p2_checkWepBpslot;
+						_item = createVehicle[_item2, _iPos, [], _radius, "CAN_COLLIDE"];
+					};
 				};
 			};
 		};
@@ -168,6 +186,8 @@ switch (_iClass) do {
 	    _index = floor(random _cntWeights);
 		_index = _weights select _index;
 		_iItem = _itemTypes select _index;
+		//diag_log("P2DEBUG: spawn_loot: _itemTypes: " + str _itemTypes);
+	//	diag_log("P2DEBUG: spawn_loot: _iItem: " + str _iItem);
 
 		if (_iItem == "Chainsaw") then {
 			_iItem = ["ChainSaw","ChainSawB","ChainSawG","ChainSawP","ChainSawR"] call BIS_fnc_selectRandom;
@@ -180,13 +200,21 @@ switch (_iClass) do {
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
 		_item addWeaponCargoGlobal [_iItem,1];
 		_mags = [] + getArray (configFile >> "cfgWeapons" >> _iItem >> "magazines");
-		if ((count _mags) > 0) then
-		{
-			if (_mags select 0 == "Quiver") then { _mags set [0, "WoodenArrow"] }; // Prevent spawning a Quiver
-			if (_mags select 0 == "20Rnd_556x45_Stanag") then { _mags set [0, "30Rnd_556x45_Stanag"] };
-			if (_mags select 0 == "30Rnd_556x45_G36") then { _mags set [0, "30Rnd_556x45_Stanag"] };
-			if (_mags select 0 == "30Rnd_556x45_G36SD") then { _mags set [0, "30Rnd_556x45_StanagSD"] };
-			_item addMagazineCargoGlobal [(_mags select 0), (round(random 2))];
+		if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: cfglootweapon: %1", _iItem]; };
+		if (((count _mags) > 0) && (!(_iItem in MeleeWeapons))) then{
+
+			for "_x" from 1 to (round(random 3) + 1) do {
+				private["_p2mag"];
+
+				_p2mag = [_iItem,_mags,[false,false]] call p2_randomMags;
+
+				if (_p2mag == "20Rnd_556x45_Stanag") then { _p2mag = "30Rnd_556x45_Stanag"; };
+				if (_p2mag == "30Rnd_556x45_G36") then { _p2mag =  "30Rnd_556x45_Stanag"; };
+				if (_p2mag == "30Rnd_556x45_G36SD") then { _p2mag =  "30Rnd_556x45_StanagSD"; };
+				_item addMagazineCargoGlobal[_p2mag, 1];
+			};
+
+			if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: Mags: %1", (getMagazineCargo _item)]; };
 		};
 		
 	};
@@ -196,20 +224,28 @@ switch (_iClass) do {
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
 		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
+
+		if (_iItem == "Chainsaw") then {
+			_iItem = ["ChainSaw","ChainSawB","ChainSawG","ChainSawP","ChainSawR"] call BIS_fnc_selectRandom;
+		};
+
 		_item addWeaponCargoGlobal [_iItem,1];
 		_mags = [] + getArray (configFile >> "cfgWeapons" >> _iItem >> "magazines");
-		if ((count _mags) > 0) then
-		{
-			if (_mags select 0 == "Quiver") then { _mags set [0, "WoodenArrow"] }; // Prevent spawning a Quiver
-			if (_mags select 0 == "20Rnd_556x45_Stanag") then { _mags set [0, "30Rnd_556x45_Stanag"] };
-			if (_mags select 0 == "30Rnd_556x45_G36") then { _mags set [0, "30Rnd_556x45_Stanag"] };
-			if (_mags select 0 == "30Rnd_556x45_G36SD") then { _mags set [0, "30Rnd_556x45_StanagSD"] };
-			if (!(_iItem in MeleeWeapons)) then {
-				_magQty = round(random 10);
-				if (_magQty > 3) then {
-					_item addMagazineCargoGlobal [(_mags select 0), (round(random 1) + 1)];
-				};
+		if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: Weapon: %1", _iItem]; };
+		if (((count _mags) > 0) && (!(_iItem in MeleeWeapons))) then{
+
+			for "_x" from 1 to (round(random 3) + 1) do {
+				private["_p2mag"];
+
+				_p2mag = [_iItem,_mags,[false,false]] call p2_randomMags;
+
+				if (_p2mag == "20Rnd_556x45_Stanag") then { _p2mag = "30Rnd_556x45_Stanag"; };
+				if (_p2mag == "30Rnd_556x45_G36") then { _p2mag =  "30Rnd_556x45_Stanag"; };
+				if (_p2mag == "30Rnd_556x45_G36SD") then { _p2mag =  "30Rnd_556x45_StanagSD"; };
+				_item addMagazineCargoGlobal[_p2mag, 1];
 			};
+
+			if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: Mags: %1", (getMagazineCargo _item)]; };
 		};
 	};
 	case "weaponnomags":
@@ -218,6 +254,11 @@ switch (_iClass) do {
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
 		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
+
+		if (_iItem == "Chainsaw") then {
+			_iItem = ["ChainSaw","ChainSawB","ChainSawG","ChainSawP","ChainSawR"] call BIS_fnc_selectRandom;
+		};
+
 		_item addWeaponCargoGlobal [_iItem,1];
 	};
 	case "magazine":
@@ -231,6 +272,11 @@ switch (_iClass) do {
 	case "object": {
 		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
+
+		if (_iItem == "Chainsaw") then {
+			_iItem = ["ChainSaw","ChainSawB","ChainSawG","ChainSawP","ChainSawR"] call BIS_fnc_selectRandom;
+		};
+
 		_item = createVehicle [_iItem, _iPos, [], _radius, "CAN_COLLIDE"];
 		if ((count _iPos) > 2) then {
 			_item setPosATL _iPos;

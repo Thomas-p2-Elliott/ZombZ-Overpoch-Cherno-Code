@@ -18,12 +18,12 @@ if (!isDedicated) then {
 	player_build =					compile preprocessFileLineNumbers "actions\player_build.sqf";
 	dayz_spaceInterrupt =			compile preprocessFileLineNumbers "actions\dayz_spaceInterrupt.sqf";
 	player_unlockVault =			compile preprocessFileLineNumbers "compile\player_unlockVault.sqf";
-	player_zombieCheck = 			compile preprocessFileLineNumbers "compile\player_zombieCheck.sqf";		//Run on a players computer, checks if the player is near a zombie
-	player_zombieAttack = 			compile preprocessFileLineNumbers "compile\player_zombieAttack.sqf";	//Run on a players computer, causes a nearby zombie to attack them
+	player_zombieCheck = 			compile preprocessFileLineNumbers "compile\player_zombieCheck.sqf";		
+	player_zombieAttack = 			compile preprocessFileLineNumbers "compile\player_zombieAttack.sqf";	
 	player_death =					compile preprocessFileLineNumbers "compile\player_death.sqf";
 	player_checkStealth =			compile preprocessFileLineNumbers "compile\player_checkStealth.sqf";
 	player_monitor =				compile preprocessFileLineNumbers "system\player_monitor.sqf";
-
+	building_spawnLoot =			compile preprocessFileLineNumbers "compile\building_spawnLoot.sqf";
 
 	/*	Gear Menu Compiles	*/
 	[] execVM 						"init\gearMenuCompiles.sqf";
@@ -39,6 +39,7 @@ if (!isDedicated) then {
 	//pure custom
 	snap_build = 					compile preprocessFileLineNumbers "compile\snap_build.sqf";
 	fnc_removeExtraBars =			compile preprocessFileLineNumbers "compile\fnc_removeExtraBars.sqf";
+	p2_randomMags =					compile preprocessFileLineNumbers "compile\p2_randomMags.sqf";
 	player2_haloSpawn =				compile preprocessFileLineNumbers "actions\player2_haloSpawn.sqf";
 	call 							compile preprocessFileLineNumbers "compile\fn_hintMsg.sqf";
 	call 							compile preprocessFileLineNumbers "compile\fnc_debugMon.sqf";
@@ -54,7 +55,6 @@ if (!isDedicated) then {
 	player_animalCheck =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_animalCheck.sqf";
 	player_spawnCheck = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_spawnCheck.sqf";
 	player_dumpBackpack = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_dumpBackpack.sqf";
-	building_spawnLoot =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\building_spawnLoot.sqf";
 	building_spawnZombies =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\building_spawnZombies.sqf";
 	player_fired =					compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_fired.sqf";			//Runs when player fires. Alerts nearby Zeds depending on calibre && audial rating
 	player_harvest =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_harvest.sqf";

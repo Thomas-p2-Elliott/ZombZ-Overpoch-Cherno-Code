@@ -71,14 +71,19 @@ dayz_CLBase = [];
 _config = [];
 if (DZE_MissionLootTable) then {
 	_config = missionConfigFile >> "cfgLoot";
+	//diag_log format["P2DEBUG loot_init: _config1: %1", _config];
 } else {
 	_config = configFile >> "cfgLoot";
+	//diag_log format["P2DEBUG loot_init: _config2: %1", _config];
 };
 
 for "_i" from 0 to ((count (_config)) - 1) do {
 	_classname = configName (_config select _i);
 	_itemChances = getArray (_config select _i);
-	_weighted = [];
+	//if (P2DZE_debugLoot) then { 
+	//	diag_log format["DEBUG _classname: %1 _itemChances: %2", _classname, _itemChances];
+	//};
+		_weighted = [];
 	_j = 0;
 	for "_l" from 0 to ((count _itemChances) - 1) do 
 	{

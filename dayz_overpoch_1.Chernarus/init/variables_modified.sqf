@@ -60,6 +60,8 @@ Debugging Settings
 	//fnc_debugMon.sqf
 	P2DZE_debugColoutput = false;
 
+	P2DZE_debugLoot = true;
+
 /*---------------------------------------------------------------------------
 Player/Spawn Settings
 ---------------------------------------------------------------------------*/
@@ -73,13 +75,22 @@ Player/Spawn Settings
 	dayz_paraSpawn = false;
 
 	//debug freshspawn loadouts
-	P2DZE_loadoutsDebug = true;
+	P2DZE_loadoutsDebug = false;
 
 	//nametag distance
-	DZE_HumanityTargetDistance = 25;
+	DZE_HumanityTargetDistance = 0;
 
 	//backpack gaurd, wipes backpack if you log out near another player (anti-duping measure)
 	if(isServer) then {
+		//debug server player sync
+		P2DZE_debugServerPlayerSync = false;
+
+		//debug safe zone cleanup
+		P2DZE_safeZoneCleanupDebug = false;
+
+		//debug crashsites
+		P2DZE_debugCrashSites = false;
+
 		//enable backpack gaurd
 		DZE_BackpackGuard = true;
 
@@ -119,7 +130,7 @@ Player/Spawn Settings
 		DZE_ForceNameTags = false;
 
 		//force name tags off?
-		DZE_ForceNameTagsOff = false;
+		DZE_ForceNameTagsOff = true;
 
 		//force name tags in trader?
 		DZE_ForceNameTagsInTrader = false;
@@ -140,7 +151,7 @@ Loot & Zombie & Animal Settings
 ---------------------------------------------------------------------------*/
 	P2DZ_lootCheck_centerPoint = [0,0,0];	//Center point for where the 'improved' loot should spawn (type: position array)
 	P2DZ_lootCheck_radius = 10000;			//Radius for this dome for the size of the imrpoved loot zone (type: number, meters)
-
+	P2DZ_lootCheck_enabled = false;
 	//Pistols List (Pistols listed here will spawn 4 - 8 mags)
 	P2DZ_pistolList = ["Makarov","MakarovSD","M9","Colt1911","revolver_EP1","revolver_gold_EP1","glock17_EP1","M9SD","MakarovSD","Sa61_EP1","UZI_EP1","UZI_SD_EP1"];
 
@@ -183,7 +194,7 @@ Loot & Zombie & Animal Settings
 	dayz_maxAnimals = 1;
 
 	//Zombie eye vision angle
-	p2_zEyeAngle = 10;
+	p2_zEyeAngle = 15;
 
 	//Zombie attack speed, 1 = default (fast)
 	p2_zAttackSpeed = 1;
@@ -240,7 +251,7 @@ Base Settings
 	//allow building on roads with true, disallow with false
 	DZE_BuildOnRoads = false;
 
-	//plot dimensions, plot radius, plot exclusion zone for other plots
+	//plot dimensions / plot radius, plot exclusion zone for other plots
 	DZE_PlotPole = [55,65];
 
 	//plot maintenance area effect dimensions
@@ -268,7 +279,7 @@ Trader Settings
 /*---------------------------------------------------------------------------
 Gold Settings
 ---------------------------------------------------------------------------*/
-	P2DZE_goldItemHandlingDebug = true; 	//enable debug messages
+	P2DZE_goldItemHandlingDebug = false; 	//enable debug messages
 	P2DZE_Gold_MaxPickup = 	(500 * 1000);	//max gold pickup (500k)
 	P2DZE_goldRunning = false;
 	P2DZE_hasGold = false;			// - gets modified by checkGoldItems & pickupgold & dropgold
@@ -336,6 +347,11 @@ p2_humanityLevelsEnabled = true;
 p2_humanitySkinsMale = ["Survivor2_DZ","Bandit1_DZ","Bandit2_DZ","Survivor3_DZ","TK_INS_Warlord_EP1_DZ","Ins_Soldier_GL_DZ","INS_Lopotev_DZ"];
 p2_humanitySkinsFemale = ["SurvivorW2_DZ","SurvivorWcombat_DZ","SurvivorWdesert_DZ","SurvivorWurban_DZ","SurvivorWpink_DZ","SurvivorW3_DZ","BanditW1_DZ","BanditW2_DZ"];
 
+/*---------------------------------------------------------------------------
+Executions
+---------------------------------------------------------------------------*/
+//init global arrays for Loot Chances
+call compile preprocessFileLineNumbers "init\loot_init.sqf";
 
 /*---------------------------------------------------------------------------
 							Functions
@@ -368,7 +384,7 @@ p2_fnc_skinLvlCheck = {
 	_model = _this select 0;
 	_humanity = _this select 1;
 
-	diag_log("P2DEBUG: fnc_skinLvlCheck: " + str(_this));
+	//diag_log("P2DEBUG: fnc_skinLvlCheck: " + str(_this));
 
 	//	-	Check if player is in class-based clothing
 	// Check if player is a man
@@ -428,7 +444,7 @@ p2_fnc_skinLvlCheck = {
 			};
 
 
-		diag_log("P2DEBUG: fnc_skinLvlCheck: finalModel: " + str(_model));
+		//diag_log("P2DEBUG: fnc_skinLvlCheck: finalModel: " + str(_model));
 
 		// Set players skin
 		_model spawn player_switchModel;

@@ -31,10 +31,18 @@ Configuration Instructions:
 www.ZombZ.net
 ---------------------------------------------------------------------------*/
 private ["_loot","_position","_out","_p2d","_centerPoint","_radius","_dist","_inZone","_timeStart","_timeEnd","_timeBetween"];
+
+if(P2DZ_lootCheck_enabled) then {
+
 _timeStart = diag_tickTime;
 //load info parsed in from execution
 _loot = _this select 0;
 _position = _this select 1;
+
+if (isNil '_loot' || isNil '_position') exitWith {
+	nil
+};
+
 _out = _loot;
 
 //load info from global vars
@@ -170,3 +178,7 @@ _timeEnd = diag_tickTime;
 _timeBetween = _timeEnd - _timeStart;
 if (_p2d) then { diag_log("fn_lootCheck:	_loot:	" + str _loot + "	_inZone:	" + str _inZone + "	_out:	" + str _out + "	Ticks Taken: " + str _timeBetween); };
 _out
+
+} else {
+	_this select 0
+};

@@ -578,8 +578,6 @@ dayz_fuelsources = ["Land_Ind_TankSmall","Land_fuel_tank_big","Land_fuel_tank_st
 
 DZE_Lock_Door = "";
 
-//init global arrays for Loot Chances
-call compile preprocessFileLineNumbers "init\loot_init.sqf";
 
 if(isServer) then {
 	dayz_players = [];
