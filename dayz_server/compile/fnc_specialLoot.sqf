@@ -60,10 +60,10 @@ switch (_eventType) do {
 							 ["BAF_AS50_scoped_DZ", "weapon"], 			 //SniperTopWeaps
 							 ["m107_SKN", "weapon"], 					 //SniperTopWeaps
 							 ["BAF_LRR_scoped_W", "weapon"], 			 //SniperTopWeaps
-							 ["FHQ_MSR_DESERT","weapon"],					 //SniperTopWeaps
-							 ["FHQ_MSR_SD_DESERT","weapon"],				 //SniperTopWeaps
+							 ["FHQ_MSR_DESERT","weapon"],				 //SniperTopWeaps
+							 ["FHQ_MSR_SD_DESERT","weapon"],			 //SniperTopWeaps
 							 ["FHQ_XM2010_SD_DESERT","weapon"],			 //SniperTopWeaps
-							 ["FHQ_XM2010_DESERT","weapon"],				 //SniperTopWeaps
+							 ["FHQ_XM2010_DESERT","weapon"],			 //SniperTopWeaps
 
 							 ["M136", "weapon"],              			 //RocketWeaps
 							 ["RPG7V", "weapon"], 			       	 	 //RocketWeaps
@@ -72,12 +72,12 @@ switch (_eventType) do {
 							 ["MAAWS", "weapon"], 						 //RocketWeaps
 							 ["Vil_RPG16", "weapon"], 					 //RocketWeaps
 							 ["Vil_RPG7V_PGO", "weapon"], 				 //RocketWeaps
-							 ["Vil_RPG7d_PGO","weapon"],					 //RocketWeaps
-							 ["Vil_RPG29","weapon"],						 //RocketWeaps
-							 ["Vil_RPO_A","weapon"],						 //RocketWeaps
+							 ["Vil_RPG7d_PGO","weapon"],				 //RocketWeaps
+							 ["Vil_RPG29","weapon"],					 //RocketWeaps
+							 ["Vil_RPO_A","weapon"],					 //RocketWeaps
 							 ["vilas_rpg22","weapon"],					 //RocketWeaps
 							 ["vilas_rpg26","weapon"],					 //RocketWeaps
-							 ["vil_CG84T","weapon"],						 //RocketWeaps
+							 ["vil_CG84T","weapon"],					 //RocketWeaps
 							 ["vil_Panzerfaust3","weapon"],				 //RocketWeaps
 
 							 ["BAF_L85A2_RIS_CWS", "weapon"],            //TWSWeaps
@@ -130,88 +130,88 @@ switch (_eventType) do {
 							 ["SCAR_H_LNG_Sniper_SD", "weapon"], 	//ScarHighWeaps
 
 							 
-							 ["glock17_EP1","weapon"],                //PistolMilWeaps
-							 ["RH_g18","weapon"],						//PistolMilWeaps
-							 ["RH_g17","weapon"],						//PistolMilWeaps
-							 ["RH_g19","weapon"],						//PistolMilWeaps
+							 ["glock17_EP1","weapon"],              //PistolMilWeaps
+							 ["RH_g18","weapon"],					//PistolMilWeaps
+							 ["RH_g17","weapon"],					//PistolMilWeaps
+							 ["RH_g19","weapon"],					//PistolMilWeaps
 							 ["RH_g19t","weapon"],					//PistolMilWeaps
 							 ["RH_g17sd","weapon"],					//PistolMilWeaps
 							 ["UZI_EP1","weapon"],					//PistolMilWeaps
 							 ["M9SD","weapon"],					    //PistolMilWeaps
 					 		 ["RH_m9sd","weapon"],					//PistolMilWeaps
 							 ["RH_m9csd","weapon"],				    //PistolMilWeaps
-							 ["vil_USPSD","weapon"],					//PistolMilWeaps
-							 ["vil_USP45","weapon"],					//PistolMilWeaps
+							 ["vil_USPSD","weapon"],				//PistolMilWeaps
+							 ["vil_USP45","weapon"],				//PistolMilWeaps
 							 ["vil_USP45SD","weapon"],			    //PistolMilWeaps
 							 ["RH_anac","weapon"],					//PistolMilWeaps
 							 ["RH_uspsd","weapon"],					//PistolMilWeaps
 							 ["RH_vz61","weapon"],					//PistolMilWeaps
 							 ["RH_tec9","weapon"],					//PistolMilWeaps
-						     ["vil_Glock","weapon"],					//PistolMilWeaps
+						     ["vil_Glock","weapon"],				//PistolMilWeaps
 							 ["vil_Glock_o","weapon"],				//PistolMilWeaps
 							 ["Sa61_EP1","weapon"],					//PistolMilWeaps
-							 ["M9","weapon"],							//PistolMilWeaps
-							 ["RH_usp","weapon"],						//PistolMilWeaps
-							 ["RH_m9","weapon"],						//PistolMilWeaps
-							 ["RH_m9c","weapon"],						//PistolMilWeaps
+							 ["M9","weapon"],						//PistolMilWeaps
+							 ["RH_usp","weapon"],					//PistolMilWeaps
+							 ["RH_m9","weapon"],					//PistolMilWeaps
+							 ["RH_m9c","weapon"],					//PistolMilWeaps
 							 ["RH_muzi","weapon"],					//PistolMilWeaps
 							 ["vil_USP","weapon"],					//PistolMilWeaps
 
 							
 							["RH_hk417","weapon"], 					//HK417Weaps
-							["vil_HK417s","weapon"],					//HK417Weaps
-							["RH_hk417aim","weapon"],					//HK417Weaps
-							["RH_hk417eotech","weapon"],				//HK417Weaps
+							["vil_HK417s","weapon"],				//HK417Weaps
+							["RH_hk417aim","weapon"],				//HK417Weaps
+							["RH_hk417eotech","weapon"],			//HK417Weaps
 							["RH_hk417acog","weapon"],				//HK417Weaps
 							["RH_hk417saim","weapon"],				//HK417Weaps
-							["RH_hk417seotech","weapon"],				//HK417Weaps
+							["RH_hk417seotech","weapon"],			//HK417Weaps
 							["RH_hk417sacog","weapon"],				//HK417Weaps
-							["RH_hk417sd","weapon"],					//HK417Weaps
+							["RH_hk417sd","weapon"],				//HK417Weaps
 							["RH_hk417sdaim","weapon"],				//HK417Weaps
 							["RH_hk417sdeotech","weapon"],			//HK417Weaps
-							["RH_hk417sdacog","weapon"],				//HK417Weaps
-							["RH_hk417sgl","weapon"],					//HK417Weaps
-							["RH_hk417sglaim","weapon"],				//HK417Weaps
+							["RH_hk417sdacog","weapon"],			//HK417Weaps
+							["RH_hk417sgl","weapon"],				//HK417Weaps
+							["RH_hk417sglaim","weapon"],			//HK417Weaps
 							["RH_hk417sgleotech","weapon"],			//HK417Weaps
-							["RH_hk417sglacog","weapon"],				//HK417Weaps
+							["RH_hk417sglacog","weapon"],			//HK417Weaps
 							["RH_hk417s","weapon"],					//HK417Weaps
 
 
 							["vil_SV_98","weapon"],					//SVDWeaps
 							["vil_SV_98_69","weapon"],				//SVDWeaps
 							["vil_SV_98_SD","weapon"],				//SVDWeaps
-							["SVD_des_EP1","weapon"],					//SVDWeaps
+							["SVD_des_EP1","weapon"],				//SVDWeaps
 							["SVD_CAMO","weapon"],					//SVDWeaps
-							["vil_SVD_63","weapon"],					//SVDWeaps
+							["vil_SVD_63","weapon"],				//SVDWeaps
 							["vil_SVD_S","weapon"],					//SVDWeaps
 							["vil_SVD_M","weapon"],					//SVDWeaps
-							["vil_SVD_P21","weapon"],					//SVDWeaps
+							["vil_SVD_P21","weapon"],				//SVDWeaps
 							["vil_SVDK","weapon"],					//SVDWeaps
-							["SVD","weapon"],							//SVDWeaps
-							["vil_SVU","weapon"],						//SVDWeaps
+							["SVD","weapon"],						//SVDWeaps
+							["vil_SVU","weapon"],					//SVDWeaps
 
 
-							["RH_sc2acog","weapon"], 					//SniperMedWeaps
+							["RH_sc2acog","weapon"], 				//SniperMedWeaps
 							["RH_sc2sp","weapon"],					//SniperMedWeaps
-							["RH_hk417sp","weapon"],					//SniperMedWeaps
+							["RH_hk417sp","weapon"],				//SniperMedWeaps
 							["RH_hk417sdsp","weapon"],				//SniperMedWeaps
 							["vil_M110","weapon"],					//SniperMedWeaps
-							["vil_M110sd","weapon"],					//SniperMedWeaps
+							["vil_M110sd","weapon"],				//SniperMedWeaps
 							["vil_SR25","weapon"],					//SniperMedWeaps
-							["vil_SR25SD","weapon"],					//SniperMedWeaps
+							["vil_SR25SD","weapon"],				//SniperMedWeaps
 							["FHQ_RSASS_TAN","weapon"],				//SniperMedWeaps
 							["FHQ_RSASS_SD_TAN","weapon"],			//SniperMedWeaps
-							["DMR_SKN","weapon"],						//SniperMedWeaps
+							["DMR_SKN","weapon"],					//SniperMedWeaps
 							["vil_DRM_BASE","weapon"],				//SniperMedWeaps
 							
 
 							["RH_sc2aim","weapon"],					//RiflesMedWeaps
 							["RH_sc2eot","weapon"],					//RiflesMedWeaps
 							["RH_sc2shd","weapon"],					//RiflesMedWeaps
-							["M14_EP1","weapon"],						//RiflesMedWeaps
-							["vil_M14","weapon"],						//RiflesMedWeaps
+							["M14_EP1","weapon"],					//RiflesMedWeaps
+							["vil_M14","weapon"],					//RiflesMedWeaps
 							["vil_M14G","weapon"],					//RiflesMedWeaps
-							["RH_m14acog","weapon"],					//RiflesMedWeaps
+							["RH_m14acog","weapon"],				//RiflesMedWeaps
 							["RH_m14aim","weapon"],					//RiflesMedWeaps
 							["RH_m14eot","weapon"],					//RiflesMedWeaps
 							["vil_G3a3","weapon"],					//RiflesMedWeaps
@@ -219,10 +219,43 @@ switch (_eventType) do {
 							["vil_G3ZF","weapon"],					//RiflesMedWeaps
 							["vil_G3zfb","weapon"],					//RiflesMedWeaps
 							["vil_G3SG1","weapon"],					//RiflesMedWeaps
-							["vil_G3sg1b","weapon"],					//RiflesMedWeaps
-							["vil_AG3EOT","weapon"],					//RiflesMedWeaps
-							["vil_Groza_HG","weapon"]				//RiflesMedWeaps
-				
+							["vil_G3sg1b","weapon"],				//RiflesMedWeaps
+							["vil_AG3EOT","weapon"],			    //RiflesMedWeaps
+							["vil_Groza_HG","weapon"],				//RiflesMedWeaps
+
+							["MedBox0", "object"],					//Misc. Loot
+							["AmmoBoxSmall_762", "object"],			//Misc. Loot
+							["Binocular_Vector", "weapon"]	,		//Misc. Loot
+
+							["Skin_Sniper1_DZ", "magazine"]	,	      //Ghillie Suit
+							["Skin_Camo1_DZ", "magazine"]	,		  //Camo Clothing
+							["Skin_Survivor2_DZ", "magazine"]	,	  //Civilian Clothing
+							["Skin_Soldier1_DZ", "magazine"]	,	  //Soldier Clothing
+							["Skin_Rocket_DZ", "magazine"]	,	      //Officer Suit
+							["Skin_RU_Policeman_DZ", "magazine"],      //Policeman "Sergei"
+							["Skin_Ins_Soldier_GL_DZ", "magazine"]  ,  //Terrorist Uniform
+							["Skin_GUE_Commander_DZ", "magazine"]   ,  //Rebel Uniform
+							["Skin_Bandit1_DZ","magazine"]	,	      //Bandit Outfit
+							["Skin_Bandit2_DZ","magazine"]	,		  //Bandit Camo
+							["Skin_GUE_Soldier_MG_DZ", "magazine"]	,  //Bandit Gunner
+							["Skin_GUE_Soldier_Crew_DZ", "magazine"] ,   //Bandit Baklava
+							["Skin_GUE_Soldier_CO_DZ", "magazine"] ,   //Bandit Mask
+							["Skin_GUE_Soldier_2_DZ", "magazine"] ,   //Bandit Hat
+							["Skin_TK_INS_Warlord_EP1_DZ", "magazine"],	  //Takistani Warlord
+							["Skin_TK_INS_Soldier_EP1_DZ", "magazine"],	  //Takistani Soldier
+							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ  ", "magazine"] ,   //Special Forces
+							["Skin_Drake_Light_DZ", "magazine"]	,					//Desert Camo
+							["Skin_Soldier_Bodyguard_AA12_PMC_DZ", "magazine"],		//Bodyguard
+							["Skin_FR_OHara_DZ", "magazine"],					//Jungle Camo
+							["Skin_FR_Rodriguez_DZ", "magazine"],					 //Gunner Outfit
+							["Skin_CZ_Soldier_Sniper_EP1_DZ  ", "magazine"]	,		//Desert Ghillie
+							["Skin_Graves_Light_DZ", "magazine"],					//Urban Camo
+							["Skin_Soldier_Sniper_PMC_DZ  ", "magazine"],			 //Marksman
+							["Skin_Soldier_TL_PMC_DZ", "magazine"],					//Team Leader
+							["Skin_TK_Special_Forces_MG_EP1_DZ", "magazine"],		//Smuggler
+							["Skin_TK_Soldier_Sniper_EP1_DZ", "magazine"],			//Desert Sniper
+							["Skin_TK_Commander_EP1_DZ  ", "magazine"],				//General
+							["Skin_RU_Soldier_Crew_DZ  ", "magazine"]				//Crewman
 							];
 
 				_itemChance = [ 
@@ -407,13 +440,52 @@ switch (_eventType) do {
 							    0.06, 
 							    0.06, 
 							    0.06,   
-							    0.06
+							    0.06,
+
+							    //Misc. Loot
+							    0.09,
+							    0.09,
+							    0.09,
+
+							    //Skins **Percentages need to be adjusted**
+							    0.002,   
+							    0.002,  
+							    0.002, 
+							    0.002,  
+							    0.002, 
+							    0.002,   
+							    0.002,  
+							    0.002, 
+							    0.002, 
+							    0.002,   
+							    0.002, 
+							    0.002,  
+							    0.002, 
+							    0.002, 
+							    0.002,   
+							    0.002,  
+							    0.002, 
+							    0.002,  
+							    0.002, 
+							    0.002,   
+							    0.002,  
+							    0.002, 
+							    0.002, 
+							    0.002,   
+							    0.002, 
+							    0.002, 
+							    0.002, 
+							    0.002,   
+							    0.002
+
 
 							 ];
  				
  				_lootTable = [_itemTypes,_itemChance]; 
  			};
 
+
+                                                                                                    
 
 
 
