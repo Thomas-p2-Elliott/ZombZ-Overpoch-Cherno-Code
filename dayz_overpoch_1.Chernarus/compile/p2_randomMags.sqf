@@ -2,20 +2,18 @@
 Private Variables
 ---------------------------------------------------------------------------*/
 
-private ["_w","_m","_r","_r1","_r2","_d","_finalMag","_reRunMag","_isDone","_launcherResult","_isSD","_m2c","_isMagSD","_checkIfSD_Weapon","_checkIfSD_Ammo","_wAcr","_launcherMagazineRandomiser"];
+private ["_w","_m","_r","_r1","_r2","_isSD","_isMagSD","_m2c","_wAcr","_isDone","_d","_launcherResult","_launcherMagazineRandomiser","_checkIfSD_Weapon","_checkIfSD_Ammo"];
 _w = "";
 _m = [];
 _r = [];
 _r1 = 		false;
 _r2 = 		false;
-_finalMag = "";
-_reRunMag = "";
 _isSD = 	false;
 _isMagSD =	false;
 _m2c =		"";
 _wAcr =		false;
 _isDone =	false;
-_d = 		false;			//enable/disable debugging
+_d = 		true;			//enable/disable debugging
 
 /*---------------------------------------------------------------------------
 /*	Inputs
@@ -26,8 +24,6 @@ _m = _this select 1;
 _r = _this select 2;
 _r1 = 		_r select 0;
 _r2 = 		_r select 1;
-_finalMag = _m select 0;
-_reRunMag = _m select 0;
 
 /*---------------------------------------------------------------------------
 Private Functions
@@ -69,7 +65,7 @@ _checkIfSD_Ammo = {
 };
 
 _launcherMagazineRandomiser = {
-	private ["_magOutput","_isLauncher","_wepName","_isM32","_isM203","_isGP25","_isM203Muzzle","_muzzleName"];
+	private ["_magOutput","_wepName","_isLauncher","_isM203Muzzle","_muzzleName","_isM32","_isM203","_isGP25","_isGP25Muzzle"];
 	_magOutput = _this select 0;
 	_wepName = _this select 1;
 	_isLauncher = false;
@@ -94,7 +90,7 @@ _launcherMagazineRandomiser = {
 	if (!_isLauncher) then {
 		_muzzleName = (getArray (configFile >> "cfgWeapons" >> _wepName >> "muzzles"));
 		if (count _muzzleName > 1) then {
-			if ((random 5) > 2.5) then {
+			if ((random 10) > 7.75) then {
 				_isM203Muzzle = [_muzzleName select 1, "M203"] call KRON_StrInStr;
 				if (_isM203Muzzle) then {
 					_isLauncher = true;
@@ -120,8 +116,14 @@ Instructions
 ---------------------------------------------------------------------------*/
 if (_d && !_r1) then { diag_log (format["P2DEBUG: p2_randomMags: Input: %1",[_w,_m,[_r1,_r2]]]); };
 
-//if not a re-run, check if sd.
-if (!_r1) then {	
+//if mag count not > 0
+if !(count _m > 0) then {
+	_m2c = _m select 0;
+	_isDone = true;
+};
+
+//if not a re-run and not done, check if sd.
+if (!_r1 && !_isDone) then {	
 	if (_d) then { diag_log ("p2_randomMags: Not ReRun"); };
 	//if is grenade launcher weapon this will randomise the nades, if not proceed as normal
 	_launcherResult = [_m2c,_w] call _launcherMagazineRandomiser;
@@ -134,23 +136,26 @@ if (!_r1) then {
 	};
 } else {
 	//if a rerun, sd val is parsed from last time in r2
-	if (_d) then { diag_log (format["p2_randomMags: reRun, _r2: %1",_r2]); };
+	if (_d) then { diag_log (format["p2_randomMags: reRun, _r2: %1 _m: %2",_r2,_m]); };
 	_isSD = _r2;
 };
 	
-if (_isSD) then {
+if (_isSD && !_isDone) then {
 	/*---------------------------------------------------------------------------
 	Ammo randomisation for SD weapons that arent ACRs disabled
 	due to some overpoch SD weapons using non SD ammo, list of found: HK417SD
 	---------------------------------------------------------------------------*/
-	_wAcr = [_w, "FHQ_ACR"] call KRON_StrInStr;
+	//_wAcr = [_w, "FHQ_ACR"] call KRON_StrInStr;
+	_wAcr = true; //testing
 	if (!_wAcr) then { _m2c = _m select 0; } else {
 		_m2c = _m call BIS_fnc_selectRandom;
 		_isMagSD = _m2c call _checkIfSD_Ammo;
 		//ReRun if non-SD mag returned
 		if !(_isMagSD) then {
-			if (_d) then { diag_log (format["p2_randomMags: !isMagSD reRun, _m2c: %1",_m2c]); };
-			_m2c = [_this select 0, _this select 1,[true,true]] call p2_randomMags;
+			if (_d) then { diag_log (format["p2_randomMags: !isMagSD reRun, _m2c: %1, _m: %2",_m2c,_m]); };
+			_m = _m - [_m2c];
+			if (_d) then { diag_log (format["p2_randomMags: !isMagSD reRun ResizeArray, _m: %1",_m]); };
+			_m2c = [_this select 0, _m,[true,true]] call p2_randomMags;
 		};
 	}
 } else {
@@ -159,21 +164,23 @@ if (_isSD) then {
 		_isMagSD = _m2c call _checkIfSD_Ammo;
 		//ReRun if SD mag returned
 		if (_isMagSD) then {
-			if (_d) then { diag_log (format["p2_randomMags: _isMagSD reRun, _m2c: %1",_m2c]); };
-			_m2c = [_this select 0, _this select 1,[true,false]] call p2_randomMags;
+			if (_d) then { diag_log (format["p2_randomMags: !isMagSD reRun, _m2c: %1, _m: %2",_m2c,_m]); };
+			_m = _m - [_m2c];
+			if (_d) then { diag_log (format["p2_randomMags: !isMagSD reRun ResizeArray, _m: %1",_m]); };
+			_m2c = [_this select 0, _m,[true,false]] call p2_randomMags;
 		};
 	};
 };
 
-//ReRun if _m2c is Nil or ""
-if (isNil "_m2c" || _m2c == "") then {
+//Select default if _m2c is Nil or ""
+if (isNil "_m2c" || isNil "_m" || {_m2c == ""} || {str _m == str[]}) then {
 	if (_d) then { diag_log ("p2_randomMags: isNil reRun"); };
-	_m2c = [_this select 0, _this select 1,[true,_isSD]] call p2_randomMags; 
+	_m2c = [] + getArray (configFile >> "cfgWeapons" >> _w >> "magazines");
+	_m2c = _m2c select 0;
 };
 
 if (_d && !_r1) then { diag_log (format["P2DEBUG: p2_randomMags: Output: %1",_m2c]); };
 /*---------------------------------------------------------------------------
 Output
 ---------------------------------------------------------------------------*/
-_finalMag = _m2c;
-_finalMag
+_m2c
