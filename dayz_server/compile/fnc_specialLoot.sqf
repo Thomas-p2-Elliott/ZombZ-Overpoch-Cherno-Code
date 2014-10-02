@@ -38,12 +38,387 @@ switch (_eventType) do {
 	case 1: { 
 	//Heli Crashsite Loot
 		switch (_eventSubType) do {
- 			//Normal Heli Crash
-			case 1: 				{ 
-				_itemTypes = [["MedBox0", "object"],["BAF_LRR_scoped_W", "weapon"],["AmmoBoxSmall_556", "object"],["AmmoBoxSmall_762", "object"],["DMR_DZ", "weapon"]];
-				_itemChance = [0.1,0.2,0.3,0.4,0,5];
+ 				
+ 				//Normal Heli Crash
+				case 1: 				{ 
+				_itemTypes = [
+							 ["M32_EP1", "weapon"], 					 //LauncherWeaps
+							 ["M79_EP1", "weapon"],  					 //LauncherWeaps
+							 ["Mk13_EP1", "weapon"], 					 //LauncherWeaps
+							 
+							 ["revolver_gold_EP1", "weapon"],  			 //UltraWeaps
+							 ["RH_Deagleg", "weapon"], 					 //UltraWeaps
+							 ["RH_anacg", "weapon"], 					 //UltraWeaps
+							 ["Javelin", "weapon"], 					 //UltraWeaps
+							 ["AKS_GOLD", "weapon"], 					 //UltraWeaps
+							 ["AA12_PMC", "weapon"], 					 //UltraWeaps
+
+							 ["BAF_LRR_scoped", "weapon"],               //SniperTopWeaps
+							 ["KSVK_DZE", 	"weapon"], 			         //SniperTopWeaps
+							 ["USSR_cheytacM200", "weapon"], 			 //SniperTopWeaps
+							 ["USSR_cheytacM200_sd", "weapon"], 	     //SniperTopWeaps
+							 ["BAF_AS50_scoped_DZ", "weapon"], 			 //SniperTopWeaps
+							 ["m107_SKN", "weapon"], 					 //SniperTopWeaps
+							 ["BAF_LRR_scoped_W", "weapon"], 			 //SniperTopWeaps
+							 ["FHQ_MSR_DESERT","weapon"],					 //SniperTopWeaps
+							 ["FHQ_MSR_SD_DESERT","weapon"],				 //SniperTopWeaps
+							 ["FHQ_XM2010_SD_DESERT","weapon"],			 //SniperTopWeaps
+							 ["FHQ_XM2010_DESERT","weapon"],				 //SniperTopWeaps
+
+							 ["M136", "weapon"],              			 //RocketWeaps
+							 ["RPG7V", "weapon"], 			       	 	 //RocketWeaps
+							 ["MetisLauncher", "weapon"], 				 //RocketWeaps
+							 ["SMAW", "weapon"], 	    				 //RocketWeaps
+							 ["MAAWS", "weapon"], 						 //RocketWeaps
+							 ["Vil_RPG16", "weapon"], 					 //RocketWeaps
+							 ["Vil_RPG7V_PGO", "weapon"], 				 //RocketWeaps
+							 ["Vil_RPG7d_PGO","weapon"],					 //RocketWeaps
+							 ["Vil_RPG29","weapon"],						 //RocketWeaps
+							 ["Vil_RPO_A","weapon"],						 //RocketWeaps
+							 ["vilas_rpg22","weapon"],					 //RocketWeaps
+							 ["vilas_rpg26","weapon"],					 //RocketWeaps
+							 ["vil_CG84T","weapon"],						 //RocketWeaps
+							 ["vil_Panzerfaust3","weapon"],				 //RocketWeaps
+
+							 ["BAF_L85A2_RIS_CWS", "weapon"],            //TWSWeaps
+							 ["M249_TWS_EP1", "weapon"], 			     //TWSWeaps
+							 ["AKS_74_GOSHAWK", "weapon"], 				 //TWSWeaps
+							 ["SCAR_L_STD_EGLM_TWS", "weapon"], 	     //TWSWeaps
+							 ["SCAR_H_STD_TWS_SD", "weapon"], 		     //TWSWeaps
+							 ["m8_tws_sd", "weapon"], 					 //TWSWeaps
+							 ["FHQ_ACR_WDL_TWS_F", "weapon"], 			 //TWSWeaps
+							 ["FHQ_ACR_BLK_TWS_SD", "weapon"], 			 //TWSWeaps
+							 ["FHQ_ACR_TAN_TWS_GL_SD", "weapon"], 		 //TWSWeaps
+							 ["FHQ_ACR_SNW_TWS", "weapon"], 			 //TWSWeaps
+							 ["FHQ_ACR_SNW_TWS_GL", "weapon"], 			 //TWSWeaps
+
+							 ["RH_deagle", "weapon"],              		 //PistolTopWeaps
+							 ["RH_Deaglem", "weapon"], 			       	 //PistolTopWeaps
+							 ["RH_Deaglemz", "weapon"], 				 //PistolTopWeaps
+							 ["RH_Deaglemzb", "weapon"], 	    		 //PistolTopWeaps
+							 ["RH_Deagles", "weapon"], 					 //PistolTopWeaps
+							 ["UZI_SD_EP1", "weapon"], 					 //PistolTopWeaps
+							 ["RH_uspm", "weapon"], 				     //PistolTopWeaps
+							 ["RH_bull", "weapon"], 				     //PistolTopWeaps
+							 ["vil_apssd", "weapon"], 				     //PistolTopWeaps
+							 ["vil_APS", "weapon"], 				     //PistolTopWeaps
+
+							 ["Pecheneg_DZ", "weapon"],              	 //HMGWeaps
+							 ["Mk_48_DZ", "weapon"], 			       	 //HMGWeaps
+							 ["m240_scoped_EP1_DZE", "weapon"], 		 //HMGWeaps
+							 ["M240_DZ", "weapon"], 	    		     //HMGWeaps
+							 ["M60A4_EP1_DZE", "weapon"], 				 //HMGWeaps
+							 ["PK_DZ", "weapon"], 					     //HMGWeaps
+							 ["vil_PKP_EOT", "weapon"], 				 //HMGWeaps
+							 ["BAF_L7A2_GPMG", "weapon"], 				 //HMGWeaps
+							 ["vil_PKP", "weapon"], 				 	 //HMGWeaps
+							 ["vil_PK", "weapon"], 				 		 //HMGWeaps
+							 ["vil_zastava_m84", "weapon"], 			 //HMGWeaps
+							 ["vil_PKM", "weapon"], 			 		 //HMGWeaps
+							 ["skavil_M60", "weapon"], 			 		 //HMGWeaps
+							 ["skavil_M60e3", "weapon"], 			     //HMGWeaps
+							 ["vil_Mg3", "weapon"], 			 		 //HMGWeaps
+							 ["vil_FnMag", "weapon"], 			 		 //HMGWeaps
+							 ["vil_M240_B", "weapon"], 			 		 //HMGWeaps
+
+							
+
+							 ["SCAR_L_STD_EGLM_RCO", "weapon"],     //ScarHighWeaps
+							 ["SCAR_H_CQC_CCO_SD", "weapon"], 		//ScarHighWeaps
+							 ["SCAR_H_STD_EGLM_Spect", "weapon"],   //ScarHighWeaps
+							 ["SCAR_H_LNG_Sniper", "weapon"], 	    //ScarHighWeaps
+							 ["SCAR_H_LNG_Sniper_SD", "weapon"], 	//ScarHighWeaps
+
+							 
+							 ["glock17_EP1","weapon"],                //PistolMilWeaps
+							 ["RH_g18","weapon"],						//PistolMilWeaps
+							 ["RH_g17","weapon"],						//PistolMilWeaps
+							 ["RH_g19","weapon"],						//PistolMilWeaps
+							 ["RH_g19t","weapon"],					//PistolMilWeaps
+							 ["RH_g17sd","weapon"],					//PistolMilWeaps
+							 ["UZI_EP1","weapon"],					//PistolMilWeaps
+							 ["M9SD","weapon"],					    //PistolMilWeaps
+					 		 ["RH_m9sd","weapon"],					//PistolMilWeaps
+							 ["RH_m9csd","weapon"],				    //PistolMilWeaps
+							 ["vil_USPSD","weapon"],					//PistolMilWeaps
+							 ["vil_USP45","weapon"],					//PistolMilWeaps
+							 ["vil_USP45SD","weapon"],			    //PistolMilWeaps
+							 ["RH_anac","weapon"],					//PistolMilWeaps
+							 ["RH_uspsd","weapon"],					//PistolMilWeaps
+							 ["RH_vz61","weapon"],					//PistolMilWeaps
+							 ["RH_tec9","weapon"],					//PistolMilWeaps
+						     ["vil_Glock","weapon"],					//PistolMilWeaps
+							 ["vil_Glock_o","weapon"],				//PistolMilWeaps
+							 ["Sa61_EP1","weapon"],					//PistolMilWeaps
+							 ["M9","weapon"],							//PistolMilWeaps
+							 ["RH_usp","weapon"],						//PistolMilWeaps
+							 ["RH_m9","weapon"],						//PistolMilWeaps
+							 ["RH_m9c","weapon"],						//PistolMilWeaps
+							 ["RH_muzi","weapon"],					//PistolMilWeaps
+							 ["vil_USP","weapon"],					//PistolMilWeaps
+
+							
+							["RH_hk417","weapon"], 					//HK417Weaps
+							["vil_HK417s","weapon"],					//HK417Weaps
+							["RH_hk417aim","weapon"],					//HK417Weaps
+							["RH_hk417eotech","weapon"],				//HK417Weaps
+							["RH_hk417acog","weapon"],				//HK417Weaps
+							["RH_hk417saim","weapon"],				//HK417Weaps
+							["RH_hk417seotech","weapon"],				//HK417Weaps
+							["RH_hk417sacog","weapon"],				//HK417Weaps
+							["RH_hk417sd","weapon"],					//HK417Weaps
+							["RH_hk417sdaim","weapon"],				//HK417Weaps
+							["RH_hk417sdeotech","weapon"],			//HK417Weaps
+							["RH_hk417sdacog","weapon"],				//HK417Weaps
+							["RH_hk417sgl","weapon"],					//HK417Weaps
+							["RH_hk417sglaim","weapon"],				//HK417Weaps
+							["RH_hk417sgleotech","weapon"],			//HK417Weaps
+							["RH_hk417sglacog","weapon"],				//HK417Weaps
+							["RH_hk417s","weapon"],					//HK417Weaps
+
+
+							["vil_SV_98","weapon"],					//SVDWeaps
+							["vil_SV_98_69","weapon"],				//SVDWeaps
+							["vil_SV_98_SD","weapon"],				//SVDWeaps
+							["SVD_des_EP1","weapon"],					//SVDWeaps
+							["SVD_CAMO","weapon"],					//SVDWeaps
+							["vil_SVD_63","weapon"],					//SVDWeaps
+							["vil_SVD_S","weapon"],					//SVDWeaps
+							["vil_SVD_M","weapon"],					//SVDWeaps
+							["vil_SVD_P21","weapon"],					//SVDWeaps
+							["vil_SVDK","weapon"],					//SVDWeaps
+							["SVD","weapon"],							//SVDWeaps
+							["vil_SVU","weapon"],						//SVDWeaps
+
+
+							["RH_sc2acog","weapon"], 					//SniperMedWeaps
+							["RH_sc2sp","weapon"],					//SniperMedWeaps
+							["RH_hk417sp","weapon"],					//SniperMedWeaps
+							["RH_hk417sdsp","weapon"],				//SniperMedWeaps
+							["vil_M110","weapon"],					//SniperMedWeaps
+							["vil_M110sd","weapon"],					//SniperMedWeaps
+							["vil_SR25","weapon"],					//SniperMedWeaps
+							["vil_SR25SD","weapon"],					//SniperMedWeaps
+							["FHQ_RSASS_TAN","weapon"],				//SniperMedWeaps
+							["FHQ_RSASS_SD_TAN","weapon"],			//SniperMedWeaps
+							["DMR_SKN","weapon"],						//SniperMedWeaps
+							["vil_DRM_BASE","weapon"],				//SniperMedWeaps
+							
+
+							["RH_sc2aim","weapon"],					//RiflesMedWeaps
+							["RH_sc2eot","weapon"],					//RiflesMedWeaps
+							["RH_sc2shd","weapon"],					//RiflesMedWeaps
+							["M14_EP1","weapon"],						//RiflesMedWeaps
+							["vil_M14","weapon"],						//RiflesMedWeaps
+							["vil_M14G","weapon"],					//RiflesMedWeaps
+							["RH_m14acog","weapon"],					//RiflesMedWeaps
+							["RH_m14aim","weapon"],					//RiflesMedWeaps
+							["RH_m14eot","weapon"],					//RiflesMedWeaps
+							["vil_G3a3","weapon"],					//RiflesMedWeaps
+							["vil_G3a2","weapon"],					//RiflesMedWeaps
+							["vil_G3ZF","weapon"],					//RiflesMedWeaps
+							["vil_G3zfb","weapon"],					//RiflesMedWeaps
+							["vil_G3SG1","weapon"],					//RiflesMedWeaps
+							["vil_G3sg1b","weapon"],					//RiflesMedWeaps
+							["vil_AG3EOT","weapon"],					//RiflesMedWeaps
+							["vil_Groza_HG","weapon"]				//RiflesMedWeaps
+				
+							];
+
+				_itemChance = [ 
+								//LauncherWeaps
+								0.03,  
+							    0.03,  
+							    0.03,  
+							    
+							    //UltraWeaps
+							    0.001,  
+							    0.001,   
+							    0.001,   
+							    0.001,   
+							    0.001,   
+							    0.001,   
+
+							    //SniperTopWeaps
+							    0.02,  
+							    0.02,   
+							    0.02,   
+							    0.02,   
+							    0.02,   
+							    0.02, 
+							    0.02,  
+							    0.02,   
+							    0.02,   
+							    0.02,   
+							    0.02,   
+
+							    //RocketWeaps
+							    0.02,  
+							    0.02,  
+							    0.02,   
+							    0.02,   
+							    0.02,   
+							    0.02, 
+							    0.02,  
+							    0.02,   
+							    0.02,  
+							    0.02,   
+							    0.02, 
+							    0.02,   
+							    0.02, 
+
+							    //TWSWeaps  
+							    0.001,  
+							    0.001,  
+							    0.001,   
+							    0.001,   
+							    0.001,   
+							    0.001, 
+							    0.001,  
+							    0.04,   
+							    0.04,   
+							    0.04,   
+							    0.04, 
+							    0.04,  
+							    0.04,   
+							    0.04,  
+							    0.04, 
+							    0.04,   
+							    0.04,  
+							    0.04, 
+							    0.04, 
+							    0.04,   
+							    0.04,  
+							    0.04, 
+
+							    //ScarHighWeaps
+							    0.02,  
+							    0.02,  
+							    0.02,   
+							    0.02,   
+							    0.02, 
+							     
+							    //PistolMilWeaps
+							    0.04,  
+							    0.04,  
+							    0.04,   
+							    0.04,   
+							    0.04,   
+							    0.04, 
+							    0.04,  
+							    0.04,   
+							    0.04,  
+							    0.04, 
+							    0.04,   
+							    0.04,  
+							    0.04, 
+							    0.04, 
+							    0.04,   
+							    0.04,  
+							    0.04, 
+							    0.04,  
+							    0.04, 
+							    0.04,   
+							    0.04,  
+							    0.04, 
+							    0.04, 
+							    0.04,   
+							    0.04,  
+							    0.04, 
+
+							    //HK417Weaps
+							    0.03, 
+							    0.03,   
+							    0.03,  
+							    0.03, 
+							    0.03, 
+							    0.03,   
+							    0.03,  
+							    0.03, 
+							    0.03,  
+							    0.03, 
+							    0.03,   
+							    0.03,  
+							    0.03, 
+							    0.03, 
+							    0.03,   
+							    0.03,  
+							    0.03, 
+
+							    //SVDWeaps
+							    0.04,  
+							    0.04, 
+							    0.04, 
+							    0.04,   
+							    0.04,  
+							    0.04, 
+							    0.04,  
+							    0.04, 
+							    0.04,   
+							    0.04,  
+							    0.04, 
+							    0.04, 
+							    0.04,   
+							    0.04,  
+
+							    //SniperMedWeaps
+							    0.05, 
+							    0.05, 
+							    0.05,   
+							    0.05,  
+							    0.05, 
+							    0.05,  
+							    0.05, 
+							    0.05,   
+							    0.05,  
+							    0.05, 
+							    0.05, 
+							    0.05,   
+							    0.05,  
+
+							    //RiflesMedWeaps
+							    0.06, 
+							    0.06, 
+							    0.06,   
+							    0.06,  
+							    0.06, 
+							    0.06,  
+							    0.06, 
+							    0.06,   
+							    0.06,  
+							    0.06, 
+							    0.06, 
+							    0.06,   
+							    0.06, 
+							    0.06,  
+							    0.06, 
+							    0.06, 
+							    0.06,   
+							    0.06,  
+							    0.06, 
+							    0.06,  
+							    0.06, 
+							    0.06,   
+							    0.06,  
+							    0.06, 
+							    0.06, 
+							    0.06,   
+							    0.06, 
+							    0.06, 
+							    0.06, 
+							    0.06,   
+							    0.06
+
+							 ];
+ 				
  				_lootTable = [_itemTypes,_itemChance]; 
  			};
+
+
+
+
+
+
  			//Navy Heli Crash
 			case 2: 				{ 
 				_itemTypes = [["PartWoodLumber", "magazine"],["PartWoodLumber", "magazine"],["PartWoodLumber", "magazine"],["AmmoBoxSmall_762", "object"],["DMR_DZ", "weapon"]];
