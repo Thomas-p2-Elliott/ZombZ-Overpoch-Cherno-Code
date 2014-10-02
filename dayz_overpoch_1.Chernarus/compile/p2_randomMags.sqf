@@ -2,7 +2,7 @@
 Private Variables
 ---------------------------------------------------------------------------*/
 
-private ["_w","_m","_r","_r1","_r2","_isSD","_isMagSD","_m2c","_wAcr","_isDone","_d","_launcherResult","_launcherMagazineRandomiser","_checkIfSD_Weapon","_checkIfSD_Ammo"];
+private ["_w","_m","_r","_r1","_r2","_isSD","_isMagSD","_m2c","_isDone","_d","_launcherResult","_launcherMagazineRandomiser","_checkIfSD_Weapon","_checkIfSD_Ammo"];
 _w = "";
 _m = [];
 _r = [];
@@ -11,9 +11,8 @@ _r2 = 		false;
 _isSD = 	false;
 _isMagSD =	false;
 _m2c =		"";
-_wAcr =		false;
 _isDone =	false;
-_d = 		true;			//enable/disable debugging
+_d = 		false;			//enable/disable debugging
 
 /*---------------------------------------------------------------------------
 /*	Inputs
@@ -22,8 +21,8 @@ _d = 		true;			//enable/disable debugging
 _w = _this select 0;
 _m = _this select 1;
 _r = _this select 2;
-_r1 = 		_r select 0;
-_r2 = 		_r select 1;
+_r1 = 	_r select 0;
+_r2 = 	_r select 1;
 
 /*---------------------------------------------------------------------------
 Private Functions
@@ -141,13 +140,6 @@ if (!_r1 && !_isDone) then {
 };
 	
 if (_isSD && !_isDone) then {
-	/*---------------------------------------------------------------------------
-	Ammo randomisation for SD weapons that arent ACRs disabled
-	due to some overpoch SD weapons using non SD ammo, list of found: HK417SD
-	---------------------------------------------------------------------------*/
-	//_wAcr = [_w, "FHQ_ACR"] call KRON_StrInStr;
-	_wAcr = true; //testing
-	if (!_wAcr) then { _m2c = _m select 0; } else {
 		_m2c = _m call BIS_fnc_selectRandom;
 		_isMagSD = _m2c call _checkIfSD_Ammo;
 		//ReRun if non-SD mag returned
@@ -157,7 +149,6 @@ if (_isSD && !_isDone) then {
 			if (_d) then { diag_log (format["p2_randomMags: !isMagSD reRun ResizeArray, _m: %1",_m]); };
 			_m2c = [_this select 0, _m,[true,true]] call p2_randomMags;
 		};
-	}
 } else {
 	if (!_isDone) then {
 		_m2c = _m call BIS_fnc_selectRandom;
