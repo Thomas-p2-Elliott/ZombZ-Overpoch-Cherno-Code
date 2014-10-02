@@ -11,7 +11,7 @@ disableSerialization;
 
 	(_display displayCtrl 5102) ctrlShow false; //Altitude
 
-	(_display displayCtrl 5105) ctrlShow false; //Bearing
+	(_display displayCtrl 5105) ctrlShow true; //Bearing
 
 	(_display displayCtrl 5108) ctrlShow false; //Time
 
