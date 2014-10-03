@@ -21,8 +21,8 @@
  	};
  	class 30m_plot_kit {
  		type = "trade_items";
-            buy[] = {40};
-            sell[] = {20};
+            buy[] = {150};
+            sell[] = {50};
  	};
  	class ItemVault {
  		type = "trade_items";
@@ -73,8 +73,8 @@
  	};
  	class 30m_plot_kit {
  		type = "trade_items";
-            buy[] = {40};
-            sell[] = {20};
+            buy[] = {150};
+            sell[] = {50};
  	};
  	class ItemCorrugated {
  		type = "trade_items";

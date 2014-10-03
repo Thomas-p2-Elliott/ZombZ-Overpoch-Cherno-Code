@@ -1,13 +1,13 @@
  class Category_575 {
  	class Skin_Bandit1_DZ {
  		type = "trade_items";
-            buy[] = {40};
-            sell[] = {20};
+            buy[] = {10};
+            sell[] = {5};
  	};
  	class Skin_Bandit2_DZ {
  		type = "trade_items";
-            buy[] = {40};
-            sell[] = {20};
+            buy[] = {10};
+            sell[] = {5};
  	};
  	class Skin_GUE_Commander_DZ {
  		type = "trade_items";
@@ -51,12 +51,12 @@
  	};
  	class Skin_BanditW1_DZ {
  		type = "trade_items";
-            buy[] = {40};
-            sell[] = {20};
+            buy[] = {10};
+            sell[] = {5};
  	};
  	class Skin_BanditW2_DZ {
  		type = "trade_items";
-            buy[] = {40};
-            sell[] = {20};
+            buy[] = {10};
+            sell[] = {5};
  	};
  };
