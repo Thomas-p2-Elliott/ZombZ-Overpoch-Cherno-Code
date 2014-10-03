@@ -1,0 +1,7 @@
+R3f_log/heliporteur/heliporteur_init.sqf
+
+line 25 is lifting
+
+line 27 is dropping
+
+No point stopping towing as u wont be able to get inside 

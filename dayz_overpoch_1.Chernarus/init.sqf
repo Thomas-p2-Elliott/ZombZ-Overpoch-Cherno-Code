@@ -115,7 +115,7 @@ progressLoadingScreen 0.5;
 call compile preprocessFileLineNumbers "server_traders.sqf";									//Compile trader configs
 call compile preprocessFileLineNumbers "compile\fnc_server.sqf";
 progressLoadingScreen 1.0;
-
+[] execVM "R3F_ARTY_AND_LOG\init.sqf";
 "filmic" setToneMappingParams [0.153, 0.357, 0.231, 0.1573, 0.011, 3.750, 6, 4]; setToneMapping "Filmic";
 
 [] execVM "\ddopp_taserpack\scripts\init_taser.sqf";
@@ -156,10 +156,13 @@ if (!isDedicated) then {
 	//anti Hack
 	[] execVM "system\antihack.sqf"; //requires re-work before re-enable due to setdamage issue! diagnose by commenting out sections.
 };
-#define RESEC_VERBOSE
-#include "\z\addons\dayz_code\system\REsec.sqf"
-#include "system\BIS_Effects\init.sqf"
 
-//fnc_crypt =		compile preprocessFileLineNumbers "system\fnc_crypt.sqf";
+#include "\z\addons\dayz_code\system\REsec.sqf"
+#include "\z\addons\dayz_code\system\BIS_Effects\init.sqf"
+
+
+
+fnc_crypt =		compile preprocessFileLineNumbers "system\fnc_crypt.sqf";
 //[] execVM "cryptTest.sqf";
-//diag_log("P2DEBUG: " + str CRYPT_KEY);
+
+diag_log("P2DEBUG: " + str CRYPT_KEY);
