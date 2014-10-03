@@ -233,3 +233,4 @@ class Category_477 {
              class DMR_SKN {type="trade_weapons";buy[]={160};sell[]={150};};
              class vil_DRM_BASE {type="trade_weapons";buy[]={160};sell[]={150};};
              class RH_sc2aim {type="trade_weapons";buy[]={85};sell[]={75};};
+};
