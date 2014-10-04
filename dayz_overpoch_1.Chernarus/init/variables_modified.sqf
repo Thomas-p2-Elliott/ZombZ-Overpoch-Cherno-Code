@@ -34,10 +34,10 @@ Debugging Settings
 ---------------------------------------------------------------------------*/
 	
 	//player2's debugging (speed)
-	p2SpT = true;
+	p2SpT = false;
 
 	//epoch debugging
-	DZEdebug = false;
+	DZEdebug = TRUE;
 
 	//define rate of fps deugging
 	DZE_DiagFpsSlow = false;
@@ -51,16 +51,36 @@ Debugging Settings
 	//fn_selfActions.sqf
 	P2DZE_debugSelfActions = false;
 
+	P2DZE_debugLogin = true;
+
 	//vehicleinspect.sqf
-	P2DZE_deugVehIns = true;
+	P2DZE_deugVehIns = false;
 
 	//fn_lootCheck.sqf
-	P2DZ_lootCheck_debug = false;			//Toggles debugging logs (type: boolean)
+	P2DZ_lootCheck_debug = false;	
 
 	//fnc_debugMon.sqf
 	P2DZE_debugColoutput = false;
 
-	P2DZE_debugLoot = true;
+	P2DZE_debugLoot = false;
+
+	P2DZE_debugHumanity = true;
+
+	//debug freshspawn loadouts
+	P2DZE_loadoutsDebug = false;
+
+	P2DZE_goldItemHandlingDebug = false; 
+
+	if(isServer) then {
+		//debug server player sync
+		P2DZE_debugServerPlayerSync = true;
+
+		//debug safe zone cleanup
+		P2DZE_safeZoneCleanupDebug = false;
+
+		//debug crashsites
+		P2DZE_debugCrashSites = false;
+	};
 
 /*---------------------------------------------------------------------------
 Player/Spawn Settings
@@ -74,22 +94,11 @@ Player/Spawn Settings
 	//parachute spawn (keep disabled, deprecated)
 	dayz_paraSpawn = false;
 
-	//debug freshspawn loadouts
-	P2DZE_loadoutsDebug = false;
-
 	//nametag distance
 	DZE_HumanityTargetDistance = 0;
 
 	//backpack gaurd, wipes backpack if you log out near another player (anti-duping measure)
 	if(isServer) then {
-		//debug server player sync
-		P2DZE_debugServerPlayerSync = false;
-
-		//debug safe zone cleanup
-		P2DZE_safeZoneCleanupDebug = false;
-
-		//debug crashsites
-		P2DZE_debugCrashSites = false;
 
 		//enable backpack gaurd
 		DZE_BackpackGuard = true;
@@ -279,7 +288,6 @@ Trader Settings
 /*---------------------------------------------------------------------------
 Gold Settings
 ---------------------------------------------------------------------------*/
-	P2DZE_goldItemHandlingDebug = false; 	//enable debug messages
 	P2DZE_Gold_MaxPickup = 	(500 * 1000);	//max gold pickup (500k)
 	P2DZE_goldRunning = false;
 	P2DZE_hasGold = false;			// - gets modified by checkGoldItems & pickupgold & dropgold

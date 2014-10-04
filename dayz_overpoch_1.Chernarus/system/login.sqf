@@ -1,5 +1,5 @@
 private ["_debugMonSettings","_parsedLogin1","_isNew","_model","_isHiveOk","_newPlayer","_isInfected","_mags","_wpns","_bcpk","_bcpkItems","_isOK","_config","_backpackMagTypes","_backpackMagQty","_backpackWpnTypes","_backpackWpnQtys","_countr","_backpackType","_backpackWpn","_backpackWater","_first","_worldspace","_state","_setDir","_setPos","_backpack","_world","_nearestCity","_survivalTimeText","_charID","_inventory","_survival","_version","_totalMins","_days","_hours","_mins","_p2_didYouKnow","_randomSelection","_p2_selectedMsg"];
-diag_log("P2DEBUG: " + __FILE__);
+if (P2DZE_debugLogin) then { diag_log("P2DEBUG: " + __FILE__); };
 
 waitUntil{!isNil "dayzPlayerLogin"};
 waitUntil{count (dayzPlayerLogin) > 1};
@@ -19,13 +19,13 @@ if (count _parsedLogin1 > 8) then {
 	_isInfected = _parsedLogin1 select 9;
 	_debugMonSettings = _parsedLogin1 select 10;
 
-	diag_log ("P2DEBUG: PLAYER EXISTS! HiveOK: " + str(_isHiveOk));
-	diag_log format ["P2DEBUG: dayzPlayerLogin:	_charID (%1)	_inventory (%2)	_backpack (%3)	_survival (%4)	_isNew (%5)	_version (%6)	_model (%7)	_isHiveOk (%8)	_newPlayer (%9)	_isInfected (%10) _debugMonSettings: (%11)",
-												_charID,	_inventory,		_backpack,		_survival,		_isNew,			_version,		_model,		_isHiveOk,		_newPlayer,		_isInfected, _debugMonSettings];
+	if (P2DZE_debugLogin) then { diag_log ("P2DEBUG: PLAYER EXISTS! HiveOK: " + str(_isHiveOk)); };
+	if (P2DZE_debugLogin) then { diag_log format ["P2DEBUG: dayzPlayerLogin:	_charID (%1)	_inventory (%2)	_backpack (%3)	_survival (%4)	_isNew (%5)	_version (%6)	_model (%7)	_isHiveOk (%8)	_newPlayer (%9)	_isInfected (%10) _debugMonSettings: (%11)",
+												_charID,	_inventory,		_backpack,		_survival,		_isNew,			_version,		_model,		_isHiveOk,		_newPlayer,		_isInfected, _debugMonSettings]; };
 } else {
-	diag_log ("P2DEBUG: NEW PLAYER! HiveOK: " + str(_isHiveOk));
+if (P2DZE_debugLogin) then { 	diag_log ("P2DEBUG: NEW PLAYER! HiveOK: " + str(_isHiveOk));
 	diag_log format ["P2DEBUG: dayzPlayerLogin:	_charID (%1)	_inventory (%2)	_backpack (%3)	_survival (%4)	_isNew (%5)	_version (%6)	_model (%7) _debugMonSettings (%8)",
-												_charID,	_inventory,		_backpack,		_survival,		_isNew,			_version,		_model, _debugMonSettings];
+												_charID,	_inventory,		_backpack,		_survival,		_isNew,			_version,		_model, _debugMonSettings]; };
 };
 
 //Work out survival time
@@ -48,7 +48,7 @@ if (_isNew) then {
 	haloSelect = -1;
 
 	//Player is a freshspawn
-	diag_log("P2DEBUG: Freshspawn!");
+	if (P2DZE_debugLogin) then { diag_log("P2DEBUG: Freshspawn!"); };
 	waitUntil{!isNil "dayzPlayerLogin2"};
 	waitUntil{count (dayzPlayerLogin2) > 0};
 	_worldspace = 	dayzPlayerLogin2 select 0;
@@ -56,8 +56,8 @@ if (_isNew) then {
 	_setDir = 		_worldspace select 0;
 	_setPos = 		_worldspace select 1;
 	P2DZ_humanity = dayzPlayerLogin2 select 2;
-	diag_log format ["P2DEBUG: dayzPlayerLogin2:_worldspace (%1)	_state (%2)	P2DZ_humanity (%3)	_setDir (%4)	_setPos (%5)",
-												_worldspace,		_state,		P2DZ_humanity,		_setDir,		_setPos];
+	if (P2DZE_debugLogin) then { diag_log format ["P2DEBUG: dayzPlayerLogin2:_worldspace (%1)	_state (%2)	P2DZ_humanity (%3)	_setDir (%4)	_setPos (%5)",
+												_worldspace,		_state,		P2DZ_humanity,		_setDir,		_setPos]; };
 
 	P2DZ_humanityLevel = floor(P2DZ_humanity / 5000);
 
@@ -76,22 +76,26 @@ if (_isNew) then {
 		P2DZ_humanityLevelText = "Survivor";
 	};
 
-	diag_log(P2DZ_humanityLevelText);
+	if (P2DZE_debugHumanity) then {
+		diag_log(format["HumanityDebug: dayzPlayerLogin2 select 2: %1", (dayzPlayerLogin2 select 2)]);
+		diag_log(format["HumanityDebug: P2DZ_humanityLevel: %1", P2DZ_humanityLevel]);
+		diag_log(format["HumanityDebug: P2DZ_humanityLevelText: %1", P2DZ_humanityLevelText]);
+	};
 
 	//Check if player has purchased loadout 
 
 	//load newspawn loadout
 	if(!isNil "DefaultMagazines") then {
-		diag_log("P2DEBUG: Login: DefaultMagazines" + str DefaultMagazines);
+		if (P2DZE_debugLogin) then { diag_log("P2DEBUG: Login: DefaultMagazines" + str DefaultMagazines);  };
 	};
 	if(!isNil "DefaultWeapons") then {
-		diag_log("P2DEBUG: Login: DefaultWeapons" + str DefaultWeapons);
+		if (P2DZE_debugLogin) then { diag_log("P2DEBUG: Login: DefaultWeapons" + str DefaultWeapons); };
 	};
 	if(!isNil "DefaultBackpack") then {
-		diag_log("P2DEBUG: Login: DefaultBackpack" + str DefaultBackpack);
+		if (P2DZE_debugLogin) then { diag_log("P2DEBUG: Login: DefaultBackpack" + str DefaultBackpack); };
 	};
 	if(!isNil "DefaultBackpackItems") then {
-		diag_log("P2DEBUG: Login: DefaultBackpackItems" + str DefaultBackpackWeapons);
+		if (P2DZE_debugLogin) then { diag_log("P2DEBUG: Login: DefaultBackpackItems" + str DefaultBackpackWeapons); };
 	};
 
 	//Wait until they're fully loaded in
@@ -127,11 +131,12 @@ if (_isNew) then {
 
 } else {
 	//Player is not a freshspawn
-	diag_log("P2DEBUG: Not Freshspawn!");
+	if (P2DZE_debugLogin) then { diag_log("P2DEBUG: Not Freshspawn!"); };
 
 	waitUntil{!isNil "dayzPlayerLogin2"};
 	waitUntil{count (dayzPlayerLogin2) > 0};
-	diag_log("P2DEBUG: dayzPlayerLogin2: " + str(dayzPlayerLogin2));
+	if (P2DZE_debugLogin) then { diag_log("P2DEBUG: dayzPlayerLogin2: " + str(dayzPlayerLogin2)); };
+
 	P2DZ_humanity = dayzPlayerLogin2 select 2;
 
 	P2DZ_humanityLevel = floor(P2DZ_humanity / 5000);
@@ -151,7 +156,11 @@ if (_isNew) then {
 		P2DZ_humanityLevelText = "Survivor";
 	};
 
-	diag_log(P2DZ_humanityLevelText);
+	if (P2DZE_debugHumanity) then {
+		diag_log(format["HumanityDebug: dayzPlayerLogin2 select 2: %1", (dayzPlayerLogin2 select 2)]);
+		diag_log(format["HumanityDebug: P2DZ_humanityLevel: %1", P2DZ_humanityLevel]);
+		diag_log(format["HumanityDebug: P2DZ_humanityLevelText: %1", P2DZ_humanityLevelText]);
+	};
 
 	//Wait until they're fully loaded in
 	waitUntil{!isNil 'dayz_gui'};
@@ -174,7 +183,7 @@ P2DZ_dbCurMode = 2;
 P2DZE_debugCol = [(_debugMonSettings select 0), (_debugMonSettings select 1), (_debugMonSettings select 2), (_debugMonSettings select 3)];
 P2DZ_debugMonitor = true;
 
-diag_log(format["P2DEBUG: login.sqf: P2DZ_dbCurMode (%1) P2DZE_debugCol (%2)", P2DZ_dbCurMode, P2DZE_debugCol]);
+if (P2DZE_debugLogin) then { diag_log(format["P2DEBUG: login.sqf: P2DZ_dbCurMode (%1) P2DZE_debugCol (%2)", P2DZ_dbCurMode, P2DZE_debugCol]); };
 
 player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true];
 player setVariable ["P2_DebugMonColours", P2DZE_debugCol, true];
@@ -208,7 +217,6 @@ _p2_didYouKnow = [
 ];
 
 _randomSelection = floor(random(count _p2_didYouKnow));
-if (p2SpT) then { diag_log("_RandomSelection: " + str(_randomSelection)); };
 //select a message to display post-halo/post-spawn
 _p2_selectedMsg = (_p2_didYouKnow select (_randomSelection));
 systemChat(_p2_selectedMsg);	
