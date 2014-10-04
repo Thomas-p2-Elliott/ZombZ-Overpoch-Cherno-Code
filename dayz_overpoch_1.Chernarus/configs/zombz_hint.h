@@ -92,7 +92,7 @@ class zombz_hintMini
       type = 0;
       style = 176;
       x="(SafeZoneW + SafeZoneX) - (1 - 0.701)";
-      y="0.135 * safezoneH + safezoneY";
+      y="0.139 * safezoneH + safezoneY";
       w = 0.2998;
       h = 0.0;
       colorText[] = {1, 1, 1, 1};
@@ -188,7 +188,7 @@ class zombz_hintFull
       type = 0;
       style = 176;
       x="(SafeZoneW + SafeZoneX) - (1 - 0.701)";
-      y="0.135 * safezoneH + safezoneY";
+      y="0.139 * safezoneH + safezoneY";
       w = 0.2998;
       h = 0.0;
       colorText[] = {1, 1, 1, 1};
