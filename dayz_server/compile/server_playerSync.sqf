@@ -1,4 +1,4 @@
-private ["_currentCharATMCard","_currentCharGoldArr","_currentCharGold","_playerUID","_key2","_result","_debugMonSettings","_empty","_name","_playerwasNearby","_character","_magazines","_force","_characterID","_charPos","_isInVehicle","_timeSince","_humanity","_debug","_distance","_isNewMed","_isNewPos","_isNewGear","_playerPos","_playerGear","_playerBackp","_medical","_distanceFoot","_lastPos","_backpack","_kills","_killsB","_killsH","_headShots","_lastTime","_timeGross","_timeLeft","_currentWpn","_currentAnim","_config","_onLadder","_isTerminal","_currentModel","_modelChk","_muzzles","_temp","_currentState","_array","_key","_pos","_forceGear","_friendlies"];
+private ["_currentCharATMCard","_currentCharGoldArr","_currentCharGold","_playerUID","_key2","_result","_debugMonSettings","_empty","_name","_playerwasNearby","_character","_magazines","_force","_characterID","_charPos","_isInVehicle","_timeSince","_humanity","_debug","_distance","_isNewMed","_isNewPos","_isNewGear","_playerPos","_playerGear","_playerBackp","_medical","_distanceFoot","_distanceFootCurrent","_distanceFootPrevious","_lastPos","_backpack","_kills","_killsB","_killsH","_headShots","_lastTime","_timeGross","_timeLeft","_currentWpn","_currentAnim","_config","_onLadder","_isTerminal","_currentModel","_modelChk","_muzzles","_temp","_currentState","_array","_key","_pos","_forceGear","_friendlies"];
 
 _character = 	_this select 0;
 _magazines = _this select 1;
@@ -17,7 +17,7 @@ if (isNull _character) exitWith {
 };
 
 _characterID =	_character getVariable ["CharacterID","0"];
-_charPos = 		getPos _character;
+_charPos = 		getPosATL _character;
 _isInVehicle = 	vehicle _character != _character;
 _timeSince = 	0;
 _humanity =		0;
@@ -55,6 +55,8 @@ if (_characterID != "0") then {
 	_playerBackp =	[];
 	_medical =		[];
 	_distanceFoot =	0;
+	_distanceFootCurrent =	0;
+	_distanceFootPrevious =	0;
 	_playerUID = getPlayerUID _character;
 	_currentCharGoldArr = [];
 	_currentCharGold = 0;
@@ -72,7 +74,7 @@ if (_characterID != "0") then {
 			_lastPos = 		_character getVariable["lastPos",_charPos];
 			if (count _lastPos > 2 && count _charPos > 2) then {
 				if (!_isInVehicle) then {
-					_distanceFoot = round(_charPos distance _lastPos);
+					_distanceFootCurrent = [_charPos, _lastPos] call KK_fnc_distanceASL;
 				};
 				_character setVariable["lastPos",_charPos];
 			};
@@ -115,25 +117,34 @@ if (_characterID != "0") then {
 			be recording  results from their local objects (such as agent zombies)
 		*/
 
-		_debugMode = 		_character getVariable ["P2_DebugMonMode",2]; 
-		_debugColours = 	_character getVariable ["P2_DebugMonColours",[0,0,0,0.2]]; 
+		_debugMode = 			_character getVariable ["P2_DebugMonMode",2]; 
+		_debugColours = 		_character getVariable ["P2_DebugMonColours",[0,0,0,0.2]]; 
 		//set variable to save to db
-		_debugMonSettings = [(_debugColours select 0), (_debugColours select 1), (_debugColours select 2), (_debugColours select 3), _debugMode];
+		_debugMonSettings = 	[(_debugColours select 0), (_debugColours select 1), (_debugColours select 2), (_debugColours select 3), _debugMode];
 
+		_currentCharGold = 		["ZombZGold",_character] call server_getDiff;
 
-		_currentCharGold = 		_character getVariable ["ZombZGold",0]; 
-		_currentCharATMCard = 	_character getVariable ["ZombZATMCard",0]; 
+		_kills = 				["zombieKills",_character] call server_getDiff;
+		_killsB = 				["banditKills",_character] call server_getDiff;
+		_killsH = 				["humanKills",_character] call server_getDiff;
+		_headShots = 			["headShots",_character] call server_getDiff;
+		_humanity = 			["humanity",_character] call server_getDiff2;
+
+		_currentCharGold = 		_character getVariable ["ZombZGold_CHK", 13]; 
+
+		//_currentCharATMCard = 	_character getVariable ["ZombZATMCard",0]; unused
+		_currentCharATMCard = 0;
 		//Save in array for db
-		_currentCharGoldArr = [_currentCharGold,_currentCharATMCard];
+		_currentCharGoldArr =	[_currentCharGold,_currentCharATMCard];
 
+		_kills = 				_character getVariable["zombieKills_CHK",	13];
+		_killsB = 				_character getVariable["banditKills_CHK", 	13];
+		_killsH = 				_character getVariable["humanKills_CHK",  	13];
+		_headShots = 			_character getVariable["headShots_CHK",  	13];
+		_humanity = 			_character getVariable["humanity_CHK",    	2500];
+		_distanceFootPrevious = _character getVariable["distanceFoot_CHK", 	13];
+		_distanceFoot = _distanceFootPrevious + _distanceFootCurrent;
 
-		_kills = 		["zombieKills",_character] call server_getDiff;
-		_killsB = 		["banditKills",_character] call server_getDiff;
-		_killsH = 		["humanKills",_character] call server_getDiff;
-		_headShots = 	["headShots",_character] call server_getDiff;
-		_humanity = 	["humanity",_character] call server_getDiff2;
-		diag_log("P2DEBUG: server_playerSync: " + str _currentCharGoldArr);
-		diag_log("P2DEBUG: server_playerSync: " + str _debugMonSettings);
 
 		//_humanity = 	_character getVariable ["humanity",0];
 		_character addScore _kills;		
@@ -207,7 +218,7 @@ if (_characterID != "0") then {
 				//Wait for HIVE to be free
 				//Send request
 				_key = format["CHILD:201:%1:%2:%3:%4:%5:%6:%7:%8:%9:%10:%11:%12:%13:%14:%15:%16:%17:",_characterID,_playerPos,_playerGear,_playerBackp,_medical,false,false,_kills,_headShots,_distanceFoot,_timeSince,_currentState,_killsH,_killsB,_currentModel,_humanity,_currentCharGoldArr];
-				diag_log ("HIVE: WRITE: "+ str(_key) + " / " + _characterID);
+				if (P2DZE_debugServerPlayerSync) then { diag_log ("HIVE: WRITE: "+ str(_key) + " / " + _characterID); };
 				_key call server_hiveWrite;
 
 				//update debug mon settings
@@ -220,7 +231,7 @@ if (_characterID != "0") then {
 		if (vehicle _character != _character) then {
 			//[vehicle _character, "position"] call server_updateObject;
 			if (!(vehicle _character in needUpdate_objects)) then {
-				//diag_log format["DEBUG: Added to NeedUpdate=%1",vehicle _character];
+				if (P2DZE_debugServerPlayerSync) then { diag_log format["DEBUG: Added to NeedUpdate=%1",vehicle _character]; };
 				needUpdate_objects set [count needUpdate_objects, vehicle _character];
 			};
 		};

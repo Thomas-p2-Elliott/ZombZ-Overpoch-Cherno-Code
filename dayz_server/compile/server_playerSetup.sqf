@@ -66,6 +66,14 @@ _currentCharGoldArr =	_primary select 7;
 _currentCharGold =	_currentCharGoldArr select 0;
 _currentCharATM = 	_currentCharGoldArr select 1;
 
+if (P2DZ_humanityDebug) then {
+	diag_log ("HUMANITYDEBUG: server_playerSetup: " + str(_humanity));
+};
+
+if (P2DZE_goldItemHandlingDebug) then {
+	diag_log ("GoldDebug: server_playerSetup: " + str(_currentCharGoldArr));
+};
+
 //Set position
 _randomSpot = false;
 
@@ -118,10 +126,10 @@ if (isNil '_debugMonSettings') then {
 	
 	//save for client and save for JIP checks
 	_playerObj setVariable["P2_DebugMonMode",(_debugMode),true];
-	_playerObj setVariable["P2_DebugMonMode_CHK",(_debugMode),true];
+	_playerObj setVariable["P2_DebugMonMode_CHK",(_debugMode)];
 	//save for client and save for serverJIP checks
 	_playerObj setVariable["P2_DebugMonColours",(_debugColours),true];
-	_playerObj setVariable["P2_DebugMonColours_CHK",(_debugColours),true];
+	_playerObj setVariable["P2_DebugMonColours_CHK",(_debugColours)];
 
 
 };
@@ -129,12 +137,16 @@ if (isNil '_debugMonSettings') then {
 //set gold values
 if (count _currentCharGoldArr > 0) then {
 	_playerObj setVariable["ZombZGold", (_currentCharGold), true];
-	_playerObj setVariable["ZombZATMCard", (_currentCharATM), true];
+	//_playerObj setVariable["ZombZATMCard", (_currentCharATM), true]; //unused
 
+	//save for jip check
+	_playerObj setVariable["ZombZGold_CHK", (_currentCharGold)];
 //reset gold values to [0,0]...data has been broken and is no longer in array format of [currentGold,currentATMCard]
 } else {
 	_playerObj setVariable["ZombZGold", 0, true];
-	_playerObj setVariable["ZombZATMCard", 0, true];
+	//_playerObj setVariable["ZombZATMCard", 0, true]; //unused
+	_playerObj setVariable["ZombZGold_CHK", 0];
+
 };
 
 //set medical values
@@ -301,7 +313,7 @@ if (!isNull _playerObj) then {
 _playerObj setVariable ["lastTime",time];
 //_playerObj setVariable ["model_CHK",typeOf _playerObj];
 
-diag_log ("P2DEBUG: LOGIN PUBLISHING: " + str(_playerObj) + " Type: " + (typeOf _playerObj));
+//diag_log ("P2DEBUG: LOGIN PUBLISHING: " + str(_playerObj) + " Type: " + (typeOf _playerObj));
 
 PVDZE_plr_Login = nil;
 PVDZE_plr_Login2 = nil;
