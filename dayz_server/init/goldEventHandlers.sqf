@@ -84,7 +84,7 @@ P2DZE_dropGold = {
 
 				if (_amount > 0) then {
 					//create gold pile
-					_iPos = getPos _unit;
+					_iPos = getPosATL _unit;
 					_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
 					_item setpos _iPos;
 					_item addMagazineCargoGlobal ["ItemGoldBar10oz",1];
