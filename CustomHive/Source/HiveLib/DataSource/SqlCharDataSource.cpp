@@ -80,7 +80,7 @@ Sqf::Value SqlCharDataSource::fetchCharacterInitial( string playerId, int server
 		"TIMESTAMPDIFF(MINUTE,`Datestamp`,`LastLogin`) as `SurvivalTime`, "
 		"TIMESTAMPDIFF(MINUTE,`LastAte`,NOW()) as `MinsLastAte`, "
 		"TIMESTAMPDIFF(MINUTE,`LastDrank`,NOW()) as `MinsLastDrank`, "
-		"`Model` FROM `Character_DATA` WHERE `"+_idFieldName+"` = '%s' AND `Alive` = 1 ORDER BY `CharacterID` DESC LIMIT 1").c_str(), getDB()->escape(playerId).c_str());
+		"`Model`, `DistanceFoot` FROM `Character_DATA` WHERE `"+_idFieldName+"` = '%s' AND `Alive` = 1 ORDER BY `CharacterID` DESC LIMIT 1").c_str(), getDB()->escape(playerId).c_str());
 	int infected = 0;
 	bool newChar = false; //not a new char
 	int characterId = -1; //invalid charid
@@ -89,6 +89,7 @@ Sqf::Value SqlCharDataSource::fetchCharacterInitial( string playerId, int server
 	Sqf::Value backpack = lexical_cast<Sqf::Value>("[]"); //empty backpack
 	Sqf::Value survival = lexical_cast<Sqf::Value>("[0,0,0]"); //0 mins alive, 0 mins since last ate, 0 mins since last drank
 	string model = ""; //empty models will be defaulted by scripts
+	int distanceFoot = 0;
 	if (charsRes && charsRes->fetchRow())
 	{
 		newChar = false;
@@ -138,6 +139,16 @@ Sqf::Value SqlCharDataSource::fetchCharacterInitial( string playerId, int server
 		catch(...)
 		{
 			model = charsRes->at(7).getString();
+		}
+
+		//set distance foot
+		try
+		{
+			distanceFoot = boost::get<int>(lexical_cast<Sqf::Value>(charsRes->at(8).getInt32()));
+		}
+			catch (...)
+		{
+			distanceFoot = charsRes->at(8).getInt32();
 		}
 
 		//update last login
@@ -234,7 +245,7 @@ Sqf::Value SqlCharDataSource::fetchCharacterInitial( string playerId, int server
 	//hive interface version
 	retVal.push_back(0.96f);
 	retVal.push_back(debugMonSettings);
-
+	retVal.push_back(distanceFoot);
 	return retVal;
 }
 
