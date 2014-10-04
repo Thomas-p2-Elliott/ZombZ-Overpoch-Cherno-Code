@@ -874,13 +874,8 @@ MeleeWeaps[] = {
 {"MeleeCrowbar",0.1}, 
 {"MeleeSledge",0.1}, 
 {"MeleeFishingPole",0.05}, 
-{"Chainsaw",0.01}, 
-{"ChainSawB",0.01}, 
-{"ChainSawG",0.01}, 
-{"ChainSawP",0.01}, 
-{"ChainSawR",0.01} 
+{"Chainsaw",0.01}
 };
-
 
 
 SniperTopWeaps[] = {
