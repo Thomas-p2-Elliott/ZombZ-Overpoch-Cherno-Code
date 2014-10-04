@@ -2,3 +2,5 @@ todo: antihack
 
 
 build generator to whitelist all mission file script paths then instead of using infistar script name blacklist scan, use a whitelist scan.
+
+report items and especially tws on player, where they found it, etc
