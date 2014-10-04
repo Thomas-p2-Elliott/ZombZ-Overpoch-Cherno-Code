@@ -11,9 +11,9 @@ _spawnMarker	= _this select 5;
 _spawnRadius	= _this select 6;
 _spawnFire	= _this select 7;
 _fadeFire	= _this select 8;
+_d = P2DZE_debugCrashSites;
 
-
-diag_log("CRASHSPAWNER: Starting spawn logic for Crash Spawner");
+if (_d) then { diag_log("CRASHSPAWNER: Starting spawn logic for Crash Spawner"); };
 
 while {1 == 1} do {
 	private["_timeAdjust","_timeToSpawn","_spawnRoll","_crash","_hasAdjustment","_newHeight","_adjustedPos"];
@@ -37,7 +37,7 @@ while {1 == 1} do {
 
 	_crashName	= getText (configFile >> "CfgVehicles" >> _crashModel >> "displayName");
 
-	diag_log(format["CRASHSPAWNER: %1%2 chance to spawn '%3' with loot table '%4' in %5 seconds", round(_spawnChance * 100), '%', _crashName, _crashModel, _timeToSpawn]);
+	if (_d) then { diag_log(format["CRASHSPAWNER: %1%2 chance to spawn '%3' with loot table '%4' in %5 seconds", round(_spawnChance * 100), '%', _crashName, _crashModel, _timeToSpawn]); };
 
 	// Apprehensive about using one giant long sleep here given server time variances over the life of the server daemon
 	while {time < _timeToSpawn} do {
@@ -51,7 +51,7 @@ while {1 == 1} do {
 
 		_position = [getMarkerPos _spawnMarker,0,_spawnRadius,10,0,2000,0] call BIS_fnc_findSafePos;
 
-		diag_log(format["CRASHSPAWNER: Spawning '%1' with loot table '%2' NOW! (%3) at: %4", _crashName, _lootTable, time, str(_position)]);
+		if (_d) then { diag_log(format["CRASHSPAWNER: Spawning '%1' with loot table '%2' NOW! (%3) at: %4", _crashName, _lootTable, time, str(_position)]); };
 
 		_crash = createVehicle [_crashModel,_position, [], 0, "CAN_COLLIDE"];
 		// Randomize the direction the wreck is facing
@@ -77,12 +77,12 @@ while {1 == 1} do {
 		_newHeight = 0;
 		if (_hasAdjustment) then {
 			_newHeight = getNumber(_config);
-			//diag_log(format["DIAG: ADJUSTMENT FOUND FOR %1, IT IS: %2", _crashName, _newHeight]);
+			//if (_d) then { diag_log(format["DIAG: ADJUSTMENT FOUND FOR %1, IT IS: %2", _crashName, _newHeight]); };
 		};
 
 		// Must setPos after a setDir otherwise the wreck won't level itself with the terrain
 		_adjustedPos = [(_position select 0), (_position select 1), _newHeight];
-		//diag_log(format["DIAG: Designated Position: %1", str(_adjustedPos)]);
+		//if (_d) then { diag_log(format["DIAG: Designated Position: %1", str(_adjustedPos)]); };
 		_crash setPos _adjustedPos;
 
 		_crash setVariable ["ObjectID","1",true];
@@ -119,7 +119,7 @@ while {1 == 1} do {
 
 			[_itemType select 0, _itemType select 1, _lootPos, 2] call spawn_loot_server;
 
-			diag_log(format["P2DEBUG: CRASHSPAWNER: Loot spawn at '%1' with loot table '%2' and chance array '%3'", _crashName, _lootTable select 0, _lootTable select 1]);
+			if (_d) then { if (_d) then { diag_log(format["P2DEBUG: CRASHSPAWNER: Loot spawn at '%1' with loot table '%2' and chance array '%3'", _crashName, _lootTable select 0, _lootTable select 1]); };
 
 			// ReammoBox is preferred parent class here, as WeaponHolder wouldn't match MedBox0 && other such items.
 			_nearby = _position nearObjects ["ReammoBox", sizeOf(_crashModel)];

@@ -4,7 +4,7 @@ private ["_object","_keep1Bar","_contents","_itemCount","_goldBarCount","_addBac
 If gold exists in objects cargo space, make sure there is only 1
 if gold does not exist, add 1 gold bar item.
 ---------------------------------------------------------------------------*/
-_d = true;							//true = enable debug log outputs, false = disable
+_d = false;							//true = enable debug log outputs, false = disable
 _itemType = "ItemGoldBar10oz";
 
 if (_d) then { diag_log("P2DEBUG: fnc_removeExtraBars Input: " + str _this); };

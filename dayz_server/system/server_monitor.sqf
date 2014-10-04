@@ -267,7 +267,13 @@ if (isServer && isNil "sm_done") then {
 				[_object,true] call fnc_removeExtraBars;
 			};
 
-			diag_log(format["P2DEBUG: HiveStream: GoldSet on Obj, _gold: " + str _gold]);
+			//comment out if statement to see ALL objects gold as they spawn
+			if (_gold > 5000) then {
+				private["_log"];
+				_log = format["HighGoldObject: " + str(typeOf _object) + ", Gold: " + str _gold + ", Pos: " + str(position _object)];
+				diag_log(_log);
+			   ["highGoldObjects",_log] call p2net_log1; 
+			};
 
 			_object setVariable ["ZombZGold", _gold, true];
 

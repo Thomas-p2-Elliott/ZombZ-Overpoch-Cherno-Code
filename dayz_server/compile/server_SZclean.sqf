@@ -1,7 +1,8 @@
+private ["_p2d","_obj","_delVeh","_safespot","_Action","_radius","_dam","_delbikmot","_defdelar","_unlock","_txt","_updateHIVE","_WorldName","_possiblematch","_Spos","_Rad","_radats","_radx4","_defdel","_typeOf","_mags","_weaps","_packs","_objID","_objUID","_objname","_newPos","_position","_worldspace","_fuel","_key","_msg"];
 /*VEHICLE CLEANUP ZONE*/
 _obj = _this select 0;
 
-if (!isServer) exitWith {diag_log "Server_DeleteObjInsafezone.sqf - ERROR: NOT SERVER?"};
+if (!isServer) exitWith { diag_log "Server_DeleteObjInsafezone.sqf - ERROR: NOT SERVER?"};
 
 //\\\\\\\\\\\\\\\\\\\\ Setup Area ////////////////////\\
 
@@ -14,6 +15,8 @@ _delVeh = ["Air","Landvehicle","Ship","Tank"];
 //2 Tp vehicles to a position within 125m of _safespot (remember to set a position below)
 //3 will delete vehicles completly from database
 _Action = 1;
+
+_p2d = P2DZE_safeZoneCleanupDebug;
 
 //if _Action = 2 then enter the position you desire here (default is by grozovoy pass around 022010)
 _safespot = [2283.19,14255,0];
@@ -39,12 +42,12 @@ _updateHIVE = true;
 
 //VEHICLE CLEANUP ZONE's/areas switch choosing the map name for cleanup location purposes
 if(isNil "HALV_VEHICLE_CLEANUPZONES")then{
-	diag_log format["%1: selecting world to cleanup ...",_txt];
+	if (_p2d) then { diag_log format["%1: selecting world to cleanup ...",_txt]; };
 	_WorldName = toLower format ["%1", worldName];
 	switch (_WorldName)do {
 //NAPF
 		case "napf":{
-//			diag_log format["%2: Cleanup zones for napf selected! (check: %1)",_WorldName,_txt]; //logging if right worldname was selected, if uncommented
+//			if (_p2d) then { diag_log format["%2: Cleanup zones for napf selected! (check: %1)",_WorldName,_txt]; }; //logging if right worldname was selected, if uncommented
 			HALV_VEHICLE_CLEANUPZONES = [
 			//position					//radius	//cityname/text
 			[[8246.3184,15485.867,0],	125,		"Trader City Lenzburg"],
@@ -61,7 +64,7 @@ if(isNil "HALV_VEHICLE_CLEANUPZONES")then{
 		};
 //chernarus
 		case "chernarus":{
-			diag_log format["%2: Cleanup zones for chernarus selected! (check: %1)",_WorldName,_txt]; //logging if right worldname was selected, if uncommented
+			if (_p2d) then { diag_log format["%2: Cleanup zones for chernarus selected! (check: %1)",_WorldName,_txt]; }; //logging if right worldname was selected, if uncommented
 			HALV_VEHICLE_CLEANUPZONES = [
 			//position					radius		cityname/text
 			[[6325.6772,7807.7412,0],	125,		"Trader City Stary"],
@@ -78,7 +81,7 @@ if(isNil "HALV_VEHICLE_CLEANUPZONES")then{
 		};
 //tavi
 		case "tavi":{
-//			diag_log format["%2: Cleanup zones for tavi selected! (check: %1)",_WorldName,_txt]; //logging if right worldname was selected, if uncommented
+//			if (_p2d) then { diag_log format["%2: Cleanup zones for tavi selected! (check: %1)",_WorldName,_txt]; }; //logging if right worldname was selected, if uncommented
 			HALV_VEHICLE_CLEANUPZONES = [
 			//position					//radius	//cityname/text
 			[[11698.81,15210.121,0],	75,			"Trader City Lyepestok"],
@@ -102,7 +105,7 @@ if(isNil "HALV_VEHICLE_CLEANUPZONES")then{
 /*
 //myworldname
 		case "myworldnameinlowercase":{
-//			diag_log format["%2: Cleanup zones for myworldnameinlowercase selected! (check: %1)",_WorldName,_txt]; //logging if right worldname was selected, if uncommented
+//			if (_p2d) then { diag_log format["%2: Cleanup zones for myworldnameinlowercase selected! (check: %1)",_WorldName,_txt]; }; //logging if right worldname was selected, if uncommented
 			HALV_VEHICLE_CLEANUPZONES = [
 			//position					//radius	//cityname/text
 			[[7839.60,8414.73,381.33],	150,		"my custom zone marker"],
@@ -112,7 +115,7 @@ if(isNil "HALV_VEHICLE_CLEANUPZONES")then{
 */
 //default
 		default{
-			diag_log format["%2: Cleanup zones for %1 not availible ...",_WorldName,_txt]; //logging if right worldname was selected, if uncommented
+			if (_p2d) then { diag_log format["%2: Cleanup zones for %1 not availible ...",_WorldName,_txt]; }; //logging if right worldname was selected, if uncommented
 			HALV_VEHICLE_CLEANUPZONES = [
 			//position	//radius	//cityname/text
 			[[0,0,0],	1,			"DEBUG"]
@@ -143,13 +146,13 @@ if(_possiblematch)then{
 			_objID		= _obj getVariable["ObjectID","0"];
 			_objUID		= _obj getVariable["ObjectUID","0"];
 			_objname	= (gettext (configFile >> 'CfgVehicles' >> _typeOf >> 'displayName'));
-			diag_log format["%1: %2 (%3) by %4 @%5 %6 [ID:%7,UID:%8] Cargo: [%9,%10,%11]",_txt,_typeOf,_objname,_name,mapgridposition _pos,_pos,_objID,_objUID,_weaps,_mags,_packs];
+			if (_p2d) then { diag_log format["%1: %2 (%3) by %4 @%5 %6 [ID:%7,UID:%8] Cargo: [%9,%10,%11]",_txt,_typeOf,_objname,_name,mapgridposition _pos,_pos,_objID,_objUID,_weaps,_mags,_packs]; };
 			if(_delbikmot)then{{if(_obj isKindOf _x)then{_defdel = true};}forEach _defdelar;};
-			if(_defdel)then{_Action=3;diag_log format["%2: %1 is Model to delete by default!",_typeOf,_txt];};
-			if(getDammage _obj > _dam)then{_Action=3;diag_log format["%2: %1 too damaged",_typeOf,_txt];};
-			if(_unlock and !_defdel and (locked _obj))then{_obj setVehicleLock "UNLOCKED";_obj setVariable ["R3F_LOG_disabled",false,true];diag_log format["%2: %1 Un-Locked",_typeOf,_txt];};
+			if(_defdel)then{_Action=3;if (_p2d) then { diag_log format["%2: %1 is Model to delete by default!",_typeOf,_txt];};};
+			if(getDammage _obj > _dam)then{_Action=3;if (_p2d) then { diag_log format["%2: %1 too damaged",_typeOf,_txt];};};
+			if(_unlock and !_defdel and (locked _obj))then{_obj setVehicleLock "UNLOCKED";_obj setVariable ["R3F_LOG_disabled",false,true];if (_p2d) then { diag_log format["%2: %1 Un-Locked",_typeOf,_txt];};};
 			switch(_Action)do{
-				case 0:{deleteVehicle _obj;diag_log format["%2: %1 Deleted, but remains in DB (Dont forget to clean this up)",_typeOf,_txt];};
+				case 0:{deleteVehicle _obj;if (_p2d) then { diag_log format["%2: %1 Deleted, but remains in DB (Dont forget to clean this up)",_typeOf,_txt];};};
 				case 1:{
 					_newPos = [_Spos, _radats, _radx4, 10, 0, 2000, 0] call BIS_fnc_findSafePos;
 					_obj setpos _newPos;
@@ -163,10 +166,10 @@ if(_possiblematch)then{
 						]; 
 						_fuel = fuel _obj;
 						_key = format["CHILD:305:%1:%2:%3:",_objID,_worldspace,_fuel];
-						diag_log ("HIVE: WRITE: "+ str(_key));
+						if (_p2d) then { diag_log ("HIVE: WRITE: "+ str(_key));};
 						_key call server_hiveWrite;
 					};
-					diag_log format["%6: %5 TP from %1 %2 to %3 %4",_pos,mapgridposition _pos,_newPos,mapgridposition _newPos,_typeOf,_txt];
+					if (_p2d) then { diag_log format["%6: %5 TP from %1 %2 to %3 %4",_pos,mapgridposition _pos,_newPos,mapgridposition _newPos,_typeOf,_txt];};
 				};
 				case 2:{
 					_newPos = [_safespot, 0, _radius, 10, 0, 2000, 0] call BIS_fnc_findSafePos;
@@ -181,10 +184,10 @@ if(_possiblematch)then{
 						];
 						_fuel = fuel _obj;
 						_key = format["CHILD:305:%1:%2:%3:",_objID,_worldspace,_fuel];
-						diag_log ("HIVE: WRITE: "+ str(_key));
+						if (_p2d) then { diag_log ("HIVE: WRITE: "+ str(_key));};
 						_key call server_hiveWrite;
 					};
-					diag_log format["%6: %5 TP from %1 %2 to %3 %4",_pos,mapgridposition _pos,_newPos,mapgridposition _newPos,_typeOf,_txt];
+					if (_p2d) then { diag_log format["%6: %5 TP from %1 %2 to %3 %4",_pos,mapgridposition _pos,_newPos,mapgridposition _newPos,_typeOf,_txt];};
 				};
 				default{_msg = format["%2: %1",_typeOf,_txt];deleteVehicle _obj;[_objID,_objUID,_msg] call server_deleteObj;};
 			};

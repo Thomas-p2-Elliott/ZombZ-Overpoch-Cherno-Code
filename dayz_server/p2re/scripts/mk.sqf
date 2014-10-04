@@ -1,7 +1,5 @@
 private [ "_rExec" ];
 _rExec = compile ("
-diag_log(""INFILE: MK.SQF"");
-
 waitUntil {!isNil ""dayz_gui""};
 
 _bank1 = createMarker [""skalka main outpost"", [2241.4453, 10803.656]];
@@ -75,13 +73,7 @@ _bank11 setMarkerText ""Winterfell"";
 _bank11 setMarkerType ""Defend"";
 _bank11 setMarkerColor ""ColorRedAlpha"";
 bank11 = _bank11;
-
-
-
-diag_log(""FILEDONE: MK.SQF"");
-
-
- ");
+");
 
 ["ZombZ map markers",_rExec] call fnc_p2_RemoteExecute;
 
