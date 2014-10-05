@@ -3,7 +3,7 @@ LOG_CFG_lANG = "en"; 				/*  en = english , de = german , fr = french  */
 LOG_CFG_ALLOW_LOCKED = false;	 	/* allow to transport locked vehicles */
 LOG_CFG_ALLOW_CHAINING = false; 	/* allow chain towing  */
 LOG_CFG_ALLOW_GETIN = false; 		/* allow player to get into a towed / lifted object  */
-
+P2LOG_CFG_ALLOW_FROMPLOT = false; 	/* player2: allow player to tow or lift from plots */
 
 /*--------------------------------------------------------------------------------------------------------------
 	LIST OF VEHICLES WHERE CAN TOW

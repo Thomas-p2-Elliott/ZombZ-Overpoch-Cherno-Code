@@ -34,7 +34,63 @@ if (!isDedicated) then {
 				_return = false; 
 			};
 		_return
+	};
+
+	LOG_P2FNCT_PLOTNEAR = {
+		private ["_return","_distance","_findNearestPoles","_findNearestPole","_IsNearPlot","_nearestPole","_ownerID","_friendlies"];
+		_target = (_this select 0);
+		_return = true;
+
+		if !(P2LOG_CFG_ALLOW_FROMPLOT) then  { 	
+			_pos = getPosASL _target;
+
+			_distance = DZE_PlotPole select 1;
+			
+			// check for near plot
+			_findNearestPoles = nearestObjects [_pos, ["Plastic_Pole_EP1_DZ"], _distance];
+			_findNearestPole = [];
+
+			{
+				if (alive _x) then {
+					_findNearestPole set [(count _findNearestPole),_x];
+				};
+			} count _findNearestPoles;
+
+			_IsNearPlot = count (_findNearestPole);
+
+			if(_IsNearPlot == 0) then {
+
+				// its okay! no plots around
+				//return true, they can tow or lift
+				_return = true;
+
+			} else {
+				// Since there are plots nearby we check for ownership && then for friend status
+				_return = false;
+				// check nearby plots ownership && then for friend status
+				_nearestPole = _findNearestPole select 0;
+
+				// Find owner
+				_ownerID = _nearestPole getVariable ["CharacterID","0"];
+
+				if(dayz_characterID == _ownerID) then { 
+					// owner can tow or lift here
+					_return = true;
+				} else {
+					_friendlies		= player getVariable ["friendlyTo",[]];
+					// check if friendly to owner
+					if(_ownerID in _friendlies) then {
+						//is friendly to owner, they can tow or lift
+						_return = true;
+					};
+				};
+			};
+		} else {
+			_return = true;
 		};
+
+		_return
+	};
 	
 	LOG_FNCT_CHAINING = { 
 		private ["_return","_target"];
