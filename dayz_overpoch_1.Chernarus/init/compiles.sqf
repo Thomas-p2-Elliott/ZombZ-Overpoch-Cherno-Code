@@ -218,7 +218,9 @@ Both Server & Client Side Scripts
 	//custom
 	p2_lootCheck = 					compile preprocessFileLineNumbers "compile\p2_lootCheck.sqf";
 	p2_checkWepBpSlot = 			compile preprocessFileLineNumbers "compile\p2_checkWepBpSlot.sqf"; 
-
+	//towing and lifting
+	call 							compile preprocessFileLineNumbers "logistic\init.sqf";
+	
 	//coming soon to epoch
 	FNC_GetPlayerUID = {
 		private ["_object","_version","_PID"];

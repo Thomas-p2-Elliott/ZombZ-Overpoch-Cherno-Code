@@ -115,7 +115,6 @@ progressLoadingScreen 0.5;
 call compile preprocessFileLineNumbers "server_traders.sqf";									//Compile trader configs
 call compile preprocessFileLineNumbers "compile\fnc_server.sqf";
 progressLoadingScreen 1.0;
-[] execVM "R3F_ARTY_AND_LOG\init.sqf";
 "filmic" setToneMappingParams [0.153, 0.357, 0.231, 0.1573, 0.011, 3.750, 6, 4]; setToneMapping "Filmic";
 
 [] execVM "\ddopp_taserpack\scripts\init_taser.sqf";
