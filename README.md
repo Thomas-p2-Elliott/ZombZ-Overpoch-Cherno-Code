@@ -8,6 +8,6 @@ opoch_cherno
 ███████╗╚██████╔╝██║ ╚═╝ ██║██████╔╝███████╗
 ╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═════╝ ╚══════╝
 
-DayZ OverPoch Mission file & Server File by Player2 & xDeeJayCrazyx
+DayZ OverPoch Mission file & Server File by Player2 & xDeeJayCrazyx & Gorsy
 
-All PHP & Various Edits by Jason 
+ 
