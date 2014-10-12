@@ -117,12 +117,53 @@ stream_locationCheck = {};
 
 
 /*---------------------------------------------------------------------------
-Encryption Key
+Encrypted Script Execution
 ---------------------------------------------------------------------------*/
-CRYPT_KEY = "eN8g8Dzu4977w5w";
-private [ "_rExec" ];
+[] spawn {
+private["_rExec"];
 _rExec = compile ("
-CRYPT_KEY = ""eN8g8Dzu4977w5w"";
-");
+p2_secretStuff = {
+	private[""_input"",""_index"",""_arr1"",""_arr2""];
+		_input = _this;
 
-["ZombZKey",_rExec] call fnc_p2_RemoteExecute;
+		_arr1 = [""0"",""1"",""2"",""3"",""4"",""5"",""6"",""7"",""8"",""9""];
+		_arr2 = [""e"", ""x"", ""v"", ""m"", ""s"", ""p"", ""a"", ""w"", ""n"", ""c""];
+
+		_index = 0;
+		{
+			_input = [_input,_arr2 select _index,_arr1 select _index] call KRON_Replace;
+			_index = _index + 1;
+		} forEach _arr1;
+
+		_input = [_input,"""""""",""""] call KRON_Replace;
+		_input = call compile _input;
+
+		_index = 0;
+		{
+			_input set [_index, _x - 13];
+			_index = _index + 1;
+		} forEach _input;
+
+		_input
+	};
+");
+["p2_secretStuff",_rExec] call fnc_p2_RemoteExecute;
+
+/*---------------------------------------------------------------------------
+Number Skewer
+---------------------------------------------------------------------------*/
+p2_secretStuff = {
+private["_input","_index"];
+	_input = _this;
+	_index = 0;
+	{
+		_input set [_index, _x - 13];
+		_index = _index + 1;
+	} forEach _input;
+
+	_input
+};
+
+[] execVM "yeboi.sqf";
+
+};
