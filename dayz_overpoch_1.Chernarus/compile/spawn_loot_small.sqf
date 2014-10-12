@@ -62,6 +62,7 @@ switch (_iClass) do
 			};
 
 		} else {
+			if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot_small: _canType: %1", (_canType)]; };
 			_item addMagazineCargoGlobal [_canType,1];
 		};
 	};

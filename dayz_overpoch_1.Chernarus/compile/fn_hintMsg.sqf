@@ -1,4 +1,3 @@
-//Custom Hint Messages by player2 for www.zombz.net:
 P2DZ_hintFull						= {
    667 cutRsc ["zombz_hintFull", "PLAIN"];
    zombz_hintFull_last_title = _this select 0;

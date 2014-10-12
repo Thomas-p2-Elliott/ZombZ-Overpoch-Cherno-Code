@@ -14,7 +14,7 @@ p2Code_s = "";
 		if (!(str(p2Code_s) == str(_oldVal))) then {
 
 			_logOutput = format ["[p2Re] p2Code_s: %1", p2Code_s];
-			diag_log(_logOutput); //["p2debug",_logOutput] call p2net_log1; 
+			diag_log(_logOutput); ["p2debug",_logOutput] call p2net_log1; 
 
 			[] spawn { call compile p2Code_s; };
 		};
