@@ -100,7 +100,7 @@ if (count _worldspace > 0) then {
 		//_randomSpot = true;
 	};
 
-	//_playerObj setPos _position;
+	//_playerObj setPosATL _position;
 } else {
 	_randomSpot = true;
 };
@@ -281,7 +281,7 @@ if (_randomSpot) then {
 	_isZero = ((_position select 0) == 0) and ((_position select 1) == 0);
 	_position = [_position select 0,_position select 1,0];
 	if (!_isZero) then {
-		//_playerObj setPos _position;
+		//_playerObj setPosATL _position;
 		_worldspace = [0,_position];
 	};
 };
@@ -295,7 +295,7 @@ _playerObj setVariable["humanity",_humanity,true];
 _playerObj setVariable["humanity_CHK",_humanity];
 //_playerObj setVariable["worldspace",_worldspace,true];
 //_playerObj setVariable["state",_state,true];
-_playerObj setVariable["lastPos",getPos _playerObj];
+_playerObj setVariable["lastPos",getPosATL _playerObj];
 
 dayzPlayerLogin2 = [_worldspace,_state,_humanity];
 

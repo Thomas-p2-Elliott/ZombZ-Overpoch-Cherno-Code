@@ -63,7 +63,7 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
         _array = _this select 1;
         _obj = _array select 0;
         _player = _array select 1;
-		_objPos = getPos _obj;
+		_objPos = getPosATL _obj;
 		_armedLittleBird = _obj getVariable ["ArmedLittlebird", false];
 		_debug = getMarkerpos "respawn_west";
 		diag_log(str _obj);
@@ -75,7 +75,7 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 			_origMat = ["ItemToolbox"];
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
-				_bag modelToWorld getPos _player;
+				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
 
@@ -96,7 +96,7 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 			_origMat = ["ItemToolbox","ItemToolbox","PartGeneric","PartWheel"];
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
-				_bag modelToWorld getPos _player;
+				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
 
@@ -118,7 +118,7 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 			_origMat = ["ItemToolbox","ItemToolbox","PartGeneric","PartEngine"];
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
-				_bag modelToWorld getPos _player;
+				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
 
@@ -140,7 +140,7 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartWheel"];
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
-				_bag modelToWorld getPos _player;
+				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
 
@@ -161,7 +161,7 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartEngine"];
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
-				_bag modelToWorld getPos _player;
+				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
 
@@ -182,7 +182,7 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 			_origMat =  ["ItemToolbox","ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartEngine","Mk_48_DZ","100Rnd_762x51_M240"];
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
-				_bag modelToWorld getPos _player;
+				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
 
@@ -204,7 +204,7 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartEngine","PartGeneric"];
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
-				_bag modelToWorld getPos _player;
+				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
 
@@ -225,7 +225,7 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartEngine","PartGeneric","PartGeneric","Mk_48_DZ","100Rnd_762x51_M240"];
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
-				_bag modelToWorld getPos _player;
+				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
 
@@ -246,7 +246,7 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 			_origMat = ["ItemToolbox","PartVrotor","PartEngine"];
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
-				_bag modelToWorld getPos _player;
+				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
 
@@ -268,7 +268,7 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 			if (_armedLittleBird) then {	diag_log("OBJECT DEPLOY LOG: The littlebird is agggressive"); _origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartGeneric","ItemToolbox"];	};
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
-				_bag modelToWorld getPos _player;
+				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
 
@@ -289,7 +289,7 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartEngine","PartGeneric"];
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
-				_bag modelToWorld getPos _player;
+				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				_player reveal _bag;
 

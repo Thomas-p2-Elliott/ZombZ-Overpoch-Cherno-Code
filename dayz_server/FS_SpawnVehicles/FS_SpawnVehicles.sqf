@@ -108,7 +108,7 @@ _fnc_spawn_vehicle = {
 					//place vehicle 
 					_veh = createVehicle [_vehicle, (_x select 1), [], 0, "CAN_COLLIDE"];
 					_veh setdir _dir;
-					_veh setpos (_x select 1);		
+					_veh setposATL (_x select 1);		
 
 					_veh call {
 					    _this setVariable [
@@ -129,7 +129,7 @@ _fnc_spawn_vehicle = {
 					};	
 				
 					// Get position
-					_objPosition = GetPos _veh;
+					_objPosition = GetPosATL _veh;
 					if (_p2d) then {	diag_log(" "); diag_log("Static Spawn Vehicle of Type: " + str _veh + " Created At: " + str _objPosition + " With Direction: " + str _dir); };
 
 					clearWeaponCargoGlobal  _veh;

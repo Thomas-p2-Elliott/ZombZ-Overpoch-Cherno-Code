@@ -190,7 +190,7 @@ if (isServer && isNil "sm_done") then {
 			// _object setVehicleAmmo DZE_vehicleAmmo;
 			
 			_object setdir _dir;
-			_object setpos _pos;
+			_object setposATL _pos;
 			_object setDamage _damage;
 			
 			if ((typeOf _object) in dayz_allowedObjects) then {

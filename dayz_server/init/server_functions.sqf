@@ -355,7 +355,7 @@ spawn_vehicles = {
 			};	
 		
 			// Get position with ground
-			_objPosition = getPos _veh;
+			_objPosition = getPosATL _veh;
 		
 			clearWeaponCargoGlobal  _veh;
 			clearMagazineCargoGlobal  _veh;
@@ -704,7 +704,7 @@ dayz_perform_purge_player = {
 
 	if(!isNull(_this)) then {
 
-		_location = getPos _this;
+		_location = getPosATL _this;
 		_dir = getDir _this;
 
 		_holder = createVehicle ["GraveDZE", _location, [], 0, "CAN_COLLIDE"];
@@ -721,7 +721,7 @@ dayz_perform_purge_player = {
 		};	
 
 		_holder setDir _dir;
-		_holder setPos _location;
+		_holder setPosATL _location;
 
 		_holder enableSimulation false;
 
@@ -933,7 +933,7 @@ server_spawnCleanAnimals = {
 			if (!alive _x) then {
 				_pos = getPos _x;
 				if (count _pos > 0) then {
-					_nearby = {(isPlayer _x) && (alive _x)} count (_pos nearEntities [["CAManBase","AllVehicles"], 130]);
+					_nearby = {(isPlayer _x) && (alive _x)} count (_pos nearEntities [["CAManBase","AllVehicles"], 150]);
 					if (_nearby==0) then {
 						_x call dayz_perform_purge;
 						sleep 0.05;
