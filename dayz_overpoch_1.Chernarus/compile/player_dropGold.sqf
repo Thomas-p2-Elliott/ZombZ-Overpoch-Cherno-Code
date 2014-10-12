@@ -93,6 +93,9 @@ if (P2DZE_gearOnContainer) then {
 		{
 			player reveal _x;
 		} forEach _near;
+
+		//create local grass cutter at feet
+		"ClutterCutter_small_EP1" createVehicleLocal (getPosATL player);
 	};
 };
 
