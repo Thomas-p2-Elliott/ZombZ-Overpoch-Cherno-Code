@@ -520,21 +520,139 @@ switch (_eventType) do {
 				_itemChance = [0.09,0.01,0.01,0.06,0.06,0.01,0.06];  
 				_lootTable = [_itemTypes,_itemChance]; 
  			};
+ 			
+
  			//Industrial Care Package
+			
 			case 3: 				{		
-		 		_itemTypes = [["WeaponHolder_PartGeneric", "object"], ["WeaponHolder_PartWheel", "object"], ["WeaponHolder_PartFueltank", "object"], ["WeaponHolder_PartEngine", "object"], ["WeaponHolder_PartGlass", "object"], ["WeaponHolder_PartVRotor", "object"], ["WeaponHolder_ItemJerrycan", "object"],["ItemToolbox", "weapon"]];
-            	_itemChance = [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];   
+		 		_itemTypes = [
+		 		["PartFueltank","magazine"],
+				["PartWheel", "magazine"],
+				["PartGeneric", "magazine"], 
+				["PartEngine", "magazine"],
+				["PartWoodPile", "magazine"],
+				["PartVRotor", "magazine"],
+				["PartGlass", "magazine"],
+				["ItemJerrycanEmpty", "magazine"],
+				["ItemJerrycan", "magazine"],
+				["ItemGenerator", "magazine"],
+				["ItemSandbag", "magazine"],
+				["ItemTankTrap", "magazine"],
+				["ItemWire", "magazine"],
+				["ItemMixOil", "magazine"],
+				["CSGAS", "magazine"],
+				["ItemJerryMixed", "magazine"],
+				["ItemJerryMixed4", "magazine"],
+				["ItemJerryMixed3", "magazine"],
+				["ItemJerryMixed2", "magazine"],
+				["ItemJerryMixed1", "magazine"],
+				["ItemOilBarrel", "magazine"],
+				["ItemFuelBarrel", "magazine"],
+				["ItemFuelBarrelEmpty", "magazine"],
+				["CinderBlocks", "magazine"],
+				["MortarBucket", "magazine"],
+				["ItemLightBulb", "magazine"],
+				["ItemHotwireKit", "magazine"]
+		 		];
+            	
+            	_itemChance = [
+
+						0.2,
+						0.2,
+						0.2,
+						0.2,
+						0.02,
+						0.02,
+						0.2,
+						0.08,
+						0.03,
+						0.02,
+						0.02,
+						0.02,
+						0.02,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						0.02,
+						0.03,
+						0.02,
+						0.02,
+						0.02
+						 
+							];   
  				_lootTable = [_itemTypes,_itemChance]; 
  			};
+ 			
+
+
  			//Base Building Care Package
+			
 			case 4: 				{ 
-				_itemTypes = [["30m_plot_kit","magazine"],["metal_floor_kit", "magazine"],["cinder_wall_kit", "magazine"],["cinder_door_kit", "magazine"],["cinder_garage_kit", "magazine"],["ItemWoodFloor", "magazine"],["ItemWoodFloorHalf", "magazine"],["ItemWoodFloorQuarter", "magazine"],["ItemWoodStairs", "magazine"],["ItemWoodStairsSupport", "magazine"],["ItemWoodLadder", "magazine"],["ItemWoodWall", "magazine"],["ItemWoodWallThird", "magazine"],["ItemWoodWallWindow", "magazine"],["ItemWoodWallDoor", "magazine"],["ItemWoodWallWithDoor", "magazine"],["ItemWoodWallWithDoorLocked", "magazine"],["ItemWoodWallGarageDoor", "magazine"],["ItemWoodWallGarageDoorLocked", "magazine"],["ItemWoodWallLg", "magazine"],["ItemWoodWallWindowLg", "magazine"],["ItemWoodWallDoorLg", "magazine"],["ItemWoodWallWithDoorLg", "magazine"],["ItemWoodWallWithDoorLgLocked", "magazine"],["ItemComboLock", "magazine"],["ItemCorrugated", "magazine"],["ItemCorrugated", "magazine"],["ItemCorrugated", "magazine"],["ItemCorrugated", "magazine"],["ItemCorrugated", "magazine"],["ItemCorrugated", "magazine"],["ItemCorrugated", "magazine"],["ItemCorrugated", "magazine"],["ItemPole", "magazine"],["ItemPole", "magazine"],["ItemPole", "magazine"],["ItemPole", "magazine"],["ItemPole", "magazine"],["ItemPole", "magazine"],["ItemPole", "magazine"],["ItemPole", "magazine"],["ItemGunRackKit", "magazine"],["ItemWoodCrateKit", "magazine"],["ItemOilBarrel", "magazine"],["ItemFuelBarrel", "magazine"],["ItemFuelBarrel", "magazine"],["ItemFuelBarrel", "magazine"],["ItemFuelBarrelEmpty", "magazine"],["ItemFireBarrel_kit", "magazine"],["workbench_kit", "magazine"],["wood_ramp_kit", "magazine"],["30m_plot_kit", "magazine"],["metal_panel_kit", "magazine"],["deer_stand_kit", "magazine"],["desert_large_net_kit", "magazine"],["forest_large_net_kit", "magazine"],["desert_net_kit", "magazine"],["forest_net_kit", "magazine"],["fuel_pump_kit", "magazine"],["light_pole_kit", "magazine"],["stick_fence_kit", "magazine"],["wooden_shed_kit", "magazine"],["wood_shack_kit", "magazine"],["m240_nest_kit", "magazine"],["sun_shade_kit", "magazine"],["park_bench_kit", "magazine"],["rusty_gate_kit", "magazine"],["sandbag_nest_kit", "magazine"],["outhouse_kit", "magazine"],["storage_shed_kit", "magazine"],["ItemFuelPump", "magazine"],["ItemScaffoldingKit", "magazine"],["ItemVault", "magazine"],["ItemLockbox", "magazine"],["PartPlankPack", "magazine"],["CinderBlocks", "magazine"],["MortarBucket", "magazine"],["PartPlywoodPack", "magazine"],["PartWoodLumber", "magazine"],["PartWoodLumber", "magazine"],["PartWoodLumber", "magazine"],["ItemCanvas", "magazine"],["ItemCanvas", "magazine"],["PartWoodPlywood", "magazine"],["PartWoodPlywood", "magazine"],["PartWoodPlywood", "magazine"],["PartWoodPlywood", "magazine"],["PartWoodPlywood", "magazine"],["PartWoodPlywood", "magazine"],["ItemTankTrap", "magazine"],["ItemTankTrap", "magazine"],["ItemTankTrap", "magazine"],["ItemTankTrap", "magazine"],["temTrashToiletpaper", "magazine"],["PartWoodPile", "magazine"],["PartOre", "magazine"],["PartOreSilver", "magazine"],["PartOreGold", "magazine"],["ItemTentOld", "magazine"],["ItemTentDomed", "magazine"],["ItemTentDomed2", "magazine"],["BagFenceRound_DZ_kit", "magazine"],["ItemSledgeHead", "magazine"],["ItemSledgeHandle", "magazine"],["ItemSandbagLarge", "magazine"],["ItemSandbagExLarge", "magazine"],["ItemSandbagExLarge5x", "magazine"],["ItemToolbox","weapon"],["ItemToolbox","weapon"],["ItemEtool","weapon"],["ItemEtool","weapon"]];
-				_itemChance = [0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01,0.01]; 				
+				_itemTypes = [
+
+				["30m_plot_kit","magazine"],  //SuperFuckingRare
+				["metal_floor_kit", "magazine"],   //SuperFuckingRare
+				["ItemPlotDeed", "magazine"],    //Rare
+				["CinderBlocks", "magazine"],    //Common
+				["ItemComboLock", "magazine"],    //Uncommon
+				["ParLumbertWood", "magazine"],          //Common
+				["Land_HBarrier_large", "building"],             //Uncommon
+				["Land_HBarrier1", "building"],          //Uncommon
+				["CinderWall_DZ", "magazine"],           //Rare
+				["CinderWallDoorway_DZ", "magazine"],            //Rare
+				["WoodFloor_DZ", "magazine"],    //Uncommon
+				["WoodLargeWall_DZ", "magazine"],        //Rare
+				["WoodLadder_DZ", "magazine"],           //Uncommon
+				["Fence_corrugated_DZ", "magazine"],             //Rare
+				["OutHouse_DZ", "magazine"],     //Uncommon
+				["cinder_door_kit", "magazine"],         //Rare
+				["cinder_wall_kit", "magazine"],         //Uncommon
+				["ItemWoodWallWithDoor", "magazine"],            //Uncommon
+				["WeaponHolder_MeleeCrowbar", "weapon"],         //Common
+				["PartWoodPlywood", "magazine"],        //Common
+				["ChainSaw", "weapon"],         //Super Rare like rare as hell fucking mega silly rare
+				["MortarBucket", "magazine"],            //Common
+				["ItemTankTrap", "magazine"] ];           //Common
+				];
+				_itemChance = [ 0.01,
+								0.01,
+								0.02,
+								0.05,
+								0.03,
+								0.05,
+								0.03,
+								0.03,
+								0.02,
+								0.03,
+								0.02,
+								0.03,
+								0.02,
+								0.03,
+								0.01,
+								0.03,
+								0.03,
+								0.05,
+								0.05,
+								0.01.
+								0.05,
+								0.05
+							  ]; 
+
 				_lootTable = [_itemTypes,_itemChance]; 
  			};
 		}; 
 	};
+	
+
 	case 3: { 
+	
+
 	//Infected Camp Loot
 		switch (_eventSubType) do {
  			//Default
