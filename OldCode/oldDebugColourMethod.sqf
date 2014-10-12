@@ -1,4 +1,4 @@
-/*
+
     private ["_handle1","_handle2"];
 	disableSerialization;
 	uiNamespace setVariable ['ZombZHintColour_Dialog', displayNull];
@@ -87,4 +87,4 @@
 	systemChat("Debug Monitor Input Valid and Accepted!");  
 	player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true];
 	player setVariable ["P2_DebugMonColours", P2DZE_debugCol, true];
-	*/
+	
