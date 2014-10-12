@@ -22,6 +22,7 @@ _backpack = 	[];
 _survival =		[0,0,0];
 _model =		"";
 _debugMonSettings =	[0,0,1,0.2,2];
+_distanceFoot = 0;
 
 if (_playerID == "") then {
 	_playerID = getPlayerUID _playerObj;
@@ -56,7 +57,7 @@ if ((_primary select 0) == "ERROR") exitWith {
 
 //Process request
 _newPlayer = 	_primary select 1;
-_isNew = 		count _primary < 8; //_result select 1;
+_isNew = 		count _primary < 9; //_result select 1;
 _charID = 		_primary select 2;
 
 
@@ -122,12 +123,24 @@ if (!_isNew) then {
 		diag_log("P2DEBUG: Login: DefaultBackpackItems" + str DefaultBackpackWeapons);
 		_bcpkItems = DefaultBackpackItems;
 	};
+
 	//_randomSpot = true;
 
 	//Wait for HIVE to be free
 	_key = format["CHILD:203:%1:%2:%3:",_charID,[_wpns,_mags],[_bcpk,[],[]]];
 	diag_log("P2DEBUG: " + _key);
 	_key call server_hiveWrite;
+};
+
+
+if(!isNil "_debugMonSettings") then {
+	_debugMonSettings =	[0,0,0,0.2,2];
+};
+if(!isNil "_distanceFoot") then {
+	_distanceFoot = 0;
+};
+if(!isNil "_survival") then {
+	_survival =		[0,0,0];
 };
 
 _isHiveOk = true;

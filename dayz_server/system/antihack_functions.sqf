@@ -23,6 +23,7 @@ private["_missionVehicles"];
         _missionVehicles = _missionVehicles + allMissionObjects "car"; 
         _missionVehicles = _missionVehicles + allMissionObjects "air";
         _missionVehicles = _missionVehicles + allMissionObjects "sea";
+        
         { 
             if (!(_x in P2DZE_alreadyChecked) && {(!((typeOf _x) in ["ParachuteWest","ParachuteC"]))} && {(!((typeOf _x) in AllPlayers))} && {(!((typeOf _x) in dayz_allowedObjects))}) then {
                 _x call KK_fnc_checkHash;
@@ -34,7 +35,7 @@ private["_missionVehicles"];
             };
             sleep 0.0001;
         } forEach _missionVehicles;
-
+        
     PDZE_Hash_Check = nil;
 };
 

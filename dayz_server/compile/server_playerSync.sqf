@@ -1,7 +1,7 @@
 private ["_currentCharATMCard","_currentCharGoldArr","_currentCharGold","_playerUID","_key2","_result","_debugMonSettings","_empty","_name","_playerwasNearby","_character","_magazines","_force","_characterID","_charPos","_isInVehicle","_timeSince","_humanity","_debug","_distance","_isNewMed","_isNewPos","_isNewGear","_playerPos","_playerGear","_playerBackp","_medical","_distanceFoot","_distanceFootCurrent","_distanceFootPrevious","_lastPos","_backpack","_kills","_killsB","_killsH","_headShots","_lastTime","_timeGross","_timeLeft","_currentWpn","_currentAnim","_config","_onLadder","_isTerminal","_currentModel","_modelChk","_muzzles","_temp","_currentState","_array","_key","_pos","_forceGear","_friendlies"];
 
 _character = 	_this select 0;
-_magazines = _this select 1;
+_magazines = 	_this select 1;
 
 //_force = 		_this select 2;
 _forceGear =	_this select 3;
@@ -119,23 +119,21 @@ if (_characterID != "0") then {
 
 		_debugMode = 			_character getVariable ["P2_DebugMonMode",2]; 
 		_debugColours = 		_character getVariable ["P2_DebugMonColours",[0,0,0,0.2]]; 
-		//set variable to save to db
-		_debugMonSettings = 	[(_debugColours select 0), (_debugColours select 1), (_debugColours select 2), (_debugColours select 3), _debugMode];
 
-		_currentCharGold = 		["ZombZGold",_character] call server_getDiff;
+		_currentCharGold = 		["ZombZGold",	_character] 	call server_getDiff;
 
-		_kills = 				["zombieKills",_character] call server_getDiff;
-		_killsB = 				["banditKills",_character] call server_getDiff;
-		_killsH = 				["humanKills",_character] call server_getDiff;
-		_headShots = 			["headShots",_character] call server_getDiff;
-		_humanity = 			["humanity",_character] call server_getDiff2;
+		_kills = 				["zombieKills",	_character] 	call server_getDiff;
+		_killsB = 				["banditKills",	_character] 	call server_getDiff;
+		_killsH = 				["humanKills",	_character] 	call server_getDiff;
+		_headShots = 			["headShots",	_character] 	call server_getDiff;
+		_humanity = 			["humanity",	_character] 	call server_getDiff2;
 
-		_currentCharGold = 		_character getVariable ["ZombZGold_CHK", 13]; 
+		_currentCharGold = 		_character getVariable ["ZombZGold_CHK", 	13]; 
+		/*---------------------------------------------------------------------------
+		If gold is being set to 13 a lot then run a hive check on previous gold amount for player
+		---------------------------------------------------------------------------*/
 
-		//_currentCharATMCard = 	_character getVariable ["ZombZATMCard",0]; unused
-		_currentCharATMCard = 0;
-		//Save in array for db
-		_currentCharGoldArr =	[_currentCharGold,_currentCharATMCard];
+		//_currentCharATMCard = _character getVariable ["ZombZATMCard",0]; unused
 
 		_kills = 				_character getVariable["zombieKills_CHK",	13];
 		_killsB = 				_character getVariable["banditKills_CHK", 	13];
@@ -143,8 +141,15 @@ if (_characterID != "0") then {
 		_headShots = 			_character getVariable["headShots_CHK",  	13];
 		_humanity = 			_character getVariable["humanity_CHK",    	2500];
 		_distanceFootPrevious = _character getVariable["distanceFoot_CHK", 	13];
-		_distanceFoot = _distanceFootPrevious + _distanceFootCurrent;
 
+		//set debug mon array
+		_debugMonSettings = 	[(_debugColours select 0), (_debugColours select 1), (_debugColours select 2), (_debugColours select 3), _debugMode];
+
+		//add distance
+		_distanceFoot = 		_distanceFootPrevious + _distanceFootCurrent;
+
+		//Save in array for db
+		_currentCharGoldArr =	[_currentCharGold,0];
 
 		//_humanity = 	_character getVariable ["humanity",0];
 		_character addScore _kills;		

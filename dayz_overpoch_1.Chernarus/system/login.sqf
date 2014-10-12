@@ -13,7 +13,7 @@ _version	= _parsedLogin1 select 5;
 _model		= _parsedLogin1 select 6;
 _debugMonSettings = _parsedLogin1 select 7;
 
-if (count _parsedLogin1 > 8) then {
+if (count _parsedLogin1 > 9) then {
 	_isHiveOk = _parsedLogin1 select 7;
 	_newPlayer = _parsedLogin1 select 8;
 	_isInfected = _parsedLogin1 select 9;
