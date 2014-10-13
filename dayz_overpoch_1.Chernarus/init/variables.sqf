@@ -1,5 +1,7 @@
 disableSerialization;
-
+if (isNil "DayZ_UseSteamID") then {
+	DayZ_UseSteamID = true;
+};
 //Model Variables
 Bandit1_DZ = 	"Bandit1_DZ";
 Bandit2_DZ = 	"Bandit2_DZ";
@@ -188,6 +190,9 @@ dayz_locationsActive = [];
 Dayz_GUI_R = 0.38; // 0.7
 Dayz_GUI_G = 0.63; // -0.63
 Dayz_GUI_B = 0.26; // -0.26
+if (isNil "Dayz_Dark_UI") then {
+	Dayz_Dark_UI = false;
+};
 
 //Player self-action handles
 dayz_resetSelfActions = {
@@ -204,6 +209,7 @@ dayz_resetSelfActions = {
 	s_player_fillwater2 = 	-1;
 	s_player_fillfuel = 	-1;
 	s_player_grabflare = 	-1;
+	s_player_dropflare =	-1;
 	s_player_callzombies = 	-1;
 	s_player_showname = 	-1;
 	s_player_debuglootpos = 	-1;
@@ -251,7 +257,16 @@ dayz_resetSelfActions = {
 	s_player_heli_lift = -1;
 	s_player_heli_detach = -1;
 	s_player_lockUnlock_crtl = -1;
+	s_player_toggleSnap = -1;
+    s_player_toggleSnapSelect = -1;
 	s_player_clothes = -1; //Take Clothes
+    s_player_toggleSnapSelectPoint=[];
+    snapActions = -1;
+	s_player_plot_boundary_on = -1;
+	s_player_plot_boundary_off = -1;
+	s_player_plot_take_ownership = -1;
+	s_player_plotManagement = -1;
+	s_player_manageDoor = -1;
 };
 call dayz_resetSelfActions;
 
@@ -264,6 +279,10 @@ s_player_lockunlock = [];
 s_player_madsci 		= 	[];
 s_player_parts 			= 	[];
 s_player_combi 			= 	[];
+
+//Modular player_build
+snapGizmos = [];
+snapGizmosNearby = [];
 
 //Initialize Medical Variables
 r_interrupt = 			false;
@@ -529,6 +548,24 @@ if(isNil "DZE_StaticConstructionCount") then {
 if (isNil "DZE_selfTransfuse_Values") then {
 	DZE_selfTransfuse_Values = [12000, 15, 300];
 };
+if (isNil "helperDetach") then {
+	helperDetach = false;
+};
+if (isNil "DZE_modularBuild") then {
+	DZE_modularBuild = false;
+};
+if (isNil "DZE_snapExtraRange") then {
+	DZE_snapExtraRange = 0;
+};
+if (isNil "DZE_APlotforLife") then {
+	DZE_APlotforLife = false;
+};
+if (isNil "DZE_PlotOwnership") then {
+	DZE_PlotOwnership = false;
+};
+if (isNil "DZE_checkNearbyRadius") then {
+	DZE_checkNearbyRadius = 30;
+};
 
 // needed on server
 if(isNil "DZE_PlotPole") then {
@@ -537,6 +574,8 @@ if(isNil "DZE_PlotPole") then {
 if(isNil "DZE_maintainRange") then {
 	DZE_maintainRange = ((DZE_PlotPole select 0)+20);
 };
+
+DZE_snap_build_file = "";
 
 DZE_REPLACE_WEAPONS = [["Crossbow","ItemMatchbox","ItemHatchet"],["Crossbow_DZ","ItemMatchbox_DZE","ItemHatchet_DZE"]];
 
@@ -578,6 +617,9 @@ dayz_fuelsources = ["Land_Ind_TankSmall","Land_fuel_tank_big","Land_fuel_tank_st
 
 DZE_Lock_Door = "";
 
+if (isNil "DZE_plotOwnershipExclusions") then {
+	DZE_plotTakeOwnershipItems = dayz_allowedObjects - (DZE_LockableStorage + ["Plastic_Pole_EP1_DZ","TentStorage","TentStorageDomed","TentStorageDomed2"]);
+};
 
 if(isServer) then {
 	dayz_players = [];
@@ -772,6 +814,8 @@ if(!isDedicated) then {
 	DZE_5 = false;
 	DZE_4 = false;
 	DZE_6 = false;
+	
+	DZE_F = false;
 
 	DZE_cancelBuilding = false;
 	DZE_PZATTACK = false;

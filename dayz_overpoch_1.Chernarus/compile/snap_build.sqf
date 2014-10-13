@@ -1,4 +1,4 @@
-private ["_object","_objectSnapGizmo","_objColorActive","_objColorInactive","_classname","_whitelist","_points","_cfg","_cnt","_pos","_findWhitelisted","_nearbyObject","_posNearby","_selectedAction","_newPos","_pointsNearby","_onWater"];
+private ["_object","_objectSnapGizmo","_objColorActive","_objColorInactive","_classname","_whitelist","_points","_radius","_cfg","_cnt","_pos","_findWhitelisted","_nearbyObject","_posNearby","_selectedAction","_newPos","_pointsNearby","_onWater","_waterBase"];
 //Args
 snapActionState = _this select 3 select 0;
 _object = _this select 3 select 1;
@@ -52,24 +52,23 @@ fnc_initSnapPoints = {
 };
 
 fnc_initSnapPointsNearby = {
-	_pos = getPosATL _object;
+	_pos = [_object] call FNC_GetPos;
 	_findWhitelisted = []; _pointsNearby = [];
-	_findWhitelisted = nearestObjects [_pos,_whitelist,_radius]-[_object];
+	_findWhitelisted = nearestObjects [_pos,_whitelist,(_radius + DZE_snapExtraRange)]-[_object];
 	snapGizmosNearby = [];	
 	{	
 		_nearbyObject = _x;
 		_pointsNearby = getArray (missionConfigFile >> "SnapBuilding" >> (typeOf _x) >> "points");
 		{
-			_onWater = surfaceIsWater position _nearbyObject;
 			_objectSnapGizmo = "Sign_sphere10cm_EP1" createVehicleLocal [0,0,0];
 			_objectSnapGizmo setobjecttexture [0,_objColorInactive];
+			_objectSnapGizmo setDir (getDir _nearbyObject);
 			_posNearby = _nearbyObject modelToWorld [_x select 0,_x select 1,_x select 2];
-			if (_onWater) then {
+			if (surfaceIsWater _posNearby) then {
 				_objectSnapGizmo setPosASL [(_posNearby) select 0,(_posNearby) select 1,(getPosASL _nearbyObject select 2) + (_x select 2)];
 			} else {
 				_objectSnapGizmo setPosATL _posNearby;
 			};
-			_objectSnapGizmo setDir (getDir _nearbyObject);
 			snapGizmosNearby set [count snapGizmosNearby,_objectSnapGizmo];
 		} count _pointsNearby;
 	} forEach _findWhitelisted;
@@ -77,7 +76,7 @@ fnc_initSnapPointsNearby = {
 
 fnc_initSnapPointsCleanup = {
 	{detach _x;deleteVehicle _x;}count snapGizmos;snapGizmos=[];
-	{deleteVehicle _x;}count snapGizmosNearby;snapGizmosNearby=[];
+	{detach _x;deleteVehicle _x;}count snapGizmosNearby;snapGizmosNearby=[];
 	snapActionState = "OFF";
 };
 
@@ -87,12 +86,7 @@ fnc_snapDistanceCheck = {
 	_distClosestPointFound = objNull; _distCheck = 0; _distClosest = 10; _distClosestPoint = objNull; _testXPos = []; _distClosestPointFoundPos =[]; _distClosestPointFoundDir = 0;
 		{	
 			if (_x !=_distClosestPointFound) then {_x setobjecttexture [0,_objColorInactive];};
-			_onWater = surfaceIsWater position _x;
-			if (_onWater) then {
-				_testXPos = [(getPosASL _x select 0),(getPosASL _x select 1),(getPosASL _x select 2)];
-			} else {
-				_testXPos = [(getPosATL _x select 0),(getPosATL _x select 1),(getPosATL _x select 2)];
-			};
+			_testXPos = [_x] call FNC_GetPos;
 			_distCheck = _objectHelper distance _testXPos;
 			_distClosestPoint = _x;
 				if (_distCheck < _distClosest) then {
@@ -114,7 +108,7 @@ fnc_snapDistanceCheck = {
 					} else {
 						_distClosestPointFoundPos = getPosATL _distClosestPointFound;
 						_objectHelper setPosATL _distClosestPointFoundPos;
-					};
+					}; 
 					_objectHelper setDir _distClosestPointFoundDir;
 					waitUntil {sleep 0.1; !helperDetach};
 				};
@@ -122,12 +116,7 @@ fnc_snapDistanceCheck = {
 				_distClosestAttached = objNull; _distCheckAttached = 0; _distClosest = 10; _distClosestAttachedFoundPos = [];
 				{
 					if (_x !=_distClosestAttached) then {_x setobjecttexture [0,_objColorInactive];};
-					_onWater = surfaceIsWater position _x;
-					if (_onWater) then {
-						_testXPos = [(getPosASL _x select 0),(getPosASL _x select 1),(getPosASL _x select 2)];
-					} else {
-						_testXPos = [(getPosATL _x select 0),(getPosATL _x select 1),(getPosATL _x select 2)];
-					};
+					_testXPos = [_x] call FNC_GetPos;
 					_distCheckAttached = _distClosestPointFound distance _testXPos;
 					_distClosestPoint = _x;
 						if (_distCheckAttached < _distClosest) then {
@@ -171,12 +160,11 @@ fnc_initSnapTutorial = {
 	Add snapTutorial = false; to your init.sqf to disable this tutorial completely.
 	You can also add this bool to the end of this function to only show tutorial once per player login (not recommended)
 */
-	private ["_bldTxtSwitch","_bldTxtEnable","_bldTxtClrO","_bldTxtClrC","_bldTxtClrW","_bldTxtClrR","_bldTxtClrG","_bldTxtSz","_bldTxtSzT","_bldTxtShdw","_bldTxtAlgnL","_bldTxtUndrln","_bldTxtBold","_bldTxtFinal","_bldTxtStringTitle","_bldTxtStringSD","_bldTxtStringSE","_bldTxtStringSA","_bldTxtStringSM","_bldTxtStringPG","_bldTxtStringAPG","_bldTxtStringCPG","_bldTxtStringQE","_bldTxtStringQEF","_bldTxtStringFD","_bldTxtStringFS"];
+	private ["_bldTxtSwitch","_bldTxtEnable","_bldTxtClrO","_bldTxtClrW","_bldTxtClrR","_bldTxtClrG","_bldTxtSz","_bldTxtSzT","_bldTxtShdw","_bldTxtAlgnL","_bldTxtUndrln","_bldTxtBold","_bldTxtFinal","_bldTxtStringTitle","_bldTxtStringSD","_bldTxtStringSE","_bldTxtStringSA","_bldTxtStringSM","_bldTxtStringPG","_bldTxtStringAPG","_bldTxtStringCPG","_bldTxtStringQE","_bldTxtStringQEF","_bldTxtStringFD","_bldTxtStringFS"];
 		if (isNil "snapTutorial") then { 
 			_bldTxtSwitch = _this select 0;
 			_bldTxtEnable = _this select 1;
 			_bldTxtClrO = "color='#ff8800'"; //orange
-			_bldTxtClrC = "color='#17DBEC'"; //cyan
 			_bldTxtClrW = "color='#ffffff'"; //white
 			_bldTxtClrR = "color='#fd0a05'"; //red
 			_bldTxtClrG = "color='#11ef00'"; //green
@@ -194,16 +182,16 @@ fnc_initSnapTutorial = {
 			
 			//Init Tutorial text
 			if (_bldTxtEnable) then {
-				_bldTxtStringTitle = format ["<t %1%2%3%4>Snap Building <t %5%6%7>Pro</t></t><br />",_bldTxtClrO,_bldTxtSz,_bldTxtShdw,_bldTxtAlgnL,_bldTxtClrW,_bldTxtUndrln,_bldTxtBold];
-				_bldTxtStringSD = format["<t %1%4%5%6>[Snap]<t %2> Disabled:</t> <t %3>use action menu to enable.</t></t><br /><br />",_bldTxtClrC,_bldTxtClrR,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
-				_bldTxtStringSE = format["<t %1%4%5%6>[Snap]<t %2> Enabled:</t> <t %3>use action menu to disable.</t></t><br /><br />",_bldTxtClrC,_bldTxtClrG,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
-				_bldTxtStringSA = format["<t %1%3%4%5>[Snap Point]<t %2> AUTOMATIC: Automatic snap point detection.</t></t><br /><br />",_bldTxtClrC,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
-				_bldTxtStringSM = format["<t %1%3%4%5>[Snap Point]<t %2> MANUAL: Select your preferred snap point.</t></t><br /><br />",_bldTxtClrC,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
-				_bldTxtStringPG = format["<t %1%3%4%5>[PgUP / PgDOWN]<t %2>: Adjust height of object by 10cm</t></t><br />",_bldTxtClrC,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
-				_bldTxtStringAPG = format["<t %1%3%4%5>[Alt]+[PgUP / PgDOWN]<t %2>: Adjust height of object by 1m</t></t><br />",_bldTxtClrC,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
-				_bldTxtStringCPG = format["<t %1%3%4%5>[Ctrl]+[PgUP / PgDOWN]<t %2>: Adjust height of object by 1cm</t></t><br />",_bldTxtClrC,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
-				_bldTxtStringQE = format["<t %1%3%4%5>[Q / E]<t %2>: Rotate object 180 degrees while holding.</t></t><br />",_bldTxtClrC,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
-				_bldTxtStringQEF = format["<t %1%3%4%5>[Q / E]<t %2>: Rotate object 45 degrees while dropped or snapped.</t></t><br /><br />",_bldTxtClrC,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
+				_bldTxtStringTitle = format ["<t %1%2%3%4%6>ZombZ<t %5%7> Snap Building</t></t><br />",_bldTxtClrW,_bldTxtSz,_bldTxtShdw,_bldTxtAlgnL,_bldTxtClrO,_bldTxtUndrln,_bldTxtBold];
+				_bldTxtStringSD = format["<t %1%4%5%6>[Snap]<t %2> Disabled:</t> <t %3>use action menu to enable.</t></t><br /><br />",_bldTxtClrO,_bldTxtClrR,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
+				_bldTxtStringSE = format["<t %1%4%5%6>[Snap]<t %2> Enabled:</t> <t %3>use action menu to disable.</t></t><br /><br />",_bldTxtClrO,_bldTxtClrG,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
+				_bldTxtStringSA = format["<t %1%3%4%5>[Auto]<t %2>: Automatic snap point detection.</t></t><br /><br />",_bldTxtClrO,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
+				_bldTxtStringSM = format["<t %1%3%4%5>[Manual]<t %2>: Select your preferred snap point.</t></t><br /><br />",_bldTxtClrO,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
+				_bldTxtStringPG = format["<t %1%3%4%5>[PgUP / PgDOWN]<t %2>: Adjust height of object by 10cm</t></t><br />",_bldTxtClrO,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
+				_bldTxtStringAPG = format["<t %1%3%4%5>[Alt]+[PgUP / PgDOWN]<t %2>: Adjust height of object by 1m</t></t><br />",_bldTxtClrO,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
+				_bldTxtStringCPG = format["<t %1%3%4%5>[Ctrl]+[PgUP / PgDOWN]<t %2>: Adjust height of object by 1cm</t></t><br />",_bldTxtClrO,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
+				_bldTxtStringQE = format["<t %1%3%4%5>[Q / E]<t %2>: Rotate object 180 degrees while holding.</t></t><br />",_bldTxtClrO,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
+				_bldTxtStringQEF = format["<t %1%3%4%5>[Q / E]<t %2>: Rotate object 45 degrees while dropped or snapped.</t></t><br /><br />",_bldTxtClrO,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
 				_bldTxtStringFD = format["<t %1%3%4%5>[F]<t %2>: Drop / Pick up object.</t></t><br />",_bldTxtClrO,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
 				_bldTxtStringFS = format["<t %1%3%4%5>[F]<t %2>: Snap /Pick up object.</t></t><br />",_bldTxtClrO,_bldTxtClrW,_bldTxtSzT,_bldTxtShdw,_bldTxtAlgnL];
 				switch (_bldTxtSwitch) do {
@@ -238,7 +226,7 @@ switch (snapActionState) do {
 		[1,0,0] call fnc_snapActionCleanup;
 		[] spawn {
 		while {true} do {
-			if(!DZE_ActionInProgress) exitWith {call fnc_initSnapPointsCleanup;[0,0,0] call fnc_snapActionCleanup; ["",false] call fnc_initSnapTutorial; snapActionState = "OFF";};
+			if(!DZE_ActionInProgress || DZE_cancelBuilding) exitWith {call fnc_initSnapPointsCleanup;[0,0,0] call fnc_snapActionCleanup; ["",false] call fnc_initSnapTutorial; snapActionState = "OFF";};
 			sleep 2;
 			};
 		};
@@ -279,10 +267,11 @@ switch (snapActionState) do {
 		_newPos = [(getPosATL _x select 0),(getPosATL _x select 1),(getPosATL _x select 2)];
 		detach _object;
 		detach _objectHelper;
+		_objectHelper setDir (getDir _object);
 		_objectHelper setPosATL _newPos;
 		_object attachTo [_objectHelper];
 		_x setobjecttexture [0,_objColorActive];
-		if (!helperDetach) then {_objectHelper attachTo [player];};	
+		if (!helperDetach) then {_objectHelper attachTo [player]; _objectHelper setDir ((getDir _objectHelper)-(getDir player));};	
 	};
 	_cnt = _cnt+1;
 }count snapGizmos;

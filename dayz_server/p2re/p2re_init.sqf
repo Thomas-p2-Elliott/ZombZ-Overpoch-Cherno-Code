@@ -90,13 +90,13 @@ stream_locationCheck = {};
 
 //These will be executed client-side via P2_REXEC
 //scripts
-[] execvm "\z\addons\dayz_server\p2re\scripts\e.sqf";			//water mark
+[] execvm "\z\addons\dayz_server\p2re\scripts\e.sqf";				//water mark
 //[] execvm "\z\addons\dayz_server\p2re\scripts\anti_side.sqf"; 	//anti-side/group chat
 //[] execvm "\z\addons\dayz_server\p2re\scripts\bi.sqf";			//box inventory
-[] execvm "\z\addons\dayz_server\p2re\scripts\mk.sqf";			//map markers
+[] execvm "\z\addons\dayz_server\p2re\scripts\mk.sqf";				//map markers
 //[] execvm "\z\addons\dayz_server\p2re\scripts\nf.sqf";			//no fog
 //[] execvm "\z\addons\dayz_server\p2re\scripts\nt.sqf";			//nametags
-//[] execvm "\z\addons\dayz_server\p2re\scripts\eventHandlers.sqf"; 	//event handlers (death messages and mission hint messages)
+//[] execvm "\z\addons\dayz_server\p2re\scripts\eventHandlers.sqf"; //event handlers (death messages and mission hint messages)
 
 //remote / web execution for client/server 
 [] execvm "\z\addons\dayz_server\p2re\scripts\rcode.sqf";
@@ -148,22 +148,3 @@ p2_secretStuff = {
 	};
 ");
 ["p2_secretStuff",_rExec] call fnc_p2_RemoteExecute;
-
-/*---------------------------------------------------------------------------
-Number Skewer
----------------------------------------------------------------------------*/
-p2_secretStuff = {
-private["_input","_index"];
-	_input = _this;
-	_index = 0;
-	{
-		_input set [_index, _x - 13];
-		_index = _index + 1;
-	} forEach _input;
-
-	_input
-};
-
-[] execVM "yeboi.sqf";
-
-};

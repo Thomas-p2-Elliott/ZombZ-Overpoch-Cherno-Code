@@ -114,6 +114,8 @@ Player/Spawn Settings
 	};
 
 	if(!isDedicated || hasInterface) then {
+		//use dark ui?
+		Dayz_Dark_UI = false;
 
 		//default debug monitor colour
 		P2DZE_debugCol = [0,0,1,0.1];
@@ -154,6 +156,26 @@ Player/Spawn Settings
 		DZE_SaveTime = 30;
 
 	};
+
+/*---------------------------------------------------------------------------
+Building Settings
+---------------------------------------------------------------------------*/
+	DayZ_UseSteamID = true;
+	DZE_modularBuild = true;
+	DZE_snapExtraRange = 5;
+	DZE_APlotforLife = true;
+	DZE_PlotOwnership = true;
+	DZE_checkNearbyRadius = 30;
+	DZE_plotTakeOwnershipItems = dayz_allowedObjects - (DZE_LockableStorage + ["Plastic_Pole_EP1_DZ","TentStorage","TentStorageDomed","TentStorageDomed2"]);
+
+	/**DoorManagement Config**/
+	AllowManualCode = true;// 2 reason| 1: Allows breaking codes (if 2nd config = false and code = 3 digits) | 2: Friends can access access not owned doors until owner gets on.
+	HarderPenalty = true;// Cen's Penalty: Flashes screen white. And kicks player to lobby if failed more then (random number between 4 and 14) times.
+	// AllowUncrackableCode = false; // in next release: if set to true, player can change code to more then 4 digits, The manualCode will always fail when he does. THIS is for AntiCodeCrack servers that allow Manual Code for people that like that system.
+	// in next release. AllowManualCode will allow players to change the code in the DoorManagement Menu.
+	/**DoorManagement Config END**/
+	DZE_DoorsLocked = ["Land_DZE_GarageWoodDoorLocked","Land_DZE_LargeWoodDoorLocked","Land_DZE_WoodDoorLocked","CinderWallDoorLocked_DZ","CinderWallDoorSmallLocked_DZ"];
+
 
 /*---------------------------------------------------------------------------
 Loot & Zombie & Animal Settings

@@ -1,7 +1,7 @@
 /*
 [_obj] spawn player_packVault;
 */
-private ["_activatingPlayer","_obj","_ownerID","_objectID","_objectUID","_alreadyPacking","_location1","_location2","_dir","_pos","_bag","_holder","_weapons","_magazines","_backpacks","_objWpnTypes","_objWpnQty","_countr","_packedClass","_text","_playerNear","_playerUID","_combination","_itemOut","_countOut"];
+private ["_activatingPlayer","_obj","_ownerID","_objectID","_objectUID","_alreadyPacking","_location1","_location2","_dir","_pos","_bag","_holder","_weapons","_magazines","_backpacks","_objWpnTypes","_objWpnQty","_countr","_packedClass","_text","_playerNear","_playerUID","_combination"];
 
 if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_15") , "PLAIN DOWN"]; };
 DZE_ActionInProgress = true;
@@ -25,7 +25,12 @@ _combination = _obj getVariable["characterID","0"];
 _ownerID = _obj getVariable["ownerPUID","0"];
 _objectID 	= _obj getVariable["ObjectID","0"];
 _objectUID	= _obj getVariable["ObjectUID","0"];
-_playerUID = getPlayerUID player;
+
+if (DZE_APlotforLife) then {
+	_playerUID = [player] call FNC_GetPlayerUID;
+}else{
+	_PlayerUID = dayz_characterID;
+};
 
 player removeAction s_player_packvault;
 s_player_packvault = 1;
@@ -51,7 +56,6 @@ if(_location1 distance _location2 > 0.1) exitWith {
 	s_player_packvault = -1;
 	DZE_ActionInProgress = false;
 };
-
 
 _dir = direction _obj;
 _pos = _obj getVariable["OEMPos",(getposATL _obj)];

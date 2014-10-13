@@ -12,7 +12,12 @@ s_player_downgrade_build = 1;
 
 _distance = 30;
 _needText = localize "str_epoch_player_246";
-_playerUID = getPlayerUID player;
+
+if (DZE_APlotforLife) then {
+	_playerUID = [player] call FNC_GetPlayerUID;
+}else{
+	_playerUID = dayz_characterID;
+};
 
 // check for near plot
 _findNearestPoles = nearestObjects [(vehicle player), ["Plastic_Pole_EP1_DZ"], _distance];
@@ -44,11 +49,17 @@ if(_IsNearPlot == 0) then {
 	if(_playerUID == _ownerID) then {
 		_canBuildOnPlot = true;
 	} else {
-		_friendlies		= player getVariable ["friendlyTo",[]];
+		_friendlies = _nearestPole getVariable ["plotfriends",[]];
+		_fuid  = [];
+		{
+		      _friendUID = _x select 0;
+		      _fuid  =  _fuid  + [_friendUID];
+		} forEach _friendlies;
+		_builder  = getPlayerUID player;
 		// check if friendly to owner
-		if(_ownerID in _friendlies) then {
-			_canBuildOnPlot = true;
-		};
+		if(_builder in _fuid) then {
+		    _canBuildOnPlot = true;
+		}; 
 	};
 };
 
@@ -142,12 +153,13 @@ if ((count _upgrade) > 0) then {
 
 		// Set Owner.
 		_object setVariable ["ownerPUID",_ownerID,true];
-		
-		diag_log format["Player_buildingdowngrade: [newclassname: %1] [_ownerID: %2] [_objectCharacterID: %2]",_newclassname, _ownerID, _objectCharacterID];
+
+		//diag_log format["Player_buildingdowngrade: [newclassname: %1] [_ownerID: %2] [_objectCharacterID: %2]",_newclassname, _ownerID, _objectCharacterID];
 
 		cutText [format[(localize "str_epoch_player_142"),_text], "PLAIN DOWN", 5];
 
-		PVDZE_obj_Swap = [_objectCharacterID,_object,[_dir,_location,_ownerID],_classname,_obj,player];
+		_playerUID = [player] call FNC_GetPlayerUID;
+		PVDZE_obj_Swap = [_objectCharacterID,_object,[_dir,_location,_playerUID],_classname,_obj,player];
 		publicVariableServer "PVDZE_obj_Swap";
 
 		player reveal _object;

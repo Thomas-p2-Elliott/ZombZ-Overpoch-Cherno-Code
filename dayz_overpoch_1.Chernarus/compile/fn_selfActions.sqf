@@ -4,7 +4,7 @@ scriptName "Functions\misc\fn_selfActions.sqf";
 	- Function
 	- [] call fnc_usec_selfActions;
 ************************************************************/
-private ["_isWreckBuilding","_temp_keys","_magazinesPlayer","_isPZombie","_vehicle","_inVehicle","_hasFuelE","_hasRawMeat","_hasKnife","_hasToolbox","_onLadder","_nearLight","_canPickLight","_canDo","_text","_isHarvested","_isVehicle","_isVehicletype","_isMan","_traderType","_ownerID","_isAnimal","_isDog","_isZombie","_isDestructable","_isTent","_isFuel","_isAlive","_Unlock","_lock","_buy","_dogHandle","_lieDown","_warn","_hastinitem","_allowedDistance","_menu","_menu1","_humanity_logic","_low_high","_cancel","_metals_trader","_traderMenu","_isWreck","_isRemovable","_isDisallowRepair","_rawmeat","_humanity","_speed","_dog","_hasbottleitem","_isAir","_isShip","_playersNear","_findNearestGens","_findNearestGen","_IsNearRunningGen","_cursorTarget","_isnewstorage","_itemsPlayer","_ownerKeyId","_typeOfCursorTarget","_hasKey","_oldOwner","_combi","_key_colors","_player_deleteBuild","_player_flipveh","_player_lockUnlock_crtl","_player_butcher","_player_studybody","_player_cook","_player_boil","_player_clothes","_hasFuelBarrelE","_hasHotwireKit","_player_SurrenderedGear","_isSurrendered","_isModular","_isModularDoor","_ownerKeyName","_temp_keys_names","_hasAttached","_allowTow","_liftHeli","_found","_posL","_posC","_height","_liftHelis","_attached","_playerUID","_characterID"];
+private ["_isWreckBuilding","_temp_keys","_magazinesPlayer","_isPZombie","_vehicle","_inVehicle","_hasFuelE","_hasRawMeat","_hasKnife","_hasToolbox","_onLadder","_nearLight","_canPickLight","_canDo","_text","_isHarvested","_isVehicle","_isVehicletype","_isMan","_traderType","_ownerID","_isAnimal","_isDog","_isZombie","_isDestructable","_isTent","_isFuel","_isAlive","_Unlock","_lock","_buy","_dogHandle","_lieDown","_warn","_hastinitem","_allowedDistance","_menu","_menu1","_humanity_logic","_low_high","_cancel","_metals_trader","_traderMenu","_isWreck","_isRemovable","_isDisallowRepair","_rawmeat","_humanity","_speed","_dog","_hasbottleitem","_isAir","_isShip","_playersNear","_findNearestGens","_findNearestGen","_IsNearRunningGen","_cursorTarget","_isnewstorage","_itemsPlayer","_ownerKeyId","_typeOfCursorTarget","_hasKey","_oldOwner","_combi","_key_colors","_player_deleteBuild","_player_flipveh","_player_lockUnlock_crtl","_player_butcher","_player_studybody","_player_cook","_player_boil","_player_clothes","_hasFuelBarrelE","_hasHotwireKit","_player_SurrenderedGear","_isSurrendered","_isModular","_isModularDoor","_ownerKeyName","_temp_keys_names","_hasAttached","_allowTow","_liftHeli","_found","_posL","_posC","_height","_liftHelis","_attached","_playerUID","_characterID","_plotDistance","_PlotsNear", "_classname","_isowner"];
 
 if (DZE_ActionInProgress) exitWith {}; // Do not allow if any script is running.
 
@@ -160,7 +160,12 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	_hasKnife = 	"ItemKnife" in _itemsPlayer;
 	_hasToolbox = 	"ItemToolbox" in _itemsPlayer;
 
-	_playerUID = getPlayerUID player;
+	if (DZE_APlotforLife) then {
+		_playerUID = [player] call FNC_GetPlayerUID;
+	}else{
+		_playerUID = dayz_characterID;
+	};
+
 	_isMan = _cursorTarget isKindOf "Man";
 	_traderType = _typeOfCursorTarget;
 	_ownerID = _cursorTarget getVariable ["ownerPUID","0"];
@@ -204,16 +209,62 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	_player_lockUnlock_crtl = false;
 
 	 if (_canDo && (speed player <= 1) && (_cursorTarget isKindOf "Plastic_Pole_EP1_DZ")) then {
-		 if (s_player_maintain_area < 0) then {
-		  	s_player_maintain_area = player addAction [format["<t color='#ff0000'>%1</t>",localize "STR_EPOCH_ACTIONS_MAINTAREA"], "\z\addons\dayz_code\actions\maintain_area.sqf", "maintain", 5, false];
-		 	s_player_maintain_area_preview = player addAction [format["<t color='#ff0000'>%1</t>",localize "STR_EPOCH_ACTIONS_MAINTPREV"], "\z\addons\dayz_code\actions\maintain_area.sqf", "preview", 5, false];
+	 	 if (s_player_plotManagement < 0) then {
+		    _adminList = P2DZ_plotManagerUIDs; // Add admins here if you admins to able to manage all plotpoles
+		    _owner = _cursorTarget getVariable ["ownerPUID","0"];
+		    _friends = _cursorTarget getVariable ["plotfriends", []];
+		    _fuid = [];
+		    {
+		    _friendUID = _x select 0;
+		    _fuid = _fuid + [_friendUID];
+		    } forEach _friends;
+		    _allowed = [_owner];    
+		    _allowed = [_owner] + _adminList + _fuid;
+		    if((getPlayerUID player) in _allowed)then{            
+		    s_player_plotManagement = player addAction ["<t color='#0059FF'>Manage Plot</t>", "plotManagement\initPlotManagement.sqf", [], 5, false];
+		    };
 		 };
+
+		 if (s_player_maintain_area < 0) then {
+		  	s_player_maintain_area = player addAction [format["<t color='#ff0000'>%1</t>",localize "STR_EPOCH_ACTIONS_MAINTAREA"], "plotManagement\maintain_areaSC.sqf", "maintain", 5, false];
+		 	s_player_maintain_area_preview = player addAction [format["<t color='#ff0000'>%1</t>",localize "STR_EPOCH_ACTIONS_MAINTPREV"], "plotManagement\plotToggleMarkers.sqf", "preview", 5, false];
+		 };
+
+		 _plotDistance = (DZE_PlotPole select 0);
+		_PlotsmarkersNear = count (nearestObjects [_cursorTarget, ["Land_coneLight"], _PlotDistance]);
+
+		if (s_player_plot_boundary_on < 0) then {
+			If (_PlotsmarkersNear == 0 ) then{
+				s_player_plot_boundary_on = player addAction ["Show plot boundary", "actions\object_showPlotRadius.sqf", "", 1, false];
+			};
+		 };	
+		 if (s_player_plot_boundary_off < 0) then {
+			If (_PlotsmarkersNear > 0 ) then{
+				s_player_plot_boundary_off = player addAction ["Remove plot boundary", "actions\object_removePlotRadius.sqf", "", 1, false];
+			};
+		};
+		if (s_player_plot_take_ownership < 0) then {
+			if (DZE_APlotforLife) then {
+				_isowner = [player, _cursorTarget] call FNC_check_owner;
+				If (( _isowner select 0 )) then{
+					s_player_plot_take_ownership = player addAction ["Take plot items ownership", "actions\plot_take_ownership.sqf", "", 1, false];
+				};
+			};
+		};
 	 } else {
-    		player removeAction s_player_maintain_area;
-    		s_player_maintain_area = -1;
-    		player removeAction s_player_maintain_area_preview;
-    		s_player_maintain_area_preview = -1;
-	 };
+   		player removeAction s_player_plotManagement;
+	    s_player_plotManagement = -1;
+	    player removeAction s_player_maintain_area;
+	    s_player_maintain_area = -1;
+	    player removeAction s_player_maintain_area_preview;
+	    s_player_maintain_area_preview = -1;
+		player removeAction s_player_plot_boundary_on;
+		s_player_plot_boundary_on = -1;
+		player removeAction s_player_plot_boundary_off;
+		s_player_plot_boundary_off = -1;
+		player removeAction s_player_plot_take_ownership;
+		s_player_plot_take_ownership = -1;
+	};
 
 	// CURSOR TARGET ALIVE
 	if(_isAlive) then {
@@ -227,24 +278,23 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		
 		//diag_log format["fn_selfactions remove: [PlayerUID = %1]  [OwnerID = %2] [Is Modular: %3] [Object: %4]", _playerUID, _ownerID,_isModular, cursortarget];
 		
-		//Allow owners to delete modulars
-
   		if (P2DZE_debugSelfActions) then {
   			diag_log format["fn_actons: [PlayerUID: %1] [_ownerID: %2] [_isModular: %3] [typeOfCursorTarget: %4]",_playerUID, _ownerID, _isModular, _typeOfCursorTarget];
   		};
 
-		if(_isModular && (_playerUID == _ownerID)) then {
-             if(_hasToolbox && "ItemCrowbar" in _itemsPlayer) then {
-				// diag_log text "fn_selfactions remove: [can remove modular item]";
-                    _player_deleteBuild = true;
-             };
-         };
-		//Allow owners to delete modular doors without locks
+		//Allow owners to delete modulars
+		if(_isModular) then {
+	        if(_hasToolbox && "ItemCrowbar" in _itemsPlayer) then {
+	                _player_deleteBuild = true;
+	        };
+		};
+
 		if (P2DZE_debugSelfActions) then {
 			diag_log format["fn_actons: [PlayerUID: %1] [_ownerID: %2] [_isModularDoor: %3] [typeOfCursorTarget: %4]",_playerUID, _ownerID, _isModularDoor, _typeOfCursorTarget];
 		};
-		
-		if(_isModularDoor && (_playerUID == _ownerID)) then {
+				
+		//Allow owners to delete modular doors without locks
+		if(_isModularDoor) then {
             if(_hasToolbox && "ItemCrowbar" in _itemsPlayer) then {
 				_player_deleteBuild = true;
              };		
@@ -559,6 +609,16 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		s_player_unlockvault = -1;
 	};
 
+	//Allow manage door
+	if((_typeOfCursorTarget in DZE_DoorsLocked)) then {
+		if (s_player_manageDoor < 0) then {		 
+	     s_player_manageDoor = player addAction ["<t color='#0059FF'>Manage Door</t>", "doorManagement\initDoorManagement.sqf", _cursorTarget, 5, false];
+		};
+	} else {
+			player removeAction s_player_manageDoor;
+			s_player_manageDoor = -1;
+	};
+	
 	//Allow owner to pack vault
 	if(_typeOfCursorTarget in DZE_UnLockedStorage && _characterID != "0" && (player distance _cursorTarget < 3)) then {
 
@@ -877,6 +937,18 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	s_player_SurrenderedGear = -1;
 
 	//Others
+	player removeAction s_player_plotManagement;
+	s_player_plotManagement = -1;
+    player removeAction s_player_maintain_area;
+    s_player_maintain_area = -1;
+    player removeAction s_player_maintain_area_preview;
+   	s_player_maintain_area_preview = -1;
+	player removeAction s_player_plot_boundary_on;
+	s_player_plot_boundary_on = -1;
+	player removeAction s_player_plot_boundary_off;
+	s_player_plot_boundary_off = -1;
+	player removeAction s_player_plot_take_ownership;
+	s_player_plot_take_ownership = -1;
 	player removeAction s_player_forceSave;
 	s_player_forceSave = -1;
 	player removeAction s_player_flipveh;
@@ -919,6 +991,10 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	player removeAction s_player_followdog;
 	s_player_followdog = -1;
     
+    /*Door Management*/
+	player removeAction s_player_manageDoor;
+	s_player_manageDoor = -1;
+
     // vault
 	player removeAction s_player_unlockvault;
 	s_player_unlockvault = -1;

@@ -2,9 +2,36 @@
 delete object from db with extra waiting by [VB]AWOL
 parameters: _obj
 */
-private ["_activatingPlayer","_obj","_objectID","_objectUID","_started","_finished","_animState","_isMedic","_isOk","_proceed","_counter","_limit","_objType","_sfx","_dis","_itemOut","_countOut","_selectedRemoveOutput","_friendlies","_nearestPole","_ownerID","_refundpart","_isWreck","_findNearestPoles","_findNearestPole","_IsNearPlot","_brokenTool","_removeTool","_isDestructable","_isRemovable","_objOwnerID","_isOwnerOfObj","_preventRefund","_ipos","_item","_radius","_isWreckBuilding","_nameVehicle","_isModular","_playerUID","_gems","_gem","_isMine"];
+private ["_activatingPlayer","_obj","_objectID","_objectUID","_started","_finished","_animState","_isMedic","_isOk","_proceed","_counter","_limit","_objType","_sfx","_dis","_itemOut","_countOut","_selectedRemoveOutput","_friendlies","_nearestPole","_ownerID","_refundpart","_isWreck","_findNearestPoles","_findNearestPole","_IsNearPlot","_brokenTool","_removeTool","_isDestructable","_isRemovable","_objOwnerID","_isOwnerOfObj","_preventRefund","_ipos","_item","_radius","_isWreckBuilding","_nameVehicle","_isModular","_playerUID"];
 
 if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_88") , "PLAIN DOWN"]; };
+
+_findNearestPoles = nearestObjects[player, ["Plastic_Pole_EP1_DZ"], DZE_PlotPole select 0];
+_IsNearPlot = count (_findNearestPoles);
+_fuid  = [];
+_allowed = [];
+
+if(_IsNearPlot > 0)then{
+	_thePlot = _findNearestPoles select 0;
+	_owner =  _thePlot getVariable ["ownerPUID","010"];
+	_friends = _thePlot getVariable ["plotfriends", []];
+
+	{
+	  _friendUID = _x select 0;
+	  _fuid  =  _fuid  + [_friendUID];
+	} forEach _friends;
+
+	_allowed = [_owner];    
+	_allowed = [_owner] +  _fuid;
+
+};
+
+_obj = _this select 3;
+_isModular = _obj isKindOf "ModularItems";
+_isModularDoor = _obj in ["Land_DZE_WoodDoor","Land_DZE_LargeWoodDoor","Land_DZE_GarageWoodDoor","CinderWallDoor_DZ","CinderWallDoorSmall_DZ"];
+
+if ((_isModular || _isModularDoor) && !((getPlayerUID player) in _allowed)) exitWith { cutText ["You are not allowed to remove this structure." , "PLAIN DOWN"]; };
+
 DZE_ActionInProgress = true;
 
 player removeAction s_player_deleteBuild;
@@ -14,10 +41,15 @@ _obj = _this select 3;
 
 _activatingPlayer = player;
 
-_playerUID = getPlayerUID _activatingPlayer;
 _objOwnerID = _obj getVariable["ownerPUID","0"];
-_isOwnerOfObj = (_objOwnerID == _playerUID);
 
+if (DZE_APlotforLife) then {
+	_playerUID = [player] call FNC_GetPlayerUID;
+	_isOwnerOfObj = (_objOwnerID == _playerUID);
+}else{
+	_playerUID = dayz_characterID;
+	_isOwnerOfObj = (_objOwnerID == dayz_characterID);
+};
 
 if (_obj in DZE_DoorsLocked) exitWith { DZE_ActionInProgress = false; cutText [(localize "STR_EPOCH_ACTIONS_20"), "PLAIN DOWN"];};
 if(_obj getVariable ["GeneratorRunning", false]) exitWith {DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_89"), "PLAIN DOWN"];};
@@ -152,8 +184,6 @@ while {_isOk} do {
 	};
 
 };
-
-
 
 if(_brokenTool) then {
 	if(_isWreck) then {

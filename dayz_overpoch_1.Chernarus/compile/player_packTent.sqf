@@ -15,7 +15,12 @@ _obj = _this;
 _ownerID = _obj getVariable["ownerPUID","0"];
 _objectID 	= _obj getVariable["ObjectID","0"];
 _objectUID	= _obj getVariable["ObjectUID","0"];
-_playerUID = getPlayerUID player;
+
+if (DZE_APlotforLife) then {
+	_playerUID = [player] call FNC_GetPlayerUID;
+}else{
+	_playerUID = dayz_characterID;
+};
 
 [1,1] call dayz_HungerThirst;
 player playActionNow "Medic";

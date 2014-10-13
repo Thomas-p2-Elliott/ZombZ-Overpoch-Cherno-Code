@@ -8,16 +8,16 @@ if (!isDedicated) then {
 
 	//modified
 	fnc_usec_damageActions =		compile preprocessFileLineNumbers "compile\fn_damageActions.sqf";		//Checks which actions for nearby casualty
-	fnc_usec_selfActions =			compile preprocessFileLineNumbers "compile\fn_selfActions.sqf";			//Checks which actions for self
-	player_packTent =				compile preprocessFileLineNumbers "compile\player_packTent.sqf";
-	player_removeObject =			compile preprocessFileLineNumbers "actions\remove.sqf";
-	player_lockVault =				compile preprocessFileLineNumbers "compile\player_lockVault.sqf";
-	player_updateGui =				compile preprocessFileLineNumbers "compile\player_updateGui.sqf";
+	fnc_usec_selfActions = 			compile preprocessFileLineNumbers "compile\fn_selfActions.sqf";  		//Checks which actions for self
 	player_tentPitch =				compile preprocessFileLineNumbers "actions\tent_pitch.sqf";
+	player_packTent =				compile preprocessFileLineNumbers "compile\player_packTent.sqf";
 	player_vaultPitch =				compile preprocessFileLineNumbers "actions\vault_pitch.sqf";
-	player_build =					compile preprocessFileLineNumbers "actions\player_build.sqf";
-	dayz_spaceInterrupt =			compile preprocessFileLineNumbers "actions\dayz_spaceInterrupt.sqf";
 	player_unlockVault =			compile preprocessFileLineNumbers "compile\player_unlockVault.sqf";
+	player_lockVault =				compile preprocessFileLineNumbers "compile\player_lockVault.sqf";
+	player_build =					compile preprocessFileLineNumbers "actions\player_build.sqf";
+	player_removeObject =			compile preprocessFileLineNumbers "actions\remove.sqf";
+	player_updateGui =				compile preprocessFileLineNumbers "compile\player_updateGui.sqf";
+	dayz_spaceInterrupt =			compile preprocessFileLineNumbers "actions\dayz_spaceInterrupt.sqf";
 	player_zombieCheck = 			compile preprocessFileLineNumbers "compile\player_zombieCheck.sqf";		
 	player_zombieAttack = 			compile preprocessFileLineNumbers "compile\player_zombieAttack.sqf";	
 	player_death =					compile preprocessFileLineNumbers "compile\player_death.sqf";
@@ -25,6 +25,30 @@ if (!isDedicated) then {
 	player_monitor =				compile preprocessFileLineNumbers "system\player_monitor.sqf";
 	building_spawnLoot =			compile preprocessFileLineNumbers "compile\building_spawnLoot.sqf";
 	player_fired =					compile preprocessFileLineNumbers "compile\player_fired.sqf";			//Runs when player fires. Alerts nearby Zeds depending on calibre && audial rating
+
+	/*Plot*/
+	CurrencyName = "Gold";
+
+	PlotGetFriends =				compile preprocessFileLineNumbers "plotManagement\plotGetFriends.sqf";
+	PlotNearbyHumans = 				compile preprocessFileLineNumbers "plotManagement\plotNearbyHumans.sqf";
+	PlotAddFriend =					compile preprocessFileLineNumbers "plotManagement\plotAddFriend.sqf";
+	PlotRemoveFriend = 				compile preprocessFileLineNumbers "plotManagement\plotRemoveFriend.sqf";
+	MaintainPlot =					compile preprocessFileLineNumbers "plotManagement\maintain_areaSC.sqf";
+	PlotPreview =					compile preprocessFileLineNumbers "plotManagement\plotToggleMarkers.sqf";
+	PlotObjects = 					compile preprocessFileLineNumbers "plotManagement\plotObjects.sqf";
+	/*Plot End*/
+
+	/*DoorManagement Zupa*/
+	DoorGetFriends 		=			compile preprocessFileLineNumbers "doorManagement\doorGetFriends.sqf";
+	DoorNearbyHumans 	= 			compile preprocessFileLineNumbers "doorManagement\doorNearbyHumans.sqf";
+	DoorAddFriend 		= 			compile preprocessFileLineNumbers "doorManagement\doorAddFriend.sqf";
+	DoorRemoveFriend 	= 			compile preprocessFileLineNumbers "doorManagement\doorRemoveFriend.sqf";
+	player_unlockDoor       = 		compile preprocessFileLineNumbers "doorManagement\player_unlockDoor.sqf";
+	player_unlockDoorCode = 		compile preprocessFileLineNumbers "doorManagement\player_unlockDoorCode.sqf";
+	player_manageDoor       = 		compile preprocessFileLineNumbers "doorManagement\initDoorManagement.sqf";
+	player_enterCode       = 		compile preprocessFileLineNumbers "doorManagement\player_enterCode.sqf";
+	player_changeCombo = 			compile preprocessFileLineNumbers "doorManagement\player_changeCombo.sqf"; 
+	/*DoorManagement End*/
 
 	/*	Gear Menu Compiles	*/
 	[] execVM 						"init\gearMenuCompiles.sqf";
@@ -69,21 +93,19 @@ if (!isDedicated) then {
 		[["Hedgehog_DZ"], 1,"STR_EPOCH_ACTIONS_14"] call player_removeNearby;
 	};
 	player_removeNet = {
-		[["DesertLargeCamoNet","ForestCamoNet_DZ","DesertLargeCamoNet_DZ","ForestLargeCamoNet_DZ"], 5,"str_epoch_player_8"] call player_removeNearby;
+		[["DesertCamoNet_DZ","DesertLargeCamoNet","ForestCamoNet_DZ","DesertLargeCamoNet_DZ","ForestLargeCamoNet_DZ"], 5,"str_epoch_player_8"] call player_removeNearby;
 	};
 
 	player_login = {
-		private ["_unit","_detail"];
+		private ["_unit","_detail","_PUID"];
 		_unit = _this select 0;
 		_detail = _this select 1;
-		if(_unit == getPlayerUID player) then {
+		_PUID = [player] call FNC_GetPlayerUID;
+		if(_unit == _PUID) then {
 			player setVariable["publish",_detail];
 		};
 	};
 
-
-	player_unlockDoor =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_unlockDoor.sqf";
-	player_changeCombo =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_changeCombo.sqf";
 
 	player_crossbowBolt =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_crossbowBolt.sqf";
 	player_music = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_music.sqf";			//Used to generate ambient music
@@ -119,13 +141,33 @@ if (!isDedicated) then {
 	player_makeFire =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_makefire.sqf";
 	player_harvestPlant =		compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_harvestPlant.sqf";
 	player_goFishing =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_goFishing.sqf";
+	
+	if (DZE_modularBuild) then {
+		player_build =				compile preprocessFileLineNumbers "actions\modular_build.sqf";
+		player_build_countNearby =	compile preprocessFileLineNumbers "actions\player_build_countNearby.sqf";
+		player_build_states =		compile preprocessFileLineNumbers "actions\player_build_states.sqf";
+		player_build_needNearby =	compile preprocessFileLineNumbers "actions\player_build_needNearby.sqf";
+		player_build_getConfig =	compile preprocessFileLineNumbers "actions\player_build_getConfig.sqf";
+		player_build_plotCheck =	compile preprocessFileLineNumbers "actions\player_build_plotCheck.sqf";
+		player_build_buildReq =		compile preprocessFileLineNumbers "actions\player_build_buildReq.sqf";
+		player_build_create =		compile preprocessFileLineNumbers "actions\player_build_create.sqf";
+		player_build_controls =		compile preprocessFileLineNumbers "actions\player_build_controls.sqf";
+		player_build_publish =		compile preprocessFileLineNumbers "actions\player_build_publish.sqf";
+		DZE_snap_build_file = 		"compile\snap_build.sqf"; // Set as a global variable as it is also referenced in snapbuild.sqf
+		snap_build = 				compile preprocessFileLineNumbers DZE_snap_build_file;
+	} else {
+		player_build =				compile preprocessFileLineNumbers "actions\player_build.sqf";
+	};
+
+	FNC_check_owner =			compile preprocessFileLineNumbers "compile\fn_check_owner.sqf";
+
 	object_pickup = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\object_pickup.sqf";
 	player_flipvehicle = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_flipvehicle.sqf";
 	player_sleep = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_sleep.sqf";
 	player_antiWall =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_antiWall.sqf";
 	player_deathBoard =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\list_playerDeathsAlt.sqf";
 
-	player_plotPreview = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_showPlotRadius.sqf";
+	player_plotPreview = 		compile preprocessFileLineNumbers "actions\object_showPlotRadius.sqf";
 	player_upgradeVehicle =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_upgradeVehicle.sqf";
 
 
@@ -282,6 +324,22 @@ Both Server & Client Side Scripts
 	world_isDay = 				{if ((daytime < (24 - dayz_sunRise)) && (daytime > dayz_sunRise)) then {true} else {false}};
 
 	// player_projectileNear = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_projectileNear.sqf";
+	FNC_GetPlayerUID = {
+		private ["_object","_version","_PID"];
+		_object = _this select 0;
+		_version = productVersion select 3;
+		if (DayZ_UseSteamID) then {
+			_PID = GetPlayerUID _object;
+		} else {
+			if (_version >= 125548) then {
+				_PID = call (compile "GetPlayerUIDOld _object");
+			} else {
+				_PID = GetPlayerUID _object;
+				diag_log format["Your game version, %1, is less than the required for the old UID system; using Steam ID system instead. Update to 1.63.125548 (or latest steam beta)", _version];
+			};
+		};
+		_PID
+	};
 	FNC_GetSetPos = { //DO NOT USE IF YOU NEED ANGLE COMPENSATION!!!!
 		private "_pos";
 		_thingy = _this select 0;

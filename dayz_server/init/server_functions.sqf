@@ -13,6 +13,7 @@ server_onPlayerDisconnect = 	compile preprocessFileLineNumbers "\z\addons\dayz_s
 server_updateObject =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_updateObject.sqf";
 server_playerDied =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDied.sqf";
 server_publishObj = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishObject.sqf";
+server_publishFullObject = 		compile preprocessFileLineNumbers "custom\compile\server_publishFullObject.sqf";
 server_deleteObj =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_deleteObj.sqf";
 server_swapObject =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_swapObject.sqf"; 
 server_publishVeh = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle.sqf";
@@ -636,7 +637,7 @@ server_getDiff2 =	{
 dayz_objectUID = {
 	private["_position","_dir","_key","_object"];
 	_object = _this;
-	_position = getPos _object;
+	_position = getPosATL _object;
 	_dir = direction _object;
 	_key = [_dir,_position] call dayz_objectUID2;
     _key
@@ -912,7 +913,7 @@ server_spawnCleanLoot = {
 			};
 		};
 		sleep 0.001;
-	} forEach _missionObjs;
+	} count _missionObjs;
 	if (_delQty > 0) then {
 		_qty = count _missionObjs;
 		diag_log (format["CLEANUP: Deleted %1 Loot Piles out of %2",_delQty,_qty]);
@@ -931,9 +932,9 @@ server_spawnCleanAnimals = {
 			_delQtyAnimal = _delQtyAnimal + 1;
 		} else {
 			if (!alive _x) then {
-				_pos = getPos _x;
+				_pos = getPosATL _x;
 				if (count _pos > 0) then {
-					_nearby = {(isPlayer _x) && (alive _x)} count (_pos nearEntities [["CAManBase","AllVehicles"], 150]);
+					_nearby = {(isPlayer _x) && (alive _x)} count (_pos nearEntities [["CAManBase","AllVehicles"], 130]);
 					if (_nearby==0) then {
 						_x call dayz_perform_purge;
 						sleep 0.05;
@@ -943,7 +944,7 @@ server_spawnCleanAnimals = {
 			};
 		};
 		sleep 0.001;
-	} forEach _missonAnimals;
+	} count _missonAnimals;
 	if (_delQtyAnimal > 0) then {
 		_qty = count _missonAnimals;
 		diag_log (format["CLEANUP: Deleted %1 Animals out of %2",_delQtyAnimal,_qty]);
@@ -963,7 +964,7 @@ server_logUnlockLockEvent = {
 			[_obj, "gear"] call server_updateObject;
 			_statusText = "LOCKED";
 		};
-		_PUID = [_killer] call FNC_GetPlayerUID;
+		_PUID = [_player] call FNC_GetPlayerUID;
 		diag_log format["SAFE %5: ID:%1 UID:%2 BY %3(%4)", _objectID, _objectUID, (name _player), _PUID, _statusText];
 	};
 };

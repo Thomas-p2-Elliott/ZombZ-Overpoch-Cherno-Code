@@ -15,9 +15,6 @@ enableRadio false;
 // May prevent "how are you civillian?" messages from NPC
 enableSentences false;
 
-//early
-fnc_crypt =		compile preprocessFileLineNumbers "system\fnc_crypt.sqf";
-
 //enable ASM
 ASM_Enabled = false;
 
@@ -35,6 +32,10 @@ if (hasInterface && !isDedicated) then {
 
 	//enable uid whitelist
 	P2DZE_clientAHWhitelistEnabled = true;
+
+	P2DZ_plotManagerUIDs = ["007"]; //["76561198147422604","76561197994454413","76561198143011904"];
+	P2DZ_DoorAdminList =   ["007"]; // List of Player Id's of admins that can manage all doors
+
 };
 
 if (isDedicated && !hasInterface || isServer) then {
@@ -113,7 +114,7 @@ progressLoadingScreen 1.0;
 
 [] execVM "\ddopp_taserpack\scripts\init_taser.sqf";
 // Set effects control to player
-player setVariable ["isTazed", false, true];
+player setVariable 	["isTazed", false, true];
 player addEventHandler ["HandleDamage",{_this call DDOPP_taser_handleHit}];
 
 if (isServer) then {
