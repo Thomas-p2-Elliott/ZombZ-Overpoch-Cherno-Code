@@ -8,6 +8,46 @@ waitUntil {vehicle player == player};
 //Because we don't have rules on the test server!
 if ((getPlayerUID player) in ["76561198147422604","76561197994454413","76561198143011904"] && P2DZE_clientAHWhitelistEnabled) exitWith {};
 
+/* Anti-Cheat Engine Stuffs */
+
+_LoadTest = [];
+_Loaded = [-1,4,21,24,34,141,142,157,158,159,160,161,162,163,164,165,
+166,167,168,169,170,171,172,173,174,175,183,184,185,191,194,195,196,199,215,216,217,218,219,228,229,
+230,232,233,240,241,243,244,264,265,274,320,321,324,326,328,329,330,333,334,335,336,337,342,343,344,
+345,346,347,348,349,350,351,352,353,354,355,356,358,364,365,497,500,501,503,507,618];
+for '_i' from 0 to (count configFile)-1 do {
+	if !(_i in _Loaded) then
+	{
+		_cfg = configFile select _i;
+		if(isClass _cfg) then
+		{
+			_cname = configName _cfg;
+			_cfg = configFile >> _cname >> 'controls';
+			if(isClass _cfg) then
+			{
+				_Load = toArray(str(getText(configFile >> _cname >> 'onLoad')));
+				_Unload = toArray(str(getText(configFile >> _cname >> 'onUnload')));
+				_LoadTest = _LoadTest + [[_cname,_Load,_Unload,_i]];
+			};
+		};
+	};
+};
+
+_CE1 = toArray (getText(configFile >> 'RscDisplayDSinterface' >> 'onLoad'));
+_CE2 = toArray (getText(configFile >> 'RscDisplayOptionsVideo' >> 'onLoad'));
+_CE3 = toArray (getText(configFile >> 'RscDisplayOptionsVideo' >> 'onUnload'));
+_CE4 = toArray (getText(configFile >> 'RscDisplayGear' >> 'onLoad'));
+_CE5 = toArray (getText(configFile >> 'RscDisplayInterrupt' >> 'onLoad'));
+_CE6 = toArray (getText(configFile >> 'RscDisplayInterrupt' >> 'onUnload'));
+_CE7 = toArray (getText(configFile >> 'RscDisplayProfileController' >> 'onLoad'));
+_CE8 = toArray (getText(configFile >> 'RscDisplayInterruptEditorPreview' >> 'onLoad'));
+_CE9 = toArray (getText(configFile >> 'RscDisplayInterruptEditorPreview' >> 'onUnload'));
+_CE10 = toArray (getText(configFile >> 'RscDisplayMPInterrupt' >> 'onLoad'));
+_CE11 = toArray (getText(configFile >> 'RscDisplayMPInterrupt' >> 'onUnload'));
+_CE12 = toArray (getText(configFile >> 'RscDisplayClientGetReady' >> 'onLoad'));
+_CE13 = toArray (getText(configFile >> 'RscDisplayServerGetReady' >> 'onLoad'));
+_CE14 = toArray (getText(configFile >> 'RscDisplayOptionsVideo' >> 'controls' >> 'G_VideoOptionsControls' >> 'controls' >> 'HideAdvanced' >> 'OnButtonClick'));
+
 
 //extra functions!
 [] execVM "system\antihack_wepCheck.sqf";
@@ -631,44 +671,8 @@ P2DZ_AHKick = {
 };
 
 /* Anti-cheat engine */
-_LoadTest = [];
-_Loaded = [-1,4,21,24,34,141,142,157,158,159,160,161,162,163,164,165,
-166,167,168,169,170,171,172,173,174,175,183,184,185,191,194,195,196,199,215,216,217,218,219,228,229,
-230,232,233,240,241,243,244,264,265,274,320,321,324,326,328,329,330,333,334,335,336,337,342,343,344,
-345,346,347,348,349,350,351,352,353,354,355,356,358,364,365,497,500,501,503,507,618];
-for '_i' from 0 to (count configFile)-1 do {
-	if !(_i in _Loaded) then
-	{
-		_cfg = configFile select _i;
-		if(isClass _cfg) then
-		{
-			_cname = configName _cfg;
-			_cfg = configFile >> _cname >> 'controls';
-			if(isClass _cfg) then
-			{
-				_Load = toArray(str(getText(configFile >> _cname >> 'onLoad')));
-				_Unload = toArray(str(getText(configFile >> _cname >> 'onUnload')));
-				_LoadTest = _LoadTest + [[_cname,_Load,_Unload,_i]];
-			};
-		};
-	};
-};
-_CE1 = toArray (getText(configFile >> 'RscDisplayDSinterface' >> 'onLoad'));
-_CE2 = toArray (getText(configFile >> 'RscDisplayOptionsVideo' >> 'onLoad'));
-_CE3 = toArray (getText(configFile >> 'RscDisplayOptionsVideo' >> 'onUnload'));
-_CE4 = toArray (getText(configFile >> 'RscDisplayGear' >> 'onLoad'));
-_CE5 = toArray (getText(configFile >> 'RscDisplayInterrupt' >> 'onLoad'));
-_CE6 = toArray (getText(configFile >> 'RscDisplayInterrupt' >> 'onUnload'));
-_CE7 = toArray (getText(configFile >> 'RscDisplayProfileController' >> 'onLoad'));
-_CE8 = toArray (getText(configFile >> 'RscDisplayInterruptEditorPreview' >> 'onLoad'));
-_CE9 = toArray (getText(configFile >> 'RscDisplayInterruptEditorPreview' >> 'onUnload'));
-_CE10 = toArray (getText(configFile >> 'RscDisplayMPInterrupt' >> 'onLoad'));
-_CE11 = toArray (getText(configFile >> 'RscDisplayMPInterrupt' >> 'onUnload'));
-_CE12 = toArray (getText(configFile >> 'RscDisplayClientGetReady' >> 'onLoad'));
-_CE13 = toArray (getText(configFile >> 'RscDisplayServerGetReady' >> 'onLoad'));
-_CE14 = toArray (getText(configFile >> 'RscDisplayOptionsVideo' >> 'controls' >> 'G_VideoOptionsControls' >> 'controls' >> 'HideAdvanced' >> 'OnButtonClick'));
 
-[] spawn {
+call compile ("
 	_CE1 = ("+(str _CE1)+");
 	_CE2 = ("+(str _CE2)+");
 	_CE3 = ("+(str _CE3)+");
@@ -707,7 +711,7 @@ _CE14 = toArray (getText(configFile >> 'RscDisplayOptionsVideo' >> 'controls' >>
 			_b = _CECA2 select _i;
 			if (str _a != str (toArray _b)) then
 			{
-				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('CheatEngine'), toArray (str [_a,_b])];
+				PVDZE_atp = format['NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)',name player, getPlayerUID player, toArray ('CheatEngine'), toArray (str [_a,_b])];
 				publicVariableServer 'PVDZE_atp';
 				[] spawn P2DZ_AHKick;
 			};
@@ -724,13 +728,13 @@ _CE14 = toArray (getText(configFile >> 'RscDisplayOptionsVideo' >> 'controls' >>
 			_OUL1 = toArray(str(getText(configFile >> _cname >> 'onUnload')));
 			if (str _OL != str _OL1) then
 			{
-				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('CheatEngine'), toArray (str [_OL1,_OL])];
+				PVDZE_atp = format['NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)',name player, getPlayerUID player, toArray ('CheatEngine'), toArray (str [_OL1,_OL])];
 				publicVariableServer 'PVDZE_atp';
 				[] spawn P2DZ_AHKick;
 			};
 			if (str _OUL != str _OUL1) then
 			{
-				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, toArray ('CheatEngine'), toArray (str [_OUL1,_OUL])];
+				PVDZE_atp = format['NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)',name player, getPlayerUID player, toArray ('CheatEngine'), toArray (str [_OUL1,_OUL])];
 				publicVariableServer 'PVDZE_atp';
 				[] spawn P2DZ_AHKick;
 			};
@@ -738,7 +742,7 @@ _CE14 = toArray (getText(configFile >> 'RscDisplayOptionsVideo' >> 'controls' >>
 
 		uiSleep 60;
 	};
-};
+");
 
 /* anti-teleport */
 [] spawn {
