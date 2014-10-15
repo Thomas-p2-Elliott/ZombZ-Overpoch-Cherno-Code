@@ -94,11 +94,6 @@
                buy[] ={10};
               sell[]={5};
         };
-        class 20Rnd_762x51_B_SCAR  {
-              type = "trade_items";
-               buy[] ={10};
-              sell[]={5};
-        };
 }; 
  class Category_609 {
         class FHQ_rem_30Rnd_680x43_ACR {
@@ -192,11 +187,6 @@
               sell[]={5};
         };
         class 30Rnd_556x45_G36 {
-              type = "trade_items";
-               buy[] ={10};
-              sell[]={5};
-        };
-        class 20Rnd_762x51_B_SCAR  {
               type = "trade_items";
                buy[] ={10};
               sell[]={5};

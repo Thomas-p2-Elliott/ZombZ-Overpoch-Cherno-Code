@@ -29,11 +29,6 @@
                buy[] ={25};
               sell[]={13};
         };
-        class 20Rnd_762x51_FNFAL {
-              type = "trade_items";
-               buy[] ={25};
-              sell[]={13};
-        };
         class 20Rnd_762x51_FNFAL  {
               type = "trade_items";
                buy[] ={25};
@@ -112,11 +107,6 @@
               sell[]={13};
         };
         class 10x_303  {
-              type = "trade_items";
-               buy[] ={25};
-              sell[]={13};
-        };
-        class 20Rnd_762x51_FNFAL {
               type = "trade_items";
                buy[] ={25};
               sell[]={13};

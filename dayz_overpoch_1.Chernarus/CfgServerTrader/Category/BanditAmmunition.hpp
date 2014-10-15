@@ -94,11 +94,6 @@
                buy[] ={10};
               sell[]={5};
         };
-        class 20Rnd_762x51_B_SCAR  {
-              type = "trade_items";
-               buy[] ={10};
-              sell[]={5};
-        };
         class 20Rnd_762x51_DMR  {
               type = "trade_items";
                buy[] ={30};
@@ -354,11 +349,6 @@
                buy[] ={5};
               sell[]={3};
         };
-        class 15Rnd_9x19_M9SD {
-              type = "trade_items";
-               buy[] ={5};
-              sell[]={3};
-        };
         class RH_12Rnd_45cal_usp  {
               type = "trade_items";
                buy[] ={5};
@@ -470,11 +460,6 @@
               sell[]={13};
         };
         class 20Rnd_762x51_FNFAL {
-              type = "trade_items";
-               buy[] ={25};
-              sell[]={13};
-        };
-        class 20Rnd_762x51_FNFAL  {
               type = "trade_items";
                buy[] ={25};
               sell[]={13};

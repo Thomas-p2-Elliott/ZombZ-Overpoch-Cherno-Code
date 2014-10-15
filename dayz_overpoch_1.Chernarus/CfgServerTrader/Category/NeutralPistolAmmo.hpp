@@ -144,11 +144,6 @@
                buy[] ={5};
               sell[]={3};
         };
-        class 15Rnd_9x19_M9SD {
-              type = "trade_items";
-               buy[] ={5};
-              sell[]={3};
-        };
         class RH_12Rnd_45cal_usp  {
               type = "trade_items";
                buy[] ={5};
@@ -332,11 +327,6 @@
               sell[]={3};
         };
         class RH_8Rnd_9x19_Mksd {
-              type = "trade_items";
-               buy[] ={5};
-              sell[]={3};
-        };
-        class 15Rnd_9x19_M9SD  {
               type = "trade_items";
                buy[] ={5};
               sell[]={3};
