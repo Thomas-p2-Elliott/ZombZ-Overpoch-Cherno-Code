@@ -1,77 +1,87 @@
  class Category_527 {
- 	class 20Rnd_9x39_SP5_VSS {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 8Rnd_B_Beneli_74Slug {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 20Rnd_762x51_SB_SCAR {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 8Rnd_B_Beneli_Pellets {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 8Rnd_B_Saiga12_74Slug {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 8Rnd_B_Saiga12_Pellets {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 20Rnd_B_765x17_Ball {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 10Rnd_762x54_SVD {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 5Rnd_762x51_M24 {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 30Rnd_556x45_Stanag {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 20Rnd_762x51_FNFAL {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 100Rnd_556x45_BetaCMag {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 75Rnd_545x39_RPK {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 64Rnd_9x19_Bizon {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- 	class 5Rnd_127x108_KSVK {
- 		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
- 	};
- };
+        class M136  {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class Vil_CG_HEAT {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class vil_RPG26  {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class vil_RPG22  {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class Vil_SHMEL_FTW  {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class Vil_PG29_HEAT  {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class Vil_PGOd_PG7VL {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class Vil_PGO_PG7VL {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class Vil_PGO_PG16  {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class MAAWS_HEAT {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class SMAW_HEAA {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class AT13  {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class PG7V {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class Javelin  {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class Vil_PZF3_S_HEAT {
+              type = "trade_items";
+               buy[] ={75};
+              sell[]={38};
+        };
+        class 6Rnd_HE_M203 {
+              type = "trade_items";
+               buy[] ={125};
+              sell[]={63};
+        };
+        class 1Rnd_HE_M203 {
+              type = "trade_items";
+               buy[] ={50};
+              sell[]={25};
+        };
+};
