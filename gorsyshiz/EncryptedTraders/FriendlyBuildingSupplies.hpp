@@ -1,184 +1,184 @@
  class Category_678 {
-     class 31c95c138c123c131c105c119c132c122c120c119c125 {
+ 	class 94c137c122c130c104c118c131c121c119c118c124 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 32c96c139c124c132c107c120c133c130c107c137c120c135 {
+ 	class 95c138c123c131c106c119c132c129c106c136c119c134 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 31c95c138c123c131c106c123c132c138c101c130c122 {
+ 	class 94c137c122c130c105c122c131c137c100c129c121 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 29c93c136c121c129c106c117c137c128c136 {
+ 	class 92c135c120c128c105c116c136c127c135 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 28c92c135c120c128c106c124c133c120 {
+ 	class 91c134c119c127c105c123c132c119 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 32c74c71c132c118c135c131c134c139c118c130c128c139 {
+ 	class 73c70c131c117c134c130c133c138c117c129c127c138 {
  		type = "trade_items";
             buy[] = {150};
             sell[] = {50};
  	};
-     class 34c98c141c126c134c92c136c139c139c142c128c122c141c126c125 {
+ 	class 97c140c125c133c91c135c138c138c141c127c121c140c125c124 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 28c92c135c120c128c99c130c127c120 {
+ 	class 91c134c119c127c98c129c126c119 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 33c97c140c125c133c108c125c134c140c92c135c133c125c124 {
+ 	class 96c139c124c132c107c124c133c139c91c134c132c124c123 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 34c98c141c126c134c109c126c135c141c93c136c134c126c125c75 {
+ 	class 97c140c125c133c108c125c134c140c92c135c133c125c124c74 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 33c97c140c125c133c100c129c127c128c140c90c141c132c122 {
+ 	class 96c139c124c132c99c128c126c127c139c89c140c131c121 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 33c97c140c125c133c95c125c134c125c138c121c140c135c138 {
+ 	class 96c139c124c132c94c124c133c124c137c120c139c134c137 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
  };
  class Category_680 {
-     class 31c95c138c123c131c105c119c132c122c120c119c125 {
+ 	class 94c137c122c130c104c118c131c121c119c118c124 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 32c96c139c124c132c107c120c133c130c107c137c120c135 {
+ 	class 95c138c123c131c106c119c132c129c106c136c119c134 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 31c95c138c123c131c106c123c132c138c101c130c122 {
+ 	class 94c137c122c130c105c122c131c137c100c129c121 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 29c93c136c121c129c106c117c137c128c136 {
+ 	class 92c135c120c128c105c116c136c127c135 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 28c92c135c120c128c106c124c133c120 {
+ 	class 91c134c119c127c105c123c132c119 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 32c74c71c132c118c135c131c134c139c118c130c128c139 {
+ 	class 73c70c131c117c134c130c133c138c117c129c127c138 {
  		type = "trade_items";
             buy[] = {150};
             sell[] = {50};
  	};
-     class 34c98c141c126c134c92c136c139c139c142c128c122c141c126c125 {
+ 	class 97c140c125c133c91c135c138c138c141c127c121c140c125c124 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 28c92c135c120c128c99c130c127c120 {
+ 	class 91c134c119c127c98c129c126c119 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 33c97c140c125c133c108c125c134c140c92c135c133c125c124 {
+ 	class 96c139c124c132c107c124c133c139c91c134c132c124c123 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 34c98c141c126c134c109c126c135c141c93c136c134c126c125c75 {
+ 	class 97c140c125c133c108c125c134c140c92c135c133c125c124c74 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 33c97c140c125c133c100c129c127c128c140c90c141c132c122 {
+ 	class 96c139c124c132c99c128c126c127c139c89c140c131c121 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 33c97c140c125c133c95c125c134c125c138c121c140c135c138 {
+ 	class 96c139c124c132c94c124c133c124c137c120c139c134c137 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
  };
  class Category_530 {
-     class 31c95c138c123c131c105c119c132c122c120c119c125 {
+ 	class 94c137c122c130c104c118c131c121c119c118c124 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 32c96c139c124c132c107c120c133c130c107c137c120c135 {
+ 	class 95c138c123c131c106c119c132c129c106c136c119c134 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 31c95c138c123c131c106c123c132c138c101c130c122 {
+ 	class 94c137c122c130c105c122c131c137c100c129c121 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 29c93c136c121c129c106c117c137c128c136 {
+ 	class 92c135c120c128c105c116c136c127c135 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 28c92c135c120c128c106c124c133c120 {
+ 	class 91c134c119c127c105c123c132c119 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 32c74c71c132c118c135c131c134c139c118c130c128c139 {
+ 	class 73c70c131c117c134c130c133c138c117c129c127c138 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 34c98c141c126c134c92c136c139c139c142c128c122c141c126c125 {
+ 	class 97c140c125c133c91c135c138c138c141c127c121c140c125c124 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 28c92c135c120c128c99c130c127c120 {
+ 	class 91c134c119c127c98c129c126c119 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 33c97c140c125c133c108c125c134c140c92c135c133c125c124 {
+ 	class 96c139c124c132c107c124c133c139c91c134c132c124c123 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 34c98c141c126c134c109c126c135c141c93c136c134c126c125c75 {
+ 	class 97c140c125c133c108c125c134c140c92c135c133c125c124c74 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 33c97c140c125c133c100c129c127c128c140c90c141c132c122 {
+ 	class 96c139c124c132c99c128c126c127c139c89c140c131c121 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};
  	};
-     class 33c97c140c125c133c95c125c134c125c138c121c140c135c138 {
+ 	class 96c139c124c132c94c124c133c124c137c120c139c134c137 {
  		type = "trade_items";
             buy[] = {40};
             sell[] = {20};

@@ -1,35 +1,35 @@
  class Category_517 {
-     class 26c82c95c67c112c85c107 {
+ 	class 81c94c66c111c84c106 {
  		type = "trade_any_vehicle";
             buy[] = {60};
             sell[] = {30};
  	};
-     class 35c93c75c77c74c100c121c111c109c121c95c106c75c121c94c116 {
+ 	class 92c74c76c73c99c120c110c108c120c94c105c74c120c93c115 {
  		type = "trade_any_vehicle";
             buy[] = {60};
             sell[] = {30};
  	};
-     class 27c95c104c68c68c113c86c108 {
+ 	class 94c103c67c67c112c85c107 {
  		type = "trade_any_vehicle";
             buy[] = {60};
             sell[] = {30};
  	};
-     class 29c91c98c104c115c87c69c76c73c105 {
+ 	class 90c97c103c114c86c68c75c72c104 {
  		type = "trade_any_vehicle";
             buy[] = {60};
             sell[] = {30};
  	};
-     class 28c90c97c103c114c86c68c75c72 {
+ 	class 89c96c102c113c85c67c74c71 {
  		type = "trade_any_vehicle";
             buy[] = {60};
             sell[] = {30};
  	};
-     class 29c91c98c104c115c87c69c76c73c102 {
+ 	class 90c97c103c114c86c68c75c72c101 {
  		type = "trade_any_vehicle";
             buy[] = {60};
             sell[] = {30};
  	};
-     class 29c91c98c104c115c87c69c76c73c87 {
+ 	class 90c97c103c114c86c68c75c72c86 {
  		type = "trade_any_vehicle";
             buy[] = {60};
             sell[] = {30};
