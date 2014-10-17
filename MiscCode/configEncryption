@@ -1,0 +1,34 @@
+Encryption (PHP)
+----------------- 
+
+Input 	 								"M4A1"
+ 
+Convert to ascii numbers array			[77,52,65,49]
+
+add 10 to all numbers					[87,62,75,59]
+
+add strLen(M4A1) aka 4 to all numbers	[91,66,79,63]
+
+convert to string						"91,66,79,63"
+
+replace , with c 						"91c66c79c63"
+
+OutPut: 								"91c66c79c63"
+
+
+Decryption (SQF)
+----------------- 
+
+Input 									"91c66c79c63"
+
+replace c with ,						"91,66,79,63"
+
+compile to array						[91,66,79,63]
+
+take count array from all numbers 		[87,62,75,59]
+ 
+take 10 from all numbers				[77,52,65,49]
+ 
+convert to text							"M4A1"
+ 
+OutPut:									"M4A1"
