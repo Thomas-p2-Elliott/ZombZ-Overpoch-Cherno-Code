@@ -1,20 +1,4 @@
 /*---------------------------------------------------------------------------
-p2 fired
-
-parent function
-
-Input:
- [unit, weapon, muzzle, mode, ammo, magazine, projectile]
----------------------------------------------------------------------------*/
-
-p2_fired = {
-
-	[_this select 1, _this select 4] call p2_infAmmoCheck;
-};
-
-
-
-/*---------------------------------------------------------------------------
 AntiHack Weaponchecker
 by Player2 for wwww.ZombZ.net
 
@@ -52,8 +36,53 @@ _endTime = diag_tickTime;
 };
 */
 
+/*---------------------------------------------------------------------------
+Bullet Check
+		Player Fired Event: _this = [unit, weapon, muzzle, mode, ammo, magazine, projectile]
 
+---------------------------------------------------------------------------*/
+p2_bulletCheck = {
+	if (vehicle player != player) exitWith {};
+	_unit = _this select 0;
+	_weapon = _this select 1;
+	_magazine = _this select 2;
+	_projectile = _this select 3;
+	_muzzle = _this select 4;
 
+	//Check the speed the velocity is currently travelling
+	_currentBulletSpeed = velocity _projectile;
+
+	//Check the max velocity this projectile should be travelling
+	_maxBulletSpeed = (getNumber (configFile >> "CfgMagazines" >> _magazine >> "initSpeed"));
+
+	{
+		if (_x > (_maxBulletSpeed + 50)) then {
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name _unit, getPlayerUID _unit, 'Bullet Check: Velocity too High.', ([str _currentBulletSpeed, str _maxBulletSpeed])];
+			publicVariableServer 'PVDZE_atp';
+			[] spawn P2DZ_AHKick;
+		};
+	} count _currentBulletSpeed;
+
+	//Get the projectile type
+	_projectileType = (typeOf (_projectile));
+	//Check if the magazine supports that projectile type
+	_magAmmoText = (getText (configFile >> "CfgMagazines" >> _magazine >> "ammo"));
+
+	if ({_x == _magAmmoText} count [_projectileType] < 1) exitWith {	
+		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name _unit, getPlayerUID _unit, 'Bullet Check: Bullet Doesnt Match Magazine', ([str _magAmmoText, str _projectileType])];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick;
+	};
+
+	//Check if the gun supports that magazine
+	_wepMagText = (getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines"));
+
+	if ({_x == _magazine} count _wepMagText < 1 && !(count (getArray (configFile >> "cfgWeapons" >> _weapon >> "muzzles")) > 1)) exitWith {	
+		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name _unit, getPlayerUID _unit, 'Bullet Check: Magazine Does not Match Weapon', ([str _magazine, str _wepMagText])];
+		publicVariableServer 'PVDZE_atp';
+		[] spawn P2DZ_AHKick;
+	};
+};
 
 
 /*---------------------------------------------------------------------------
@@ -62,26 +91,14 @@ Infinite ammo checker
 	Checks current weapon fired, checks ammo left in clip
 	If no change for 3 shots, kicks and log
 ---------------------------------------------------------------------------*/
-P2DZ_blackMarkCount = 0;
-P2DZ_LastShotInfo = ["","",0,0];
-P2DZ_lastReload = diag_tickTime;
-
-/* sub function...waits for a player to reload then logs the time they reloaded at */
-
-[] spawn {
-	while {true} do {
-		waitUntil {inputAction "ReloadMagazine" > 0};  
-		P2DZ_lastReload = diag_tickTime;
-	};
-};
 
 p2_infAmmoCheck = {
 	private ["_weapon","_ammo","_d","_lastWeapon","_lastAmmoLeft","_lastMagsLeft","_shotsFiredCount","_ammoLeft","_magsLeft","_magCapacity","_lastTime"];
 	if (vehicle player != player) exitWith {};
 	_weapon = _this select 0;
 	_ammo = _this select 1;
-	_d = true;
-	_u = player;
+	_u = _this select 2;
+	_d = false;
 
 
 
@@ -122,7 +139,7 @@ p2_infAmmoCheck = {
 	};
 
 	if (P2DZ_blackMarkCount > 3) then {
-		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name player, getPlayerUID player, 'p2_infAmmoCheck', ([P2DZ_LastShotInfo, P2DZ_blackMarkCount])];
+		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name _unit, getPlayerUID _unit, 'p2_infAmmoCheck', ([P2DZ_LastShotInfo, P2DZ_blackMarkCount])];
 		publicVariableServer 'PVDZE_atp';
 		[] spawn P2DZ_AHKick;
 	};

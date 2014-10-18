@@ -40,18 +40,6 @@ if (isServer) then {
 	"PVDZE_send" addPublicVariableEventHandler {(_this select 1) call server_sendToClient};
 	"PVDZE_maintainArea" addPublicVariableEventHandler {(_this select 1) spawn server_maintainArea};
 
-	"PVDZE_atp" addPublicVariableEventHandler {
-		_x = _this select 1;
-		if (typeName _x == "STRING") then {
-			diag_log _x;
-			_found	=	["TELEPORT REVERT",_x] call KRON_StrInStr;
-			if (_found) then {
-				["teleportLog",_x] call p2net_log1;
-			} else {
-				["hackerLog",_x] call p2net_log1; 
-			};
-		};
-	};
 	"PVDZE_plr_Died"		addPublicVariableEventHandler {_id = (_this select 1) spawn server_playerDied};
 	"PVDZE_plr_Save"		addPublicVariableEventHandler {_id = (_this select 1) spawn server_playerSync;};
 	"PVDZE_obj_Publish"		addPublicVariableEventHandler {(_this select 1) call server_publishObj};

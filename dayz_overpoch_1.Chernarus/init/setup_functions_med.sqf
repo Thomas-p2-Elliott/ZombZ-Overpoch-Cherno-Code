@@ -1,20 +1,3 @@
-fnc_usec_damageHandle = {
-	/***********************************************************
-	ASSIGN DAMAGE HANDLER TO A UNIT
-	- Function
-	- [unit] call fnc_usec_damageHandle;
-	************************************************************/
-	private ["_unit"];
-	_unit = _this select 0;
-	
-	// Remove handle damage override
-	// _unit removeEventHandler ["HandleDamage",temp_handler];
-
-	mydamage_eh1 = _unit addeventhandler ["HandleDamage",{_this call fnc_usec_damageHandler;} ];
-	mydamage_eh2 = _unit addEventHandler ["Fired", {_this call player_fired; _this call p2_fired}];
-	mydamage_eh3 = _unit addEventHandler ["Killed", {_id = [] spawn player_death;}];
-};
-
 fnc_usec_pitchWhine = {
 	
 	private ["_visual","_sound"];
@@ -257,7 +240,7 @@ fnc_usec_recoverUncons = {
 	r_player_cardiac = false;
 	r_player_handler1 = false;
 
-	sleep 1;
+	sleep 0.5;
 
 	disableUserInput false;
 	[objNull,player,rSwitchMove,"AinjPpneMstpSnonWnonDnon"] call RE;

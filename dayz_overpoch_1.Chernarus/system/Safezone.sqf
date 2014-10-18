@@ -45,22 +45,23 @@ while {true} do {
 
 	if (_ZombZ_SZ_Godmode ) then
 	{
-		player_zombieCheck = {};
-		fnc_usec_damageHandler = {};
-		fnc_usec_unconscious  = {};
+		player setVariable ['ZombZInSafeZone', true];
+		player_zombieCheck = { "ZombZinSafeZone"; false };
+		fnc_usec_damageHandler = { "ZombZinSafeZone"; false };
+		fnc_usec_unconscious  = { "ZombZinSafeZone"; false };
 		_thePlayer removeAllEventHandlers "handleDamage";
-		_thePlayer addEventHandler ["handleDamage", {false}];
+		_thePlayer addEventHandler ["handleDamage", { "ZombZinSafeZone"; false}];
 		_thePlayer allowDamage false;
 	};
 
 	if (_ZombZ_SZ_Clothing) then
 	{
-		player_wearClothes = {systemChat ("[ZombZ] Changing clothes is disabled in Safezone Trader Area"); };
+		player_wearClothes = { "ZombZinSafeZone"; systemChat ("[ZombZ] Changing clothes is disabled in Safezone Trader Area"); false };
 	};
 
 	if (_ZombZ_SZ_NoZeds ) then
 	{
-		building_spawnZombies =	{};
+		building_spawnZombies =	{ "ZombZinSafeZone"; false };
 	};
 	
 	if (_ZombZ_SZ_SpeedLimit ) then
@@ -93,6 +94,7 @@ while {true} do {
 	if (_ZombZ_SZ_DisableWeaponFiring) then
 	{
 		_EH_Fired = _thePlayer addEventHandler ["Fired", {
+			"ZombZinSafeZone";
 			systemChat ("[ZombZ] You can not fire your weapon in a Safezone Trader Area");
 			NearestObject [_this select 0,_this select 4] setPos[0,0,0];
 		}];
@@ -117,6 +119,7 @@ while {true} do {
 				_inVehicle = vehicle player;
 				_inVehicleDamage = getDammage _inVehicle;
 				_EH_Fired_Vehicle = _inVehicle addEventHandler ["Fired", {
+					"ZombZinSafeZone";
 					systemChat ("[ZombZ] You can not fire your vehicles weapon in a Trader City Area");
 					NearestObject [_this select 0,_this select 4] setPos[0,0,0];
 				}];
@@ -149,13 +152,15 @@ while {true} do {
 	{
 		if (!(isNull _inVehicle)) then
 		{
-			if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] No Firing Vehicle Guns Disabled");};
+			if (_ZombZ_SZ_Messages) then {
+			systemChat ("[ZombZ] No Firing Vehicle Guns Disabled");};
 			_inVehicle removeEventHandler ["Fired", _EH_Fired_Vehicle];
 		};
 		
 		if (!(isNull _inVehicleLast)) then
 		{
-			if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] No Firing Vehicle Guns Disabled");};
+			if (_ZombZ_SZ_Messages) then {
+			systemChat ("[ZombZ] No Firing Vehicle Guns Disabled");};
 			_inVehicleLast removeEventHandler ["Fired", _EH_Fired_Vehicle];
 		};
 	};
@@ -176,20 +181,21 @@ while {true} do {
 	
 	if (_ZombZ_SZ_NoZeds) then
 	{
-		building_spawnZombies =	compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\building_spawnZombies.sqf";
+		building_spawnZombies =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\building_spawnZombies.sqf";
 	};
 	
 	if (_ZombZ_SZ_Clothing) then
 	{
-		player_wearClothes = compile preprocessFileLineNumbers "actions\player_wearClothes.sqf";
+		player_wearClothes =			compile preprocessFileLineNumbers "actions\player_wearClothes.sqf";
 	};
 	
 	if (_ZombZ_SZ_Godmode) then
 	{
-		player_zombieCheck = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieCheck.sqf";
-		fnc_usec_damageHandler = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageHandler.sqf";
-		fnc_usec_unconscious = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_unconscious.sqf";
-		_thePlayer addEventHandler ["handleDamage", {true}];
+		player setVariable ['ZombZInSafeZone', false];
+		player_zombieCheck = 		compile preprocessFileLineNumbers "compile\player_zombieCheck.sqf";
+		fnc_usec_damageHandler = 	compile preprocessFileLineNumbers "compile\fn_damageHandler.sqf";
+		fnc_usec_unconscious = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_unconscious.sqf";
+		_thePlayer addeventhandler ["HandleDamage",{_this call fnc_usec_damageHandler; _this call DDOPP_taser_handleHit; } ];
 		_thePlayer removeAllEventHandlers "handleDamage";
 		_thePlayer allowDamage true;
 	};

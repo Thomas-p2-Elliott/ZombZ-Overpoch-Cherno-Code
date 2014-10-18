@@ -266,7 +266,7 @@ dze_isnearest_player = {
     _timeOutmax = P2DZ_LoadingTimeOut * 100;
 
     while { _timeOut < _timeOutmax } do {
-        if (dayz_clientPreload && dayz_authed) exitWith { diag_log "PLOGIN: Login loop completed!"; };
+        if (dayz_clientPreload && dayz_authed) exitWith { diag_log "PLOGIN: Login loop completed!"; endLoadingScreen; _display = uiNamespace getVariable "BIS_loadingScreen"; _display closeDisplay 0; };
         if (!isNil '_display') then {
             if ( isNull _display ) then {
                     waitUntil { !dialog; };

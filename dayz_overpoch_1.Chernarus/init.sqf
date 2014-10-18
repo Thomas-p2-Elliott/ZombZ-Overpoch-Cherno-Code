@@ -24,25 +24,31 @@ p2d_server = false;
 p2d_headless = false;
 
 //enable player2 custom hive dll debugging
-P2D_H = true;
+P2D_H = false;
 P2D_Hp = "P2DEBUG: HIVE DEBUG: ";
 
 if (hasInterface && !isDedicated) then {
 	p2d_client = true;
 
-	//enable uid whitelist
-	P2DZE_clientAHWhitelistEnabled = true;
-
-	P2DZ_plotManagerUIDs = ["007"]; //["76561198147422604","76561197994454413","76561198143011904"];
-	P2DZ_DoorAdminList =   ["007"]; // List of Player Id's of admins that can manage all doors
-
+	/*---------------------------------------------------------------------------
+	Enable Client-Side AntiHack?
+	---------------------------------------------------------------------------*/
+	P2DZ_clientAHWhitelistEnabled = 	false;
+	P2DZ_AHDebug = true; //Enable debugging outputs?
 };
+
+/*---------------------------------------------------------------------------
+UID WhiteLists - Door Management, Plot Management, Client-Side AntiHack
+---------------------------------------------------------------------------*/
+testServer_AdminMenuList = 			["76561198147422604","76561197994454413","76561198143011904"];
+P2DZ_clientAHWhiteListUIDs = 		["76561198147422604","76561197994454413","76561198143011904"];
+P2DZ_plotManagerUIDs = 				["007"]; 
+P2DZ_DoorAdminList =   				["007"];
 
 if (isDedicated && !hasInterface || isServer) then {
 	p2d_server = true;
 
 	#include "configs\debug_console.hpp";
-	conBeep();
 	conFileTime("Server Started");
 	diag_log ("debug_console" callExtension ("i"));
 
@@ -115,7 +121,9 @@ progressLoadingScreen 1.0;
 [] execVM "\ddopp_taserpack\scripts\init_taser.sqf";
 // Set effects control to player
 player setVariable 	["isTazed", false, true];
-player addEventHandler ["HandleDamage",{_this call DDOPP_taser_handleHit}];
+
+//anti Hack
+[] execVM "system\antihack.sqf";
 
 if (isServer) then {
 
@@ -155,9 +163,7 @@ if (!isDedicated) then {
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
 	_playerMonitor = 	[] execVM "system\player_monitor.sqf";	
 
-	[] execVM "system\SafeZone.sqf";	
-	//anti Hack
-	[] execVM "system\antihack.sqf";
+	[] execVM "system\SafeZone.sqf";
 };
 
 #define RESEC_VERBOSE
