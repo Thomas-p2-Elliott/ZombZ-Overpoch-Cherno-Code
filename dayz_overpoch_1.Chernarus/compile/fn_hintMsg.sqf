@@ -1,3 +1,11 @@
+//Global Variable init
+zombz_hintFull_last_title = "";
+zombz_hintFull_last_text =  "";
+zombz_hintFull_color =      "";
+zombz_hintMini_last_title = "";
+zombz_hintMini_last_text =  "";
+zombz_hintMini_color =      "";
+
 P2DZ_hintFull						= {
    667 cutRsc ["zombz_hintFull", "PLAIN"];
    zombz_hintFull_last_title = _this select 0;
