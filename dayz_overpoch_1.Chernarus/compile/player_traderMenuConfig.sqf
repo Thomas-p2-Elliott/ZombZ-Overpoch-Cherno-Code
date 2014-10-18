@@ -11,13 +11,40 @@ TraderCurrentCatIndex = -1;
 TraderCatList = -1;
 TraderItemList = -1;
 
+P2DZ_decryptFunction = {
+	private["_input","_index","_output"];
+	_output = "Unknown Item";	
+	_input = "";
+	_index = 0;
+
+	_input = _this;
+
+	_input = [_input,"c",","] call KRON_Replace;
+
+	_input = [_input,"""",""] call KRON_Replace;
+
+	_input = call compile ("[" + _input + "]");
+ 
+	{
+		_input set [_index, ((_x - (count _input))) - 10];
+ 		_index = _index + 1;
+	} count _input; 
+
+	_output = toString(_input);
+	_output = [_output," ",""] call KRON_Replace;
+
+	_output
+};
+
+
 TraderDialogLoadItemList = {
-	private ["_index","_trader_id","_activatingPlayer","_distance","_objclass","_item_list"];
+	private ["_index","_trader_id","_activatingPlayer","_distance","_objclass","_item_list","_pthrough"];
 	TraderItemList = -1;
 	_index = _this select 0;
 
 	if (_index < 0) exitWith {};
 	//TraderCurrentCatIndex = _index;
+	_pthrough = 0;
 
 	_trader_id = TraderCatList select _index;
 	_activatingPlayer = player;
@@ -26,18 +53,27 @@ TraderDialogLoadItemList = {
 	ctrlSetText [TraderDialogBuyPrice, ""];
 	ctrlSetText [TraderDialogSellPrice, ""];
 
+	lbAdd [TraderDialogItemList, format["Please Wait (%1) Is Loading...", _trader_id]];
+
+
 	_cfgTraderCategory = missionConfigFile >> "CfgTraderCategory" >> (format["Category_%1",_trader_id]);	
 
 	PVDZE_plr_TradeMenuResult = [];
 	
 	for "_i" from 0 to ((count _cfgTraderCategory) - 1) do {
+
+		//output percentage through in window
+		lbClear TraderDialogItemList;
+		_pthrough = ((_i / ((count _cfgTraderCategory) - 1)) * 100);
+		lbAdd [TraderDialogItemList, format["Please Wait, Trader List Loading...(%1%2)", round _pthrough, "%"]];
+
 		_class = configName (_cfgTraderCategory select _i);
-					
+
 		_type  = getText ((_cfgTraderCategory select _i) >> "type");	
 		_buy  = getArray ((_cfgTraderCategory select _i) >> "buy");	
 		_sell = getArray ((_cfgTraderCategory select _i) >> "sell");
 		
-		_buy set [2,1];
+		_buy set [2,1]; 
 		_sell set [2,1];
 
 		_typeNum = 1;
@@ -48,11 +84,13 @@ TraderDialogLoadItemList = {
 				_typeNum = 2;
 			};
 		};
-		
+
+		_class = _class call P2DZ_decryptFunction;
 		_data = [9999,[_class,_typeNum],99999,_buy,_sell,0,_trader_id,_type];
 		
 		PVDZE_plr_TradeMenuResult set [count PVDZE_plr_TradeMenuResult, _data];
 	};
+
 
 	lbClear TraderDialogItemList;
 	_item_list = [];
@@ -73,6 +111,7 @@ TraderDialogLoadItemList = {
 				_type = "CfgWeapons";
 			};
 		};
+
 		// Display Name of item
 		_textPart =	getText(configFile >> _type >> _name >> "displayName");
 

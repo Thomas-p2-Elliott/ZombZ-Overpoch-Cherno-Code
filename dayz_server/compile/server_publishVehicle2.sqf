@@ -97,7 +97,7 @@ _key call server_hiveWrite;
 	} else {
 		_object = createVehicle [_class, _location, [], 0, "CAN_COLLIDE"];
 
-		_veh call {
+		_object call {
 		    _this setVariable [
 		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
 		        "hash_id" callExtension format [

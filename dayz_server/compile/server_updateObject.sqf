@@ -43,21 +43,29 @@ if (_isNotOk) exitWith { deleteVehicle _object; diag_log(format["Deleting object
 _lastUpdate = _object getVariable ["lastUpdate",time];
 _needUpdate = _object in needUpdate_objects;
 
-// TODO ----------------------
 _object_position = {
-	private["_position","_worldspace","_fuel","_key"];
-		_position = getPosATL _object;
+private["_position","_worldspace","_fuel","_key","_colour","_colour2"];
+	_position = getPosATL _object;
+	if (_object isKindOf "AllVehicles") then {
+		_colour = _object getVariable ["Colour","0"];
+		_colour2 = _object getVariable ["Colour2","0"];
+		_worldspace = [
+			round(direction _object),
+			_position,
+			_colour,
+			_colour2
+		];
+		_fuel = fuel _object;
+	} else {
 		_worldspace = [
 			round(direction _object),
 			_position
 		];
 		_fuel = 0;
-		if (_object isKindOf "AllVehicles") then {
-			_fuel = fuel _object;
-		};
-		_key = format["CHILD:305:%1:%2:%3:",_objectID,_worldspace,_fuel];
-		//diag_log ("HIVE: WRITE: "+ str(_key));
-		_key call server_hiveWrite;
+	};
+	_key = format["CHILD:305:%1:%2:%3:",_objectID,_worldspace,_fuel];
+	//diag_log ("HIVE: WRITE: "+ str(_key));
+	_key call server_hiveWrite;
 };
 
 _object_inventory = {

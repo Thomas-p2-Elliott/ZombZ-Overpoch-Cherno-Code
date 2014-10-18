@@ -13,7 +13,7 @@ server_onPlayerDisconnect = 	compile preprocessFileLineNumbers "\z\addons\dayz_s
 server_updateObject =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_updateObject.sqf";
 server_playerDied =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDied.sqf";
 server_publishObj = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishObject.sqf";
-server_publishFullObject = 		compile preprocessFileLineNumbers "custom\compile\server_publishFullObject.sqf";
+server_publishFullObject = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishFullObject.sqf";
 server_deleteObj =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_deleteObj.sqf";
 server_swapObject =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_swapObject.sqf"; 
 server_publishVeh = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle.sqf";
@@ -35,13 +35,58 @@ fnc_specialLoot = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\c
 fn_SZclean = 					compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_SZClean.sqf";
 
 //remove extra gold bars (p2)
-fnc_removeExtraBars = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fnc_removeExtraBars.sqf";
+fnc_removeExtraBars = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fnc_removeExtraBars.sqf";
 
 /* PVS/PVC - Skaronator */
 server_sendToClient =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_sendToClient.sqf";
 
 //onPlayerConnected 			{[_uid,_name] call server_onPlayerConnect;};
 onPlayerDisconnected 		{[_uid,_name] call server_onPlayerDisconnect;};
+
+/*---------------------------------------------------------------------------
+Vehicle Painting
+---------------------------------------------------------------------------*/
+"PVDZE_veh_Colour" addPublicVariableEventHandler {
+	private["_position","_worldspace","_fuel","_key","_colour","_colour2","_object","_objectID","_PUID","_clrinit","_clrinit2","_pname","_name"];
+	_object = ((_this select 1) select 0);
+	_colour = ((_this select 1) select 1);
+	_colour2 = ((_this select 1) select 2);
+	
+	_clrinit = format ["#(argb,8,8,3)color(%1)",_colour];
+	_clrinit2 = format ["#(argb,8,8,3)color(%1)",_colour2];
+	_object setVehicleInit "this setObjectTexture [0,"+str _clrinit+"];";
+	_object setVehicleInit "this setObjectTexture [1,"+str _clrinit2+"];";
+	
+	_object setVariable["Colour",_colour,true];
+	_object setVariable["Colour2",_colour2,true];
+	
+	_name = getText(configFile >> "cfgVehicles" >> (typeOf _object) >> "displayName");
+	_PUID = ((_this select 1) select 3);
+	_pname = ((_this select 1) select 4);
+	
+	diag_log format ["VEHICLE PAINT: Player %1 (%2) has painted a %3!",_pname,_PUID,_name];
+	
+	_position = getPosATL _object;
+	
+	_worldspace = [
+		round(direction _object),
+		_position,
+		_colour,
+		_colour2
+	];
+	
+	_fuel = 0;
+	_fuel = fuel _object;
+	
+	_objectID =	_object getVariable ["ObjectID","0"];
+	
+	_key = format["CHILD:305:%1:%2:%3:",_objectID,_worldspace,_fuel];
+	_key call server_hiveWrite;
+
+	processInitCommands;
+};
+/*---------------------------------------------------------------------------
+---------------------------------------------------------------------------*/
 
 server_updateNearbyObjects = {
 	private["_pos"];

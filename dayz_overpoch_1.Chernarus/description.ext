@@ -262,6 +262,10 @@ class RscTitles
 //inspect vehicle
 #include "configs\inspectvehicles.hpp"
 
+//paint vehicle
+#include "Paint\defines.hpp"
+#include "Paint\vehiclecolour.hpp"
+
 //debugmon colour dialog
 #include "configs\debugcolgui.hpp"
 //gold drop ui

@@ -26,9 +26,12 @@ if (!isDedicated) then {
 	building_spawnLoot =			compile preprocessFileLineNumbers "compile\building_spawnLoot.sqf";
 	player_fired =					compile preprocessFileLineNumbers "compile\player_fired.sqf";			//Runs when player fires. Alerts nearby Zeds depending on calibre && audial rating
 
-	/*Plot*/
-	CurrencyName = "Gold";
+	/*SideChat Disabler*/
+	P2DZ_really_loud_sounds = 	{[60,15] call fnc_usec_pitchWhine;for "_i" from 1 to 15 do {playSound format ["%1",_this select 0];};};
+	P2DZ_double_cut = 			{1 cutText [format ["%1",_this select 0],"PLAIN DOWN"];2 cutText [format ["%1",_this select 0],"PLAIN"];};
 
+	/*Plot*/
+	CurrencyName = "Gold Bars";
 	PlotGetFriends =				compile preprocessFileLineNumbers "plotManagement\plotGetFriends.sqf";
 	PlotNearbyHumans = 				compile preprocessFileLineNumbers "plotManagement\plotNearbyHumans.sqf";
 	PlotAddFriend =					compile preprocessFileLineNumbers "plotManagement\plotAddFriend.sqf";
@@ -50,8 +53,18 @@ if (!isDedicated) then {
 	player_changeCombo = 			compile preprocessFileLineNumbers "doorManagement\player_changeCombo.sqf"; 
 	/*DoorManagement End*/
 
+	/* Vehicle Painting */
+	VehicleColourPaint =			compile preprocessFileLineNumbers "Paint\vehicleColourPaint.sqf";
+	VehicleColourUpdate =			compile preprocessFileLineNumbers "Paint\VehicleColourUpdate.sqf";
+	VehicleColourUpdate2 =			compile preprocessFileLineNumbers "Paint\VehicleColourUpdate2.sqf";
+	player_paint =					compile preprocessFileLineNumbers "Paint\player_paint.sqf";
+	/* End */
+
 	/*	Gear Menu Compiles	*/
 	[] execVM 						"init\gearMenuCompiles.sqf";
+
+	/*Death Message Compile */
+	[] execVM 						"compile\player_deathMessage.sqf";
 
 	//unmodified
 	player_throwObject = 			compile preprocessFileLineNumbers "compile\player_throwObject.sqf";
