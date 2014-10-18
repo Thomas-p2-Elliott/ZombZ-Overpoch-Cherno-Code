@@ -228,6 +228,7 @@ if (_characterID != "0") then {
 
 				//update debug mon settings
 				_key2 = format["CHILD:222:%1:%2:",_playerUID,_debugMonSettings];
+				if (P2DZE_debugServerPlayerSync) then { diag_log ("HIVE: WRITE: "+ str(_key2) + " / " + _playerUID); };
 				_key2 call server_hiveWrite;
 			};
 		};

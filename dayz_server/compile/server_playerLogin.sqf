@@ -133,13 +133,13 @@ if (!_isNew) then {
 };
 
 
-if(!isNil "_debugMonSettings") then {
+if(isNil "_debugMonSettings") then {
 	_debugMonSettings =	[0,0,0,0.2,2];
 };
-if(!isNil "_distanceFoot") then {
+if(isNil "_distanceFoot") then {
 	_distanceFoot = 0;
 };
-if(!isNil "_survival") then {
+if(isNil "_survival") then {
 	_survival =		[0,0,0];
 };
 

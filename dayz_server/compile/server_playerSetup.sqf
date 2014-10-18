@@ -126,11 +126,8 @@ if (isNil '_debugMonSettings') then {
 	
 	//save for client and save for JIP checks
 	_playerObj setVariable["P2_DebugMonMode",(_debugMode),true];
-	_playerObj setVariable["P2_DebugMonMode_CHK",(_debugMode)];
 	//save for client and save for serverJIP checks
 	_playerObj setVariable["P2_DebugMonColours",(_debugColours),true];
-	_playerObj setVariable["P2_DebugMonColours_CHK",(_debugColours)];
-
 
 };
 

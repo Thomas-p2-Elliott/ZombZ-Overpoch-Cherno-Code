@@ -199,7 +199,6 @@ fnc_debugOff = {
 
  /* CONFIGURATION END */
 
-
 fnc_debugMon = {
 	[] spawn {
 		private["_handle0","_handle1","_handle2","_handle3"];
@@ -215,6 +214,7 @@ fnc_debugMon = {
 				    {
 				        _handle1 = [] call fnc_debugOff;
 						P2DZ_debugMonitor = false;
+						if (random 10 > 8) then { player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true]; };
 				    };
 				    case 2:
 				    {
@@ -222,17 +222,20 @@ fnc_debugMon = {
 				    	P2DZ_debugBloodCol = [] call fnc_bloodCol;
 				        _handle2 = [] call fnc_debugFull;
 						P2DZ_debugMonitor = true;
+						if (random 10 > 8) then { player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true]; };
 				    };
 				    case 3:
 				    {
 				    	P2DZ_debugBloodCol = [] call fnc_bloodCol;
 						_handle3 = [] call fnc_debugMini;
 						P2DZ_debugMonitor = true;
+						if (random 10 > 8) then { player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true]; };
 					};
 					default
 					{
 						_handle0 = [] call fnc_debugOff;
 						P2DZ_debugMonitor = false;
+						if (random 10 > 8) then { player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true]; };
 					};
 				};
 			};
