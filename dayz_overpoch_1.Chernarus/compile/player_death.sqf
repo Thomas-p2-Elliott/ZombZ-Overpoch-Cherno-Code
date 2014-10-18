@@ -2,10 +2,15 @@ private ["_display","_body","_playerID","_array","_source","_method","_canHitFre
 disableSerialization;
 if (deathHandled) exitWith {};
 deathHandled = true;
-[] spawn player_dropGold;
+
+if (({"ItemGoldBar10oz" == _x} count (magazines _object)) > 0) then {
+	[] spawn player_dropGold;
+};
+
 if ((alive player) && {isNil {dayz_playerName}}) then {
 	dayz_playerName = name player;
 };
+
 //Prevent client freezes
 _display = findDisplay 49;
 if(!isNull _display) then {_display closeDisplay 0;};
@@ -16,20 +21,17 @@ _body = player;
 _playerID = getPlayerUID player;
 
 disableUserInput true;
-//add weapon on back to player...
-//if (dayz_onBack != "") then {
-//	_body addWeapon dayz_onBack;
-//};
 
-_infected = 0;
-if (r_player_infected && DZE_PlayerZed) then {
-	_infected = 1;
+_array = _this;
+if (count _array > 0) then {
+	//Death messages
+	(_array select 0) call P2DZE_deathMessage;
 };
 
-PVDZE_plr_Died = [dayz_characterID,0,_body,_playerID,_infected, dayz_playerName];
+PVDZE_plr_Died = [dayz_characterID,0,_body,_playerID,0, dayz_playerName];
 publicVariableServer "PVDZE_plr_Died";
 
-_id = [player,20,true,getPosATL player] call player_alertZombies;
+_id = [player,100,true,getPosATL player] call player_alertZombies;
 
 sleep 0.5;
 
@@ -44,7 +46,6 @@ player setVariable ["startcombattimer", 0];
 r_player_unconscious = false;
 r_player_cardiac = false;
 
-_array = _this;
 if (count _array > 0) then {
 	_source = _array select 0;
 	_method = _array select 1;
@@ -53,58 +54,6 @@ if (count _array > 0) then {
 		_isBandit = (player getVariable["humanity",0]) <= -5000; //Default: 2000
 		_punishment = _canHitFree || _isBandit; //if u are bandit || start first - player will not recieve humanity drop
 		_humanityHit = 0;
-
-		/*---------------------------------------------------------------------------
-			Fucking Sexy CS-Style Death Messages by Player2
-		---------------------------------------------------------------------------*/
-		[_array,player] call {
-			private ["_victim","_victimName","_killer","_killerName","_weapon","_distance","_message","_killfeed"];
-			_array = _this select 0;
-			//victim info
-			_victim = 		_this select 1;
-			_victimName =	name _victim;
-			//killer info
-			_killer = 		_array select 0;
-			_killerName = 	name _killer;
-			//death method
-			_method = _array select 1;
-
-			diag_log(__FILE__ + "  _victim: " +  str(_victim) + "  _victimName: " + str(_victimName) + "  _killer: " + str (_killer) + "  _killerName: " + str(_killerName) + "  _method: " + str(_method));
-
-			//if killer has a name
-			if (_killerName != "nil") then
-			{
-				if (_victimName == _killerName) then 
-				{
-					_message = format["%1 killed himself",_victimName];
-					diag_log(_message);
-				}
-				else 
-				{
-					_weapon = weaponState _killer;
-					if (_weapon select 0 == "Throw") then 
-					{
-						_weapon = _weapon select 3;
-					}
-					else
-					{
-						_weapon = _weapon select 0;
-					};
-
-					_vehicle = typeOf (vehicle _killer); 
-					if ((getText (configFile >> "CfgVehicles" >> _vehicle >> "vehicleClass")) in ["CarW","Car","CarD","Armored","Ship","Support","Air","ArmouredW","ArmouredD","SupportWoodland_ACR"]) then {
-						_weapon = getText (configFile >> "CfgVehicles" >> _vehicle >> "displayName");
-					};
-
-					_distance = [getPosASL _victim, getPosASL _killer] call KK_fnc_distanceASL;
-					_distance = floor(_distance);
-
-					P2DZ_dS = [_victim,_killer,_weapon,_distance,_method];
-					publicVariable "P2DZ_dS";
-					diag_log("[P2_PubVar]: P2DZ_dS: " + str(P2DZ_dS));
-				};
-			};
-		};
 
 		if (!_punishment) then {
 			//i'm "not guilty" - kill me && be punished
