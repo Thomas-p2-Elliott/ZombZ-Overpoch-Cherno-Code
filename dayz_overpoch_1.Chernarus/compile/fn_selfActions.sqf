@@ -328,52 +328,6 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		s_player_deleteBuild = -1;
 	};
 	
-	if (DZE_HeliLift) then {
-		_liftHeli = objNull;
-		_found = false;
-	
-		_allowTow = false;
-		if ((count (crew _cursorTarget)) == 0) then {
-			{
-				if(!_allowTow) then {
-					_allowTow = _cursorTarget isKindOf _x;
-				};
-			} count DZE_HeliAllowToTow;
-		};
-
-		//diag_log format["CREW: %1 ALLOW: %2",(count (crew _cursorTarget)),_allowTow];
-
-		if (_allowTow) then {
-			_liftHelis = nearestObjects [player, DZE_HeliAllowTowFrom, 15];
-			{
-				if(!_found) then {
-					_posL = [_x] call FNC_getPos;
-					_posC = [_cursorTarget] call FNC_getPos;
-					_height = (_posL select 2) - (_posC select 2);
-					_hasAttached = _x getVariable["hasAttached",false];
-					if(_height < 15 && _height > 5 && (typeName _hasAttached != "OBJECT")) then {
-						if(((abs((_posL select 0) - (_posC select 0))) < 10) && ((abs((_posL select 1) - (_posC select 1))) < 10)) then {
-							_liftHeli = _x;
-							_found = true;
-						};
-					};
-				};
-			} count _liftHelis;
-		};
-
-		//diag_log format["HELI: %1 TARGET: %2",_found,_cursorTarget];
-
-		_attached = _cursorTarget getVariable["attached",false];
-		if(_found && _allowTow && _canDo && !locked _cursorTarget && !_isPZombie && (typeName _attached != "OBJECT")) then {
-			if (s_player_heli_lift < 0) then {
-				s_player_heli_lift = player addAction ["Attach to Heli", "\z\addons\dayz_code\actions\player_heliLift.sqf",[_liftHeli,_cursorTarget], -10, false, true, "",""];
-			};
-		} else {
-			player removeAction s_player_heli_lift;
-			s_player_heli_lift = -1;
-		};
-	};
-	
 	// Allow Owner to lock && unlock vehicle  
 	if(_player_lockUnlock_crtl) then {
 		if (s_player_lockUnlock_crtl < 0) then {
@@ -758,23 +712,6 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		s_player_fillgen = -1;
 	};
 
-	//Towing with tow truck
-	/*
-	if(_typeOfCursorTarget == "TOW_DZE") then {
-		if (s_player_towing < 0) then {
-			if(!(_cursorTarget getVariable ["DZEinTow", false])) then {
-				s_player_towing = player addAction [localize "STR_EPOCH_ACTIONS_ATTACH" "\z\addons\dayz_code\actions\tow_AttachStraps.sqf",_cursorTarget, 0, false, true, "",""];				
-			} else {
-				s_player_towing = player addAction [localize "STR_EPOCH_ACTIONS_DETACH", "\z\addons\dayz_code\actions\tow_DetachStraps.sqf",_cursorTarget, 0, false, true, "",""];				
-			};
-		};
-	} else {
-		player removeAction s_player_towing;
-		s_player_towing = -1;
-	};
-	*/
-
-
     //Sleep
 	if(_isTent && _ownerID == _playerUID) then {
 		if ((s_player_sleep < 0) && (player distance _cursorTarget < 3)) then {
@@ -1019,8 +956,6 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	s_player_maint_build = -1;
 	player removeAction s_player_downgrade_build;
 	s_player_downgrade_build = -1;
-	player removeAction s_player_towing;
-	s_player_towing = -1;
 	player removeAction s_player_fuelauto;
 	s_player_fuelauto = -1;
 	player removeAction s_player_fuelauto2;
