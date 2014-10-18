@@ -22,6 +22,14 @@ if (typename _this == typename objnull) then {
 
 	if (_unit == player) then {
 
+		//show halo altimeter
+		if !(uiNamespace getVariable ["altiHudOpened",true]) then {
+			disableSerialization;
+			showWatch false;
+			666 cutRsc ['ATM_Altimeter', 'PLAIN'];
+			uiNamespace setVariable ["altiHudOpened",true];
+		};
+
 		_brightness = 0.99;
 		_pos = position player;
 
@@ -139,9 +147,9 @@ if (typename _this == typename []) then {
 
 	//--- Free fall
 	if (count _this == 2) exitwith {
-		_alt = 1500;
-		_unit setpos [position _unit select 0,position _unit select 1,_alt];
+		_alt = _this select 1;
 		_unit setvariable ["bis_fnc_halo_now",true];
+		_unit setpos [position _unit select 0,position _unit select 1,_alt];
 		_unit spawn bis_fnc_halo;
 	};
 	//-------------
@@ -158,6 +166,7 @@ if (typename _this == typename []) then {
 	bis_fnc_halo_para_dirAbs = direction _para;
 
 	if (_unit == player) then {
+
 		_para setvelocity [(_vel select 0),(_vel select 1),(_vel select 2)*1];
 
 		bis_fnc_halo_para_vel = 0;
@@ -246,5 +255,13 @@ if (typename _this == typename []) then {
 		bis_fnc_halo_para_keydown_eh = nil;
 		bis_fnc_halo_para_mousemoving_eh = nil;
 		bis_fnc_halo_para_mouseholding_eh = nil;
+
+		//hide halo altimeter
+		if (uiNamespace getVariable ["altiHudOpened",true]) then {
+			disableSerialization;
+			[] call ALTIMETER_fnc_HideCtrl;
+			666 cutText ["","PLAIN"];
+			uiNamespace setVariable ["altiHudOpened",false];
+		};
 	};
 };
