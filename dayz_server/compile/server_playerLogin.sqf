@@ -21,7 +21,7 @@ _inventory =	[];
 _backpack = 	[];
 _survival =		[0,0,0];
 _model =		"";
-_debugMonSettings =	[0,0,1,0.2,2];
+_debugMonSettings =	[0,0,0,0.2,2];
 _distanceFoot = 0;
 
 if (_playerID == "") then {
@@ -32,7 +32,7 @@ if ((_playerID == "") || (isNil "_playerID")) exitWith {
 	diag_log ("LOGIN FAILED: Player [" + _playerName + "] has no login ID");
 };
 
-diag_log ("P2DEBUG: LOGIN ATTEMPT: " + str(_playerID) + " " + _playerName);
+//diag_log ("P2DEBUG: LOGIN ATTEMPT: " + str(_playerID) + " " + _playerName);
 
 //Do Connection Attempt
 _doLoop = 0;
@@ -65,7 +65,7 @@ _charID = 		_primary select 2;
 _hiveVer = 0;
 
 if (!_isNew) then {
-	diag_log ("P2DEBUG: LOGIN RESULT: !isNew: " + str(_primary));
+	//diag_log ("P2DEBUG: LOGIN RESULT: !isNew: " + str(_primary));
 
 
 	//RETURNING CHARACTER		
@@ -82,7 +82,7 @@ if (!_isNew) then {
 	};
 
 } else {
-	diag_log ("P2DEBUG: LOGIN RESULT: isNew: " + str(_primary));
+	//diag_log ("P2DEBUG: LOGIN RESULT: isNew: " + str(_primary));
 
 	_model =				_primary select 4;
 	_hiveVer =				_primary select 5;
@@ -100,41 +100,116 @@ if (!_isNew) then {
 		};
 	};
 
+
+	/*---------------------------------------------------------------------------
+	Damn, Player2 Writes a new Loadout Script?!
+	---------------------------------------------------------------------------*/
+	_p2loadout = call {
+		private ["_p2output","_p2gun","_p2backpack","_p2mag","_p2mags","_p2weapons","_p2randomWeaponList","_chance"];
+		_p2output = 	[];
+		_p2gun = 		"";
+		_chance = 		1;
+		_p2backpack = 	"";
+		_p2mag = 		"";
+
+		/*---------------------------------------------------------------------------
+		Configuration
+			Mags always given, weapons always given, backpack always given
+			Primary weapon if given (30%) picks at random from list
+		---------------------------------------------------------------------------*/
+		_p2mags = 		["ItemBandage","ItemBandage","ItemPainkiller","ItemMorphine"];
+		_p2weapons = 	["ItemToolbox","Binocular","ItemMap","ItemCompass","ItemHatchet_DZE"];
+		_p2backpack = 	"DZ_Czech_Vest_Puch";
+		_p2randomWeaponList = [
+			"Winchester1866",
+			"Winchester1866",
+			"Crossbow_DZ",
+			"Crossbow_DZ",
+			"Remington870",
+			"gms_k98",
+			"LeeEnfield",
+			"MR43",
+			"M1014",
+			"vil_SKS",
+			"vil_SKS",
+			"vil_SKS"
+		];
+		/*---------------------------------------------------------------------------
+		---------------------------------------------------------------------------*/
+
+
+		/* 70% Chance to Pick a Pistol, 30% Chance to Pick a Primary Weapon */
+		if (random 10 > 6.99) then {
+			/*---------------------------------------------------------------------------
+			Pick Random Civillian Primary
+			---------------------------------------------------------------------------*/
+			_p2gun = (_p2randomWeaponList select (floor(random(count(_p2randomWeaponList)))));
+			_p2weapons = _p2weapons + [_p2gun];
+
+			if (_p2gun == "Crossbow_DZ") then {
+				_p2mag = "Quiver";
+			} else {
+				_p2mag = 	((getArray (configFile >> "cfgWeapons" >> _p2gun >> "magazines")) select 0);
+			};
+
+			//add between 1 and 3 magazines
+			_chance = (round((random 3)+0.5));
+
+			//lower the chance of getting a 3 by 50%
+			if (_chance  > 2 && {random 1 > 0.4999}) then {
+				_chance = 2;
+			};
+
+			for "_i" from 0 to _chance do {
+				_p2mags = _p2mags + [_p2mag];
+			};
+
+		} else {
+			/*---------------------------------------------------------------------------
+			Pick Random Civillian Secondary
+			---------------------------------------------------------------------------*/
+			_p2gun =  ((getArray (missionConfigFile >> "cfgLoot" >> "PistolsLow")) select floor(random(count(getArray (missionConfigFile >> "cfgLoot" >> "PistolsLow"))))select 0);
+			_p2weapons = _p2weapons + [_p2gun];
+
+			//Add 4 Pistol Magazines
+			_p2mag = 	(getArray (configFile >> "cfgWeapons" >> _p2gun >> "magazines") select 0);
+			_p2mags = _p2mags + [_p2mag,_p2mag,_p2mag,_p2mag];
+		};
+
+
+		/*---------------------------------------------------------------------------
+		Return Values
+		---------------------------------------------------------------------------*/
+		[_p2weapons,_p2mags,_p2backpack]
+	};
+
 	//Record initial inventory only if not player zombie 
-	_config = (missionConfigFile >> "CfgNewSpawn" >> "Inventory" >> "Default");
-	_mags = getArray (_config >> "magazines");
-	_wpns = getArray (_config >> "weapons");
-	_bcpk = getText (_config >> "backpack");
-	DefaultBackpackItems = "ItemToolbox";
-
-	if(!isNil "DefaultMagazines") then {
-		diag_log("P2DEBUG: Login: DefaultMagazines" + str DefaultMagazines);
-		_mags = DefaultMagazines;
-	};
-	if(!isNil "DefaultWeapons") then {
-		diag_log("P2DEBUG: Login: DefaultWeapons" + str DefaultWeapons);
-		_wpns = DefaultWeapons;
-	};
-	if(!isNil "DefaultBackpack") then {
-		diag_log("P2DEBUG: Login: DefaultBackpack" + str DefaultBackpack);
-		_bcpk = DefaultBackpack;
-	};
-	if(!isNil "DefaultBackpackWeapons") then {
-		diag_log("P2DEBUG: Login: DefaultBackpackItems" + str DefaultBackpackWeapons);
-		_bcpkItems = DefaultBackpackItems;
-	};
-
-	//_randomSpot = true;
+	_wpns = _p2loadout select 0;
+	_mags = _p2loadout select 1;
+	_bcpk = _p2loadout select 2;
+	_inventory = [_wpns,_mags];
+	_backpack = [_bcpk,[],[]];
 
 	//Wait for HIVE to be free
-	_key = format["CHILD:203:%1:%2:%3:",_charID,[_wpns,_mags],[_bcpk,[],[]]];
-	diag_log("P2DEBUG: " + _key);
+	_key = format["CHILD:203:%1:%2:%3:",_charID,_inventory,_backpack];
 	_key call server_hiveWrite;
 };
 
-
 if(isNil "_debugMonSettings") then {
 	_debugMonSettings =	[0,0,0,0.2,2];
+} else {
+	_debugR = _debugMonSettings select 0;
+	 if(isNil "_debugR") then { _debugR = 0; };
+	_debugG = _debugMonSettings select 1;
+	 if(isNil "_debugG") then { _debugG = 0; };
+	_debugB = _debugMonSettings select 2;
+	 if(isNil "_debugB") then { _debugB = 0; };
+	_debugA = _debugMonSettings select 3;
+	 if(isNil "_debugA") then { _debugA = 0.2; };
+	_debugM = _debugMonSettings select 4;	
+ 	if(isNil "_debugM") then { _debugM = 2; };
+
+ 	_debugMonSettings = [_debugR,_debugG,_debugB,_debugA,_debugM];
 };
 if(isNil "_distanceFoot") then {
 	_distanceFoot = 0;
@@ -152,4 +227,4 @@ if (worldName == "chernarus") then {
 
 dayzPlayerLogin = [_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,0,_debugMonSettings,_distanceFoot];
 (owner _playerObj) publicVariableClient "dayzPlayerLogin";
-diag_log ("P2DEBUG: FINAL LOGIN RESULT: " + str([_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,0,_debugMonSettings,_distanceFoot]));
+//diag_log ("P2DEBUG: FINAL LOGIN RESULT: " + str([_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,0,_debugMonSettings,_distanceFoot]));
