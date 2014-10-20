@@ -9,10 +9,7 @@ _obj = _this;
 // lower case to prevent issues with differing case for buildings from map to map.
 _type = toLower(typeOf _obj);
 
-_config = 		configFile >> "CfgBuildingLoot" >> _type;
-if (DZE_MissionLootTable) then {
-	_config = missionConfigFile >> "CfgBuildingLoot" >> _type;
-};
+_config = missionConfigFile >> "CfgBuildingLoot" >> _type;
 
 _pos = [] + getArray (_config >> "lootPos");
 _itemTypes = [] + getArray (_config >> "lootType");
@@ -100,9 +97,13 @@ _positionsSmall = _posSmall call _ShuffleArray;
 					_index = floor(random _cntWeights);
 					_index = _weights select _index;
 
-					//if (P2DZE_debugLoot) then { diag_log format["building_spawnLoot.sqf: %1", _itemTypesSmall]; };
+					if (P2DZE_debugLoot) then { diag_log format["building_spawnLoot.sqf:SpawnLootSmall: _itemTypesSmall %1", _itemTypesSmall]; };
+					if (P2DZE_debugLoot) then { diag_log format["building_spawnLoot.sqf:SpawnLootSmall: _index %1", _index]; };
 
 					_itemType = _itemTypesSmall select _index;
+
+					if (P2DZE_debugLoot) then { diag_log format["building_spawnLoot.sqf:SpawnLootSmall: _itemType %1", _itemType]; };
+
 					[_itemType select 0, _itemType select 1, _iPos, 0.0] call spawn_loot_small;
 					if (P2DZE_debugLoot) then { diag_log (format["SpawnLootSmall: Building: %4, LootType: %2/%3",_iPos,_itemType select 0,_itemType select 1,_type]); };
 					dayz_currentWeaponHolders = dayz_currentWeaponHolders +1;
