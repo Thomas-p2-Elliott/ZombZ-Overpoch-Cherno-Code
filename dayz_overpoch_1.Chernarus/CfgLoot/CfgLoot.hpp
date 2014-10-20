@@ -457,19 +457,18 @@ G36Weaps[] = {
 
 
 
-PistolTopWeaps[] = {
-
-{"RH_deagle",0.50}, 
-{"RH_Deaglem",0.50}, 
-{"RH_Deaglemz",0.50}, 
-{"RH_Deaglemzb",0.50}, 
-{"RH_Deagles",0.50}, 
-{"UZI_SD_EP1",0.50}, 
-{"RH_uspm",0.50}, 
-{"RH_bull",0.50}, 
-{"vil_apssd",0.50}, 
-{"vil_APS",0.50} 
-};
+	PistolTopWeaps[] = {
+		{"RH_deagle",	0.05}, 
+		{"RH_Deaglem",	0.04}, 
+		{"RH_Deaglemz",	0.03}, 
+		{"RH_Deaglemzb",0.02}, 
+		{"RH_Deagles",	0.01},
+		{"UZI_SD_EP1",	0.20},
+		{"RH_uspm",		0.20},
+		{"RH_bull",		0.10},
+		{"vil_apssd",	0.15}, 
+		{"vil_APS",		0.20}  
+	};
 
 
 
@@ -491,34 +490,33 @@ SVDWeaps[] = {
 
 
 
-PistolMilWeaps[] = {
-
-{"glock17_EP1",0.50}, 
-{"RH_g18",0.50}, 
-{"RH_g17",0.50}, 
-{"RH_g19",0.50}, 
-{"RH_g19t",0.50}, 
-{"RH_g17sd",0.50}, 
-{"UZI_EP1",0.50}, 
-{"M9SD",0.50}, 
-{"RH_m9sd",0.50}, 
-{"RH_m9csd",0.50}, 
-{"vil_USPSD",0.50}, 
-{"vil_USP45",0.50}, 
-{"vil_USP45SD",0.50}, 
-{"RH_anac",0.50}, 
-{"RH_uspsd",0.50}, 
-{"RH_vz61",0.50}, 
-{"RH_tec9",0.50}, 
-{"vil_Glock",0.50}, 
-{"vil_Glock_o",0.50}, 
-{"Sa61_EP1",0.50}, 
-{"M9",0.50}, 
-{"RH_usp",0.50}, 
-{"RH_m9",0.50}, 
-{"RH_m9c",0.50}, 
-{"vil_USP",0.50} 
-};
+	PistolMilWeaps[] = {
+		{"glock17_EP1",	0.07},
+		{"RH_g18",		0.05}, 
+		{"RH_g17",		0.04}, 
+		{"RH_g17sd",	0.03}, 
+		{"RH_g19",		0.03}, 
+		{"RH_g19t",		0.02}, 
+		{"vil_Glock",	0.03}, 
+		{"vil_Glock_o",	0.03}, 
+		{"vil_USP",		0.05}, 
+		{"vil_USPSD",	0.04}, 
+		{"vil_USP45",	0.05}, 
+		{"vil_USP45SD",	0.01}, 
+		{"RH_usp",		0.05}, 
+		{"RH_uspsd",	0.05}, 
+		{"UZI_EP1",		0.05}, 
+		{"Sa61_EP1",	0.05}, 
+		{"RH_vz61",		0.05}, 
+		{"RH_tec9",		0.04}, 
+		{"M9",			0.07}, 
+		{"M9SD",		0.06}, 
+		{"RH_m9",		0.05}, 
+		{"RH_m9c",		0.02},
+		{"RH_m9sd",		0.04}, 
+		{"RH_m9csd",	0.01}, 
+		{"RH_anac",		0.01}
+	};
 
 
 
@@ -826,70 +824,66 @@ HMGWeaps[] = {
 
 
 NVweaps[] = {
-
-{"vil_PKM_N",0.50}, 
-{"FN_FAL_ANPVS4",0.50}, 
-{"SVD_NSPU_EP1",0.50}, 
-{"AKS_74_NSPU",0.50}, 
-{"M110_NVG_EP1",0.50}, 
-{"FHQ_MSR_NV_DESERT",0.50}, 
-{"FHQ_MSR_NV_SD_DESERT",0.50}, 
-{"FHQ_XM2010_NV_DESERT",0.50}, 
-{"FHQ_XM2010_NV_SD_DESERT",0.50}, 
-{"vil_VSS_N",0.50}, 
-{"vil_VAL_N",0.50}, 
-{"vil_AK_74_N",0.50} 
+	{"vil_PKM_N",0.50}, 
+	{"FN_FAL_ANPVS4",0.50}, 
+	{"SVD_NSPU_EP1",0.50}, 
+	{"AKS_74_NSPU",0.50}, 
+	{"M110_NVG_EP1",0.50}, 
+	{"FHQ_MSR_NV_DESERT",0.50}, 
+	{"FHQ_MSR_NV_SD_DESERT",0.50}, 
+	{"FHQ_XM2010_NV_DESERT",0.50}, 
+	{"FHQ_XM2010_NV_SD_DESERT",0.50}, 
+	{"vil_VSS_N",0.50}, 
+	{"vil_VAL_N",0.50}, 
+	{"vil_AK_74_N",0.50} 
 };
 
 
 
 UltraWeaps[] = {
-
-{"revolver_gold_EP1",0.28}, 
-{"RH_Deagleg",0.2}, 
-{"RH_anacg",0.24}, 
-{"Javelin",0.01}, 
-{"AKS_GOLD",0.27} 
+	{"revolver_gold_EP1",0.28}, 
+	{"RH_Deagleg",0.2}, 
+	{"RH_anacg",0.24}, 
+	{"Javelin",0.01}, 
+	{"AKS_GOLD",0.27} 
 };
 
 
 
 ShotgunWeaps[] = {
-
-{"Winchester1866",0.4}, 
-{"Crossbow_DZ",0.2},
-{"MR43",0.15}, 
-{"M1014",0.1}, 
-{"Saiga12K",0.05}, 
-{"Remington870_lamp",0.05}, 
-{"Remington870",0.05} 
+	{"Winchester1866",0.30}, 
+	{"Crossbow_DZ",0.25}, 
+	{"Remington870",0.05},
+	{"Remington870_lamp",0.05}, 
+	{"M1014",0.15}, 
+	{"MR43",0.15}, 
+	{"Saiga12K",0.05}
 };
 
 
 
 MeleeWeaps[] = {
-{"MeleeHatchet_DZE",0.35}, 
-{"MeleeMachete",0.25}, 
-{"MeleeBaseBallBat",0.1}, 
-{"MeleeCrowbar",0.1}, 
-{"MeleeSledge",0.1}, 
-{"MeleeFishingPole",0.05}, 
-{"Chainsaw",0.01}
+	{"MeleeHatchet_DZE",0.35}, 
+	{"MeleeMachete",0.25}, 
+	{"MeleeCrowbar",0.2}, 
+	{"MeleeFishingPole",0.14}, 
+	{"MeleeSledge",0.05}, 
+	{"Chainsaw",0.01}
 };
 
 
 SniperTopWeaps[] = {
-{"KSVK_DZE",0.25}, 
-{"BAF_LRR_scoped",0.25}, 
-{"FHQ_XM2010_DESERT", 0.14},
-{"BAF_LRR_scoped_W",0.13}, 
-{"FHQ_MSR_DESERT",0.12}, 
-{"FHQ_XM2010_SD_DESERT",0.03},
-{"FHQ_MSR_SD_DESERT",0.03}, 
-{"USSR_cheytacM200",0.02}, 
-{"USSR_cheytacM200_sd",0.01}, 
-{"m107_SKN",0.01}, 
-{"BAF_AS50_scoped_DZ",0.01}
+	{"KSVK_DZE",0.25}, 
+	{"BAF_LRR_scoped",0.25}, 
+	{"FHQ_XM2010_DESERT", 0.14},
+	{"BAF_LRR_scoped_W",0.13}, 
+	{"FHQ_MSR_DESERT",0.12}, 
+	{"FHQ_XM2010_SD_DESERT",0.03},
+	{"FHQ_MSR_SD_DESERT",0.03}, 
+	{"USSR_cheytacM200",0.02}, 
+	{"USSR_cheytacM200_sd",0.01}, 
+	{"m107_SKN",0.01}, 
+	{"BAF_AS50_scoped_DZ",0.01}
 };
 
 

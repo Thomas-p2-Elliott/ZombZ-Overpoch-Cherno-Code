@@ -49,7 +49,7 @@
                          {"", "SniperLowWeaps",  0.02}, 
                          {"", "RiflesLowWeaps",  0.02}, 
                          {"", "PistolsLow",  0.1}, 
-                         {"ItemToolbox","weapon",0.03},
+                         {"ItemToolbox","weapon",0.01},
                          {"","hunter",0.4},
                          {"","generic",0.4}
                  };
@@ -71,8 +71,7 @@
                          {"", "PistolsLow",  0.08 }, 
                          {"", "ShotgunWeaps",  0.03 }, 
                          {"", "MeleeWeaps",  0.06 }, 
-                         {"ItemToolbox","weapon",0.03},
-                         {"", "RiflesLowWeaps",  0.01 }, 
+                         {"", "RiflesLowWeaps",  0.01 }
                  };
                  lootTypeSmall[] = {
                          { "ItemSodaMdew","magazine",0.01 },
@@ -82,7 +81,7 @@
                          { "ItemKnife","weapon",0.04 },
                          { "ItemMatchbox_DZE","weapon",0.03 },
                          { "","generic",0.08 },
-                         { "","civillian",0.08 },
+                         { "","civilian",0.08 },
                          { "","military",0.04 },
                          { "","food",0.1},
                          { "","office",0.03 },
@@ -103,7 +102,6 @@
                          {"ItemKnife","generic",0.04},
                          {"ItemMatchbox_DZE","generic",0.01},
                          {"backpacks","backpacks",0.04},
-                         {"ItemToolbox","weapon",0.03},
                          {"tents","tents",0.01},
                          {"PartPlywoodPack","magazine",0.02},
                          {"clothes","clothes",0.02},
@@ -112,7 +110,7 @@
                          {"", "PistolsLow",  0.08}, 
                          {"", "SniperLowWeaps",  0.01}, 
                          {"", "MeleeWeaps",  0.08}, 
-                         {"ItemToolbox","weapon",0.03},
+                         {"ItemToolbox","weapon",0.01},
                          {"", "RiflesLowWeaps",  0.01} 
                  };
                  lootTypeSmall[] = {
@@ -130,7 +128,7 @@
                          { "","office2",0.03 },
                          { "clothes","single",0.16 },
                          { "specialclothes","single",0.01 },
-                         { "ItemToolbox","weapon",0.03},
+                         { "ItemToolbox","weapon",0.01},
                          { "ItemDocument","magazine",0.01 }
                  };
          };
@@ -152,7 +150,6 @@
                          {"PartVRotor","magazine",0.01},
                          {"ItemJerrycan","magazine",0.04},
                          {"WeaponHolder_ItemHatchet_DZE","object",0.07},
-                         {"ItemKnife","military",0.07},
                          {"ItemToolbox","weapon",0.06},
                          {"ItemWire","magazine",0.01},
                          {"ItemTankTrap","magazine",0.04},
@@ -221,7 +218,6 @@
                          {"", "RiflesLowWeaps",  0.01}, 
                          {"", "ShotgunWeaps",  0.08}, 
                          {"backpacks","backpacks",0.03},
-                         {"ItemToolbox","weapon",0.03},
                          {"", "MeleeWeaps",  0.1}, 
                          {"ItemSledgeHandle","magazine",0.02}
                  };
@@ -229,6 +225,7 @@
                          { "","generic", 0.19},
                          { "","trash",0.14 },
                          { "","military",0.05},
+                         {"ItemToolbox","weapon",0.03},
                          {"", "PistolsLow",  0.2}, 
                          { "ItemSledgeHead","magazine",0.01}
                  };
@@ -245,7 +242,7 @@
                          {"ItemSodaOrangeSherbet","magazine",0.03},
                          {"ItemFlashlight","generic",0.01},
                          {"ItemKnife","generic",0.02},
-                         {"ItemToolbox","weapon",0.03},
+                         {"ItemToolbox","weapon",0.01},
                          {"ItemMatchbox_DZE","generic",0.04},
                          {"backpacks","backpacks",0.07},
                          {"tents","tents",0.01},
@@ -323,7 +320,7 @@
                          { "ItemFlashlightRed", "weapon", 0.01 },
                          { "ItemKnife", "weapon", 0.04 },
                          { "ItemGPS", "weapon", 0.02 },
-                         {"ItemToolbox","weapon",0.03},
+                         {"ItemToolbox","weapon",0.01},
                          { "", "medical", 0.12 },
                          { "", "generic", 0.22 },
                          { "", "military", 0.35 },
