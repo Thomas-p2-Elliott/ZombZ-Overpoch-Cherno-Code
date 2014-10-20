@@ -30,7 +30,6 @@ _ZombZ_SZ_VehicleSalvage 		 = true; //Should we allow salavage options in the tr
 disableSerialization;
 
 waitUntil {!isNil "dayz_animalCheck"};
-if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] Safezone Commander Loaded!");};
 
 _inVehicle = objNull;
 _inVehicleLast = objNull;

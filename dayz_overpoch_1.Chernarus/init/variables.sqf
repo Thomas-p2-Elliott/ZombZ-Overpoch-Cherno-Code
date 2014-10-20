@@ -266,6 +266,7 @@ dayz_resetSelfActions = {
 	s_player_plot_take_ownership = -1;
 	s_player_plotManagement = -1;
 	s_player_manageDoor = -1;
+	s_player_takeGold = -1;
 };
 call dayz_resetSelfActions;
 
@@ -829,4 +830,281 @@ if(!isDedicated) then {
 	DZE_SaveTime = 30;
 };
 
-call compile preprocessFileLineNumbers "init\variables_modified.sqf";
+/*---------------------------------------------------------------------------
+Custom Variables
+---------------------------------------------------------------------------*/
+
+if(isServer) then {
+	DZE_safeVehicle = ["ParachuteWest","ParachuteC"];
+};
+
+ 
+Bandit1_DZ = 	"Bandit1_DZ";
+Bandit2_DZ = 	"Bandit2_DZ";
+BanditW1_DZ = 	"BanditW1_DZ";
+BanditW2_DZ = 	"BanditW2_DZ";
+Survivor1_DZ = 	"Survivor2_DZ";
+Survivor2_DZ = 	"Survivor2_DZ";
+SurvivorW2_DZ = "SurvivorW2_DZ";
+SurvivorW3_DZ = "SurvivorW2_DZ";
+Sniper1_DZ = 	"Sniper1_DZ";
+Camo1_DZ = 		"Camo1_DZ";
+Soldier1_DZ = 	"Soldier1_DZ";
+Rocket_DZ = 	"Rocket_DZ";
+
+AllPlayers = ["Survivor2_DZ","SurvivorWcombat_DZ","SurvivorWdesert_DZ","SurvivorWurban_DZ","SurvivorWsequishaD_DZ","SurvivorWsequisha_DZ","SurvivorWpink_DZ","SurvivorW3_DZ","SurvivorW2_DZ","Bandit1_DZ","Bandit2_DZ","BanditW1_DZ","BanditW2_DZ","Soldier_Crew_PMC","Sniper1_DZ","Camo1_DZ","Soldier1_DZ","Rocket_DZ","Rocker1_DZ","Rocker2_DZ","Rocker3_DZ","Rocker4_DZ","Priest_DZ","Functionary1_EP1_DZ","GUE_Commander_DZ","Ins_Soldier_GL_DZ","Haris_Press_EP1_DZ","Pilot_EP1_DZ","RU_Policeman_DZ","pz_policeman","pz_suit1","pz_suit2","pz_worker1","pz_worker2","pz_worker3","pz_doctor","pz_teacher","pz_hunter","pz_villager1","pz_villager2","pz_villager3","pz_priest","Soldier_TL_PMC_DZ","Soldier_Sniper_PMC_DZ","Soldier_Bodyguard_AA12_PMC_DZ","Drake_Light_DZ","CZ_Special_Forces_GL_DES_EP1_DZ","TK_INS_Soldier_EP1_DZ","TK_INS_Warlord_EP1_DZ","FR_OHara_DZ","FR_Rodriguez_DZ","CZ_Soldier_Sniper_EP1_DZ","Graves_Light_DZ","GUE_Soldier_MG_DZ","GUE_Soldier_Sniper_DZ","GUE_Soldier_Crew_DZ","GUE_Soldier_CO_DZ","GUE_Soldier_2_DZ","TK_Special_Forces_MG_EP1_DZ","TK_Soldier_Sniper_EP1_DZ","TK_Commander_EP1_DZ","RU_Soldier_Crew_DZ","INS_Lopotev_DZ","INS_Soldier_AR_DZ","INS_Soldier_CO_DZ","INS_Bardak_DZ","INS_Worker2_DZ"];
+
+
+
+
+DayZ_UseSteamID = true;
+
+
+DZE_DiagFpsSlow = false;
+DZE_DiagFpsFast = false;
+DZE_DiagVerbose = false;
+DZE_Debug_Damage = false;
+
+if(isServer && !hasInterface) then {
+	 
+	dayz_fullMoonNights = false;
+	 
+	DZE_DeathMsgGlobal = false;
+	DZE_DeathMsgTitleText = false;
+	DZE_DeathMsgSide = false;
+	OldHeliCrash = true;
+};
+
+MaxVehicleLimit = 5000;  
+MaxDynamicDebris = 50;  
+
+DynamicVehicleDamageLow = 		0;  
+DynamicVehicleDamageHigh = 		0;  
+DynamicVehicleFuelHigh	= 		15;
+DynamicVehicleFuelLow =			0;
+MaxAmmoBoxes = 50;
+MaxMineVeins = 25;
+
+
+	DZE_LootSpawnTimer = 10;
+
+	 
+	DZE_MissionLootTable = true;
+
+	 
+	 
+	dayz_maxMaxModels = 120; 
+
+	 
+	dayz_spawnArea = 200; 
+
+	 
+	dayz_canDelete = 300; 
+
+	 
+	dayz_maxZeds = 200;
+
+	 
+	dayz_zombieTargetList = [
+		["SoldierWB",35],
+		["Air",200],
+		["LandVehicle",100]
+	];
+
+	 
+	dayz_tameDogs = true;
+
+	 
+	dayz_animalDistance = 200;
+
+	 
+	dayz_zSpawnDistance = 300;
+
+	 
+	dayz_maxAnimals = 1;
+
+	 
+	p2_zEyeAngle = 15;
+
+	 
+	p2_zAttackSpeed = 1;
+
+	if(!isDedicated || hasInterface) then {
+
+		 
+		dayz_spawnDelay =		120;
+		dayz_spawnWait =		-120;
+		dayz_lootDelay =		3;
+		dayz_lootWait =			-300;
+
+		 
+		dayz_maxGlobalZeds = 3000;
+
+		 
+		dayz_maxLocalZombies = 15;
+
+		 
+		dayz_maxNearByZombies = 60; 
+
+		 
+		dayz_maxGlobalZombiesInit = 15;
+
+		 
+		dayz_maxGlobalZombiesIncrease = 5;
+
+		 
+		dayz_zedsAttackVehicles = false;
+
+		 
+		dayz_zedSpawnVehCount = dayz_maxLocalZombies / 2;
+
+		 
+		dayz_spawnAirCount = 0;
+	};
+
+ 
+	DZE_HeliLift = false;
+
+ 
+	dayz_minpos = -1; 
+	dayz_maxpos = 16000;
+	dayz_MapArea = 14000;  
+	spawnShoremode = 1;  
+	dayz_spawnselection = 1;  
+	spawnArea= 1500;  
+
+	 
+	dayz_paraSpawn = false;
+
+	 
+	DZE_HumanityTargetDistance = 0;
+
+	 
+	if(isServer) then {
+
+		 
+		DZE_BackpackGuard = true;
+
+		 
+		DZE_FS_UseStaticVehicleSpawn = true;
+
+		 
+		P2DZ_Debug_StaticVehSpawns = false;
+
+		 
+		P2DZ_StaticVehSpawns_DupeDistanceCheck = 7.5;
+	};
+
+ 
+	dayz_dawn = 6;
+	dayz_dusk = 18;
+
+
+	DayZ_UseSteamID = true;
+	DZE_modularBuild = true;
+	DZE_snapExtraRange = 5;
+	DZE_APlotforLife = true;
+	DZE_PlotOwnership = true;
+	DZE_checkNearbyRadius = 30;
+	DZE_plotTakeOwnershipItems = dayz_allowedObjects - (DZE_LockableStorage + ["Plastic_Pole_EP1_DZ","TentStorage","TentStorageDomed","TentStorageDomed2"]);
+
+
+
+	AllowManualCode = true; 
+	HarderPenalty = true; 
+	
+	 	if(!isDedicated || hasInterface) then {
+		 
+		Dayz_Dark_UI = false;
+
+		 
+		P2DZE_debugCol = [0,0,0,0.2];
+
+		 
+		DZE_PlayerZed = false;
+
+		 
+		DZE_SelfTransfuse = true;
+		 
+		DZE_selfTransfuse_Values = [12000, 5, 120];
+
+		 
+		P2DZ_LoadingTimeOut = 60;
+
+		 
+		DZE_AllowForceSave = false;
+
+		 
+		DZE_AllowCargoCheck = true;
+
+		 
+		DZE_ForceNameTags = false;
+
+		 
+		DZE_ForceNameTagsOff = true;
+
+		 
+		DZE_ForceNameTagsInTrader = false;
+
+		 
+		DZE_HaloJump = true;
+
+		 
+		DZE_R3F_WEIGHT = false;
+
+		 
+		DZE_SaveTime = 60;
+
+	};
+
+ DZE_DoorsLocked = ["Land_DZE_GarageWoodDoorLocked","Land_DZE_LargeWoodDoorLocked","Land_DZE_WoodDoorLocked","CinderWallDoorLocked_DZ","CinderWallDoorSmallLocked_DZ"];
+
+DZE_BuildingLimit = 300;
+DZE_StaticConstructionCount = 1;
+DZE_GodModeBase = false;
+
+DZE_FriendlySaving = true;
+ 
+DZE_BuildOnRoads = false;
+ 
+DZE_PlotPole = [55,65];
+ 
+DZE_maintainRange = ((DZE_PlotPole select 0)+20);
+ 
+DZE_DamageBeforeMaint = 0.09;
+ 
+DZE_ConfigTrader = true;
+
+ 
+dayz_sellDistance_vehicle = 10;
+dayz_sellDistance_boat = 30;
+dayz_sellDistance_air = 40;
+	DZE_DoorsLocked = ["Land_DZE_GarageWoodDoorLocked","Land_DZE_LargeWoodDoorLocked","Land_DZE_WoodDoorLocked","CinderWallDoorLocked_DZ","CinderWallDoorSmallLocked_DZ"];
+
+ 
+DZE_TRADER_SPAWNMODE = false;
+
+p2_survivorSkins_male = ["Survivor2_DZ"];
+p2_survivorSkins_female = ["SurvivorW3_DZ","SurvivorW2_DZ","SurvivorWpink_DZ","SurvivorWcombat_DZ","SurvivorWdesert_DZ","SurvivorWurban_DZ"];
+
+p2_humanityLevelsEnabled = true;
+
+p2_humanitySkinsMale = ["Survivor2_DZ","Bandit1_DZ","Bandit2_DZ","Survivor3_DZ","TK_INS_Warlord_EP1_DZ","Ins_Soldier_GL_DZ","INS_Lopotev_DZ"];
+p2_humanitySkinsFemale = ["SurvivorW2_DZ","SurvivorWcombat_DZ","SurvivorWdesert_DZ","SurvivorWurban_DZ","SurvivorWpink_DZ","SurvivorW3_DZ","BanditW1_DZ","BanditW2_DZ"];
+
+KK_fnc_distanceASL = {
+    private ["_v0","_v1"];
+    _v0 = _this select 0;
+    _v1 = _this select 1;
+    sqrt (
+        ((_v0 select 0) - (_v1 select 0)) ^ 2 + 
+        ((_v0 select 1) - (_v1 select 1)) ^ 2 + 
+        ((_v0 select 2) - (_v1 select 2)) ^ 2
+    )
+};
+
+call compile preprocessFileLineNumbers "init\variables_painting.sqf";
+call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\loot_init.sqf";
+
+
+//call compile preprocessFileLineNumbers "init\variables_modified.sqf";

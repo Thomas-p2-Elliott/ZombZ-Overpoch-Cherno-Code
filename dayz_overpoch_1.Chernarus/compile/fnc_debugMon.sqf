@@ -117,7 +117,7 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 
 	_zombztimeToRestart = 	(90 - (round(serverTime / 60)));
 
-	_pDir = (round(getDir player)); _gpsP2osZombZ = (mapGridPosition getPos player);
+	_pDir = (round(getDir (vehicle player))); _gpsP2osZombZ = (mapGridPosition getPos player);
 	_pDirT = switch (true) do {
 	 		default { (format["N %1", _pDir]) };
 	 		case (((_pDir >= 355) && (_pDir <=359)) || ((_pDir >= 0) && (_pDir <= 5))): { (format["N %1", _pDir]) };
@@ -159,7 +159,7 @@ private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
 	_p2within2500 = (({isPlayer _x} count (getPos vehicle player nearEntities [["AllVehicles"], 2500]))-1);
 	_p2mkills = (player getVariable['humanKills', 0]);
 	_p2bKills = (player getVariable['banditKills', 0]);
-	_pDir = (round(getDir player));
+	_pDir = (round(getDir (vehicle player)));
 	_gpsP2osZombZ = (mapGridPosition getPos player);
 	_pDirT = switch (true) do {
 	 		default { (format["N %1", _pDir]) };
@@ -241,45 +241,5 @@ fnc_debugMon = {
 			};
 			sleep P2DZ_debugMonSleep;
 		};
-	};
-};
-
-
-
-fnc_p2debugMonColorGUI = {
-	private ["_dialog","_rSliderIdc","_gSliderIdc","_bSliderIdc","_aSliderIdc","_sliderIdcArray"];
-	disableSerialization;
-	uiNamespace setVariable ['DEBUGSMON', displayNull];
-	_dialog = createDialog 'DEBUGSMON';
-	
-	if (_dialog) then {
-		_rSliderIdc = 501900;	_gSliderIdc = 501901;	_bSliderIdc = 501902;	_aSliderIdc = 501903; 
-		_sliderIdcArray = [_rSliderIdc,_gSliderIdc,_bSliderIdc,_aSliderIdc];
-		{
-		 	sliderSetRange [_x, 0, P2DZ_debugSliderRange];
-		} forEach _sliderIdcArray;
-		sliderSetPosition [_rSliderIdc, (P2DZE_debugCol select 0) * P2DZ_debugSliderRange];	sliderSetPosition [_gSliderIdc, (P2DZE_debugCol select 1) * P2DZ_debugSliderRange];
-		sliderSetPosition [_bSliderIdc, (P2DZE_debugCol select 2) * P2DZ_debugSliderRange];	sliderSetPosition [_aSliderIdc, (P2DZE_debugCol select 3) * P2DZ_debugSliderRange];
-		_thread = [] spawn {
-			private ["_rSliderVal","_rSliderIdc","_gSliderVal","_gSliderIdc","_bSliderVal","_bSliderIdc","_aSliderVal","_aSliderIdc","_sliderIdcArray"];
-			_rSliderIdc = 501900;		_gSliderIdc = 501901;		_bSliderIdc = 501902;		_aSliderIdc = 501903; 
-			_sliderIdcArray = [_rSliderIdc,_gSliderIdc,_bSliderIdc,_aSliderIdc];
-			while {dialog} do {
-				_rSliderVal = ((sliderPosition _rSliderIdc) / P2DZ_debugSliderRange);			_gSliderVal = ((sliderPosition _gSliderIdc) / P2DZ_debugSliderRange);
-				_bSliderVal = ((sliderPosition _bSliderIdc) / P2DZ_debugSliderRange);			_aSliderVal = ((sliderPosition _aSliderIdc) / P2DZ_debugSliderRange);
-				if (!isNil '_sliderIdcArray' && {(count _sliderIdcArray == 4)}) then {
-					P2DZE_debugMon_array_r = _rSliderVal;				P2DZE_debugMon_array_g = _gSliderVal; 
-					P2DZE_debugMon_array_b = _bSliderVal;				P2DZE_debugMon_array_a = _aSliderVal;   
-					P2DZE_debugCol = [P2DZE_debugMon_array_r,P2DZE_debugMon_array_g,P2DZE_debugMon_array_b,P2DZE_debugMon_array_a];
-				};
-				sleep 0.33;
-			};
-			systemChat("Debug Monitor Input Valid and Accepted!");  
-			player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true];
-			player setVariable ["P2_DebugMonColours", P2DZE_debugCol, true];
-		};
-	} else {
-		systemChat("Error: Debug Monitor Colour Dialog failed to open!");
-		diag_log("Error: Debug Monitor Colour Dialog failed to open!");
 	};
 };

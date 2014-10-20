@@ -14,7 +14,7 @@ enableItemsDropping = 0;
 briefing = 0;
 debriefing = 0;
 
-onPauseScript = "";
+onPauseScript = "compile\player_onPause.sqf";
 loadScreen = "\z\addons\dayz_code\gui\dayz_logo_ca.paa";
 
 class Header
@@ -199,38 +199,31 @@ class CfgSounds
     	introSong,
     	administer_iv_02,
     	morphine_01,
-    	painkiller_01,
-    	fracture_1
+    	painkiller_01
     };
     //spawn music
     class introSong
     {
 	    name="introSong";
-	    sound[]={introSong.ogg,0.5,1};
+	    sound[]={sounds\introSong.ogg,0.5,1};
 	    titles[] = {};
     };
 	class administer_iv_02
 	{
 		name="administer_iv_02";
-		sound[]={\z\addons\dayz_sfx\effects\administer_iv_02.ogg,1,1};
+		sound[]={sounds\administer_iv_02.ogg,1,1};
 		titles[]={};
 	};
 	class morphine_01
 	{
 		name="morphine_01";
-		sound[]={\z\addons\dayz_sfx\effects\morphine_01.ogg,1,1};
+		sound[]={sounds\morphine_01.ogg,1,1};
 		titles[]={};
 	};
 	class painkiller_01
 	{
 		name="painkiller_01";
-		sound[]={\z\addons\dayz_sfx\effects\painkiller_01.ogg,1,1};
-		titles[]={};
-	};
-	class fracture_1
-	{
-		name="fracture_1";
-		sound[]={\z\addons\dayz_sfx\gore\fracture_1.wss,1,1};
+		sound[]={sounds\painkiller_01.ogg,1,1};
 		titles[]={};
 	};
 };

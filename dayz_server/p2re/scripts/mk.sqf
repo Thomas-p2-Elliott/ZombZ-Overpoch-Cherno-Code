@@ -76,22 +76,3 @@ bank11 = _bank11;
 ");
 
 ["ZombZ map markers",_rExec] call fnc_p2_RemoteExecute;
-
-
-
-
-//
-
-
-// _bank16 = createMarker [""Skalka"", [1231.9579, 13489.006]];
-//_bank16 setMarkerText ""Winterfell"";
-//_bank16 setMarkerType ""Headquaters"";
-//_bank16 setMarkerColor ""ColorGreenAlpha"";
- //bank16 = _bank16;
-//
-  //_bank17 = createMarker [""zugaddition"", [6611.0601, 5565.5273]];/
-//_bank17 setMarkerText ""US Checkpoint"";
-//_bank16 setMarkerType ""Camp"";
-//_bank16 setMarkerColor ""ColorGreenAlpha"";
- //bank16 = _bank16;
-//

@@ -23,19 +23,8 @@ p2d_client = false;
 p2d_server = false;
 p2d_headless = false;
 
-//enable player2 custom hive dll debugging
-P2D_H = false;
-P2D_Hp = "P2DEBUG: HIVE DEBUG: ";
-
-if (hasInterface && !isDedicated) then {
-	p2d_client = true;
-
-	/*---------------------------------------------------------------------------
-	Enable Client-Side AntiHack?
-	---------------------------------------------------------------------------*/
-	P2DZ_clientAHWhitelistEnabled = 	false;
-	P2DZ_AHDebug = true; //Enable debugging outputs?
-};
+//Sets text in escape menu
+P2DZ_serverName = "Test";
 
 /*---------------------------------------------------------------------------
 UID WhiteLists - Door Management, Plot Management, Client-Side AntiHack
@@ -45,39 +34,9 @@ P2DZ_clientAHWhiteListUIDs = 		["76561198147422604","76561197994454413","7656119
 P2DZ_plotManagerUIDs = 				["007"]; 
 P2DZ_DoorAdminList =   				["007"];
 
-if (isDedicated && !hasInterface || isServer) then {
-	p2d_server = true;
-
-	#include "configs\debug_console.hpp";
-	conFileTime("Server Started");
-	diag_log ("debug_console" callExtension ("i"));
-
-	//enable antihack on test server?
-	AHe = false;
-	//enable object streaming from db?
-	P2DZE_serverStreamObjsEnabled = true;
-
-	//asm performance testing setting
-	if (ASM_Enabled) then {
-		diag_log("P2DEBUG: ASM_Enabled: " + str ASM_Enabled);
-		["OverPoch_Server"] execFSM  "\ASM\fn_ASM.fsm";
-	};
-
-	//generate hash for vehicles
-	P2DZE_randHashVar = "hash_id" callExtension "id";
-	P2DZE_randHashVar = ("_" + P2DZE_randHashVar);
-    "debug_console" callExtension (format["Random Hash Variable: (%1)",P2DZE_randHashVar]);
-
-	call compile ("
-		with uiNamespace do {
-		    if (isNil 'hashIdVar" + P2DZE_randHashVar + "') then {
-		        uiNamespace setVariable ['hashIdVar" + P2DZE_randHashVar + "', 'hash_id' callExtension 'rID'];
-    			'debug_console' callExtension (format['Hash Generated (rID): (%1)', hashIdVar" + P2DZE_randHashVar + "]);
-		    };
-		};
-	");	
-};
-
+/*---------------------------------------------------------------------------
+Headless Client
+---------------------------------------------------------------------------*/
 
 if (!hasInterface && !isDedicated && !isServer) exitWith {
 	p2d_headless = true;
@@ -98,13 +57,58 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
 	};
 };
 
+
+/*---------------------------------------------------------------------------
+Dedicated Server
+---------------------------------------------------------------------------*/
+
+if (isDedicated && !hasInterface || isServer) then {
+	p2d_server = true;
+
+	//enable antihack on test server?
+	AHe = false;
+	//enable object streaming from db?
+	P2DZE_serverStreamObjsEnabled = true;
+
+	//enable custom hive dll debugging
+	P2D_H = false;
+	P2D_Hp = "P2DEBUG: HIVE DEBUG: ";
+
+	call compile preprocessFileLineNumbers "init\variables.sqf";
+	call compile preprocessFileLineNumbers "\z\addons\dayz_server\init\variables_modified.sqf";
+		
+	//asm performance testing setting
+	if (ASM_Enabled) then {
+		diag_log("P2DEBUG: ASM_Enabled: " + str ASM_Enabled);
+		["OverPoch_Server"] execFSM  "\ASM\fn_ASM.fsm";
+	};
+};
+
+/*---------------------------------------------------------------------------
+Client / Player
+---------------------------------------------------------------------------*/
+
+if (hasInterface && !isDedicated) then {
+	p2d_client = true;
+	
+	P2DZ_clientAHWhitelistEnabled = 	false;
+	P2DZ_AHDebug = 						false;
+
+	//[] execVM "_decrypted\init.sqf";
+
+	call compile preprocessFileLineNumbers "init\variables.sqf";	
+
+	P2DZ_postVars = true;
+
+	waitUntil{uiSleep 0.5; P2DZ_postVarsDone};
+};
+
+
 diag_log("P2DEBUG: Is Player Client: 	" + str p2d_client);
 diag_log("P2DEBUG: Is Dedicatd Server: 	" + str p2d_server);
 diag_log("P2DEBUG: Is Headless Client: 	" + str p2d_headless);
 
 //Load in compiled functions
-call compile preprocessFileLineNumbers "init\variables.sqf";									//Initilize the Variables (IMPORTANT: Must happen very early)
-[] execVM "loadouts.sqf";																		//newspawn loadout variables
 progressLoadingScreen 0.1;
 call compile preprocessFileLineNumbers "init\publicEH.sqf";										//Initilize the publicVariable event handlers
 progressLoadingScreen 0.2;
@@ -122,10 +126,8 @@ progressLoadingScreen 1.0;
 // Set effects control to player
 player setVariable 	["isTazed", false, true];
 
-//anti Hack
-[] execVM "system\antihack.sqf";
-
 if (isServer) then {
+	_null = [] execVM "\z\addons\dayz_server\hashId.sqf";
 
 	//Compile vehicle configs
 	call compile preprocessFileLineNumbers "\z\addons\dayz_server\missions\DayZ_Epoch_11.Chernarus\dynamic_vehicle.sqf";
@@ -144,16 +146,21 @@ if (isServer) then {
 };
 
 if (!isDedicated) then {
+	P2DZ_postCompiles = true;
+
 	/* Client Performannce Settings */
 
-	setViewdistance 1000;
+	setViewdistance 1500;
 	setTerraingrid 45;
 	0 setovercast 0;
 	0 setFog 0;
 
 	/* --------- */
 
+	waitUntil {uiSleep 0.5; P2DZ_postCompilesDone};
+
 	[] execVM "system\login.sqf";	
+
 	//Conduct map operations
 	0 fadeSound 0;
 	waitUntil {!isNil "dayz_loadScreenMsg"};
@@ -163,7 +170,11 @@ if (!isDedicated) then {
 	_id = player addEventHandler ["Respawn", {_id = [] spawn player_death;}];
 	_playerMonitor = 	[] execVM "system\player_monitor.sqf";	
 
-	[] execVM "system\SafeZone.sqf";
+	[] 	execVM 						"compile\fn_deployActions.sqf";	
+	call compile preprocessFileLineNumbers "compile\fnc_debugMon.sqf";
+
+	[] execVM 						"system\safezone.sqf";
+
 };
 
 #define RESEC_VERBOSE

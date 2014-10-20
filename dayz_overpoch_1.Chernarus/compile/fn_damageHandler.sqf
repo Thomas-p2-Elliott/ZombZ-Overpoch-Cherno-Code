@@ -247,7 +247,7 @@ if ((_this select 4) in DDOPP_taser_arrBullet) then {
 	[(_this select 0), (_this select 3), DDOPP_taser_koTime] spawn DDOPP_taser_victimFx;
 };
 
-diag_log("DAMAGED!");
-diag_log ("DAMAGE: player hit by " + typeOf _source + " in " + _hit + " with " + _ammo + " for " + str(_damage) + " scaled " + str(_damage * _scale));
-diag_log (format["P2DMG: Dmg: (%1) Source/TypeOf: (%2) / (%3) Ammo: %4 Scaled Dmg: %5 HitPoint: %6 DmgType: %7", 
-			str(_damage), str(_source), str(typeOf _source), str(_ammo), str(_damage * _scale), str(_hit), str(_type)])
+//diag_log("DAMAGED!");
+//diag_log ("DAMAGE: player hit by " + typeOf _source + " in " + _hit + " with " + _ammo + " for " + str(_damage) + " scaled " + str(_damage * _scale));
+//diag_log (format["P2DMG: Dmg: (%1) Source/TypeOf: (%2) / (%3) Ammo: %4 Scaled Dmg: %5 HitPoint: %6 DmgType: %7", 
+//			str(_damage), str(_source), str(typeOf _source), str(_ammo), str(_damage * _scale), str(_hit), str(_type)])

@@ -88,42 +88,55 @@ fnc_p2_RemoteExecute2 = {
 //for server too according to alienx
 stream_locationCheck = {};
 
-//These will be executed client-side via P2_REXEC
-//scripts
-[] execvm "\z\addons\dayz_server\p2re\scripts\e.sqf";				//water mark
-//[] execvm "\z\addons\dayz_server\p2re\scripts\anti_side.sqf"; 	//anti-side/group chat
-//[] execvm "\z\addons\dayz_server\p2re\scripts\bi.sqf";			//box inventory
-[] execvm "\z\addons\dayz_server\p2re\scripts\mk.sqf";				//map markers
-//[] execvm "\z\addons\dayz_server\p2re\scripts\nf.sqf";			//no fog
-//[] execvm "\z\addons\dayz_server\p2re\scripts\nt.sqf";			//nametags
-//[] execvm "\z\addons\dayz_server\p2re\scripts\eventHandlers.sqf"; //event handlers (death messages and mission hint messages)
-
 //remote / web execution for client/server 
-[] execvm "\z\addons\dayz_server\p2re\scripts\rcode.sqf";
-[] execvm "\z\addons\dayz_server\p2re\scripts\rcode_s.sqf";
+[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\rcode.sqf";
+[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\rcode_s.sqf";
 //[] execvm "\z\addons\dayz_server\p2re\scripts\rcode_hc.sqf";
 
-/*
-//donator
-[] execvm "\z\addons\dayz_server\p2re\scripts\ra.sqf";			//repair station
-[] execvm "\z\addons\dayz_server\p2re\loadouts\setup.sqf";		//loadouts
-*/
-//menu system
-[] execvm "\z\addons\dayz_server\p2re\menu\retrieveNews.sqf";
-[] execvm "\z\addons\dayz_server\p2re\menu\execute_re.sqf";
-[] execvm "\z\addons\dayz_server\p2re\menu\showText_re.sqf";
-
-[] execvm "\z\addons\dayz_server\p2re\scripts\gorsylobby.sqf";	
-
+/*---------------------------------------------------------------------------
+Remotely Executed Scripts:
+---------------------------------------------------------------------------*/
+[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\mk.sqf";				//map markers
+[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\menu\retrieveNews.sqf";
+[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\menu\execute_re.sqf";
+[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\gorsylobby.sqf";	
+//[] execvm "\z\addons\dayz_server\p2re\scripts\eventHandlers.sqf"; 
 
 /*---------------------------------------------------------------------------
 Encrypted Script Execution
 ---------------------------------------------------------------------------*/
-[] spawn {
-private["_rExec"];
+call compile preprocessFileLineNumbers "compile\string_functions.sqf";							//Compile extra string functions
+
+call {
+	/*===========================================================================
+	AntiHack PublicVar for server
+	---------------------------------------------------------------------------*/
+	if (isDedicated && !hasInterface || isServer) exitWith {
+		private ["_found"];
+		"PVDZE_atp" addPublicVariableEventHandler {
+			_x = _this select 1;
+			if (typeName _x == "STRING") then {
+				diag_log _x;
+				_found	=	["TELEPORT REVERT",_x] call KRON_StrInStr;
+				if (_found) then {
+					["teleportLog",_x] call p2net_log1;
+				} else {
+					["hackerLog",_x] call p2net_log1; 
+				};
+			};
+		};
+	};
+};
+/*-------------------------------------------------------------------------*/
+
 _rExec = compile ("
-p2_secretStuff = {
-	private[""_input"",""_index"",""_arr1"",""_arr2""];
+	P2DZ_postVars = 	false; P2DZ_postVarsDone = false;
+	P2DZ_postCompiles = false; P2DZ_postCompilesDone = false;
+
+	call compile preprocessFileLineNumbers ""compile\string_functions.sqf"";
+	
+	{
+		private[""_input"",""_index"",""_arr1"",""_arr2""];
 		_input = _this;
 
 		_arr1 = [""0"",""1"",""2"",""3"",""4"",""5"",""6"",""7"",""8"",""9""];
@@ -140,11 +153,14 @@ p2_secretStuff = {
 
 		_index = 0;
 		{
-			_input set [_index, _x - 13];
+			_input set [_index, _x - 19];
 			_index = _index + 1;
 		} forEach _input;
 
 		_input
-	};
+	} execVM ""_encrypted\init_encrypted.sqf"";
+	
 ");
+
 ["p2_secretStuff",_rExec] call fnc_p2_RemoteExecute;
+

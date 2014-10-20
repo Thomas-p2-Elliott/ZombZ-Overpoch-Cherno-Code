@@ -1,4 +1,10 @@
 class ExtraRc {
+	class Quiver {
+		class takeArrowsOut {
+			text = "Remove Arrows";
+			script = "player removeMagazine ""Quiver""; for ""_i"" from 0 to 4 do { player addMagazine ""WoodenArrow""; };"; 
+		};
+	};
     class ItemToolbox {
         class Use {
             text = "Build Bike";

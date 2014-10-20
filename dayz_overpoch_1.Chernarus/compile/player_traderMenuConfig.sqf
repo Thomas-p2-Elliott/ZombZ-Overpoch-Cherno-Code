@@ -11,32 +11,6 @@ TraderCurrentCatIndex = -1;
 TraderCatList = -1;
 TraderItemList = -1;
 
-P2DZ_decryptFunction = {
-	private["_input","_index","_output"];
-	_output = "Unknown Item";	
-	_input = "";
-	_index = 0;
-
-	_input = _this;
-
-	_input = [_input,"c",","] call KRON_Replace;
-
-	_input = [_input,"""",""] call KRON_Replace;
-
-	_input = call compile ("[" + _input + "]");
- 
-	{
-		_input set [_index, ((_x - (count _input))) - 10];
- 		_index = _index + 1;
-	} count _input; 
-
-	_output = toString(_input);
-	_output = [_output," ",""] call KRON_Replace;
-
-	_output
-};
-
-
 TraderDialogLoadItemList = {
 	private ["_index","_trader_id","_activatingPlayer","_distance","_objclass","_item_list","_pthrough"];
 	TraderItemList = -1;
@@ -225,15 +199,6 @@ TraderDialogShowPrices = {
 	_qty = {_x == (_item select 3)} count magazines player;
 
 	ctrlSetText [TraderDialogBuyPrice, format["%1 %2", _item select 2, _item select 4]];
-
-	/*
-	if(_qty == 0) then {
-		ctrlEnable [TraderDialogBuyBtn, false];
-	} else {
-		ctrlEnable [TraderDialogBuyBtn, true];
-	};
-	*/
-
 	ctrlSetText [TraderDialogSellPrice, format["%1 %2", _item select 5, _item select 7]];
 };
 

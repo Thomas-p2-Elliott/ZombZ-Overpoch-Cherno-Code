@@ -15,7 +15,7 @@ P2DZ_AH_BannedCommands = {
 		createSimpleTask='STR';buttonSetAction='STR';processDiaryLink='STR';createDiaryLink='STR';
 		lbSetData='STR';createTeam='STR';exec='STR';addGroupIcon='STR';
 		setGroupIconParams='STR';addWeaponCargo='STR';addMagazineCargo='STR';setVehicleAmmoDef='STR';
-		setWeaponReloadingTime='STR';addMPEventHandler='STR';createVehicleLocal='STR';inputAction='STR';
+		setWeaponReloadingTime='STR';addMPEventHandler='STR';
 		setWaypointStatements='STR';addWaypoint='STR';
 		loadFile='STR';rcallVarcode='STR';saveStatus='STR';loadStatus='STR';
 		saveVar='STR';drawIcon='STR';setMarkerText='STR';setMarkerType='STR';

@@ -24,7 +24,7 @@ if (!isDedicated) then {
 	player_checkStealth =			compile preprocessFileLineNumbers "compile\player_checkStealth.sqf";
 	player_monitor =				compile preprocessFileLineNumbers "system\player_monitor.sqf";
 	building_spawnLoot =			compile preprocessFileLineNumbers "compile\building_spawnLoot.sqf";
-	player_fired =					compile preprocessFileLineNumbers "compile\player_fired.sqf";			//Runs when player fires. Alerts nearby Zeds depending on calibre && audial rating
+	player_packVault =				compile preprocessFileLineNumbers "compile\player_packVault.sqf";
 
 	/*SideChat Disabler*/
 	P2DZ_really_loud_sounds = 	{[60,15] call fnc_usec_pitchWhine;for "_i" from 1 to 15 do {playSound format ["%1",_this select 0];};};
@@ -36,7 +36,7 @@ if (!isDedicated) then {
 	PlotNearbyHumans = 				compile preprocessFileLineNumbers "plotManagement\plotNearbyHumans.sqf";
 	PlotAddFriend =					compile preprocessFileLineNumbers "plotManagement\plotAddFriend.sqf";
 	PlotRemoveFriend = 				compile preprocessFileLineNumbers "plotManagement\plotRemoveFriend.sqf";
-	MaintainPlot =					compile preprocessFileLineNumbers "plotManagement\maintain_areaSC.sqf";
+	//MaintainPlot =					compile preprocessFileLineNumbers "plotManagement\maintain_areaSC.sqf";				##encrypted
 	PlotPreview =					compile preprocessFileLineNumbers "plotManagement\plotToggleMarkers.sqf";
 	PlotObjects = 					compile preprocessFileLineNumbers "plotManagement\plotObjects.sqf";
 	/*Plot End*/
@@ -54,7 +54,7 @@ if (!isDedicated) then {
 	/*DoorManagement End*/
 
 	/* Vehicle Painting */
-	VehicleColourPaint =			compile preprocessFileLineNumbers "Paint\vehicleColourPaint.sqf";
+	//VehicleColourPaint =			compile preprocessFileLineNumbers "Paint\vehicleColourPaint.sqf";						##encrypted
 	VehicleColourUpdate =			compile preprocessFileLineNumbers "Paint\VehicleColourUpdate.sqf";
 	VehicleColourUpdate2 =			compile preprocessFileLineNumbers "Paint\VehicleColourUpdate2.sqf";
 	player_paint =					compile preprocessFileLineNumbers "Paint\player_paint.sqf";
@@ -66,9 +66,9 @@ if (!isDedicated) then {
 	/*Death Message Compile */
 	[] execVM 						"compile\player_deathMessage.sqf";
 
-	//unmodified
-	player_throwObject = 			compile preprocessFileLineNumbers "compile\player_throwObject.sqf";
-	player_traderCity = 			compile preprocessFileLineNumbers "compile\player_traderCity.sqf";
+	/* Menu Text Compile */
+	[] call compile preprocessFileLineNumbers "system\menu.sqf";
+
 	ui_changeDisplay = 				compile preprocessFileLineNumbers "compile\ui_changeDisplay.sqf";
 	player_selectSlot =				compile preprocessFileLineNumbers "compile\ui_selectSlot.sqf";
 	player_wearClothes =			compile preprocessFileLineNumbers "actions\player_wearClothes.sqf";
@@ -77,15 +77,14 @@ if (!isDedicated) then {
 	//pure custom
 	snap_build = 					compile preprocessFileLineNumbers "compile\snap_build.sqf";
 	fnc_removeExtraBars =			compile preprocessFileLineNumbers "compile\fnc_removeExtraBars.sqf";
-	p2_randomMags =					compile preprocessFileLineNumbers "compile\p2_randomMags.sqf";
+	//p2_randomMags =				compile preprocessFileLineNumbers "compile\p2_randomMags.sqf";							##encrypted
 	player2_haloSpawn =				compile preprocessFileLineNumbers "actions\player2_haloSpawn.sqf";
-	call 							compile preprocessFileLineNumbers "compile\fn_hintMsg.sqf";
-	call 							compile preprocessFileLineNumbers "compile\fnc_debugMon.sqf";
-	[] 	execVM 						"compile\fn_deployActions.sqf";	
+	//call 							compile preprocessFileLineNumbers "compile\fn_hintMsg.sqf";								##encrypted
+
 
 	BIS_Effects_Burn = 				compile preprocessFile "\ca\Data\ParticleEffects\SCRIPTS\destruction\burn.sqf";
-	player_zombieCheck = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieCheck.sqf";			//Run on a players computer, checks if the player is near a zombie
-	player_zombieAttack = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_zombieAttack.sqf";	//Run on a players computer, causes a nearby zombie to attack them
+	player_traderCity = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_traderCity.sqf";
+	player_throwObject = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_throwObject.sqf";
 	fnc_inAngleSector =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_inAngleSector.sqf";		//Checks which actions for nearby casualty
 	fnc_usec_unconscious =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_unconscious.sqf";
 	player_temp_calculation	=		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_temperatur.sqf";			//Temperatur System	//TeeChange
@@ -95,10 +94,9 @@ if (!isDedicated) then {
 	player_dumpBackpack = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_dumpBackpack.sqf";
 	building_spawnZombies =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\building_spawnZombies.sqf";
 	player_harvest =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_harvest.sqf";
-	player_packVault =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_packVault.sqf";
 	player_humanityMorph =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_humanityMorph.sqf";
 	player_switchModel =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_switchModel.sqf";
-
+	player_fired =					compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_fired.sqf";			//Runs when player fires. Alerts nearby Zeds depending on calibre && audial rating
 	player_removeNearby =    		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_removeNearby.sqf";
 
 	player_removeTankTrap = {
@@ -219,23 +217,10 @@ if (!isDedicated) then {
 		_cost
 	};
 
-	epoch_totalCurrency = {
-		_total_currency = 0;
-		_total_currency = player getVariable ["ZombZGold", 0];
-		diag_log format["DEBUG TRADER epoch_totalCurrency: %1", _total_currency];
-		_total_currency
-	};
-
-	epoch_returnChange = compile preprocessFileLineNumbers "compile\epoch_returnChange.sqf";
-	// usage [["partinclassname",4]] call epoch_returnChange;
-
 
 	// trader menu code
-	if (DZE_ConfigTrader) then {
-		call compile preprocessFileLineNumbers "compile\player_traderMenuConfig.sqf";
-	}else{
-		call compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_traderMenuHive.sqf";
-	};
+	call compile preprocessFileLineNumbers "compile\player_traderMenuConfig.sqf";
+	
 	// recent murders menu code
 	call compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_murderMenu.sqf";
 

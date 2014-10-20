@@ -1,4 +1,4 @@
-private ["_debugMonSettings","_parsedLogin1","_isNew","_model","_isHiveOk","_newPlayer","_isInfected","_mags","_wpns","_bcpk","_bcpkItems","_isOK","_config","_backpackMagTypes","_backpackMagQty","_backpackWpnTypes","_backpackWpnQtys","_countr","_backpackType","_backpackWpn","_backpackWater","_first","_worldspace","_state","_setDir","_setPos","_backpack","_world","_nearestCity","_survivalTimeText","_charID","_inventory","_survival","_version","_totalMins","_days","_hours","_mins","_p2_didYouKnow","_randomSelection","_p2_selectedMsg"];
+private ["_debugMonSettings","_parsedLogin1","_isNew","_model","_isHiveOk","_newPlayer","_isInfected","_mags","_wpns","_bcpk","_bcpkItems","_isOK","_config","_backpackMagTypes","_backpackMagQty","_backpackWpnTypes","_backpackWpnQtys","_countr","_backpackType","_backpackWpn","_backpackWater","_first","_worldspace","_state","_setDir","_setPos","_backpack","_world","_nearestCity","_survivalTimeText","_charID","_inventory","_survival","_version","_totalMins","_days","_hours","_mins","_pic","_p2_didYouKnow","_randomSelection","_p2_selectedMsg"];
 if (P2DZE_debugLogin) then { diag_log("P2DEBUG: " + __FILE__); };
 
 waitUntil{!isNil "dayzPlayerLogin"};
@@ -84,20 +84,6 @@ if (_isNew) then {
 
 	//Check if player has purchased loadout 
 
-	//load newspawn loadout
-	if(!isNil "DefaultMagazines") then {
-		if (P2DZE_debugLogin) then { diag_log("P2DEBUG: Login: DefaultMagazines" + str DefaultMagazines);  };
-	};
-	if(!isNil "DefaultWeapons") then {
-		if (P2DZE_debugLogin) then { diag_log("P2DEBUG: Login: DefaultWeapons" + str DefaultWeapons); };
-	};
-	if(!isNil "DefaultBackpack") then {
-		if (P2DZE_debugLogin) then { diag_log("P2DEBUG: Login: DefaultBackpack" + str DefaultBackpack); };
-	};
-	if(!isNil "DefaultBackpackItems") then {
-		if (P2DZE_debugLogin) then { diag_log("P2DEBUG: Login: DefaultBackpackItems" + str DefaultBackpackWeapons); };
-	};
-
 	//Wait until they're fully loaded in
 	waitUntil{!isNil 'dayz_gui'};
 
@@ -165,6 +151,25 @@ if (_isNew) then {
 	//Wait until they're fully loaded in
 	waitUntil{!isNil 'dayz_gui'};
 
+
+	_world = toUpper(worldName); //toUpper(getText (configFile >> "CfgWorlds" >> (worldName) >> "description"));
+	_nearestCity = nearestLocations [([player] call FNC_GetPos), ["NameCityCapital","NameCity","NameVillage","NameLocal"],1000];
+	Dayz_logonTown = "Wilderness";
+	_survivalTimeText = "Hour: " + str(_hours);
+
+	if (count _nearestCity > 0) then {Dayz_logonTown = text (_nearestCity select 0)};
+
+	if (!isNil "P2DZ_humanityLevelText") then {
+		_first = [
+			Dayz_logonTown,
+			_survivalTimeText,
+			P2DZ_humanityLevelText
+		] spawn BIS_fnc_infoText;
+	} else {
+		_first = [_world,Dayz_logonTown,_survivalTimeText] spawn BIS_fnc_infoText;
+	};
+
+
 	//they're in, so set these to true since they didnt do either!
 	P2DZE_paraOpened = true;
 	P2DZE_hasLanded = true;
@@ -175,6 +180,11 @@ if (_isNew) then {
 };
 //double check this one m8
 waitUntil{!isNil 'dayz_gui'};
+
+//Spawn watermark
+_pic = "img\watermark.paa";
+["<img align='left' size='1.0' shadow='1' image="+(str(_pic))+" />",safeZoneX+0.027,safeZoneY+safeZoneH-0.1,99999,0,0,3390] spawn bis_fnc_dynamicText;
+
 //Wait until player has chute open!
 waitUntil{(P2DZE_paraOpened)};
 
@@ -204,15 +214,17 @@ _p2_didYouKnow = [
 "Did you know: You can upgrade deployed vehicles with parts just by scrolling on them!",
 "Did you know: Every single vehicle spawn point on this server was hand-made by a professional hide and seek player",
 "Did you know: Thermal weapons are the rarest items on this server.",
+"Did you know: You can press F6 to change your debug monitor colour!",
 "Did you know: We run dayz overwatch, dayz mod, epoch cherno, and epoch panthera servers! Just search ZombZ in your server browser!",
 "Did you know: There are medical, military, and industrial care packages marked by smoke.",
 "Did you know: Several Ultra-Rare weapons can be found at crashsites only! Including the Cheytec SD, MSR SD, XM2010 SD & Thermal Weapons!",
+"Did you know: You can press F6 to change your debug monitor colour!",
 "Did you know: We have a huge community of players on our teamspeak, find friends, form rivalries, get involved! ts3.zombz.net:9172",
 "Did you know: A.I. Missions can be found, kill the bandits, grab the loot, and get out before another group shows up!",
 "Did you know: You can press F1 for a full run down of the features on this server!",
 "Did you know: This server is always subject to improvement and optimisation by a dedicated team!",
 "Did you know: Auto-Refuel is enabled, just get out of the vehicle first!",
-"Did you know: Empty Jack Daniels bottles are actually Molotovs on this server!",
+"Did you know: You can press F6 to change your debug monitor colour!",
 "Did you know: Nevermind, I forgot what I was going to say..."
 ];
 

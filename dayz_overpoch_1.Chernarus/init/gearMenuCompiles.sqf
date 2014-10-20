@@ -1,18 +1,21 @@
 fn_gearMenuChecks =			compile preprocessFileLineNumbers "compile\fn_gearMenuChecks.sqf";
 object_monitorGear =		compile preprocessFileLineNumbers "compile\object_monitorGear.sqf";
-player_gearSync	=			compile preprocessFileLineNumbers "compile\player_gearSync.sqf";
-player_gearSet	=			compile preprocessFileLineNumbers "compile\player_gearSet.sqf";
-ui_gear_sound =             compile preprocessFileLineNumbers "compile\ui_gear_sound.sqf";
-player_countmagazines =		compile preprocessFileLineNumbers "actions\player_countmagazines.sqf";
-player_addToolbelt =		compile preprocessFileLineNumbers "actions\player_addToolbelt.sqf";
+
+player_gearSync	=			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_gearSync.sqf";
+player_gearSet	=			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_gearSet.sqf";
+ui_gear_sound =             compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\ui_gear_sound.sqf";
+player_countmagazines =		compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_countmagazines.sqf";
+player_addToolbelt =		compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_addToolbelt.sqf";
+
 /* Gold Actions */
-player_checkGoldItems =		compile preprocessFileLineNumbers "compile\player_checkGoldItems.sqf";
-player_dropGold =			compile preprocessFileLineNumbers "compile\player_dropGold.sqf";
-player_pickupGold =			compile preprocessFileLineNumbers "compile\player_pickupGold.sqf";
+//player_checkGoldItems =		compile preprocessFileLineNumbers "compile\player_checkGoldItems.sqf";
+//player_dropGold =			compile preprocessFileLineNumbers "compile\player_dropGold.sqf";
+//player_pickupGold =			compile preprocessFileLineNumbers "compile\player_pickupGold.sqf";
 /* Gold Interface */
 ui_goldInit =				compile preprocessFileLineNumbers "compile\ui_goldInit.sqf";
-ui_displayGold =			compile preprocessFileLineNumbers "compile\ui_displayGold.sqf";
-ui_goldDrop = 				compile preprocessFileLineNumbers "compile\ui_goldDrop.sqf";
+//ui_displayGold =			compile preprocessFileLineNumbers "compile\ui_displayGold.sqf";
+//ui_goldDrop = 			compile preprocessFileLineNumbers "compile\ui_goldDrop.sqf";
+
 /* Gold Scroll Actions */
 [] execVM 					"compile\fn_goldActions.sqf";
 
@@ -266,7 +269,7 @@ dze_isnearest_player = {
     _timeOutmax = P2DZ_LoadingTimeOut * 100;
 
     while { _timeOut < _timeOutmax } do {
-        if (dayz_clientPreload && dayz_authed) exitWith { diag_log "PLOGIN: Login loop completed!"; endLoadingScreen; _display = uiNamespace getVariable "BIS_loadingScreen"; _display closeDisplay 0; };
+        if (dayz_clientPreload && dayz_authed) exitWith { endLoadingScreen; _display = uiNamespace getVariable "BIS_loadingScreen"; _display closeDisplay 0; };
         if (!isNil '_display') then {
             if ( isNull _display ) then {
                     waitUntil { !dialog; };

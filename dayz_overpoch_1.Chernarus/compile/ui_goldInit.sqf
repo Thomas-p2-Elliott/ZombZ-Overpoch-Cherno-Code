@@ -1,7 +1,7 @@
 private ["_ctrlText","_len","_inout"];
 disableSerialization;
 waitUntil {ctrlShown ((findDisplay 106) displayCtrl 105)};
-((findDisplay 106) displayCtrl 105) ctrlSetEventHandler ["LBSelChanged","private [""_dummy""]; _dummy = [_this,""onLBSelChanged""] execVM ""system\handleGear.sqf""; [] call ui_displayGold; _dummy;"];
+((findDisplay 106) displayCtrl 105) ctrlSetEventHandler ["LBSelChanged","private [""_dummy""]; _dummy = [_this,""onLBSelChanged""] execVM ""\z\addons\dayz_code\system\handleGear.sqf""; [] call ui_displayGold; _dummy;"];
 
 _inout = {
 	private["_in","_i","_arr","_out"];

@@ -28,10 +28,10 @@ private["_missionVehicles"];
             if (!(_x in P2DZE_alreadyChecked) && {(!((typeOf _x) in ["ParachuteWest","ParachuteC"]))} && {(!((typeOf _x) in AllPlayers))} && {(!((typeOf _x) in dayz_allowedObjects))}) then {
                 _x call KK_fnc_checkHash;
                 P2DZE_alreadyChecked = P2DZE_alreadyChecked + [_x];
-                "debug_console" callExtension format["Obj: %1 Added to Safe List #1111", typeOf _x];
+                //"debug_console" callExtension format["Obj: %1 Added to Safe List #1111", typeOf _x];
 
             } else {
-                "debug_console" callExtension format["Obj: %1 Has already been Checked #0101", typeOf _x];
+                //"debug_console" callExtension format["Obj: %1 Has already been Checked #0101", typeOf _x];
             };
             sleep 0.0001;
         } forEach _missionVehicles;
@@ -63,7 +63,7 @@ KK_fnc_makeRandomId = {
 };
 
 KK_fnc_checkHash = {
-    "debug_console" callExtension format["Obj: %1 hash check", typeOf _this];
+   // "debug_console" callExtension format["Obj: %1 hash check", typeOf _this];
 
     if ("hash_id" callExtension format [
         "%1:%2#%3", 
@@ -72,9 +72,9 @@ KK_fnc_checkHash = {
         _this getVariable [
             (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])), "NULL"
         ]
-    ] == "PASS") exitWith {"debug_console" callExtension format["Obj: %1 PASSED #0101", typeOf _this]; true};
+    ] == "PASS") exitWith {true};
     0 = _this spawn KK_fnc_logFailed;
-    "debug_console" callExtension format["Obj: %1 FAILED #1001", typeOf _this];
+    //"debug_console" callExtension format["Obj: %1 FAILED #1001", typeOf _this];
     false
 };
 
@@ -88,7 +88,7 @@ KK_fnc_checkHashGold = {
         _this getVariable [
             (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])), "NULL"
         ]
-    ] == "PASS") exitWith {"debug_console" callExtension format["Gold: %1 PASSED #0101", typeOf _this]; true};
+    ] == "PASS") exitWith {true};
     0 = _this spawn KK_fnc_logFailedGold;
     //"debug_console" callExtension format["Gold: %1 FAILED #1001", typeOf _this];
     false
@@ -101,7 +101,7 @@ KK_fnc_logFailedGold = {
 
 KK_fnc_logFailed = {
     _dcout = {
-        "debug_console" callExtension (format _this);
+       // "debug_console" callExtension (format _this);
         //log it
         ["hashCheckFails",format _this] call p2net_log1; 
     };
@@ -152,7 +152,7 @@ KK_fnc_logFailed = {
 
     _this setDamage 1; //destroy it
     deleteVehicle _this; //delete it
-    "debug_console" callExtension "A"; //alert beep
+    //"debug_console" callExtension "A"; //alert beep
     //use url_fetch to alert admin anywhere?
 };
 
