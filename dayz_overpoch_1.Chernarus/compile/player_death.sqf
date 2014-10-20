@@ -3,7 +3,7 @@ disableSerialization;
 if (deathHandled) exitWith {};
 deathHandled = true;
 
-if (({"ItemGoldBar10oz" == _x} count (magazines _object)) > 0) then {
+if (({"ItemGoldBar10oz" == _x} count (magazines player)) > 0) then {
 	[] spawn player_dropGold;
 };
 

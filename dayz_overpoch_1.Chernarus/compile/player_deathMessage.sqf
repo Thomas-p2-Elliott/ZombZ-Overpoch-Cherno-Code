@@ -157,7 +157,7 @@ P2DZE_deathMessage = {
 		};
 
 		_fullmessage = format [
-		""<t color='#ffffff' align='left' size='0.66'>%1</t><img align='left' size='1' image='%2'/><t color='#ffffff' align='left' size='0.66'>(%4m) %3</t>"", 
+		"<t color='#ffffff' align='left' size='0.66'>%1</t><img align='left' size='1' image='%2'/><t color='#ffffff' align='left' size='0.66'>(%4m) %3</t>", 
 		_killerName, _picture, _victimName, _distance];
 
 		[
