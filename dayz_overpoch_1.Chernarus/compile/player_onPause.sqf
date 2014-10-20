@@ -1,61 +1,24 @@
-private ["_display","_btnRespawn","_btnAbort","_timeOut","_timeMax","_btnAbortText","_sleep"];
+private ["_display","_btnTitle0","_btnTitle1","_btnTitle2","_playeruid"];
 disableSerialization;
 waitUntil {
 	_display = findDisplay 49;
 	!isNull _display;
 };
-_btnRespawn = _display displayCtrl 1010;
-_btnAbort = _display displayCtrl 104;
-_btnRespawn ctrlEnable false;
-_btnAbort ctrlEnable false;
-_btnAbortText = ctrlText _btnAbort;
-_timeOut = 0;
-_timeMax = diag_tickTime+10;
-dayz_lastCheckBit = time;
-		
-// if(r_player_dead) exitWith {_btnAbort ctrlEnable true;};
-if(r_fracture_legs && !r_player_dead) then {_btnRespawn ctrlEnable true;};
-		
-//force gear save
-if (!r_player_dead && time - dayz_lastCheckBit > 10) then {
-	call dayz_forceSave;
-};			
 
-if (r_player_dead || (!alive player)) exitWith {_btnAbort ctrlEnable true; _btnAbort ctrlSetText _btnAbortText;};		
-_sleep = 1;
+_playeruid = getplayerUID player;
+
 
 while {!isNull _display} do {
-	switch true do {
-		case (!r_player_dead && {isPlayer _x} count (player nearEntities ["AllVehicles", 12]) > 1) : {
-			_btnAbort ctrlEnable false;
-			cutText [localize "str_abort_playerclose", "PLAIN DOWN"];
-			_sleep = 1;
-		};
-		case (!r_player_dead && !canbuild) : {
-			_btnAbort ctrlEnable false;
-			cutText [(localize "str_epoch_player_12"), "PLAIN DOWN"];
-			_sleep = 1;
-		};
-		case (!r_player_dead && player getVariable["combattimeout", 0] >= time) : {
-			_btnAbort ctrlEnable false;
-			//cutText ["Cannot Abort while in combat!", "PLAIN DOWN"];
-			cutText [localize "str_abort_playerincombat", "PLAIN DOWN"];
-			_sleep = 1;
-		};
-		case (_timeOut < _timeMax) : {
-			_btnAbort ctrlEnable false;
-			_btnAbort ctrlSetText format["%1 (in %2)", _btnAbortText, (ceil ((_timeMax - diag_tickTime)*10)/10)];
-			cutText ["", "PLAIN DOWN"];	
-			_sleep = 0.1;
-		};
-		default {
-			_btnAbort ctrlEnable true;
-			_btnAbort ctrlSetText _btnAbortText;
-			cutText ["", "PLAIN DOWN"];	
-			_sleep = 1;
-		};
-	};
-	sleep _sleep;
-	_timeOut = diag_tickTime;
+	
+	_btnTitle0 = _display displayCtrl 	523;	//top
+	_btnTitle0 ctrlSetText 				format["Server: %1",(missionNamespace getVariable "P2DZ_serverName")];
+	
+	_btnTitle1 = _display displayCtrl 	121;	//lower top
+	_btnTitle1 ctrlSetText 				"Player UID: ";
+	
+	_btnTitle2 = _display displayCtrl 	120;	//bottom
+	_btnTitle2 ctrlSetText 				format["%1",_playeruid];
+
+	sleep 0.1;
 };
 cutText ["", "PLAIN DOWN"];
