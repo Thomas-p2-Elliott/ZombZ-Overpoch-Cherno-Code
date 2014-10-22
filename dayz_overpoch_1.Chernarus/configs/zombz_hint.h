@@ -34,7 +34,7 @@ class zombz_hintMini
 {
    idd          = 9100;
    movingEnable =  1;
-   duration     =  1;
+   duration     =  1.5;
    fadein       =  0;
    fadeout      =  0;
    name = "zombz_hintMini";
@@ -53,7 +53,7 @@ class zombz_hintMini
       type = 0;
       colorText[] = {0, 0, 0, 0};
       font = "Bitstream";
-      colorBackground[] = {0, 0, 1, 0.2};
+      colorBackground[] = {0, 0, 0, 0.2};
       text = "";
       style = 128;
       sizeEx = 0.025;
@@ -130,7 +130,7 @@ class zombz_hintFull
 {
    idd          = 9104;
    movingEnable =  1;
-   duration     =  1;
+   duration     =  3;
    fadein       =  0;
    fadeout      =  0;
    name = "zombz_hintFull";

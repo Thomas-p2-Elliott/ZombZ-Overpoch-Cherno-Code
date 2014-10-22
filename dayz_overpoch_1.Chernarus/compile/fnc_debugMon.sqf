@@ -109,8 +109,6 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 		_p2wep = "Direct Chat";
 	};
 	_p2skin = (typeOf player);
-	P2DZ_humanity;
-	P2DZ_humanityPrefix; P2DZ_humanityLevel;
 
 	_zombzVehCount = (count (player nearEntities [["LandVehicle", "Ship", "Air"], 14500]) + 100);
 	_zombzZedCount = (({alive _x} count (getPos vehicle player nearEntities [["zZombie_Base"], 12000]))-1);
@@ -223,6 +221,7 @@ fnc_debugMon = {
 				        _handle2 = [] call fnc_debugFull;
 						P2DZ_debugMonitor = true;
 						if (random 10 > 8) then { player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true]; };
+						sleep P2DZ_debugMonSleep;	//double sleep for big mode
 				    };
 				    case 3:
 				    {
