@@ -26,7 +26,7 @@ class ATM_Altimeter
 		font="Bitstream";
 		sizeEx=0.050000001;
 		x="safeZoneX";
-		y="safeZoneY + safeZoneH - 0.9";
+		y="safeZoneY + safeZoneH - 0.6";
 		h="0.4 * safezoneH";
 		w="0.225 * safezoneW";
 	};
@@ -41,7 +41,7 @@ class ATM_Altimeter
 		font="Bitstream";
 		sizeEx=0.050000001;
 		x="safeZoneX";
-		y="safeZoneY + safeZoneH - 0.9";
+		y="safeZoneY + safeZoneH - 0.6";
 		h="0.4 * safezoneH";
 		w="0.225 * safezoneW";
 	};
@@ -56,7 +56,7 @@ class ATM_Altimeter
 		font="Bitstream";
 		sizeEx=0.071;
 		x="safezoneX - 0.005";
-		y="safeZoneY + safeZoneH - 0.89";
+		y="safeZoneY + safeZoneH - 0.59";
 		h="0.4 * safezoneH";
 		w="0.225 * safezoneW";
 	};
@@ -71,7 +71,7 @@ class ATM_Altimeter
 		font="Bitstream";
 		sizeEx=0.031;
 		x="safezoneX - 0.005";
-		y="safeZoneY + safeZoneH - 0.81"; //795
+		y="safeZoneY + safeZoneH - 0.51";
 		h="0.4 * safezoneH";
 		w="0.225 * safezoneW";
 	};
@@ -86,7 +86,7 @@ class ATM_Altimeter
 		font="Bitstream";
 		sizeEx=0.031;
 		x="safezoneX - 0.005";
-		y="safeZoneY + safeZoneH - 0.98";
+		y="safeZoneY + safeZoneH - 0.68";
 		h="0.4 * safezoneH";
 		w="0.225 * safezoneW";
 	};
