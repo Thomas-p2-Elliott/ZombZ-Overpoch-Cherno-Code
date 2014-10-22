@@ -32,25 +32,128 @@ if ((typeName _killer) != "STRING") then
 	{
 		_message = format["%1 was killed by %2 with weapon %3 from %4m",_victimName, _killerName, _weapon, _distance];
 		_loc_message = format["PKILL: %1 was killed by %2 with weapon %3 from %4m", _victimName, _killerName, _weapon, _distance];
+
+
+		/*---------------------------------------------------------------------------
+		Death was caused by PvP
+		---------------------------------------------------------------------------*/
+		//Enable Debug Messages?
+		P2DZ_DeathMessage_Debug = true;
+
+		//Vars
+		_isCar =			false;
+		_isHeli =			false;
+		_isBoat = 			false;
+		_killedByVehicle = 	false;
+		_killerVehicle = 	objNull;
+		_weaponClassname =  "";
+		_picture = 			"";
+		_killerDistance = 	100;
+
+		//Code
+		_killerVehicle = 	vehicle _killer;
+		_isCar = 			_killerVehicle isKindOf "Car";
+		_isHeli = 			_killerVehicle isKindOf "Air";
+		_isBoat = 			_killerVehicle isKindOf "Sea";
+
+		diag_log _loc_message;
+
+		if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: Input: %1", str[_victimName,_killerName,_distance,_weapon]]); };
+
+		if ((getText (configFile >> "CfgVehicles" >> (typeOf _killerVehicle) >> "vehicleClass")) in ["CarW","Car","CarD","Armored","Ship","Support","Air","ArmouredW","ArmouredD","SupportWoodland_ACR"]) then {
+			_killedByVehicle = true;
+		};
+
+		if (_isCar || _isHeli || _isBoat) then {
+			_killedByVehicle = true;
+		};
+
+		if (isNil "_weapon") then {
+
+			if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _weapon, setting to: %1", weaponState _killer]); };
+
+			_weaponClassname = weaponState _killer;
+
+			if (isNil "_weaponClassname") then {
+				if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _weapon, setting to: Unknown"]); };
+				_weaponClassname = ["Unknown"];
+			};
+		} else {
+			_weaponClassname = [_weapon];
+		};
+
+
+		if (_killedByVehicle) then {
+			_weaponClassname = typeOf _killerVehicle;
+			_picture = (gettext (configFile >> "cfgVehicles" >> (_weaponClassname) >> "picture"));
+		} else {
+			if (_weaponClassname select 0 == "Throw") then 
+			{
+				_weaponClassname = _weaponClassname select 3;
+			}
+			else
+			{
+				_weaponClassname = _weaponClassname select 0;
+			};
+
+			_picture = (gettext (configFile >> "cfgWeapons" >> (_weaponClassname) >> "picture"));
+		};
+
+		if (isNil "_victimName") then {
+
+			if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _victimName, setting to: %1", name _victim]);};
+
+			_victimName = name _victim;
+
+			if (isNil "_victimName") then {
+				if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _victimName, setting to: Unknown"]); };
+			};
+		};
+		
+		if (isNil "_killerName") then {
+
+			if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _killerName, setting to: %1", name _killer]);};
+
+			_killerName = name _killer;
+
+			if (isNil "_killerName") then {
+				if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _killerName, setting to: Unknown"]); };
+				_killerName = "Unknown";
+			};
+		};
+
+		
+		if (isNil "_distance") then {
+
+			if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _distance, setting to: KK_fnc_distanceASL Result"]);};
+
+			_killerDistance = [getPosASL _victim, getPosASL _killer] call KK_fnc_distanceASL;
+
+			if (isNil "_killerDistance") then {
+				if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _killerDistance, setting to: %1", _victim distance _killer]);};
+				
+				_killerDistance = _victim distance _killer;
+
+				if (isNil "_killerDistance") then {
+					if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _killerDistance, setting to: 100"]); };
+					_killerDistance = 100;
+				};
+			};
+		} else {
+			_killerDistance = _distance;
+		};
+		_killerDistance = floor(_killerDistance);
+
+		if (!isNil "_victimName" && !isNil "_killerName" && !isNil "_killerDistance" && !isNil "_picture") then {
+			if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: Firing P2DZE_dM with: %1", str[_victimName,_killerName,_killerDistance,_picture]]); };
+
+			P2DZE_dM = [_victimName,_killerName,_killerDistance,_picture];
+			publicVariable "P2DZE_dM";
+		};
 	};
 
 	diag_log _loc_message;
 
-	if(DZE_DeathMsgGlobal) then {
-		[nil, nil, rspawn, [_killer, _message], { (_this select 0) globalChat (_this select 1) }] call RE;
-	};
-	/* needs customRemoteMessage
-	if(DZE_DeathMsgGlobal) then {
-		customRemoteMessage = ['globalChat', _message, _killer];
-		publicVariable "customRemoteMessage";
-	};
-	*/
-	if(DZE_DeathMsgSide) then {
-		[nil, nil, rspawn, [_killer, _message], { (_this select 0) sideChat (_this select 1) }] call RE;
-	};
-	if(DZE_DeathMsgTitleText) then {
-		[nil,nil,"per",rTITLETEXT,_message,"PLAIN DOWN"] call RE;
-	};
 
 	// build array to store death messages to allow viewing at message board in trader citys.
 	_death_record = [

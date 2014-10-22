@@ -22,12 +22,6 @@ _playerID = getPlayerUID player;
 
 disableUserInput true;
 
-_array = _this;
-if (count _array > 0) then {
-	//Death messages
-	(_array select 0) call P2DZE_deathMessage;
-};
-
 PVDZE_plr_Died = [dayz_characterID,0,_body,_playerID,0, dayz_playerName];
 publicVariableServer "PVDZE_plr_Died";
 
@@ -46,6 +40,7 @@ player setVariable ["startcombattimer", 0];
 r_player_unconscious = false;
 r_player_cardiac = false;
 
+_array = _this;
 if (count _array > 0) then {
 	_source = _array select 0;
 	_method = _array select 1;

@@ -1,67 +1,6 @@
-P2DZE_deathMessage = {
-	private ['_killerVehicle','_killer','_victim','_victimName','_killerName','_weaponClassname','_picture','_killerDistance','_isCar','_isHeli','_isBoat','_killedByVehicle'];
-	_killerVehicle = 	objNull;
-	_killer = 			objNull;
-	_victim = 			objNull;
-	_victimName = 		'';
-	_killerName = 		'';
-	_weaponClassname =  '';
-	_picture = 			'';
-	_killerDistance = 	0;
-	_isCar =			false;
-	_isHeli =			false;
-	_isBoat = 			false;
-	_killedByVehicle = 	false;
-
-	_killer = 			_this;
-	_killerName = 		name _killer;
-	_killerVehicle = 	vehicle _killer;
-	_weaponClassname = 	weaponState _killer;
-	_victim = 			player;
-	_victimName = 		dayz_playerName;
-
-	_killerDistance = _victim distance _killer;
-	_killerDistance = floor(_killerDistance);
-
-	if ((getText (configFile >> 'CfgVehicles' >> (typeOf _killerVehicle) >> 'vehicleClass')) in ['CarW','Car','CarD','Armored','Ship','Support','Air','ArmouredW','ArmouredD','SupportWoodland_ACR']) then {
-		_killedByVehicle = true;
-	};	
-
-	_isCar = _killerVehicle isKindOf 'Car';
-	_isHeli = _killerVehicle isKindOf 'Air';
-	_isBoat = _killerVehicle isKindOf 'Sea';
-
-	if (_isCar || _isHeli || _isBoat) then {
-		_killedByVehicle = true;
-	};
-
-	if (_killedByVehicle) then {
-		_weaponClassname = typeOf _killerVehicle;
-		_picture = (gettext (configFile >> 'cfgVehicles' >> (_weaponClassname) >> 'picture'));
-	} else {
-		if (_weaponClassname select 0 == 'Throw') then 
-		{
-			_weaponClassname = _weaponClassname select 3;
-		}
-		else
-		{
-			_weaponClassname = _weaponClassname select 0;
-		};
-
-		_picture = (gettext (configFile >> 'cfgWeapons' >> (_weaponClassname) >> 'picture'));
-	};
-
-	if (!isNil '_victimName' && !isNil '_killerName' && !isNil '_killerDistance' && !isNil '_picture') then {
-		if ((_victimName != '') && (_killerName != '') && (_killerDistance > 0) && (_picture != '')) then {
-			P2DZE_dM = [_victimName,_killerName,_killerDistance,_picture];
-			publicVariable 'P2DZE_dM';
-		};
-	};
-};
-
 'P2DZE_dM' addPublicVariableEventHandler {
 	[] spawn {
-		private ['_victim','_killer','_weapon','_distance','_method','_killerVehicle','_vehicle','_adjectiveChance','_killerName','_isCar','_isHeli','_isBoat','_vType','_adjective','_victimName','_message','_fullmessage','_killerDist','_weaponType','_isWeaponVehicle','_weaponClassname','_picture','_safeZoneOffset','_layer'];		
+		private ["_victimName","_killerName","_killerDist","_picture","_adjective","_safeZoneOffset","_layer","_fullmessage"];
 		_victimName = P2DZE_dM select 0;
 		_killerName = P2DZE_dM select 1;
 		_killerDist = P2DZE_dM select 2;
@@ -158,7 +97,7 @@ P2DZE_deathMessage = {
 
 		_fullmessage = format [
 		"<t color='#ffffff' align='left' size='0.66'>%1</t><img align='left' size='1' image='%2'/><t color='#ffffff' align='left' size='0.66'>(%4m) %3</t>", 
-		_killerName, _picture, _victimName, _distance];
+		_killerName, _picture, _victimName, _killerDist];
 
 		[
 			_fullmessage,
