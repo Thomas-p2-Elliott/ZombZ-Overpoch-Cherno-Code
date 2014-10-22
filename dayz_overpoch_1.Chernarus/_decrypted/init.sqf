@@ -27,6 +27,7 @@ waitUntil{uiSleep 0.5; P2DZ_postVars};
 [] call compile preprocessFileLineNumbers "_decrypted\fn_hintMsg.sqf";	if (P2DZ_decryptionDebug) then { diag_log(format["P2DecryptionDebug: Decrypted: %1","fn_hintMsg"]); };
 [] call compile preprocessFileLineNumbers "_decrypted\player_dropGold.sqf"; if (P2DZ_decryptionDebug) then { diag_log(format["P2DecryptionDebug: Decrypted: %1","player_dropGold"]); };
 
+
 P2DZ_postVarsDone = true;
 
 waitUntil{uiSleep 0.5; P2DZ_postCompiles};

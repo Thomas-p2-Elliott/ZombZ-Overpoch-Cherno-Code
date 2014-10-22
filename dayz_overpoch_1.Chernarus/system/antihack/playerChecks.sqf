@@ -90,23 +90,6 @@ P2DZ_AH_PlayerChecks = {
 		}; 
 	};
 
-	if (((!deathHandled) && (r_fracture_legs) && (canMove player)) || (deathHandled)) then
-	{
-		if (isNil 'P2DZ_AH_DeathHandleCheck') then
-		{
-			P2DZ_AH_DeathHandleCheck = true;
-			[] spawn {
-				uiSleep 10;
-				if (((!deathHandled) && (r_fracture_legs) && (canMove player)) || (deathHandled)) then
-				{
-					[] spawn (compile preprocessFileLineNumbers 'compile\player_death.sqf');
-					player setHit['Body',1];
-				};
-				P2DZ_AH_DeathHandleCheck = nil;
-			};
-		};
-	};
-
 	if (deathHandled) then
 	{
 		[] spawn {

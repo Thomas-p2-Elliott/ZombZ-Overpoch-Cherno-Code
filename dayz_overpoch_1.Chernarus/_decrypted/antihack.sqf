@@ -163,7 +163,7 @@ if (hasInterface && !isDedicated) exitWith {
 		Load the rest of the functions
 		---------------------------------------------------------------------------*/
 		call compile preprocessFileLineNumbers "system\antihack\bannedCommands.sqf";
-		//call compile preprocessFileLineNumbers "system\antihack\functionChecks.sqf";
+		//call compile preprocessFileLineNumbers "system\antihack\functionChecks.sqf";	## Encrypted
 		call compile preprocessFileLineNumbers "system\antihack\disableSideChat.sqf";
 		call compile preprocessFileLineNumbers "system\antihack\playerChecks.sqf";
 		call compile preprocessFileLineNumbers "system\antihack\chatCommands.sqf";
@@ -187,7 +187,7 @@ if (hasInterface && !isDedicated) exitWith {
 		/*---------------------------------------------------------------------------
 		 Weapon / Magazine / Projectile Security Functions
 		---------------------------------------------------------------------------*/
-		//[] execVM "system\antihack\antihack_wepCheck.sqf";
+		[] execVM "system\antihack\antihack_wepCheck.sqf";
 
 		/*---------------------------------------------------------------------------
 		Spawn Main AntiHack Loop

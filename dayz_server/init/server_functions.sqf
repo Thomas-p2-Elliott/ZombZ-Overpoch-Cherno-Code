@@ -63,7 +63,17 @@ Vehicle Painting
 	_name = getText(configFile >> "cfgVehicles" >> (typeOf _object) >> "displayName");
 	_PUID = ((_this select 1) select 3);
 	_pname = ((_this select 1) select 4);
-	
+
+	diag_log format [
+		"VEHICLE PAINT DEBUG: _colour (%5) _colour2 = (%6) _clrinit (%1) _clrinit2 (%2) form _clrinit (%3) form _clrinit2 (%4)",
+		_clrinit,
+		_clrinit2,
+		str("this setObjectTexture [0,"+str _clrinit+"];"),
+		str("this setObjectTexture [1,"+str _clrinit2+"];"),
+		_colour,
+		_colour2
+	];
+
 	diag_log format ["VEHICLE PAINT: Player %1 (%2) has painted a %3!",_pname,_PUID,_name];
 	
 	_position = getPosATL _object;

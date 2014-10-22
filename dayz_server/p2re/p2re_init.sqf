@@ -158,7 +158,7 @@ _rExec = compile ("
 		} forEach _input;
 
 		_input
-	} execVM ""_encrypted\init_encrypted.sqf"";
+	} call compile preprocessFileLineNumbers ""_encrypted\init_encrypted.sqf"";
 	
 ");
 

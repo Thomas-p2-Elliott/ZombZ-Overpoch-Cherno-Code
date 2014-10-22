@@ -177,7 +177,7 @@ if (!isDedicated) then {
 
 };
 
-#define RESEC_VERBOSE
-#include "\z\addons\dayz_code\system\REsec.sqf"
+//#define RESEC_VERBOSE
+//#include "\z\addons\dayz_code\system\REsec.sqf"
 #include "system\BIS_Effects\init.sqf"
 
