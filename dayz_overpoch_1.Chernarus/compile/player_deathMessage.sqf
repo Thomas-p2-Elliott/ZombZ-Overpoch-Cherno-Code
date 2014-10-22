@@ -1,24 +1,10 @@
-'P2DZE_dM' addPublicVariableEventHandler {
+'P2DZE_DeathMessage_GUI' addPublicVariableEventHandler {
 	[] spawn {
 		private ["_victimName","_killerName","_killerDist","_picture","_adjective","_safeZoneOffset","_layer","_fullmessage"];
 		_victimName = P2DZE_dM select 0;
 		_killerName = P2DZE_dM select 1;
 		_killerDist = P2DZE_dM select 2;
 		_picture = 	  P2DZE_dM select 3;
-
-		switch (ceil(random 10)) do {
-    		case (1): 	{ _adjective = 'murdered'; 		};
-    		case (2): 	{ _adjective = 'taken out'; 	};
-    		case (3): 	{ _adjective = 'killed'; 		};
-    		case (4): 	{ _adjective = 'defeated'; 		};
-    		case (5): 	{ _adjective = 'wasted'; 		};
-    		case (6): 	{ _adjective = 'assasinated'; 	};
-    		case (7): 	{ _adjective = 'finished off';	};
-    		case (8): 	{ _adjective = 'dispatched'; 	};
-    		case (9): 	{ _adjective = 'slaughtered';	};
-    		case (10): 	{ _adjective = 'executed'; 		};
-   			default 	{ _adjective = 'killed'; 		};
-		};
 
 		offset_check =
 		{
@@ -110,4 +96,3 @@
 		] spawn bis_fnc_dynamictext;
 	};
 };
-

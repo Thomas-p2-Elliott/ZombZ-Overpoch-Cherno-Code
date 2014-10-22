@@ -37,6 +37,12 @@ fn_SZclean = 					compile preprocessFileLineNumbers "\z\addons\dayz_server\compi
 //remove extra gold bars (p2)
 fnc_removeExtraBars = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fnc_removeExtraBars.sqf";
 
+//PVP death messages
+player2_deathMessage =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\player2_deathMessage.sqf";
+
+//player2 stats logger compiles
+call compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_statsLogger.sqf";
+
 /* PVS/PVC - Skaronator */
 server_sendToClient =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_sendToClient.sqf";
 

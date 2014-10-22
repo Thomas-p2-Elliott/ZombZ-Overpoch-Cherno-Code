@@ -1,20 +1,50 @@
-private ["_characterID","_minutes","_newObject","_playerID","_infected","_victim","_victimName","_killer","_killerName","_weapon","_distance","_message","_loc_message","_key","_death_record"];
-//[unit, weapon, muzzle, mode, ammo, magazine, projectile]
+private ["_characterID","_minutes","_newObject","_playerID","_infected","_victimName","_victim","_killer","_killerName","_weapon","_distance","_loc_message","_nearLocations","_nearestLocation","_rExec","_killMsgThread","_death_record","_key"];
 _characterID = 	_this select 0;
 _minutes =		_this select 1;
 _newObject = 	_this select 2;
 _playerID = 	_this select 3;
 _infected =		_this select 4;
+
+//Enable Debug Messages?
+P2DZ_DeathMessage_Debug = true;
+
+//Enable Death Messages in Chat?
+P2DZ_DeathMessage_Chat_Enabled = true;
+
+//Enable GUI Death Messages?
+P2DZ_DeathMessage_GUI_Enabled = true;
+
 if (((count _this) >= 6) && {(typeName (_this select 5)) == "STRING"} && {(_this select 5) != ""}) then {
 	_victimName =	_this select 5;
 } else {
-	_victimName =  if (alive _newObject) then {name _newObject;} else {"";};
+	_victimName =  if (alive _newObject) then {name _newObject;} else {"Unknown";};
 };
-_victim = _newObject;
+
+_deathMessageSent = 	false;
+
+/* Get Victim Info */
+
+_victim = 			_newObject;
+_victimVehicle = 	vehicle _victim;
+
+/* Set Victim body name */
+
 _newObject setVariable ["bodyName", _victimName, true];
+
+/* Get Killer Info */
 
 _killer = _victim getVariable["AttackedBy", "nil"];
 _killerName = _victim getVariable["AttackedByName", "nil"];
+
+/* Get Town / Location Name */
+
+_nearLocations = nearestLocations [([_victim] call FNC_GetPos), ["NameCityCapital","NameCity","NameVillage","NameLocal"],2500];
+
+if (count _nearLocations > 0) then {
+	_nearestLocation = text (_nearLocations select 0); 
+} else {
+	_nearestLocation = "Wilderness";
+};
 
 // when a zombie kills a player _killer, _killerName && _weapon will be "nil"
 // we can use this to determine a zombie kill && send a customized message for that. right now no killmsg means it was a zombie.
@@ -25,134 +55,54 @@ if ((typeName _killer) != "STRING") then
 
 	if ((owner _victim) == (owner _killer)) then 
 	{
-		_message = format["%1 killed himself",_victimName];
 		_loc_message = format["PKILL: %1 killed himself", _victimName];
+
+		/*---------------------------------------------------------------------------
+		Death by Suicide & Vehicle Suicide Chat Message
+		---------------------------------------------------------------------------*/
+		if (P2DZ_DeathMessage_Chat_Enabled && !_deathMessageSent) then {
+
+			/* if the victim was in a vehicle */
+			if ((getText (configFile >> "CfgVehicles" >> (typeOf _victimVehicle) >> "vehicleClass")) in ["CarW","Car","CarD","Armored","Ship","Support","Air","ArmouredW","ArmouredD","SupportWoodland_ACR"]) then {
+				P2DZE_systemChat = format["%1 committed suicide near %2 in a %3",(_victimName),(_nearestLocation),(typeOf _victimVehicle)];
+				publicVariable "P2DZE_systemChat";
+				_deathMessageSent = true;
+			} else {
+				P2DZE_systemChat = format["%1 committed suicide near %2",(_victimName),(_nearestLocation)];
+				publicVariable "P2DZE_systemChat";
+				_deathMessageSent = true;
+			};
+		};
 	}
 	else
 	{
-		_message = format["%1 was killed by %2 with weapon %3 from %4m",_victimName, _killerName, _weapon, _distance];
-		_loc_message = format["PKILL: %1 was killed by %2 with weapon %3 from %4m", _victimName, _killerName, _weapon, _distance];
-
-
 		/*---------------------------------------------------------------------------
 		Death was caused by PvP
 		---------------------------------------------------------------------------*/
-		//Enable Debug Messages?
-		P2DZ_DeathMessage_Debug = true;
 
-		//Vars
-		_isCar =			false;
-		_isHeli =			false;
-		_isBoat = 			false;
-		_killedByVehicle = 	false;
-		_killerVehicle = 	objNull;
-		_weaponClassname =  "";
-		_picture = 			"";
-		_killerDistance = 	100;
-
-		//Code
-		_killerVehicle = 	vehicle _killer;
-		_isCar = 			_killerVehicle isKindOf "Car";
-		_isHeli = 			_killerVehicle isKindOf "Air";
-		_isBoat = 			_killerVehicle isKindOf "Sea";
-
-		diag_log _loc_message;
-
-		if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: Input: %1", str[_victimName,_killerName,_distance,_weapon]]); };
-
-		if ((getText (configFile >> "CfgVehicles" >> (typeOf _killerVehicle) >> "vehicleClass")) in ["CarW","Car","CarD","Armored","Ship","Support","Air","ArmouredW","ArmouredD","SupportWoodland_ACR"]) then {
-			_killedByVehicle = true;
+		/*---------------------------------------------------------------------------
+		PVP Kill Messages (GUI & Chat)
+		---------------------------------------------------------------------------*/
+		if (P2DZ_DeathMessage_GUI_Enabled) then {
+			[_killer,_killerName,_victim,_victimName,_weapon,_distance,_nearestLocation] call player2_deathMessage;
+			_deathMessageSent = true;
 		};
 
-		if (_isCar || _isHeli || _isBoat) then {
-			_killedByVehicle = true;
-		};
-
-		if (isNil "_weapon") then {
-
-			if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _weapon, setting to: %1", weaponState _killer]); };
-
-			_weaponClassname = weaponState _killer;
-
-			if (isNil "_weaponClassname") then {
-				if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _weapon, setting to: Unknown"]); };
-				_weaponClassname = ["Unknown"];
-			};
-		} else {
-			_weaponClassname = [_weapon];
-		};
-
-
-		if (_killedByVehicle) then {
-			_weaponClassname = typeOf _killerVehicle;
-			_picture = (gettext (configFile >> "cfgVehicles" >> (_weaponClassname) >> "picture"));
-		} else {
-			if (_weaponClassname select 0 == "Throw") then 
-			{
-				_weaponClassname = _weaponClassname select 3;
-			}
-			else
-			{
-				_weaponClassname = _weaponClassname select 0;
-			};
-
-			_picture = (gettext (configFile >> "cfgWeapons" >> (_weaponClassname) >> "picture"));
-		};
-
-		if (isNil "_victimName") then {
-
-			if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _victimName, setting to: %1", name _victim]);};
-
-			_victimName = name _victim;
-
-			if (isNil "_victimName") then {
-				if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _victimName, setting to: Unknown"]); };
-			};
-		};
-		
-		if (isNil "_killerName") then {
-
-			if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _killerName, setting to: %1", name _killer]);};
-
-			_killerName = name _killer;
-
-			if (isNil "_killerName") then {
-				if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _killerName, setting to: Unknown"]); };
-				_killerName = "Unknown";
-			};
-		};
-
-		
-		if (isNil "_distance") then {
-
-			if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _distance, setting to: KK_fnc_distanceASL Result"]);};
-
-			_killerDistance = [getPosASL _victim, getPosASL _killer] call KK_fnc_distanceASL;
-
-			if (isNil "_killerDistance") then {
-				if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _killerDistance, setting to: %1", _victim distance _killer]);};
-				
-				_killerDistance = _victim distance _killer;
-
-				if (isNil "_killerDistance") then {
-					if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _killerDistance, setting to: 100"]); };
-					_killerDistance = 100;
-				};
-			};
-		} else {
-			_killerDistance = _distance;
-		};
-		_killerDistance = floor(_killerDistance);
-
-		if (!isNil "_victimName" && !isNil "_killerName" && !isNil "_killerDistance" && !isNil "_picture") then {
-			if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: Firing P2DZE_dM with: %1", str[_victimName,_killerName,_killerDistance,_picture]]); };
-
-			P2DZE_dM = [_victimName,_killerName,_killerDistance,_picture];
-			publicVariable "P2DZE_dM";
-		};
 	};
 
-	diag_log _loc_message;
+	/*---------------------------------------------------------------------------
+	Death was caused by Other Killer?
+	---------------------------------------------------------------------------*/
+
+
+	/*---------------------------------------------------------------------------
+	Other Killer Death Message (Chat)
+	---------------------------------------------------------------------------*/
+	if (P2DZ_DeathMessage_Chat_Enabled && !_deathMessageSent) then {
+		P2DZE_systemChat = format["%1 was killed near %2",(_victimName),(_nearestLocation)];
+		publicVariable "P2DZE_systemChat";
+		_deathMessageSent = true;
+	};
 
 
 	// build array to store death messages to allow viewing at message board in trader citys.
@@ -172,14 +122,34 @@ if ((typeName _killer) != "STRING") then
 	_victim setVariable["AttackedFromDistance", "nil", true];
 };
 
-// Might not be the best way...
-/*
-if (isnil "dayz_disco") then {
-	dayz_disco = [];
-};
-*/
+/*---------------------------------------------------------------------------
+Death was caused by no Killer?
+---------------------------------------------------------------------------*/
 
-// dayz_disco = dayz_disco - [_playerID];
+if (P2DZ_DeathMessage_Debug) then {
+	diag_log("P2DZ_DeathMessage_Debug: Player Died");
+	diag_log(format["	_this: %1",(str _this)]);
+	diag_log(format["	_killer: %1",(str _killer)]);
+	diag_log(format["	_killerName: %1",(str _killerName)]);
+	diag_log(format["	_victim: %1",(str _victim)]);
+	diag_log(format["	_victimName: %1",(str _victimName)]);
+	diag_log(format["	_victimVehicle: %1",(str (typeOf _victimVehicle))]);
+	diag_log(format["	_weapon: %1",(str _weapon)]);
+	diag_log(format["	_distance: %1",(str _distance)]);
+	diag_log(format["	_nearestLocation: %1",(str _nearestLocation)]);
+	diag_log(format["									"]);
+};
+
+/*---------------------------------------------------------------------------
+Unknown Causes Death Message (Chat)
+---------------------------------------------------------------------------*/
+
+if (P2DZ_DeathMessage_Chat_Enabled && !_deathMessageSent) then {
+	P2DZE_systemChat = format["%1 died near %2",(_victimName),(_nearestLocation)];
+	publicVariable "P2DZE_systemChat";
+	_deathMessageSent = true;
+};
+
 _newObject setVariable["processedDeath",diag_tickTime];
 
 if (typeName _minutes == "STRING") then
