@@ -56,7 +56,7 @@ menu_GUE_Soldier_MG = [
 ];
 // Aircraft Dealer
 menu_Worker2 = [
-	[["Airplanes",517],["Helicopter Unarmed",519]],
+	[["Airplanes",517],["Helicopter Unarmed",519],["Helicopter Armed",512]],
 	[],
 	"neutral"
 ];
