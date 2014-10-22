@@ -1,4 +1,5 @@
 private ["_killer","_killerName","_victim","_victimName","_weapon","_distance","_isCar","_isHeli","_isBoat","_killedByVehicle","_weaponClassname","_picture","_killerDistance","_nearestLocation","_killerVehicle","_adjective","_rExec","_message"];
+_killer =			_this select 0;
 _killerName	=		_this select 1;
 _victim = 			_this select 2;
 _victimName = 		_this select 3;
