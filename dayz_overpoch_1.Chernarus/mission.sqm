@@ -1255,37 +1255,37 @@ class Mission
 		};
 		class Item2
 		{
-			position[]={4476.95,0.01,2195.58};
+			position[]={4061.40,0,2325.03};
 			name="spawn0"; //spawn_balota
 			type="Empty";
 		};
 		class Item3
 		{
-			position[]={1721.35,1.8203,2001.41};
+			position[]={2189.54,0,2090.20};
 			name="spawn1"; //spawn_kamenka
 			type="Empty";
 		};
 		class Item4
 		{
-			position[]={7056.23,21.0023,2314.62};
+			position[]={6692.25,0,2527.57};
 			name="spawn2"; //spawn_cherno
 			type="Empty";
 		};
 		class Item5
 		{
-			position[]={10287.8,10.6831,1618.21};
+			position[]={10360.75,0,2179.79};
 			name="spawn3"; //spawn_elektro
 			type="Empty";
 		};
 		class Item6
 		{
-			position[]={13206.1,0.00142431,6833.44};
+			position[]={13455.94,0,5905.62};
 			name="spawn4"; //spawn_sol
 			type="Empty";
 		};
 		class Item7
 		{
-			position[]={13181.6,8.00784,9851.46};
+			position[]={11941.82,0,8874.15};
 			name="spawn5"; //spawn_berezino
 			type="Empty";
 		};

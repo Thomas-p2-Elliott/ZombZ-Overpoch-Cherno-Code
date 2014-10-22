@@ -290,14 +290,6 @@ if (isServer && isNil "sm_done") then {
 
 			if (_object isKindOf "AllVehicles") then {
 				/*---------------------------------------------------------------------------
-				Shoot From Helis - UH1Y & MH60S
-				---------------------------------------------------------------------------*/
-				if ((typeOf _object) in ["MH60S","MH60S_DZ","MH60S_DZE","UH1Y","UH1Y_DZ","UH1Y_DZE"]) then {
-					_object setVehicleInit "[this] execVM ""heliDoor\heliDoor_init.sqf"";";
-				};
-				
-
-				/*---------------------------------------------------------------------------
 				Vehicle Painting
 				---------------------------------------------------------------------------*/
 				private ["_colour","_colour2","_clrinit","_clrinit2"];
@@ -345,8 +337,6 @@ if (isServer && isNil "sm_done") then {
 					serverVehicleCounter set [count serverVehicleCounter,_type];
 				};
 				[_object] call fn_SZclean;
-
-				processInitCommands;
 			};
 		};
 	} forEach (_BuildingQueue + _objectQueue);
