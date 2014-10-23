@@ -76,10 +76,12 @@ set_time_limit(300);
 					}
 
 					$sell = round(($buy/100) *50);
+					$buy = '{'.$buy.'}';
+					$sell = '{'.$sell.'}';
 					$buildfile = "$buildfile \tclass $item {\n";
 					$buildfile = "$buildfile \t\ttype = \"$subtype\";\n";
-					$buildfile = "$buildfile \t\tbuy[]={$buy};\n";
-					$buildfile = "$buildfile \t\tsell[]={$sell};\n";
+					$buildfile = "$buildfile \t\tbuy[]=$buy;\n";
+					$buildfile = "$buildfile \t\tsell[]=$sell;\n";
 					$buildfile = "$buildfile \t};\n";
 
 

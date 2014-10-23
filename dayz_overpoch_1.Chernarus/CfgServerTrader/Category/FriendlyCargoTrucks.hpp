@@ -1,264 +1,72 @@
- class Category_564 {
-        class 118c98c123c128c118c143c130c147c142c134c133c128c117c108c128c102c113c82c128c101c123c102c82 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class 122c102c127c132c122c147c134c151c146c138c137c132c121c112c132c104c110c123c132c106c117c86c132c105c127c106c86 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class 107c87c112c117c89c90c92c117c90c112c91c71 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class 107c87c112c117c95c100c105c117c90c112c91c71 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class 106c86c111c116c103c106c116c89c111c90c70 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c118c111c128c102c113c82c128c101c123c102c82 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class 102c123c136c126c108c137c144c127c140c121c93c116c121c95c106c75 {
-              type = "trade_any_vehicle";
-               buy[] ={375};
-              sell[]={188};
-        };
-        class 106c127c140c130c112c141c148c131c144c125c114c105c125c97c103c116c125c99c110c79 {
-              type = "trade_any_vehicle";
-               buy[] ={375};
-              sell[]={188};
-        };
-        class 122c102c127c132c122c147c134c151c146c138c137c132c121c112c132c104c110c123c132c106c117c86c132c105c127c106c87 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c118c111c128c102c113c82c128c101c123c102c83 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c117c108c128c102c113c82c128c101c123c102c83 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class 106c86c111c116c103c106c116c89c111c90c71 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class 107c87c112c117c95c100c105c117c90c112c91c72 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class 107c87c112c117c89c90c92c117c90c112c91c72 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class 122c102c127c132c122c147c134c151c146c138c137c132c121c112c132c104c110c123c132c106c117c86c132c105c127c106c88 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c118c111c128c102c113c82c128c101c123c102c84 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c117c108c128c102c113c82c128c101c123c102c84 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class 106c86c111c116c103c106c116c89c111c90c72 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class 107c87c112c117c95c100c105c117c90c112c91c73 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class 107c87c112c117c89c90c92c117c90c112c91c73 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class 107c87c112c117c89c90c92c117c90c112c91c74 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class 107c87c112c117c95c100c105c117c90c112c91c74 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class 106c86c111c116c103c106c116c89c111c90c73 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c117c108c128c102c113c82c128c101c123c102c85 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c118c111c128c102c113c82c128c101c123c102c85 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class 122c102c127c132c122c147c134c151c146c138c137c132c121c112c132c104c110c123c132c106c117c86c132c105c127c106c89 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-}; 
- class Category_570 {
-        class 118c98c123c128c118c143c130c147c142c134c133c128c117c108c128c102c113c82c128c101c123c102c82 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class 122c102c127c132c122c147c134c151c146c138c137c132c121c112c132c104c110c123c132c106c117c86c132c105c127c106c86 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class 107c87c112c117c89c90c92c117c90c112c91c71 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class 107c87c112c117c95c100c105c117c90c112c91c71 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class 106c86c111c116c103c106c116c89c111c90c70 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c118c111c128c102c113c82c128c101c123c102c82 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class 102c123c136c126c108c137c144c127c140c121c93c116c121c95c106c75 {
-              type = "trade_any_vehicle";
-               buy[] ={375};
-              sell[]={188};
-        };
-        class 106c127c140c130c112c141c148c131c144c125c114c105c125c97c103c116c125c99c110c79 {
-              type = "trade_any_vehicle";
-               buy[] ={375};
-              sell[]={188};
-        };
-        class 122c102c127c132c122c147c134c151c146c138c137c132c121c112c132c104c110c123c132c106c117c86c132c105c127c106c87 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c118c111c128c102c113c82c128c101c123c102c83 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c117c108c128c102c113c82c128c101c123c102c83 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class 106c86c111c116c103c106c116c89c111c90c71 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class 107c87c112c117c95c100c105c117c90c112c91c72 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class 107c87c112c117c89c90c92c117c90c112c91c72 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class 122c102c127c132c122c147c134c151c146c138c137c132c121c112c132c104c110c123c132c106c117c86c132c105c127c106c88 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c118c111c128c102c113c82c128c101c123c102c84 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c117c108c128c102c113c82c128c101c123c102c84 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class 106c86c111c116c103c106c116c89c111c90c72 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class 107c87c112c117c95c100c105c117c90c112c91c73 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class 107c87c112c117c89c90c92c117c90c112c91c73 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class 107c87c112c117c89c90c92c117c90c112c91c74 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class 107c87c112c117c95c100c105c117c90c112c91c74 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class 106c86c111c116c103c106c116c89c111c90c73 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c117c108c128c102c113c82c128c101c123c102c85 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class 118c98c123c128c118c143c130c147c142c134c133c128c118c111c128c102c113c82c128c101c123c102c85 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class 122c102c127c132c122c147c134c151c146c138c137c132c121c112c132c104c110c123c132c106c117c86c132c105c127c106c89 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-};
+class Category_570 {
+ 	class 99c93c118c123c114c139c128c138c133c135c123c105c129c128c97c146c125c127 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ 	class 95c111c97c106c79c124c101c110c124c113c104c124c100c114c98c124c98c109c78 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1400};
+ 		sell[]={700};
+ 	};
+ 	class 95c113c111c81c77c124c106c100c124c113c104c124c100c114c98c124c98c109c78 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={700};
+ 		sell[]={350};
+ 	};
+ 	class 92c110c108c78c74c121c110c101c121c97c111c95c121c95c106c75 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ 	class 95c113c111c81c77c124c106c100c124c113c104c124c102c107c112c124c98c109c78 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={700};
+ 		sell[]={350};
+ 	};
+ 	class 92c110c108c78c74c121c110c101c121c99c104c109c121c95c106c75 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ 	class 100c72c72c74c74c118c100c92c109c118c92c103c72 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={900};
+ 		sell[]={450};
+ 	};
+ 	class 95c89c114c119c110c135c124c134c129c131c119c92c114c93 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1000};
+ 		sell[]={500};
+ 	};
+ 	class 85c103c101c76c67c114c87c109c88 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1700};
+ 		sell[]={850};
+ 	};
+ 	class 88c106c104c79c70c117c94c103c117c90c112c91 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1400};
+ 		sell[]={700};
+ 	};
+ 	class 95c84c105c69c72c114c87c109c88 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1800};
+ 		sell[]={900};
+ 	};
+ 	class 98c87c108c72c75c117c94c103c117c90c112c91 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1400};
+ 		sell[]={700};
+ 	};
+ 	class 106c78c78c80c94c138c127c146c137c124c114c107c124c98c109c78c124c97c119 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ 	class 106c78c78c80c94c138c127c146c137c124c113c104c124c98c109c78c124c97c119 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ };
