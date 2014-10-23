@@ -83,4 +83,5 @@ if (!isDedicated) then {
 	"norrnRnoAnim"			addPublicVariableEventHandler {(_this select 1) execVM "\z\addons\dayz_code\medical\publicEH\noAnim.sqf"};
 
 	'P2DZE_systemChat'	 	addPublicVariableEventHandler {	systemChat(format["%1",(_this select 1)]);	};
+	'P2DZE_miniMsg'			addPublicVariableEventHandler {	_id = (_this select 1) spawn p2_miniMsg; };
 };

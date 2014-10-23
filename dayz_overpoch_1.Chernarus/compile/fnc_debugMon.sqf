@@ -58,6 +58,23 @@ fnc_bloodCol = {
 	_output
 };
 
+fnc_pDir = {
+	private["_d","_o"];
+	_d = (round(getDir (vehicle player)));
+	_o = switch (true) do {
+ 		default { (format["N %1", _pDir]) };
+ 		case (((_pDir >= 355) && (_pDir <=359)) || ((_pDir >= 0) && (_pDir <= 5))): { (format["N %1", _pDir]) };
+	    case ((_pDir > 5) && (_pDir < 85)): { (format["NE %1", _pDir]) };
+	    case ((_pDir >= 85) && (_pDir <= 95)): { (format["E %1", _pDir]) };
+	    case ((_pDir > 95) && (_pDir < 175)): { (format["SE %1", _pDir]) };
+	    case ((_pDir >= 175) && (_pDir <= 185)): { (format["S %1", _pDir]) };
+	    case ((_pDir > 185) && (_pDir < 265)): { (format["SW %1", _pDir]) };
+	    case ((_pDir >= 265) && (_pDir <= 275)): { (format["W %1", _pDir]) };
+	    case ((_pDir > 275) && (_pDir < 355)): { (format["NW %1", _pDir]) };
+	};
+	_o
+};
+
 
 fnc_debugFull = {
 private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills","_p2zKills","_p2wep","_p2skin","_zombzVehCount","_zombzZedCount","_zombztimeToRestart","_pDir","_gpsP2osZombZ","_p2bl","_p2c"];
@@ -69,17 +86,17 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 
 	if (P2DZ_humanityLevel < 0) then {
 		P2DZ_humanityPrefix = "Bandit Level: ";
-		P2DZ_humanityLevelText = format["%1 %2",P2DZ_humanityPrefix, P2DZ_humanityLevel];
-	};
-
-	if (P2DZ_humanityLevel > 0) then {
-		P2DZ_humanityPrefix = "Hero Level: ";
-		P2DZ_humanityLevelText = format["%1 %2",P2DZ_humanityPrefix, P2DZ_humanityLevel];
-	};
-
-	if (P2DZ_humanityLevel == 0) then {
-		P2DZ_humanityPrefix = "Survivor Level: ";
-		P2DZ_humanityLevelText = format["%1 %2",P2DZ_humanityPrefix, P2DZ_humanityLevel];
+		P2DZ_humanityLevelText = format["%1 %2",P2DZ_humanityPrefix, (abs P2DZ_humanityLevel)];
+	} else {
+		if (P2DZ_humanityLevel > 0) then {
+			P2DZ_humanityPrefix = "Hero Level: ";
+			P2DZ_humanityLevelText = format["%1 %2",P2DZ_humanityPrefix, P2DZ_humanityLevel];
+		} else {
+			if (P2DZ_humanityLevel == 0) then {
+				P2DZ_humanityPrefix = "Survivor Level: ";
+				P2DZ_humanityLevelText = format["%1 %2",P2DZ_humanityPrefix, P2DZ_humanityLevel];
+			};
+		};
 	};
 
 	if (player == vehicle player) then
@@ -95,7 +112,7 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 
 	P2DZ_debugMon_Mode = "Full"; P2DZ_debugMon_ToggleKey = "F5";
 
-	_p2totalPlayers = (({isPlayer _x} count (getPos vehicle player nearEntities [["AllVehicles"], 14000]))-1);
+	_p2totalPlayers = (({isPlayer _x} count (getPos vehicle player nearEntities [["AllVehicles"], 14000])));
 	_p2within2500 = (({isPlayer _x} count (getPos vehicle player nearEntities [["AllVehicles"], 2500]))-1);
 
 	_p2mkills = (player getVariable['humanKills', 0]);
@@ -116,19 +133,8 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	_zombztimeToRestart = 	(90 - (round(serverTime / 60)));
 
 	_pDir = (round(getDir (vehicle player))); _gpsP2osZombZ = (mapGridPosition getPos player);
-	_pDirT = switch (true) do {
-	 		default { (format["N %1", _pDir]) };
-	 		case (((_pDir >= 355) && (_pDir <=359)) || ((_pDir >= 0) && (_pDir <= 5))): { (format["N %1", _pDir]) };
-		    case ((_pDir > 5) && (_pDir < 85)): { (format["NE %1", _pDir]) };
-		    case ((_pDir >= 85) && (_pDir <= 95)): { (format["E %1", _pDir]) };
-		    case ((_pDir > 95) && (_pDir < 175)): { (format["SE %1", _pDir]) };
-		    case ((_pDir >= 175) && (_pDir <= 185)): { (format["S %1", _pDir]) };
-		    case ((_pDir > 185) && (_pDir < 265)): { (format["SW %1", _pDir]) };
-		    case ((_pDir >= 265) && (_pDir <= 275)): { (format["W %1", _pDir]) };
-		    case ((_pDir > 275) && (_pDir < 355)): { (format["NW %1", _pDir]) };
-	};
+	_pDirT = call fnc_pDir;
 
-	hintSilent "";
 	["<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Mode: " + P2DZ_debugMon_Mode + "</t><t size='1' font='Bitstream' align='right'>Key: " + P2DZ_debugMon_ToggleKey + "</t>", 
 	"<img align='center' size=" + str _p2ps + " image=" + str _p2p + "/><br/>
 	<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Players:</t><t size='1' font='Bitstream' align='right' color='#FFFFFF'>" + str _p2totalPlayers + "</t><br/>
@@ -137,7 +143,7 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	<t size='1' font='Bitstream' align='left' color='#8BFF6B'>Bandit Kills: </t><t size='1' font='Bitstream' align='right' color='#8BFF6B'>" + str _p2bKills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Blood: </t><t size='1' font='Bitstream' align='right' color=" + str P2DZ_debugBloodCol + ">" + str r_player_blood + "</t><br/><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Gun: </t><t size='0.75' font='Bitstream' align='right' color='#01DFD7'>" + _p2wep + "</t><br/>
-	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Headshots / Z Kills: </t><t size='1' font='Bitstream' align='right' color='#01DFD7'>" + str _p2zKills + "/" + str _p2zHSKills + "</t><br/>
+	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Headshots / Z Kills: </t><t size='1' font='Bitstream' align='right' color='#01DFD7'>" + str _p2zHSKills + "/" + str _p2zKills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Skin: </t><t size='0.8' font='Bitstream' align='right' color='#01DFD7'>" + _p2skin + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Humanity: </t><t size='1' font='Bitstream' align='right' color='#01DFD7'>" + str P2DZ_humanity + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>"+ P2DZ_humanityPrefix + "</t><t size='1' font='Bitstream' align='right' color='#01DFD7'>" + str P2DZ_humanityLevel + "</t><br/><br/>
@@ -159,37 +165,14 @@ private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
 	_p2bKills = (player getVariable['banditKills', 0]);
 	_pDir = (round(getDir (vehicle player)));
 	_gpsP2osZombZ = (mapGridPosition getPos player);
-	_pDirT = switch (true) do {
-	 		default { (format["N %1", _pDir]) };
-	 		case (((_pDir >= 355) && (_pDir <=359)) || ((_pDir >= 0) && (_pDir <= 5))): { (format["N %1", _pDir]) };
-		    case ((_pDir > 5) && (_pDir < 85)): { (format["NE %1", _pDir]) };
-		    case ((_pDir >= 85) && (_pDir <= 95)): { (format["E %1", _pDir]) };
-		    case ((_pDir > 95) && (_pDir < 175)): { (format["SE %1", _pDir]) };
-		    case ((_pDir >= 175) && (_pDir <= 185)): { (format["S %1", _pDir]) };
-		    case ((_pDir > 185) && (_pDir < 265)): { (format["SW %1", _pDir]) };
-		    case ((_pDir >= 265) && (_pDir <= 275)): { (format["W %1", _pDir]) };
-		    case ((_pDir > 275) && (_pDir < 355)): { (format["NW %1", _pDir]) };
-	};
+	_pDirT = call fnc_pDir;
 
-
-	hintSilent "";
 	["<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Mode: " + P2DZ_debugMon_Mode + "</t><t size='1' font='Bitstream' align='right'>Key: " + P2DZ_debugMon_ToggleKey + "</t>", 
 	"<t size='1' font='Bitstream' align='left' color='#FFFFFF'> Players (2500m): </t><t size='1' font='Bitstream' align='right' color='#FFFFFF'>" + str _p2within2500 + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#FC473A'>Murders:</t><t size='1' font='Bitstream' align='right' color='#FC473A'>" + str _p2mkills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#8BFF6B'>Bandit Kills:</t><t size='1' font='Bitstream' align='right' color='#8BFF6B'>" + str _p2bKills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Blood: </t><t size='1' font='Bitstream' align='right' color=" + str P2DZ_debugBloodCol + ">" + str r_player_blood + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#F7F2E0'>DIR: "+ _pDirT + "</t><t size='1' font='Bitstream' align='right' color='#F7F2E0'>GPS: " + _gpsP2osZombZ + "</t>", 
-	P2DZE_debugCol, //debug design by player2
-	false
-	] call P2DZ_hintMini;
-};
-
-fnc_debugOff = {
-	hintSilent "";
-	P2DZ_debugMon_Mode = "Off";
-	P2DZ_debugMon_ToggleKey = "F5";
-	["<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Mode: " + P2DZ_debugMon_Mode + "</t><t size='1' font='Bitstream' align='right'>Key: " + P2DZ_debugMon_ToggleKey + "</t>", 
-	"<t size='1' font='Bitstream' align='center' color='#FFFFFF'><br/> Re-Enable with the "+ P2DZ_debugMon_ToggleKey + " button.</t>", 
 	P2DZE_debugCol, //debug design by player2
 	false
 	] call P2DZ_hintMini;
@@ -210,18 +193,16 @@ fnc_debugMon = {
 				{
 				    case 1:
 				    {
-				        _handle1 = [] call fnc_debugOff;
+				        667 cutText ["", "PLAIN"];
 						P2DZ_debugMonitor = false;
-						if (random 10 > 8) then { player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true]; };
 				    };
 				    case 2:
 				    {
-
 				    	P2DZ_debugBloodCol = [] call fnc_bloodCol;
 				        _handle2 = [] call fnc_debugFull;
 						P2DZ_debugMonitor = true;
 						if (random 10 > 8) then { player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true]; };
-						sleep P2DZ_debugMonSleep;	//double sleep for big mode
+						sleep P2DZ_debugMonSleep; //double sleep for full mode
 				    };
 				    case 3:
 				    {
@@ -232,9 +213,8 @@ fnc_debugMon = {
 					};
 					default
 					{
-						_handle0 = [] call fnc_debugOff;
-						P2DZ_debugMonitor = false;
-						if (random 10 > 8) then { player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true]; };
+				        667 cutText ["", "PLAIN"];
+				        P2DZ_debugMonitor = false;
 					};
 				};
 			};
