@@ -15,7 +15,7 @@ $platform = "mysql";
 $database = "dayz_epoch"; #Databse Name
 $host = "192.223.27.54";# IP
 $port = "3306"; # Port (default 3306)
-$user = ""; # Username 
+$user = "root"; # Username 
 $pw = ""; # Password
 #-----------------------------------------------------------------------------------------------
 $dsn = "dbi:$platform:$database:$host:$port"; #do not edit this.
