@@ -36,7 +36,7 @@ if (!isDedicated) then {
 	PlotNearbyHumans = 				compile preprocessFileLineNumbers "plotManagement\plotNearbyHumans.sqf";
 	PlotAddFriend =					compile preprocessFileLineNumbers "plotManagement\plotAddFriend.sqf";
 	PlotRemoveFriend = 				compile preprocessFileLineNumbers "plotManagement\plotRemoveFriend.sqf";
-	//MaintainPlot =					compile preprocessFileLineNumbers "plotManagement\maintain_areaSC.sqf";				##encrypted
+	MaintainPlot =					compile preprocessFileLineNumbers "compile\maintain_areaSC.sqf";			
 	PlotPreview =					compile preprocessFileLineNumbers "plotManagement\plotToggleMarkers.sqf";
 	PlotObjects = 					compile preprocessFileLineNumbers "plotManagement\plotObjects.sqf";
 	/*Plot End*/
@@ -54,7 +54,7 @@ if (!isDedicated) then {
 	/*DoorManagement End*/
 
 	/* Vehicle Painting */
-	//VehicleColourPaint =			compile preprocessFileLineNumbers "Paint\vehicleColourPaint.sqf";						##encrypted
+	VehicleColourPaint =			compile preprocessFileLineNumbers "Paint\vehicleColourPaint.sqf";						
 	VehicleColourUpdate =			compile preprocessFileLineNumbers "Paint\VehicleColourUpdate.sqf";
 	VehicleColourUpdate2 =			compile preprocessFileLineNumbers "Paint\VehicleColourUpdate2.sqf";
 	player_paint =					compile preprocessFileLineNumbers "Paint\player_paint.sqf";
@@ -77,10 +77,10 @@ if (!isDedicated) then {
 	//pure custom
 	snap_build = 					compile preprocessFileLineNumbers "compile\snap_build.sqf";
 	fnc_removeExtraBars =			compile preprocessFileLineNumbers "compile\fnc_removeExtraBars.sqf";
-	//p2_randomMags =				compile preprocessFileLineNumbers "compile\p2_randomMags.sqf";							##encrypted
 	player2_haloSpawn =				compile preprocessFileLineNumbers "actions\player2_haloSpawn.sqf";
 	//call 							compile preprocessFileLineNumbers "compile\fn_hintMsg.sqf";								##encrypted
-
+	//p2_randomMags =				compile preprocessFileLineNumbers "compile\p2_randomMags.sqf";							##encrypted
+	player_humanityMorph =			compile preprocessFileLineNumbers "compile\player_humanityMorph.sqf";
 
 	BIS_Effects_Burn = 				compile preprocessFile "\ca\Data\ParticleEffects\SCRIPTS\destruction\burn.sqf";
 	player_traderCity = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_traderCity.sqf";
@@ -94,7 +94,6 @@ if (!isDedicated) then {
 	player_dumpBackpack = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_dumpBackpack.sqf";
 	building_spawnZombies =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\building_spawnZombies.sqf";
 	player_harvest =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_harvest.sqf";
-	player_humanityMorph =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_humanityMorph.sqf";
 	player_switchModel =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_switchModel.sqf";
 	player_fired =					compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_fired.sqf";			//Runs when player fires. Alerts nearby Zeds depending on calibre && audial rating
 	player_removeNearby =    		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_removeNearby.sqf";
@@ -213,10 +212,48 @@ if (!isDedicated) then {
 	epoch_itemCost = {
 		_cost = 0;
 		_cost = (_this select 0) select 1;
-		diag_log format["DEBUG TRADER epoch_itemCost: _this 0-0 (%1) _this (%2)", _cost, _this];
 		_cost
 	};
 
+	epoch_totalCurrency = {
+		_total_currency = 0;
+		_total_currency = [false,player] call p2_gv;
+		_total_currency
+	};
+
+	epoch_returnChange = {
+		private ["_trade_total","_part_inWorth","_part_in_configClass","_total_currency","_part","_worth","_return_change","_total","_briefcase_100oz","_gold_10oz_a","_gold_10oz_b","_gold_10oz","_gold_1oz_a","_gold_1oz_b","_gold_1oz","_silver_10oz_a","_silver_10oz_b","_silver_10oz","_silver_1oz_a","_silver_1oz_b","_silver_1oz","_successful","_buyOrSell","_total_items"];
+		_successful = false;
+		_canAfford = false;
+		_buyOrSell = (_this select 1);
+		_trade_total = (_this select 0) call epoch_itemCost;
+		_total_currency_dry = call epoch_totalCurrency;
+		_return_change_dry = 0;
+		if (_buyOrSell == 0) then {
+			_return_change_dry = _total_currency_dry - _trade_total; 
+		} else {
+			_return_change_dry = _total_currency_dry + _trade_total; 
+		};
+		if (_return_change_dry >= 0) then {
+			_canAfford = true;
+		};
+
+		if (_canAfford) then {
+			_total_currency = _total_currency_dry;
+			_return_change = 0;
+			if (_buyOrSell == 0) then {
+				_return_change = _total_currency - _trade_total; 
+			} else {
+				_return_change = _total_currency + _trade_total; 
+			};
+			if (_return_change >= 0) then {
+				_total = _return_change;
+				[player,_total] call p2_gc;
+				_successful = true;
+			};
+		};
+		_successful
+	};
 
 	// trader menu code
 	call compile preprocessFileLineNumbers "compile\player_traderMenuConfig.sqf";
@@ -225,13 +262,13 @@ if (!isDedicated) then {
 	call compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_murderMenu.sqf";
 
 	dayz_meleeMagazineCheck = {
-                private["_meleeNum","_magType"];
-                _magType =         ([] + getArray (configFile >> "CfgWeapons" >> _wpnType >> "magazines")) select 0;
-                _meleeNum = ({_x == _magType} count magazines player);
-                if (_meleeNum < 1) then {
-                        player addMagazine _magType;
-                };
+        private["_meleeNum","_magType"];
+        _magType =         ([] + getArray (configFile >> "CfgWeapons" >> _wpnType >> "magazines")) select 0;
+        _meleeNum = ({_x == _magType} count magazines player);
+        if (_meleeNum < 1) then {
+                player addMagazine _magType;
         };
+    };
 
 	dayz_originalPlayer = player;
 

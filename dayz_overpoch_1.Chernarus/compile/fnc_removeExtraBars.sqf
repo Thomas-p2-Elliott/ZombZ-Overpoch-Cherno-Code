@@ -29,11 +29,8 @@ if (_timeSinceLast > 2) exitWith {
 	if (_d) then { diag_log("P2DEBUG: fnc_removeExtraBars: Input: " + str _this); };
 
 	if (isNil "_zGold") exitWith {
-		_zGold = player getVariable ["ZombZGold", nil];
-		waitUntil {
-		  sleep 0.1;
-		  !isNil "_zGold"
-		};
+		_zGold = [true,player] call p2_gv;
+		
 		if (_d) then { diag_log("P2DEBUG: fnc_removeExtraBars: Past WaitUntil, Gold: " + str _zGold + " Line: " + str __LINE__); };
 
 		[_zGold] spawn fnc_removeExtraBars;
