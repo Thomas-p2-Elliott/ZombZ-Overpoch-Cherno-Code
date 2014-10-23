@@ -39,12 +39,12 @@ if (!isNull _playerObj) then {
 		_playerObj setVariable["NORRN_unconscious",true, true];
 		_playerObj setVariable["unconsciousTime",15,true];
 	
-		diag_log format["COMBAT LOGGED: %1 (%2) at location %3", _playerName,_timeout,(getPos _playerObj)];
-		diag_log format["SET UNCONCIOUSNESS: %1", _playerName];
+		diag_log format["COMBAT LOGGED: %4/%1 (%2) at location %3", _playerName,_timeout,(getPos _playerObj),_playerUID];
 	
 		// Message whole server when player combat logs
-		_message = format["PLAYER COMBAT LOGGED: %1",_playerName];
-		[nil, nil, rTitleText, _message, "PLAIN"] call RE;
+		_message = format["%1 Combat Logged, KO Timer Set.",_playerName];
+		P2DZE_systemChat = _message;
+		publicVariable 'P2DZE_systemChat'; 
 	};
 
 	diag_log format["DISCONNECT: %1 (%2) Object: %3, _characterID: %4 at loc %5", _playerName,_playerUID,_playerObj,_characterID, (getPos _playerObj)];
