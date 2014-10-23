@@ -26,6 +26,7 @@ ColourVehicles = [
 	"GNT_C185C",
 	"GNT_C185T",
 	"Mi17_medevac_Ins",
+	"350z_ruben", //test
 	"GNT_C185E",
 	"GNT_C185F",
 	"GNT_C185U",

@@ -24,7 +24,6 @@ _caller disableAI "anim";
 sleep 0.1;
 titletext ["","BLACK IN", 0.1];
 
-call compile format ["_caller setVehicleInit 'nul = [this,%1] execVM ''heliDoor\while_atDoor1.sqf'''", _vcl];
 processInitCommands;
 
 if (true) exitWith {};
