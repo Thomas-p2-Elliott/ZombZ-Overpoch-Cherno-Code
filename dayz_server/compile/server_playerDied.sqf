@@ -35,6 +35,8 @@ _newObject setVariable ["bodyName", _victimName, true];
 
 _killer = _victim getVariable["AttackedBy", "nil"];
 _killerName = _victim getVariable["AttackedByName", "nil"];
+_weapon = _victim getVariable["AttackedByWeapon", "nil"];
+_distance = _victim getVariable["AttackedFromDistance", "nil"];
 
 /* Get Town / Location Name */
 
@@ -50,9 +52,6 @@ if (count _nearLocations > 0) then {
 // we can use this to determine a zombie kill && send a customized message for that. right now no killmsg means it was a zombie.
 if ((typeName _killer) != "STRING") then
 {
-	_weapon = _victim getVariable["AttackedByWeapon", "nil"];
-	_distance = _victim getVariable["AttackedFromDistance", "nil"];
-
 	if ((owner _victim) == (owner _killer)) then 
 	{
 		_loc_message = format["PKILL: %1 killed himself", _victimName];
