@@ -9,7 +9,7 @@ set_time_limit(300);
 	$query = "SELECT * FROM overpoch_traders WHERE (type='Weapons' OR type='Vehicle' OR type='Ammo') AND classes IS NOT NULL;";
 	Echo "<a href='encrypttraders.php'>Now Encrypt that shiz</a><br><br><b>Recreated the following files:</b><Br>";
 	foreach ($dbh->query($query) AS $result){
-
+		$buildfile = "";
 		$trader = $result['trader'];
 		$type = $result['type'];
 		$classes = $result['classes'];
@@ -39,10 +39,14 @@ set_time_limit(300);
 				break;
 		}
 
+		echo "<hr><br><br>$trader<br>";
+		print_r($category);
+		echo "<br>";
 		//$buildfile ="<br><br>";
 		//for each category we set the category and then add all the stuff
 		foreach ($category AS $cat){
-			$buildfile = "class Category_$cat {\n";
+			$buildfile = "$buildfile class Category_$cat {\n";
+			echo "$cat<br><BR>";
 			//foreach class we have return them and fill in the file
 			foreach ($classes AS $class){
 				$query = "SELECT price, item, subtype FROM $db WHERE type='$class' AND enable ='Yes';";
@@ -56,19 +60,19 @@ set_time_limit(300);
 
 					switch ($subtype) {
 						case 'item':
-							$subtype = "trade_items";
+							$subtype1 = "trade_items";
 							break;
 						case 'Weapon':
-							$subtype = "trade_weapons";
+							$subtype1 = "trade_weapons";
 							break;
 						case 'car':
-							$subtype= "trade_any_vehicle";
+							$subtype1= "trade_any_vehicle";
 							break;
 						case 'air':
-							$subtype= "trade_any_vehicle";
+							$subtype1= "trade_any_vehicle";
 							break;
-						case 'Car':
-							$subtype= "trade_any_boat";
+						case 'boat':
+							$subtype1= "trade_any_boat";
 							break;	
 						default:
 							# code...
@@ -79,7 +83,7 @@ set_time_limit(300);
 					$buy = '{'.$buy.'}';
 					$sell = '{'.$sell.'}';
 					$buildfile = "$buildfile \tclass $item {\n";
-					$buildfile = "$buildfile \t\ttype = \"$subtype\";\n";
+					$buildfile = "$buildfile \t\ttype = \"$subtype1\";\n";
 					$buildfile = "$buildfile \t\tbuy[]=$buy;\n";
 					$buildfile = "$buildfile \t\tsell[]=$sell;\n";
 					$buildfile = "$buildfile \t};\n";
@@ -101,7 +105,7 @@ set_time_limit(300);
 		
 		
 		fclose($myfile);
-
+		//echo "<hr>$trader<br><br>$buildfile";
 		//file_put_contents($url, $buildfile);
 
 
