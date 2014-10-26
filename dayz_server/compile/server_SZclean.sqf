@@ -67,7 +67,7 @@ if(isNil "HALV_VEHICLE_CLEANUPZONES")then{
 			if (_p2d) then { diag_log format["%2: Cleanup zones for chernarus selected! (check: %1)",_WorldName,_txt]; }; //logging if right worldname was selected, if uncommented
 			HALV_VEHICLE_CLEANUPZONES = [
 			//position					radius		cityname/text
-			[[12060.471,12638.533,0], 	125,	"Aircraft Dealer"],
+			[[12060.471,12638.533,0], 	250,	"Aircraft Dealer"],
 			[[1606.6443,7803.5156,0],	200,	"Bandit Camp"],
 			[[13532.614,6355.9497,0],	50,	"Boat Dealer East"],
 			[[7989.3354,2900.9946,0],	50,	"Boat Dealer South"],
