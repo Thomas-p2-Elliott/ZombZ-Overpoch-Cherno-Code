@@ -226,7 +226,7 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		 };
 
 		 if (s_player_maintain_area < 0) then {
-		  	s_player_maintain_area = player addAction [format["<t color='#ff0000'>%1</t>",localize "STR_EPOCH_ACTIONS_MAINTAREA"], "plotManagement\maintain_areaSC.sqf", "maintain", 5, false];
+		  	s_player_maintain_area = player addAction [format["<t color='#ff0000'>%1</t>",localize "STR_EPOCH_ACTIONS_MAINTAREA"], "compile\maintain_areaSC.sqf", "maintain", 5, false];
 		 	s_player_maintain_area_preview = player addAction [format["<t color='#ff0000'>%1</t>",localize "STR_EPOCH_ACTIONS_MAINTPREV"], "plotManagement\plotToggleMarkers.sqf", "preview", 5, false];
 		 };
 
