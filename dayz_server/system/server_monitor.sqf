@@ -153,6 +153,26 @@ if (isServer && isNil "sm_done") then {
 			    ];
 			};
 
+
+			if ((_gold) < 1) then {
+				_gold = 0;
+				//make sure there no gold item in the object
+				[_object,false] call fnc_removeExtraBars;
+			} else {
+				//make sure there is only one gold item in the object
+				[_object,true] call fnc_removeExtraBars;
+			};
+
+			//comment out if statement to see ALL objects gold as they spawn
+			if (_gold > 10000) then {
+				private["_log"];
+				_log = format["HighGoldObject: " + str(typeOf _object) + ", Gold: " + str _gold + ", Pos: " + str(position _object)];
+				diag_log(_log);
+			   ["highGoldObjects",_log] call p2net_log1; 
+			};
+
+			_object setVariable ["ZombZGold", _gold, true];
+
 			_object setVariable ["lastUpdate",time];
 			_object setVariable ["ObjectID", _idKey, true];
 			_object setVariable ["OwnerPUID", _ownerPUID, true];
@@ -268,25 +288,6 @@ if (isServer && isNil "sm_done") then {
 				};
 			};	
 
-
-			if ((_gold) < 1) then {
-				_gold = 0;
-				//make sure there no gold item in the object
-				[_object,false] call fnc_removeExtraBars;
-			} else {
-				//make sure there is only one gold item in the object
-				[_object,true] call fnc_removeExtraBars;
-			};
-
-			//comment out if statement to see ALL objects gold as they spawn
-			if (_gold > 5000) then {
-				private["_log"];
-				_log = format["HighGoldObject: " + str(typeOf _object) + ", Gold: " + str _gold + ", Pos: " + str(position _object)];
-				diag_log(_log);
-			   ["highGoldObjects",_log] call p2net_log1; 
-			};
-
-			_object setVariable ["ZombZGold", _gold, true];
 
 			if (_object isKindOf "AllVehicles") then {
 				/*---------------------------------------------------------------------------
@@ -511,7 +512,7 @@ if (isServer && isNil "sm_done") then {
 
 
 
-
+/*
 
     //Bases
 	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base1.sqf";
@@ -548,38 +549,16 @@ if (isServer && isNil "sm_done") then {
 	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base32.sqf";
 	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base33.sqf";
 	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base34.sqf";
-	
+*/
 
 	//Buildings
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernodrozhina.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernodrozhinaitem.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoelecktro2.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoelektroitem.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoklen.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoklenitem.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernonea.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoneaitem.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernonovylug.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernonovylugitem.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernonwa.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernonwaitem.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernopulkovo.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoskalka2.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoskalka2item.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoskalkaoutpost.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoskalkaoutpostitem.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernosouthcoastcheckpoint.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernosouthcoastcheckpointitems.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernozelengorsk.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernozelengorskitems.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\elektro3.sqf";
-    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\elektro3item.sqf";
-    
-
-	
-
-
-
-
+	//	Moved to MPMissions\.\buildings\init_buildings.sqf
+	//
+	//	InFile Changes/Replacements:
+	//		CreateVehicle -> CreateVehicleLocal
+	//		(Regex): 'createVehicleLocal [' 	--> 	''  						(remove quotes...'' = replaced with nothing/deleted)
+	//		(Regex): ',(?= \[\d)'				-->		' createVehicleLocal'
+	//		(Regex): ', \[\], \d, \"CAN_COLLIDE\"\]'	-->	''
+	//		isServer 		-> hasInterface
 
 };

@@ -162,6 +162,8 @@ if (!isDedicated) then {
 	[] execVM "system\login.sqf";	
 
 	//Conduct map operations
+	call compile preprocessFileLineNumbers "buildings\init_buildings.sqf";	
+
 	0 fadeSound 0;
 	waitUntil {!isNil "dayz_loadScreenMsg"};
 	dayz_loadScreenMsg = ("ZombZ: " + localize "STR_AUTHENTICATING");
