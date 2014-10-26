@@ -77,6 +77,7 @@ if(isNil "HALV_VEHICLE_CLEANUPZONES")then{
 			[[7989.3354,2900.9946,0],	100,		"Boat Dealer South"],
 			[[13532.614,6355.9497,0],	100,		"Boat Dealer East"],
 			[[4361.4937,2259.9526,0],	100,		"Wholesaler South"]
+			[[12060.471,12638.533,0], 	100,		"NE Aircraft Dealer"]
 			];
 		};
 //tavi
