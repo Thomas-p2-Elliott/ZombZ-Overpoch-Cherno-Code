@@ -120,20 +120,23 @@ if (_characterID != "0") then {
 		_debugMode = 			_character getVariable ["P2_DebugMonMode",2]; 
 		_debugColours = 		_character getVariable ["P2_DebugMonColours",[0,0,0,0.2]]; 
 
-		_currentCharGold = 		["ZombZGold",	_character] 	call server_getDiff;
-
+		_currentCharGold = 		["ZombZGold",	_character] 	call server_getDiff2;
+		if (P2DZE_debugServerPlayerSync) then { diag_log format["_currentCharGold: %1",_currentCharGold]; };
+			
 		_kills = 				["zombieKills",	_character] 	call server_getDiff;
 		_killsB = 				["banditKills",	_character] 	call server_getDiff;
 		_killsH = 				["humanKills",	_character] 	call server_getDiff;
 		_headShots = 			["headShots",	_character] 	call server_getDiff;
 		_humanity = 			["humanity",	_character] 	call server_getDiff2;
 
-		_currentCharGold = 		_character getVariable ["ZombZGold_CHK", 	13]; 
 		/*---------------------------------------------------------------------------
 		If gold is being set to 13 a lot then run a hive check on previous gold amount for player
 		---------------------------------------------------------------------------*/
 
 		//_currentCharATMCard = _character getVariable ["ZombZATMCard",0]; unused
+		_currentCharGold = 		_character getVariable["ZombZGold_CHK", 	13]; 
+		if (P2DZE_debugServerPlayerSync) then { diag_log format["_currentCharGold_CHK: %1",_currentCharGold]; };
+
 
 		_kills = 				_character getVariable["zombieKills_CHK",	13];
 		_killsB = 				_character getVariable["banditKills_CHK", 	13];
@@ -144,6 +147,12 @@ if (_characterID != "0") then {
 
 		//set debug mon array
 		_debugMonSettings = 	[(_debugColours select 0), (_debugColours select 1), (_debugColours select 2), (_debugColours select 3), _debugMode];
+
+		//update debug mon settings
+		_key2 = format["CHILD:222:%1:%2:",_playerUID,_debugMonSettings];
+		if (P2DZE_debugServerPlayerSync) then { diag_log ("HIVE: WRITE: "+ str(_key2) + " / " + _playerUID); };
+		_key2 call server_hiveWrite;
+
 
 		//add distance
 		_distanceFoot = 		_distanceFootPrevious + _distanceFootCurrent;
@@ -224,12 +233,7 @@ if (_characterID != "0") then {
 				//Send request
 				_key = format["CHILD:201:%1:%2:%3:%4:%5:%6:%7:%8:%9:%10:%11:%12:%13:%14:%15:%16:%17:",_characterID,_playerPos,_playerGear,_playerBackp,_medical,false,false,_kills,_headShots,_distanceFoot,_timeSince,_currentState,_killsH,_killsB,_currentModel,_humanity,_currentCharGoldArr];
 				if (P2DZE_debugServerPlayerSync) then { diag_log ("HIVE: WRITE: "+ str(_key) + " / " + _characterID); };
-				_key call server_hiveWrite;
-
-				//update debug mon settings
-				_key2 = format["CHILD:222:%1:%2:",_playerUID,_debugMonSettings];
-				if (P2DZE_debugServerPlayerSync) then { diag_log ("HIVE: WRITE: "+ str(_key2) + " / " + _playerUID); };
-				_key2 call server_hiveWrite;
+				_key call server_hiveWrite;			
 			};
 		};
 
