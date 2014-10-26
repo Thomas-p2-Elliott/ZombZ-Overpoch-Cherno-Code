@@ -326,8 +326,8 @@ Misc Settings
 	DynamicVehicleDamageHigh = 		0; // Default: 100
 	DynamicVehicleFuelHigh	= 		15;
 	DynamicVehicleFuelLow =			0;
-	MaxAmmoBoxes = 100;
-	MaxMineVeins = 25;
+	MaxAmmoBoxes = 200;	//testing
+	MaxMineVeins = 0;
 
 	// epoch Heli lifting
 	DZE_HeliLift = false;
