@@ -8,54 +8,95 @@ _bank1 setMarkerType ""Defend"";
 _bank1 setMarkerColor ""ColorRedAlpha"";
 bank1 = _bank1;
 
-_bank2 = createMarker [""Drozhina"", [3847.0142, 4787.8877, 1]];
-_bank2 setMarkerText ""Ruins of Drozhina"";
-_bank2 setMarkerType ""Defend"";
-_bank2 setMarkerColor ""ColorRedAlpha"";
-bank2 = _bank2;
+_count = 0;
+_LocalVarName = ""_marker_0"";
+_GlobalVarName = ""marker_0"";
 
-_bank3 = createMarker [""Klen"", [11465.664, 11314.625, 2]];
-_bank3 setMarkerText ""Free City Of Klen"";
-_bank3 setMarkerType ""Defend"";
-_bank3 setMarkerColor ""ColorRedAlpha"";
-bank3 = _bank3;
+{
+  _count = _count + 1;
+  _LocalVarName = ""_marker_"" + str(_count);
+  _GlobalVarName = ""marker_"" + str(_count);
+  _MarkerText = ""C"" + str(_count);
 
-_bank4 = createMarker [""ZombZ International"", [10153.31, 1710.7061, 1]];
-_bank4 setMarkerText ""ZombZ International Airbase"";
-_bank4 setMarkerType ""Defend"";
-_bank4 setMarkerColor ""ColorRedAlpha"";
-bank4 = _bank4;
+   call compile format[""
+   	diag_log(""""%1 %2 %3 %4"""");
+   	%1 = createMarker [""""%4"""", %3];
+   	%1 setMarkerText """"%4"""";
+	%1 setMarkerType """"Defend"""";
+	%1 setMarkerColor """"ColorRedAlpha"""";
+	%2 = %1;
+  "",_LocalVarName,_GlobalVarName,_x,_MarkerText];
 
-_bank5 = createMarker [""Novy Lug"", [9577.7266, 11299.333, 1]];
-_bank5 setMarkerText ""Smugglers Den"";
-_bank5 setMarkerType ""Defend"";
-_bank5 setMarkerColor ""ColorRedAlpha"";
-bank5 = _bank5;
-
-_bank6 = createMarker [""Survivors Den"", [4814.814, 10067.607, 1]];
-_bank6 setMarkerText ""Survivors Den"";
-_bank6 setMarkerType ""Defend"";
-_bank6 setMarkerColor ""ColorRedAlpha"";
-bank6 = _bank6;
-
-_bank7 = createMarker [""Pulkovo"", [4861.4014, 5633.7153, 1]];
-_bank7 setMarkerText ""Ruins of Pulkovo"";
-_bank7 setMarkerType ""Defend"";
-_bank7 setMarkerColor ""ColorRedAlpha"";
-bank7 = _bank7;
-
-_bank8 = createMarker [""Skalka"", [1902.0646, 11947.333, 1]];
-_bank8 setMarkerText ""Winterfell"";
-_bank8 setMarkerType ""Defend"";
-_bank8 setMarkerColor ""ColorRedAlpha"";
-bank8 = _bank8;
-
-_bank9 = createMarker [""Skalka2"", [2282.0522, 10825.35, 1]];
-_bank9 setMarkerText ""Ruins of Skalka"";
-_bank9 setMarkerType ""Defend"";
-_bank9 setMarkerColor ""ColorRedAlpha"";
-bank9 = _bank9;
+} forEach [[3847.0142, 4787.8877, 1.5258789e-005],
+[3841.5867, 4775.7349, -1.9062195],
+[10286.419, 2084.4519, 0.17802812],
+[6603.0518, 2465.3159, 1.2874603e-005],
+[11465.664, 11314.625, 9.1552734e-005],
+[11460.356, 11302.453, 6.1035156e-005],
+[10153.31, 1710.7061, -0.81663656],
+[12174.332, 12746.813, 0.044486191],
+[9577.7266, 11299.333, 0.4098191],
+[9580.4238, 11308.442, 1.5258789e-005],
+[4814.814, 10067.607, -6.1035156e-005],
+[4819.8657, 10086.853, -3.0517578e-005],
+[4861.4014, 5633.7153, 0.1487579],
+[1902.0646, 11947.333, -3.0517578e-005],
+[1980.0703, 11913.91, 1.5258789e-005],
+[2282.0522, 10825.35, 2],
+[2249.6692, 10832.145, -6.1035156e-005],
+[4048.4211, 2613.1758, 2.3841858e-006],
+[4040.615, 2602.0276, -2.3841858e-006],
+[2501.8564, 5090.1445, 0.014888633],
+[2555.4353, 5040.814, 2],
+[11036.93, 2705.0854, -0.45178086],
+[10962.532, 2754.1912, 4.0054321e-005]];
 
 ");
 
 ["ZombZ map markers",_rExec] call fnc_p2_RemoteExecute;
+
+
+
+/*
+Creates a map marker for each pos in list
+
+_count = 0;
+_LocalVarName = "_marker_0";
+_GlobalVarName = "marker_0";
+
+{
+  _count = _count + 1;
+  _LocalVarName = "_marker_" + str(_count);
+  _GlobalVarName = "marker_" + str(_count);
+
+   call compile format["
+   	%1 = createMarker [""C"", %3];
+   	%1 setMarkerText ""C"";
+	%1 setMarkerType ""Defend"";
+	%1 setMarkerColor ""ColorRedAlpha"";
+	%2 = %1;
+  ",_LocalVarName,_GlobalVarName,_x];
+
+} forEach [[3847.0142, 4787.8877, 1.5258789e-005],
+[3841.5867, 4775.7349, -1.9062195],
+[10286.419, 2084.4519, 0.17802812],
+[6603.0518, 2465.3159, 1.2874603e-005],
+[11465.664, 11314.625, 9.1552734e-005],
+[11460.356, 11302.453, 6.1035156e-005],
+[10153.31, 1710.7061, -0.81663656],
+[12174.332, 12746.813, 0.044486191],
+[9577.7266, 11299.333, 0.4098191],
+[9580.4238, 11308.442, 1.5258789e-005],
+[4814.814, 10067.607, -6.1035156e-005],
+[4819.8657, 10086.853, -3.0517578e-005],
+[4861.4014, 5633.7153, 0.1487579],
+[1902.0646, 11947.333, -3.0517578e-005],
+[1980.0703, 11913.91, 1.5258789e-005],
+[2282.0522, 10825.35, 2],
+[2249.6692, 10832.145, -6.1035156e-005],
+[4048.4211, 2613.1758, 2.3841858e-006],
+[4040.615, 2602.0276, -2.3841858e-006],
+[2501.8564, 5090.1445, 0.014888633],
+[2555.4353, 5040.814, 2],
+[11036.93, 2705.0854, -0.45178086],
+[10962.532, 2754.1912, 4.0054321e-005]]; */

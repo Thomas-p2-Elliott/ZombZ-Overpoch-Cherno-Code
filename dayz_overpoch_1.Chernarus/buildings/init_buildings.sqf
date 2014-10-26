@@ -1,23 +1,23 @@
-call compile preprocessFileLineNumbers "buildings\chernodrozhina.sqf";
-call compile preprocessFileLineNumbers "buildings\chernodrozhinaitem.sqf";
-call compile preprocessFileLineNumbers "buildings\chernoelecktro2.sqf";
-call compile preprocessFileLineNumbers "buildings\chernoelektroitem.sqf";
-call compile preprocessFileLineNumbers "buildings\chernoklen.sqf";
-call compile preprocessFileLineNumbers "buildings\chernoklenitem.sqf";
-call compile preprocessFileLineNumbers "buildings\chernonea.sqf";
-call compile preprocessFileLineNumbers "buildings\chernoneaitem.sqf";
-call compile preprocessFileLineNumbers "buildings\chernonovylug.sqf";
-call compile preprocessFileLineNumbers "buildings\chernonovylugitem.sqf";
-call compile preprocessFileLineNumbers "buildings\chernonwa.sqf";
-call compile preprocessFileLineNumbers "buildings\chernonwaitem.sqf";
-call compile preprocessFileLineNumbers "buildings\chernopulkovo.sqf";
-call compile preprocessFileLineNumbers "buildings\chernoskalka2.sqf";
-call compile preprocessFileLineNumbers "buildings\chernoskalka2item.sqf";
-call compile preprocessFileLineNumbers "buildings\chernoskalkaoutpost.sqf";
-call compile preprocessFileLineNumbers "buildings\chernoskalkaoutpostitem.sqf";
-call compile preprocessFileLineNumbers "buildings\chernosouthcoastcheckpoint.sqf";
-call compile preprocessFileLineNumbers "buildings\chernosouthcoastcheckpointitems.sqf";
-call compile preprocessFileLineNumbers "buildings\chernozelengorsk.sqf";
-call compile preprocessFileLineNumbers "buildings\chernozelengorskitems.sqf";
-call compile preprocessFileLineNumbers "buildings\elektro3.sqf";
-call compile preprocessFileLineNumbers "buildings\elektro3item.sqf";
+call compile preprocessFileLineNumbers "buildings\chernodrozhina.sqf"; //Pos: [3847.0142, 4787.8877, 1.5258789e-005]
+call compile preprocessFileLineNumbers "buildings\chernodrozhinaitem.sqf"; //Pos: [3841.5867, 4775.7349, -1.9062195]
+call compile preprocessFileLineNumbers "buildings\chernoelecktro2.sqf"; //Pos: [10286.419, 2084.4519, 0.17802812]
+call compile preprocessFileLineNumbers "buildings\chernoelektroitem.sqf"; //Pos: [6603.0518, 2465.3159, 1.2874603e-005]
+call compile preprocessFileLineNumbers "buildings\chernoklen.sqf"; //Pos: [11465.664, 11314.625, 9.1552734e-005]
+call compile preprocessFileLineNumbers "buildings\chernoklenitem.sqf"; //Pos: [11460.356, 11302.453, 6.1035156e-005]
+call compile preprocessFileLineNumbers "buildings\chernonea.sqf"; //Pos: [10153.31, 1710.7061, -0.81663656]
+call compile preprocessFileLineNumbers "buildings\chernoneaitem.sqf"; //Pos: [12174.332, 12746.813, 0.044486191]
+call compile preprocessFileLineNumbers "buildings\chernonovylug.sqf"; //Pos: [9577.7266, 11299.333, 0.4098191]
+call compile preprocessFileLineNumbers "buildings\chernonovylugitem.sqf"; //Pos: [9580.4238, 11308.442, 1.5258789e-005]
+call compile preprocessFileLineNumbers "buildings\chernonwa.sqf"; //Pos: [4814.814, 10067.607, -6.1035156e-005]
+call compile preprocessFileLineNumbers "buildings\chernonwaitem.sqf"; //Pos: [4819.8657, 10086.853, -3.0517578e-005]
+call compile preprocessFileLineNumbers "buildings\chernopulkovo.sqf"; //Pos: [4861.4014, 5633.7153, 0.1487579]
+call compile preprocessFileLineNumbers "buildings\chernoskalka2.sqf"; //Pos: [1902.0646, 11947.333, -3.0517578e-005]
+call compile preprocessFileLineNumbers "buildings\chernoskalka2item.sqf"; //Pos: [1980.0703, 11913.91, 1.5258789e-005]
+call compile preprocessFileLineNumbers "buildings\chernoskalkaoutpost.sqf"; //Pos: [2282.0522, 10825.35]
+call compile preprocessFileLineNumbers "buildings\chernoskalkaoutpostitem.sqf"; //Pos: [2249.6692, 10832.145, -6.1035156e-005]
+call compile preprocessFileLineNumbers "buildings\chernosouthcoastcheckpoint.sqf"; //Pos: [4048.4211, 2613.1758, 2.3841858e-006]
+call compile preprocessFileLineNumbers "buildings\chernosouthcoastcheckpointitems.sqf"; //Pos: [4040.615, 2602.0276, -2.3841858e-006]
+call compile preprocessFileLineNumbers "buildings\chernozelengorsk.sqf"; //Pos: [2501.8564, 5090.1445, 0.014888633]
+call compile preprocessFileLineNumbers "buildings\chernozelengorskitems.sqf"; //Pos: [2555.4353, 5040.814]
+call compile preprocessFileLineNumbers "buildings\elektro3.sqf"; //Pos: [11036.93, 2705.0854, -0.45178086]
+call compile preprocessFileLineNumbers "buildings\elektro3item.sqf"; //Pos: [10962.532, 2754.1912, 4.0054321e-005]

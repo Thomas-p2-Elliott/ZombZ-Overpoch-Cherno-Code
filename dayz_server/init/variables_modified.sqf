@@ -320,13 +320,13 @@ Gold Settings
 Misc Settings
 ---------------------------------------------------------------------------*/
 	MaxVehicleLimit = 5000; // Default = 50
-	MaxDynamicDebris = 50; // Default = 100
+	MaxDynamicDebris = 0; // Default = 100
 
 	DynamicVehicleDamageLow = 		0; // Default: 0
 	DynamicVehicleDamageHigh = 		0; // Default: 100
 	DynamicVehicleFuelHigh	= 		15;
 	DynamicVehicleFuelLow =			0;
-	MaxAmmoBoxes = 200;	//testing
+	MaxAmmoBoxes = 0;
 	MaxMineVeins = 0;
 
 	// epoch Heli lifting

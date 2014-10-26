@@ -136,7 +136,7 @@ if (isServer && isNil "sm_done") then {
 		
 
 
-		if (_damage < 1) then {
+		if (_damage < 0.95) then {
 			//diag_log format["OBJ: %1 - %2", _idKey,_type];
 			
 			//Create it
@@ -554,11 +554,7 @@ if (isServer && isNil "sm_done") then {
 	//Buildings
 	//	Moved to MPMissions\.\buildings\init_buildings.sqf
 	//
-	//	InFile Changes/Replacements:
-	//		CreateVehicle -> CreateVehicleLocal
-	//		(Regex): 'createVehicleLocal [' 	--> 	''  						(remove quotes...'' = replaced with nothing/deleted)
-	//		(Regex): ',(?= \[\d)'				-->		' createVehicleLocal'
-	//		(Regex): ', \[\], \d, \"CAN_COLLIDE\"\]'	-->	''
-	//		isServer 		-> hasInterface
+	//	InFile Changes/Replacements (ReGex must be enabled in sublime/npp++ replace! < = Start, > = End):
+	//		<_this;\n> -> <_this;\n   _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];\n>
 
 };

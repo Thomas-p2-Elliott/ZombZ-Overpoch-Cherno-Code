@@ -139,7 +139,8 @@ if (isServer) then {
 	};
 
 	// Add trader citys
-	_nil = [] execVM "\z\addons\dayz_server\missions\DayZ_Epoch_11.Chernarus\mission.sqf";
+	_nil = 	[] execVM "\z\addons\dayz_server\missions\DayZ_Epoch_11.Chernarus\mission.sqf";
+	_nil2 = [] execVM "buildings\init_buildings.sqf";
 
 	//Execute server monitor
 	_serverMonitor = 	[] execVM "\z\addons\dayz_server\system\server_monitor_preExec.sqf";
@@ -161,8 +162,7 @@ if (!isDedicated) then {
 
 	[] execVM "system\login.sqf";	
 
-	//Conduct map operations
-	call compile preprocessFileLineNumbers "buildings\init_buildings.sqf";	
+	
 
 	0 fadeSound 0;
 	waitUntil {!isNil "dayz_loadScreenMsg"};
