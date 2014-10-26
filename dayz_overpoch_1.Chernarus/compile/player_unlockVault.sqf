@@ -32,7 +32,8 @@ _alreadyPacking = _obj getVariable["packing",0];
 _claimedBy = _obj getVariable["claimed","0"];
 _characterID = _obj getVariable["CharacterID","0"];
 _ownerID = _obj getVariable["ownerPUID","0"];;
-
+_objGold = 	[true,_obj] call p2_gv;
+_objGold = 	(floor(_objGold));
 if (DZE_APlotforLife) then {
 	_playerUID = [player] call FNC_GetPlayerUID;
 }else{
@@ -79,20 +80,23 @@ if ((_characterID == dayz_combination) || (_ownerID == _playerUID)) then {
 			sleep 5;
 
 			_holder = createVehicle [_unlockedClass,_pos,[], 0, "CAN_COLLIDE"];
+			if (_objGold < 1) then {
+				PVDZE_log_lockUnlock = [player, _obj, false, _holder, nil];
+			} else {
+				PVDZE_log_lockUnlock = [player, _obj, false, _holder, _objGold];
+			};
 
 			PVDZE_log_lockUnlock = [player, _obj, false, _holder, nil];
 			publicVariableServer "PVDZE_log_lockUnlock";
-			diag_log(format["P2DEBUG: UnlockVault: %1", (str([player, _obj, false, _holder, nil]))]);
 
 			_holder setdir _dir;
 			_holder setPosATL _pos;
 			player reveal _holder;
 
 
-			sleep 1;
-
+			//sleep 1;
 			// Remove locked vault
-			deleteVehicle _obj;
+			//deleteVehicle _obj; 		//moved to server side
 
 			_holder setVariable["CharacterID",_characterID,true];
 			_holder setVariable["ObjectID",_objectID,true];

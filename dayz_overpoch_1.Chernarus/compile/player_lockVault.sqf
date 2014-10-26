@@ -78,10 +78,10 @@ if(!isNull _obj) then {
 	_magazines = 	getMagazineCargo _obj;
 	_backpacks = 	getBackpackCargo _obj;
 
-	sleep 1;
+	//sleep 1;
 
 	// remove vault
-	deleteVehicle _obj;
+	//deleteVehicle _obj;	//moved server side
 
 	// Fill variables with loot
 	_holder setVariable ["WeaponCargo", _weapons, true];
