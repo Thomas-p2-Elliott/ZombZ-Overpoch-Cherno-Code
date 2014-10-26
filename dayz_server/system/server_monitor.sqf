@@ -495,4 +495,91 @@ if (isServer && isNil "sm_done") then {
 	allowConnection = true;	
 	sm_done = true;
 	publicVariable "sm_done";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    //Bases
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base1.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base2.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base3.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base4.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base5.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base6.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base7.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base8.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base9.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base10.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base11.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base12.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base13.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base14.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base15.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base16.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base17.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base18.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base19.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base20.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base21.sqf"; 
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base22.sqf"; 
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base23.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base24.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base25.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base26.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base27.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base28.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base29.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base30.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base31.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base32.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base33.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base34.sqf";
+	
+
+	//Buildings
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernodrozhina.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernodrozhinaitem.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoelecktro2.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoelektroitem.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoklen.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoklenitem.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernonea.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoneaitem.sqf";
+	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernonovylug.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernonovylugitem.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernonwa.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernonwaitem.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernopulkovo.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoskalka2.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoskalka2item.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoskalkaoutpost.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernoskalkaoutpostitem.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernosouthcoastcheckpoint.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernosouthcoastcheckpointitems.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernozelengorsk.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\chernozelengorskitems.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\elektro3.sqf";
+    call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\elektro3item.sqf";
+    
+
+	
+
+
+
+
+
 };
