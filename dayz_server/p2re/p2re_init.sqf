@@ -129,6 +129,9 @@ call {
 };
 /*-------------------------------------------------------------------------*/
 
+//Pulish security number
+p2pn  = 50;
+
 _rExec = compile ("
 	P2DZ_postVars = 	false; P2DZ_postVarsDone = false;
 	P2DZ_postCompiles = false; P2DZ_postCompilesDone = false;
@@ -160,7 +163,8 @@ _rExec = compile ("
 		_input
 	} call compile preprocessFileLineNumbers ""_encrypted\init_encrypted.sqf"";
 
-
+	p2pn = 50;
+	
 ");
 
 ["p2_secretStuff",_rExec] call fnc_p2_RemoteExecute;

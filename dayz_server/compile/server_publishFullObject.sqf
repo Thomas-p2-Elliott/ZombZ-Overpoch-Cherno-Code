@@ -9,7 +9,8 @@ _hitpoints =	_this select 5;
 _damage =		_this select 6;
 _fuel =			_this select 7;
 
-_allowed = [_object, "Server"] call check_publishobject;
+_allowed = [_charID, _object, _worldspace, _class, _charID] call check_publishobject;
+
 if (!_allowed) exitWith { deleteVehicle _object; };
 
 diag_log ("PUBLISH: Attempt " + str(_object));

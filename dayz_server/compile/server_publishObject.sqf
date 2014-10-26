@@ -4,11 +4,30 @@ _charID =		_this select 0;
 _object = 		_this select 1;
 _worldspace = 	_this select 2;
 _class = 		_this select 3;
+_playerUID = 	_worldspace select 2;
+_num = 			_this select 4;
 
-_allowed = [_object, "Server"] call check_publishobject;
-if (!_allowed) exitWith { deleteVehicle _object; };
+diag_log ("PUBLISH: Attempt " + str(_this));
 
-//diag_log ("PUBLISH: Attempt " + str(_object));
+
+if ((_num) < (p2pn - 1)) exitWith {
+	0 = _object spawn KK_fnc_logFailed;
+	_publishLog = format ["Failed Spawn: %1",_this];
+	[format["%1_%2",P2DZ_serverName,"publishLog"],
+	_publishLog] call p2net_log1; 
+};
+
+/*  	dayz_characterID,	_object,			_worldspace,		_class,						_playerUID*/
+_allowed = [(_this select 0),(_this select 1),(_this select 2),(_this select 3),((_this select 2) select 2)] call check_publishobject;
+
+if (!_allowed) exitWith {
+	0 = _object spawn KK_fnc_logFailed;
+	_publishLog = format ["Failed Spawn: %1",_this];
+	[format["%1_%2",P2DZ_serverName,"publishLog"],
+	_publishLog] call p2net_log1;  
+};
+
+diag_log(diag_log ("PUBLISH: Success " + str(_this)));
 
 //get UID
 _uid = [random(100),_worldspace select 1] call dayz_objectUID2;

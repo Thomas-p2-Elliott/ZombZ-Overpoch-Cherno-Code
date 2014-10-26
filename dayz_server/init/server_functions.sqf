@@ -183,14 +183,44 @@ object_handleServerKilled = {
 check_publishobject = {
 	private["_allowed","_object","_playername"];
 
-	_object = _this select 0;
-	_playername = _this select 1;
+	_charID =		_this select 0;
+	_object = 		_this select 1;
+	_worldspace = 	_this select 2;
+	_class = 		_this select 3;
+	_playerUID = 	_this select 4;
 	_allowed = false;
 
+	if (isNil '_charID' || isNil '_worldspace' || isNil '_class' || isNil '_playerUID') exitWith {
+		if (!isNull _object) then {
+			0 = _object spawn KK_fnc_logFailed;
+		} else {
+			_publishLog = format ["Failed Spawn: %1",_this];
+			[format["%1_%2",P2DZ_serverName,"publishLog"],
+			_publishLog] call p2net_log1; 
+		};
+		false
+	};
+
+
 	if ((typeOf _object) in dayz_allowedObjects) then {
-			//diag_log format ["DEBUG: Object: %1 published by %2 is Safe",_object, _playername];
+			_publishLog = format ["%1/%2 Spawned: %3/%4 @ %5",_playerUID, _charID,_class,_object,_worldspace];
+			[format["%1_%2",P2DZ_serverName,"publishLog"],
+			_publishLog] call p2net_log1; 
+
+		    _object call {
+			    _this setVariable [
+			        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+			        "hash_id" callExtension format [
+			            "%1:%2",
+			            netId _this,
+			            typeOf _this
+			        ]
+			    ];
+			};
+
 			_allowed = true;
 	};
+
     _allowed
 };
 
@@ -1013,28 +1043,94 @@ server_spawnCleanAnimals = {
 };
 
 server_logUnlockLockEvent = {
-	private["_player", "_obj", "_objectID", "_objectUID", "_statusText", "_PUID", "_status"];
-	_player = _this select 0;
-	_obj = _this select 1;
-	_status = _this select 2;
+	private["_player", "_obj", "_objectID", "_objectUID", "_statusText", "_PUID", "_status","_log","_objGold","_gold"];
+	_player = 		_this select 0;
+	_obj = 			_this select 1;
+	_status = 		_this select 2;
+	_newObject = 	_this select 3;
+	_objGold = 		_this select 4;
+	_gold = 		0;
+	
+	//diag_log(format["server_logUnlockLockEvent: _this: %1", str _this]);
+
 	if (!isNull(_obj)) then {
 		_objectID = _obj getVariable["ObjectID", "0"];
 		_objectUID = _obj getVariable["ObjectUID", "0"];
+		_objGoldServer = _obj getVariable["ZombZGold", nil];
+
+		_obj call {
+		    _this setVariable [
+		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+		        "hash_id" callExtension format [
+		            "%1:%2",
+		            netId _this,
+		            typeOf _this
+		        ]
+		    ];
+		};
+
+		if (isNil '_objGold') then {
+
+			diag_log("isNil: _objGold:");
+
+			if (!isNil '_objGoldServer') then {
+
+				//diag_log(format["!isNil: _objGoldServer: %1", _objGoldServer]);
+				_gold = _objGoldServer;
+
+			} else {
+
+				//diag_log("isNil: _objGoldServer: 0");
+				_gold = 0;
+
+			};
+
+		} else {
+
+			//diag_log(format["!isNil: _objGold: %1", _objGold]);
+			_gold = _objGold;
+
+		};
+
+		if (!isNull(_newObject)) then {
+			_newObject setVariable ["ZombZGold", _gold, true];
+		};
+		
+		_obj setVariable ["ZombZGold", _gold, true];
+
+		//diag_log(format["server_logUnlockLockEvent: GoldSet: %1", _gold]);
+
 		_statusText = "UNLOCKED";
 		if (_status) then {
 			[_obj, "gear"] call server_updateObject;
 			_statusText = "LOCKED";
 		};
 		_PUID = [_player] call FNC_GetPlayerUID;
-		diag_log format["SAFE %5: ID:%1 UID:%2 BY %3(%4)", _objectID, _objectUID, (name _player), _PUID, _statusText];
+
+		_log = format["SAFE %5: ID:%1 UID:%2 BY %3(%4)", _objectID, _objectUID, (name _player), _PUID, _statusText];
+		[format["%1_%2",P2DZ_serverName,"lockUnlockLog"],
+		_log] call p2net_log1; 
+	};
+
+	if (!isNull(_newObject)) then {
+		_newObject call {
+		    _this setVariable [
+		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+		        "hash_id" callExtension format [
+		            "%1:%2",
+		            netId _this,
+		            typeOf _this
+		        ]
+		    ];
+		};
 	};
 };
 
-p2net_log1 =	compile preprocessFileLineNumbers "\z\addons\dayz_server\init\p2net_logFunction.sqf";
-[] execVM "\z\addons\dayz_server\system\antihack_functions.sqf";
-[] execvm "\z\addons\dayz_server\init\deploy_functions.sqf";
-[] execvm "\z\addons\dayz_server\init\goldEventHandlers.sqf";
-[] execvm "\z\addons\dayz_server\p2re\p2re_init.sqf";
+p2net_log1 =	compile preprocessFileLineNumbers 	"\z\addons\dayz_server\init\p2net_logFunction.sqf";
+[] execVM 											"\z\addons\dayz_server\system\antihack_functions.sqf";
+[] execvm 											"\z\addons\dayz_server\init\deploy_functions.sqf";
+[] execvm 											"\z\addons\dayz_server\init\goldEventHandlers.sqf";
+[] execvm 											"\z\addons\dayz_server\p2re\p2re_init.sqf";
 
 if (AHe) exitWith {
 	[] spawn {
