@@ -65,8 +65,8 @@ if ((_characterID == dayz_combination) || (_ownerID == _playerUID)) then {
 
 		if(!isNull _obj && alive _obj) then {
 
-			PVDZE_log_lockUnlock = [player, _obj, false];
-			publicVariableServer "PVDZE_log_lockUnlock";
+			//PVDZE_log_lockUnlock = [player, _obj, false];
+			//publicVariableServer "PVDZE_log_lockUnlock";
 
 			_obj setVariable["packing",1];
 			[1,1] call dayz_HungerThirst;
@@ -79,12 +79,21 @@ if ((_characterID == dayz_combination) || (_ownerID == _playerUID)) then {
 			sleep 5;
 
 			_holder = createVehicle [_unlockedClass,_pos,[], 0, "CAN_COLLIDE"];
-			// Remove locked vault
-			deleteVehicle _obj;
+
+			PVDZE_log_lockUnlock = [player, _obj, false, _holder, nil];
+			publicVariableServer "PVDZE_log_lockUnlock";
+			diag_log(format["P2DEBUG: UnlockVault: %1", (str([player, _obj, false, _holder, nil]))]);
+
 			_holder setdir _dir;
 			_holder setPosATL _pos;
 			player reveal _holder;
-	
+
+
+			sleep 1;
+
+			// Remove locked vault
+			deleteVehicle _obj;
+
 			_holder setVariable["CharacterID",_characterID,true];
 			_holder setVariable["ObjectID",_objectID,true];
 			_holder setVariable["ObjectUID",_objectUID,true];

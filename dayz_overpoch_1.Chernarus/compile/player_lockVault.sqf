@@ -3,7 +3,7 @@
 	Usage: [_obj] spawn player_unlockVault;
 	Made for DayZ Epoch please ask permission to use/edit/distrubute email vbawol@veteranbastards.com.
 */
-private ["_objectID","_objectUID","_obj","_ownerID","_dir","_pos","_holder","_weapons","_magazines","_backpacks","_alreadyPacking","_lockedClass","_text","_playerNear","_characterID","_PlayerUID"];
+private ["_objectID","_objectUID","_obj","_ownerID","_objGold","_dir","_pos","_holder","_weapons","_magazines","_backpacks","_alreadyPacking","_lockedClass","_text","_playerNear","_characterID","_PlayerUID"];
 
 if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_10") , "PLAIN DOWN"]; };
 DZE_ActionInProgress = true;
@@ -32,6 +32,8 @@ _characterID = _obj getVariable["CharacterID","0"];
 _objectID 	= _obj getVariable["ObjectID","0"];
 _objectUID	= _obj getVariable["ObjectUID","0"];
 _ownerID =  _obj getVariable["ownerPUID", "0"];
+_objGold = 	[true,_obj] call p2_gv;
+
 
 if (DZE_APlotforLife) then {
 	_playerUID = [player] call FNC_GetPlayerUID;
@@ -50,14 +52,21 @@ _pos = _obj getVariable["OEMPos",(getposATL _obj)];
 
 if(!isNull _obj) then {
 
-	PVDZE_log_lockUnlock = [player, _obj,true];
-	publicVariableServer "PVDZE_log_lockUnlock";
+	//PVDZE_log_lockUnlock = [player, _obj,true];
+	//publicVariableServer "PVDZE_log_lockUnlock";
 
 	//place vault
 	_holder = createVehicle [_lockedClass,_pos,[], 0, "CAN_COLLIDE"];
+	PVDZE_log_lockUnlock = [player, _obj,true,_holder,_objGold];
+	publicVariableServer "PVDZE_log_lockUnlock";
+	diag_log(format["P2DEBUG: LockVault: %1", (str ([player, _obj,true,_holder,_objGold]))]);
+
+
 	_holder setdir _dir;
 	_holder setPosATL _pos;
 	player reveal _holder;
+
+
 	
 	_holder setVariable["CharacterID",_characterID,true];
 	_holder setVariable["ObjectID",_objectID,true];
@@ -68,6 +77,8 @@ if(!isNull _obj) then {
 	_weapons = 		getWeaponCargo _obj;
 	_magazines = 	getMagazineCargo _obj;
 	_backpacks = 	getBackpackCargo _obj;
+
+	sleep 1;
 
 	// remove vault
 	deleteVehicle _obj;
