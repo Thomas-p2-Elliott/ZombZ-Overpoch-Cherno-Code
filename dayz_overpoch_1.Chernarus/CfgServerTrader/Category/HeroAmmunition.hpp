@@ -1,4 +1,4 @@
-class Category_478 {
+ class Category_478 {
  	class 104c106c115c129c148c135c143c129c85c82c116c144c134c129c88c90c82c154c86c85c129c99c101c116 {
  		type = "trade_items";
  		buy[]={10};

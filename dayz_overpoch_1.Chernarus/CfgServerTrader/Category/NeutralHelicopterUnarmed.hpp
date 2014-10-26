@@ -1,4 +1,4 @@
-class Category_519 {
+ class Category_519 {
  	class 86c102c93c114c90c140c133c130c99 {
  		type = "trade_any_vehicle";
  		buy[]={600};

@@ -1,4 +1,4 @@
-class Category_477 {
+ class Category_477 {
  	class 97c99c108c122c92c94c109c122c93c103c102c122c94c94c106c122c97 {
  		type = "trade_weapons";
  		buy[]={40};

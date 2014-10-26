@@ -1,4 +1,4 @@
-class Category_495 {
+ class Category_495 {
  	class 109c130c143c133c115c144c151c134c147c128c110c104c128c117c108c128c106c111c116c128c102c113c82 {
  		type = "trade_any_vehicle";
  		buy[]={650};

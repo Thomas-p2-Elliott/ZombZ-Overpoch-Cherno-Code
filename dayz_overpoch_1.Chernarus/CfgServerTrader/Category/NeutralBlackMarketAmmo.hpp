@@ -1,4 +1,4 @@
-class Category_527 {
+ class Category_527 {
  	class 91c63c65c68  {
  		type = "trade_items";
  		buy[]={75};

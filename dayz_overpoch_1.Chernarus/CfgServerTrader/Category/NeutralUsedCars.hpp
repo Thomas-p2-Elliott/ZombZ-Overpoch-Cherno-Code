@@ -1,2 +1,4 @@
-class Category_520 {
+ class Category_660 {
+ };
+ class Category_520 {
  };
