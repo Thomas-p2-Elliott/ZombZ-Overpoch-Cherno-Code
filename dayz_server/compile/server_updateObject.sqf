@@ -123,10 +123,10 @@ _object_damage = {
 		//diag_log ("HIVE: WRITE: "+ str(_key));
 		_key call server_hiveWrite;
 	_object setVariable ["needUpdate",false,true];
-	};
+};
 
 _object_killed = {
-	private["_hitpoints","_array","_hit","_selection","_key","_damage"];
+	private["_hitpoints","_array","_hit","_selection","_key","_damage","_log"];
 	_hitpoints = _object call vehicle_getHitpoints;
 	//_damage = damage _object;
 	_damage = 1;
@@ -155,9 +155,14 @@ _object_killed = {
 		_worldSpace = getPosATL _object;
 		if (getPlayerUID _killer != "") then {
 			_name = if (alive _killer) then { name _killer; } else { format["OBJECT %1", _killer]; };
-			diag_log format["Vehicle killed: Vehicle %1 (TYPE: %2), CharacterID: %3, ObjectID: %4, ObjectUID: %5, Position: %6, Killer: %7 (UID: %8)", _object, (typeOf _object), _charID, _objID, _objUID, _worldSpace, _name, (getPlayerUID _killer)];
+			_log = format["Vehicle killed: Vehicle %1 (TYPE: %2), CharacterID: %3, ObjectID: %4, ObjectUID: %5, Position: %6, Killer: %7 (UID: %8)", _object, (typeOf _object), _charID, _objID, _objUID, _worldSpace, _name, (getPlayerUID _killer)];
+			[format["%1_%2",P2DZ_serverName,"vehicleKillLog"],
+			_log] call p2net_log1; 
+
 		} else {
-			diag_log format["Vehicle killed: Vehicle %1 (TYPE: %2), CharacterID: %3, ObjectID: %4, ObjectUID: %5, Position: %6", _object, (typeOf _object), _charID, _objID, _objUID, _worldSpace];
+			_log = format["Vehicle killed: Vehicle %1 (TYPE: %2), CharacterID: %3, ObjectID: %4, ObjectUID: %5, Position: %6", _object, (typeOf _object), _charID, _objID, _objUID, _worldSpace];
+			[format["%1_%2",P2DZ_serverName,"vehicleKillLog"],
+			_log] call p2net_log1; 
 		};
 	};
 };
@@ -187,12 +192,12 @@ _object_gold = {
 	_objGoldVar = [_objGoldVar,0];
 	if (_objectID == "0") then {
 		_key = format["CHILD:323:%1:%2:",_uid,_objGoldVar];
-		diag_log("P2DEBUG: _object_gold by UID");
-		diag_log("HIVE: Data Sent:" + str _key);
+		//diag_log("P2DEBUG: _object_gold by UID");
+		//diag_log("HIVE: Data Sent:" + str _key);
 	} else {
 		_key = format["CHILD:322:%1:%2:",_objectID,_objGoldVar];
-		diag_log("P2DEBUG: _object_gold by objectID");
-		diag_log("HIVE: Data Sent:" + str _key);
+		//diag_log("P2DEBUG: _object_gold by objectID");
+		//diag_log("HIVE: Data Sent:" + str _key);
 	};
 	_key call server_hiveWrite;
 };
@@ -207,16 +212,18 @@ switch (_type) do {
 		call _object_inventory;
 		call _object_damage;
 		call _object_gold;
-		};
+	};
 	case "position": {
 		if (!(_object in needUpdate_objects)) then {
 			//diag_log format["DEBUG Position: Added to NeedUpdate=%1",_object];
 			needUpdate_objects set [count needUpdate_objects, _object];
+			call _object_gold;
 		};
 	};
 	case "gear": {
 		call _object_inventory;
-			};
+		call _object_gold;
+	};
 	case "damage": {
 		if ( (time - _lastUpdate) > 5) then {
 			call _object_damage;
