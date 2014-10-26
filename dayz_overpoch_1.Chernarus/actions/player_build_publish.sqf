@@ -192,7 +192,7 @@ if(!_cancel) then {
 				_tmpbuilt setVariable ["ownerPUID",_OwnerUID,true];
 				
 				//call publish precompiled function with given args and send public variable to server to save item to database
-				PVDZE_obj_Publish = [_combination,_tmpbuilt,[_dir,_location,_playerUID],_classname];
+				PVDZE_obj_Publish = [_combination,_tmpbuilt,[_dir,_location,_playerUID],_classname,(p2pn + (random 10))];
 				publicVariableServer "PVDZE_obj_Publish";
 
 				cutText [format[(localize "str_epoch_player_140"),_combinationDisplay,_text], "PLAIN DOWN", 5]; //display new combination
@@ -207,7 +207,7 @@ if(!_cancel) then {
 					_tmpbuilt spawn player_fireMonitor;
 				} else {
 					
-					PVDZE_obj_Publish = [dayz_characterID,_tmpbuilt,[_dir,_location,_playerUID],_classname];
+					PVDZE_obj_Publish = [dayz_characterID,_tmpbuilt,[_dir,_location,_playerUID],_classname,(p2pn + (random 10))];
 					publicVariableServer "PVDZE_obj_Publish";
 				};
 			};

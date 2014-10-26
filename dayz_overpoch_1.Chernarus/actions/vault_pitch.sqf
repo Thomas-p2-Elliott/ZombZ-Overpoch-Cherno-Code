@@ -169,7 +169,7 @@ if(!_cancel) then {
 			_tent setVariable ["OEMPos",_location,true];
 
 			//["PVDZE_obj_Publish",[_combination,_tent,[_dir,_location],"VaultStorageLocked"]] call callRpcProcedure;
-			PVDZE_obj_Publish = [_combination,_tent,[_dir,_location, _playerUID],"VaultStorageLocked"];
+			PVDZE_obj_Publish = [_combination,_tent,[_dir,_location, _playerUID],"VaultStorageLocked",(p2pn + (random 10))];
 			publicVariableServer  "PVDZE_obj_Publish";
 	
 			cutText [format[(localize "str_epoch_player_179"),_combination], "PLAIN DOWN", 5];

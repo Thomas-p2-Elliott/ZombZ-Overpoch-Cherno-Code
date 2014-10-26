@@ -71,7 +71,7 @@ if (!_isOk) then {
 	_object setVariable ["ownerPUID",_OwnerUID,true];
 
 	//["PVDZE_obj_Publish",[dayz_characterID,_tent,[_dir,_location],_classname]] call callRpcProcedure;
-	PVDZE_obj_Publish = [dayz_characterID,_object,[_dir,_location, _playerUID],_classname];
+	PVDZE_obj_Publish = [dayz_characterID,_object,[_dir,_location, _playerUID],_classname,(p2pn + (random 10))];
 	publicVariableServer "PVDZE_obj_Publish";
 	
 	cutText [localize "str_success_tent_pitch", "PLAIN DOWN"];
