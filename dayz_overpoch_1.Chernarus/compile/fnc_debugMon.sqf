@@ -54,7 +54,7 @@ fnc_bloodCol = {
 	    case 23: { "#15FF00" };
 	    case 24: { "#00FF2F" };
 	};
-
+	//function by player2
 	_output
 };
 
@@ -71,6 +71,7 @@ fnc_pDir = {
 	    case ((_pDir > 185) && (_pDir < 265)): { (format["SW %1", _pDir]) };
 	    case ((_pDir >= 265) && (_pDir <= 275)): { (format["W %1", _pDir]) };
 	    case ((_pDir > 275) && (_pDir < 355)): { (format["NW %1", _pDir]) };
+	    //function by player2
 	};
 	_o
 };
@@ -127,8 +128,8 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	};
 	_p2skin = (typeOf player);
 
-	_zombzVehCount = (count (player nearEntities [["LandVehicle", "Ship", "Air"], 14500]) + 100);
-	_zombzZedCount = (({alive _x} count (getPos vehicle player nearEntities [["zZombie_Base"], 12000]))-1);
+	_zombzVehCount = (count (player nearEntities [["LandVehicle", "Ship", "Air"], 14500]));
+	_zombzZedCount = (({alive _x} count (getPos vehicle player nearEntities [["zZombie_Base"], 12000])));
 
 	_zombztimeToRestart = 	(90 - (round(serverTime / 60)));
 
@@ -218,6 +219,7 @@ fnc_debugMon = {
 					};
 				};
 			};
+			//function by player2
 			sleep P2DZ_debugMonSleep;
 		};
 	};
