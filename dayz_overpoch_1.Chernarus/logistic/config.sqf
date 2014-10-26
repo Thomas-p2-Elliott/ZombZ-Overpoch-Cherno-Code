@@ -25,9 +25,7 @@ LOG_CFG_CANTOW=[
 "KamazOpen_DZE",
 "GAZ_Vodnik_MedEvac",
 "BRDM2_HQ_TK_GUE_EP1",
-"BTR40_MG_TK_GUE_EP1",
 "BTR40_TK_GUE_EP1",
-"BTR40_MG_TK_INS_EP1",
 "BTR40_TK_INS_EP1",
 "M1133_MEV_EP1",
 "GAZ_Vodnik_DZE",
@@ -408,7 +406,7 @@ LOG_CFG_ISLIFTABLE=[
 "C130J_US_EP1_DZ",
 "An2_1_TK_CIV_EP1",
 "An2_2_TK_CIV_EP1",
-"An2_TK_EP1"
+"An2_TK_EP1",
 "CVPI_Patrol",
 "CVPI_Trooper_Patrol",
 "CVPI_TrooperSL_Patrol",
