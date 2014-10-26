@@ -67,30 +67,16 @@ if(isNil "HALV_VEHICLE_CLEANUPZONES")then{
 			if (_p2d) then { diag_log format["%2: Cleanup zones for chernarus selected! (check: %1)",_WorldName,_txt]; }; //logging if right worldname was selected, if uncommented
 			HALV_VEHICLE_CLEANUPZONES = [
 			//position					radius		cityname/text
-			/* Old Useless Junk That wasn't correct
-			[[6325.6772,7807.7412,0],	125,		"Trader City Stary"],
-			[[4063.4226,11664.19,0],	125,		"Trader City Bash"],
-			[[11447.472,11364.504,0],	125,		"Trader City Klen"],
-			[[1606.6443,7803.5156,0],	125,		"Bandit Camp"],
-			[[12944.227,12766.889,0],	125,		"Hero Camp"],
-			[[13441.16,5429.3013,0],	100,		"Wholesaler East"],
-			[[4510.7773,10774.518,0],	100,		"Aircraft Dealer"],
-			[[7989.3354,2900.9946,0],	100,		"Boat Dealer South"],
-			[[13532.614,6355.9497,0],	100,		"Boat Dealer East"],
-			[[4361.4937,2259.9526,0],	100,		"Wholesaler South"]
-			[[12060.471,12638.533,0], 	100,		"NE Aircraft Dealer"]
-			*/
-			//Corrected Postitions by DeeJay!
-			[[12060.471,12638.533,0], 	100,	"Aircraft Dealer"],
-			[[1606.6443,7803.5156,0],	125,	"Bandit Camp"],
-			[[13532.614,6355.9497,0],	100,	"Boat Dealer East"],
-			[[7989.3354,2900.9946,0],	100,	"Boat Dealer South"],
-			[[12944.227,12766.889,0],	125,	"Hero Camp"],
-			[[4063.4226,11664.19,0],	125,	"Trader City Bash"],
-			[[11447.472,11364.504,0],	125,	"Trader City Klen"],
-			[[6326.4805,7809.4888,0],	100,	"Trader City Stary"],
-			[[13441.16,5429.3013,0],	100,	"Wholesaler East"],
-			[[4361.4937,2259.9526,0],	100,	"Wholesaler South"]
+			[[12060.471,12638.533,0], 	125,	"Aircraft Dealer"],
+			[[1606.6443,7803.5156,0],	200,	"Bandit Camp"],
+			[[13532.614,6355.9497,0],	50,	"Boat Dealer East"],
+			[[7989.3354,2900.9946,0],	50,	"Boat Dealer South"],
+			[[12944.227,12766.889,0],	75,	"Hero Camp"],
+			[[4063.4226,11664.19,0],	200,	"Trader City Bash"],
+			[[11447.472,11364.504,0],	200,	"Trader City Klen"],
+			[[6326.4805,7809.4888,0],	200,	"Trader City Stary"],
+			[[13441.16,5429.3013,0],	50,	"Wholesaler East"],
+			[[4361.4937,2259.9526,0],	50,	"Wholesaler South"]
 			];
 		};
 //tavi
