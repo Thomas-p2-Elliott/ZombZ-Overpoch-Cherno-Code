@@ -3,14 +3,7 @@ if (true) then
 {
   _this = createVehicle ["Land_Toilet", [11467.155, 11341.848, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_39 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
+  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 305.48679;
   _this setPos [11467.155, 11341.848, 3.0517578e-005];
 };
@@ -1817,21 +1810,6 @@ if (true) then
   _this setPos [6310.2837, 7797.7686, 3.0517578e-005];
 };
 
-_vehicle_548 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Land_Fire_barrel", [4358.5767, 2260.3745, -2.8610229e-006], [], 0, "CAN_COLLIDE"];
-  _vehicle_548 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setPos [4358.5767, 2260.3745, -2.8610229e-006];
-};
 
 _vehicle_550 = objNull;
 if (true) then
@@ -1863,91 +1841,6 @@ if (true) then
     ]
   ];
   _this setPos [7983.9741, 2890.6536, -0.024177462];
-};
-
-_vehicle_567 = objNull;
-if (true) then
-{
-  _this = createVehicle ["MASH_EP1", [4836.6572, 2528.4377, -0.042138901], [], 0, "CAN_COLLIDE"];
-  _vehicle_567 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setDir 207.76485;
-  _this setPos [4836.6572, 2528.4377, -0.042138901];
-};
-
-_vehicle_568 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Camp_EP1", [4827.6084, 2532.1213, -0.033894159], [], 0, "CAN_COLLIDE"];
-  _vehicle_568 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setDir 567.49945;
-  _this setPos [4827.6084, 2532.1213, -0.033894159];
-};
-
-_vehicle_569 = objNull;
-if (true) then
-{
-  _this = createVehicle ["CampEast_EP1", [4833.8086, 2508.781, 0.016567288], [], 0, "CAN_COLLIDE"];
-  _vehicle_569 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setDir 334.10687;
-  _this setPos [4833.8086, 2508.781, 0.016567288];
-};
-
-_vehicle_571 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Land_Fire_barrel", [4836.3447, 2519.4587, -0.009747833], [], 0, "CAN_COLLIDE"];
-  _vehicle_571 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setDir -6.2675123;
-  _this setPos [4836.3447, 2519.4587, -0.009747833];
-};
-
-_vehicle_573 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Camp_EP1", [4845.7427, 2522.3279, -0.052045986], [], 0, "CAN_COLLIDE"];
-  _vehicle_573 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setDir 574.28497;
-  _this setPos [4845.7427, 2522.3279, -0.052045986];
 };
 
 _unit_97 = objNull;
