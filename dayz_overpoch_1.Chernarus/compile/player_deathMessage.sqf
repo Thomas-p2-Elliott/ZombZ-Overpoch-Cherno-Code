@@ -1,10 +1,10 @@
 'P2DZE_DeathMessage_GUI' addPublicVariableEventHandler {
 	[] spawn {
 		private ["_victimName","_killerName","_killerDist","_picture","_adjective","_safeZoneOffset","_layer","_fullmessage"];
-		_victimName = P2DZE_dM select 0;
-		_killerName = P2DZE_dM select 1;
-		_killerDist = P2DZE_dM select 2;
-		_picture = 	  P2DZE_dM select 3;
+		_victimName = P2DZE_DeathMessage_GUI select 0;
+		_killerName = P2DZE_DeathMessage_GUI select 1;
+		_killerDist = P2DZE_DeathMessage_GUI select 2;
+		_picture = 	  P2DZE_DeathMessage_GUI select 3;
 
 		offset_check =
 		{
