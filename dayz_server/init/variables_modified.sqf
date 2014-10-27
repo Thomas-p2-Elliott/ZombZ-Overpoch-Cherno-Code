@@ -109,6 +109,9 @@ Player/Spawn Settings
 		//enable debug output for static vehicle spawns?
 		P2DZ_Debug_StaticVehSpawns = false;
 
+		//enable mapp markers for static veh spawned
+		P2DZ_staticSpawnMarkers = true;
+
 		//Static vehicle spawns duplicate vehicle distance check (meters)
 		P2DZ_StaticVehSpawns_DupeDistanceCheck = 7.5;
 	};

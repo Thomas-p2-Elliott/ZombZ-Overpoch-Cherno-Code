@@ -301,7 +301,7 @@ if (isServer && isNil "sm_done") then {
 				/*---------------------------------------------------------------------------
 				Vehicle Painting
 				---------------------------------------------------------------------------*/
-				private ["_colour","_colour2","_clrinit","_clrinit2"];
+				private ["_colour","_colour2","_clrinit","_clrinit2","_marker"];
 
 				{
 					_selection = _x select 0;
@@ -338,6 +338,13 @@ if (isServer && isNil "sm_done") then {
 					
 					if(_ownerID != "0" && !(_object isKindOf "Bicycle")) then {
 						_object setvehiclelock "locked";
+					} else {
+						if (P2DZ_staticSpawnMarkers) then {
+							_marker = createMarker [str(_pos) , _pos];
+							_marker setMarkerShape "ICON";
+							_marker setMarkerType "DOT";
+							_marker setMarkerText str(_type);
+						};
 					};
 					
 					_totalvehicles = _totalvehicles + 1;
