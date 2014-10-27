@@ -84,6 +84,7 @@ p2_bulletCheck = {
 	};
 };
 
+p2_infAmmoCheck = { true };
 
 /*---------------------------------------------------------------------------
 Infinite ammo checker
@@ -91,7 +92,7 @@ Infinite ammo checker
 	Checks current weapon fired, checks ammo left in clip
 	If no change for 3 shots, kicks and log
 ---------------------------------------------------------------------------*/
-
+/*
 p2_infAmmoCheck = {
 	private ["_weapon","_ammo","_d","_lastWeapon","_lastAmmoLeft","_lastMagsLeft","_shotsFiredCount","_ammoLeft","_magsLeft","_magCapacity","_lastTime"];
 	if (vehicle player != player) exitWith {};
@@ -128,9 +129,9 @@ p2_infAmmoCheck = {
 		//	P2DZ_blackMarkCount = P2DZ_blackMarkCount + 1;
 		//};
 
-		if (_ammoLeft > _magCapacity) then {
-			P2DZ_blackMarkCount = P2DZ_blackMarkCount + 999;
-		};
+		///if (_ammoLeft > _magCapacity) then {
+		//	P2DZ_blackMarkCount = P2DZ_blackMarkCount + 999;
+		//};
 
 		_shotsFiredCount = _shotsFiredCount + 1;
 		P2DZ_LastShotInfo = [_weapon,_ammo,diag_tickTime,_ammoLeft,_shotsFiredCount];
@@ -144,3 +145,4 @@ p2_infAmmoCheck = {
 		[] spawn P2DZ_AHKick;
 	};
 };
+*/
