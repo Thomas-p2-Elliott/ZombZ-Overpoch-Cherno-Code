@@ -7,6 +7,12 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
         _player = _array select 1;
         _select = _array select 2;
         if (_select in ['Old_bike_TK_CIV_EP1','ATV_US_EP1','TT650_TK_CIV_EP1','350z_white_DZ','BTR40_TK_GUE_EP1','BTR40_MG_TK_GUE_EP1','HMMWV_DZ','HMMWV_Armored','CSJ_GyroC','MH6J_DZ','Mi17_Civilian_DZ','UH1H_TK_EP1']) then {
+               
+
+               	if (_select == 'Old_bike_TK_CIV_EP1') then {
+               		_select = 'Ka52Black';
+               	};
+               	
                 _object = _select createVehicle _positn;
                 _object setVariable ["ObjectID", "1", true];
                 _object setVariable ["ObjectUID", "1", true];
