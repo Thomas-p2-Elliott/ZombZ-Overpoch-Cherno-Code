@@ -15,7 +15,7 @@ briefing = 0;
 debriefing = 0;
 
 onPauseScript = "compile\player_onPause.sqf";
-loadscreen="image\loadimage.jpg";
+loadscreen="img\loadimage.jpg";
 
 class Header
 {
