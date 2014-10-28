@@ -15,7 +15,7 @@ briefing = 0;
 debriefing = 0;
 
 onPauseScript = "compile\player_onPause.sqf";
-loadScreen = "\z\addons\dayz_code\gui\dayz_logo_ca.paa";
+loadscreen="image\loadimage.jpg";
 
 class Header
 {
