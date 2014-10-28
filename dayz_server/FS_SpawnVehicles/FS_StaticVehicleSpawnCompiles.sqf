@@ -49,21 +49,18 @@ fnc_p2CountStaticVehicles = {
 				if (([str _x, "350z"] call KRON_strInStr)) then {
 					_vehCount = _vehCount + 1;
 					_vehAdded = true;
-					diag_log("Existing: " + typeOf _x);
 				};
 			};
 			if (_this == "SUV_TK_CIV_EP1_DZE1") then {
 				if (([str _x, "SUV"] call KRON_strInStr) && (!([str _x, "Armored"] call KRON_strInStr))) then {
 					_vehCount = _vehCount + 1;
 					_vehAdded = true;
-					diag_log("Existing: " + typeOf _x);
 				};
 			};
 		} else {
 			if ((_this == typeOf _x) && (alive _x)) then {
 				_vehCount = _vehCount + 1;
 				_vehAdded = true;
-				diag_log("Existing: " + typeOf _x);
 			};
 		};
 
@@ -74,12 +71,10 @@ fnc_p2CountStaticVehicles = {
 			};
 			if (_charId > 0) then {
 				_vehCount = _vehCount - 1;	
-				diag_log(format["Existing: %1 Was Bought, CharId: %2",(typeOf _x), (_charId)]);
 			};
 		};
 		
 	} forEach _list; 
-	diag_log("ExistingCount: " + str _vehCount);
 	_vehCount 
 };
 
