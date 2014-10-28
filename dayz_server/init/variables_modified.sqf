@@ -114,6 +114,10 @@ Player/Spawn Settings
 
 		//Static vehicle spawns duplicate vehicle distance check (meters)
 		P2DZ_StaticVehSpawns_DupeDistanceCheck = 7.5;
+
+		//Static vehicle spawns - max failures at spawning each vehicle at random pos
+		P2DZ_maxVehSpawnAttempts = 25;
+
 	};
 
 	if(!isDedicated || hasInterface) then {

@@ -136,7 +136,7 @@ if (isServer && isNil "sm_done") then {
 		
 
 
-		if (_damage < 0.95) then {
+		if (_damage < 1) then {
 			//diag_log format["OBJ: %1 - %2", _idKey,_type];
 			
 			//Create it
@@ -400,22 +400,19 @@ if (isServer && isNil "sm_done") then {
 	};
 
 	if (_hiveLoaded) then {
-		//  spawn_vehicles
-		_vehLimit = MaxVehicleLimit - _totalvehicles;
-		if(_vehLimit > 0) then {
-			diag_log ("HIVE: Spawning # of Vehicles: " + str(_vehLimit));
-			if (DZE_FS_UseStaticVehicleSpawn) then {
-				[_vehLimit] spawn fs_spawnVehicles;
-			}
-			else {
-				for "_x" from 1 to _vehLimit do {
-					[] spawn spawn_vehicles;
-				};
+		if (DZE_FS_UseStaticVehicleSpawn) then {
+			_vehLimit = 1000;
+			diag_log ("HIVE: Spawning Vehicles Using Static Vehicle Spawn System by Player2");
+			[_vehLimit] spawn fs_spawnVehicles;
+		} else {
+			_vehLimit = 100;
+			diag_log ("HIVE: Spawning Vehicles Using defualt Epoch System, Amount to Spawn: " + str (_vehLimit));
+			for "_x" from 1 to _vehLimit do {
+				//[] spawn spawn_vehicles;
 			};
-		}
-		else {
-			diag_log "HIVE: Vehicle Spawn limit reached!";
 		};
+	} else {
+		diag_log "HIVE: Cannot Spawn Vehicles, Hive Not loaded!";
 	};
 	
 	//  spawn_roadblocks

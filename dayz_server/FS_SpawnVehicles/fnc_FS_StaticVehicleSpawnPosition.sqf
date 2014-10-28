@@ -15,7 +15,7 @@ _locationFound = false;
 _usageSwitchedOff = false;
 _arrayCount = 0;
 _counter = 0;
-_maxCount = 40;
+_maxCount = 100;
 
 if (isNil "_debugMessages") then {
 	_debugMessages = false;

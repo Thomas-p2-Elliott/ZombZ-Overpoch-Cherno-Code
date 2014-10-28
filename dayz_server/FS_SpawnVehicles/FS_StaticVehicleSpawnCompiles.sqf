@@ -29,5 +29,60 @@ server_staticVehicleSpawnInit = compile preprocessFileLineNumbers "\z\addons\day
 server_fnc_staticVehiclePosition = compile preprocessFileLineNumbers "\z\addons\dayz_server\FS_SpawnVehicles\fnc_FS_StaticVehicleSpawnPosition.sqf";
 fs_spawnVehicles = compile preprocessFileLineNumbers "\z\addons\dayz_server\FS_SpawnVehicles\FS_SpawnVehicles.sqf";
 
+/*---------------------------------------------------------------------------
+Player2's count existing static spawned vehicles currently on map
+Input: Vehicle classname as string
+
+Example use: 
+_count = "Ka52Black" call fnc_p2CountStaticVehicles;
+if (_count < _maxKa52Count) then { ... };
+---------------------------------------------------------------------------*/
+fnc_p2CountStaticVehicles = {
+	private["_vehCount","_list","_charId"];
+	_vehCount = 0; 
+
+	_list = ([0,0,0]) nearEntities [["Car","Air","Ship"], 25000]; 
+	{
+		_vehAdded = false;
+		If ((_this == "350z") || (_this == "SUV_TK_CIV_EP1_DZE1")) then {
+			if (_this == "350z") then {
+				if (([str _x, "350z"] call KRON_strInStr)) then {
+					_vehCount = _vehCount + 1;
+					_vehAdded = true;
+					diag_log("Existing: " + typeOf _x);
+				};
+			};
+			if (_this == "SUV_TK_CIV_EP1_DZE1") then {
+				if (([str _x, "SUV"] call KRON_strInStr) && (!([str _x, "Armored"] call KRON_strInStr))) then {
+					_vehCount = _vehCount + 1;
+					_vehAdded = true;
+					diag_log("Existing: " + typeOf _x);
+				};
+			};
+		} else {
+			if ((_this == typeOf _x) && (alive _x)) then {
+				_vehCount = _vehCount + 1;
+				_vehAdded = true;
+				diag_log("Existing: " + typeOf _x);
+			};
+		};
+
+		if (_vehAdded) then {
+			_charId = (_x getVariable ["CharacterID", 0]);
+			if (typeName _charId == typeName "") then {
+				_charId = parseNumber _charId;	
+			};
+			if (_charId > 0) then {
+				_vehCount = _vehCount - 1;	
+				diag_log(format["Existing: %1 Was Bought, CharId: %2",(typeOf _x), (_charId)]);
+			};
+		};
+		
+	} forEach _list; 
+	diag_log("ExistingCount: " + str _vehCount);
+	_vehCount 
+};
+
+
 // Set up the StaticVehicleUsageConfig WITHOUT spawning any vehicles. <-- DO NOT CHANGE TO MAKE IT SPAWN VEHICLES HERE.
 [0] call fs_spawnVehicles;
