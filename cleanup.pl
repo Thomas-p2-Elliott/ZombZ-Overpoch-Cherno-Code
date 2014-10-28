@@ -98,6 +98,9 @@ if ($cleanup_objects == 1){
 	$object_query = "DELETE FROM `Object_DATA` WHERE `LastUpdated` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $object_after_creation_time DAY) AND `Datestamp` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $object_from_creation_time DAY);";
 	$query_handle2 = $connect->prepare($object_query);
 	$query_handle2->execute();
+	$object_query2 = "DELETE FROM `Object_DATA` WHERE `Damage` > 0.99;";
+	$query_handle3 = $connect->prepare($object_query2);
+	$query_handle3->execute();
 }else{
 	print "Cleanup Objects Switched Off.\n"
 }
