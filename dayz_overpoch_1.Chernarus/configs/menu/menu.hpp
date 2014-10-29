@@ -31,7 +31,7 @@ class RscGorsyMenu
 			colorFocused[] = {0,0,0,0};
 			colorShadow[] = {0,0,0,0};
 			colorBorder[] = {0,0,0.0,0};
-			action = "closeDialog 0; _ok = createDialog ""RscGorsyMenuLB""; [""basebuilding"",""img\menu\BB.paa""]execVM ""configs\menu\listbox.sqf""; diag_log(""GorsyDebug Menu: List box should be loaded"");";
+			action = "closeDialog 0; _ok = createDialog ""RscGorsyMenuLB""; [""basebuilding"",""img\menu\BB.paa""]execVM ""configs\menu\listbox.sqf"";";
 			onMouseEnter = "ctrlSetFocus (_this select 0)";
 		};
 		class MenuPic1: RscGorsyPicture
@@ -62,7 +62,7 @@ class RscGorsyMenu
 			colorFocused[] = {0,0,0,0};
 			colorShadow[] = {0,0,0,0};
 			colorBorder[] = {0,0,0.0,0};
-			action = "closeDialog 0;";
+			action = "closeDialog 0; _ok = createDialog ""RscGorsyMenuLB""; [""craftablevehicles"",""img\menu\CV.paa""]execVM ""configs\menu\listbox.sqf"";";
 			onMouseEnter = "ctrlSetFocus (_this select 0)";
 		};
 		class MenuPic2: RscGorsyPicture
@@ -89,7 +89,7 @@ class RscGorsyMenu
 			colorFocused[] = {0,0,0,0};
 			colorShadow[] = {0,0,0,0};
 			colorBorder[] = {0,0,0.0,0};
-			action = "closeDialog 0;";
+			action = "closeDialog 0; _ok = createDialog ""RscGorsyMenuLB""; [""features"",""img\menu\SF.paa""]execVM ""configs\menu\listbox.sqf"";";
 			onMouseEnter = "ctrlSetFocus (_this select 0)";
 		};
 		class MenuPic3: RscGorsyPicture
@@ -170,7 +170,7 @@ class RscGorsyMenu
 			colorFocused[] = {0,0,0,0};
 			colorShadow[] = {0,0,0,0};
 			colorBorder[] = {0,0,0.0,0};
-			action = "closeDialog 0;";
+			action = "closeDialog 0; _ok = createDialog ""RscGorsyMenuLB""; [""about"",""img\menu\ABZ.paa""]execVM ""configs\menu\listbox.sqf"";";
 			onMouseEnter = "ctrlSetFocus (_this select 0)";
 		};
 		class MenuPic6: RscGorsyPicture
