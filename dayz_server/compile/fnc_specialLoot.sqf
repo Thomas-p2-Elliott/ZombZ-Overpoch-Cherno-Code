@@ -448,35 +448,35 @@ switch (_eventType) do {
 							    0.09,
 
 							    //Skins **Percentages need to be adjusted**
-							    0.002,   
-							    0.002,  
-							    0.002, 
-							    0.002,  
-							    0.002, 
-							    0.002,   
-							    0.002,  
-							    0.002, 
-							    0.002, 
-							    0.002,   
-							    0.002, 
-							    0.002,  
-							    0.002, 
-							    0.002, 
-							    0.002,   
-							    0.002,  
-							    0.002, 
-							    0.002,  
-							    0.002, 
-							    0.002,   
-							    0.002,  
-							    0.002, 
-							    0.002, 
-							    0.002,   
-							    0.002, 
-							    0.002, 
-							    0.002, 
-							    0.002,   
-							    0.002
+							    0.02,   
+							    0.02,  
+							    0.02, 
+							    0.02,  
+							    0.02, 
+							    0.02,   
+							    0.02,  
+							    0.02, 
+							    0.02, 
+							    0.02,   
+							    0.02, 
+							    0.02,  
+							    0.02, 
+							    0.02, 
+							    0.02,   
+							    0.02,  
+							    0.02, 
+							    0.02,  
+							    0.02, 
+							    0.02,   
+							    0.02,  
+							    0.02, 
+							    0.02, 
+							    0.02,   
+							    0.02, 
+							    0.02, 
+							    0.02, 
+							    0.02,   
+							    0.02
 
 
 							 ];
@@ -595,54 +595,55 @@ switch (_eventType) do {
 			
 			case 4: 				{ 
 				_itemTypes = [
-
-				["30m_plot_kit","magazine"],  //SuperFuckingRare
-				["metal_floor_kit", "magazine"],   //SuperFuckingRare
-				["ItemPlotDeed", "magazine"],    //Rare
-				["CinderBlocks", "magazine"],    //Common
-				["ItemComboLock", "magazine"],    //Uncommon
-				["ParLumbertWood", "magazine"],          //Common
-				["Land_HBarrier_large", "building"],             //Uncommon
-				["Land_HBarrier1", "building"],          //Uncommon
-				["CinderWall_DZ", "magazine"],           //Rare
-				["CinderWallDoorway_DZ", "magazine"],            //Rare
-				["WoodFloor_DZ", "magazine"],    //Uncommon
-				["WoodLargeWall_DZ", "magazine"],        //Rare
-				["WoodLadder_DZ", "magazine"],           //Uncommon
-				["Fence_corrugated_DZ", "magazine"],             //Rare
-				["OutHouse_DZ", "magazine"],     //Uncommon
-				["cinder_door_kit", "magazine"],         //Rare
-				["cinder_wall_kit", "magazine"],         //Uncommon
-				["ItemWoodWallWithDoor", "magazine"],            //Uncommon
-				["WeaponHolder_MeleeCrowbar", "weapon"],         //Common
-				["PartWoodPlywood", "magazine"],        //Common
-				["ChainSaw", "weapon"],         //Super Rare like rare as hell fucking mega silly rare
-				["MortarBucket", "magazine"],            //Common
-				["ItemTankTrap", "magazine"] ];           //Common
+					["ChainSaw", "weapon"],         			//Super Rare like rare as hell fucking mega silly rare
+					["metal_floor_kit", "magazine"],  			//SuperFuckingRare
+					["cinder_door_kit", "magazine"],        	//Rare
+					["ItemPlotDeed", "magazine"],    			//Rare
+					["CinderWall_DZ", "magazine"],          	//Rare
+					["CinderWallDoorway_DZ", "magazine"],   	//Rare
+					["WoodLargeWall_DZ", "magazine"],       	//Rare
+					["Fence_corrugated_DZ", "magazine"],    	//Rare
+					["30m_plot_kit","magazine"],  				//Uncommon
+					["Land_HBarrier_large", "building"],		//Uncommon
+					["OutHouse_DZ", "magazine"],     			//Uncommon
+					["cinder_wall_kit", "magazine"],        	//Uncommon
+					["ItemWoodWallWithDoor", "magazine"],  		//Uncommon
+					["Land_HBarrier1", "building"],         	//Uncommon
+					["ItemComboLock", "magazine"],    			//Uncommon
+					["WoodFloor_DZ", "magazine"],    			//Uncommon
+					["WoodLadder_DZ", "magazine"],          	//Uncommon
+					["WeaponHolder_MeleeCrowbar", "weapon"],  	//Uncommon
+					["ParLumbertWood", "magazine"],     		//Common
+					["PartWoodPlywood", "magazine"],        	//Common
+					["ItemTankTrap", "magazine"],           	//Common
+					["CinderBlocks", "magazine"],    			//Common
+					["MortarBucket", "magazine"]            	//Common
 				];
-				_itemChance = [ 0.01,
-								0.01,
-								0.02,
-								0.05,
-								0.03,
-								0.05,
-								0.03,
-								0.03,
-								0.02,
-								0.03,
-								0.02,
-								0.03,
-								0.02,
-								0.03,
-								0.01,
-								0.03,
-								0.03,
-								0.05,
-								0.05,
-								0.01.
-								0.05,
-								0.05
-							  ]; 
+				_itemChance = [ 
+					0.01,
+					0.02,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.03,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.04,
+					0.05,
+					0.08,
+					0.08,
+					0.08,
+					0.07,
+					0.07
+				]; 
 
 				_lootTable = [_itemTypes,_itemChance]; 
  			};
