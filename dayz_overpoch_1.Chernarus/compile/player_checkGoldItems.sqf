@@ -1,4 +1,4 @@
-private["_unit","_mags","_goldCount","_goldVar","_result2","_timer"];
+private ["_timer","_goldVar","_unit","_goldCount","_result2","_mags","_backpack","_bcontents","_bitemCount","_bgoldBarCount"];
 _timer = diag_tickTime;
 _goldVar = 0;
 //get players gold early
@@ -45,8 +45,31 @@ if (!P2DZE_goldRunning) then {
 		_result2 = "nochange";
 		//if player had gold bar item prior
 		if (P2DZE_hasGold) then {
-			[] spawn player_dropGold;
-			_result2 = "HasNoGold: Player DID have gold bar item prior, running player_dropGold...";
+			_bcontents = [];
+			_bitemCount = 0;
+			_bgoldBarCount = 0;
+			_backpack = unitBackpack player;
+			_bcontents = getMagazineCargo _backpack;
+			{
+				if (((_bcontents select 0) select _bitemCount) == "ItemGoldBar10oz") then {
+					_bgoldBarCount = (_bcontents select 1) select _bitemCount;
+				};
+				_bitemCount = _bitemCount + 1;
+			} count (_bcontents select 0);
+			//if player has gold in backpack
+			if (_bgoldBarCount > 0) then {
+				_unit addMagazine "ItemGoldBar10oz";
+				P2DZE_plr_bpGold = _backpack; publicVariableServer "P2DZE_plr_bpGold";
+				titleText ["Do not move your gold into your backpack!", "PLAIN", 0.5]; 
+				if (P2DZ_enableGoldSystemChat) then {
+					systemChat("Gold: Do not move your gold into your backpack!");
+				};
+				closeDialog 0;
+				_result2 = "HasGoldItem: Player moved gold into backpack!";
+			} else {
+				[] spawn player_dropGold;
+				_result2 = "HasNoGold: Player DID have gold bar item prior, running player_dropGold...";
+			};
 
 		//if player did not have gold bar item prior
 		} else {
