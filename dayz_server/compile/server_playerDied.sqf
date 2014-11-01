@@ -1,9 +1,10 @@
-private ["_characterID","_minutes","_newObject","_playerID","_infected","_victimName","_victim","_killer","_killerName","_weapon","_distance","_loc_message","_nearLocations","_nearestLocation","_rExec","_killMsgThread","_death_record","_key"];
+private ["_pGold","_characterID","_minutes","_newObject","_playerID","_infected","_victimName","_victim","_killer","_killerName","_weapon","_distance","_loc_message","_nearLocations","_nearestLocation","_rExec","_killMsgThread","_death_record","_key"];
 _characterID = 	_this select 0;
 _minutes =		_this select 1;
 _newObject = 	_this select 2;
 _playerID = 	_this select 3;
 _infected =		_this select 4;
+_pGold = 		_this select 5;
 
 //Enable Debug Messages?
 P2DZ_DeathMessage_Debug = true;
@@ -27,6 +28,10 @@ _deathMessageSent = 	false;
 _victim = 			_newObject;
 _victimVehicle = 	vehicle _victim;
 
+/* Add gold to player body */
+
+_newObject setVariable ["ZombZGold", _pGold, true];
+
 /* Set Victim body name */
 
 _newObject setVariable ["bodyName", _victimName, true];
@@ -39,8 +44,8 @@ _weapon = _victim getVariable["AttackedByWeapon", "nil"];
 _distance = _victim getVariable["AttackedFromDistance", "nil"];
 
 /* Get Town / Location Name */
-
-_nearLocations = nearestLocations [([_victim] call FNC_GetPos), ["NameCityCapital","NameCity","NameVillage","NameLocal"],2500];
+_victimPos = ([_victim] call FNC_GetPos);
+_nearLocations = nearestLocations [(_victimPos), ["NameCityCapital","NameCity","NameVillage","NameLocal"],2500];
 
 if (count _nearLocations > 0) then {
 	_nearestLocation = text (_nearLocations select 0); 
@@ -90,7 +95,7 @@ if ((typeName _killer) != "STRING") then
 	};
 
 	/*---------------------------------------------------------------------------
-	Death was caused by Other Killer?
+	Death was caused by Other Killer? (Zombie kill / runover detection?)
 	---------------------------------------------------------------------------*/
 
 
@@ -156,6 +161,10 @@ if (typeName _minutes == "STRING") then
 	_minutes = parseNumber _minutes;
 };
 
+/*---------------------------------------------------------------------------
+Send death to hive if legit character
+---------------------------------------------------------------------------*/
+
 diag_log ("PDEATH: Player Died " + _playerID);
 if (!isNil '_characterID') then {
 	if (_characterID != "0") then
@@ -171,3 +180,32 @@ if (!isNil '_characterID') then {
 		deleteVehicle _newObject;
 	};
 };
+
+/*---------------------------------------------------------------------------
+Stats Output
+----------------------------------------------------------------------------*
+
+Output:
+	Day,Hour,Minutes,Seconds,VictimName,VictimUID,VictimPos,Victim Vehicle,Nearest Location
+---------------------------------------------------------------------------*/
+
+//		Get current real time
+//	[yyyy,mm,dd,mm,ss,wd,yd,dow,dst] example: [2014,9,24,21,9,57,3,266,0])
+//	wd = weekday, yd = yearday, dow = day of week (0 = sun, 6 = sat), dst = daylight savings
+_currentTime = "real_date" callExtension "+";
+_currentTime = call compile _currentTime;
+
+_day = 			_currentTime select 2;
+_hour = 		_currentTime select 3;
+_mins = 		_currentTime select 4;
+_secs = 		_currentTime select 5;
+
+//build message
+_statsMessage = format[
+	"%1,%2,%3,%4,%5,%6,%7,%8,%9",
+	_day,_hour,_mins,_secs,_victimName,(getPlayerUID _victim),_victimPos,(typeOf (vehicle _victim)),_nearestLocation
+];
+
+//send to stats log
+_statsMessage call stats_deaths;
+
