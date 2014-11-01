@@ -204,11 +204,7 @@ class RscGorsyMenu
 		{
 			idc = 1206;
 			style = 48;
-<<<<<<< HEAD
 			text = "img\menu\BOT.paa";
-=======
-			text = "img\watermark.paa";
->>>>>>> origin/master
 			x = 0.293698 * safezoneW + safezoneX;
 			y = 0.61 * safezoneH + safezoneY;
 			w = 0.412605 * safezoneW;
