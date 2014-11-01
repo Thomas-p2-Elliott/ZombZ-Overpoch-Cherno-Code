@@ -153,6 +153,7 @@ if (isServer && isNil "sm_done") then {
 			    ];
 			};
 
+			_object call player2_removeVehicleWeapons;
 
 			if ((_gold) < 1) then {
 				_gold = 0;

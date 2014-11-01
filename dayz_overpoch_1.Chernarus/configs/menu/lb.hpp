@@ -33,7 +33,11 @@ class RscGorsyMenuLB {
 			color[] = {0.5,0.5,0.5,1};
 			colorActive[] = {1,1,1,1};
 			colorText[] = {1,1,1,1};
+<<<<<<< HEAD
 	      	text = "<t size='1' font='Bitstream' align='left' color='#FFBF00'><br/><br/>Select an option from the left.</t>";
+=======
+	      	text = "<t size='2' font='Bitstream' align='left' color='#FFBF00'>Select an option from the left.</t>";
+>>>>>>> origin/master
 	      	colorDisabled[] = {0,0,0,0};
 			colorBackground[] = {0,0,0,0.0};
 			colorBackgroundDisabled[] = {0,0,0,0};

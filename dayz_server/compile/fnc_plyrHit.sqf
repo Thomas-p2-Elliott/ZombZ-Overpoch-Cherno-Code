@@ -32,3 +32,30 @@ _victim setVariable["AttackedByName", (name _attacker), true];
 //_victim setVariable["AttackedByWeapon", (currentWeapon _attacker), true];
 _victim setVariable["AttackedByWeapon", _weapon, true];
 _victim setVariable["AttackedFromDistance", _distance, true];
+
+
+/*---------------------------------------------------------------------------
+Stats Logging
+----------------------------------------------------------------------------*
+Output:
+	Day,Hour,Minute,Second,AttackerName,AttackerUID,VictimName,VictimUID,Weapon,Distance,Damage,AttackerPosition,VictimPosition
+*/
+
+//		Get current real time
+//	[yyyy,mm,dd,mm,ss,wd,yd,dow,dst] example: [2014,9,24,21,9,57,3,266,0])
+//	wd = weekday, yd = yearday, dow = day of week (0 = sun, 6 = sat), dst = daylight savings
+_currentTime = "real_date" callExtension "+";
+_currentTime = call compile _currentTime;
+_day = 			_currentTime select 2;
+_hour = 		_currentTime select 3;
+_mins = 		_currentTime select 4;
+_secs = 		_currentTime select 5;
+
+//build message
+_statsMessage = format[
+	"%1,%2,%3,%4,%5,%6,%7,%8,%9,%10,%11,%12,%13",
+	_day,_hour,_mins,_secs,(name _attacker),(getPlayerUID _attacker),(name _victim),(getPlayerUID _victim),_weapon,_distance,_damage,(getPosATL _attacker),(getPosATL _victim)
+];
+
+//send to stats log
+_statsMessage call stats_hits;

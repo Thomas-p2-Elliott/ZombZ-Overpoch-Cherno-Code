@@ -1,6 +1,10 @@
 _choose_section = _this select 0;
 
+<<<<<<< HEAD
 	 _leftmenu = ["About","Bicycle","Motorbike","ATV","350z","BTR","Humvee","BTR W/ Guns","Humvee W/ Guns","","Gyrocopter","Littlebird","Merlin","Huey"];
+=======
+	 _leftmenu = ["Coming Soon"];
+>>>>>>> origin/master
 	//0 //1 //2 //3 //4 //5 //6
 	if (_choose_section == "Left") exitWith {
 	
@@ -15,6 +19,7 @@ _choose_section = _this select 0;
 
 
 case (_leftmenu Select 0):{ 
+<<<<<<< HEAD
 "Craftable Vehicles is a feature originally created by the ZombZ team. Many servers have ripped off the basic original script of creating a bicycle. 
 But no other servers have our indepth crafting system.
 <br/><br/>
@@ -321,6 +326,9 @@ Toolbox
 <br/>
 Heavy Machine Gun x 1 Scrap Metal x 1
 <br/>
+=======
+"Coming soon 
+>>>>>>> origin/master
 "
 };
 			};//end of switch

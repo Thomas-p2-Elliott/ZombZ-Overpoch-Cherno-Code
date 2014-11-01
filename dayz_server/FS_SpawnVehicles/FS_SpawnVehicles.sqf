@@ -151,6 +151,17 @@ _fnc_spawn_vehicle = {
 					//add to veh spawned
 					_vehSpawned = _vehSpawned + 1;
 
+					//remove magazines
+					clearMagazineCargoGlobal _veh;
+
+					//remove weapons
+					clearWeaponCargoGlobal _veh;
+
+					//remove vehicle weapon ammo (eg m240 on humvee ammo)
+					//_veh setAmmo 0;
+					
+					_veh call player2_removeVehicleWeapons;
+
 					_veh call {
 					    _this setVariable [
 					        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),

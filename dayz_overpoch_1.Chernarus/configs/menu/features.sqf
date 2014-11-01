@@ -1,16 +1,25 @@
 _choose_section = _this select 0;
 
+<<<<<<< HEAD
 	 _leftmenu = ["Auto Refuel","Anti Side Chat","A.I. Missions ","A.I Fortress","Altitude Meter","Base Building","Crafting Menu","Craftable Vehicles","Custom Mapping","Custom Displays","Custom Sounds","Colour Menu System","Code Rewrites","Custom Debug","Combat Log Punishment","Debug Kill Punishment","Death Messages","Extended Friends","Faster Traders","Ground Spawn","Halo Spawn","Halo Jump","Headless Client ","Humanity Levels","Lifting ","New Loot","New Vehicles","New Stances","Maintain Base","Medic System (heroes)","Menu UID","Paint Vehicle","Random Loadouts","Random Vehicle Spawns","Randomised Mags","Shoot from Vehicle","Server Antihack","Skynet Antihack","Snap Build Pro","Towing","Trader Zones","Tons of bug fixes","Watermark","",""];
+=======
+	 _leftmenu = ["Coming Soon"];
+>>>>>>> origin/master
 	//0 //1 //2 //3 //4 //5 //6
 	if (_choose_section == "Left") exitWith {
 	
 		//sends left menu array to file
 		_leftmenu 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 	};
 	if (_choose_section == "Right") exitWith {
 		_selectright = _this Select 1;
 		_text = switch (_selectright) do {
 
+<<<<<<< HEAD
 case ("Auto Refuel"):{
 "<t color='#01DFD7'>Auto Refuel</t>
 <br/><br/>
@@ -477,11 +486,20 @@ There are alot of servers that try to steal our code, or copy our code. Always p
 case (""):{
 ""
 }
+=======
+
+
+case (_leftmenu Select 0):{ 
+"Coming soon 
+"
+};
+>>>>>>> origin/master
 			};//end of switch
 		//sends text back to file
 
 		_text
 
+<<<<<<< HEAD
 	};
 
 /*
@@ -531,3 +549,6 @@ Tons of bug fixes
 Watermark
 
 */
+=======
+	};
+>>>>>>> origin/master

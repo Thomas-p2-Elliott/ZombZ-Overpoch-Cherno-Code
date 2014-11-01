@@ -26,7 +26,7 @@ P2DZ_AH_MenuChecks = {
 			_selected = _tmp select _i;
 			if (count _selected > 4) then
 			{
-				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, toArray 'BIS_MENU_GroupCommunication', toArray (format["%1",(((_selected select 4) select 0) select 1)])];
+				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  'BIS_MENU_GroupCommunication',  (format["%1",(((_selected select 4) select 0) select 1)])];
 				publicVariableServer 'PVDZE_atp';
 				[] spawn P2DZ_AHKick;
 			};
@@ -47,7 +47,7 @@ P2DZ_AH_MenuChecks = {
 			showCommandingMenu '';
 			if (_short in ['#USER:']) then
 			{
-				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, toArray 'BadCommandingMenu', toArray (format["%1",_commandingMenu])];
+				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  'BadCommandingMenu',  (format["%1",_commandingMenu])];
 				publicVariableServer 'PVDZE_atp';
 				[] spawn P2DZ_AHKick;
 			};

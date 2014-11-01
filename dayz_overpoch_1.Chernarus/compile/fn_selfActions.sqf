@@ -51,7 +51,7 @@ if (DZE_HeliLift) then {
 };
 
 if(DZE_HaloJump) then {
-	if(_inVehicle && (_vehicle isKindOf "Air") && ((([_vehicle] call FNC_getPos) select 2) > 400)) then {
+	if(_inVehicle && (_vehicle isKindOf "Air") && ((([_vehicle] call FNC_getPos) select 2) > 175)) then {
 		if (s_halo_action < 0) then {
 			DZE_myHaloVehicle = _vehicle;
 			s_halo_action = DZE_myHaloVehicle addAction [localize "STR_EPOCH_ACTIONS_HALO","\z\addons\dayz_code\actions\halo_jump.sqf",[],2,false,true,"",""];

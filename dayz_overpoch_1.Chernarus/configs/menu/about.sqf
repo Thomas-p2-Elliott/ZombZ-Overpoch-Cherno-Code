@@ -1,6 +1,10 @@
 _choose_section = _this select 0;
 
+<<<<<<< HEAD
 	 _leftmenu = ["Rules","Staff","Support","Recruitment","Servers","Our Vision","","Bases","Loadouts","Skins","Gold","Humanity"];
+=======
+	 _leftmenu = ["Coming Soon","Coming Soon"];
+>>>>>>> origin/master
 	//0 //1 //2 //3 //4 //5 //6
 	if (_choose_section == "Left") exitWith {
 	
@@ -15,6 +19,7 @@ _choose_section = _this select 0;
 
 
 case (_leftmenu Select 0):{ 
+<<<<<<< HEAD
 "<t color='#01DFD7'>Rules</t>
 <br/><br/>
 
@@ -139,6 +144,11 @@ We dont currently offer humanity on Overpoch. This may change as we release more
 "
 };
 
+=======
+"Coming soon 
+"
+};
+>>>>>>> origin/master
 			};//end of switch
 		//sends text back to file
 

@@ -1,4 +1,4 @@
-private ["_player","_name","_traderid","_buyorsell","_data","_result","_key","_outcome","_clientID"];
+private ["_player","_traderID","_buyorsell","_classname","_traderCity","_currency","_qty","_clientID","_price","_currentTime","_day","_hour","_mins","_secs","_statsMessage","_outcome","_key","_data","_result"];
 
 _player =		_this select 0;
 _traderID = 	_this select 1;
@@ -12,9 +12,67 @@ _price = format ["%2x %1",_currency,_qty];
 _name = if (alive _player) then { name _player; } else { "Dead Player"; };
 
 if (_buyorsell == 0) then { //Buy
-diag_log format["EPOCH SERVERTRADE: Player: %1 (%2) bought a %3 in/at %4 for %5", _name, (getPlayerUID _player), _classname, _traderCity, _price];
+
+	diag_log format["EPOCH SERVERTRADE: Player: %1 (%2) bought a %3 in/at %4 for %5", _name, (getPlayerUID _player), _classname, _traderCity, _price];
+
+	/*---------------------------------------------------------------------------
+	Stats Output
+	----------------------------------------------------------------------------*
+
+	Output:
+		Day,Hour,Minutes,Seconds,Transaction Type,Player Name, Player UID, Item Purchased, Trader City, Price
+	---------------------------------------------------------------------------*/
+
+	//		Get current real time
+	//	[yyyy,mm,dd,mm,ss,wd,yd,dow,dst] example: [2014,9,24,21,9,57,3,266,0])
+	//	wd = weekday, yd = yearday, dow = day of week (0 = sun, 6 = sat), dst = daylight savings
+	_currentTime = "real_date" callExtension "+";
+	_currentTime = call compile _currentTime;
+
+	_day = 			_currentTime select 2;
+	_hour = 		_currentTime select 3;
+	_mins = 		_currentTime select 4;
+	_secs = 		_currentTime select 5;
+
+	//build message
+	_statsMessage = format[
+		"%1,%2,%3,%4,%5,%6,%7,%8,%9",
+		_day,_hour,_mins,_secs,"Buy",_name,(getPlayerUID _player),_classname,_traderCity,_price
+	];
+
+	//send to stats log
+	_statsMessage call stats_trades;
+
 } else { //SELL
-diag_log format["EPOCH SERVERTRADE: Player: %1 (%2) sold a %3 in/at %4 for %5",_name, (getPlayerUID _player), _classname, _traderCity, _price];
+
+	diag_log format["EPOCH SERVERTRADE: Player: %1 (%2) sold a %3 in/at %4 for %5",_name, (getPlayerUID _player), _classname, _traderCity, _price];
+	/*---------------------------------------------------------------------------
+	Stats Output
+	----------------------------------------------------------------------------*
+
+	Output:
+		Day,Hour,Minutes,Seconds,Transaction Type,Player Name, Player UID, Item Purchased, Trader City, Price
+	---------------------------------------------------------------------------*/
+
+	//		Get current real time
+	//	[yyyy,mm,dd,mm,ss,wd,yd,dow,dst] example: [2014,9,24,21,9,57,3,266,0])
+	//	wd = weekday, yd = yearday, dow = day of week (0 = sun, 6 = sat), dst = daylight savings
+	_currentTime = "real_date" callExtension "+";
+	_currentTime = call compile _currentTime;
+
+	_day = 			_currentTime select 2;
+	_hour = 		_currentTime select 3;
+	_mins = 		_currentTime select 4;
+	_secs = 		_currentTime select 5;
+
+	//build message
+	_statsMessage = format[
+		"%1,%2,%3,%4,%5,%6,%7,%8,%9",
+		_day,_hour,_mins,_secs,"Sell",_name,(getPlayerUID _player),_classname,_traderCity,_price
+	];
+
+	//send to stats log
+	_statsMessage call stats_trades;
 };
 
 if (DZE_ConfigTrader) then {

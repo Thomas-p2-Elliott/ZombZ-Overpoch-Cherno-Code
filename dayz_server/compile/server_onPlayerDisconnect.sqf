@@ -69,3 +69,34 @@ if (!isNull _playerObj) then {
 		} count (nearestObjects [_playerPos, dayz_updateObjects, 10]);
 	};
 };
+
+
+
+/*---------------------------------------------------------------------------
+Stats Output
+----------------------------------------------------------------------------*
+
+Output:
+	Day,Hour,Minutes,Seconds,VictimName,VictimUID,VictimPos,Victim Vehicle,Nearest Location
+---------------------------------------------------------------------------*/
+
+//		Get current real time
+//	[yyyy,mm,dd,mm,ss,wd,yd,dow,dst] example: [2014,9,24,21,9,57,3,266,0])
+//	wd = weekday, yd = yearday, dow = day of week (0 = sun, 6 = sat), dst = daylight savings
+_currentTime = "real_date" callExtension "+";
+_currentTime = call compile _currentTime;
+
+_month =		_currentTime select 1;
+_day = 			_currentTime select 2;
+_hour = 		_currentTime select 3;
+_mins = 		_currentTime select 4;
+_secs = 		_currentTime select 5;
+
+//build message
+_statsMessage = format[
+	"%1,%2,%3,%4,%5,%6,%7,%8",
+	_month,_day,_hour,_mins,_secs,_playerName,_playerUID,(getPos _playerObj)
+];
+
+//send to stats log
+_statsMessage call stats_disconnects;

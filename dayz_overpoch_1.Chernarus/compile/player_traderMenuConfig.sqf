@@ -151,7 +151,7 @@ TraderDialogLoadItemList = {
 					if (_name isKindOf "Ship") then {
 						_distance = dayz_sellDistance_boat;
 					};
-					_count = {(typeOf _x) == _name} count (nearestObjects [(getPosATL player), [_name], _distance]);
+					_count = {(((typeOf _x) == _name) && {(!(_x getVariable ["Deployed",false]))})} count (nearestObjects [(getPosATL player), [_name], _distance]);
 				};
 			};
 		};

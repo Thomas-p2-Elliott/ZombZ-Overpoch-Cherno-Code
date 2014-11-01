@@ -3,9 +3,7 @@ disableSerialization;
 if (deathHandled) exitWith {};
 deathHandled = true;
 
-if (({"ItemGoldBar10oz" == _x} count (magazines player)) > 0) then {
-	[] spawn player_dropGold;
-};
+_pGold = [false,player] call p2_gv;
 
 if ((alive player) && {isNil {dayz_playerName}}) then {
 	dayz_playerName = name player;
@@ -22,7 +20,7 @@ _playerID = getPlayerUID player;
 
 disableUserInput true;
 
-PVDZE_plr_Died = [dayz_characterID,0,_body,_playerID,0, dayz_playerName];
+PVDZE_plr_Died = [dayz_characterID,0,_body,_playerID,0, dayz_playerName,_pGold];
 publicVariableServer "PVDZE_plr_Died";
 
 _id = [player,100,true,getPosATL player] call player_alertZombies;

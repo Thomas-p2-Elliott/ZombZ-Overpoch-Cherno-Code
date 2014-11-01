@@ -1,4 +1,4 @@
-private ["_killer","_killerName","_victim","_victimName","_weapon","_distance","_isCar","_isHeli","_isBoat","_killedByVehicle","_weaponClassname","_picture","_killerDistance","_nearestLocation","_killerVehicle","_adjective","_rExec","_message"];
+private ["_killer","_killerName","_victim","_victimName","_weapon","_distance","_nearestLocation","_isCar","_isHeli","_isBoat","_killedByVehicle","_weaponClassname","_picture","_killerDistance","_killerVehicle","_adjective","_currentTime","_day","_hour","_mins","_secs","_killerPos","_victimPos","_statsMessage","_killerUID","_victimUID"];
 _killer =			_this select 0;
 _killerName	=		_this select 1;
 _victim = 			_this select 2;
@@ -6,16 +6,38 @@ _victimName = 		_this select 3;
 _weapon = 			_this select 4;
 _distance =			_this select 5;
 _nearestLocation =  _this select 6;
-
+_killerPos = 		[];
+_victimPos =		[];
+_currentTime = 		[];
 _isCar =			false;
 _isHeli =			false;
 _isBoat = 			false;
 _killedByVehicle = 	false;
 _weaponClassname =  "";
 _picture = 			"";
+_statsMessage = 	"";
 _killerDistance = 	100;
+_day = 				0;
+_hour = 			0;
+_mins = 			0;
+_secs = 			0;
 
 if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: Input: %1", (str _this)]); };
+
+
+//		Get current real time
+//	[yyyy,mm,dd,mm,ss,wd,yd,dow,dst] example: [2014,9,24,21,9,57,3,266,0])
+//	wd = weekday, yd = yearday, dow = day of week (0 = sun, 6 = sat), dst = daylight savings
+_currentTime = "real_date" callExtension "+";
+_currentTime = call compile _currentTime;
+_day = 			_currentTime select 2;
+_hour = 		_currentTime select 3;
+_mins = 		_currentTime select 4;
+_secs = 		_currentTime select 5;
+
+//get position of killer and victim
+_killerPos = ([_killer] call FNC_GetPos);
+_victimPos = ([_victim] call FNC_GetPos);
 
 /* Check if the killer used a vehicle */
 
@@ -104,17 +126,20 @@ if (isNil "_distance") then {
 	if (isNil "_killerDistance") then {
 		if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _killerDistance, setting to: %1", _victim distance _killer]);};
 		
-		_killerDistance = _victim distance _killer;
+		_killerDistance = _killer distance _victim;
 
 		if (isNil "_killerDistance") then {
 			if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: isNil _killerDistance, setting to: 100"]); };
 			_killerDistance = 100;
 		};
 	};
-} else {
-	_killerDistance = _distance;
 };
+
 _killerDistance = floor(_killerDistance);
+
+/*---------------------------------------------------------------------------
+Send Messages
+---------------------------------------------------------------------------*/
 
 if (!isNil "_victimName" && !isNil "_killerName" && !isNil "_killerDistance" && !isNil "_picture") then {
 
@@ -148,3 +173,19 @@ if (!isNil "_victimName" && !isNil "_killerName" && !isNil "_killerDistance" && 
 	P2DZE_systemChat = format["%1 was %2 with a %3 from %4m by %5 near %6",(_victimName),(_adjective),(_weaponClassname),(_killerDistance),(_killerName),(_nearestLocation)];
 	publicVariable "P2DZE_systemChat";
 };
+
+/*---------------------------------------------------------------------------
+Stats Logging
+----------------------------------------------------------------------------*
+Output:
+	Day,Hour,Minute,Second,KillerName,KillerUID,VictimName,VictimUID,KillerPos,VictimPos,KillerDistance,KillerWeapon,VictimVehicle,KillerVehicle,NearestLocation
+*/
+
+//build message
+_statsMessage = format[
+	"%1,%2,%3,%4,%5,%6,%7,%8,%9,%10,%11,%12,%13,%14,%15",
+	_day,_hour,_mins,_secs,_killerName,_killerUID,_victimName,_victimUID,_killerPos,_victimPos,_killerDistance,_weaponClassname,(typeOf (vehicle _victim)),(typeOf (vehicle _killer)),_nearestLocation
+];
+
+//send to stats log
+_statsMessage call stats_kills;

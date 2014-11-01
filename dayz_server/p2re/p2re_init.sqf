@@ -117,11 +117,11 @@ call {
 			_x = _this select 1;
 			if (typeName _x == "STRING") then {
 				diag_log _x;
-				_found	=	["TELEPORT REVERT",_x] call KRON_StrInStr;
+				_found	=	[_x,"TELEPORT REVERT"] call KRON_StrInStr;
 				if (_found) then {
-					["teleportLog",_x] call p2net_log1;
+					_x call stats_teleports;
 				} else {
-					["hackerLog",_x] call p2net_log1; 
+					_x call stats_hackers;
 				};
 			};
 		};

@@ -1,4 +1,21 @@
 /*---------------------------------------------------------------------------
+Remove Gold from players backpack
+
+Inputs:
+	Player Backpack (Object)
+---------------------------------------------------------------------------*/
+"P2DZE_plr_bpGold"		addPublicVariableEventHandler {_id = (_this select 1) spawn P2DZE_removeGoldFromBackpack};
+
+P2DZE_removeGoldFromBackpack = {
+		private["_backpack"];
+		_backpack = _this;
+		if (P2DZE_goldItemHandlingDebug) then {
+			diag_log(format["P2DZE_removeGoldFromBackpack:	PlayerBackpack Object: %1",_backpack]);
+		};
+		[_this,false] call fnc_removeExtraBars;
+};
+
+/*---------------------------------------------------------------------------
 Drop Gold
 
 Inputs:
@@ -9,12 +26,12 @@ Inputs:
 "P2DZE_plr_dropGold"		addPublicVariableEventHandler {_id = (_this select 1) spawn P2DZE_dropGold};
 
 P2DZE_dropGold = {
-	private ["_amount","_objGoldVar","_newPlyrGold","_newObjGold","_plyrGoldVar","_iPos","_radius","_item","_input","_unit","_object"];
+	private ["_unit","_object","_item","_iPos","_input","_amount","_radius","_newObjGold","_newPlyrGold","_plyrGoldVar","_objGoldVar","_near","_currentTime","_day","_hour","_mins","_secs","_statsMessage"];
 
 	_unit = objNull;
 	_object = objNull;
 	_item = objNull;
-	_ipos = [];
+	_iPos = [];
 	_input = [];
 	_amount = -1;
 	_radius = 0;
@@ -120,6 +137,35 @@ P2DZE_dropGold = {
 				if (P2DZE_goldItemHandlingDebug) then {
 					diag_log(format[" DropGold: onContainer: (false) _newPlyrGold: (%1) _newObjGold: (%2) _object / _unit: (%3/%4) _plyrGoldVar: (%5)", _newPlyrGold, _newObjGold, objNull, _unit, _plyrGoldVar]);
 				};
+
+				/*---------------------------------------------------------------------------
+				Stats Output
+				----------------------------------------------------------------------------*
+
+				Output:
+					Day,Hour,Minutes,Seconds,Transaction Type,Player Name, Player UID, Dropped Amount, Old Player Gold, New Player Gold
+				---------------------------------------------------------------------------*/
+
+				//		Get current real time
+				//	[yyyy,mm,dd,mm,ss,wd,yd,dow,dst] example: [2014,9,24,21,9,57,3,266,0])
+				//	wd = weekday, yd = yearday, dow = day of week (0 = sun, 6 = sat), dst = daylight savings
+				_currentTime = "real_date" callExtension "+";
+				_currentTime = call compile _currentTime;
+
+				_day = 			_currentTime select 2;
+				_hour = 		_currentTime select 3;
+				_mins = 		_currentTime select 4;
+				_secs = 		_currentTime select 5;
+
+				//build message
+				_statsMessage = format[
+					"%1,%2,%3,%4,%5,%6,%7,%8,%9,%10",
+					_day,_hour,_mins,_secs,"DropGold",(name _unit),(getPlayerUID _unit),_newObjGold,_plyrGoldVar,_newPlyrGold
+				];
+
+				//send to stats log
+				_statsMessage call stats_gold;
+
 			};
 		};
 	};
@@ -136,7 +182,7 @@ Object
 "P2DZE_plr_pickupGold"		addPublicVariableEventHandler {_id = (_this select 1) spawn P2DZE_pickupGold};
 
 P2DZE_pickupGold = {
-	private ["_unit","_object","_newPlyrGold","_input","_plyrGoldVar","_objGoldVar"];
+	private ["_unit","_object","_newPlyrGold","_input","_plyrGoldVar","_objGoldVar","_currentTime","_day","_hour","_mins","_secs","_statsMessage"];
 
 	_unit = objNull;
 	_object = objNull;
@@ -182,6 +228,35 @@ P2DZE_pickupGold = {
 				if (P2DZE_goldItemHandlingDebug) then {
 					diag_log(format[" pickupGold: _object / _unit: (%3/%4) _plyrGoldVar: (%1) _newPlyrGold: (%2)", _plyrGoldVar, _newPlyrGold,_object,_unit]);
 				};
+
+				/*---------------------------------------------------------------------------
+				Stats Output
+				----------------------------------------------------------------------------*
+
+				Output:
+					Day,Hour,Minutes,Seconds,Transaction Type,Player Name, Player UID, Change Amount, New Gold Amount
+				---------------------------------------------------------------------------*/
+
+				//		Get current real time
+				//	[yyyy,mm,dd,mm,ss,wd,yd,dow,dst] example: [2014,9,24,21,9,57,3,266,0])
+				//	wd = weekday, yd = yearday, dow = day of week (0 = sun, 6 = sat), dst = daylight savings
+				_currentTime = "real_date" callExtension "+";
+				_currentTime = call compile _currentTime;
+
+				_day = 			_currentTime select 2;
+				_hour = 		_currentTime select 3;
+				_mins = 		_currentTime select 4;
+				_secs = 		_currentTime select 5;
+
+				//build message
+				_statsMessage = format[
+					"%1,%2,%3,%4,%5,%6,%7,%8,%9",
+					_day,_hour,_mins,_secs,"PickupGold",(name _unit),(getPlayerUID _unit),_objGoldVar,_newPlyrGold
+				];
+
+				//send to stats log
+				_statsMessage call stats_gold;
+
 			};
 		};
 	};
@@ -199,7 +274,7 @@ Change
 "P2DZE_plr_giveChange"		addPublicVariableEventHandler {_id = (_this select 1) spawn P2DZE_giveChange};
 
 P2DZE_giveChange = {
-	private ["_unit","_object","_newPlyrGold","_input","_plyrGoldVar","_objGoldVar"];
+	private ["_unit","_input","_change","_currentTime","_day","_hour","_mins","_secs","_statsMessage"];
 
 	_unit = objNull;
 	_input = _this;
@@ -216,6 +291,35 @@ P2DZE_giveChange = {
 				if (P2DZE_goldItemHandlingDebug) then {
 					diag_log(format[" P2DZE_giveChange: _unit / _change: (%1 / %2)", _unit, _change]);
 				};
+
+				/*---------------------------------------------------------------------------
+				Stats Output
+				----------------------------------------------------------------------------*
+
+				Output:
+					Day,Hour,Minutes,Seconds,Transaction Type,Player Name, Player UID, New Player Gold
+				---------------------------------------------------------------------------*/
+
+				//		Get current real time
+				//	[yyyy,mm,dd,mm,ss,wd,yd,dow,dst] example: [2014,9,24,21,9,57,3,266,0])
+				//	wd = weekday, yd = yearday, dow = day of week (0 = sun, 6 = sat), dst = daylight savings
+				_currentTime = "real_date" callExtension "+";
+				_currentTime = call compile _currentTime;
+
+				_day = 			_currentTime select 2;
+				_hour = 		_currentTime select 3;
+				_mins = 		_currentTime select 4;
+				_secs = 		_currentTime select 5;
+
+				//build message
+				_statsMessage = format[
+					"%1,%2,%3,%4,%5,%6,%7,%8",
+					_day,_hour,_mins,_secs,"GiveChange",(name _unit),(getPlayerUID _unit),_change
+				];
+
+				//send to stats log
+				_statsMessage call stats_gold;
+
 			};
 		};
 	};
