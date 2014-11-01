@@ -13,6 +13,7 @@ s_player_upgradegyro = -1;
 s_player_upgradebtr2 = -1;
 s_player_upgradehumvee2 = -1;
 s_player_upgrademerlin = -1; 
+s_player_vehDeployed = -1; 
 
 while {true} do {	
 	if (!isNull player) then {
@@ -21,11 +22,11 @@ while {true} do {
 	_vehicle = vehicle player; 
 	_inVehicle = (_vehicle != player); 
 
-	if (player distance _cursorTarget < 4 && {_cursorTarget isKindOf "AllVehicles"} && {!isNull _cursorTarget} && {!_inVehicle}) then {
+	if (player distance _cursorTarget < 6 && {_cursorTarget isKindOf "AllVehicles"} && {!isNull _cursorTarget} && {!_inVehicle}) then {
 
 			_isDeployed = _cursorTarget getVariable ["Deployed",false]; 
 
-			if (_isDeployed) then {
+			if (_isDeployed && {_cursorTarget == cursorTarget}) then {
 
 				_onLadder = (getNumber (configFile >> "CfgMovesMaleSdr" >> "States" >> (animationState player) >> "onLadder")) == 1; 
 				_hasToolbox = "ItemToolbox" in items player; 
@@ -39,8 +40,17 @@ while {true} do {
 				_isLittlebird = typeOf _cursorTarget in ["MH6J_DZ"]; 
 				_isMerlin = typeOf _cursorTarget in ["Mi17_Civilian_DZ"]; 
 				
-				if (s_player_packOBJ < 0) then {
-					s_player_packOBJ = player addaction [("<t color=""#00FF04"">" + ("Pack "+typeOf _cursorTarget+"") +"</t>"),"actions\deploys\pack.sqf",_cursorTarget,6,false,true,"", ""]			
+				if (player distance _cursorTarget < 6 && {_cursorTarget == cursorTarget}) then {
+					if (s_player_vehDeployed < 0) then {
+						s_player_vehDeployed = player addAction ["<t color='#FFFFFF'>Deployed Vehicle - Cannot be Sold</t>", "","", -1];	
+					};
+				} else {
+					player removeAction s_player_vehDeployed; 
+					s_player_vehDeployed = -1; 
+				};
+
+				if (s_player_packOBJ < 0 && {_cursorTarget == cursorTarget}) then {
+					s_player_packOBJ = player addaction [("<t color=""#00FF04"">" + ("Pack "+typeOf _cursorTarget+"") +"</t>"),"actions\deploys\pack.sqf",_cursorTarget,-1,false,true,"", ""]			
 				}; 
 			
 				if ((_isMerlin) && {_hasToolbox} && {_canDo}) then {				
@@ -52,7 +62,7 @@ while {true} do {
 					s_player_upgrademerlin = -1; 
 				}; 
 				
-				if ((_isHumvee) && {_hasToolbox} && {_canDo}) then {
+				if ((_isHumvee) && {_hasToolbox} && {_canDo} && {_cursorTarget == cursorTarget}) then {
 					if (s_player_upgradehumvee2 < 0) then {	
 						s_player_upgradehumvee2 = player addaction[("<t color=""#007ab7"">" + ("Upgrade to Humvee (m240)") +"</t>"),"actions\deploys\bike\upgrade_humvee_gun.sqf",_cursorTarget, -1, true, true, "", ""]; 
 					}; 
@@ -61,7 +71,7 @@ while {true} do {
 					s_player_upgradehumvee2 = -1; 
 				}; 
 
-				if ((_isBtr) && {_hasToolbox} && {_canDo}) then {				
+				if ((_isBtr) && {_hasToolbox} && {_canDo} && {_cursorTarget == cursorTarget}) then {				
 					if (s_player_upgradebtr2 < 0) then {
 						s_player_upgradebtr2 = player addaction[("<t color=""#007ab7"">" + ("Upgrade to BTR (m240)") +"</t>"),"actions\deploys\bike\upgrade_btr_gun.sqf",_cursorTarget, -1, true, true, "", ""]; 
 					}; 
@@ -70,7 +80,7 @@ while {true} do {
 					s_player_upgradebtr2 = -1; 
 				};
 
-				if ((_isGyro) && {_hasToolbox} && {_canDo}) then {				
+				if ((_isGyro) && {_hasToolbox} && {_canDo} && {_cursorTarget == cursorTarget}) then {				
 					if (s_player_upgradegyro < 0) then {
 						s_player_upgradegyro = player addaction[("<t color=""#007ab7"">" + ("Upgrade to LittleBird") +"</t>"),"actions\deploys\gyro\upgrade.sqf",_cursorTarget, -1, true, true, "", ""]; 
 					}; 
@@ -79,7 +89,7 @@ while {true} do {
 					s_player_upgradegyro = -1; 
 				}; 
 				
-				if ((_isLittlebird) && {_hasToolbox} && {_canDo}) then {				
+				if ((_isLittlebird) && {_hasToolbox} && {_canDo} && {_cursorTarget == cursorTarget}) then {				
 					if (s_player_upgradelittlebird < 0) then {					
 						s_player_upgradelittlebird = player addaction[("<t color=""#007ab7"">" + ("Upgrade to Mi17 Civ") +"</t>"),"actions\deploys\gyro\upgrade2.sqf",_cursorTarget, -1, true, true, "", ""]; 
 					}; 
@@ -88,7 +98,7 @@ while {true} do {
 					s_player_upgradelittlebird = -1; 
 				}; 
 
-				if ((_isLittlebird) && {_hasToolbox} && {_canDo}) then {				
+				if ((_isLittlebird) && {_hasToolbox} && {_canDo} && {_cursorTarget == cursorTarget}) then {				
 					if (s_player_upgradelittlebird2 < 0) then {					
 						s_player_upgradelittlebird2 = player addaction[("<t color=""#007ab7"">" + ("Upgrade to Armed Littlebird") +"</t>"),"actions\deploys\gyro\upgrade2_2.sqf",_cursorTarget, -1, true, true, "", ""]; 
 					}; 
@@ -97,7 +107,7 @@ while {true} do {
 					s_player_upgradelittlebird2 = -1; 
 				}; 
 
-				if ((_isBike) && {_hasToolbox} && {_canDo}) then {
+				if ((_isBike) && {_hasToolbox} && {_canDo} && {_cursorTarget == cursorTarget}) then {
 					if (s_player_upgrademoto < 0) then {
 							s_player_upgrademoto = player addaction[("<t color=""#007ab7"">" + ("Upgrade to Motorcycle") +"</t>"),"actions\deploys\bike\upgrade_moto.sqf",_cursorTarget, -1, true, true, "", ""]; 
 					}; 
@@ -106,7 +116,7 @@ while {true} do {
 					s_player_upgrademoto = -1; 
 				}; 
 				
-				if ((_isBike) && {_hasToolbox} && {_canDo}) then {
+				if ((_isBike) && {_hasToolbox} && {_canDo} && {_cursorTarget == cursorTarget}) then {
 					if (s_player_upgradeatv < 0) then {			
 						s_player_upgradeatv = player addaction[("<t color=""#007ab7"">" + ("Upgrade to ATV") +"</t>"),"actions\deploys\bike\upgrade_atv.sqf",_cursorTarget, -1, true, true, "", ""]; 
 					}; 
@@ -115,7 +125,7 @@ while {true} do {
 					s_player_upgradeatv = -1; 
 				}; 
 
-				if ((_isMoto) && {_hasToolbox} && {_canDo}) then {			
+				if ((_isMoto) && {_hasToolbox} && {_canDo} && {_cursorTarget == cursorTarget}) then {			
 					if (s_player_upgrade350z < 0) then {
 						s_player_upgrade350z = player addaction[("<t color=""#007ab7"">" + ("Upgrade to Nissan 350z") +"</t>"),"actions\deploys\bike\upgrade_350z.sqf",_cursorTarget, -1, true, true, "", ""]; 
 					}; 
@@ -124,7 +134,7 @@ while {true} do {
 					s_player_upgrade350z = -1; 
 				}; 
 
-				if ((_isATV) && {_hasToolbox} && {_canDo}) then {
+				if ((_isATV) && {_hasToolbox} && {_canDo} && {_cursorTarget == cursorTarget}) then {
 					if (s_player_upgradebtr < 0) then {
 							s_player_upgradebtr = player addaction[("<t color=""#007ab7"">" + ("Upgrade to BTR") +"</t>"),"actions\deploys\bike\upgrade_btr.sqf",_cursorTarget, -1, true, true, "", ""]; 
 					}; 
@@ -133,7 +143,7 @@ while {true} do {
 					s_player_upgradebtr = -1; 
 				};
 
-				if ((_isBtr) && {_hasToolbox} && {_canDo}) then {
+				if ((_isBtr) && {_hasToolbox} && {_canDo} && {_cursorTarget == cursorTarget}) then {
 					if (s_player_upgradehumvee < 0) then {
 							s_player_upgradehumvee = player addaction[("<t color=""#007ab7"">" + ("Upgrade to HMMWV") +"</t>"),"actions\deploys\bike\upgrade_humvee.sqf",_cursorTarget, -1, true, true, "", ""]; 
 					}; 
@@ -195,6 +205,10 @@ while {true} do {
 				player removeAction s_player_upgradehumvee2; 
 				s_player_upgradehumvee2 = -1;
 			};
+			if (s_player_vehDeployed > -1) then {
+				player removeAction s_player_vehDeployed;
+				s_player_vehDeployed = -1;
+			}
 		};
 	};
 		
