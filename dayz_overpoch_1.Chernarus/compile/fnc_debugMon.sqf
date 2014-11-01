@@ -87,15 +87,13 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 
 	if (P2DZ_humanityLevel < 0) then {
 		P2DZ_humanityPrefix = "Bandit Level: ";
-		P2DZ_humanityLevelText = format["%1 %2",P2DZ_humanityPrefix, (abs P2DZ_humanityLevel)];
+		P2DZ_humanityLevel = abs P2DZ_humanityLevel;
 	} else {
 		if (P2DZ_humanityLevel > 0) then {
 			P2DZ_humanityPrefix = "Hero Level: ";
-			P2DZ_humanityLevelText = format["%1 %2",P2DZ_humanityPrefix, P2DZ_humanityLevel];
 		} else {
 			if (P2DZ_humanityLevel == 0) then {
 				P2DZ_humanityPrefix = "Survivor Level: ";
-				P2DZ_humanityLevelText = format["%1 %2",P2DZ_humanityPrefix, P2DZ_humanityLevel];
 			};
 		};
 	};
