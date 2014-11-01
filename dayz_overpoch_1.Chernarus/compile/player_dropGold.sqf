@@ -33,9 +33,15 @@ if (P2DZE_gearOnContainer) then {
 		if (_amount < 0 || _amount >= _pGold) then {
 			//set has gold var
 			P2DZE_hasGold = false;
+			if (P2DZ_enableGoldSystemChat) then {
+				systemChat(format["Gold: %1 dropped to %2.",_pGold,(typeOf _object)]);
+			};
 		} else {
 			//set has gold var
 			P2DZE_hasGold = true;
+			if (P2DZ_enableGoldSystemChat) then {
+				systemChat(format["Gold: %1 dropped to %2.",_amount,(typeOf _object)]);
+			};
 		};
 
 
@@ -57,9 +63,15 @@ if (P2DZE_gearOnContainer) then {
 				if (_amount < 0 || _amount >= _pGold) then {
 					//set has gold var
 					P2DZE_hasGold = false;
+					if (P2DZ_enableGoldSystemChat) then {
+						systemChat(format["Gold: %1 dropped to %2.",_pGold,(typeOf _x)]);
+					};
 				} else {
 					//set has gold var
 					P2DZE_hasGold = true;
+					if (P2DZ_enableGoldSystemChat) then {
+						systemChat(format["Gold: %1 dropped to %2.",_amount,(typeOf _x)]);
+					};
 				};
 
 			};
@@ -81,9 +93,18 @@ if (P2DZE_gearOnContainer) then {
 	if (_amount < 0 || _amount >= _pGold) then {
 		//set has gold var
 		P2DZE_hasGold = false;
+
+		if (P2DZ_enableGoldSystemChat) then {
+			systemChat(format["Gold: %1 dropped to ground.",_pGold]);
+		};
+
 	} else {
 		//set has gold var
 		P2DZE_hasGold = true;
+
+		if (P2DZ_enableGoldSystemChat) then {
+			systemChat(format["Gold: %1 dropped to ground.",_amount]);
+		};
 	};
 
 	//reveal object

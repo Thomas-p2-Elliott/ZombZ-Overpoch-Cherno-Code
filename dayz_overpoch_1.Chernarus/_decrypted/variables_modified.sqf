@@ -1,4 +1,5 @@
 p2SpT = false;
+P2DZ_enableGoldSystemChat = true;
 P2DZE_debugSelfActions = false;
 P2DZE_debugLogin = false;
 P2DZE_deugVehIns = false;
