@@ -13,7 +13,7 @@ call compile ("
 	[_x] spawn {
 		_x = _this select 0;
 		waitUntil {!(isNil _x)};
-		PVDZE_atp = format['NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)',"+(str _pname)+", " +(str _puid)+ ", 'GameFunction Broken: ', toArray (str(_x))];
+		PVDZE_atp = format['NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)',"+(str _pname)+", " +(str _puid)+ ", 'GameFunction Broken: ',  (str(_x))];
 		publicVariableServer 'PVDZE_atp';
 		[] spawn P2DZ_AHKick; 
 	};
@@ -57,7 +57,7 @@ if (_worldName == 'Chernarus') then
 	if (count _BadPlants > 1) then
 	{
 		_log = format['BadSize: %1 - Plants and/or Clutter pbo(s) removed..!',_BadPlants];
-		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)", _pname, _puid, 'Plants/Clutter PBOs removed!', toArray (_BadPlants)];
+		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)", _pname, _puid, 'Plants/Clutter PBOs removed!',  (_BadPlants)];
 		publicVariableServer 'PVDZE_atp';
 		[] spawn P2DZ_AHKick; 
 	};

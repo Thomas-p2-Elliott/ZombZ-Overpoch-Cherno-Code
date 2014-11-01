@@ -42,7 +42,7 @@ P2DZ_AH_FunctionChecks = {
 		if (typeName TraderItemList == 'CODE') then
 		{
 			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",
-				_pname, _puid, toArray ('Trader Menu - not near a Trader!'), toArray (format["#1 - %1 @%2",_ltxt,getPosATL player])];
+				_pname, _puid,  ('Trader Menu - not near a Trader!'),  (format["#1 - %1 @%2",_ltxt,getPosATL player])];
 			publicVariableServer 'PVDZE_atp';
 			[] spawn P2DZ_AHKick;
 		};
@@ -100,7 +100,7 @@ P2DZ_AH_FunctionChecks = {
 	{
 		if (str(player_checkStealth) != orig_player_checkStealth) exitWith 
 		{
-			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, toArray 'player_checkStealth', toArray ('NotOriginal')];
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  'player_checkStealth',  ('NotOriginal')];
 			publicVariableServer 'PVDZE_atp';
 			[] spawn P2DZ_AHKick;
 		};
@@ -116,7 +116,7 @@ P2DZ_AH_FunctionChecks = {
 	{
 		if (str(player_zombieAttack) != orig_player_zombieAttack) exitWith 
 		{
-			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, toArray 'player_zombieAttack', toArray ('NotOriginal')];
+			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  'player_zombieAttack',  ('NotOriginal')];
 			publicVariableServer 'PVDZE_atp';
 			[] spawn P2DZ_AHKick;
 		};
@@ -137,7 +137,7 @@ P2DZ_AH_FunctionChecks = {
 	if (str _TraderDialogBuy != str TraderDialogBuy) then
 	{
 		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",
-			_pname, _puid, toArray ('TraderDialogBuy modified: '), toArray (format["%1 @%2 %3",_ltxt,getPosATL player,TraderDialogBuy])];
+			_pname, _puid,  ('TraderDialogBuy modified: '),  (format["%1 @%2 %3",_ltxt,getPosATL player,TraderDialogBuy])];
 		publicVariableServer 'PVDZE_atp';
 		[] spawn P2DZ_AHKick;
 
@@ -146,7 +146,7 @@ P2DZ_AH_FunctionChecks = {
 	if (str _TraderDialogSell != str TraderDialogSell) then
 	{
 		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",
-			_pname, _puid, toArray ('TraderDialogSell modified: '), toArray (format["%1 @%2 %3",_ltxt,getPosATL player,TraderDialogSell])];
+			_pname, _puid,  ('TraderDialogSell modified: '),  (format["%1 @%2 %3",_ltxt,getPosATL player,TraderDialogSell])];
 		publicVariableServer 'PVDZE_atp';
 		[] spawn P2DZ_AHKick;
 	};
