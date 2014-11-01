@@ -28,6 +28,9 @@ fnc_plyrHit   =					compile preprocessFileLineNumbers "\z\addons\dayz_server\com
 server_deaths = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDeaths.sqf";
 server_maintainArea = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_maintainArea.sqf";
 
+//by player2 just for stats logging
+server_onPlayerConnect = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_onPlayerConnect.sqf";
+
 //Loot tables for heli crash sites and care packages and infected camp and any other server events
 fnc_specialLoot = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fnc_specialLoot.sqf";
 
@@ -43,10 +46,14 @@ player2_deathMessage =			compile preprocessFileLineNumbers "\z\addons\dayz_serve
 //player2 stats logger compiles
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_statsLogger.sqf";
 
+//remove weapon compiles
+call compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\player2_removeVehicleWeapons.sqf";
+
+
 /* PVS/PVC - Skaronator */
 server_sendToClient =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_sendToClient.sqf";
 
-//onPlayerConnected 			{[_uid,_name] call server_onPlayerConnect;};
+onPlayerConnected 			{[_uid,_name] call server_onPlayerConnect;};
 onPlayerDisconnected 		{[_uid,_name] call server_onPlayerDisconnect;};
 
 /*---------------------------------------------------------------------------
