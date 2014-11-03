@@ -134,9 +134,14 @@ TraderDialogLoadItemList = {
 		_afile = _x select 7;
 		_File = "\z\addons\dayz_code\actions\" + _afile + ".sqf";
 			
+		if (_afile == "trade_items") then {
+			_File = "actions\" + _afile + ".sqf";
+		};
+
 		_count = 0;
 		if(_type == "CfgVehicles") then {
 			if (_afile == "trade_backpacks") then {
+				_File = "actions\" + _afile + ".sqf";
 				_bag = unitBackpack player;
 				_bagclass = typeOf _bag;
 				if(_name == _bagclass) then {
@@ -151,7 +156,7 @@ TraderDialogLoadItemList = {
 					if (_name isKindOf "Ship") then {
 						_distance = dayz_sellDistance_boat;
 					};
-					_count = {(((typeOf _x) == _name) && {(!(_x getVariable ["Deployed",false]))})} count (nearestObjects [(getPosATL player), [_name], _distance]);
+					_count = {(((typeOf _x) == _name) && {(alive _x)} && {(!(_x getVariable ["Deployed",false]))})} count (nearestObjects [(getPosATL player), [_name], _distance]);
 				};
 			};
 		};
@@ -172,6 +177,8 @@ TraderDialogLoadItemList = {
 
 		_image = getText(configFile >> _type >> _name >> "picture");
 		lbSetPicture [TraderDialogItemList, _index, _image];
+
+		diag_log(format["%1",_File]);
 
 		_item_list set [count _item_list, [
 			_name,
