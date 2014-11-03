@@ -14,7 +14,6 @@ switch (typeOf _vcl) do {
 		case "UH1Y_DZ":  {_caller attachTo [_vcl,[-0.5,-3.5,-1.4]]; _caller setDir 235;};
 		case "UH1Y_DZE":  {_caller attachTo [_vcl,[-0.5,-3.5,-1.4]]; _caller setDir 235;};
 		case "UH1Y":  {_caller attachTo [_vcl,[-0.5,-3.5,-1.4]]; _caller setDir 235;};
-
 };
 
 _caller setpos getpos _caller;
@@ -23,7 +22,8 @@ processInitCommands;
 _caller disableAI "anim";
 sleep 0.1;
 titletext ["","BLACK IN", 0.1];
-
+call compile preprocessFileLineNumbers "heliDoor\p2_mountHelp.sqf";
+player switchCamera "Gunner";
 processInitCommands;
 
 if (true) exitWith {};

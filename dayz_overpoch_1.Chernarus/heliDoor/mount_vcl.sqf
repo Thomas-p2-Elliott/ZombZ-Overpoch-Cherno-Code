@@ -22,7 +22,8 @@ processInitCommands;
 _caller disableAI "anim";
 sleep 0.1;
 titletext ["","BLACK IN", 0.1];
-
+call compile preprocessFileLineNumbers "heliDoor\p2_mountHelp.sqf";
+player switchCamera "Gunner";
 processInitCommands;
 
 if (true) exitWith {};
