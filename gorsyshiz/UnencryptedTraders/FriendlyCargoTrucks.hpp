@@ -1,264 +1,144 @@
  class Category_564 {
-        class UAZ_Unarmed_TK_EP1_DZE1 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class UAZ_Unarmed_TK_CIV_EP1_DZE1 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class UAZ_CDF_DZE1 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class UAZ_INS_DZE1 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class UAZ_RU_DZE1 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class UAZ_Unarmed_UN_EP1_DZE1 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class LandRover_CZ_EP1 {
-              type = "trade_any_vehicle";
-               buy[] ={375};
-              sell[]={188};
-        };
-        class LandRover_TK_CIV_EP1 {
-              type = "trade_any_vehicle";
-               buy[] ={375};
-              sell[]={188};
-        };
-        class UAZ_Unarmed_TK_CIV_EP1_DZE2 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class UAZ_Unarmed_UN_EP1_DZE2 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class UAZ_Unarmed_TK_EP1_DZE2 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class UAZ_RU_DZE2 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class UAZ_INS_DZE2 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class UAZ_CDF_DZE2 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class UAZ_Unarmed_TK_CIV_EP1_DZE3 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class UAZ_Unarmed_UN_EP1_DZE3 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class UAZ_Unarmed_TK_EP1_DZE3 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class UAZ_RU_DZE3 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class UAZ_INS_DZE3 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class UAZ_CDF_DZE3 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class UAZ_CDF_DZE4 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class UAZ_INS_DZE4 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class UAZ_RU_DZE4 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class UAZ_Unarmed_TK_EP1_DZE4 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class UAZ_Unarmed_UN_EP1_DZE4 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class UAZ_Unarmed_TK_CIV_EP1_DZE4 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-}; 
+ 	class GAZ_Vodnik_MedEvac {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ 	class BRDM2_HQ_TK_GUE_EP1 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1400};
+ 		sell[]={700};
+ 	};
+ 	class BTR40_MG_TK_GUE_EP1 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={700};
+ 		sell[]={350};
+ 	};
+ 	class BTR40_TK_GUE_EP1 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ 	class BTR40_MG_TK_INS_EP1 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={700};
+ 		sell[]={350};
+ 	};
+ 	class BTR40_TK_INS_EP1 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ 	class M1133_MEV_EP1 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={900};
+ 		sell[]={450};
+ 	};
+ 	class GAZ_Vodnik_DZE {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1000};
+ 		sell[]={500};
+ 	};
+ 	class BTR90_DZE {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1700};
+ 		sell[]={850};
+ 	};
+ 	class BTR90_HQ_DZE {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1400};
+ 		sell[]={700};
+ 	};
+ 	class LAV25_DZE {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1800};
+ 		sell[]={900};
+ 	};
+ 	class LAV25_HQ_DZE {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1400};
+ 		sell[]={700};
+ 	};
+ 	class M113Ambul_UN_EP1_DZ {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ 	class M113Ambul_TK_EP1_DZ {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ };
  class Category_570 {
-        class UAZ_Unarmed_TK_EP1_DZE1 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class UAZ_Unarmed_TK_CIV_EP1_DZE1 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class UAZ_CDF_DZE1 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class UAZ_INS_DZE1 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class UAZ_RU_DZE1 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class UAZ_Unarmed_UN_EP1_DZE1 {
-              type = "trade_any_vehicle";
-               buy[] ={370};
-              sell[]={185};
-        };
-        class LandRover_CZ_EP1 {
-              type = "trade_any_vehicle";
-               buy[] ={375};
-              sell[]={188};
-        };
-        class LandRover_TK_CIV_EP1 {
-              type = "trade_any_vehicle";
-               buy[] ={375};
-              sell[]={188};
-        };
-        class UAZ_Unarmed_TK_CIV_EP1_DZE2 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class UAZ_Unarmed_UN_EP1_DZE2 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class UAZ_Unarmed_TK_EP1_DZE2 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class UAZ_RU_DZE2 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class UAZ_INS_DZE2 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class UAZ_CDF_DZE2 {
-              type = "trade_any_vehicle";
-               buy[] ={380};
-              sell[]={190};
-        };
-        class UAZ_Unarmed_TK_CIV_EP1_DZE3 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class UAZ_Unarmed_UN_EP1_DZE3 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class UAZ_Unarmed_TK_EP1_DZE3 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class UAZ_RU_DZE3 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class UAZ_INS_DZE3 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class UAZ_CDF_DZE3 {
-              type = "trade_any_vehicle";
-               buy[] ={390};
-              sell[]={195};
-        };
-        class UAZ_CDF_DZE4 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class UAZ_INS_DZE4 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class UAZ_RU_DZE4 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class UAZ_Unarmed_TK_EP1_DZE4 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class UAZ_Unarmed_UN_EP1_DZE4 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-        class UAZ_Unarmed_TK_CIV_EP1_DZE4 {
-              type = "trade_any_vehicle";
-               buy[] ={400};
-              sell[]={200};
-        };
-};
+ 	class GAZ_Vodnik_MedEvac {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ 	class BRDM2_HQ_TK_GUE_EP1 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1400};
+ 		sell[]={700};
+ 	};
+ 	class BTR40_MG_TK_GUE_EP1 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={700};
+ 		sell[]={350};
+ 	};
+ 	class BTR40_TK_GUE_EP1 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ 	class BTR40_MG_TK_INS_EP1 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={700};
+ 		sell[]={350};
+ 	};
+ 	class BTR40_TK_INS_EP1 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ 	class M1133_MEV_EP1 {
+ 		type = "trade_any_vehicle";
+ 		buy[]={900};
+ 		sell[]={450};
+ 	};
+ 	class GAZ_Vodnik_DZE {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1000};
+ 		sell[]={500};
+ 	};
+ 	class BTR90_DZE {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1700};
+ 		sell[]={850};
+ 	};
+ 	class BTR90_HQ_DZE {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1400};
+ 		sell[]={700};
+ 	};
+ 	class LAV25_DZE {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1800};
+ 		sell[]={900};
+ 	};
+ 	class LAV25_HQ_DZE {
+ 		type = "trade_any_vehicle";
+ 		buy[]={1400};
+ 		sell[]={700};
+ 	};
+ 	class M113Ambul_UN_EP1_DZ {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ 	class M113Ambul_TK_EP1_DZ {
+ 		type = "trade_any_vehicle";
+ 		buy[]={500};
+ 		sell[]={250};
+ 	};
+ };

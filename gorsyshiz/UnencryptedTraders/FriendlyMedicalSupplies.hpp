@@ -1,8 +1,8 @@
  class Category_541 {
  	class ItemAntibiotic {
  		type = "trade_items";
-            buy[] = {5};
-            sell[] = {3};
+            buy[] = {30};
+            sell[] = {15};
  	};
  	class ItemBandage {
  		type = "trade_items";
