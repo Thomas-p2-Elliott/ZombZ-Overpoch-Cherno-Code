@@ -45,13 +45,17 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
                 	
                	};
                	
-               // 		Removed for test server to make ka52s deployable and sellable with toolbox.
-               
-               // _object = _select createVehicle _positn;
-               // _object setVariable ["ObjectID", "1", true];
-               // _object setVariable ["ObjectUID", "1", true];
-               // _object setVariable ["Deployed", true, true];
-/*
+               /*
+                Removed for test server to make ka52s deployable and sellable with toolbox.
+                
+				//turn old bike to mountain bike
+                if (_select == 'Old_bike_TK_CIV_EP1') then {	_select = "MMT_CIV" };
+
+                _object = _select createVehicle _positn;
+                _object setVariable ["ObjectID", "1", true];
+                _object setVariable ["ObjectUID", "1", true];
+                _object setVariable ["Deployed", true, true];
+
                 _object call {
 				    _this setVariable [
 				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
