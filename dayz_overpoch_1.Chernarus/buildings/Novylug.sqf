@@ -255,7 +255,7 @@ if (true) then
 _chernonovylug_257 = objNull;
 if (true) then
 {
-  _this = "land_stan_east" createVehicle [9586.1357, 11268.128, 0.00048367097];
+  _this = "Land_Stan_east" createVehicle [9586.1357, 11268.128, 0.00048367097];
   _chernonovylug_257 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -222.06267;
   _this setPos [9586.1357, 11268.128, 0.00048367097];

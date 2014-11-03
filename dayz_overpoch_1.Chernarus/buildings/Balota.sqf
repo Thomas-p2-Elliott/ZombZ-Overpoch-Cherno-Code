@@ -61,15 +61,6 @@ if (true) then
   _this setPos [4852.2983, 2509.1824, 0.17535429];
 };
 
-_balota_13 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Land_BarbGate", [4643.2163, 2489.8452, 2.6702881e-005], [], 0, "CAN_COLLIDE"];
-  _balota_13 = _this;
-  _this setDir -41.119759;
-  _this setPos [4643.2163, 2489.8452, 2.6702881e-005];
-};
-
 _balota_15 = objNull;
 if (true) then
 {
