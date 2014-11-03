@@ -36,6 +36,10 @@ if (_dikCode == 0x01 && r_player_dead) then {
 	_handled = true;
 };
 
+//reload magazine with R
+if (_dikCode in actionKeys "ReloadMagazine") then {
+	reload player;
+};
 
 // surrender 
 if (_dikCode in actionKeys "Surrender") then {
