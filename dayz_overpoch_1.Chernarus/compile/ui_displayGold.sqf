@@ -85,6 +85,7 @@ if (alive player) then {
 	};
 
 	[_gold] spawn fnc_removeExtraBars;
+	call player2_putGoldItemsAtTop;
 };
 
 true
