@@ -25,6 +25,8 @@ if (!isDedicated) then {
 	player_monitor =				compile preprocessFileLineNumbers "system\player_monitor.sqf";
 	building_spawnLoot =			compile preprocessFileLineNumbers "compile\building_spawnLoot.sqf";
 	player_packVault =				compile preprocessFileLineNumbers "compile\player_packVault.sqf";
+	player_spawnCheck = 			compile preprocessFileLineNumbers "compile\player_spawnCheck.sqf";
+	fnc_usec_unconscious =			compile preprocessFileLineNumbers "compile\fn_unconscious.sqf";
 
 	/*SideChat Disabler*/
 	P2DZ_really_loud_sounds = 	{[60,15] call fnc_usec_pitchWhine;for "_i" from 1 to 15 do {playSound format ["%1",_this select 0];};};
@@ -86,11 +88,9 @@ if (!isDedicated) then {
 	player_traderCity = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_traderCity.sqf";
 	player_throwObject = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_throwObject.sqf";
 	fnc_inAngleSector =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_inAngleSector.sqf";		//Checks which actions for nearby casualty
-	fnc_usec_unconscious =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_unconscious.sqf";
 	player_temp_calculation	=		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_temperatur.sqf";			//Temperatur System	//TeeChange
 	player_weaponFiredNear =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_weaponFiredNear.sqf";
 	player_animalCheck =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_animalCheck.sqf";
-	player_spawnCheck = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_spawnCheck.sqf";
 	player_dumpBackpack = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_dumpBackpack.sqf";
 	building_spawnZombies =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\building_spawnZombies.sqf";
 	player_harvest =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_harvest.sqf";
@@ -407,7 +407,7 @@ Both Server & Client Side Scripts
 		if (isServer) then {
 			_unit addEventHandler ["local", {_this call zombie_findOwner}];
 		};
-		_id = _unit addeventhandler["HandleDamage", { _this call local_zombieDamage }];
+		_id = _unit addeventhandler["HandleDamage", { _this call local_zombieDamage; _this call DDOPP_taser_handleHit; }];
 		_id = _unit addeventhandler["Killed", { [_this, "zombieKills"] call local_eventKill }];
 	};
 
