@@ -5,8 +5,8 @@ set_time_limit(300);
 	$DB_USERNAME = "ticketuser"; //  DATABASE USERNAME 									
 	$DB_PASSWORD = "29control"; //DATABASE PASSWORD
 	$dbh = new PDO($DB_CONNSTRING, $DB_USERNAME, $DB_PASSWORD);
-
-	$query = "SELECT * FROM overpoch_traders WHERE (type='Weapons' OR type='Vehicle' OR type='Ammo') AND classes IS NOT NULL;";
+	//selects the ones in the where (type='???'')
+	$query = "SELECT * FROM overpoch_traders WHERE (type='Weapons' OR type='Vehicle' OR type='Ammo' OR type='Backpacks') AND classes IS NOT NULL;";
 	Echo "<a href='encrypttraders.php'>Now Encrypt that shiz</a><br><br><b>Recreated the following files:</b><Br>";
 	foreach ($dbh->query($query) AS $result){
 		$buildfile = "";
@@ -33,14 +33,18 @@ set_time_limit(300);
 				$db = "overpoch_vehicles";
 				
 				break;
+			case 'Backpacks':
+				$db = "overpoch_backpack";
+				
+				break;
 			
 			default:
-				$db = "fail";
+				$db = "overpoch_items";
 				break;
 		}
 
 		echo "<hr><br><br>$trader<br>";
-		print_r($category);
+		//print_r($category);
 		echo "<br>";
 		//$buildfile ="<br><br>";
 		//for each category we set the category and then add all the stuff
@@ -50,6 +54,7 @@ set_time_limit(300);
 			//foreach class we have return them and fill in the file
 			foreach ($classes AS $class){
 				$query = "SELECT price, item, subtype FROM $db WHERE type='$class' AND enable ='Yes';";
+				echo "db= $db class=$class<br>";
 				//$buildfile = $query;
 				foreach ($dbh->query($query) AS $result){
 					$subtype = $result['subtype'];
