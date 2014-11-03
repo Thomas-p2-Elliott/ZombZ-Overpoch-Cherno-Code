@@ -19,7 +19,7 @@ while {!isNull _display} do {
 	_btnTitle2 ctrlSetText 						format["%1",_playeruid];
 
 	_btnTitle3 = _display displayCtrl 			103;
-	_btnTitle3 ctrlSetText 						"Server Info";
+	_btnTitle3 ctrlSetText 						"Server Menu";
 	_btnTitle3 ctrlEnable true;
 	_btnTitle3 ctrlRemoveAllEventHandlers		"ButtonClick";
 	_btnTitle3 ctrlAddEventHandler 				["ButtonClick","_ok = createDialog ""ZombZ_GorsyMenu""; "];
