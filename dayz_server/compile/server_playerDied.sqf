@@ -4,7 +4,10 @@ _minutes =		_this select 1;
 _newObject = 	_this select 2;
 _playerID = 	_this select 3;
 _infected =		_this select 4;
-_pGold = 		_this select 5;
+
+
+diag_log(format["P2DEBUG: %1: Input: %2","playerDied",_this]);
+diag_log(format["P2DEBUG: %1: _pGold: %2","playerDied",_pGold]);
 
 //Enable Debug Messages?
 P2DZ_DeathMessage_Debug = true;
@@ -29,8 +32,16 @@ _victim = 			_newObject;
 _victimVehicle = 	vehicle _victim;
 
 /* Add gold to player body */
-
-_newObject setVariable ["ZombZGold", _pGold, true];
+if (((count _this) >= 6) && {(typeName (_this select 6)) == (typeName (0))} && {(_this select 6) != 0}) then {
+	_pGold = 		_this select 6;
+	
+	//debugging line
+	diag_log(format["P2DEBUG: %1: ZombZGold: %2","playerDied",_pGold]);
+	
+	if (!isNil '_pGold') then {
+		_newObject setVariable ["ZombZGold", _pGold, true];
+	};
+};
 
 /* Set Victim body name */
 
@@ -174,6 +185,17 @@ if (!isNil '_characterID') then {
 		diag_log ("HIVE: WRITE: "+ str(_key));
 		#endif
 		_key call server_hiveWrite;
+
+		_newObject call {
+		    _this setVariable [
+		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+		        "hash_id" callExtension format [
+		            "%1:%2",
+		            netId _this,
+		            typeOf _this
+		        ]
+		    ];
+		}; 
 	}
 	else
 	{
