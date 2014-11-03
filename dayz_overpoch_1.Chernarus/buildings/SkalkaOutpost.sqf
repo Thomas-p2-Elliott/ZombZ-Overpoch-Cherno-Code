@@ -165,7 +165,7 @@ if (true) then
 _chrisskalkaoutpost_146 = objNull;
 if (true) then
 {
-  _this = "Land_Astan" createVehicle [2238.6067, 10856.081];
+  _this = "MAP_Astan" createVehicle [2238.6067, 10856.081];
   _chrisskalkaoutpost_146 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setPos [2238.6067, 10856.081];
 };
@@ -173,7 +173,7 @@ if (true) then
 _chrisskalkaoutpost_148 = objNull;
 if (true) then
 {
-  _this = "Land_Astan" createVehicle [2232.6946, 10852.595, -3.0517578e-005];
+  _this = "MAP_Astan" createVehicle [2232.6946, 10852.595, -3.0517578e-005];
   _chrisskalkaoutpost_148 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setPos [2232.6946, 10852.595, -3.0517578e-005];
 };

@@ -637,7 +637,7 @@ if (true) then
 _elektro1_175 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_BusStop", [10477.598, 2570.8406, 0.00015640259], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Map_BusStop", [10477.598, 2570.8406, 0.00015640259], [], 0, "CAN_COLLIDE"];
   _elektro1_175 = _this;
   _this setDir 116.09689;
   _this setPos [10477.598, 2570.8406, 0.00015640259];

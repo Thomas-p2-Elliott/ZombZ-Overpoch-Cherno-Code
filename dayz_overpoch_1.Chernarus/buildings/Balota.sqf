@@ -145,7 +145,7 @@ if (true) then
 _balota_27 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_BusStop", [4589.2251, 2586.5796, 0.074458577], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Map_BusStop", [4589.2251, 2586.5796, 0.074458577], [], 0, "CAN_COLLIDE"];
   _balota_27 = _this;
   _this setDir 70.621819;
   _this setPos [4589.2251, 2586.5796, 0.074458577];

@@ -578,7 +578,7 @@ if (true) then
 _berezino_147 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_Wall_IndCnc_Pole", [12582.843, 9551.5791, -1.335144e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_Wall_IndCnc_Pole", [12582.843, 9551.5791, -1.335144e-005], [], 0, "CAN_COLLIDE"];
   _berezino_147 = _this;
   _this setDir 19.309324;
   _this setPos [12582.843, 9551.5791, -1.335144e-005];
@@ -650,7 +650,7 @@ if (true) then
 _berezino_166 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_Wall_IndCnc_Pole", [12599.484, 9525.8203, 1.6689301e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_Wall_IndCnc_Pole", [12599.484, 9525.8203, 1.6689301e-005], [], 0, "CAN_COLLIDE"];
   _berezino_166 = _this;
   _this setDir 6.7498379;
   _this setPos [12599.484, 9525.8203, 1.6689301e-005];
@@ -1023,15 +1023,6 @@ if (true) then
   _berezino_255 = _this;
   _this setDir -174.15514;
   _this setPos [12993.461, 9836.582, 0.081687115];
-};
-
-_berezino_256 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Land_BusStop", [13079.122, 10256.036, 0.052168503], [], 0, "CAN_COLLIDE"];
-  _berezino_256 = _this;
-  _this setDir 108.7845;
-  _this setPos [13079.122, 10256.036, 0.052168503];
 };
 
 _berezino_259 = objNull;

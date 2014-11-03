@@ -370,7 +370,7 @@ if (true) then
 _skalistyCoast_136 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_Stan_east", [12964.49, 3817.6895, -1.3828278e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["land_stan_east", [12964.49, 3817.6895, -1.3828278e-005], [], 0, "CAN_COLLIDE"];
   _skalistyCoast_136 = _this;
   _this setDir -77.52607;
   _this setPos [12964.49, 3817.6895, -1.3828278e-005];

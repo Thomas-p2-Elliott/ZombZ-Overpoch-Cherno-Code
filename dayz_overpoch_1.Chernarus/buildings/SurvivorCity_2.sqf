@@ -3444,15 +3444,6 @@ if (true) then
   _this setPos [6567.1934, 14048.264];
 };
 
-_survivorcity2_1390 = objNull;
-if (true) then
-{
-  _this = createVehicle ["MH6J2_DZ", [6523.0142, 14011.286], [], 0, "CAN_COLLIDE"];
-  _survivorcity2_1390 = _this;
-  _this setDir 180.04967;
-  _this setPos [6523.0142, 14011.286];
-};
-
 _survivorcity2_1411 = objNull;
 if (true) then
 {

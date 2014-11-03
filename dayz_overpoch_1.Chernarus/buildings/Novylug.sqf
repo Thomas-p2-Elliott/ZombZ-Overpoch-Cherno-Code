@@ -237,7 +237,7 @@ if (true) then
 _chernonovylug_254 = objNull;
 if (true) then
 {
-  _this = "Land_PowGen_Big" createVehicle [9615.1758, 11289.608, -1.5258789e-005];
+  _this = "MAP_PowGen_Big" createVehicle [9615.1758, 11289.608, -1.5258789e-005];
   _chernonovylug_254 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -375.7413;
   _this setPos [9615.1758, 11289.608, -1.5258789e-005];
@@ -255,7 +255,7 @@ if (true) then
 _chernonovylug_257 = objNull;
 if (true) then
 {
-  _this = "Land_Stan_east" createVehicle [9586.1357, 11268.128, 0.00048367097];
+  _this = "land_stan_east" createVehicle [9586.1357, 11268.128, 0.00048367097];
   _chernonovylug_257 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -222.06267;
   _this setPos [9586.1357, 11268.128, 0.00048367097];
@@ -561,7 +561,7 @@ if (true) then
 _chernonovylug_730 = objNull;
 if (true) then
 {
-  _this = "Land_BusStop" createVehicle [9498.7002, 11391.689, 0.068388738];
+  _this = "Map_BusStop" createVehicle [9498.7002, 11391.689, 0.068388738];
   _chernonovylug_730 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 35.445789;
   _this setPos [9498.7002, 11391.689, 0.068388738];
@@ -570,7 +570,7 @@ if (true) then
 _chernonovylug_732 = objNull;
 if (true) then
 {
-  _this = "Land_BusStop" createVehicle [9494.8965, 11312.037, -1.5258789e-005];
+  _this = "Map_BusStop" createVehicle [9494.8965, 11312.037, -1.5258789e-005];
   _chernonovylug_732 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -169.48161;
   _this setPos [9494.8965, 11312.037, -1.5258789e-005];
