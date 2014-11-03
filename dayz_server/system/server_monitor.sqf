@@ -219,7 +219,7 @@ if (isServer && isNil "sm_done") then {
 			
 			clearWeaponCargoGlobal  _object;
 			clearMagazineCargoGlobal  _object;
-			// _object setVehicleAmmo DZE_vehicleAmmo;
+			_object setVehicleAmmo DZE_vehicleAmmo;
 			
 			_object setdir _dir;
 			_object setposATL _pos;

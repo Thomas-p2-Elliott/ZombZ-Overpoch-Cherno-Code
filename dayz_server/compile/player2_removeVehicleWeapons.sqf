@@ -1,4 +1,9 @@
 P2DZ_safeVehWeaps = ["Horn","M240","M134","Smoke","m32","m203","PKT","Vickers","Grenade","FFAR","762","556","pook","127x107","DShKM","127x99","M2","40mm","MK19"];
+DZE_vehicleAmmo = 0.2;
+
+//add m134 cannon back on removal?
+P2DZ_addNewWeaponsOnRemoval = true;
+
 P2DZ_debugWepRemovals = true;
 
 //To Use:
@@ -26,8 +31,10 @@ player2_checkIfVehWeaponSafe = {
 	for "_i" from 0 to ((count P2DZ_safeVehWeaps) - 1) do {
 
 		if (([(_this),(P2DZ_safeVehWeaps select _i)] call KRON_strInStr)) then {
-			_inCount = _inCount + 1;
-		}
+			if !(_this == "M230") then {
+				_inCount = _inCount + 1; 
+			};
+		};
 	};
 
 	if (_inCount > 0) then {
@@ -43,6 +50,11 @@ player2_checkIfVehWeaponSafe = {
 player2_removeVehicleWeapons = {
 	private ["_vehicleObject","_vehicle","_mainWeapons","_answer","_mainMagazines","_dn","_cfg","_tc","_mtc","_mt","_st","_stc","_weaps","_mags","_stp"];
 	_vehicleObject = _this;
+
+
+	_mainRemoved = false;
+	_turretsRemoved = [];
+
 	_vehicle = (typeOf _vehicleObject);
 
 	if (P2DZ_debugWepRemovals) then { diag_log("player2_removeVehicleWeapons: " + str _vehicle); };
@@ -58,6 +70,7 @@ player2_removeVehicleWeapons = {
 				} else {
  					if (P2DZ_debugWepRemovals) then { diag_log("Main Weapon Removed: " + str _x); };
  					_vehicleObject removeWeapon _x;
+					if ((_x != "CMFlareLauncher")) then { _mainRemoved = true; };
 				};
 			  
 			} forEach _mainWeapons;
@@ -101,7 +114,10 @@ player2_removeVehicleWeapons = {
 					} else {
 					 	if (P2DZ_debugWepRemovals) then { diag_log("Turret #" + str(_mti) + " Weapon Removed: " + str _x); };
 	 					_vehicleObject removeWeapon _x;
+ 					if !(_mti in _turretsRemoved) then {
+						_turretsRemoved = _turretsRemoved + [_mti];
 					};
+ 			};
 
 
 				} forEach _weaps;
@@ -130,7 +146,10 @@ player2_removeVehicleWeapons = {
 						} else {
 						 	if (P2DZ_debugWepRemovals) then { diag_log("Turret #" + str(_sti) + " Weapon Removed: " + str _x); };
 		 					_vehicleObject removeWeapon _x;
+	 					if !(_sti in _turretsRemoved) then {
+							_turretsRemoved = _turretsRemoved + [_sti];
 						};
+					};
 
 					} forEach _weaps;
 
@@ -151,5 +170,13 @@ player2_removeVehicleWeapons = {
 			};
 		}; 
 
+	if (P2DZ_addNewWeaponsOnRemoval) then {
+		if (((count _turretsRemoved) > 0) || _mainRemoved) then {
+			_vehicleObject addMagazine "2000Rnd_762x51_M134";
+			_vehicleObject addWeapon "M134";
+			_vehicleObject setVehicleAmmo DZE_vehicleAmmo;
+			if (P2DZ_debugWepRemovals) then { diag_log("P2DEBUG: M134 with 400 Rounds Added to: " + (typeOf _vehicleObject)); };
+		};
+	};
 	//_this call player2_outputVehicleWeapons; 
 };

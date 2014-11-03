@@ -117,7 +117,12 @@ _key call server_hiveWrite;
 
 	clearWeaponCargoGlobal  _object;
 	clearMagazineCargoGlobal  _object;
-	// _object setVehicleAmmo DZE_vehicleAmmo;
+	_object setVehicleAmmo DZE_vehicleAmmo;
+
+	/*---------------------------------------------------------------------------
+	Remove OP Weapons From Vehicle On Purchase by Player2
+	---------------------------------------------------------------------------*/
+	_object call player2_removeVehicleWeapons;
 
 	_object setVariable ["ObjectID", _oid, true];
 	

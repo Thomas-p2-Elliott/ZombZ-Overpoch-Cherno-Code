@@ -186,7 +186,7 @@ _fnc_spawn_vehicle = {
 
 					clearWeaponCargoGlobal  _veh;
 					clearMagazineCargoGlobal  _veh;
-					// _veh setVehicleAmmo DZE_vehicleAmmo;
+					_veh setVehicleAmmo DZE_vehicleAmmo;
 
 					[_veh,[_dir,_objPosition],_vehicle,true,"0"] call server_publishVeh;
 					_vehicle = _this select 0; // just in case it was modified by suv/350z changes...
