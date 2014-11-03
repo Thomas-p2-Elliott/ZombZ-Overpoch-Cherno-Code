@@ -29,6 +29,20 @@ dayz_losChance = {
 	_myExp
 };
 
+player2_putGoldItemsAtTop = {
+	private["_ogMags","_newMags"];
+	_ogMags = magazines player;	
+	if !(_ogMags select 0 == "ItemGoldBar10oz") then {
+		_newMags = _ogMags - ["ItemGoldBar10oz"];
+		_newMags =  ["ItemGoldBar10oz"] + _newMags;
+		{
+		  player removeMagazine _x;
+		} forEach _ogMags;
+		{
+		  player addMagazine _x;
+		} forEach _newMags;	
+	};
+};
 
 ui_initDisplay = {
 	private["_control","_ctrlBleed","_display","_ctrlFracture","_ctrlDogFood","_ctrlDogWater","_ctrlDogWaterBorder", "_ctrlDogFoodBorder"];
