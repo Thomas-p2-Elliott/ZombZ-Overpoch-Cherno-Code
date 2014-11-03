@@ -125,13 +125,13 @@ if (!isNull _menClose && _hasPatient && !r_drag_sqf && !r_action && !_inVehicle 
 			r_action = true;
 			_action = _unit addAction [localize "str_actions_medical_06", "\z\addons\dayz_code\medical\morphine.sqf",[_unit], 0, true, true, "", ""];
 			r_player_actions set [count r_player_actions,_action];
-			playSound "heartbeat_1"; playSound "fracture_1"; playSound "heartbeat_1";
+			playSound "heartbeat_1"; playSound "z_fracture_0"; playSound "heartbeat_1";
 		};
 		if(_inPain) then {
 			r_action = true;
 			_action = _unit addAction [localize "str_actions_medical_07", "\z\addons\dayz_code\medical\painkiller.sqf",[_unit], 0, true, true, "", ""];
 			r_player_actions set [count r_player_actions,_action];
-			playSound "heartbeat_1"; playSound "fracture_1";  playSound "heartbeat_1";
+			playSound "heartbeat_1"; playSound "z_fracture_0";  playSound "heartbeat_1";
 		};
 	} else {
 		//Allow player to bandage
