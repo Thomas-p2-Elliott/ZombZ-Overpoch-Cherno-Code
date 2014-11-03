@@ -641,7 +641,7 @@ if(isServer) then {
 		EpochEvents = [];
 	};
 	if(isNil "DZE_vehicleAmmo") then {
-		DZE_vehicleAmmo = 0;
+		DZE_vehicleAmmo = 0.2;
 	};
 
 	if(isNil "DZE_BackpackGuard") then {
@@ -1106,5 +1106,6 @@ KK_fnc_distanceASL = {
 call compile preprocessFileLineNumbers "init\variables_painting.sqf";
 call compile preprocessFileLineNumbers "\z\addons\dayz_code\init\loot_init.sqf";
 
+DZE_vehicleAmmo = 0.2;
 
 //call compile preprocessFileLineNumbers "init\variables_modified.sqf";
