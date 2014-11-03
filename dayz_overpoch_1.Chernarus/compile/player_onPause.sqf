@@ -22,8 +22,7 @@ while {!isNull _display} do {
 	_btnTitle3 ctrlSetText 						"Server Info";
 	_btnTitle3 ctrlEnable true;
 	_btnTitle3 ctrlRemoveAllEventHandlers		"ButtonClick";
-	_btnTitle3 ctrlAddEventHandler 				["ButtonClick","[['<t size=''1'' font=''Bitstream'' align=''left'' color=''#FFFFFF''>Information</t>',  
-	'<br /><t size=''1.5'' font=''Bitstream'' align=''center'' color=''#F7F2E0''>Coming Soon!</t>'],4] spawn p2_miniMsg;"];
+	_btnTitle3 ctrlAddEventHandler 				["ButtonClick","_ok = createDialog ""ZombZ_GorsyMenu""; "];
   	
   	_btnTitle4 = _display displayCtrl 			119;	
 	_btnTitle4 ctrlSetText 						"Player Stats";
