@@ -1090,7 +1090,7 @@ if (true) then
 _berezino_272 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_mud_6konec", [12844.411, 9070.8535, 7.1525574e-006], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_mud_6konec", [12844.411, 9070.8535, 7.1525574e-006], [], 0, "CAN_COLLIDE"];
   _berezino_272 = _this;
   _this setDir 120.88184;
   _this setPos [12844.411, 9070.8535, 7.1525574e-006];
@@ -1099,7 +1099,7 @@ if (true) then
 _berezino_279 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_mud_6konec", [12843.321, 9078.0957, -8.1539154e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_mud_6konec", [12843.321, 9078.0957, -8.1539154e-005], [], 0, "CAN_COLLIDE"];
   _berezino_279 = _this;
   _this setDir 156.07179;
   _this setPos [12843.321, 9078.0957, -8.1539154e-005];
@@ -1117,7 +1117,7 @@ if (true) then
 _berezino_282 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_mud_6konec", [12833.851, 9039.3506, -5.2452087e-006], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_mud_6konec", [12833.851, 9039.3506, -5.2452087e-006], [], 0, "CAN_COLLIDE"];
   _berezino_282 = _this;
   _this setDir 88.813301;
   _this setPos [12833.851, 9039.3506, -5.2452087e-006];
@@ -1126,7 +1126,7 @@ if (true) then
 _berezino_284 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_mud_6", [12839.154, 9039.2891, -5.7697296e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_mud_6", [12839.154, 9039.2891, -5.7697296e-005], [], 0, "CAN_COLLIDE"];
   _berezino_284 = _this;
   _this setDir 88.099808;
   _this setPos [12839.154, 9039.2891, -5.7697296e-005];
@@ -1144,7 +1144,7 @@ if (true) then
 _berezino_289 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_mud_6konec", [12840.157, 9037.2813, -7.0095062e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_mud_6konec", [12840.157, 9037.2813, -7.0095062e-005], [], 0, "CAN_COLLIDE"];
   _berezino_289 = _this;
   _this setDir 28.366253;
   _this setPos [12840.157, 9037.2813, -7.0095062e-005];
@@ -1153,7 +1153,7 @@ if (true) then
 _berezino_291 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_mud_6konec", [12850.24, 9031.6963, -2.2888184e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_mud_6konec", [12850.24, 9031.6963, -2.2888184e-005], [], 0, "CAN_COLLIDE"];
   _berezino_291 = _this;
   _this setDir 97.458389;
   _this setPos [12850.24, 9031.6963, -2.2888184e-005];
@@ -1162,7 +1162,7 @@ if (true) then
 _berezino_295 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_mud_6konec", [12851.357, 9036.4463, -7.2002411e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_mud_6konec", [12851.357, 9036.4463, -7.2002411e-005], [], 0, "CAN_COLLIDE"];
   _berezino_295 = _this;
   _this setDir 98.194366;
   _this setPos [12851.357, 9036.4463, -7.2002411e-005];
@@ -1171,7 +1171,7 @@ if (true) then
 _berezino_298 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_mud_6konec", [12849.229, 9026.9609, 2.3365021e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_mud_6konec", [12849.229, 9026.9609, 2.3365021e-005], [], 0, "CAN_COLLIDE"];
   _berezino_298 = _this;
   _this setDir 98.194366;
   _this setPos [12849.229, 9026.9609, 2.3365021e-005];
@@ -1180,7 +1180,7 @@ if (true) then
 _berezino_300 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_mud_6konec", [12854.765, 9035.9756, 7.1525574e-006], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_mud_6konec", [12854.765, 9035.9756, 7.1525574e-006], [], 0, "CAN_COLLIDE"];
   _berezino_300 = _this;
   _this setDir -72.700546;
   _this setPos [12854.765, 9035.9756, 7.1525574e-006];
@@ -1189,7 +1189,7 @@ if (true) then
 _berezino_302 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_mud_6konec", [12844.356, 9039.8838, -3.6716461e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_mud_6konec", [12844.356, 9039.8838, -3.6716461e-005], [], 0, "CAN_COLLIDE"];
   _berezino_302 = _this;
   _this setDir 113.50662;
   _this setPos [12844.356, 9039.8838, -3.6716461e-005];
