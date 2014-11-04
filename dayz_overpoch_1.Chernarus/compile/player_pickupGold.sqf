@@ -56,7 +56,7 @@ if (P2DZE_gearOnContainer || P2DZE_gearOnWeaponHolder) then {
 		diag_log(format[" pickupGold: onContainer: (true) Container/Type: %1 / %2", _object, typeOf _object]);
 	};
 
-//if gear is coming from ground (+1 in gold)
+//if gear is coming from ground
 } else {
 	if (P2DZE_goldItemHandlingDebug) then {
 		diag_log("ERROR: Gold has no value or was hacked in and has no value! Sorry to get your hopes up!");
