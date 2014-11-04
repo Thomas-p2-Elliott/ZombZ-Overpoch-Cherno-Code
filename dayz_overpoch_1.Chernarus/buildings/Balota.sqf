@@ -28,7 +28,7 @@ if (true) then
 _balota_6 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Ind_IlluminantTower", [5029.6089, 2380.3943, -1.9073486e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Ind_IlluminantTower", [5029.6089, 2380.3943, -1.9073486e-005], [], 0, "CAN_COLLIDE"];
   _balota_6 = _this;
   _this setDir 29.92828;
   _this setPos [5029.6089, 2380.3943, -1.9073486e-005];
@@ -37,7 +37,7 @@ if (true) then
 _balota_8 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Ind_IlluminantTower", [5255.457, 2244.3777, -3.0994415e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Ind_IlluminantTower", [5255.457, 2244.3777, -3.0994415e-005], [], 0, "CAN_COLLIDE"];
   _balota_8 = _this;
   _this setDir 29.967731;
   _this setPos [5255.457, 2244.3777, -3.0994415e-005];
@@ -91,7 +91,7 @@ if (true) then
 _balota_22 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Ind_Workshop01_03", [4673.7114, 2588.1228, 4.7683716e-006], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Ind_Workshop01_03", [4673.7114, 2588.1228, 4.7683716e-006], [], 0, "CAN_COLLIDE"];
   _balota_22 = _this;
   _this setDir -274.80975;
   _this setPos [4673.7114, 2588.1228, 4.7683716e-006];

@@ -120,7 +120,7 @@ if (true) then
 _vehicle_250 = objNull;
 if (true) then
 {
-  _this = "MAP_Ind_IlluminantTower" createVehicle [4920.4443, 9716.2568];
+  _this = "Land_Ind_IlluminantTower" createVehicle [4920.4443, 9716.2568];
   _vehicle_250 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 60.520912;
   _this setPos [4920.4443, 9716.2568];
@@ -129,7 +129,7 @@ if (true) then
 _vehicle_253 = objNull;
 if (true) then
 {
-  _this = "MAP_Ind_IlluminantTower" createVehicle [4703.7896, 10093.894, -3.0517578e-005];
+  _this = "Land_Ind_IlluminantTower" createVehicle [4703.7896, 10093.894, -3.0517578e-005];
   _vehicle_253 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 60.520912;
   _this setPos [4703.7896, 10093.894, -3.0517578e-005];
@@ -138,7 +138,7 @@ if (true) then
 _vehicle_255 = objNull;
 if (true) then
 {
-  _this = "MAP_Ind_IlluminantTower" createVehicle [4465.1187, 10505.38, 6.1035156e-005];
+  _this = "Land_Ind_IlluminantTower" createVehicle [4465.1187, 10505.38, 6.1035156e-005];
   _vehicle_255 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 60.520912;
   _this setPos [4465.1187, 10505.38, 6.1035156e-005];
@@ -147,7 +147,7 @@ if (true) then
 _vehicle_257 = objNull;
 if (true) then
 {
-  _this = "MAP_Ind_IlluminantTower" createVehicle [4247.6401, 10880.154, -3.0517578e-005];
+  _this = "Land_Ind_IlluminantTower" createVehicle [4247.6401, 10880.154, -3.0517578e-005];
   _vehicle_257 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 60.520912;
   _this setPos [4247.6401, 10880.154, -3.0517578e-005];

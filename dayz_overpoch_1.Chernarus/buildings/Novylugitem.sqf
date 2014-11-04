@@ -183,7 +183,7 @@ if (true) then
 _chernonovylug_85 = objNull;
 if (true) then
 {
-  _this = "MAP_plot_rust_branka" createVehicle [9620.3379, 11288.403, -9.1552734e-005];
+  _this = "Land_plot_rust_branka" createVehicle [9620.3379, 11288.403, -9.1552734e-005];
   _chernonovylug_85 = _this;
   _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 52.743645;

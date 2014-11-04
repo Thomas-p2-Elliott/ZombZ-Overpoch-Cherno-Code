@@ -174,7 +174,7 @@ if (true) then
 _skalistyCoast_72 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_MASH", [12981.234, 3821.2598, -5.2452087e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MASH_EP1", [12981.234, 3821.2598, -5.2452087e-005], [], 0, "CAN_COLLIDE"];
   _skalistyCoast_72 = _this;
   _this setDir 148.69662;
   _this setPos [12981.234, 3821.2598, -5.2452087e-005];
@@ -183,7 +183,7 @@ if (true) then
 _skalistyCoast_74 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_MASH", [12987.284, 3824.8909, 1.4305115e-006], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MASH_EP1", [12987.284, 3824.8909, 1.4305115e-006], [], 0, "CAN_COLLIDE"];
   _skalistyCoast_74 = _this;
   _this setDir 148.69662;
   _this setPos [12987.284, 3824.8909, 1.4305115e-006];
@@ -370,7 +370,7 @@ if (true) then
 _skalistyCoast_136 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Stan_east", [12964.49, 3817.6895, -1.3828278e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["CampEast_EP1", [12964.49, 3817.6895, -1.3828278e-005], [], 0, "CAN_COLLIDE"];
   _skalistyCoast_136 = _this;
   _this setDir -77.52607;
   _this setPos [12964.49, 3817.6895, -1.3828278e-005];

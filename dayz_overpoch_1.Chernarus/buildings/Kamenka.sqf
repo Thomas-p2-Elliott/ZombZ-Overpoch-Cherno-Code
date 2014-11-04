@@ -146,7 +146,7 @@ if (true) then
 _kamenka_55 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_A_Castle_Bastion", [1504.1941, 2112.1663, 9.5367432e-006], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_A_Castle_Bastion", [1504.1941, 2112.1663, 9.5367432e-006], [], 0, "CAN_COLLIDE"];
   _kamenka_55 = _this;
   _this setDir -150.56377;
   _this setPos [1504.1941, 2112.1663, 9.5367432e-006];
@@ -155,7 +155,7 @@ if (true) then
 _kamenka_56 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_A_Castle_Bergfrit", [1530.3273, 2150.3928, -0.23053658], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_A_Castle_Bergfrit", [1530.3273, 2150.3928, -0.23053658], [], 0, "CAN_COLLIDE"];
   _kamenka_56 = _this;
   _this setDir -149.77667;
   _this setPos [1530.3273, 2150.3928, -0.23053658];
@@ -173,7 +173,7 @@ if (true) then
 _kamenka_58 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_A_Castle_Gate", [1489.9438, 2164.2026, -2.8610229e-006], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_A_Castle_Gate", [1489.9438, 2164.2026, -2.8610229e-006], [], 0, "CAN_COLLIDE"];
   _kamenka_58 = _this;
   _this setDir 116.97249;
   _this setPos [1489.9438, 2164.2026, -2.8610229e-006];
@@ -182,7 +182,7 @@ if (true) then
 _kamenka_59 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_A_Castle_Stairs_A", [1533.5032, 2139.7385, -0.15654387], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_A_Castle_Stairs_A", [1533.5032, 2139.7385, -0.15654387], [], 0, "CAN_COLLIDE"];
   _kamenka_59 = _this;
   _this setDir -59.395794;
   _this setPos [1533.5032, 2139.7385, -0.15654387];
@@ -344,7 +344,7 @@ if (true) then
 _kamenka_127 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_A_Castle_Bastion_ruins", [1564.76, 2117.2561, -2.7544804], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_A_Castle_Bastion_ruins", [1564.76, 2117.2561, -2.7544804], [], 0, "CAN_COLLIDE"];
   _kamenka_127 = _this;
   _this setDir -36.642303;
   _this setPos [1564.76, 2117.2561, -2.7544804];
@@ -353,7 +353,7 @@ if (true) then
 _kamenka_130 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_MASH", [1511.5073, 2182.8027, 8.5830688e-006], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MASH_EP1", [1511.5073, 2182.8027, 8.5830688e-006], [], 0, "CAN_COLLIDE"];
   _kamenka_130 = _this;
   _this setDir -153.39412;
   _this setPos [1511.5073, 2182.8027, 8.5830688e-006];
@@ -362,7 +362,7 @@ if (true) then
 _kamenka_132 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_MASH", [1517.2045, 2180.0583, 2.0027161e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MASH_EP1", [1517.2045, 2180.0583, 2.0027161e-005], [], 0, "CAN_COLLIDE"];
   _kamenka_132 = _this;
   _this setDir -153.39412;
   _this setPos [1517.2045, 2180.0583, 2.0027161e-005];
@@ -766,7 +766,7 @@ if (true) then
 _kamenka_242 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Ind_Workshop01_03", [1686.2592, 2093.3882, 5.7220459e-006], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Ind_Workshop01_03", [1686.2592, 2093.3882, 5.7220459e-006], [], 0, "CAN_COLLIDE"];
   _kamenka_242 = _this;
   _this setDir 135.21408;
   _this setPos [1686.2592, 2093.3882, 5.7220459e-006];
@@ -1618,7 +1618,7 @@ if (true) then
 _kamenka_472 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Rail_House_01", [84.212646, 1584.073, 0.31782094], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Rail_House_01", [84.212646, 1584.073, 0.31782094], [], 0, "CAN_COLLIDE"];
   _kamenka_472 = _this;
   _this setDir 170.22672;
   _this setPos [84.212646, 1584.073, 0.31782094];
@@ -1627,7 +1627,7 @@ if (true) then
 _kamenka_478 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_HouseV_3I1", [146.0365, 1639.3356, -0.19311692], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_HouseV_3I1", [146.0365, 1639.3356, -0.19311692], [], 0, "CAN_COLLIDE"];
   _kamenka_478 = _this;
   _this setDir 15.275419;
   _this setPos [146.0365, 1639.3356, -0.19311692];
@@ -1636,7 +1636,7 @@ if (true) then
 _kamenka_479 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_HouseV_3I1", [1832.9393, 2166.7014, -0.16379839], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_HouseV_3I1", [1832.9393, 2166.7014, -0.16379839], [], 0, "CAN_COLLIDE"];
   _kamenka_479 = _this;
   _this setDir -103.47805;
   _this setPos [1832.9393, 2166.7014, -0.16379839];

@@ -2,7 +2,7 @@
 _gorka_1 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Mil_Barracks_i", [9788.2813, 8763.2217], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_Barracks_i", [9788.2813, 8763.2217], [], 0, "CAN_COLLIDE"];
   _gorka_1 = _this;
   _this setDir 3.391232;
   _this setPos [9788.2813, 8763.2217];
@@ -11,7 +11,7 @@ if (true) then
 _gorka_3 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Mil_Barracks_i", [9788.9346, 8771.9512, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_Barracks_i", [9788.9346, 8771.9512, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _gorka_3 = _this;
   _this setDir 3.3560793;
   _this setPos [9788.9346, 8771.9512, 3.0517578e-005];
@@ -38,7 +38,7 @@ if (true) then
 _gorka_9 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_MASH", [9827.7217, 8744.9805, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MASH_EP1", [9827.7217, 8744.9805, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _gorka_9 = _this;
   _this setDir -24.418491;
   _this setPos [9827.7217, 8744.9805, -3.0517578e-005];
@@ -47,7 +47,7 @@ if (true) then
 _gorka_11 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_MASH", [9821.6025, 8742.3818, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MASH_EP1", [9821.6025, 8742.3818, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _gorka_11 = _this;
   _this setDir -23.852636;
   _this setPos [9821.6025, 8742.3818, 3.0517578e-005];
@@ -56,7 +56,7 @@ if (true) then
 _gorka_13 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_MASH", [9813.0391, 8740.1006, -0.00012207031], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MASH_EP1", [9813.0391, 8740.1006, -0.00012207031], [], 0, "CAN_COLLIDE"];
   _gorka_13 = _this;
   _this setDir -4.3281856;
   _this setPos [9813.0391, 8740.1006, -0.00012207031];
@@ -65,7 +65,7 @@ if (true) then
 _gorka_16 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_tent_west", [9803.8018, 8784.46, -0.23884276], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Camp", [9803.8018, 8784.46, -0.23884276], [], 0, "CAN_COLLIDE"];
   _gorka_16 = _this;
   _this setDir 93.822487;
   _this setPos [9803.8018, 8784.46, -0.23884276];
@@ -74,7 +74,7 @@ if (true) then
 _gorka_23 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Stan_east", [9827.5332, 8786.9844, 0.034250908], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["CampEast_EP1", [9827.5332, 8786.9844, 0.034250908], [], 0, "CAN_COLLIDE"];
   _gorka_23 = _this;
   _this setDir 44.602894;
   _this setPos [9827.5332, 8786.9844, 0.034250908];

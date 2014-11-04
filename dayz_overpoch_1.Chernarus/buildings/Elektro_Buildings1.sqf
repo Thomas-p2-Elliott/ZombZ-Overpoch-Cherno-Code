@@ -110,7 +110,7 @@ if (true) then
 _elektro1_25 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_HouseV_3I4", [10427.588, 2014.9269, 8.2492828e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_HouseV_3I4", [10427.588, 2014.9269, 8.2492828e-005], [], 0, "CAN_COLLIDE"];
   _elektro1_25 = _this;
   _this setDir -23.083778;
   _this setPos [10427.588, 2014.9269, 8.2492828e-005];
@@ -533,7 +533,7 @@ if (true) then
 _elektro1_90 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_telek1", [10623.225, 2590.2793, 3.8146973e-006], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_telek1", [10623.225, 2590.2793, 3.8146973e-006], [], 0, "CAN_COLLIDE"];
   _elektro1_90 = _this;
   _this setDir -323.89523;
   _this setPos [10623.225, 2590.2793, 3.8146973e-006];

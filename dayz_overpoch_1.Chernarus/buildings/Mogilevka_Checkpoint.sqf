@@ -108,7 +108,7 @@ if (true) then
 _checkpoint_47 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_MASH", [8272.8926, 4925.1055, -0.039544858], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MASH_EP1", [8272.8926, 4925.1055, -0.039544858], [], 0, "CAN_COLLIDE"];
   _checkpoint_47 = _this;
   _this setDir 159.98471;
   _this setPos [8272.8926, 4925.1055, -0.039544858];
@@ -117,7 +117,7 @@ if (true) then
 _checkpoint_49 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_MASH", [8265.543, 4922.623, -0.029194091], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MASH_EP1", [8265.543, 4922.623, -0.029194091], [], 0, "CAN_COLLIDE"];
   _checkpoint_49 = _this;
   _this setDir 159.98471;
   _this setPos [8265.543, 4922.623, -0.029194091];

@@ -38,7 +38,7 @@ if (true) then
 _kumyrna_10 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Mil_Barracks_i", [8296.4844, 5980.835], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_Barracks_i", [8296.4844, 5980.835], [], 0, "CAN_COLLIDE"];
   _kumyrna_10 = _this;
   _this setDir -443.2616;
   _this setPos [8296.4844, 5980.835];
@@ -56,7 +56,7 @@ if (true) then
 _kumyrna_17 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_MASH", [8334.667, 5998.731], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MASH_EP1", [8334.667, 5998.731], [], 0, "CAN_COLLIDE"];
   _kumyrna_17 = _this;
   _this setDir -173.49222;
   _this setPos [8334.667, 5998.731];
@@ -65,7 +65,7 @@ if (true) then
 _kumyrna_19 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_MASH", [8340.8486, 5997.9126, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MASH_EP1", [8340.8486, 5997.9126, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _kumyrna_19 = _this;
   _this setDir -172.87123;
   _this setPos [8340.8486, 5997.9126, 3.0517578e-005];
@@ -74,7 +74,7 @@ if (true) then
 _kumyrna_21 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Stan_east", [8334.4248, 5957.6802, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["CampEast_EP1", [8334.4248, 5957.6802, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _kumyrna_21 = _this;
   _this setDir -80.048851;
   _this setPos [8334.4248, 5957.6802, 3.0517578e-005];
@@ -163,7 +163,7 @@ if (true) then
 _kumyrna_57 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Ind_IlluminantTower", [8376.0596, 5993.0723, 0.088754833], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Ind_IlluminantTower", [8376.0596, 5993.0723, 0.088754833], [], 0, "CAN_COLLIDE"];
   _kumyrna_57 = _this;
   _this setDir -172.15532;
   _this setPos [8376.0596, 5993.0723, 0.088754833];

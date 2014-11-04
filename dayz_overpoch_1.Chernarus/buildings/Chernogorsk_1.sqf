@@ -3,7 +3,7 @@ if (isServer) then {
 _cherno_30 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_A_Hospital", [6611.7349, 2455.3655, 0.044995967], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_A_Hospital", [6611.7349, 2455.3655, 0.044995967], [], 0, "CAN_COLLIDE"];
   _cherno_30 = _this;
   _this setDir -46.915562;
   _this setPos [6611.7349, 2455.3655, 0.044995967];

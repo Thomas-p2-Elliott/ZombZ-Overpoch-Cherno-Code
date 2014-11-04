@@ -283,7 +283,7 @@ if (true) then
 _drozhina_247 = objNull;
 if (true) then
 {
-  _this = "MAP_Barn_W_02_ruins" createVehicle [3809.4717, 4740.1108];
+  _this = "Land_Barn_W_02_ruins" createVehicle [3809.4717, 4740.1108];
   _drozhina_247 = _this;
   _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 43.212372;
