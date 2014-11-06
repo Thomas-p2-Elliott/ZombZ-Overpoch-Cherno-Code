@@ -1,6 +1,6 @@
 private["_timeSinceLast","_d"];
 
-_d = true;						//enable debug output?
+_d = false;						//enable debug output?
 
 _timeSinceLast = diag_tickTime - P2DZE_removeExtra_lastRunTime;
 P2DZE_removeExtra_lastRunTime = diag_tickTime;
@@ -10,11 +10,11 @@ if (_d) then {
 	diag_log("P2DEBUG: fnc_removeExtraBars: _timeSinceLast: " + str _timeSinceLast); 
 };
 
-if (_timeSinceLast < 3) exitWith {
+if (_timeSinceLast < 0.2) exitWith {
 	if (_d) then { diag_log("P2DEBUG: fnc_removeExtraBars: Exiting..."); };
 };
 
-if (_timeSinceLast > 2) exitWith {
+if (_timeSinceLast > 0.2) exitWith {
 	private ["_object","_zGold","_keep1Bar","_contents","_itemType","_goldBarCount"];
 
 	_zGold = nil;
@@ -58,14 +58,14 @@ if (_timeSinceLast > 2) exitWith {
 				_object removeMagazine _itemType;
 			};
 			//new
-			call player2_putGoldItemsAtTop;
+			call player2_preventInvOverfill;
 		} else {
 			if (_goldBarCount < 1) then {
 				if (_d) then { diag_log("P2DEBUG: fnc_removeExtraBars: _keep1Bar: Added 1 gold bar."); };
 				_object addMagazine _itemType;
 			};
 			//new
-			call player2_putGoldItemsAtTop;
+			call player2_preventInvOverfill;
 		};
 
 	} else {
