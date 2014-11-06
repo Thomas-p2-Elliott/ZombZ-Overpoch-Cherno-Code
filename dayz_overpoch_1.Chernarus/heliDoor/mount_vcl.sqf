@@ -16,7 +16,11 @@ switch (typeOf _vcl) do {
 		case "UH1Y":  {_caller attachTo [_vcl,[0.5,-3.5,-1.4]]; _caller setDir 105;};
 		case "V3S_Civ":  {_caller attachTo [_vcl,[0.85,0.8,-0.75]]; _caller setDir 45; };
 		case "MH6J_EP1": { _caller attachTo [_vcl,[1.0,1.7,-2.0]]; _caller setDir 45; };
-		case "TT650_INS":  { _caller attachTo [_vcl,[-0.15,-0.3,-1.5]]; _caller setDir 180; };
+		case "TT650_Ins":  { _caller attachTo [_vcl,[-0.15,-0.3,-1.5]]; _caller setDir 180; };
+		case "TT650_Gue":  { _caller attachTo [_vcl,[-0.15,-0.3,-1.5]]; _caller setDir 180; };
+		case "TT650_Civ":  { _caller attachTo [_vcl,[-0.15,-0.3,-1.5]]; _caller setDir 180; };
+		case "TT650_TK_CIV_EP1":  { _caller attachTo [_vcl,[-0.15,-0.3,-1.5]]; _caller setDir 180; };
+		case "TT650_TK_EP1":  { _caller attachTo [_vcl,[-0.15,-0.3,-1.5]]; _caller setDir 180; };
 }; 
 
 _caller setpos getpos _caller;
