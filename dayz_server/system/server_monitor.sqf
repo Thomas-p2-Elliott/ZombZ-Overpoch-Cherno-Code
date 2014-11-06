@@ -292,9 +292,9 @@ if (isServer && isNil "sm_done") then {
 
 			if (_object isKindOf "AllVehicles") then {
 				/*---------------------------------------------------------------------------
-				Shoot From Helis - UH1Y & MH60S
+				Shoot From Vehicles - UH1Y & MH60S & MH6J & V3S
 				---------------------------------------------------------------------------*/
-				if ((typeOf _object) in ["MH60S","MH60S_DZ","MH60S_DZE","UH1Y","UH1Y_DZ","UH1Y_DZE"]) then {
+				if ((typeOf _object) in P2DZ_DriveByVehicles) then {
 					_object setVehicleInit "[this] execVM ""heliDoor\heliDoor_init.sqf"";";
 				};
 				

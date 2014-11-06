@@ -23,6 +23,17 @@ while {alive _vcl} do
 				case "UH1Y":  {_load = _vcl addAction ["Move to right door", "heliDoor\mount_vcl.sqf", "", 0, false, true];};
 				case "UH1Y_DZ":  {_load = _vcl addAction ["Move to right door", "heliDoor\mount_vcl.sqf", "", 0, false, true];};
 				case "UH1Y_DZE":  {_load = _vcl addAction ["Move to right door", "heliDoor\mount_vcl.sqf", "", 0, false, true];};
+
+				case "V3S_Civ":  {_load = _vcl addAction ["Move to Front Right", "heliDoor\mount_vcl.sqf", "", 0, false, true];};
+
+				case "MH6J_EP1":  {_load = _vcl addAction ["Move to Front Right", "heliDoor\mount_vcl.sqf", "", 0, false, true];};
+
+				case "TT650_Ins":  {_load = _vcl addAction ["Drive-By Position", "heliDoor\mount_vcl.sqf", "", 0, false, true];};
+				case "TT650_Gue":  {_load = _vcl addAction ["Drive-By Position", "heliDoor\mount_vcl.sqf", "", 0, false, true];};
+				case "TT650_TK_EP1":  {_load = _vcl addAction ["Drive-By Position", "heliDoor\mount_vcl.sqf", "", 0, false, true];};
+				case "TT650_TK_CIV_EP1":  {_load = _vcl addAction ["Drive-By Position", "heliDoor\mount_vcl.sqf", "", 0, false, true];};
+				case "TT650_Civ":  {_load = _vcl addAction ["Drive-By Position", "heliDoor\mount_vcl.sqf", "", 0, false, true];};
+
 			};
 			_c = 1;
 		};

@@ -97,6 +97,14 @@ _key call server_hiveWrite;
 	    ];
 	};
 
+	/*---------------------------------------------------------------------------
+	Shoot From Vehicles - UH1Y & MH60S & MH6J & V3S
+	---------------------------------------------------------------------------*/
+	if ((typeOf _object) in P2DZ_DriveByVehicles) then {
+		_object setVehicleInit "[this] execVM ""heliDoor\heliDoor_init.sqf"";";
+	};
+	
+
 	_object setDir _dir;
 	_object setPosATL _location;
 						

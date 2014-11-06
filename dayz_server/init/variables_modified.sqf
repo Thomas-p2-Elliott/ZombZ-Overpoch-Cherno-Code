@@ -1,11 +1,29 @@
 disableSerialization;
 
-/*---------------------------------------------------------------------------
-Security Settings
----------------------------------------------------------------------------*/
+
 
 if(isServer) then {
 	DZE_safeVehicle = ["ParachuteWest","ParachuteC"];
+
+
+	/*---------------------------------------------------------------------------
+	DriveBy Vehicles
+	---------------------------------------------------------------------------*/
+
+	P2DZ_DriveByVehicles = [
+	"MH60S",
+	"MH60S_DZ",
+	"MH60S_DZE",
+	"UH1Y",
+	"UH1Y_DZ",
+	"UH1Y_DZE",
+	"MH6J_EP1",
+	"V3S_Civ",
+	"TT650_Ins",
+	"TT650_Gue",
+	"TT650_TK_EP1",
+	"TT650_TK_CIV_EP1",
+	"TT650_Civ"];
 };
 
 //Model Variables
@@ -87,9 +105,9 @@ Player/Spawn Settings
 ---------------------------------------------------------------------------*/
 
 	// DayZ Epoch config
-	spawnShoremode = 1; // Default = 1 (on shore)
-	dayz_spawnselection = 1; // Spawn selection screen
-	spawnArea= 1500; // Default = 1500
+	spawnShoremode = 1; 		// Default = 1 (on shore)
+	dayz_spawnselection = 1; 	// Spawn selection screen
+	spawnArea= 1500; 			// Default = 1500
 
 	//parachute spawn (keep disabled, deprecated)
 	dayz_paraSpawn = false;

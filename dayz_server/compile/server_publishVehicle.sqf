@@ -116,5 +116,13 @@ _key call server_hiveWrite;
 	PVDZE_veh_Init = _object;
 	publicVariable "PVDZE_veh_Init";
 
+
+	/*---------------------------------------------------------------------------
+	Shoot From Vehicles - UH1Y & MH60S & MH6J & V3S
+	---------------------------------------------------------------------------*/
+	if ((typeOf _object) in P2DZ_DriveByVehicles) then {
+		_object setVehicleInit "[this] execVM ""heliDoor\heliDoor_init.sqf"";";
+	};
+
 	diag_log ("PUBLISH: Created " + (_class) + " with ID " + str(_uid));
 };
