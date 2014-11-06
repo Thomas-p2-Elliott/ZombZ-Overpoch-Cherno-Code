@@ -10,13 +10,9 @@ if (_dikCode in[0x02,0x03,0x04,0x58,0x57,0x44,0x43,0x42,0x41,0x3E,0x3D,0x3C,0x3B
 };
 
 if (_dikCode == 0x3B )then{
-_ok = createDialog "RscGorsyMenu";
-
-diag_log("GorsyDebug: RscGorsyMenu Button pressed");
-
-_handed=true;
+	_ok = createDialog "RscGorsyMenu";
+	_handed=true;
 };
-
 
 if ((_dikCode == 0x3E || _dikCode == 0x0F || _dikCode == 0xD3)) then {
 	if(diag_tickTime - dayz_lastCheckBit > 10) then {
@@ -36,10 +32,6 @@ if (_dikCode == 0x01 && r_player_dead) then {
 	_handled = true;
 };
 
-//reload magazine with R
-if (_dikCode in actionKeys "ReloadMagazine") then {
-	reload player;
-};
 
 // surrender 
 if (_dikCode in actionKeys "Surrender") then {
@@ -122,7 +114,7 @@ if ((_dikCode in actionKeys "Gear") && (vehicle player != player) && !_shift && 
 	_handled = true;
 };
 
-if (_dikCode in (actionKeys "GetOver")) then {
+if (_dikCode in (actionKeys "GetOver") && (diag_tickTime - dayz_lastCheckBit > 1)) then {
 	_nearbyObjects = nearestObjects[getPosATL player, dayz_disallowedVault, 8];
 	if (count _nearbyObjects > 0) then {
 		if((diag_tickTime - dayz_lastCheckBit > 2)) then {
@@ -137,45 +129,67 @@ if (_dikCode in (actionKeys "GetOver")) then {
 
 
 if (_dikCode == 0x3F && (diag_tickTime - dayz_lastCheckBit > 1)) then {
-	dayz_lastCheckBit = diag_tickTime;
 	if (isNil "P2DZ_dbCurMode") then {
 		P2DZ_dbCurMode = 2;
 		P2DZ_dbCurMode = P2DZ_DebugMonDefault;
 		diag_log("Debug Mon Start!");
+		dayz_lastCheckBit = diag_tickTime;
 		_handled = true;
 	} else {
 		diag_log("Debug Mon Pressed (F5)! Mode: " + str P2DZ_dbCurMode);
 		if (P2DZ_dbCurMode < 3) then {
 			P2DZ_dbCurMode = P2DZ_dbCurMode + 1;
 			P2DZ_debugMonitor = true;
+			dayz_lastCheckBit = diag_tickTime;
 			_handled = true;
 		} else {
 			P2DZ_dbCurMode = 1;
 			P2DZ_debugMonitor = true;
+			dayz_lastCheckBit = diag_tickTime;
 			_handled = true;
 		};
 	};
 };
 
 /*Move Into Nearest Heli / HeliDoor Script */
-if (_dikCode == 0xD2  && (diag_tickTime - dayz_lastCheckBit > 1)) then {
-	dayz_lastCheckBit = diag_tickTime;
+if (_dikCode == 0xD2  && (diag_tickTime - dayz_lastCheckBit > 1) && (player getVariable ["NORRN_inVehMount", false])) then {
 	diag_log("P2DEBUG: Insert Key presed!");
-	detach player;
 	[] spawn {
 		diag_log("P2DEBUG: Insert Key presed Thread!");
-		_objs = nearestObjects [player, ["Air"], 5];
+		detach player;
+		player setVariable ["NORRN_inVehMount", false];
+		_objs = nearestObjects [player, ["AllVehicles"], 100];
 		player action ["getInCargo", (_objs select 0)];
-		player setVariable ["NORRN_heliDoor", true, true];
 	};
+	dayz_lastCheckBit = diag_tickTime;
+	_handled = true;
+};
+
+/*Q and E Lean / HeliDoor */
+if ((player getVariable ["NORRN_inVehMount", false]) && (diag_tickTime - dayz_lastCheckBit > 1) && {(_dikCode in actionKeys "LeanRight")}) then {
+	player setDir ((getDir player) + 4);
+	dayz_lastCheckBit = diag_tickTime;
+	_handled = true;
+};
+if ((player getVariable ["NORRN_inVehMount", false]) && (diag_tickTime - dayz_lastCheckBit > 1) && {(_dikCode in actionKeys "LeanLeft")}) then {
+	player setDir ((getDir player) - 4);
+	dayz_lastCheckBit = diag_tickTime;
+	_handled = true;
+};
+
+/* HeliDoor reload magazine with reloadMagazine Key */
+if ((player getVariable ["NORRN_inVehMount", false]) && (diag_tickTime - dayz_lastCheckBit > 1) && {(_dikCode in actionKeys "ReloadMagazine")}) then {
+	reload player;
+	dayz_lastCheckBit = diag_tickTime;
 	_handled = true;
 };
 
 
-if (_dikCode == 0x40 && (diag_tickTime - dayz_lastCheckBit > 3)) then {
-	dayz_lastCheckBit = diag_tickTime;
+/* Debug Mon Colour GUI */
+if (_dikCode == 0x40 && (diag_tickTime - dayz_lastCheckBit > 1)) then {
 	[] spawn fnc_p2debugMonColorGUI;
 	_handled = true;
+	dayz_lastCheckBit = diag_tickTime;
 };
 
 //if (_dikCode == 57) then {_handled = true}; // space
