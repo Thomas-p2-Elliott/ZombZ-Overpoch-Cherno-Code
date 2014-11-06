@@ -3,7 +3,7 @@ private ["_type","_inVehicle","_dateNow","_maxWildZombies","_age","_radius","_po
 
 _type = _this select 0;
 _inVehicle = (vehicle player != player);
-_onTheMove = (speed (vehicle player) > 10);
+_onTheMove = (speed (vehicle player) > 35);
 _dateNow = (DateToNumber date);
 _maxWildZombies = 3;
 _age = -1;
@@ -73,7 +73,7 @@ if (_nearbyCount < 1) exitwith
 		_dis = _x distance player;
 
 		//Loot -						-> was !inVehicle
-		if ((_dis < 120) && (_dis > 15) && !_onTheMove) then {
+		if ((_dis < 120) && (_dis > 5) && !_onTheMove) then {
 			_looted = (_x getVariable ["looted",-0.1]);
 			_cleared = (_x getVariable ["cleared",true]);
 			_dateNow = (DateToNumber date);
@@ -93,7 +93,7 @@ if (_nearbyCount < 1) exitwith
 			};
 		};
 
-		// do not spawn zeds if player is moving faster then 10kmh
+		// do not spawn zeds if player is moving faster then 30kmh
 		if (!_onTheMove) then {
 			//Zeds
 			if ((time - dayz_spawnWait) > dayz_spawnDelay) then {
