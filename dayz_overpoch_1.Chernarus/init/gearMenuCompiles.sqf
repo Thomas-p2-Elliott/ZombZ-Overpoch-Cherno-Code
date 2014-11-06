@@ -29,21 +29,6 @@ dayz_losChance = {
 	_myExp
 };
 
-player2_putGoldItemsAtTop = {
-	private["_ogMags","_newMags"];
-	_ogMags = magazines player;	
-	if !(_ogMags select 0 == "ItemGoldBar10oz") then {
-		_newMags = _ogMags - ["ItemGoldBar10oz"];
-		_newMags =  ["ItemGoldBar10oz"] + _newMags;
-		{
-		  player removeMagazine _x;
-		} forEach _ogMags;
-		{
-		  player addMagazine _x;
-		} forEach _newMags;	
-	};
-};
-
 ui_initDisplay = {
 	private["_control","_ctrlBleed","_display","_ctrlFracture","_ctrlDogFood","_ctrlDogWater","_ctrlDogWaterBorder", "_ctrlDogFoodBorder"];
 	disableSerialization;
@@ -91,6 +76,49 @@ dayz_losCheck = {
 	};
 	_cantSee
 };
+
+
+player2_preventInvOverfill = {
+	private ["_PMagCnt", "_PMagCnt2", "_wepHolder", "_ogMags", "_newMags", "_clutter"];
+	_PMagCnt = 0;
+	{
+		if !(getNumber(configFile >> "CfgMagazines" >> _x >> "type") == 16) then {
+			_PMagCnt = _PMagCnt + 1;
+		};
+	} count (magazines player);
+
+	if (_PMagCnt >= 12) then {
+		_PMagCnt2 = 0;
+		_wepHolder = objNull;
+		{
+			if (!(getNumber(configFile >> "CfgMagazines" >> _x >> "type") == 16) && (((_PMagCnt) - _PMagCnt2) >= 13) && (_x != "ItemGoldBar10oz")) then {
+				_PMagCnt2 = _PMagCnt2 + 1;
+				if (isNull _wepHolder) then {
+					_wepHolder = "WeaponHolder" createVehicle (getPosATL player);
+					_wepHolder setPosATL (getPosATL player);
+					_clutter = "ClutterCutter_small_EP1" createVehicleLocal (getPosATL player);
+					_clutter setPosATL (getPosATL player);
+					systemChat(format["Warning: Inventory Full! %1 dropped to ground.",_x]);
+					player action ["dropMagazine", _wepHolder, _x];
+				} else {
+					systemChat(format["Warning: Inventory Full! %1 dropped to ground.",_x]);
+					player action ["dropMagazine", _wepHolder, _x];
+				};
+			};
+		} count (magazines player);
+	};
+
+	[] spawn { 
+		{
+	 		if ("ItemGoldBar10oz" in ((getMagazineCargo _x) select 0)) then {
+	 			_r = ([false,_x] call p2_gv); if (_r < 1) then { deleteVehicle _x; }; 
+	 		};
+		} count ((getPosATL player) nearObjects ["WeaponHolder",5]);
+	};
+}; 
+
+
+
 
 dayz_equipCheck = {
 	private ["_empty","_needed","_diff","_success","_config"];

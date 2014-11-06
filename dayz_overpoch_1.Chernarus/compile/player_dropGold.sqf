@@ -88,35 +88,78 @@ if (P2DZE_gearOnContainer) then {
 //If gear is going to ground
 } else {
 	if (P2DZE_goldItemHandlingDebug) then { diag_log("dropGold: player_dropGold: (" + str _amount + ") of players gold (" + str _pGold + ") going to ground"); };
-	P2DZE_plr_dropGold = [player,objNull,_amount];
-	publicVariableServer "P2DZE_plr_dropGold";
+
+	
 	if (_amount < 0 || _amount >= _pGold) then {
-		//set has gold var
-		P2DZE_hasGold = false;
+		
+		//Count primary magazines, if = slot count then it was forced out of inv and dont drop gold
+		_PMagCnt = 0;
+		{
+			if !(getNumber(configFile >> "CfgMagazines" >> _x >> "type") == 16) then {
+				_PMagCnt = _PMagCnt + 1;
+			};
+		} count (magazines player);
 
-		if (P2DZ_enableGoldSystemChat) then {
-			systemChat(format["Gold: %1 dropped to ground.",_pGold]);
+		if (_PMagCnt >= 12) then {
+			_PMagCnt2 = 0;
+			_wepHolder = objNull;
+			{
+				if (!(getNumber(configFile >> "CfgMagazines" >> _x >> "type") == 16) && (((_PMagCnt) - _PMagCnt2) > 12) && (_x != "ItemGoldBar10oz")) then {
+					_PMagCnt2 = _PMagCnt2 + 1;
+					if (isNull _wepHolder) then {
+						_wepHolder = "WeaponHolder" createVehicle (getPosATL player);
+						_wepHolder setPosATL (getPosATL player);
+						_clutter = "ClutterCutter_small_EP1" createVehicleLocal (getPosATL player);
+						_clutter setPosATL (getPosATL player);
+					};
+		 			systemChat(format["Warning: Inventory Full! %1 dropped to ground.",_x]);
+					player action ["dropMagazine", _wepHolder, _x];
+				};
+			} count (magazines player);
+		} else {
+
+
+			P2DZE_plr_dropGold = [player,objNull,_amount];
+			publicVariableServer "P2DZE_plr_dropGold";
+
+			//set has gold var
+			P2DZE_hasGold = false;
+
+			if (P2DZ_enableGoldSystemChat) then {
+				systemChat(format["Gold: %1 dropped to ground.",_pGold]);
+			};
+
+			//cut grass
+			[] spawn { 
+				private["_pos","_clutter"];
+				_pos = getPosATL player;
+				sleep 3; 	//give time for serv to create object
+				_clutter = "ClutterCutter_small_EP1" createVehicleLocal _pos;
+				_clutter setPosATL _pos;
+			};
+
 		};
-
+		 
 	} else {
+		P2DZE_plr_dropGold = [player,objNull,_amount];
+		publicVariableServer "P2DZE_plr_dropGold";
+
+
 		//set has gold var
 		P2DZE_hasGold = true;
 
 		if (P2DZ_enableGoldSystemChat) then {
 			systemChat(format["Gold: %1 dropped to ground.",_amount]);
 		};
-	};
 
-	//reveal object
-	[] spawn { 
-		sleep 1; //give time for serv to create object
-		_near = (position player) nearObjects ["WeaponHolder",5];
-		{
-			player reveal _x;
-		} forEach _near;
-
-		//create local grass cutter at feet
-		"ClutterCutter_small_EP1" createVehicleLocal (getPosATL player);
+		//cut grass
+		[] spawn { 
+			private["_pos","_clutter"];
+			_pos = getPosATL player;
+			sleep 3; 	//give time for serv to create object
+			_clutter = "ClutterCutter_small_EP1" createVehicleLocal _pos;
+			_clutter setPosATL _pos;
+		};
 	};
 };
 
