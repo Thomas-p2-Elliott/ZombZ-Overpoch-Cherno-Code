@@ -62,9 +62,6 @@ P2DZE_dropGold = {
 				//gold going to object
 				_objGoldVar = _object getVariable ["ZombZGold", 0];
 
-				//make sure there is only one gold item in the object
-				[_object,true] call fnc_removeExtraBars;
-
 				waitUntil{!isNil '_plyrGoldVar'};
 				waitUntil{!isNil '_objGoldVar'};
 
@@ -74,14 +71,24 @@ P2DZE_dropGold = {
 				//new object gold = objects gold + ammount of gold dropped
 				_newObjGold = _objGoldVar + _amount;
 
-				//set objects gold
-				_object setVariable ["ZombZGold", _newObjGold, true];
-				//set players gold
-				_unit setVariable ["ZombZGold", _newPlyrGold, true];
+				if (_newPlyrGold < 0) then {
+					if (P2DZE_goldItemHandlingDebug) then {
+						diag_log(format[" DropGold(Failed:Anti-Dupe): onContainer: (true) _newPlyrGold: (%1) _newObjGold: (%2) _object / _unit: (%3/%4) _plyrGoldVar: (%5)", _newPlyrGold, _newObjGold, _object, _unit, _plyrGoldVar]);
+					};
+				} else {
 
-				if (P2DZE_goldItemHandlingDebug) then {
-					diag_log(format[" DropGold: onContainer: (true) _newPlyrGold: (%1) _newObjGold: (%2) _object / _unit: (%3/%4) _plyrGoldVar: (%5)", _newPlyrGold, _newObjGold, _object, _unit, _plyrGoldVar]);
+					//set objects gold
+					_object setVariable ["ZombZGold", _newObjGold, true];
+					//set players gold
+					_unit setVariable ["ZombZGold", _newPlyrGold, true];
+
+					if (P2DZE_goldItemHandlingDebug) then {
+						diag_log(format[" DropGold: onContainer: (true) _newPlyrGold: (%1) _newObjGold: (%2) _object / _unit: (%3/%4) _plyrGoldVar: (%5)", _newPlyrGold, _newObjGold, _object, _unit, _plyrGoldVar]);
+					};
 				};
+
+				//make sure there is only one gold item in the object
+				[_object,true] call fnc_removeExtraBars;			
 
 			} else {
 
@@ -112,26 +119,33 @@ P2DZE_dropGold = {
 					//new player gold = player gold - gold dropped
 					_newPlyrGold = _plyrGoldVar - _amount;
 
-					//set amount of gold in pile
-					_item setVariable ["ZombZGold", _newObjGold, true];
+					if (_newPlyrGold < 0) then {
+						diag_log(format[" DropGold(Failed:Anti-Dupe): onContainer: (false) _newPlyrGold: (%1) _newObjGold: (%2) _object / _unit: (%3/%4) _plyrGoldVar: (%5)", _newPlyrGold, _newObjGold, objNull, _unit, _plyrGoldVar]);
 
+					} else {
 
-					_item call {
-					    _this setVariable [
-					        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-					        "hash_id" callExtension format [
-					            "%1:%2",
-					            netId _this,
-					            typeOf _this
-					        ]
-					    ];
+						//set amount of gold in pile
+						_item setVariable ["ZombZGold", _newObjGold, true];
+
+						_item call {
+						    _this setVariable [
+						        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+						        "hash_id" callExtension format [
+						            "%1:%2",
+						            netId _this,
+						            typeOf _this
+						        ]
+						    ];
+						};
+
+						//set player gold
+						_unit setVariable ["ZombZGold", _newPlyrGold, true];
+
+						//reveal object to unit
+						_unit reveal _item;
+
 					};
-
-					//set player gold
-					_unit setVariable ["ZombZGold", _newPlyrGold, true];
-
-					//reveal object to unit
-					_unit reveal _item;
+					
 				};
 
 				if (P2DZE_goldItemHandlingDebug) then {
@@ -202,9 +216,6 @@ P2DZE_pickupGold = {
 				//make sure object isnt hacked in
 				_object call KK_fnc_checkHash;
 
-				//make sure there is no gold left
-				[_object,false] call fnc_removeExtraBars;
-
 				//get object gold
 				_objGoldVar = _object getVariable ["ZombZGold", 0];
 
@@ -224,6 +235,9 @@ P2DZE_pickupGold = {
 
 				//set players gold
 				_unit setVariable ["ZombZGold", _newPlyrGold, true];
+
+				//make sure there is no gold left
+				[_object,false] call fnc_removeExtraBars;
 
 				if (P2DZE_goldItemHandlingDebug) then {
 					diag_log(format[" pickupGold: _object / _unit: (%3/%4) _plyrGoldVar: (%1) _newPlyrGold: (%2)", _plyrGoldVar, _newPlyrGold,_object,_unit]);

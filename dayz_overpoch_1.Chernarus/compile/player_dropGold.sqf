@@ -117,9 +117,8 @@ if (P2DZE_gearOnContainer) then {
 				};
 			} count (magazines player);
 		} else {
-
-
-			P2DZE_plr_dropGold = [player,objNull,_amount];
+			//All of players gold going to ground
+			P2DZE_plr_dropGold = [player,objNull,_pGold];
 			publicVariableServer "P2DZE_plr_dropGold";
 
 			//set has gold var
@@ -141,6 +140,7 @@ if (P2DZE_gearOnContainer) then {
 		};
 		 
 	} else {
+		//Partial amount going to ground
 		P2DZE_plr_dropGold = [player,objNull,_amount];
 		publicVariableServer "P2DZE_plr_dropGold";
 
