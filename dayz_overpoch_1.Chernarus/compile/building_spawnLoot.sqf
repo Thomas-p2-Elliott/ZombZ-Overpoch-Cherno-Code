@@ -17,7 +17,7 @@ _lootChance = getNumber (_config >> "lootChance");
 
 //_countPositions = count _pos;
 _qty = 0; // effective quantity of spawned weaponholder
-_lootSpawnBias = 100; //67 between 50 && 100. The lower it is, the lower chance some of the lootpiles will spawn
+_lootSpawnBias = 80; //67 between 50 && 100. The lower it is, the lower chance some of the lootpiles will spawn
 
 
 // shuffles an array
