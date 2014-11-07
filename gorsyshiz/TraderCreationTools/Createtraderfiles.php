@@ -79,6 +79,9 @@ set_time_limit(300);
 						case 'boat':
 							$subtype1= "trade_any_boat";
 							break;	
+						case 'backpack':
+							$subtype1= "trade_backpacks";
+							break;	
 						default:
 							# code...
 							break;
