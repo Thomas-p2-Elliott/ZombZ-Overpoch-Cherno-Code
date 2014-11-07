@@ -1,9 +1,21 @@
 <?php
-set_time_limit(300);
+
+	
+	/////////////////////////////////CONFIG//////////////////////////////////////////
+	$percent = 50; //percent of price that traders buy for
+	$heropercent = 70; //percent that hero traders buy for
+
 
 	$DB_CONNSTRING ="mysql:host=208.167.247.35;dbname=resources"; //DB DETAILS 	locahost is the IP and dbname is the databases name
 	$DB_USERNAME = "ticketuser"; //  DATABASE USERNAME 									
 	$DB_PASSWORD = "29control"; //DATABASE PASSWORD
+
+
+	////////////////////////////////////////////////////////////////////////////////
+
+
+		set_time_limit(300);
+
 	$dbh = new PDO($DB_CONNSTRING, $DB_USERNAME, $DB_PASSWORD);
 	//selects the ones in the where (type='???'')
 	$query = "SELECT * FROM overpoch_traders WHERE (type='Weapons' OR type='Vehicle' OR type='Ammo' OR type='Backpacks') AND classes IS NOT NULL;";
@@ -14,7 +26,7 @@ set_time_limit(300);
 		$type = $result['type'];
 		$classes = $result['classes'];
 		$category = $result['category'];
-		echo "$trader<br>";
+		echo "<br>$trader<br>";
 		//$buildfile = "$buildfile $trader - $type - $classes<Br>";
 		//change into arrays for the foreach
 		$category = explode(",",$category);
@@ -43,18 +55,18 @@ set_time_limit(300);
 				break;
 		}
 
-		echo "<hr><br><br>$trader<br>";
+		//echo "<hr><br><br>$trader<br>";
 		//print_r($category);
-		echo "<br>";
+		//echo "<br>";
 		//$buildfile ="<br><br>";
 		//for each category we set the category and then add all the stuff
 		foreach ($category AS $cat){
 			$buildfile = "$buildfile class Category_$cat {\n";
-			echo "$cat<br><BR>";
+			echo " $cat -";
 			//foreach class we have return them and fill in the file
 			foreach ($classes AS $class){
 				$query = "SELECT price, item, subtype FROM $db WHERE type='$class' AND enable ='Yes';";
-				echo "db= $db class=$class<br>";
+				//echo "db= $db class=$class<br>";
 				//$buildfile = $query;
 				foreach ($dbh->query($query) AS $result){
 					$subtype = $result['subtype'];
@@ -87,7 +99,13 @@ set_time_limit(300);
 							break;
 					}
 
-					$sell = round(($buy/100) *50);
+					$sell = round(($buy/100) * $percent);
+					//echo $trader;
+					if (strpos($trader, "Hero") !==false){
+						$sell = round(($buy/100) * $heropercent);
+						//echo "hero";
+					}					
+
 					$buy = '{'.$buy.'}';
 					$sell = '{'.$sell.'}';
 					$buildfile = "$buildfile \tclass $item {\n";
