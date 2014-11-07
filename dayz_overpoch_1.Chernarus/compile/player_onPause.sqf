@@ -22,7 +22,7 @@ while {!isNull _display} do {
 	_btnTitle3 ctrlSetText 						"Server Menu";
 	_btnTitle3 ctrlEnable true;
 	_btnTitle3 ctrlRemoveAllEventHandlers		"ButtonClick";
-	_btnTitle3 ctrlAddEventHandler 				["ButtonClick","_ok = createDialog ""ZombZ_GorsyMenu""; "];
+	_btnTitle3 ctrlAddEventHandler 				["ButtonClick","_ok = createDialog ""RscGorsyMenu""; "];
   	
   	_btnTitle4 = _display displayCtrl 			119;	
 	_btnTitle4 ctrlSetText 						"Player Stats";
