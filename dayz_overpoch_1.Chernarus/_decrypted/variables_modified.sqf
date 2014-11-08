@@ -28,4 +28,5 @@ P2DZE_goldRunning = false;
 P2DZE_hasGold = false;
 P2DZE_gearOnContainer = false;
 P2DZE_gearOnWeaponHolder = false;
+P2DZE_traderListLoading = false;
 s_player_takeGold = -1;

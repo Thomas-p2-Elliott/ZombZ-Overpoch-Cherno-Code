@@ -18,182 +18,198 @@ TraderDialogLoadItemList = {
 
 	if (_index < 0) exitWith {};
 	//TraderCurrentCatIndex = _index;
-	_pthrough = 0;
 
-	_trader_id = TraderCatList select _index;
-	_activatingPlayer = player;
-
-	lbClear TraderDialogItemList;
-	ctrlSetText [TraderDialogBuyPrice, ""];
-	ctrlSetText [TraderDialogSellPrice, ""];
-
-	lbAdd [TraderDialogItemList, format["Please Wait (%1) Is Loading...", _trader_id]];
-
-
-	_cfgTraderCategory = missionConfigFile >> "CfgTraderCategory" >> (format["Category_%1",_trader_id]);	
-
-	PVDZE_plr_TradeMenuResult = [];
-	
-	for "_i" from 0 to ((count _cfgTraderCategory) - 1) do {
-
-		//output percentage through in window
-		lbClear TraderDialogItemList;
-		_pthrough = ((_i / ((count _cfgTraderCategory) - 1)) * 100);
-		lbAdd [TraderDialogItemList, format["Please Wait, Trader List Loading...(%1%2)", round _pthrough, "%"]];
-
-		_class = configName (_cfgTraderCategory select _i);
-
-		_type  = getText ((_cfgTraderCategory select _i) >> "type");	
-		_buy  = getArray ((_cfgTraderCategory select _i) >> "buy");	
-		_sell = getArray ((_cfgTraderCategory select _i) >> "sell");
-		
-		_buy set [2,1]; 
-		_sell set [2,1];
-
-		_typeNum = 1;
-		if (_type == "trade_weapons") then {
-			_typeNum = 3;
-		} else { 
-			if (_type in ["trade_backpacks", "trade_any_vehicle", "trade_any_vehicle_free", "trade_any_boat", "trade_any_bicycle"]) then {
-				_typeNum = 2;
-			};
-		};
-
-		_class = _class call P2DZ_decryptFunction;
-		_data = [9999,[_class,_typeNum],99999,_buy,_sell,0,_trader_id,_type];
-		
-		PVDZE_plr_TradeMenuResult set [count PVDZE_plr_TradeMenuResult, _data];
+	if (isNil 'P2DZE_traderListLoading') then {
+		P2DZE_traderListLoading = false;
 	};
 
+	if (!P2DZE_traderListLoading) then {
 
-	lbClear TraderDialogItemList;
-	_item_list = [];
-	{
-		private ["_header", "_item", "_name", "_type", "_textPart", "_qty", "_buy", "_bqty", "_btype", "_sell", "_sqty", "_stype", "_order", "_order", "_afile", "_File", "_count", "_bag", "_bagclass", "_index", "_image"];
-		_header = _x select 0; // "TRD"
-		_item = _x select 1;
-		_name = _item select 0;
-		_type = _item select 1;
-		switch (true) do {
-			case (_type == 1): {
-				_type = "CfgMagazines";
-			}; 
-			case (_type == 2): {
-				_type = "CfgVehicles";
-			}; 
-			case (_type == 3): {
-				_type = "CfgWeapons";
-			};
-		};
+		//Trader List Loading Set to True
+		P2DZE_traderListLoading = True;
 
-		// Display Name of item
-		_textPart =	getText(configFile >> _type >> _name >> "displayName");
+		_pthrough = 0;
 
-		// Total in stock
-		_qty = _x select 2;
+		_trader_id = TraderCatList select _index;
+		_activatingPlayer = player;
 
-		// Buy Data from array
-		_buy = _x select 3;
+		lbClear TraderDialogItemList;
+		ctrlSetText [TraderDialogBuyPrice, ""];
+		ctrlSetText [TraderDialogSellPrice, ""];
 
-		//diag_log(format["DEBUG player_traderMenuConfig.sqf: _x: %1", _x]);
+		lbAdd [TraderDialogItemList, format["Please Wait (%1) Is Loading...", _trader_id]];
 
-		_bqty = _buy select 0;
-		_btype = _buy select 2;
-		switch(true)do{ 
-			case (_btype == 1): {
-				_btype = "CfgMagazines";
-			}; 
-			case (_btype == 2): {
-				_btype = "CfgVehicles";
-			}; 
-			case (_btype == 3): {
-				_btype = "CfgWeapons";
-			}; 
-		}; 
 
-		// Display Name of buy item
-		_sell = _x select 4;
-		_sqty = _sell select 0;
-		_stype = _sell select 2;
-		switch(true)do{ 
-			case (_stype == 1): { 
-				_stype = "CfgMagazines";
-			}; 
-			case (_stype == 2): { 
-				_stype = "CfgVehicles";
-			}; 
-			case (_stype == 3): { 
-				_stype = "CfgWeapons";
-			}; 
-		}; 
+		_cfgTraderCategory = missionConfigFile >> "CfgTraderCategory" >> (format["Category_%1",_trader_id]);	
 
-		// Menu sort order
-		_order = _x select 5;
+		PVDZE_plr_TradeMenuResult = [];
+	
+		for "_i" from 0 to ((count _cfgTraderCategory) - 1) do {
 
-		// Action file to use for trade
-		_afile = _x select 7;
-		_File = "\z\addons\dayz_code\actions\" + _afile + ".sqf";
+
+
+			//output percentage through in window
+			lbClear TraderDialogItemList;
+			_pthrough = ((_i / ((count _cfgTraderCategory) - 1)) * 100);
+			lbAdd [TraderDialogItemList, format["Please Wait, Trader List Loading...(%1%2)", round _pthrough, "%"]];
+
+			_class = configName (_cfgTraderCategory select _i);
+
+			_type  = getText ((_cfgTraderCategory select _i) >> "type");	
+			_buy  = getArray ((_cfgTraderCategory select _i) >> "buy");	
+			_sell = getArray ((_cfgTraderCategory select _i) >> "sell");
 			
-		if (_afile == "trade_items") then {
-			_File = "actions\" + _afile + ".sqf";
-		};
+			_buy set [2,1]; 
+			_sell set [2,1];
 
-		_count = 0;
-		if(_type == "CfgVehicles") then {
-			if (_afile == "trade_backpacks") then {
-				_File = "actions\" + _afile + ".sqf";
-				_bag = unitBackpack player;
-				_bagclass = typeOf _bag;
-				if(_name == _bagclass) then {
-					_count = 1;
-				};
-			} else {
-				if (isClass(configFile >> "CfgVehicles" >> _name)) then {
-					_distance = dayz_sellDistance_vehicle;
-					if (_name isKindOf "Air") then {
-						_distance = dayz_sellDistance_air;
-					};
-					if (_name isKindOf "Ship") then {
-						_distance = dayz_sellDistance_boat;
-					};
-					_count = {(((typeOf _x) == _name) && {(alive _x)} && {(!(_x getVariable ["Deployed",false]))})} count (nearestObjects [(getPosATL player), [_name], _distance]);
+			_typeNum = 1;
+			if (_type == "trade_weapons") then {
+				_typeNum = 3;
+			} else { 
+				if (_type in ["trade_backpacks", "trade_any_vehicle", "trade_any_vehicle_free", "trade_any_boat", "trade_any_bicycle"]) then {
+					_typeNum = 2;
 				};
 			};
+
+			_class = _class call P2DZ_decryptFunction;
+			_data = [9999,[_class,_typeNum],99999,_buy,_sell,0,_trader_id,_type];
+			
+			PVDZE_plr_TradeMenuResult set [count PVDZE_plr_TradeMenuResult, _data];
 		};
 
-		if(_type == "CfgMagazines") then {
-			_count = {_x == _name} count magazines player;
-		};
 
-		if(_type == "CfgWeapons") then {
-			_count = {_x == _name} count weapons player;
-		};
+		lbClear TraderDialogItemList;
+		_item_list = [];
+		{
+			private ["_header", "_item", "_name", "_type", "_textPart", "_qty", "_buy", "_bqty", "_btype", "_sell", "_sqty", "_stype", "_order", "_order", "_afile", "_File", "_count", "_bag", "_bagclass", "_index", "_image"];
+			_header = _x select 0; // "TRD"
+			_item = _x select 1;
+			_name = _item select 0;
+			_type = _item select 1;
+			switch (true) do {
+				case (_type == 1): {
+					_type = "CfgMagazines";
+				}; 
+				case (_type == 2): {
+					_type = "CfgVehicles";
+				}; 
+				case (_type == 3): {
+					_type = "CfgWeapons";
+				};
+			};
 
-		_index = lbAdd [TraderDialogItemList, format["%1 (%2)", _textPart, _name]];
+			// Display Name of item
+			_textPart =	getText(configFile >> _type >> _name >> "displayName");
 
-		if (_count > 0) then {
-			lbSetColor [TraderDialogItemList, _index, [0, 1, 0, 1]];
-		};
+			// Total in stock
+			_qty = _x select 2;
 
-		_image = getText(configFile >> _type >> _name >> "picture");
-		lbSetPicture [TraderDialogItemList, _index, _image];
+			// Buy Data from array
+			_buy = _x select 3;
 
-		diag_log(format["%1",_File]);
+			//diag_log(format["DEBUG player_traderMenuConfig.sqf: _x: %1", _x]);
 
-		_item_list set [count _item_list, [
-			_name,
-			_textPart,
-			_bqty,
-			"ItemGoldBar10z",
-			"Gold Bars",
-			_sqty,
-			"ItemGoldBar10z",
-			"Gold Bars",
-			_header,
-			_File
-		]];
-	} forEach PVDZE_plr_TradeMenuResult;
-	TraderItemList = _item_list;
+			_bqty = _buy select 0;
+			_btype = _buy select 2;
+			switch(true)do{ 
+				case (_btype == 1): {
+					_btype = "CfgMagazines";
+				}; 
+				case (_btype == 2): {
+					_btype = "CfgVehicles";
+				}; 
+				case (_btype == 3): {
+					_btype = "CfgWeapons";
+				}; 
+			}; 
+
+			// Display Name of buy item
+			_sell = _x select 4;
+			_sqty = _sell select 0;
+			_stype = _sell select 2;
+			switch(true)do{ 
+				case (_stype == 1): { 
+					_stype = "CfgMagazines";
+				}; 
+				case (_stype == 2): { 
+					_stype = "CfgVehicles";
+				}; 
+				case (_stype == 3): { 
+					_stype = "CfgWeapons";
+				}; 
+			}; 
+
+			// Menu sort order
+			_order = _x select 5;
+
+			// Action file to use for trade
+			_afile = _x select 7;
+			_File = "\z\addons\dayz_code\actions\" + _afile + ".sqf";
+				
+			if (_afile == "trade_items") then {
+				_File = "actions\" + _afile + ".sqf";
+			};
+
+			_count = 0;
+			if(_type == "CfgVehicles") then {
+				if (_afile == "trade_backpacks") then {
+					_File = "actions\" + _afile + ".sqf";
+					_bag = unitBackpack player;
+					_bagclass = typeOf _bag;
+					if(_name == _bagclass) then {
+						_count = 1;
+					};
+				} else {
+					if (isClass(configFile >> "CfgVehicles" >> _name)) then {
+						_distance = dayz_sellDistance_vehicle;
+						if (_name isKindOf "Air") then {
+							_distance = dayz_sellDistance_air;
+						};
+						if (_name isKindOf "Ship") then {
+							_distance = dayz_sellDistance_boat;
+						};
+						_count = {(((typeOf _x) == _name) && {(alive _x)} && {(!(_x getVariable ["Deployed",false]))})} count (nearestObjects [(getPosATL player), [_name], _distance]);
+					};
+				};
+			};
+
+			if(_type == "CfgMagazines") then {
+				_count = {_x == _name} count magazines player;
+			};
+
+			if(_type == "CfgWeapons") then {
+				_count = {_x == _name} count weapons player;
+			};
+
+			_index = lbAdd [TraderDialogItemList, format["%1 (%2)", _textPart, _name]];
+
+			if (_count > 0) then {
+				lbSetColor [TraderDialogItemList, _index, [0, 1, 0, 1]];
+			};
+
+			_image = getText(configFile >> _type >> _name >> "picture");
+			lbSetPicture [TraderDialogItemList, _index, _image];
+
+			_item_list set [count _item_list, [
+				_name,
+				_textPart,
+				_bqty,
+				"ItemGoldBar10z",
+				"Gold Bars",
+				_sqty,
+				"ItemGoldBar10z",
+				"Gold Bars",
+				_header,
+				_File
+			]];
+		} forEach PVDZE_plr_TradeMenuResult;
+
+		P2DZE_traderListLoading = false;
+
+		TraderItemList = _item_list;
+	} else {
+		systemChat("[Trader Dialog] Please wait for the list to finish loading.");
+	};
 };
 
 TraderDialogShowPrices = {
