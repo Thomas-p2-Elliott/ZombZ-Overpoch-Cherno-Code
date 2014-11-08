@@ -106,7 +106,7 @@ _object_damage = {
 		_damage = damage _object;
 		if (_damage >= 1) exitWith { 
 			_null = _object spawn {
-				sleep 5;
+				uiSleep 15;
 				deleteVehicle _this; 
 				true
 			}; 
@@ -156,13 +156,11 @@ _object_killed = {
 		if (getPlayerUID _killer != "") then {
 			_name = if (alive _killer) then { name _killer; } else { format["OBJECT %1", _killer]; };
 			_log = format["Vehicle killed: Vehicle %1 (TYPE: %2), CharacterID: %3, ObjectID: %4, ObjectUID: %5, Position: %6, Killer: %7 (UID: %8)", _object, (typeOf _object), _charID, _objID, _objUID, _worldSpace, _name, (getPlayerUID _killer)];
-			[format["%1_%2",P2DZ_serverName,"vehicleKillLog"],
-			_log] call p2net_log1; 
+			_log call stats_vehicleKills;
 
 		} else {
 			_log = format["Vehicle killed: Vehicle %1 (TYPE: %2), CharacterID: %3, ObjectID: %4, ObjectUID: %5, Position: %6", _object, (typeOf _object), _charID, _objID, _objUID, _worldSpace];
-			[format["%1_%2",P2DZ_serverName,"vehicleKillLog"],
-			_log] call p2net_log1; 
+			_log call stats_vehicleKills; 
 		};
 	};
 };
@@ -200,6 +198,12 @@ _object_gold = {
 		//diag_log("HIVE: Data Sent:" + str _key);
 	};
 	_key call server_hiveWrite;
+
+	if ((_objGoldVar select 0) > 0) then {
+		[_object,true] call fnc_removeExtraBars;
+	} else {
+		[_object,false] call fnc_removeExtraBars;
+	};
 };
 
 
