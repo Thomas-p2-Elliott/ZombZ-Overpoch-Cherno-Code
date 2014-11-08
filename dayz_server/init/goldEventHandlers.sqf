@@ -94,12 +94,13 @@ P2DZE_dropGold = {
 
 			} else {
 
-				[_unit] spawn {
+				_unit spawn {
 					private ["_unit","_near"];
-					_unit = _this select 0;
-					_near = (position _unit) nearObjects ["WeaponHolder",5];
+					_unit = _this;
+					_near = (getPosATL _unit) nearObjects ["WeaponHolder",15];
 					{
 						if ((((getMagazineCargo _x) select 0)select 0) == "ItemGoldBar10oz") then {
+							diag_log("Found:" + str _x);
 							_x call KK_fnc_checkHashGold;
 						};
 					} forEach _near;
@@ -119,6 +120,10 @@ P2DZE_dropGold = {
 						diag_log(format[" DropGold(Failed:Anti-Dupe): onContainer: (false) _newPlyrGold: (%1) _newObjGold: (%2) _object / _unit: (%3/%4) _plyrGoldVar: (%5)", _newPlyrGold, _newObjGold, objNull, _unit, _plyrGoldVar]);
 
 					} else {
+
+						//get player pos
+						_iPos = [(getPosATL _unit) select 0, (getPosATL _unit) select 1, -50];
+
 						//create weaponholder to hold the gold item
 						_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
 						
@@ -140,14 +145,14 @@ P2DZE_dropGold = {
 						    ];
 						};
 
+						//sleep for a moment to prevent gold appearing before variable has been sent to clients
+						uiSleep 0.05;
+
 						//get player pos
 						_iPos = getPosATL _unit;
 
 						//move weaponholder to player pos
-						_item setpos _iPos;
-
-						//sleep for a moment to prevent gold appearing before variable has been sent to clients
-						uiSleep 0.3;
+						_item setPosATL _iPos;
 
 						//add gold bar to weaponholder
 						_item addMagazineCargoGlobal ["ItemGoldBar10oz",1];

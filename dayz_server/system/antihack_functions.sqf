@@ -91,6 +91,9 @@ KK_fnc_checkHashGold = {
     ] == "PASS") exitWith {true};
     0 = _this spawn KK_fnc_logFailedGold;
     //"debug_console" callExtension format["Gold: %1 FAILED #1001", typeOf _this];
+    diag_log("Deleting: " + str(_this));
+    deleteVehicle _this;
+    diag_log(format["Deleted: %1", _this]);
     false
 };
 
