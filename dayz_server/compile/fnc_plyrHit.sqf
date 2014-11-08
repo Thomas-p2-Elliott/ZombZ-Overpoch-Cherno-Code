@@ -25,7 +25,7 @@ if ((getText (configFile >> "CfgVehicles" >> _vehicle >> "vehicleClass")) in ["C
 
 _distance = _victim distance _attacker;
 
-diag_log format["PHIT: %1 was hit by %2 with %3 from %4m with %5 dmg", _victim, _attacker, _weapon, _distance, _damage];
+//diag_log format["PHIT: %1 was hit by %2 with %3 from %4m with %5 dmg", _victim, _attacker, _weapon, _distance, _damage];
 
 _victim setVariable["AttackedBy", _attacker, true];
 _victim setVariable["AttackedByName", (name _attacker), true];
