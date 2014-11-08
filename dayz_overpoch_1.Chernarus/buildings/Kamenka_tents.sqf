@@ -113,7 +113,7 @@ if (true) then
 _vehicle_53 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Stan", [1064.8109, 2440.5771, 3.2424927e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Camp", [1064.8109, 2440.5771, 3.2424927e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_53 = _this;
   _this setDir 62.464649;
   _this setPos [1064.8109, 2440.5771, 3.2424927e-005];
@@ -167,7 +167,7 @@ if (true) then
 _vehicle_83 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Stan", [1069.7053, 2430.877, 1.2397766e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Camp", [1069.7053, 2430.877, 1.2397766e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_83 = _this;
   _this setDir 62.257244;
   _this setPos [1069.7053, 2430.877, 1.2397766e-005];
