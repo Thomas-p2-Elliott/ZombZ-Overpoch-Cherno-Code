@@ -93,7 +93,6 @@ while {r_autoTrade} do {
 		if (r_interrupt) then {
 			r_doLoop = false;
 		};
-		diag_log(format["c: %1",_r_loopCount]);
 		_r_loopCount = _r_loopCount + 0.1;
 		sleep 0.1;
 	};
