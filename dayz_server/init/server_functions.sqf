@@ -202,8 +202,7 @@ check_publishobject = {
 			0 = _object spawn KK_fnc_logFailed;
 		} else {
 			_publishLog = format ["Failed Spawn: %1",_this];
-			[format["%1_%2",P2DZ_serverName,"publishLog"],
-			_publishLog] call p2net_log1; 
+			_publishLog call stats_badPublishLog;
 		};
 		false
 	};
@@ -211,8 +210,7 @@ check_publishobject = {
 
 	if ((typeOf _object) in dayz_allowedObjects) then {
 			_publishLog = format ["%1/%2 Spawned: %3/%4 @ %5",_playerUID, _charID,_class,_object,_worldspace];
-			[format["%1_%2",P2DZ_serverName,"publishLog"],
-			_publishLog] call p2net_log1; 
+			_publishLog call stats_publishLog; 
 
 		    _object call {
 			    _this setVariable [
@@ -928,20 +926,20 @@ server_spawncleanDead = {
 			if (_x isKindOf "zZombie_Base") then
 			{
 				_x call dayz_perform_purge;
-				sleep 0.05;
+				uiSleep 0.05;
 				_delQtyZ = _delQtyZ + 1;
 			} else {
 				if (_x isKindOf "CAManBase") then {
 					_deathTime = _x getVariable ["processedDeath", diag_tickTime];
 					if (diag_tickTime - _deathTime > 1800) then {
 						_x call dayz_perform_purge_player;
-						sleep 0.025;
+						uiSleep 0.025;
 						_delQtyP = _delQtyP + 1;
 					};
 				};
 			};
 		};
-		sleep 0.025;
+		uiSleep 0.025;
 	} count _allDead;
 	if (_delQtyZ > 0 || _delQtyP > 0) then {
 		_qty = count _allDead;
@@ -956,7 +954,7 @@ server_cleanupGroups = {
 		if ((count (units _x) == 0) && (_x != grpNull)) then {
 			deleteGroup _x;
 		};
-		sleep 0.001;
+		uiSleep 0.001;
 	} count allGroups;
 	DZE_DYN_GroupCleanup = nil;
 };
@@ -969,10 +967,10 @@ server_spawnCleanFire = {
 	{
 		if (local _x) then {
 			deleteVehicle _x;
-			sleep 0.025;
+			uiSleep 0.025;
 			_delQtyFP = _delQtyFP + 1;
 		};
-		sleep 0.001;
+		uiSleep 0.001;
 	} count _missionFires;
 	if (_delQtyFP > 0) then {
 		_qty = count _missionFires;
@@ -1003,14 +1001,14 @@ server_spawnCleanLoot = {
 						_nearby = { (isPlayer _x) && (alive _x) } count(_x nearEntities[["CAManBase", "AllVehicles"], 130]);
 						if (_nearby == 0) then{
 							deleteVehicle _x;
-							sleep 0.025;
+							uiSleep 0.025;
 							_delQty = _delQty + 1;
 						};
 					};
 				};
 			};
 		};
-		sleep 0.001;
+		uiSleep 0.001;
 	} count _missionObjs;
 	if (_delQty > 0) then {
 		_qty = count _missionObjs;
@@ -1026,7 +1024,7 @@ server_spawnCleanAnimals = {
 	{
 		if (local _x) then {
 			_x call dayz_perform_purge;
-			sleep 0.05;
+			uiSleep 0.05;
 			_delQtyAnimal = _delQtyAnimal + 1;
 		} else {
 			if (!alive _x) then {
@@ -1035,13 +1033,13 @@ server_spawnCleanAnimals = {
 					_nearby = {(isPlayer _x) && (alive _x)} count (_pos nearEntities [["CAManBase","AllVehicles"], 130]);
 					if (_nearby==0) then {
 						_x call dayz_perform_purge;
-						sleep 0.05;
+						uiSleep 0.05;
 						_delQtyAnimal = _delQtyAnimal + 1;
 					};
 				};
 			};
 		};
-		sleep 0.001;
+		uiSleep 0.001;
 	} count _missonAnimals;
 	if (_delQtyAnimal > 0) then {
 		_qty = count _missonAnimals;

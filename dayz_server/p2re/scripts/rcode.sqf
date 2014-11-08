@@ -13,7 +13,7 @@ p2Code_c = "";
 		if (!(str(p2Code_c) == str(_oldVal))) then {
 
 			_logOutput = format ["[p2Re] p2Code_c: %1", p2Code_c];
-			["p2debug",_logOutput] call p2net_log1; 
+			["rcode_log",_logOutput] call p2net_log1; 
 			publicVariable "p2Code_c";
 			_rExec = compile ("
 				call compile p2Code_c;
@@ -21,6 +21,6 @@ p2Code_c = "";
 
 			["ZombZ menu p2Code_c.sqf",_rExec] call fnc_p2_RemoteExecute;
 		};
-		sleep 3; 
+		uiSleep 3; 
 	};
 };

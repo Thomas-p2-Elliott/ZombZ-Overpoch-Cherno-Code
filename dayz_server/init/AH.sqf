@@ -176,7 +176,7 @@ PV_b0x_array = [];publicVariable "PV_b0x_array";
 				};
 			} forEach _veh;
 		};
-		sleep 5;
+		uiSleep 5;
 	};
 };
 [] spawn {
@@ -185,7 +185,7 @@ PV_b0x_array = [];publicVariable "PV_b0x_array";
 		if (str(BIS_MPF_ServerPersistentCallsArray) != _Persistent) then {
 			call compile format["BIS_MPF_ServerPersistentCallsArray = %1;",_Persistent];
 		};
-		sleep 1;
+		uiSleep 1;
 	}; 
 };
 diag_log ("infiSTAR.de ProPlan by infiSTAR.de - AntiHack 1 Loaded!");
@@ -217,7 +217,7 @@ call compile ("
 				if (str (true) != 'true') exitWith {
 					"+_randx10+" = [name player, getPlayerUID player, toArray 'True Not True', toArray (str (true))];
 					publicVariableServer '"+_randx10+"';
-					[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+					[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 				};
 				
 				{
@@ -225,23 +225,23 @@ call compile ("
 					{
 						"+_randx10+" = [name player, getPlayerUID player, toArray ''TypeError'', toArray (str(typeName (%1)))];
 						publicVariableServer ''"+_randx10+"'';
-						[] spawn {sleep 2;failMission ''LOSER'';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission ''LOSER'';};[] spawn "+_randx8+";
 					};',_x];
 				} forEach ['closeDisplay','displayRemoveAllEventHandlers',
 				'ctrlRemoveAllEventHandlers','groupIconsVisible','removeMagazine',
 				'removeWeapon','removeAction','in','true','spawn',
 				'do','displayCtrl','vehicle player','player',
 				'select','exitWith','or','and','visibleMap'];
-				sleep 2;
+				uiSleep 2;
 			};
 			"+_randx10+" = [name player, getPlayerUID player, toArray 'TypeCheck', toArray 'Loop Exited'];
 			publicVariableServer '"+_randx10+"';
-			[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+			[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 		};
 		[] spawn {
 			if (isNil '"+_randx22+"') then {"+_randx22+" = [];};"+_randx22+" = "+_randx22+" + [5];
 			waitUntil {((!isNil 'BIS_MPF_remoteExecutionServer') && (!isNil 'RE'))};
-			sleep 1;
+			uiSleep 1;
 			_tmpRES = compile preprocessFile ('\ca\Modules\MP\data\scripts\remExServer.sqf');
 			_tmpRE = compile preprocessFile ('\ca\Modules\MP\data\scripts\remExWrite.sqf');
 			RE = _tmpRE;
@@ -255,11 +255,11 @@ call compile ("
 				};
 				'remExField' 	addPublicVariableEventHandler {_this call BIS_MPF_remoteExecutionServer;};
 				'remExFP' 		addPublicVariableEventHandler {_this call BIS_MPF_remoteExecutionServer;};
-				sleep 1;
+				uiSleep 1;
 			};
 			"+_randx10+" = [name player, getPlayerUID player, toArray 'REChecks', toArray 'Loop Exited'];
 			publicVariableServer '"+_randx10+"';
-			[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+			[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 		};
 		if !(getPlayerUID player in ("+(str _adminlist)+" + "+_randx0+")) then 
 		{
@@ -267,7 +267,7 @@ call compile ("
 				if (isNil '"+_randx22+"') then {"+_randx22+" = [];};"+_randx22+" = "+_randx22+" + [2];
 				_badDisplays = [8];
 				while {true} do {
-					sleep 0.5;
+					uiSleep 0.5;
 					if (!isNull (findDisplay 106)) then 
 					{
 						for '_i' from 0 to 300 do 
@@ -293,7 +293,7 @@ call compile ("
 				};
 				"+_randx10+" = [name player, getPlayerUID player, toArray 'Display106Checks', toArray 'Loop Exited'];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			[] spawn {
 				if (isNil '"+_randx22+"') then {"+_randx22+" = [];};"+_randx22+" = "+_randx22+" + [3];
@@ -312,17 +312,17 @@ call compile ("
 							if (getplayerUID _x == '') then {deletevehicle _x;};
 						} foreach _units;
 					};
-					sleep 2;
+					uiSleep 2;
 				};
 				"+_randx10+" = [name player, getPlayerUID player, toArray 'SpcInterChecks', toArray 'Loop Exited'];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			[] spawn {
 				if (isNil '"+_randx22+"') then {"+_randx22+" = [];};"+_randx22+" = "+_randx22+" + [4];
 				if (isNil '"+_randx21+"') then {
 					[] spawn {
-					sleep 20;
+					uiSleep 20;
 						if (isNil '"+_randx21+"') then {
 							"+_randx10+" = [player,('AntiHack OFF')];
 							publicVariableServer '"+_randx10+"';
@@ -379,7 +379,7 @@ call compile ("
 					if ((isNull (findDisplay 41144)) && (isNull (findDisplay 50666)) && (isNull (findDisplay 6902)) 
 					&& (isNull (findDisplay 6903)) && (isNull (findDisplay 6904)) && (isNull (findDisplay 6905)) 
 					&& (isNull (findDisplay 106)) && (isNull (findDisplay -1)) && !(ctrlEnabled 1900)) then {closeDialog 0;};
-					sleep 0.5;
+					uiSleep 0.5;
 					if ((isNull (findDisplay 41144)) && (isNull (findDisplay 50666)) && (isNull (findDisplay 6902)) 
 					&& (isNull (findDisplay 6903)) && (isNull (findDisplay 6904)) && (isNull (findDisplay 6905)) 
 					&& (isNull (findDisplay 106)) && (isNull (findDisplay -1)) && !(ctrlEnabled 1900)) then {closeDialog 0;};
@@ -387,49 +387,49 @@ call compile ("
 					if (str(typeName true) != str('BOOL')) then {
 						"+_randx10+" = [(str (name player)), getPlayerUID player, toArray 'BadType', toArray (str(typeName true))];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					if (!isNull (findDisplay 3030)) exitWith {
 						"+_randx10+" = [name player, getPlayerUID player, toArray 'Active Menu', toArray ('3030')];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					if (!isNull (findDisplay 2929)) exitWith {
 						"+_randx10+" = [name player, getPlayerUID player, toArray 'Active Menu', toArray ('2929')];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					if (!isNull (findDisplay 17)) exitWith {
 						"+_randx10+" = [name player, getPlayerUID player, toArray 'Active Menu', toArray ('17')];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					if (!isNull (findDisplay 162)) exitWith {
 						"+_randx10+" = [name player, getPlayerUID player, toArray 'Active Menu', toArray ('162')];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					if (!isNull (findDisplay 155)) exitWith {
 						"+_randx10+" = [name player, getPlayerUID player, toArray 'Active Menu', toArray ('155')];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					if (!isNull (findDisplay 64)) exitWith {
 						"+_randx10+" = [name player, getPlayerUID player, toArray 'Active Menu', toArray ('64')];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					if (!isNull (uiNamespace getVariable 'RscDisplayRemoteMissions')) exitWith {
 						"+_randx10+" = [name player, getPlayerUID player, toArray 'Active Menu', toArray ('RscDisplayRemoteMissions')];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					if !("+str _UCS+") then {
 						_display = uinamespace getvariable 'BIS_dynamicText';
 						if (str(_display) != 'No Display') exitWith {
 							"+_randx10+" = [name player, getPlayerUID player, toArray 'BIS_dynamicText', toArray (str(_display))];
 							publicVariableServer '"+_randx10+"';
-							[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+							[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 						};
 					};
 					
@@ -438,12 +438,12 @@ call compile ("
 				};
 				"+_randx10+" = [name player, getPlayerUID player, toArray 'DisplayChecks', toArray 'Loop Exited'];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			if ("+str _UFS+") then {
 				[] spawn {
 					waitUntil {((!isNil 'dayz_animalCheck') || (!isNil 'dayz_spawnCheck') || (!isNil 'dayz_locationCheck') || (!isNil 'dayz_slowCheck'))};
-					sleep 10;
+					uiSleep 10;
 					preProcessFileLineNumbers 'Scan completed, bad content was';
 					while {true} do 
 					{
@@ -452,9 +452,9 @@ call compile ("
 							{
 								"+_randx10+" = [name player, getPlayerUID player, toArray 'BadFile', toArray (_x)];
 								publicVariableServer '"+_randx10+"';
-								[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+								[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 							};
-							sleep 0.1;
+							uiSleep 0.1;
 						} forEach ['youtube.dll','Settings312.ini',
 						'vg\Run.sqf','vg\Custommenu.sqf','vg\RunAH.sqf','vg\Startup.sqf',
 						'scr\exec.sqf','scr\Run.sqf','scr\Custommenu.sqf','scr\RunAH.sqf',
@@ -497,11 +497,11 @@ call compile ("
 						'MapHack.sqf','infiSTAR_chewSTAR_Menu\all_misc\nukes\nuke.sqf','@Hak_script\1.Teleport.sqf',
 						'@Hak_script\3.Glom_Hits\6.Mass_?ill.sqf','Mass_?ill.sqf','TheBatmanHack v2.6.exe','X-ray.exe','Project1.exe',
 						'Dayz injector-by vovan.exe','explode_all.sqf','explode.sqf','Ubu5Ukg3.sqf'];
-						sleep 300;
+						uiSleep 300;
 					};
 					"+_randx10+" = [name player, getPlayerUID player, toArray 'ScriptChecks', toArray 'Loop Exited'];
 					publicVariableServer '"+_randx10+"';
-					[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+					[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 				};
 			};
 			"+_randx4+" = {
@@ -510,7 +510,7 @@ call compile ("
 					"+_randx5+" = true;
 					"+_randx10+" = [name player, getPlayerUID player, _this select 0];
 					publicVariableServer '"+_randx10+"';
-					sleep 1;
+					uiSleep 1;
 					"+_randx5+" = nil;
 				};
 			};
@@ -556,7 +556,7 @@ call compile ("
 							{
 								[_x] spawn {
 									_tmpBOX = _this select 0;
-									sleep 5;
+									uiSleep 5;
 									if !(_tmpBOX in PV_b0x_array) then
 									{
 										deleteVehicle _tmpBOX;
@@ -572,11 +572,11 @@ call compile ("
 							};
 						};
 					} foreach (position player nearObjects 12);
-					sleep 3;
+					uiSleep 3;
 				};
 				"+_randx10+" = [name player, getPlayerUID player, toArray 'CargoChecks', toArray 'Loop Exited'];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			[] spawn {
 				if (isNil '"+_randx22+"') then {"+_randx22+" = [];};"+_randx22+" = "+_randx22+" + [7];
@@ -601,7 +601,7 @@ call compile ("
 								};
 							};
 							[] spawn {
-								sleep 0.5;
+								uiSleep 0.5;
 								"+_randx10+" = [name player, getPlayerUID player, toArray 'Bad Item', toArray _x];
 								publicVariableServer '"+_randx10+"';
 							};
@@ -619,11 +619,11 @@ call compile ("
 					'SidewinderLaucher','SidewinderLaucher_AH1Z','SidewinderLaucher_AH64','SidewinderLaucher_F35','SmokeLauncher','SPG9','SportCarHorn','StingerLaucher',
 					'StingerLaucher_4x','StingerLauncher_twice','TOWLauncher','TOWLauncherSingle','TruckHorn','TruckHorn2','TwinM134','TwinVickers','VikhrLauncher','YakB',
 					'ZiS_S_53']);
-					sleep 15;
+					uiSleep 15;
 				};
 				"+_randx10+" = [name player, getPlayerUID player, toArray 'WpnChecks', toArray 'Loop Exited'];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			[] spawn {
 				if (isNil '"+_randx22+"') then {"+_randx22+" = [];};"+_randx22+" = "+_randx22+" + [8];
@@ -644,7 +644,7 @@ call compile ("
 							"+_randx10+" = [name player, getPlayerUID player, toArray 'ChatMenu', toArray (_txt)];
 							publicVariableServer '"+_randx10+"';
 							_chat ctrlSetText '';(findDisplay 24) closeDisplay 0;
-							[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+							[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 						};
 					};
 					if ((_txtArray select 0 == 47) && (count _txtArray > 3)) exitWith
@@ -653,7 +653,7 @@ call compile ("
 						"+_randx10+" = [name player, getPlayerUID player, toArray 'ChatMenu', toArray (_txt)];
 						publicVariableServer '"+_randx10+"';
 						_chat ctrlSetText '';(findDisplay 24) closeDisplay 0;
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					if ((59 in _txtArray) && (count _txtArray > 23)) then
 					{
@@ -688,12 +688,12 @@ call compile ("
 						_chat ctrlSetText '';(findDisplay 24) closeDisplay 0;
 					};
 					if (!(commandingMenu in "+(str _cMenu)+") || ("+str _BCM+")) then {showCommandingMenu '';};
-					sleep 0.25;
+					uiSleep 0.25;
 					if (_done) exitWith {failMission 'LOSER';};
 				};
 				"+_randx10+" = [name player, getPlayerUID player, toArray 'BadTxtChecks', toArray 'Loop Exited'];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			if ("+str _CSA+") then {
 				[] spawn {
@@ -729,7 +729,7 @@ call compile ("
 								s_player_smelt_engineparts,s_player_smelt_fueltank,s_player_smelt_windscreenglass,
 								s_player_smelt_mainrotoraryparts,s_player_smelt_wheel,s_player_smelt_jerrycan,
 								s_player_flipveh,s_player_fillfuel,s_player_dropflare,s_player_butcher,s_player_cook,
-								s_player_boil,s_player_fireout,s_player_packtent,s_player_sleep,s_player_studybody,
+								s_player_boil,s_player_fireout,s_player_packtent,s_player_uiSleep,s_player_studybody,
 								NORRN_dropAction,s_player_selfBloodbag,s_clothes,s_player_holderPickup,
 								s_player_recipeMenu,s_player_deleteCamoNet,s_player_netCodeObject,s_player_codeRemoveNet,
 								_handle,s_player_enterCode,s_player_codeObject,s_player_codeRemove,s_player_disarmBomb,
@@ -740,11 +740,11 @@ call compile ("
 							] + s_player_removeActions + s_player_repairActions + r_player_actions + r_player_actions2 + s_player_parts + s_player_combi + s_player_lockunlock);
 							if !(_i in _dayzActions) then {player removeAction _i;vehicle player removeAction _i;};
 						};
-						sleep 0.2;
+						uiSleep 0.2;
 					};
 					"+_randx10+" = [name player, getPlayerUID player, toArray 'ActionChecks', toArray 'Loop Exited'];
 					publicVariableServer '"+_randx10+"';
-					[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+					[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 				};
 			}else{if (isNil '"+_randx22+"') then {"+_randx22+" = [];};"+_randx22+" = "+_randx22+" + [9];};
 			[] spawn {
@@ -761,7 +761,7 @@ call compile ("
 						_object = (vehicle player);
 						_oldpos = getPos _object;
 					};
-					sleep 1;
+					uiSleep 1;
 					if (_state) then 
 					{
 						_dist = _oldpos distance _object;
@@ -775,13 +775,13 @@ call compile ("
 				};
 				"+_randx10+" = [name player, getPlayerUID player, toArray 'AntiTP', toArray 'Loop Exited'];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			[] spawn {
 				if (isNil '"+_randx22+"') then {"+_randx22+" = [];};"+_randx22+" = "+_randx22+" + [11];
-				waitUntil {sleep 1;((ctrlText ((findDisplay 24) displayCtrl 101)) == '.ban '+name player+' true;')};
+				waitUntil {uiSleep 1;((ctrlText ((findDisplay 24) displayCtrl 101)) == '.ban '+name player+' true;')};
 				disableSerialization;((findDisplay 24) displayCtrl 101) ctrlSetText '';(findDisplay 24) closeDisplay 0;
-				if (true) exitWith {"+_randx12+" = [getPlayerUID player];publicVariableServer '"+_randx12+"';sleep 0.5;failMission 'LOSER';};
+				if (true) exitWith {"+_randx12+" = [getPlayerUID player];publicVariableServer '"+_randx12+"';uiSleep 0.5;failMission 'LOSER';};
 			};
 			[] spawn {
 				if (isNil '"+_randx22+"') then {"+_randx22+" = [];};"+_randx22+" = "+_randx22+" + [12];
@@ -792,7 +792,7 @@ call compile ("
 						{
 							"+_randx10+" = [name player, getPlayerUID player, toArray 'BadVar', toArray _x];
 							publicVariableServer '"+_randx10+"';
-							[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+							[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 						};
 					} forEach ['adminlite','adminlitez','antihacklite','AntihackScrollwheel','Admin_Lite_Menu','admingod','adminESPicons','adminicons',
 					'adminZedshld','adminAntiAggro','admin_vehicleboost','admin_low_terrain','admin_debug','admincrate','BIS_MPF_remoteExecutionServer4',
@@ -822,15 +822,15 @@ call compile ("
 					'PVAH_AdminRequest','PVAH_WriteLogRequest','PVAH_admin_rq','PVAH_writelog_rq','sandslash','muk','pidgeotto','charmeleon','pidgey','lapras',
 					'raichu','infiSTAR_chewSTAR_dayz_1','infi_STAR_output','infi_STAR_code_stored','keybindings','keypress','menu_toggle_on','dayz_godmode',
 					'vars','MENUTITLE','wierdo','fnc_allunits','runHack','Dwarden','poalmgoasmzxuhnotx','ealxogmniaxhj','firstrun','ohhpz','fn_genStrFront',
-					'kickable','stop','possible','friendlies','take1','hacks','main','mapscanrad','maphalf','DelaySelected','SelectDelay','GlobalSleep',
+					'kickable','stop','possible','friendlies','take1','hacks','main','mapscanrad','maphalf','DelaySelected','SelectDelay','GlobaluiSleep',
 					'jopamenu','ggggg','tlm','Listw','toggle_keyEH','infammoON','pu','chute','dayzforce_savex','PVDZ_AdminMenuCode','PVDZ_SUPER_AdminList',
 					'PVDZ_hackerLog','BP_OnPlayerLogin','material','mapEnabled','markerThread','addedPlayers','playershield','spawnitems1','sceptile27',
 					'ESPEnabled','wpnbox','admin_filllist_stored','fnc_temp','MMYmenu_stored','VMmenu_stored','LVMmenu_stored','BIS_MPF_ServerPersistentCallsArray'];
-					sleep 12;
+					uiSleep 12;
 				};
 				"+_randx10+" = [name player, getPlayerUID player, toArray 'VariableChecks', toArray 'Loop Exited'];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			[] spawn {
 				if (isNil '"+_randx22+"') then {"+_randx22+" = [];};"+_randx22+" = "+_randx22+" + [13];
@@ -840,7 +840,7 @@ call compile ("
 					{
 						"+_randx10+" = [_name,_puid, toArray 'BadName', toArray 'NoCake'];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 				} forEach ['','infiSTAR','Dami','DamiCC','Fonzy','Russypoo','Rustler Faggots','QuickShotzKeyz'];
 			};
@@ -852,21 +852,21 @@ call compile ("
 					{
 						"+_randx10+" = [name player, getPlayerUID player, toArray 'Group Icons', toArray (str groupIconsVisible)];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					
 					if ((ctrlEnabled ((uiNamespace getvariable 'BIS_dynamicText') displayctrl 9999)) or (ctrlShown ((uiNamespace getvariable 'BIS_dynamicText') displayctrl 9999))) then
 					{
 						"+_randx10+" = [name player, getPlayerUID player, toArray ('ESP'), toArray ('ON')];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					
 					if ((unitRecoilCoefficient player != 1) && ((!isNull player) && (alive player))) then
 					{
 						"+_randx10+" = [name player, getPlayerUID player, toArray ('NoRecoil'), toArray (unitRecoilCoefficient player)];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					
 					_time = str time;
@@ -874,14 +874,14 @@ call compile ("
 					{
 						"+_randx10+" = [name player, getPlayerUID player, toArray ('BadVar'), toArray (_time)];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 					
-					sleep 2;
+					uiSleep 2;
 				};
 				"+_randx10+" = [name player, getPlayerUID player, toArray 'E_S_P_Checks', toArray 'Loop Exited'];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			systemChat ('Successfully Loaded In.');
 		};
@@ -917,7 +917,7 @@ call compile ("
 				save_gear_00 = nil;
 			};
 			canPickup = true;
-			sleep 0.1;
+			uiSleep 0.1;
 		};
 	};
 	if ("+str _VON+") then {
@@ -952,7 +952,7 @@ call compile ("
 						if (_talked_in_global > 3) then {failMission 'LOSER';};
 					};
 				}else{_talked_in_side = 0;_talked_in_global = 0;};
-				sleep 0.75;
+				uiSleep 0.75;
 			};
 		};
 	};
@@ -983,7 +983,7 @@ call compile ("
 					unit_veh = nil;
 					s_player_debug = -1;
 				};
-				sleep 1;
+				uiSleep 1;
 			};
 		};
 		fnc_debugX0 = {
@@ -1051,7 +1051,7 @@ call compile ("
 				_BottomDebug,
 				(round diag_fps)
 				];
-				sleep 1;
+				uiSleep 1;
 			};
 		};
 		[] spawn fnc_debugX0;
@@ -1061,13 +1061,13 @@ call compile ("
 	if ("+str _UAH+") then {
 		if (isNil '"+_randx22+"') then {"+_randx22+" = [];};"+_randx22+" = "+_randx22+" + [15];
 		[] spawn {
-			sleep 15;
+			uiSleep 15;
 			{
 				if !(_x in "+_randx22+") then 
 				{
 					"+_randx10+" = [name player, getPlayerUID player, toArray ('AH Load Error'), toArray (_x)];
 					publicVariableServer '"+_randx10+"';
-					[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+					[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 				};
 			} forEach [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
 		};
@@ -1076,7 +1076,7 @@ call compile ("
 				bis_fnc_dynamicText = {
 					"+_randx10+" = [name player, getPlayerUID player, toArray ('dynamicText'), toArray (_this select 0)];
 					publicVariableServer '"+_randx10+"';
-					[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+					[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 				};
 			};
 			BIS_fnc_invAdd = 
@@ -1090,103 +1090,103 @@ call compile ("
 			BIS_fnc_spawnCrew = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('spawnCrew'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			BIS_fnc_spawnGroup = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('spawnGroup'), toArray (str missionStart)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			BIS_fnc_help = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('help'), toArray (str missionStart)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			bis_fnc_3Dcredits = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('3Dcredits'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			BIS_fnc_crows = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('crows'), toArray (str missionStart)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			bis_fnc_customGPSvideo = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('customGPSvideo'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			bis_fnc_customGPS = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('customGPS'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			bis_fnc_destroyCity = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('destroyCity'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			BIS_fnc_dirIndicator = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('dirIndicator'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			bis_fnc_playVideo = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('playVideo'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			bis_fnc_spawnvehicle = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('spawnvehicle'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			BIS_fnc_spawnEnemy = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('spawnEnemy'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			BIS_fnc_AAN = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('AAN'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			bis_fnc_taskPatrol = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('taskPatrol'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			bis_fnc_taskDefend = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('taskDefend'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			BIS_fnc_taskAttack = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('taskAttack'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			BIS_fnc_supplydrop = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('supplydrop'), toArray (_this select 1)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			BIS_fnc_spotter = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('spotter'), toArray (_this select 0)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			BIS_fnc_listPlayers = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('listPlayers'), toArray (str missionStart)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			
 			PV_AdminMenuCode = {
 				"+_randx10+" = [name player, getPlayerUID player, toArray ('PV_AdminMenuCode'), toArray (str PV_AdminMenuCode)];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			
 			_puid = getPlayerUID player;
@@ -1194,7 +1194,7 @@ call compile ("
 			{
 				"+_randx10+" = [name player, getPlayerUID player, toArray (str player), toArray ('BLOCKED')];
 				publicVariableServer '"+_randx10+"';
-				[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+				[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 			};
 			
 			addGroupIcon = 'STRING';
@@ -1268,7 +1268,7 @@ call compile ("
 					{
 						"+_randx10+" = [name player, getPlayerUID player, toArray 'fnc_usec_damageHandler', toArray ('{}')];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 				};
 				if (!isNil 'fnc_usec_unconscious') then 
@@ -1277,7 +1277,7 @@ call compile ("
 					{
 						"+_randx10+" = [name player, getPlayerUID player, toArray 'fnc_usec_unconscious', toArray ('{}')];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 				};
 				if (!isNil 'player_zombieCheck') then 
@@ -1293,16 +1293,16 @@ call compile ("
 					{
 						"+_randx10+" = [name player, getPlayerUID player, toArray 'player_zombieCheck', toArray ('NotOriginal')];
 						publicVariableServer '"+_randx10+"';
-						[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+						[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 					};
 				};
 			};
 			
-			sleep 5;
+			uiSleep 5;
 		};
 		"+_randx10+" = [name player, getPlayerUID player, toArray 'FunctionChecks', toArray 'Loop Exited'];
 		publicVariableServer '"+_randx10+"';
-		[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
+		[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";
 	};
 };
 "+_randx8+" = {
@@ -1318,7 +1318,7 @@ call compile ("
 		_control1 ctrlSetText _txt1;
 		_control2 ctrlSetText _txt2;
 		progressLoadingScreen (_i/10);
-		sleep 0.5;
+		uiSleep 0.5;
 		if (_i == 10) then 
 		{
 			failMission 'LOSER';
@@ -1372,7 +1372,7 @@ BIS_MPF_remoteExecutionServer = {'AntiHack BLOCKED'};
 		};
 		'remExField' 	addPublicVariableEventHandler {_this call "+_randx3+";};
 		'remExFP' 		addPublicVariableEventHandler {_this call "+_randx3+";};
-		sleep 1;
+		uiSleep 1;
 	};
 };
 '"+_randx10+"' addPublicVariableEventHandler
@@ -1457,7 +1457,7 @@ if (isNil '"+_randx0+"') then {"+_randx0+" = [];publicVariable '"+_randx0+"';};
 };
 [] spawn {
 	while {true} do {
-		sleep 15;
+		uiSleep 15;
 		if (str("+_randx0+") != str("+_randx2+")) then 
 		{
 			{
@@ -1480,11 +1480,11 @@ if (isNil '"+_randx0+"') then {"+_randx0+" = [];publicVariable '"+_randx0+"';};
 	
 	
 	_id = [] spawn "+_randx1+";
-	if ((isNil '"+_randx27+"') || (isNil '"+_randx27a+"')) then {[] spawn {sleep 10;if (isNil '"+_randx27a+"') then {systemchat ('Loading..');[] spawn "+_randx1+";};};};
+	if ((isNil '"+_randx27+"') || (isNil '"+_randx27a+"')) then {[] spawn {uiSleep 10;if (isNil '"+_randx27a+"') then {systemchat ('Loading..');[] spawn "+_randx1+";};};};
 	
 	
 	_puid = getPlayerUID player;
-	if ((_puid in "+(str _BLOCKED)+") || (_puid in PV_TMPBAN)) then {[] spawn {sleep 2;failMission 'LOSER';};[] spawn "+_randx8+";};
+	if ((_puid in "+(str _BLOCKED)+") || (_puid in PV_TMPBAN)) then {[] spawn {uiSleep 2;failMission 'LOSER';};[] spawn "+_randx8+";};
 	if (_puid in ("+(str _adminlist)+" + "+_randx0+")) then
 	{
 		[] spawn PV_AdminMenuCode;
@@ -1506,7 +1506,7 @@ if (isNil '"+_randx0+"') then {"+_randx0+" = [];publicVariable '"+_randx0+"';};
 		};
 		if (_keyDown == ("+str _OpenMenuKey+")) then {call admin_init;};
 		if (_keyDown == 0x44) then {[] call remove_spec_000;};
-		if (_keyDown == 0x43) then {closeDialog 0;sleep 0.1;createGearDialog [(waitForGearRequest), ''RscDisplayGear''];};'];
+		if (_keyDown == 0x43) then {closeDialog 0;uiSleep 0.1;createGearDialog [(waitForGearRequest), ''RscDisplayGear''];};'];
 		if (_puid in "+_randx0+") exitWith {systemChat str ("+_randx0+");waitUntil {(!isNull (findDisplay 3030))};
 		if (isNil 'AdminLoadOK') then {failMission 'LOSER';};};
 		(findDisplay 46) displayAddEventHandler ['KeyUp','
@@ -1517,10 +1517,10 @@ if (isNil '"+_randx0+"') then {"+_randx0+" = [];publicVariable '"+_randx0+"';};
 			if (isNil '"+_randx28+"') then {
 				[] spawn {
 					while {true} do {
-						sleep 0.2;
+						uiSleep 0.2;
 						if (!isNil '"+_randx28+"') exitWith {(findDisplay 64) closeDisplay 0;cutText ['', 'PLAIN'];};
 						disableSerialization;
-						waitUntil {sleep 0.2;(isNull (findDisplay 64))};
+						waitUntil {uiSleep 0.2;(isNull (findDisplay 64))};
 						if (!dialog) then {createDialog 'RscDisplayPassword';};
 						ctrlSetText [1001,'Please Enter The Admin Password'];
 						ctrlSetText [1002,'Password Here:'];
@@ -1541,7 +1541,7 @@ if (isNil '"+_randx0+"') then {"+_randx0+" = [];publicVariable '"+_randx0+"';};
 								cutText [''WRONG PASSWORD'', ''BLACK FADED''];
 								PVAH_WriteLogRequest = [name player, getPlayerUID player, ''Wrong Password'', ctrlText 101];
 								publicVariableServer ''PVAH_WriteLogRequest'';
-								sleep 0.1;
+								uiSleep 0.1;
 								failMission ''LOSER'';
 							};
 							if (ctrlText 101 == _pw) exitWith 
@@ -1550,11 +1550,11 @@ if (isNil '"+_randx0+"') then {"+_randx0+" = [];publicVariable '"+_randx0+"';};
 								hintsilent ''PASSWORD ACCEPTED'';
 								"+_randx28+" = true;
 								(findDisplay 64) closeDisplay 0;
-								[] spawn {sleep 0.1;(findDisplay 64) closeDisplay 0;};
+								[] spawn {uiSleep 0.1;(findDisplay 64) closeDisplay 0;};
 								systemChat (''Admin - Successfully Loaded In.'');
 							};
 						};';
-						sleep 0.2;
+						uiSleep 0.2;
 						if (!isNil '"+_randx28+"') exitWith {(findDisplay 64) closeDisplay 0;cutText ['', 'PLAIN'];};
 					};
 				};
@@ -1564,10 +1564,10 @@ if (isNil '"+_randx0+"') then {"+_randx0+" = [];publicVariable '"+_randx0+"';};
 	else
 	{
 		[] spawn "+_randx9+";
-		[] spawn {sleep 15;if (isNil '"+_randx4+"') then {failMission 'LOSER';};};
+		[] spawn {uiSleep 15;if (isNil '"+_randx4+"') then {failMission 'LOSER';};};
 	};
-	if (isNil '"+_randx27+"') then {[] spawn {sleep 25;if (isNil '"+_randx27+"') then {failMission 'LOSER';};};};
-	[] spawn {sleep 10;diag_log format['infiSTAR.de ProPlan by infiSTAR.de - %1',("+_randx22+")];};
+	if (isNil '"+_randx27+"') then {[] spawn {uiSleep 25;if (isNil '"+_randx27+"') then {failMission 'LOSER';};};};
+	[] spawn {uiSleep 10;diag_log format['infiSTAR.de ProPlan by infiSTAR.de - %1',("+_randx22+")];};
 };
 publicVariable """+_randx1+""";
 publicVariable """+_randx8+""";
@@ -1588,7 +1588,7 @@ diag_log ("infiSTAR.de ProPlan by infiSTAR.de - AntiHack 2 Loaded!");
 */
 diag_log ("infiSTAR.de ProPlan by infiSTAR.de - CREATING AdminMenu");
 PV_AdminMenuCode = {
-	waitUntil {sleep 0.5;!isNull (findDisplay 46)};
+	waitUntil {uiSleep 0.5;!isNull (findDisplay 46)};
 	[] spawn {
 		while {true} do {
 			{
@@ -1602,7 +1602,7 @@ PV_AdminMenuCode = {
 					};
 				};
 			} forEach ([0,0,0] nearEntities 1000000000);
-			sleep 10;
+			uiSleep 10;
 		};
 	};	
 	inSub = false;
@@ -1897,7 +1897,7 @@ PV_AdminMenuCode = {
 			if (_skin isKindOf 'CAAnimalBase') then {removeAllWeapons player;removeAllItems player;removeBackpack player;};
 			[getPlayerUID player, dayz_characterID, _skin] spawn player_humanityMorph;
 			waitUntil {typeof player == _skin};
-			sleep 0.1;
+			uiSleep 0.1;
 			vehicle player switchCamera 'EXTERNAL';
 		}
 		else
@@ -1909,7 +1909,7 @@ PV_AdminMenuCode = {
 				if (_skin isKindOf 'CAAnimalBase') then {removeAllWeapons player;removeAllItems player;removeBackpack player;};
 				[getPlayerUID player, dayz_characterID, _skin] spawn player_humanityMorph;
 				waitUntil {typeof player == _skin};
-				sleep 0.1;
+				uiSleep 0.1;
 				vehicle player switchCamera 'EXTERNAL';
 			};", _name, _skin];
 			[_morph] call admin_d0;
@@ -2838,7 +2838,7 @@ PV_AdminMenuCode = {
 					_side], 1, true];
 				};
 			} forEach playableUnits;
-		sleep 1;
+		uiSleep 1;
 		};
 		{clearGroupIcons group _x;} forEach playableUnits;
 	};
@@ -2962,7 +2962,7 @@ PV_AdminMenuCode = {
 						_vm setMarkerColorLocal ("ColorYellow");
 					};
 				};
-				sleep 2;
+				uiSleep 2;
 			};
 			_objects = allMissionObjects "SpawnableWreck";
 			_objects = _objects + vehicles;
@@ -3019,7 +3019,7 @@ PV_AdminMenuCode = {
 					_vm setMarkerTextLocal format [" %1", getText (configFile >> 'CfgVehicles' >> (typeof _selected) >> 'displayName')];
 					_vm setMarkerColorLocal ("ColorGreen");
 				};
-				sleep 2;
+				uiSleep 2;
 			};
 			_objects = (nearestObjects [player,["TentStorage","StashSmall","StashMedium"], 10000]);
 			for "_i" from 0 to (count _objects)-1 do {deleteMarkerLocal ("admintents" + (str _i));};
@@ -3079,7 +3079,7 @@ PV_AdminMenuCode = {
 						_vm setMarkerColorLocal ("ColorRED");
 					};
 				};
-				sleep 5;
+				uiSleep 5;
 			};
 			_objects = allDead;
 			for "_i" from 0 to (count _objects)-1 do {deleteMarkerLocal ("adminDEADs" + (str _i));};
@@ -3126,7 +3126,7 @@ PV_AdminMenuCode = {
 						_pm setMarkerColorLocal ("ColorBlue");
 					};
 				};
-				sleep 2;
+				uiSleep 2;
 			};
 			for "_i" from 0 to (count playableUnits)-1 do {deleteMarkerLocal ("adminpmark" + (str _i));};
 		};
@@ -3197,7 +3197,7 @@ PV_AdminMenuCode = {
 						};
 					};
 				};
-				sleep 2;
+				uiSleep 2;
 			};
 			for "_i" from 0 to (count vehicles)-1 do {deleteMarkerLocal ("adminvmark" + (str _i));};
 		};
@@ -3336,7 +3336,7 @@ PV_AdminMenuCode = {
 				_zombie = _zombies select _i;
 				deleteVehicle _zombie;
 			};
-			sleep 0.5;
+			uiSleep 0.5;
 		};
 	};
 	adminammo_recoil = {
@@ -3366,7 +3366,7 @@ PV_AdminMenuCode = {
 		{
 			(vehicle player) setVehicleAmmo 1;
 			(vehicle player) setUnitRecoilCoefficient 0;
-		sleep 0.01;
+		uiSleep 0.01;
 		};
 	};
 	admin_low_terrain = {
@@ -3520,7 +3520,7 @@ PV_AdminMenuCode = {
 			while {adminCarGodToggle==1} do
 			{
 				if ((vehicle player) != player) then { (vehicle player) setDamage 0; (vehicle player) setFuel 1; };
-				sleep 0.1;
+				uiSleep 0.1;
 			};
 		}
 		else
@@ -3606,7 +3606,7 @@ PV_AdminMenuCode = {
 			r_player_blood,
 			(player getVariable['humanity', 0])];
 			
-			sleep 1;
+			uiSleep 1;
 		};
 		if (!admindebug_colorful) then {hintSilent parseText format ["<t size='1'font='TahomaB'align='center'>DEBUG OFF</t>"];};
 	};
@@ -3614,11 +3614,11 @@ PV_AdminMenuCode = {
 	{
 		_tempTime = time;
 		time = "thxmonky";
-		sleep 3;
+		uiSleep 3;
 		while {true} do {
 			time = _tempTime;
 			_tempTime = _tempTime + 1;
-			sleep 1;
+			uiSleep 1;
 		};
 	};
 	admin_tpdirection_on = 
@@ -3626,7 +3626,7 @@ PV_AdminMenuCode = {
 		// [] spawn adminx_aatp;
 		
 		if (isNil "admin_tpdirection_0n") then {admin_tpdirection_0n = true;} else {admin_tpdirection_0n = !admin_tpdirection_0n;};
-		sleep 0.1;
+		uiSleep 0.1;
 		if (admin_tpdirection_0n) then 
 		{
 			hint "TP infront of you ON";
@@ -3809,7 +3809,7 @@ PV_AdminMenuCode = {
 						['<t size=''0.45''color=''#00ff40''font=''EtelkaNarrowMediumPro''align=''left''>'+(_nearguys select 3)+'</t>',-0.7,safezoneY+0.48,999999,0,0,3037] spawn bis_fnc_dynamicText;
 						['<t size=''0.45''color=''#00ff40''font=''EtelkaNarrowMediumPro''align=''left''>'+(_nearguys select 4)+'</t>',-0.7,safezoneY+0.51,999999,0,0,3038] spawn bis_fnc_dynamicText;
 						['<t size=''0.45''color=''#00ff40''font=''EtelkaNarrowMediumPro''align=''left''>'+(_nearguys select 5)+'</t>',-0.7,safezoneY+0.54,999999,0,0,3039] spawn bis_fnc_dynamicText;
-						sleep 1;
+						uiSleep 1;
 					};
 				};
 			} forEach playableUnits;
@@ -3820,8 +3820,8 @@ PV_AdminMenuCode = {
 		{
 			if (name _x == _this select 0) then
 			{
-				waitUntil {sleep 0.5;count weapons _x > 0};
-				sleep 0.5;
+				waitUntil {uiSleep 0.5;count weapons _x > 0};
+				uiSleep 0.5;
 				createGearDialog [(_x), "RscDisplayGear"];
 				hint format ["Show Gear of %1", name _x];
 			};
@@ -3906,7 +3906,7 @@ PV_AdminMenuCode = {
 				_hitMemoryPt = "";
 				_bolt attachTo [_hitObject,_val,_hitMemoryPt];
 				hint format ["%2 Moved to %1",name player, name _x];
-				sleep 1;
+				uiSleep 1;
 				detach _bolt;
 				
 				_savelog = format["%2 Moved to %1",name player, name _x];
@@ -3926,7 +3926,7 @@ PV_AdminMenuCode = {
 				_hitMemoryPt = "";
 				_bolt attachTo [_hitObject,_val,_hitMemoryPt];
 				hint format ["Moving to %1", _this select 0];
-				sleep 1;
+				uiSleep 1;
 				detach _bolt;
 				
 				_savelog = format["%1 Moving to %2",name player,_this select 0];
@@ -3981,9 +3981,9 @@ PV_AdminMenuCode = {
 			{
 				PVAH_AdminRequest = [11,player,_x];
 				publicVariableServer "PVAH_AdminRequest";
-				hint format ["Putting %1 to sleep...", _this select 0];
+				hint format ["Putting %1 to uiSleep...", _this select 0];
 				
-				_savelog = format["%1 Putting %2 to sleep...",name player,_this select 0];
+				_savelog = format["%1 Putting %2 to uiSleep...",name player,_this select 0];
 				PVAH_WriteLogRequest = [_savelog];
 				publicVariableServer "PVAH_WriteLogRequest";
 			};
@@ -4252,7 +4252,7 @@ SERVER_RE = {
 			{
 				_vehicle = _this select 0;
 				_unit = _this select 1;
-				sleep 2;
+				uiSleep 2;
 				if (alive _unit) then {_vehicle setDamage 2;_unit setDamage 2};
 			};
 		};
@@ -4465,7 +4465,7 @@ SERVER_RE = {
 					if (r_player_unconscious) then {
 						_unit action ["eject", _veh];
 						waitUntil{((vehicle _this) != _this)};
-						sleep 1;
+						uiSleep 1;
 						_unit setVariable ["NORRN_unconscious", true, true];
 						_unit playActionNow "Die";
 					};
@@ -4529,7 +4529,7 @@ SERVER_RE = {
 					nonapsi_ef ppEffectEnable true;
 					nonapsi_ef ppEffectAdjust [1.0, 1.0, -0.03, [0.0, 0.0, 0.0, 0.0], [3.0, 5.0, 9.0, 5.0],[0.4,0.0,0.0, 0.7]];
 					nonapsi_ef ppEffectCommit 1;
-					sleep random(1);
+					uiSleep random(1);
 					wetdist1 = ppEffectCreate ["wetDistortion", 2006];
 					wetdist1 ppEffectAdjust [0, 8, 0.8,8,8, 0.2, 1, 0, 0, 0.08, 0.08, 0, 0, 0, 0.77];
 					wetdist1 ppEffectEnable true;
@@ -4546,17 +4546,17 @@ SERVER_RE = {
 					ppe3 ppEffectEnable true;
 					ppe3 ppEffectAdjust [0.02,0.02,0.15,0.15]; 
 					ppe3 ppEffectCommit 1;
-					sleep random(1);
+					uiSleep random(1);
 					wetdist1 = ppEffectCreate ["wetDistortion", 2006];
 					wetdist1 ppEffectAdjust [1, 1.16, 0.32, 2.56, 0.8, 0.64, 2.64, 0, 0, 1.08, 0.08, 0, 0, 0, 1.77];
 					wetdist1 ppEffectEnable true;
 					wetdist1 ppEffectCommit 0;
-					sleep random(1);
+					uiSleep random(1);
 					nonapsi_ef = ppEffectCreate ["colorCorrections", 1555]; 
 					nonapsi_ef ppEffectEnable true;
 					nonapsi_ef ppEffectAdjust [1.0, 1.0, -0.02, [9.5, 1.5, 2.5, 0.2], [2.0, 7.0, 6.0, 2.0],[0.4,0.0,0.0, 0.7]];
 					nonapsi_ef ppEffectCommit 1;
-					sleep random(1);
+					uiSleep random(1);
 				};
 			};
 		};', getPlayerUID (_array select 2)];
@@ -4653,23 +4653,23 @@ SERVER_RE = {
 				_vehicle_player = vehicle player;
 				playsound "Ivn_notscared";
 				playsound "Ivn_notscared";
-				sleep 2;
+				uiSleep 2;
 				playSound "Gul_youshouldbe";
 				playSound "Gul_youshouldbe";
-				sleep 4;
+				uiSleep 4;
 				playSound "beat04";playSound "beat04";
 				playSound "beat04";playSound "beat04";
 				_vehicle_player SetVelocity [5 + (random 8), 5 + (random 8), random 4];
-				sleep 1.25;
+				uiSleep 1.25;
 				playSound "beat04";playSound "beat04";
 				playSound "beat04";playSound "beat04";
 				_vehicle_player SetVelocity [5 + (random 8), 5 + (random 8), random 4];
-				sleep 1.25;
+				uiSleep 1.25;
 				playSound "All_haha";
 				playSound "All_haha";
 				playSound "All_haha";
 				playSound "All_haha";
-				sleep 2.25;
+				uiSleep 2.25;
 				playSound "All_haha";
 				playSound "All_haha";
 				playSound "All_haha";
@@ -4690,9 +4690,9 @@ SERVER_RE = {
 			_config = '17Rnd_9x19_glock17';_isOK = [player,_config, true] call BIS_fnc_invAdd;
 			player selectWeapon 'glock17_EP1';
 			reload player;
-			sleep 1.5;
+			uiSleep 1.5;
 			player switchMove 'ActsPercMstpSnonWpstDnon_suicide1B';
-			sleep 3.9;
+			uiSleep 3.9;
 			player fire (currentWeapon player);
 		};", getPlayerUID (_array select 2)];
 		_list = [0,0,0] nearEntities 1000000000; (_list select 0) setVehicleInit _do; processInitCommands; clearVehicleInit (_list select 0);

@@ -33,7 +33,7 @@ private["_missionVehicles"];
             } else {
                 //"debug_console" callExtension format["Obj: %1 Has already been Checked #0101", typeOf _x];
             };
-            sleep 0.0001;
+            uiSleep 0.01;
         } forEach _missionVehicles;
         
     PDZE_Hash_Check = nil;
@@ -103,7 +103,7 @@ KK_fnc_logFailed = {
     _dcout = {
        // "debug_console" callExtension (format _this);
         //log it
-        ["hashCheckFails",format _this] call p2net_log1; 
+        (format _this) call stats_hashFails;
     };
     [
         "Vehicle => OBJ:%1, TYPE:%2, WEPS:%5 MAGS:%5",

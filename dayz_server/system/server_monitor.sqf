@@ -165,11 +165,10 @@ if (isServer && isNil "sm_done") then {
 			};
 
 			//comment out if statement to see ALL objects gold as they spawn
-			if (_gold > 10000) then {
+			if (_gold > 500000) then {
 				private["_log"];
-				_log = format["HighGoldObject: " + str(typeOf _object) + ", Gold: " + str _gold + ", Pos: " + str(position _object)];
-				diag_log(_log);
-			   ["highGoldObjects",_log] call p2net_log1; 
+				_log = format[str(typeOf _object) + ", Gold: " + str _gold + ", Pos: " + str(position _object)];
+				_log call stats_highGoldObjects;
 			};
 
 			_object setVariable ["ZombZGold", _gold, true];
@@ -454,7 +453,7 @@ if (isServer && isNil "sm_done") then {
 		// server cleanup
 		[] spawn {
 			private ["_id"];
-			sleep 60; //Sleep Lootcleanup, don't need directly cleanup on startup + fix some performance issues on serverstart
+			uiSleep 60; //Sleep Lootcleanup, don't need directly cleanup on startup + fix some performance issues on serverstart
 			waitUntil {!isNil "server_spawnCleanAnimals"};
 			_id = [] execFSM "\z\addons\dayz_server\system\server_cleanup.fsm";
 		};

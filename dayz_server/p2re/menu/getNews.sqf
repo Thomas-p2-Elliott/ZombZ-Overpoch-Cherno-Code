@@ -2,7 +2,7 @@ private ["_start","_end","_result"];
 		diag_log("[P2ARMANET] News Loading.");
 		"Arma2Net.Unmanaged" callExtension "Load";
 		diag_log("[P2ARMANET] News Loading..");
-		sleep 10;
+		uiSleep 10;
 		diag_log("[P2ARMANET] News Loading...");
 
 		_start = 'lbAdd [_zombzText, ""';

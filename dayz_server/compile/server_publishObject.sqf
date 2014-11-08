@@ -12,9 +12,7 @@ diag_log ("PUBLISH: Attempt " + str(_this));
 
 if ((_num) < (p2pn - 1)) exitWith {
 	0 = _object spawn KK_fnc_logFailed;
-	_publishLog = format ["Failed Spawn: %1",_this];
-	[format["%1_%2",P2DZ_serverName,"publishLog"],
-	_publishLog] call p2net_log1; 
+	_publishLog call stats_badPublishLog;
 };
 
 /*  	dayz_characterID,	_object,			_worldspace,		_class,						_playerUID*/
@@ -23,8 +21,7 @@ _allowed = [(_this select 0),(_this select 1),(_this select 2),(_this select 3),
 if (!_allowed) exitWith {
 	0 = _object spawn KK_fnc_logFailed;
 	_publishLog = format ["Failed Spawn: %1",_this];
-	[format["%1_%2",P2DZ_serverName,"publishLog"],
-	_publishLog] call p2net_log1;  
+	_publishLog call stats_badPublishLog;
 };
 
 diag_log(diag_log ("PUBLISH: Success " + str(_this)));

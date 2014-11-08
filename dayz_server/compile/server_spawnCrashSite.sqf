@@ -41,7 +41,7 @@ while {1 == 1} do {
 
 	// Apprehensive about using one giant long sleep here given server time variances over the life of the server daemon
 	while {time < _timeToSpawn} do {
-		sleep 5;
+		uiSleep 5;
 	};
 
 	_spawnRoll = random 1;

@@ -115,7 +115,6 @@ if (!isNull(_newObject)) then {
 };
 
 _log = format["%1", str _this];
-[format["%1_%2",P2DZ_serverName,"lockUnlockLog"],
-_log] call p2net_log1; 
+_log call stats_logUnlock;
 
 deleteVehicle _obj;
