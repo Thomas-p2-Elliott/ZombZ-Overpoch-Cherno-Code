@@ -31,7 +31,6 @@ switch (_iClass) do
 
 
 		_canType = _itemTypes select _index;
-		_canType = [_canType,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_canType] call p2_checkWepBpslot;
 
 		if (!isNil '_canType') then {
@@ -98,7 +97,6 @@ switch (_iClass) do
 	    _index = floor(random _cntWeights);
 		_index = _weights select _index;
 		_canType = _itemTypes select _index;
-		_canType = [_canType,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
 		_item addMagazineCargoGlobal [_canType,1];
 		if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot_small: single: %1", (_canType)]; };
@@ -130,7 +128,6 @@ switch (_iClass) do
 		_iItem = _itemTypes select _index;
 
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
 		_item addWeaponCargoGlobal [_iItem,1];
 		if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot_small: cfglootweapon: %1", (_iItem)]; };
@@ -139,7 +136,6 @@ switch (_iClass) do
 	case "weapon":
 	{
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
 		_item addWeaponCargoGlobal [_iItem,1];
 		if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot_small: weapon: %1", (_iItem)]; };
@@ -148,7 +144,6 @@ switch (_iClass) do
 	{
 		//Item is one magazine
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
 		_item addMagazineCargoGlobal [_iItem,1];
 		if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot_small: magazine: %1", (_iItem)]; };

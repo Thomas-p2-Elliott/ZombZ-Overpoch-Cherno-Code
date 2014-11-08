@@ -42,7 +42,6 @@ switch (_iClass) do {
 				};
 				if (_tQty > 0) then {
 					if (!(_canType in _uniq)) then {
-						_canType = [_canType,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 						[_canType] call p2_checkWepBpslot;
 						_item addMagazineCargoGlobal [_canType,1];
 						if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: defaultClass: can %1", _canType]; };
@@ -52,7 +51,6 @@ switch (_iClass) do {
 				};
 			};
 			if ((_iItem != "") && (isClass(configFile >> "CfgWeapons" >> _iItem))) then {
-				_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 				[_iItem] call p2_checkWepBpslot;
 
 				if (_iItem == "Chainsaw") then {
@@ -75,7 +73,6 @@ switch (_iClass) do {
 					_item2 = _itemTypes select _index;
 
 					if ((_item2 != "") && (isClass(configFile >> "CfgWeapons" >> _item2))) then {
-						_item2 = [_item2,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 
 						if (_iClass == "MeleeWeaps") then {
 
@@ -136,7 +133,6 @@ switch (_iClass) do {
 	    _index = floor(random _cntWeights);
 		_index = _weights select _index;
 		_canType = _itemTypes select _index;
-		_canType = [_canType,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_canType] call p2_checkWepBpslot;
 		_item addMagazineCargoGlobal [_canType,1];
 
@@ -157,7 +153,6 @@ switch (_iClass) do {
 	    _index = floor(random _cntWeights);
 		_index = _weights select _index;
 		_iItem = _itemTypes select _index;
-		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
 
 		_item = createVehicle [_iItem, _iPos, [], _radius, "CAN_COLLIDE"];
@@ -185,7 +180,6 @@ switch (_iClass) do {
 		_index = _weights select _index;
 		_iItem = _itemTypes select _index;
 
-		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
 
 		if (_iClass == "MeleeWeaps") then {
@@ -222,7 +216,6 @@ switch (_iClass) do {
 	{
 		//Item is a weapon, add it && a random quantity of magazines
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
 
 		if (_iClass == "MeleeWeaps") then {
@@ -257,7 +250,6 @@ switch (_iClass) do {
 	{
 		//Item is a weapon, && spawns no mags
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
 
 		if (_iItem == "Chainsaw") then {
@@ -273,13 +265,11 @@ switch (_iClass) do {
 	{
 		//Item is one magazine
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
-		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
 		_item addMagazineCargoGlobal [_iItem,1];
 		if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: magazine: %1", _iItem]; };
 	};
 	case "object": {
-		_iItem = [_iItem,_iPos] call p2_lootCheck; //Checks loot pos and changes loot item if needed
 		[_iItem] call p2_checkWepBpslot;
 
 		if (_iItem == "Chainsaw") then {

@@ -62,7 +62,7 @@ _bias = (_bias + random(100 - _bias)) / 100;
 					_index = _weights select _index;
 					_itemType = _itemTypes select _index;
 
-					//(_itemType select 1) call p2_lootCheck;
+					_itemType = [_itemType select 0, ([_itemType select 1,_iPos] call p2_lootCheck), _itemType select 2];
 
 					[_itemType select 0, _itemType select 1 , _iPos, 0.0] call spawn_loot;
 					if (P2DZE_debugLoot) then { diag_log (format["SpawnLoot: Building: %4, LootType: %2/%3",_iPos,_itemType select 0,_itemType select 1,_type]); };
@@ -101,7 +101,7 @@ _positionsSmall = _posSmall call _ShuffleArray;
 					_index = _weights select _index;
 					_itemType = _itemTypesSmall select _index;
 
-					//(_itemType select 1) call p2_lootCheck;
+					_itemType = [_itemType select 0, ([_itemType select 1,_iPos] call p2_lootCheck), _itemType select 2];
 
 					if (P2DZE_debugLoot) then { diag_log format["building_spawnLoot.sqf:SpawnLootSmall: _itemType %1", _itemType]; };
 
