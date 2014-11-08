@@ -6,7 +6,7 @@ _iItem = "";
 
 while {true} do {
 
-	if (cursorTarget isKindOf "WeaponHolder") then {
+	if (cursorTarget isKindOf "WeaponHolder" && ((player distance cursorTarget) < 3.5)) then {
 		_weaponHolderContents = getMagazineCargo cursorTarget;
 		_item = _weaponHolderContents select 0;
 		_iItem = _item select 0;
