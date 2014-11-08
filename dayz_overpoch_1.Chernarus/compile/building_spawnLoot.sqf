@@ -17,7 +17,7 @@ _lootChance = getNumber (_config >> "lootChance");
 
 //_countPositions = count _pos;
 _qty = 0; // effective quantity of spawned weaponholder
-_lootSpawnBias = 80; //67 between 50 && 100. The lower it is, the lower chance some of the lootpiles will spawn
+_lootSpawnBias = 50; //67 between 50 && 100. The lower it is, the lower chance some of the lootpiles will spawn
 
 
 // shuffles an array
@@ -61,6 +61,9 @@ _bias = (_bias + random(100 - _bias)) / 100;
 					_index = floor(random _cntWeights);
 					_index = _weights select _index;
 					_itemType = _itemTypes select _index;
+
+					//(_itemType select 1) call p2_lootCheck;
+
 					[_itemType select 0, _itemType select 1 , _iPos, 0.0] call spawn_loot;
 					if (P2DZE_debugLoot) then { diag_log (format["SpawnLoot: Building: %4, LootType: %2/%3",_iPos,_itemType select 0,_itemType select 1,_type]); };
 					dayz_currentWeaponHolders = dayz_currentWeaponHolders +1;
@@ -96,11 +99,9 @@ _positionsSmall = _posSmall call _ShuffleArray;
 					_cntWeights = count _weights;
 					_index = floor(random _cntWeights);
 					_index = _weights select _index;
-
-					if (P2DZE_debugLoot) then { diag_log format["building_spawnLoot.sqf:SpawnLootSmall: _itemTypesSmall %1", _itemTypesSmall]; };
-					if (P2DZE_debugLoot) then { diag_log format["building_spawnLoot.sqf:SpawnLootSmall: _index %1", _index]; };
-
 					_itemType = _itemTypesSmall select _index;
+
+					//(_itemType select 1) call p2_lootCheck;
 
 					if (P2DZE_debugLoot) then { diag_log format["building_spawnLoot.sqf:SpawnLootSmall: _itemType %1", _itemType]; };
 
