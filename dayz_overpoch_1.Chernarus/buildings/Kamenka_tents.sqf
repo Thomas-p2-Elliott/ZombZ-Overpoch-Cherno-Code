@@ -11,7 +11,7 @@ if (true) then
 _vehicle_7 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_tent2_west", [1082.2245, 2401.3772, 2.0980835e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_tent2_west", [1082.2245, 2401.3772, 2.0980835e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_7 = _this;
   _this setDir 67.477119;
   _this setPos [1082.2245, 2401.3772, 2.0980835e-005];
@@ -20,7 +20,7 @@ if (true) then
 _vehicle_8 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_tent_east", [1080.0231, 2448.821, 2.4318695e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_tent_east", [1080.0231, 2448.821, 2.4318695e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_8 = _this;
   _this setDir -27.383455;
   _this setPos [1080.0231, 2448.821, 2.4318695e-005];
@@ -140,7 +140,7 @@ if (true) then
 _vehicle_61 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_tent_east", [1096.5505, 2457.6589, 1.5258789e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_tent_east", [1096.5505, 2457.6589, 1.5258789e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_61 = _this;
   _this setDir -27.383455;
   _this setPos [1096.5505, 2457.6589, 1.5258789e-005];
@@ -176,7 +176,7 @@ if (true) then
 _vehicle_88 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_tent_east", [1101.3138, 2447.6538, 1.4305115e-006], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_tent_east", [1101.3138, 2447.6538, 1.4305115e-006], [], 0, "CAN_COLLIDE"];
   _vehicle_88 = _this;
   _this setDir -27.383455;
   _this setPos [1101.3138, 2447.6538, 1.4305115e-006];
@@ -185,7 +185,7 @@ if (true) then
 _vehicle_90 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_tent_east", [1085.0081, 2439.1653, 1.0490417e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_tent_east", [1085.0081, 2439.1653, 1.0490417e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_90 = _this;
   _this setDir -27.383455;
   _this setPos [1085.0081, 2439.1653, 1.0490417e-005];
