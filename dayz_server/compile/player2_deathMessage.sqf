@@ -135,6 +135,8 @@ if (isNil "_distance") then {
 			_killerDistance = 100;
 		};
 	};
+} else {
+	_killerDistance = _distance;	
 };
 
 _killerDistance = floor(_killerDistance);

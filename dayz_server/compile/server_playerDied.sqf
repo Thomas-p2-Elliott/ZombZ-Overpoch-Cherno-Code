@@ -16,8 +16,7 @@ _newObject call {
     ];
 }; 
 
-diag_log(format["P2DEBUG: %1: Input: %2","playerDied",_this]);
-diag_log(format["P2DEBUG: %1: _pGold: %2","playerDied",_pGold]);
+//diag_log(format["P2DEBUG: %1: Input: %2","playerDied",_this]);
 
 //Enable Debug Messages?
 P2DZ_DeathMessage_Debug = true;
@@ -46,7 +45,7 @@ if (((count _this) >= 6) && {(typeName (_this select 6)) == (typeName (0))} && {
 	_pGold = 		_this select 6;
 	
 	//debugging line
-	diag_log(format["P2DEBUG: %1: ZombZGold: %2","playerDied",_pGold]);
+	//diag_log(format["P2DEBUG: %1: ZombZGold: %2","playerDied",_pGold]);
 	
 	if (!isNil '_pGold') then {
 		_newObject setVariable ["ZombZGold", _pGold, true];
