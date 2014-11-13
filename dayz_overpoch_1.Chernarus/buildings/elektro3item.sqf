@@ -258,7 +258,7 @@ if (true) then
 __elektro3_110 = objNull;
 if (true) then
 {
-  _this = "MAP_Panelak2" createVehicle [10599.505, 2188.8145, -5.7220459e-006];
+  _this = "Land_Panelak2" createVehicle [10599.505, 2188.8145, -5.7220459e-006];
   __elektro3_110 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -561.64032;
   _this setPos [10599.505, 2188.8145, -5.7220459e-006];
@@ -267,7 +267,7 @@ if (true) then
 __elektro3_111 = objNull;
 if (true) then
 {
-  _this = "MAP_Panelak3" createVehicle [10584.934, 2182.9863, 5.3882599e-005];
+  _this = "Land_Panelak3" createVehicle [10584.934, 2182.9863, 5.3882599e-005];
   __elektro3_111 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -202.14851;
   _this setPos [10584.934, 2182.9863, 5.3882599e-005];

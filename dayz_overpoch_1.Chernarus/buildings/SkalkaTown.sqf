@@ -573,7 +573,7 @@ if (true) then
 _skalka_341 = objNull;
 if (true) then
 {
-  _this = "MAP_sara_domek_kovarna" createVehicle [1973.3022, 11898.225, 0.00018310547];
+  _this = "Land_sara_domek_kovarna" createVehicle [1973.3022, 11898.225, 0.00018310547];
   _skalka_341 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -164.86977;
   _this setPos [1973.3022, 11898.225, 0.00018310547];
@@ -591,7 +591,7 @@ if (true) then
 _skalka_351 = objNull;
 if (true) then
 {
-  _this = "MAP_Tovarna2" createVehicle [2012.0856, 12084.835, 0.23361027];
+  _this = "Land_Tovarna2" createVehicle [2012.0856, 12084.835, 0.23361027];
   _skalka_351 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -182.40211;
   _this setPos [2012.0856, 12084.835, 0.23361027];
@@ -789,7 +789,7 @@ if (true) then
 _skalka_536 = objNull;
 if (true) then
 {
-  _this = "MAP_deutshe_mini" createVehicle [2002.9731, 12145.058, 0.10424479];
+  _this = "Land_deutshe_mini" createVehicle [2002.9731, 12145.058, 0.10424479];
   _skalka_536 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -206.50499;
   _this setPos [2002.9731, 12145.058, 0.10424479];

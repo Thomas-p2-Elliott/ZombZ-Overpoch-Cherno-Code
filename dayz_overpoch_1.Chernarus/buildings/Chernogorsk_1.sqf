@@ -30,7 +30,7 @@ if (true) then
 _cherno_35 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_a_stationhouse", [6357.4712, 2209.385, 0.11845247], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_a_stationhouse", [6357.4712, 2209.385, 0.11845247], [], 0, "CAN_COLLIDE"];
   _cherno_35 = _this;
   _this setDir -23.051226;
   _this setPos [6357.4712, 2209.385, 0.11845247];
@@ -81,7 +81,7 @@ if (true) then
 _cherno_48 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_A_GeneralStore_01", [6892.2192, 2615.5405, -0.35336629], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_A_GeneralStore_01", [6892.2192, 2615.5405, -0.35336629], [], 0, "CAN_COLLIDE"];
   _cherno_48 = _this;
   _this setDir -137.6825;
   _this setPos [6892.2192, 2615.5405, -0.35336629];

@@ -1394,7 +1394,7 @@ if (true) then
 _survivorcity2_848 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Shed_W4", [6001.7656, 13918.113, -0.07407622], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Shed_W4", [6001.7656, 13918.113, -0.07407622], [], 0, "CAN_COLLIDE"];
   _survivorcity2_848 = _this;
   _this setDir 62.875557;
   _this setPos [6001.7656, 13918.113, -0.07407622];
@@ -2810,7 +2810,7 @@ if (true) then
 _survivorcity2_1222 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Mil_ControlTower", [6543.9209, 14072.51, 0.07329955], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_ControlTower", [6543.9209, 14072.51, 0.07329955], [], 0, "CAN_COLLIDE"];
   _survivorcity2_1222 = _this;
   _this setDir -363.28525;
   _this setPos [6543.9209, 14072.51, 0.07329955];
@@ -2819,7 +2819,7 @@ if (true) then
 _survivorcity2_1223 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_SS_hangar", [6635.0957, 14072.25, 0.29792303], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_SS_hangar", [6635.0957, 14072.25, 0.29792303], [], 0, "CAN_COLLIDE"];
   _survivorcity2_1223 = _this;
   _this setDir -272.89246;
   _this setPos [6635.0957, 14072.25, 0.29792303];
@@ -2828,7 +2828,7 @@ if (true) then
 _survivorcity2_1224 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Ind_Workshop01_01", [6520.5562, 14080.202, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Ind_Workshop01_01", [6520.5562, 14080.202, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _survivorcity2_1224 = _this;
   _this setDir -238.62079;
   _this setPos [6520.5562, 14080.202, 3.0517578e-005];
@@ -2837,7 +2837,7 @@ if (true) then
 _survivorcity2_1228 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Hangar_2", [6585.2554, 14043.702, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Hangar_2", [6585.2554, 14043.702, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _survivorcity2_1228 = _this;
   _this setDir -182.77167;
   _this setPos [6585.2554, 14043.702, -3.0517578e-005];
@@ -2898,7 +2898,7 @@ if (true) then
 _survivorcity2_1238 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Mil_House", [6536.7979, 14044.272, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_House", [6536.7979, 14044.272, -3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _survivorcity2_1238 = _this;
   _this setDir 121.40739;
   _this setPos [6536.7979, 14044.272, -3.0517578e-005];
@@ -3411,7 +3411,7 @@ if (true) then
 _survivorcity2_1400 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_hut06", [6307.585, 14259.486], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_hut06", [6307.585, 14259.486], [], 0, "CAN_COLLIDE"];
   _survivorcity2_1400 = _this;
   _this setDir -157.09436;
   _this setPos [6307.585, 14259.486];
@@ -3455,7 +3455,7 @@ if (true) then
 _survivorcity2_1415 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_A_BuildingWIP", [6385.5435, 14211.274, 0.61393762], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_A_BuildingWIP", [6385.5435, 14211.274, 0.61393762], [], 0, "CAN_COLLIDE"];
   _survivorcity2_1415 = _this;
   _this setDir -176.61574;
   _this setPos [6385.5435, 14211.274, 0.61393762];
@@ -3464,7 +3464,7 @@ if (true) then
 _survivorcity2_1416 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_a_stationhouse", [6549.8652, 14154.829, 0.16039793], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_a_stationhouse", [6549.8652, 14154.829, 0.16039793], [], 0, "CAN_COLLIDE"];
   _survivorcity2_1416 = _this;
   _this setDir 31.706768;
   _this setPos [6549.8652, 14154.829, 0.16039793];
@@ -3590,7 +3590,7 @@ if (true) then
 _survivorcity2_1462 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Shed_W4", [6388.7339, 14247.996], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Shed_W4", [6388.7339, 14247.996], [], 0, "CAN_COLLIDE"];
   _survivorcity2_1462 = _this;
   _this setDir 2.3410506;
   _this setPos [6388.7339, 14247.996];
@@ -3599,7 +3599,7 @@ if (true) then
 _survivorcity2_1467 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Hlidac_budka", [6526.8423, 13992.835, -9.1552734e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Hlidac_budka", [6526.8423, 13992.835, -9.1552734e-005], [], 0, "CAN_COLLIDE"];
   _survivorcity2_1467 = _this;
   _this setDir -159.08699;
   _this setPos [6526.8423, 13992.835, -9.1552734e-005];
@@ -4484,7 +4484,7 @@ if (true) then
 _survivorcity2_1792 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Hlidac_budka", [6512.0898, 14161.351, 6.1035156e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Hlidac_budka", [6512.0898, 14161.351, 6.1035156e-005], [], 0, "CAN_COLLIDE"];
   _survivorcity2_1792 = _this;
   _this setDir -420.80472;
   _this setPos [6512.0898, 14161.351, 6.1035156e-005];

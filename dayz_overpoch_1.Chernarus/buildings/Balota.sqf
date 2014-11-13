@@ -100,7 +100,7 @@ if (true) then
 _balota_23 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Ind_Workshop01_02", [4682.1123, 2608.7783, 0.048961043], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Ind_Workshop01_02", [4682.1123, 2608.7783, 0.048961043], [], 0, "CAN_COLLIDE"];
   _balota_23 = _this;
   _this setDir 123.7487;
   _this setPos [4682.1123, 2608.7783, 0.048961043];
@@ -127,7 +127,7 @@ if (true) then
 _balota_26 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Ind_TankBig", [4373.7217, 2268.4358, 2.7656555e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Ind_TankBig", [4373.7217, 2268.4358, 2.7656555e-005], [], 0, "CAN_COLLIDE"];
   _balota_26 = _this;
   _this setDir 131.07869;
   _this setPos [4373.7217, 2268.4358, 2.7656555e-005];

@@ -22,7 +22,7 @@ if (true) then
 _elektro2_5 = objNull;
 if (true) then
 {
-  _this = "MAP_wagon_box" createVehicle [10255.618, 2076.7256, 0.13243143];
+  _this = "Land_wagon_box" createVehicle [10255.618, 2076.7256, 0.13243143];
   _elektro2_5 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 76.127174;
   _this setPos [10255.618, 2076.7256, 0.13243143];
@@ -31,7 +31,7 @@ if (true) then
 _elektro2_7 = objNull;
 if (true) then
 {
-  _this = "MAP_wagon_box" createVehicle [10243.929, 2073.7183, 0.11804862];
+  _this = "Land_wagon_box" createVehicle [10243.929, 2073.7183, 0.11804862];
   _elektro2_7 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 76.127136;
   _this setPos [10243.929, 2073.7183, 0.11804862];
@@ -67,7 +67,7 @@ if (true) then
 _elektro2_18 = objNull;
 if (true) then
 {
-  _this = "MAP_Nasypka" createVehicle [10068.445, 2025.9047, -1.6212463e-005];
+  _this = "Land_Nasypka" createVehicle [10068.445, 2025.9047, -1.6212463e-005];
   _elektro2_18 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 75.329193;
   _this setPos [10068.445, 2025.9047, -1.6212463e-005];

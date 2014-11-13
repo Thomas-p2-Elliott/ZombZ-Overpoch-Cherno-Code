@@ -92,7 +92,7 @@ if (true) then
 _elektro1_21 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_A_BuildingWIP", [10387.256, 1992.8824, 0.57700801], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_A_BuildingWIP", [10387.256, 1992.8824, 0.57700801], [], 0, "CAN_COLLIDE"];
   _elektro1_21 = _this;
   _this setDir -294.1846;
   _this setPos [10387.256, 1992.8824, 0.57700801];
@@ -209,7 +209,7 @@ if (true) then
 _elektro1_69 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Ind_Workshop01_01", [10616.098, 2603.3682, 0.071795434], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Ind_Workshop01_01", [10616.098, 2603.3682, 0.071795434], [], 0, "CAN_COLLIDE"];
   _elektro1_69 = _this;
   _this setDir -234.21225;
   _this setPos [10616.098, 2603.3682, 0.071795434];
@@ -524,7 +524,7 @@ if (true) then
 _elektro1_149 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_HouseV_3I3", [10569.552, 2049.3281, -3.1471252e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_HouseV_3I3", [10569.552, 2049.3281, -3.1471252e-005], [], 0, "CAN_COLLIDE"];
   _elektro1_149 = _this;
   _this setDir -201.65175;
   _this setPos [10569.552, 2049.3281, -3.1471252e-005];
@@ -592,7 +592,7 @@ if (true) then
 _elektro1_164 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_HouseV_1I1", [10430.554, 2511.8645, 1.8119812e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_HouseV_1I1", [10430.554, 2511.8645, 1.8119812e-005], [], 0, "CAN_COLLIDE"];
   _elektro1_164 = _this;
   _this setDir -62.92387;
   _this setPos [10430.554, 2511.8645, 1.8119812e-005];
@@ -628,7 +628,7 @@ if (true) then
 _elektro1_171 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_HouseV_1I2", [10163.586, 2561.4814, 9.5367432e-006], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_HouseV_1I2", [10163.586, 2561.4814, 9.5367432e-006], [], 0, "CAN_COLLIDE"];
   _elektro1_171 = _this;
   _this setDir -150.03133;
   _this setPos [10163.586, 2561.4814, 9.5367432e-006];

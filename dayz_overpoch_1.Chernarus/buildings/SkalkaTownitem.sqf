@@ -554,7 +554,7 @@ if (true) then
 _skalka_291 = objNull;
 if (true) then
 {
-  _this = "MAP_Hlidac_budka" createVehicle [2072.061, 11995.235, -3.0517578e-005];
+  _this = "Land_Hlidac_budka" createVehicle [2072.061, 11995.235, -3.0517578e-005];
   _skalka_291 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -89.062759;
   _this setPos [2072.061, 11995.235, -3.0517578e-005];
@@ -760,7 +760,7 @@ if (true) then
 _skalka_334 = objNull;
 if (true) then
 {
-  _this = "MAP_dum_mesto2" createVehicle [2051.6902, 12089.339, 0.53276837];
+  _this = "Land_dum_mesto2" createVehicle [2051.6902, 12089.339, 0.53276837];
   _skalka_334 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 89.37587;
   _this setPos [2051.6902, 12089.339, 0.53276837];
@@ -769,7 +769,7 @@ if (true) then
 _skalka_338 = objNull;
 if (true) then
 {
-  _this = "MAP_dum_mesto_in" createVehicle [1939.3678, 12058.937, 0.070946962];
+  _this = "Land_dum_mesto_in" createVehicle [1939.3678, 12058.937, 0.070946962];
   _skalka_338 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -4.1489229;
   _this setPos [1939.3678, 12058.937, 0.070946962];
@@ -796,7 +796,7 @@ if (true) then
 _skalka_347 = objNull;
 if (true) then
 {
-  _this = "MAP_Misc_Cargo1D" createVehicle [2076.2532, 12018.891, 2.5309086];
+  _this = "Land_Misc_Cargo1D" createVehicle [2076.2532, 12018.891, 2.5309086];
   _skalka_347 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 13.508087;
   _this setPos [2076.2532, 12018.891, 2.5309086];
