@@ -185,6 +185,10 @@ Output:
 	Day,Hour,Minute,Second,KillerName,KillerUID,VictimName,VictimUID,KillerPos,VictimPos,KillerDistance,KillerWeapon,VictimVehicle,KillerVehicle,NearestLocation
 */
 
+_killerUID = [_killer] call FNC_GetPlayerUID;
+_victimUID = [_victim] call FNC_GetPlayerUID;
+
+
 //build message
 _statsMessage = format[
 	"%1,%2,%3,%4,%5,%6,%7,%8,%9,%10,%11,%12,%13,%14,%15",
