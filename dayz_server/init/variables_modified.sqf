@@ -87,7 +87,8 @@ Debugging Settings
 	//debug freshspawn loadouts
 	P2DZE_loadoutsDebug = false;
 
-	P2DZE_goldItemHandlingDebug = false; 
+	//gold debugging
+	P2DZE_goldItemHandlingDebug = true; 
 
 	if(isServer) then {
 		//debug server player sync
