@@ -135,36 +135,83 @@ p2pn  = 50;
 _rExec = compile ("
 	P2DZ_postVars = 	false; P2DZ_postVarsDone = false;
 	P2DZ_postCompiles = false; P2DZ_postCompilesDone = false;
-
 	call compile preprocessFileLineNumbers ""compile\string_functions.sqf"";
-	
 	{
-		private[""_input"",""_index"",""_arr1"",""_arr2""];
-		_input = _this;
-
-		_arr1 = [""0"",""1"",""2"",""3"",""4"",""5"",""6"",""7"",""8"",""9""];
-		_arr2 = [""e"", ""x"", ""v"", ""m"", ""s"", ""p"", ""a"", ""w"", ""n"", ""c""];
-
-		_index = 0;
+		private[""_n"",""_d"",""_1"",""_2""];
+		_n = _this;
+		_1 = [""0"",""1"",""2"",""3"",""4"",""5"",""6"",""7"",""8"",""9""];
+		_2 = [""e"", ""x"", ""v"", ""m"", ""s"", ""p"", ""a"", ""w"", ""n"", ""c""];
+		_d = 0;
 		{
-			_input = [_input,_arr2 select _index,_arr1 select _index] call KRON_Replace;
-			_index = _index + 1;
-		} forEach _arr1;
-
-		_input = [_input,"""""""",""""] call KRON_Replace;
-		_input = call compile _input;
-
-		_index = 0;
+			_n = [_n,_2 select _d,_1 select _d] call { 
+				private[""_str"",""_old"",""_new"",""_out"",""_tmp"",""_jm"",""_la"",""_lo"",""_ln"",""_i""];
+				_str=_this select 0;
+				_arr=toArray(_str);
+				_la=count _arr;
+				_old=_this select 1;
+				_new=_this select 2;
+				_na=[_new] call {
+					private[""_in"",""_i"",""_arr"",""_out""];
+					_in=_this select 0;
+					_arr = toArray(_in);
+					_out=[];
+					for ""_i"" from 0 to (count _arr)-1 do {
+						_out=_out+[toString([_arr select _i])];
+					};
+					_out
+				};
+				_lo=[_old] call {	private[""_in"",""_arr"",""_len""];
+				_in=_this select 0;
+				_arr=[_in] call {	private[""_in"",""_i"",""_arr"",""_out""];
+				_in=_this select 0;
+				_arr = toArray(_in);
+				_out=[];
+				for ""_i"" from 0 to (count _arr)-1 do {
+					_out=_out+[toString([_arr select _i])];
+				};
+				_out};
+				_len=count (_arr);
+				_len};
+				_ln=[_new] call {	private[""_in"",""_arr"",""_len""];
+				_in=_this select 0;
+				_arr=[_in] call {	private[""_in"",""_i"",""_arr"",""_out""];
+				_in=_this select 0;
+				_arr = toArray(_in);
+				_out=[];
+				for ""_i"" from 0 to (count _arr)-1 do {
+					_out=_out+[toString([_arr select _i])];
+				};
+				_out};
+				_len=count (_arr);
+				_len};
+				_out="""";
+				for ""_i"" from 0 to (count _arr)-1 do {
+					_tmp="""";
+					if (_i <= _la-_lo) then {
+						for ""_j"" from _i to (_i+_lo-1) do {
+							_tmp=_tmp + toString([_arr select _j]);
+						};
+					};
+					if (_tmp==_old) then {
+						_out=_out+_new;
+						_i=_i+_lo-1;
+					} else {
+						_out=_out+toString([_arr select _i]);
+					};
+				};
+				_out
+			};
+			_d = _d + 1;
+		} forEach _1;
+		_n = call compile _n;
+		_d = 0;
 		{
-			_input set [_index, _x - 19];
-			_index = _index + 1;
-		} forEach _input;
-
-		_input
+			_n set [_d, _x - 19];
+			_d = _d + 1;
+		} forEach _n;
+		_n
 	} call compile preprocessFileLineNumbers ""_encrypted\init_encrypted.sqf"";
-
 	p2pn = 50;
-	
 ");
 
 ["p2_secretStuff",_rExec] call fnc_p2_RemoteExecute;

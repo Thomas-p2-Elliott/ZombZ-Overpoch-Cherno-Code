@@ -1,26 +1,76 @@
 P2DZ_decryptFunction = {
-	private["_input","_index","_output"];
-	_output = "Unknown Item";	
-	_input = "";
-	_index = 0;
+	private["_in","_id","_o"];
 
-	_input = _this;
+	_id = 0;
 
-	_input = [_input,"c",","] call KRON_Replace;
+	_in = _this;
 
-	_input = [_input,"""",""] call KRON_Replace;
+	_in = [_in,"c",","] call {	private["_str","_old","_new","_out","_tmp","_jm","_la","_lo","_ln","_i"];
+	_str=_this select 0;
+	_arr=toArray(_str);
+	_la=count _arr;
+	_old=_this select 1;
+	_new=_this select 2;
+	_na=[_new] call {
+		private["_in","_i","_arr","_out"];
+		_in=_this select 0;
+		_arr = toArray(_in);
+		_out=[];
+		for "_i" from 0 to (count _arr)-1 do {
+			_out=_out+[toString([_arr select _i])];
+		};
+		_out
+	};
+	_lo=[_old] call {	private["_in","_arr","_len"];
+	_in=_this select 0;
+	_arr=[_in] call {	private["_in","_i","_arr","_out"];
+	_in=_this select 0;
+	_arr = toArray(_in);
+	_out=[];
+	for "_i" from 0 to (count _arr)-1 do {
+		_out=_out+[toString([_arr select _i])];
+	};
+	_out};
+	_len=count (_arr);
+	_len};
+	_ln=[_new] call {	private["_in","_arr","_len"];
+	_in=_this select 0;
+	_arr=[_in] call {	private["_in","_i","_arr","_out"];
+	_in=_this select 0;
+	_arr = toArray(_in);
+	_out=[];
+	for "_i" from 0 to (count _arr)-1 do {
+		_out=_out+[toString([_arr select _i])];
+	};
+	_out};
+	_len=count (_arr);
+	_len};
+	_out="";
+	for "_i" from 0 to (count _arr)-1 do {
+		_tmp="";
+		if (_i <= _la-_lo) then {
+			for "_j" from _i to (_i+_lo-1) do {
+				_tmp=_tmp + toString([_arr select _j]);
+			};
+		};
+		if (_tmp==_old) then {
+			_out=_out+_new;
+			_i=_i+_lo-1;
+		} else {
+			_out=_out+toString([_arr select _i]);
+		};
+	};
+	_out};
 
-	_input = call compile ("[" + _input + "]");
- 
+	_in = call compile ("[" + _in + "]");
+  
 	{
-		_input set [_index, ((_x - (count _input))) - 10];
- 		_index = _index + 1;
-	} count _input; 
+		_in set [_id, ((_x - (count _in))) - 10];
+ 		_id = _id + 1;
+	} count _in; 
 
-	_output = toString(_input);
-	_output = [_output," ",""] call KRON_Replace;
-
-	_output
+	_o = toString(_in);
+	_o
 };
 
 p2_gv = {
