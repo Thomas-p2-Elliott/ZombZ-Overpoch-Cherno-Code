@@ -3,7 +3,7 @@ if (isServer) then {
 _chernonovylug_1 = objNull;
 if (true) then
 {
-  _this = "Map_Mil_Mil_Guardhouse" createVehicle [9577.7266, 11299.333, 0.4098191];
+  _this = "Land_Mil_Guardhouse" createVehicle [9577.7266, 11299.333, 0.4098191];
   _chernonovylug_1 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 139.2065;
   _this setPos [9577.7266, 11299.333, 0.4098191];
@@ -183,7 +183,7 @@ if (true) then
 _chernonovylug_243 = objNull;
 if (true) then
 {
-  _this = "Map_Mil_Mil_Guardhouse" createVehicle [9616.8066, 11255.31, 0.11833779];
+  _this = "Land_Mil_Guardhouse" createVehicle [9616.8066, 11255.31, 0.11833779];
   _chernonovylug_243 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 140.69363;
   _this setPos [9616.8066, 11255.31, 0.11833779];

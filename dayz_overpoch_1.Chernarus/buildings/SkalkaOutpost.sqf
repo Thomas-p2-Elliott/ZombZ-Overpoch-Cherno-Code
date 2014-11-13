@@ -103,7 +103,7 @@ if (true) then
 _chrisskalkaoutpost_126 = objNull;
 if (true) then
 {
-  _this = "MAP_Mil_Mil_Guardhouse" createVehicle [2241.8372, 10835.61, 0.059088282];
+  _this = "Land_Mil_Guardhouse" createVehicle [2241.8372, 10835.61, 0.059088282];
   _chrisskalkaoutpost_126 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -89.619896;
   _this setPos [2241.8372, 10835.61, 0.059088282];

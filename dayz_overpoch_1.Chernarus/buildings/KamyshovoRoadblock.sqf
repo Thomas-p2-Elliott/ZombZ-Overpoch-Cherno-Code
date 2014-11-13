@@ -165,7 +165,7 @@ if (true) then
 _skalistyCoast_70 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MAP_Mil_Mil_Guardhouse", [12974.458, 3804.8464, -1.6212463e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_Mil_Guardhouse", [12974.458, 3804.8464, -1.6212463e-005], [], 0, "CAN_COLLIDE"];
   _skalistyCoast_70 = _this;
   _this setDir -123.33679;
   _this setPos [12974.458, 3804.8464, -1.6212463e-005];

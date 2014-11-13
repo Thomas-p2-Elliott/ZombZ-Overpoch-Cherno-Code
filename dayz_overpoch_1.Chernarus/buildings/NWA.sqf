@@ -443,7 +443,7 @@ if (true) then
 _vehicle_484 = objNull;
 if (true) then
 {
-  _this = "MAP_Mil_Mil_Guardhouse" createVehicle [5007.3267, 9570.0459];
+  _this = "Land_Mil_Guardhouse" createVehicle [5007.3267, 9570.0459];
   _vehicle_484 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 45.984905;
   _this setPos [5007.3267, 9570.0459];

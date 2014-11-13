@@ -30,7 +30,7 @@ if (true) then
 _southcoast_60 = objNull;
 if (true) then
 {
-  _this = "MAP_Mil_Mil_Guardhouse" createVehicle [4054.7979, 2596.3328, -1.5735626e-005];
+  _this = "Land_Mil_Guardhouse" createVehicle [4054.7979, 2596.3328, -1.5735626e-005];
   _southcoast_60 = _this;  _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir -0.0064046979;
   _this setPos [4054.7979, 2596.3328, -1.5735626e-005];
