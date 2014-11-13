@@ -1,5 +1,6 @@
-private ["_display","_body","_playerID","_array","_source","_method","_canHitFree","_isBandit","_punishment","_humanityHit","_myKills","_kills","_killsV","_infected","_vehicle","_id"];
+private ["_pGold", "_display", "_body", "_playerID", "_myGroup"];
 disableSerialization;
+
 if (deathHandled) exitWith {};
 deathHandled = true;
 
@@ -37,37 +38,6 @@ player setVariable ["medForceUpdate",true,true];
 player setVariable ["startcombattimer", 0];
 r_player_unconscious = false;
 r_player_cardiac = false;
-
-_array = _this;
-if (count _array > 0) then {
-	_source = _array select 0;
-	_method = _array select 1;
-	if ((!isNull _source) && (_source != player)) then {
-		_canHitFree = player getVariable ["freeTarget",false];
-		_isBandit = (player getVariable["humanity",0]) <= -5000; //Default: 2000
-		_punishment = _canHitFree || _isBandit; //if u are bandit || start first - player will not recieve humanity drop
-		_humanityHit = 0;
-
-		if (!_punishment) then {
-			//i'm "not guilty" - kill me && be punished
-			_myKills = ((player getVariable ["humanKills",0]) / 30) * 1000;
-			_humanityHit = -(1000 - _myKills);  //Default: 2000
-			_kills = _source getVariable ["humanKills",0];
-			_source setVariable ["humanKills",(_kills + 1),true];
-			PVDZE_send = [_source,"Humanity",[_source,_humanityHit,300]];
-			publicVariableServer "PVDZE_send";
-		} else {
-			//i'm "guilty" - kill me as bandit
-			_killsV = _source getVariable ["banditKills",0];
-			_source setVariable ["banditKills",(_killsV + 1),true];
-			//Give humanity for killing as bandit
-			_humanityHit = 500;
-			PVDZE_send = [_source,"Humanity",[_source,_humanityHit,300]];
-			publicVariableServer "PVDZE_send";
-		};
-	};
-	_body setVariable ["deathType",_method,true];
-};
 
 terminate dayz_musicH;
 terminate dayz_slowCheck;

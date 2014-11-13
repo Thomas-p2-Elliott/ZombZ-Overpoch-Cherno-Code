@@ -1,4 +1,4 @@
-private ["_pGold","_characterID","_minutes","_newObject","_playerID","_infected","_victimName","_victim","_killer","_killerName","_weapon","_distance","_loc_message","_nearLocations","_nearestLocation","_rExec","_killMsgThread","_death_record","_key"];
+private ["_characterID", "_minutes", "_newObject", "_playerID", "_infected", "_victimName", "_deathMessageSent", "_victim", "_victimVehicle", "_pGold", "_killer", "_killerName", "_weapon", "_distance", "_victimPos", "_nearLocations", "_nearestLocation", "_loc_message","_method", "_canHitFree", "_isBandit", "_punishment", "_humanityHit", "_killModifier", "_kills", "_killsV", "_death_record", "_key", "_currentTime", "_day", "_hour", "_mins", "_secs", "_statsMessage"];
 _characterID = 	_this select 0;
 _minutes =		_this select 1;
 _newObject = 	_this select 2;
@@ -104,14 +104,49 @@ if ((typeName _killer) != "STRING") then
 		Death was caused by PvP
 		---------------------------------------------------------------------------*/
 
-		/*---------------------------------------------------------------------------
+		/*
 		PVP Kill Messages (GUI & Chat)
-		---------------------------------------------------------------------------*/
+		*/
 		if (P2DZ_DeathMessage_GUI_Enabled) then {
 			[_killer,_killerName,_victim,_victimName,_weapon,_distance,_nearestLocation] call player2_deathMessage;
 			_deathMessageSent = true;
 		};
 
+		/*
+		Check if Victim was Innocent or Not
+		*/
+		_method = "shothead";
+		_canHitFree = _newObject getVariable ["freeTarget",false];
+		_isBandit = (_newObject getVariable["humanity",0]) <= -5000; //Default: 2000
+		_punishment = _canHitFree || _isBandit; //if u are bandit || start first - player will not recieve humanity drop
+		_humanityHit = 0;
+
+		/*
+		Set Attacker Humanity & Set Attacker Kills
+		*/
+
+		if (!_punishment) then {
+			//i'm "not guilty" - kill me && be punished
+			_killModifier = ((_newObject getVariable ["humanKills",0]) / 30) * 1000;
+			_humanityHit = -(1000 - _killModifier);  //Default: 2000
+			_kills = _killer getVariable ["humanKills",0];
+			_killer setVariable ["humanKills",(_kills + 1),true];
+			PVDZE_send = [_killer,"Humanity",[_killer,(round _humanityHit),300]];
+			PVDZE_send call server_sendToClient;
+		} else {
+			//i'm "guilty" - kill me as bandit
+			_killsV = _killer getVariable ["banditKills",0];
+			_killer setVariable ["banditKills",(_killsV + 1),true];
+			//Give humanity for killing as bandit
+			_humanityHit = 1000;
+			PVDZE_send = [_killer,"Humanity",[_killer,(round _humanityHit),300]];
+			PVDZE_send call server_sendToClient;
+		};
+
+		_newObject setVariable ["deathType",_method,true];
+
+		/*---------------------------------------------------------------------------
+		---------------------------------------------------------------------------*/
 	};
 
 	/*---------------------------------------------------------------------------
