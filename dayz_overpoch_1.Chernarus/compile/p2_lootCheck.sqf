@@ -1,26 +1,29 @@
 /*---------------------------------------------------------------------------
-p2_lootClassCheck.sqf
-Version 0.4
+p2_lootCheck.sqf
+Version 0.5
 Author: Player2
 
 Description:
 	Swaps loot depending on area of the map that it is spawning
 	E.g. Swap M4A1's for AK's if spawning in Berezino
 
-Parameters & Use:
+Inputs:
 
-	Param 1: Item Classname (_lootClass, _this select 0)
-	Param 2: Worldspace (_position, _this select 1)
-
-	["M4A1",[2500,5000,1]] call p2_lootClassCheck
-
+	_this select 0: Loot Category Name (type: String)
+	_this select 1: Position where loot is spawning (type: Position Array)
+	
 Outputs:
 
-	Item Classname (_out)
+	Category Name (type: String)
+
+Example Use:
+
+	p2_lootCheck = call compile preprocessFileLineNumbers "p2_lootCheck.sqf";
+	_newCategoryName = [_oldCategoryName,(position player)] call p2_lootCheck;
 
 Configuration Instructions:
 
-	Add and configure these variables prior loot spawning in the files.
+	Add and configure these variables:
 
 	P2DZ_lootClassCheck_centerPoint - Center point for where the 'improved' loot should spawn (type: position array)
 	P2DZ_lootClassCheck_radius - Radius for this dome for the size of the imrpoved loot zone (type: number, meters)
@@ -67,6 +70,7 @@ if (_inZone) then {
 
 	switch (_lootClass) do {
 		case "AKLowWeaps": { 		_out = "AKHighWeaps"};
+		case "RiflesMedWeaps": { 	_out = "RiflesLowWeaps"};
 
 		default {};
 	};
@@ -82,13 +86,15 @@ if (_inZone) then {
 		case "ACRHighWeaps": { 		_out = "AKHighWeaps"};
 		case "ScarLowWeaps": { 		_out = "SubWeaps"};
 		case "ScarHighWeaps": { 	_out = "AKHighWeaps"};
-		case "HK416Weaps": { 		_out = "AKHighWeaps"};
+		case "HK416Weaps": { 		_out = "AKLowWeaps"};
 		case "HK417Weaps": { 		_out = "AKHighWeaps"};
 		case "MasWeaps": { 			_out = "SubWeaps"};
 		case "G36Weaps": { 			_out = "AKLowWeaps"};
-		case "M8Weaps": { 			_out = "AKHighWeaps"};
-		case "LMGWeaps": { 			_out = "SubWeaps"};
-		case "HMGWeaps": { 			_out = "RiflesMedWeaps"};
+		case "M4Weaps": { 			_out = "AKLowWeaps"};
+		case "L85Weaps": { 			_out = "AKHighWeaps"};
+		case "M8Weaps": { 			_out = "AKLowWeaps"};
+		case "LMGWeaps": { 			_out = "RiflesLowWeaps"};
+		case "HMGWeaps": { 			_out = "RiflesLowWeaps"};
 		case "SniperMedWeaps": { 	_out = "SVDWeaps"};
 		case "SniperTopWeaps": { 	_out = "SVDWeaps"};
 		case "PistolTopWeaps": { 	_out = "PistolMilWeaps"};
