@@ -145,9 +145,6 @@ P2DZE_dropGold = {
 						    ];
 						};
 
-						//sleep for a moment to prevent gold appearing before variable has been sent to clients
-						uiSleep 0.05;
-
 						//get player pos
 						_iPos = getPosATL _unit;
 
