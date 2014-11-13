@@ -121,18 +121,7 @@ if (!_isNew) then {
 		_p2weapons = 	["ItemToolbox","Binocular","ItemMap","ItemCompass","ItemHatchet_DZE"];
 		_p2backpack = 	"DZ_Czech_Vest_Puch";
 		_p2randomWeaponList = [
-			"Winchester1866",
-			"Winchester1866",
-			"Crossbow_DZ",
-			"Crossbow_DZ",
-			"Remington870",
-			"gms_k98",
-			"LeeEnfield",
-			"MR43",
-			"M1014",
-			"vil_SKS",
-			"vil_SKS",
-			"vil_SKS"
+			"Crossbow_DZ"
 		];
 		/*---------------------------------------------------------------------------
 		---------------------------------------------------------------------------*/
