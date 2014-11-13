@@ -7,12 +7,26 @@ _unit = player;
 _goldCount = 0;
 _result2 = "nochange";
 _mags = magazines _unit;
-
 _goldCount = {"ItemGoldBar10oz" == _x} count _mags;
+
+//count backpack gold
+_bcontents = [];
+_bitemCount = 0;
+_bgoldBarCount = 0;
+_backpack = unitBackpack player;
+_bcontents = getMagazineCargo _backpack;
+{
+	if (((_bcontents select 0) select _bitemCount) == "ItemGoldBar10oz") then {
+		_bgoldBarCount = (_bcontents select 1) select _bitemCount;
+	};
+	_bitemCount = _bitemCount + 1;
+} count (_bcontents select 0);
+
+
 
 if (!P2DZE_goldRunning) then {
 	//If player has gold bar item
-	if (_goldCount > 0) then {
+	if (_goldCount > 0 || _bgoldBarCount > 0) then {
 		_result2 = "nochange";
 		//if player did not have gold bar item prior
 		if (!P2DZE_hasGold) then {
@@ -24,7 +38,7 @@ if (!P2DZE_goldRunning) then {
 		} else {
 
 			//if player picked up another gold bar item
-			if (_goldCount > 1) then {
+			if ((_goldCount + _bgoldBarCount) > 1) then {
 				for "_x" from 1 to _goldCount do {
 					_mags = magazines _unit;
 					_goldCount = {"ItemGoldBar10oz" == _x} count _mags;
@@ -37,6 +51,15 @@ if (!P2DZE_goldRunning) then {
 						P2DZE_goldRunning = true;
 						[] spawn player_pickupGold;
 					};
+				};
+				if (_bgoldBarCount > 0) then {
+					P2DZE_plr_bpGold = _backpack; publicVariableServer "P2DZE_plr_bpGold";
+					titleText ["Do not move your gold into your backpack!", "PLAIN", 0.5]; 
+					if (P2DZ_enableGoldSystemChat) then {
+						systemChat("Gold: Do not move your gold into your backpack!");
+					};
+					closeDialog 0;
+					_result2 = "HasGoldItem: Player picked gold into backpack!";
 				};
 			};
 		};

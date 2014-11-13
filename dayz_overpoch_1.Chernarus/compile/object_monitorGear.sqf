@@ -102,7 +102,7 @@ if ((_isVehicle || _isStorage || _isnewstorage) && (!_isMan) && (!(isNull (findD
 		
 		while {!(isNull (findDisplay 106))} do {
 			P2DZE_gearOnContainer = true;
-			_weapons = [] call _countWeapons;
+			_weapons = 	[] call _countWeapons;
 			_magazines = [] call _countMagazines;
 			_backpacks = [] call _countBackpacks;
 			_freeSlots = [] call _countFreeSlots;
@@ -122,5 +122,6 @@ if ((_isVehicle || _isStorage || _isnewstorage) && (!_isMan) && (!(isNull (findD
 
 if (P2DZE_gearOnContainer && {(({_x == "ItemGoldBar10oz"} count (magazines cursorTarget)) < 1)} && {([false,cursorTarget] call p2_gv) > 0}) then {
 	diag_log("P2DEBUG: HasGold Val but no gold Item...Adding gold item!");
-	cursorTarget addMagazineCargoGlobal "ItemGoldBar10oz";
+	cursorTarget addMagazine "ItemGoldBar10oz";
+	[] call ui_displayGold;
 };
