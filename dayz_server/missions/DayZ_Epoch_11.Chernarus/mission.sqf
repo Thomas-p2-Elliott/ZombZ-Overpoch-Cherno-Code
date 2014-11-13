@@ -1,7 +1,7 @@
 _vehicle_39 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_Toilet", [11467.155, 11341.848, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_Toilet", [11467.155, 11341.848, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_39 = _this;
   _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];
   _this setDir 305.48679;
@@ -727,7 +727,7 @@ if (true) then
 _vehicle_173 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_GuardShed", [4086.96, 11659.943, -6.1035156e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_GuardShed", [4086.96, 11659.943, -6.1035156e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_173 = _this;
   _this setVariable [
     uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
@@ -901,7 +901,7 @@ if (true) then
 _vehicle_217 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_Toilet", [4027.1782, 11668.193, -0.00012207031], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_Toilet", [4027.1782, 11668.193, -0.00012207031], [], 0, "CAN_COLLIDE"];
   _vehicle_217 = _this;
   _this setVariable [
     uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
@@ -1384,7 +1384,7 @@ if (true) then
 _vehicle_477 = objNull;
 if (true) then
 {
-  _this = createVehicle ["MASH_EP1", [6315.6763, 7841.8965, -0.056709375], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_MASH", [6315.6763, 7841.8965, -0.056709375], [], 0, "CAN_COLLIDE"];
   _vehicle_477 = _this;
   _this setVariable [
     uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
@@ -1401,7 +1401,7 @@ if (true) then
 _vehicle_479 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Camp_EP1", [6330.9556, 7831.4258, -0.034371372], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_tent_west", [6330.9556, 7831.4258, -0.034371372], [], 0, "CAN_COLLIDE"];
   _vehicle_479 = _this;
   _this setVariable [
     uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
@@ -1418,7 +1418,7 @@ if (true) then
 _vehicle_480 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_tent_east", [6320.0742, 7797.5137, 0.26026565], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_tent_east", [6320.0742, 7797.5137, 0.26026565], [], 0, "CAN_COLLIDE"];
   _vehicle_480 = _this;
   _this setVariable [
     uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
@@ -1435,7 +1435,7 @@ if (true) then
 _vehicle_481 = objNull;
 if (true) then
 {
-  _this = createVehicle ["CampEast_EP1", [6304.1455, 7843.9409, -0.01191554], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_Stan_east", [6304.1455, 7843.9409, -0.01191554], [], 0, "CAN_COLLIDE"];
   _vehicle_481 = _this;
   _this setVariable [
     uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
@@ -1452,7 +1452,7 @@ if (true) then
 _vehicle_485 = objNull;
 if (true) then
 {
-  _this = createVehicle ["CampEast_EP1", [6337.02, 7822.1895], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_Stan_east", [6337.02, 7822.1895], [], 0, "CAN_COLLIDE"];
   _vehicle_485 = _this;
   _this setVariable [
     uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
@@ -1469,7 +1469,7 @@ if (true) then
 _vehicle_490 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_GuardShed", [6300.7017, 7800.2729], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_GuardShed", [6300.7017, 7800.2729], [], 0, "CAN_COLLIDE"];
   _vehicle_490 = _this;
   _this setVariable [
     uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
@@ -1519,7 +1519,7 @@ if (true) then
 _vehicle_503 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Camp_EP1", [6324.0571, 7836.3125, -0.022317491], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_tent_west", [6324.0571, 7836.3125, -0.022317491], [], 0, "CAN_COLLIDE"];
   _vehicle_503 = _this;
   _this setVariable [
     uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
@@ -1658,7 +1658,7 @@ if (true) then
 _vehicle_521 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_Toilet", [6302.8491, 7793.8257, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["MAP_Toilet", [6302.8491, 7793.8257, 3.0517578e-005], [], 0, "CAN_COLLIDE"];
   _vehicle_521 = _this;
   _this setVariable [
     uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
