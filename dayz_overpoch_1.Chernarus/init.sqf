@@ -68,7 +68,7 @@ if (isDedicated && !hasInterface || isServer) then {
 	//enable antihack on test server?
 	AHe = false;
 	//enable object streaming from db?
-	P2DZE_serverStreamObjsEnabled = true;
+	P2DZE_serverStreamObjsEnabled = false;
 
 	//enable custom hive dll debugging
 	P2D_H = false;

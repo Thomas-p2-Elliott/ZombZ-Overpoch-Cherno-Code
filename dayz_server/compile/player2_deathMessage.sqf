@@ -22,6 +22,8 @@ _hour = 			0;
 _mins = 			0;
 _secs = 			0;
 
+P2DZ_DeathMessage_Debug = true;
+
 if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: Input: %1", (str _this)]); };
 
 
