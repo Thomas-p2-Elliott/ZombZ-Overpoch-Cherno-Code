@@ -86,6 +86,7 @@ private["_result","_return","_result2"];
 				_result2 = _return select 1;
 				_result2 > 1 && !P2DZE_goldRunning
 			};
+			uiSleep 0.01;
 		};
 	};
 };
@@ -111,5 +112,15 @@ if ((_isVehicle || _isStorage || _isnewstorage) && (!_isMan) && (!(isNull (findD
 		};
 	};
 } else {
-	P2DZE_gearOnContainer = false;
+	if (_isMan && (!(isNull (findDisplay 106)))) then {
+		P2DZE_gearOnContainer = true;
+	} else {
+		P2DZE_gearOnContainer = false;
+	};
+};
+
+
+if (P2DZE_gearOnContainer && {(({_x == "ItemGoldBar10oz"} count (magazines cursorTarget)) < 1)} && {([false,cursorTarget] call p2_gv) > 0}) then {
+	diag_log("P2DEBUG: HasGold Val but no gold Item...Adding gold item!");
+	cursorTarget addMagazineCargoGlobal "ItemGoldBar10oz";
 };

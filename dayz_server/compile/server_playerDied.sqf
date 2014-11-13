@@ -5,6 +5,16 @@ _newObject = 	_this select 2;
 _playerID = 	_this select 3;
 _infected =		_this select 4;
 
+_newObject call {
+    _this setVariable [
+        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+        "hash_id" callExtension format [
+            "%1:%2",
+            netId _this,
+            typeOf _this
+        ]
+    ];
+}; 
 
 diag_log(format["P2DEBUG: %1: Input: %2","playerDied",_this]);
 diag_log(format["P2DEBUG: %1: _pGold: %2","playerDied",_pGold]);
@@ -185,17 +195,6 @@ if (!isNil '_characterID') then {
 		diag_log ("HIVE: WRITE: "+ str(_key));
 		#endif
 		_key call server_hiveWrite;
-
-		_newObject call {
-		    _this setVariable [
-		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-		        "hash_id" callExtension format [
-		            "%1:%2",
-		            netId _this,
-		            typeOf _this
-		        ]
-		    ];
-		}; 
 	}
 	else
 	{
