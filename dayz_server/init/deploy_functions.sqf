@@ -110,7 +110,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 		_objPos = getPosATL _obj;
 		_armedLittleBird = _obj getVariable ["ArmedLittlebird", false];
 		_debug = getMarkerpos "respawn_west";
-		diag_log(str _obj);
 		
 		/* Check hash of object trying to pack */
 		_obj call KK_fnc_checkHash;
