@@ -282,7 +282,7 @@ ScarHighWeaps[] = {
 
 /* Done */
 SniperMedWeaps[] = {
-	{"vil_DRM_BASE",0.2} 
+	{"vil_DRM_BASE",0.2},
 	{"DMR_SKN",0.2}, 
 	{"RH_sc2acog",0.15}, 
 	{"RH_sc2sp",0.15}, 
@@ -735,7 +735,7 @@ LMGWeaps[] = {
 /* Done */
 L85Weaps[] = {
 	{"BAF_L85A2_RIS_Holo",0.27}, 
-	{"BAF_L86A2_ACOG",0.13} 
+	{"BAF_L86A2_ACOG",0.13},
 	{"BAF_L85A2_UGL_Holo",0.20}, 
 	{"BAF_L85A2_RIS_SUSAT",0.10}, 
 	{"BAF_L85A2_RIS_ACOG",0.10}, 
