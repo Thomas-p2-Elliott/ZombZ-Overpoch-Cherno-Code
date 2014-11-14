@@ -708,7 +708,7 @@ AKHighWeaps[] = {
 LMGWeaps[] = {
 	{"vil_Galil",0.07}, 
 	{"vil_Galil_arm",0.06}, 
-	{"vil_Insas_lmg",0.06} 
+	{"vil_Insas_lmg",0.06}, 
 	{"vil_RPK",0.05}, 
 	{"vil_RPK75",0.05}, 
 	{"vil_RPK75_M72",0.05}, 
