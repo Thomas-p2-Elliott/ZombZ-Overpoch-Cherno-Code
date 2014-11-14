@@ -1,0 +1,12 @@
+HOW TO FIND OUT WHAT A WEAPON IS LIKE IN OVERPOCH WITHOUT USING A TEST SERVER
+
+
+1. Open Overpoch, escape out to menu, press ALT+E, load Utes(faster)
+2. Add Center, then group
+3. Add unit, before press ok put this info into the 'Init Expression' box:
+
+player addWeapon "WEAPON_NAME"; player addMagazine "MAGAZINE_NAME";
+
+Get weapon and magazine names from this url: http://pastebin.com/raw.php?i=mYpAJETh
+
+4. Press Preview, Drop gear until you find ur gun...
