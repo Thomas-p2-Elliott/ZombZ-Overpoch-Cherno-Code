@@ -371,7 +371,7 @@ HK416Weaps[] = {
 	HK417Weaps[] = {
 		{"RH_hk417",0.19}, 
 		{"vil_HK417s",0.16},
-		{"RH_hk417s",0.16}
+		{"RH_hk417s",0.16},
 		{"RH_hk417sd",0.06},
 		{"RH_hk417eotech",0.05},
 		{"RH_hk417sgl",0.05},
