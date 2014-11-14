@@ -70,7 +70,13 @@ if (_inZone) then {
 
 	switch (_lootClass) do {
 		case "AKLowWeaps": { 		_out = "AKHighWeaps"};
-		case "RiflesMedWeaps": { 	_out = "RiflesLowWeaps"};
+
+		/*These Weapons have a 10% Chance of actually spawning instead of being swapped*/
+		case "SniperTopWeaps": { 	_out = "SniperMedWeaps";	if (((random 1) > 0.90)) then { _out = "SniperTopWeaps" }; _out};
+		case "PistolTopWeaps": { 	_out = "PistolMilWeaps";	if (((random 1) > 0.90)) then { _out = "PistolTopWeaps" }; _out};
+		case "UltraWeaps": { 		_out = "SniperTopWeaps";	if (((random 1) > 0.90)) then { _out = "UltraWeaps" }; _out};
+		case "TWSWeaps": { 			_out = "SniperTopWeaps";	if (((random 1) > 0.90)) then { _out = "TWSWeaps" }; _out};
+		/**/
 
 		default {};
 	};
@@ -82,6 +88,11 @@ if (_inZone) then {
 	Configuration Start: Out of Zone (Russian Weapons)
 	---------------------------------------------------------------------------*/
 	switch (_lootClass) do {
+
+		/*These Weapons have a 10% Chance of actually spawning instead of being swapped*/
+		case "M4Weaps": { 			_out = "AKHighWeaps";	if (((random 1) > 0.90)) then { _out = "M4Weaps" }; _out};
+		case "L85Weaps": { 			_out = "AKHighWeaps"; 	if (((random 1) > 0.90)) then { _out = "L85Weaps" }; _out};
+		/**/
 		case "ACRLowWeaps": { 		_out = "AKLowWeaps"};
 		case "ACRHighWeaps": { 		_out = "AKHighWeaps"};
 		case "ScarLowWeaps": { 		_out = "SubWeaps"};
@@ -90,11 +101,10 @@ if (_inZone) then {
 		case "HK417Weaps": { 		_out = "AKHighWeaps"};
 		case "MasWeaps": { 			_out = "SubWeaps"};
 		case "G36Weaps": { 			_out = "AKLowWeaps"};
-		case "M4Weaps": { 			_out = "AKLowWeaps"};
-		case "L85Weaps": { 			_out = "AKHighWeaps"};
 		case "M8Weaps": { 			_out = "AKLowWeaps"};
 		case "LMGWeaps": { 			_out = "RiflesLowWeaps"};
 		case "HMGWeaps": { 			_out = "RiflesLowWeaps"};
+		case "RiflesMedWeaps": { 	_out = "RiflesLowWeaps"};
 		case "SniperMedWeaps": { 	_out = "SVDWeaps"};
 		case "SniperTopWeaps": { 	_out = "SVDWeaps"};
 		case "PistolTopWeaps": { 	_out = "PistolMilWeaps"};
