@@ -1,4 +1,4 @@
-private ["_position","_num","_config","_itemType","_weights","_index","_crashModel","_lootTable","_guaranteedLoot","_randomizedLoot","_frequency","_variance","_spawnChance","_spawnMarker","_spawnRadius","_spawnFire","_crashName","_nearby","_itemTypes","_cntWeights","_fadeFire"];
+private ["_crashModel", "_lootTable", "_guaranteedLoot", "_randomizedLoot", "_frequency", "_variance", "_spawnChance", "_spawnMarker", "_spawnRadius", "_spawnFire", "_fadeFire", "_d",  "_crashName",  "_position",  "_config", "_num", "_itemTypes", "_itemChance", "_weights", "_cntWeights", "_index", "_lootRadius", "_radiusMultiplier", "_itemType", "_iClass", "_iType", "_item2", "_lootPos", "_nearBy"];
 
 //_crashModel	= _this select 0;
 //_lootTable	= _this select 1;
@@ -12,6 +12,9 @@ _spawnRadius	= _this select 6;
 _spawnFire	= _this select 7;
 _fadeFire	= _this select 8;
 _d = P2DZE_debugCrashSites;
+
+//debugging
+_d = true;
 
 if (_d) then { diag_log("CRASHSPAWNER: Starting spawn logic for Crash Spawner"); };
 
@@ -51,7 +54,7 @@ while {1 == 1} do {
 
 		_position = [getMarkerPos _spawnMarker,0,_spawnRadius,10,0,2000,0] call BIS_fnc_findSafePos;
 
-		if (_d) then { diag_log(format["CRASHSPAWNER: Spawning '%1' with loot table '%2' NOW! (%3) at: %4", _crashName, _lootTable, time, str(_position)]); };
+		if (_d) then { diag_log(format["---- Heli Crash: %1 --- Pos: %2 --- Loot: ", _crashName,_position]); };
 
 		_crash = createVehicle [_crashModel,_position, [], 0, "CAN_COLLIDE"];
 		// Randomize the direction the wreck is facing
@@ -99,44 +102,92 @@ while {1 == 1} do {
 			_crash setvariable ["fadeFire",_fadeFire,true];
 		};
 
+
+
 		_itemTypes =	_lootTable select 0;
 		_itemChance =	_lootTable select 1;
-        _weights = [_itemTypes,_itemChance] call fnc_buildWeightedArray;
-        _cntWeights = count _weights;
-        _index = _weights call BIS_fnc_selectRandom;
+		_weights = [_itemTypes,_itemChance] call fnc_buildWeightedArray;
+		_cntWeights = count _weights;
+		_index = _weights call BIS_fnc_selectRandom;
+
 		_lootRadius = 0.45;
 		_radiusMultiplier = 12;
 
 		for "_x" from 1 to _num do {
-			//Create loot
 			_index = floor(random _cntWeights);
 			_index = _weights select _index;
-			if (_index > 0) then {
-				_index = _index - 1;
+			if (_index > _cntWeights) then {
+				_index = _index - 1 ;
 			};
 			_itemType = _itemTypes select _index;
+			_iClass = _itemType select 0;
+			_iType = _itemType select 1; 
+
+			  if (_iType == "custom_weapon") then {
+				_itemTypes = [];
+				{
+					_itemTypes set [count _itemTypes, _x select 0]
+				} count getArray (missionConfigFile >> "cfgLoot" >> _iClass);
+
+				_index = -1;
+				_weights = [];
+				_cntWeights = -1;
+				_item2 = "M9SD";
+				_index = dayz_CLBase find _iClass;
+				if (_index > 0) then {
+					_weights = dayz_CLChances select _index;
+					_cntWeights = count _weights;
+					_index = floor(random _cntWeights);
+					_index = _weights select _index;
+					_item2 = _itemTypes select _index;
+
+					if ((_item2 != "") && (isClass(configFile >> "CfgWeapons" >> _item2))) then {
+
+						if (_iClass == "MeleeWeaps") then {
+
+							if (_item2 == "Chainsaw") then {
+								_item2 = ["ChainSaw","ChainSawB","ChainSawG","ChainSawP","ChainSawR"] call BIS_fnc_selectRandom;
+							};
+						};
+					};
+					_itemType = [_item2,"weapon"];
+				};
+
+				//reset to normal crash site loot table for next go around, 
+				//otherwise it'd get stuck on the last custom weapon
+
+				_itemTypes =	_lootTable select 0;
+				_itemChance =	_lootTable select 1;
+				_weights = [_itemTypes,_itemChance] call fnc_buildWeightedArray;
+				_cntWeights = count _weights;
+				_index = _weights call BIS_fnc_selectRandom;
+			};
+
+			if (_d) then { diag_log format["%1", _itemType]; };	
+
 			_lootPos = [_position, ((random 2) + (sizeOf(_crashModel) * _lootRadius)), random 360] call BIS_fnc_relPos;
 
 			[_itemType select 0, _itemType select 1, _lootPos, 2] call spawn_loot_server;
 
-			if (_d) then { if (_d) then { diag_log(format["P2DEBUG: CRASHSPAWNER: Loot spawn at '%1' with loot table '%2' and chance array '%3'", _crashName, _lootTable select 0, _lootTable select 1]); };
-
-			// ReammoBox is preferred parent class here, as WeaponHolder wouldn't match MedBox0 && other such items.
-			_nearby = _position nearObjects ["ReammoBox", sizeOf(_crashModel)];
-			{
-				_x setVariable ["permaLoot",true];
-				_x call {
-				    _this setVariable [
-				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-				        "hash_id" callExtension format [
-				            "%1:%2",
-				            netId _this,
-				            typeOf _this
-				        ]
-				    ];
-				};
-			} count _nearBy;
 		};
+
+		diag_log("---------------------------------------------");
+
+		// ReammoBox is preferred parent class here, as WeaponHolder wouldn't match MedBox0 && other such items.
+		_nearBy = _position nearObjects ["ReammoBox", sizeOf(_crashModel)];
+		{
+			_x setVariable ["permaLoot",true];
+			_x call {
+			    _this setVariable [
+			        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+			        "hash_id" callExtension format [
+			            "%1:%2",
+			            netId _this,
+			            typeOf _this
+			        ]
+			    ];
+			};
+		} count _nearBy;
 
 	};
 };
