@@ -46,36 +46,36 @@ switch (_eventType) do {
 				case 1: 				{ 
 				_itemTypes = [
 							//Weapons
-							["L85Weaps", "weapon"],		
-							["RiflesMedWeaps", "weapon"],		
-							["ACRHighWeaps", "weapon"],		
-							["LMGWeaps", "weapon"],		
+							["L85Weaps", "custom_weapon"],		
+							["RiflesMedWeaps", "custom_weapon"],		
+							["ACRHighWeaps", "custom_weapon"],		
+							["LMGWeaps", "custom_weapon"],		
 
-							["PistolTopWeaps", "weapon"],			
-							["HMGWeaps", "weapon"],					
-							["SniperMedWeaps", "weapon"],	
-							["LauncherWeaps", "weapon"],						
-							["RocketWeaps", "weapon"],							
-							["SniperTopWeaps", "weapon"],
-							["UltraWeaps", "weapon"],														
-							["TWSWeaps", "weapon"],						
+							["PistolTopWeaps", "custom_weapon"],			
+							["HMGWeaps", "custom_weapon"],					
+							["SniperMedWeaps", "custom_weapon"],	
+							["LauncherWeaps", "custom_weapon"],						
+							["RocketWeaps", "custom_weapon"],							
+							["SniperTopWeaps", "custom_weapon"],
+							["UltraWeaps", "custom_weapon"],														
+							["TWSWeaps", "custom_weapon"],						
 							//Misc Loot
 							["MedBox0", "object"],										//Misc. Loot
 							["AmmoBoxSmall_762", "object"],								//Misc. Loot
 							["AmmoBoxSmall_556", "object"],								//Misc. Loot
 							["Binocular_Vector", "weapon"],								//Misc. Loot
 							//Skins
-							["Skin_RU_Soldier_Crew_DZ  ", "magazine"]					//Crewman
+							["Skin_RU_Soldier_Crew_DZ", "magazine"],					//Crewman
 							["Skin_Sniper1_DZ", "magazine"]	,	     					//Ghillie Suit
-							["Skin_CZ_Soldier_Sniper_EP1_DZ  ", "magazine"]	,			//Desert Ghillie
-							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ ", "magazine"],   	//Special Forces 
+							["Skin_CZ_Soldier_Sniper_EP1_DZ", "magazine"],				//Desert Ghillie
+							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ", "magazine"],   	//Special Forces 
 							["Skin_Soldier1_DZ", "magazine"],							//Soldier Clothing
 							["Skin_Rocket_DZ", "magazine"],	     						//Officer Suit
 							["Skin_Drake_Light_DZ", "magazine"]	,						//Desert Camo 
 							["Skin_FR_Rodriguez_DZ", "magazine"],						//Gunner Outfit
 							["Skin_Graves_Light_DZ", "magazine"],						//Urban Camo
 							["Skin_Soldier_TL_PMC_DZ", "magazine"],						//Team Leader
-							["Skin_Soldier_Sniper_PMC_DZ", "magazine"],					//Marksman 
+							["Skin_Soldier_Sniper_PMC_DZ", "magazine"]					//Marksman 
 				];
 
 				_itemChance = [ 
@@ -125,34 +125,34 @@ switch (_eventType) do {
 			case 2: 				{ 
 				_itemTypes = [
 							//Weapons
-							["ACRHighWeaps", "weapon"],	
-							["HK417Weaps", "weapon"],
+							["ACRHighWeaps", "custom_weapon"],	
+							["HK417Weaps", "custom_weapon"],
 
-							["HMGWeaps", "weapon"],		
-							["PistolTopWeaps", "weapon"],						
-							["SniperMedWeaps", "weapon"],	
-							["LauncherWeaps", "weapon"],						
-							["RocketWeaps", "weapon"],							
-							["SniperTopWeaps", "weapon"],
-							["UltraWeaps", "weapon"],														
-							["TWSWeaps", "weapon"],						
+							["HMGWeaps", "custom_weapon"],		
+							["PistolTopWeaps", "custom_weapon"],						
+							["SniperMedWeaps", "custom_weapon"],	
+							["LauncherWeaps", "custom_weapon"],						
+							["RocketWeaps", "custom_weapon"],							
+							["SniperTopWeaps", "custom_weapon"],
+							["UltraWeaps", "custom_weapon"],														
+							["TWSWeaps", "custom_weapon"],						
 							//Misc Loot
 							["MedBox0", "object"],										//Misc. Loot
 							["AmmoBoxSmall_762", "object"],								//Misc. Loot
 							["AmmoBoxSmall_556", "object"],								//Misc. Loot
 							["Binocular_Vector", "weapon"],								//Misc. Loot
 							//Skins
-							["Skin_RU_Soldier_Crew_DZ  ", "magazine"]					//Crewman
+							["Skin_RU_Soldier_Crew_DZ", "magazine"],					//Crewman
 							["Skin_Sniper1_DZ", "magazine"]	,	     					//Ghillie Suit
-							["Skin_CZ_Soldier_Sniper_EP1_DZ  ", "magazine"]	,			//Desert Ghillie
-							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ ", "magazine"],   	//Special Forces 
+							["Skin_CZ_Soldier_Sniper_EP1_DZ", "magazine"],				//Desert Ghillie
+							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ", "magazine"],   	//Special Forces 
 							["Skin_Soldier1_DZ", "magazine"],							//Soldier Clothing
 							["Skin_Rocket_DZ", "magazine"],	     						//Officer Suit
 							["Skin_Drake_Light_DZ", "magazine"]	,						//Desert Camo 
 							["Skin_FR_Rodriguez_DZ", "magazine"],						//Gunner Outfit
 							["Skin_Graves_Light_DZ", "magazine"],						//Urban Camo
 							["Skin_Soldier_TL_PMC_DZ", "magazine"],						//Team Leader
-							["Skin_Soldier_Sniper_PMC_DZ", "magazine"],					//Marksman 
+							["Skin_Soldier_Sniper_PMC_DZ", "magazine"]					//Marksman 
 				];
 
 				_itemChance = [ 
@@ -200,34 +200,34 @@ switch (_eventType) do {
 			case 3: 				{ 
 				_itemTypes = [
 							//Weapons
-							["ScarLowWeaps", "weapon"],	
-							["ScarHighWeaps", "weapon"],
+							["ScarLowWeaps", "custom_weapon"],	
+							["ScarHighWeaps", "custom_weapon"],
 
-							["HMGWeaps", "weapon"],		
-							["PistolTopWeaps", "weapon"],						
-							["SniperMedWeaps", "weapon"],	
-							["LauncherWeaps", "weapon"],						
-							["RocketWeaps", "weapon"],							
-							["SniperTopWeaps", "weapon"],
-							["UltraWeaps", "weapon"],														
-							["TWSWeaps", "weapon"],						
+							["HMGWeaps", "custom_weapon"],		
+							["PistolTopWeaps", "custom_weapon"],						
+							["SniperMedWeaps", "custom_weapon"],	
+							["LauncherWeaps", "custom_weapon"],						
+							["RocketWeaps", "custom_weapon"],							
+							["SniperTopWeaps", "custom_weapon"],
+							["UltraWeaps", "custom_weapon"],														
+							["TWSWeaps", "custom_weapon"],						
 							//Misc Loot
 							["MedBox0", "object"],										//Misc. Loot
 							["AmmoBoxSmall_762", "object"],								//Misc. Loot
 							["AmmoBoxSmall_556", "object"],								//Misc. Loot
 							["Binocular_Vector", "weapon"],								//Misc. Loot
 							//Skins
-							["Skin_RU_Soldier_Crew_DZ  ", "magazine"]					//Crewman
+							["Skin_RU_Soldier_Crew_DZ", "magazine"],					//Crewman
 							["Skin_Sniper1_DZ", "magazine"]	,	     					//Ghillie Suit
-							["Skin_CZ_Soldier_Sniper_EP1_DZ  ", "magazine"]	,			//Desert Ghillie
-							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ ", "magazine"],   	//Special Forces 
+							["Skin_CZ_Soldier_Sniper_EP1_DZ", "magazine"],				//Desert Ghillie
+							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ", "magazine"],   	//Special Forces 
 							["Skin_Soldier1_DZ", "magazine"],							//Soldier Clothing
 							["Skin_Rocket_DZ", "magazine"],	     						//Officer Suit
 							["Skin_Drake_Light_DZ", "magazine"]	,						//Desert Camo 
 							["Skin_FR_Rodriguez_DZ", "magazine"],						//Gunner Outfit
 							["Skin_Graves_Light_DZ", "magazine"],						//Urban Camo
 							["Skin_Soldier_TL_PMC_DZ", "magazine"],						//Team Leader
-							["Skin_Soldier_Sniper_PMC_DZ", "magazine"],					//Marksman 
+							["Skin_Soldier_Sniper_PMC_DZ", "magazine"]					//Marksman 
 				];
 
 				_itemChance = [ 
@@ -279,44 +279,45 @@ switch (_eventType) do {
 			case 1: 				{ 
 				_itemTypes = [
 							//Weapons
-							["PistolMilWeaps", "weapon"],
-							["PistolTopWeaps", "weapon"],			
-							["AKHighWeaps", "weapon"],									
-							["ScarLowWeaps", "weapon"],		
-							["HK416Weaps", "weapon"],
-							["RiflesMedWeaps", "weapon"],		
-							["ACRHighWeaps", "weapon"],		
-							["LMGWeaps", "weapon"],	
-							["L85Weaps", "weapon"],		
-							["LMGWeaps", "weapon"],		
-							["M4Weaps", "weapon"],	
-							["M8Weaps", "weapon"],					
-							["G36Weaps", "weapon"],					
-							["MasWeaps", "weapon"],	
-							["SVDWeaps", "weapon"],					
-							["HMGWeaps", "weapon"],					
-							["ScarHighWeaps", "weapon"],					
-							["HK417Weaps", "weapon"],					
-							["SniperMedWeaps", "weapon"],	
-							["LauncherWeaps", "weapon"],						
-							["RocketWeaps", "weapon"],	
+							["PistolMilWeaps", "custom_weapon"],
+							["PistolTopWeaps", "custom_weapon"],			
+							["AKHighWeaps", "custom_weapon"],									
+							["ScarLowWeaps", "custom_weapon"],		
+							["HK416Weaps", "custom_weapon"],
+							["RiflesMedWeaps", "custom_weapon"],		
+							["ACRHighWeaps", "custom_weapon"],		
+							["LMGWeaps", "custom_weapon"],	
+							["L85Weaps", "custom_weapon"],		
+							["LMGWeaps", "custom_weapon"],		
+							["M4Weaps", "custom_weapon"],	
+							["M8Weaps", "custom_weapon"],					
+							["G36Weaps", "custom_weapon"],					
+							["MasWeaps", "custom_weapon"],	
+							["SVDWeaps", "custom_weapon"],					
+							["HMGWeaps", "custom_weapon"],					
+							["ScarHighWeaps", "custom_weapon"],					
+							["HK417Weaps", "custom_weapon"],					
+							["SniperMedWeaps", "custom_weapon"],	
+							["LauncherWeaps", "custom_weapon"],						
+							["RocketWeaps", "custom_weapon"],	
 							//Misc Loot
 							["MedBox0", "object"],										//Misc. Loot
 							["AmmoBoxSmall_762", "object"],								//Misc. Loot
 							["AmmoBoxSmall_556", "object"],								//Misc. Loot
 							["Binocular_Vector", "weapon"],								//Misc. Loot
+
 							//Skins
-							["Skin_RU_Soldier_Crew_DZ  ", "magazine"]					//Crewman
+							["Skin_RU_Soldier_Crew_DZ", "magazine"],					//Crewman
 							["Skin_Sniper1_DZ", "magazine"]	,	     					//Ghillie Suit
-							["Skin_CZ_Soldier_Sniper_EP1_DZ  ", "magazine"]	,			//Desert Ghillie
-							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ ", "magazine"],   	//Special Forces 
+							["Skin_CZ_Soldier_Sniper_EP1_DZ", "magazine"],				//Desert Ghillie
+							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ", "magazine"],   	//Special Forces 
 							["Skin_Soldier1_DZ", "magazine"],							//Soldier Clothing
 							["Skin_Rocket_DZ", "magazine"],	     						//Officer Suit
 							["Skin_Drake_Light_DZ", "magazine"]	,						//Desert Camo 
 							["Skin_FR_Rodriguez_DZ", "magazine"],						//Gunner Outfit
 							["Skin_Graves_Light_DZ", "magazine"],						//Urban Camo
 							["Skin_Soldier_TL_PMC_DZ", "magazine"],						//Team Leader
-							["Skin_Soldier_Sniper_PMC_DZ", "magazine"],					//Marksman 
+							["Skin_Soldier_Sniper_PMC_DZ", "magazine"]					//Marksman 
 				];
 
 				_itemChance = [ 
