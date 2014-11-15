@@ -65,9 +65,9 @@ KK_fnc_makeRandomId = {
 KK_fnc_checkHash = {
    // "debug_console" callExtension format["Obj: %1 hash check", typeOf _this];
 
-   if (_object isKindOf "Man") exitWith {
+    if (_this isKindOf "Man") exitWith {
         true;
-   };
+    };
 
     if ("hash_id" callExtension format [
         "%1:%2#%3", 
