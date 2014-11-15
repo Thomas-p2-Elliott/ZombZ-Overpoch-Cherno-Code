@@ -39,437 +39,73 @@ switch (_eventType) do {
 	//Heli Crashsite Loot
 		switch (_eventSubType) do {
  				
- 				//Normal Heli Crash
+ 				/* Normal Heli Crash
+ 				Description: Standard / Classic UH1Y/UH60 ( http://tinyurl.com/q4zses4 / http://tinyurl.com/ljgw3yu) Wreck Model 
+ 				LootTable:	Best of the best with L85's, LMGs, MedRifles, And ACRs
+ 				*/
 				case 1: 				{ 
 				_itemTypes = [
-							 ["M32_EP1", "weapon"], 					 //LauncherWeaps
-							 ["M79_EP1", "weapon"],  					 //LauncherWeaps
-							 ["Mk13_EP1", "weapon"], 					 //LauncherWeaps
-							 
-							 ["revolver_gold_EP1", "weapon"],  			 //UltraWeaps
-							 ["RH_Deagleg", "weapon"], 					 //UltraWeaps
-							 ["RH_anacg", "weapon"], 					 //UltraWeaps
-							 ["Javelin", "weapon"], 					 //UltraWeaps
-							 ["AKS_GOLD", "weapon"], 					 //UltraWeaps
-							 ["AA12_PMC", "weapon"], 					 //UltraWeaps
+							//Weapons
+							["L85Weaps", "weapon"],		
+							["RiflesMedWeaps", "weapon"],		
+							["ACRHighWeaps", "weapon"],		
+							["LMGWeaps", "weapon"],		
 
-							 ["BAF_LRR_scoped", "weapon"],               //SniperTopWeaps
-							 ["KSVK_DZE", 	"weapon"], 			         //SniperTopWeaps
-							 ["USSR_cheytacM200", "weapon"], 			 //SniperTopWeaps
-							 ["USSR_cheytacM200_sd", "weapon"], 	     //SniperTopWeaps
-							 ["BAF_AS50_scoped_DZ", "weapon"], 			 //SniperTopWeaps
-							 ["m107_SKN", "weapon"], 					 //SniperTopWeaps
-							 ["BAF_LRR_scoped_W", "weapon"], 			 //SniperTopWeaps
-							 ["FHQ_MSR_DESERT","weapon"],				 //SniperTopWeaps
-							 ["FHQ_MSR_SD_DESERT","weapon"],			 //SniperTopWeaps
-							 ["FHQ_XM2010_SD_DESERT","weapon"],			 //SniperTopWeaps
-							 ["FHQ_XM2010_DESERT","weapon"],			 //SniperTopWeaps
-
-							 ["M136", "weapon"],              			 //RocketWeaps
-							 ["RPG7V", "weapon"], 			       	 	 //RocketWeaps
-							 ["MetisLauncher", "weapon"], 				 //RocketWeaps
-							 ["SMAW", "weapon"], 	    				 //RocketWeaps
-							 ["MAAWS", "weapon"], 						 //RocketWeaps
-							 ["Vil_RPG16", "weapon"], 					 //RocketWeaps
-							 ["Vil_RPG7V_PGO", "weapon"], 				 //RocketWeaps
-							 ["Vil_RPG7d_PGO","weapon"],				 //RocketWeaps
-							 ["Vil_RPG29","weapon"],					 //RocketWeaps
-							 ["Vil_RPO_A","weapon"],					 //RocketWeaps
-							 ["vilas_rpg22","weapon"],					 //RocketWeaps
-							 ["vilas_rpg26","weapon"],					 //RocketWeaps
-							 ["vil_CG84T","weapon"],					 //RocketWeaps
-							 ["vil_Panzerfaust3","weapon"],				 //RocketWeaps
-
-							 ["BAF_L85A2_RIS_CWS", "weapon"],            //TWSWeaps
-							 ["M249_TWS_EP1", "weapon"], 			     //TWSWeaps
-							 ["AKS_74_GOSHAWK", "weapon"], 				 //TWSWeaps
-							 ["SCAR_L_STD_EGLM_TWS", "weapon"], 	     //TWSWeaps
-							 ["SCAR_H_STD_TWS_SD", "weapon"], 		     //TWSWeaps
-							 ["m8_tws_sd", "weapon"], 					 //TWSWeaps
-							 ["FHQ_ACR_WDL_TWS_F", "weapon"], 			 //TWSWeaps
-							 ["FHQ_ACR_BLK_TWS_SD", "weapon"], 			 //TWSWeaps
-							 ["FHQ_ACR_TAN_TWS_GL_SD", "weapon"], 		 //TWSWeaps
-							 ["FHQ_ACR_SNW_TWS", "weapon"], 			 //TWSWeaps
-							 ["FHQ_ACR_SNW_TWS_GL", "weapon"], 			 //TWSWeaps
-
-							 ["RH_deagle", "weapon"],              		 //PistolTopWeaps
-							 ["RH_Deaglem", "weapon"], 			       	 //PistolTopWeaps
-							 ["RH_Deaglemz", "weapon"], 				 //PistolTopWeaps
-							 ["RH_Deaglemzb", "weapon"], 	    		 //PistolTopWeaps
-							 ["RH_Deagles", "weapon"], 					 //PistolTopWeaps
-							 ["UZI_SD_EP1", "weapon"], 					 //PistolTopWeaps
-							 ["RH_uspm", "weapon"], 				     //PistolTopWeaps
-							 ["RH_bull", "weapon"], 				     //PistolTopWeaps
-							 ["vil_apssd", "weapon"], 				     //PistolTopWeaps
-							 ["vil_APS", "weapon"], 				     //PistolTopWeaps
-
-							 ["Pecheneg_DZ", "weapon"],              	 //HMGWeaps
-							 ["Mk_48_DZ", "weapon"], 			       	 //HMGWeaps
-							 ["m240_scoped_EP1_DZE", "weapon"], 		 //HMGWeaps
-							 ["M240_DZ", "weapon"], 	    		     //HMGWeaps
-							 ["M60A4_EP1_DZE", "weapon"], 				 //HMGWeaps
-							 ["PK_DZ", "weapon"], 					     //HMGWeaps
-							 ["vil_PKP_EOT", "weapon"], 				 //HMGWeaps
-							 ["BAF_L7A2_GPMG", "weapon"], 				 //HMGWeaps
-							 ["vil_PKP", "weapon"], 				 	 //HMGWeaps
-							 ["vil_PK", "weapon"], 				 		 //HMGWeaps
-							 ["vil_zastava_m84", "weapon"], 			 //HMGWeaps
-							 ["vil_PKM", "weapon"], 			 		 //HMGWeaps
-							 ["skavil_M60", "weapon"], 			 		 //HMGWeaps
-							 ["skavil_M60e3", "weapon"], 			     //HMGWeaps
-							 ["vil_Mg3", "weapon"], 			 		 //HMGWeaps
-							 ["vil_FnMag", "weapon"], 			 		 //HMGWeaps
-							 ["vil_M240_B", "weapon"], 			 		 //HMGWeaps
-
-							
-
-							 ["SCAR_L_STD_EGLM_RCO", "weapon"],     //ScarHighWeaps
-							 ["SCAR_H_CQC_CCO_SD", "weapon"], 		//ScarHighWeaps
-							 ["SCAR_H_STD_EGLM_Spect", "weapon"],   //ScarHighWeaps
-							 ["SCAR_H_LNG_Sniper", "weapon"], 	    //ScarHighWeaps
-							 ["SCAR_H_LNG_Sniper_SD", "weapon"], 	//ScarHighWeaps
-
-							 
-							 ["glock17_EP1","weapon"],              //PistolMilWeaps
-							 ["RH_g18","weapon"],					//PistolMilWeaps
-							 ["RH_g17","weapon"],					//PistolMilWeaps
-							 ["RH_g19","weapon"],					//PistolMilWeaps
-							 ["RH_g19t","weapon"],					//PistolMilWeaps
-							 ["RH_g17sd","weapon"],					//PistolMilWeaps
-							 ["UZI_EP1","weapon"],					//PistolMilWeaps
-							 ["M9SD","weapon"],					    //PistolMilWeaps
-					 		 ["RH_m9sd","weapon"],					//PistolMilWeaps
-							 ["RH_m9csd","weapon"],				    //PistolMilWeaps
-							 ["vil_USPSD","weapon"],				//PistolMilWeaps
-							 ["vil_USP45","weapon"],				//PistolMilWeaps
-							 ["vil_USP45SD","weapon"],			    //PistolMilWeaps
-							 ["RH_anac","weapon"],					//PistolMilWeaps
-							 ["RH_uspsd","weapon"],					//PistolMilWeaps
-							 ["RH_vz61","weapon"],					//PistolMilWeaps
-							 ["RH_tec9","weapon"],					//PistolMilWeaps
-						     ["vil_Glock","weapon"],				//PistolMilWeaps
-							 ["vil_Glock_o","weapon"],				//PistolMilWeaps
-							 ["Sa61_EP1","weapon"],					//PistolMilWeaps
-							 ["M9","weapon"],						//PistolMilWeaps
-							 ["RH_usp","weapon"],					//PistolMilWeaps
-							 ["RH_m9","weapon"],					//PistolMilWeaps
-							 ["RH_m9c","weapon"],					//PistolMilWeaps
-							 ["RH_muzi","weapon"],					//PistolMilWeaps
-							 ["vil_USP","weapon"],					//PistolMilWeaps
-
-							
-							["RH_hk417","weapon"], 					//HK417Weaps
-							["vil_HK417s","weapon"],				//HK417Weaps
-							["RH_hk417aim","weapon"],				//HK417Weaps
-							["RH_hk417eotech","weapon"],			//HK417Weaps
-							["RH_hk417acog","weapon"],				//HK417Weaps
-							["RH_hk417saim","weapon"],				//HK417Weaps
-							["RH_hk417seotech","weapon"],			//HK417Weaps
-							["RH_hk417sacog","weapon"],				//HK417Weaps
-							["RH_hk417sd","weapon"],				//HK417Weaps
-							["RH_hk417sdaim","weapon"],				//HK417Weaps
-							["RH_hk417sdeotech","weapon"],			//HK417Weaps
-							["RH_hk417sdacog","weapon"],			//HK417Weaps
-							["RH_hk417sgl","weapon"],				//HK417Weaps
-							["RH_hk417sglaim","weapon"],			//HK417Weaps
-							["RH_hk417sgleotech","weapon"],			//HK417Weaps
-							["RH_hk417sglacog","weapon"],			//HK417Weaps
-							["RH_hk417s","weapon"],					//HK417Weaps
-
-
-							["vil_SV_98","weapon"],					//SVDWeaps
-							["vil_SV_98_69","weapon"],				//SVDWeaps
-							["vil_SV_98_SD","weapon"],				//SVDWeaps
-							["SVD_des_EP1","weapon"],				//SVDWeaps
-							["SVD_CAMO","weapon"],					//SVDWeaps
-							["vil_SVD_63","weapon"],				//SVDWeaps
-							["vil_SVD_S","weapon"],					//SVDWeaps
-							["vil_SVD_M","weapon"],					//SVDWeaps
-							["vil_SVD_P21","weapon"],				//SVDWeaps
-							["vil_SVDK","weapon"],					//SVDWeaps
-							["SVD","weapon"],						//SVDWeaps
-							["vil_SVU","weapon"],					//SVDWeaps
-
-
-							["RH_sc2acog","weapon"], 				//SniperMedWeaps
-							["RH_sc2sp","weapon"],					//SniperMedWeaps
-							["RH_hk417sp","weapon"],				//SniperMedWeaps
-							["RH_hk417sdsp","weapon"],				//SniperMedWeaps
-							["vil_M110","weapon"],					//SniperMedWeaps
-							["vil_M110sd","weapon"],				//SniperMedWeaps
-							["vil_SR25","weapon"],					//SniperMedWeaps
-							["vil_SR25SD","weapon"],				//SniperMedWeaps
-							["FHQ_RSASS_TAN","weapon"],				//SniperMedWeaps
-							["FHQ_RSASS_SD_TAN","weapon"],			//SniperMedWeaps
-							["DMR_SKN","weapon"],					//SniperMedWeaps
-							["vil_DRM_BASE","weapon"],				//SniperMedWeaps
-							
-
-							["RH_sc2aim","weapon"],					//RiflesMedWeaps
-							["RH_sc2eot","weapon"],					//RiflesMedWeaps
-							["RH_sc2shd","weapon"],					//RiflesMedWeaps
-							["M14_EP1","weapon"],					//RiflesMedWeaps
-							["vil_M14","weapon"],					//RiflesMedWeaps
-							["vil_M14G","weapon"],					//RiflesMedWeaps
-							["RH_m14acog","weapon"],				//RiflesMedWeaps
-							["RH_m14aim","weapon"],					//RiflesMedWeaps
-							["RH_m14eot","weapon"],					//RiflesMedWeaps
-							["vil_G3a3","weapon"],					//RiflesMedWeaps
-							["vil_G3a2","weapon"],					//RiflesMedWeaps
-							["vil_G3ZF","weapon"],					//RiflesMedWeaps
-							["vil_G3zfb","weapon"],					//RiflesMedWeaps
-							["vil_G3SG1","weapon"],					//RiflesMedWeaps
-							["vil_G3sg1b","weapon"],				//RiflesMedWeaps
-							["vil_AG3EOT","weapon"],			    //RiflesMedWeaps
-							["vil_Groza_HG","weapon"],				//RiflesMedWeaps
-
-							["MedBox0", "object"],					//Misc. Loot
-							["AmmoBoxSmall_762", "object"],			//Misc. Loot
-							["Binocular_Vector", "weapon"]	,		//Misc. Loot
-
-							["Skin_Sniper1_DZ", "magazine"]	,	      //Ghillie Suit
-							["Skin_Camo1_DZ", "magazine"]	,		  //Camo Clothing
-							["Skin_Survivor2_DZ", "magazine"]	,	  //Civilian Clothing
-							["Skin_Soldier1_DZ", "magazine"]	,	  //Soldier Clothing
-							["Skin_Rocket_DZ", "magazine"]	,	      //Officer Suit
-							["Skin_RU_Policeman_DZ", "magazine"],      //Policeman "Sergei"
-							["Skin_Ins_Soldier_GL_DZ", "magazine"]  ,  //Terrorist Uniform
-							["Skin_GUE_Commander_DZ", "magazine"]   ,  //Rebel Uniform
-							["Skin_Bandit1_DZ","magazine"]	,	      //Bandit Outfit
-							["Skin_Bandit2_DZ","magazine"]	,		  //Bandit Camo
-							["Skin_GUE_Soldier_MG_DZ", "magazine"]	,  //Bandit Gunner
-							["Skin_GUE_Soldier_Crew_DZ", "magazine"] ,   //Bandit Baklava
-							["Skin_GUE_Soldier_CO_DZ", "magazine"] ,   //Bandit Mask
-							["Skin_GUE_Soldier_2_DZ", "magazine"] ,   //Bandit Hat
-							["Skin_TK_INS_Warlord_EP1_DZ", "magazine"],	  //Takistani Warlord
-							["Skin_TK_INS_Soldier_EP1_DZ", "magazine"],	  //Takistani Soldier
-							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ  ", "magazine"] ,   //Special Forces
-							["Skin_Drake_Light_DZ", "magazine"]	,					//Desert Camo
-							["Skin_Soldier_Bodyguard_AA12_PMC_DZ", "magazine"],		//Bodyguard
-							["Skin_FR_OHara_DZ", "magazine"],					//Jungle Camo
-							["Skin_FR_Rodriguez_DZ", "magazine"],					 //Gunner Outfit
-							["Skin_CZ_Soldier_Sniper_EP1_DZ  ", "magazine"]	,		//Desert Ghillie
-							["Skin_Graves_Light_DZ", "magazine"],					//Urban Camo
-							["Skin_Soldier_Sniper_PMC_DZ  ", "magazine"],			 //Marksman
-							["Skin_Soldier_TL_PMC_DZ", "magazine"],					//Team Leader
-							["Skin_TK_Special_Forces_MG_EP1_DZ", "magazine"],		//Smuggler
-							["Skin_TK_Soldier_Sniper_EP1_DZ", "magazine"],			//Desert Sniper
-							["Skin_TK_Commander_EP1_DZ  ", "magazine"],				//General
-							["Skin_RU_Soldier_Crew_DZ  ", "magazine"]				//Crewman
-							];
+							["PistolTopWeaps", "weapon"],			
+							["HMGWeaps", "weapon"],					
+							["SniperMedWeaps", "weapon"],	
+							["LauncherWeaps", "weapon"],						
+							["RocketWeaps", "weapon"],							
+							["SniperTopWeaps", "weapon"],
+							["UltraWeaps", "weapon"],														
+							["TWSWeaps", "weapon"],						
+							//Misc Loot
+							["MedBox0", "object"],										//Misc. Loot
+							["AmmoBoxSmall_762", "object"],								//Misc. Loot
+							["AmmoBoxSmall_556", "object"],								//Misc. Loot
+							["Binocular_Vector", "weapon"],								//Misc. Loot
+							//Skins
+							["Skin_RU_Soldier_Crew_DZ  ", "magazine"]					//Crewman
+							["Skin_Sniper1_DZ", "magazine"]	,	     					//Ghillie Suit
+							["Skin_CZ_Soldier_Sniper_EP1_DZ  ", "magazine"]	,			//Desert Ghillie
+							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ ", "magazine"],   	//Special Forces 
+							["Skin_Soldier1_DZ", "magazine"],							//Soldier Clothing
+							["Skin_Rocket_DZ", "magazine"],	     						//Officer Suit
+							["Skin_Drake_Light_DZ", "magazine"]	,						//Desert Camo 
+							["Skin_FR_Rodriguez_DZ", "magazine"],						//Gunner Outfit
+							["Skin_Graves_Light_DZ", "magazine"],						//Urban Camo
+							["Skin_Soldier_TL_PMC_DZ", "magazine"],						//Team Leader
+							["Skin_Soldier_Sniper_PMC_DZ", "magazine"],					//Marksman 
+				];
 
 				_itemChance = [ 
-								//LauncherWeaps
-								0.03,  
-							    0.03,  
-							    0.03,  
-							    
-							    //UltraWeaps
-							    0.01,  
-							    0.01,   
-							    0.01,   
-							    0.01,   
-							    0.01,   
-							    0.01,   
+								//Weapons = 45%
+								//Main Spawners (20%)
+								0.05,  //L85's
+								0.05,  //Medium Power Rifles
+								0.05,  //High Power ACRs
+								0.05,  //Light Machine Guns
+								//Global crash site spawners (25%) -> WARNING: Modified for this Class ONLY! (Rocket,TopSnip,Launch Changes)
+								0.10, //Top Pistols
+								0.04,  //Heavy Machine Guns
+								0.04, //Mid Snipers
+								0.01, //Launcher Weaps
+								0.02, //Rocket Weaps
+								0.02, //Top Snipers (Ends up as +0.019% thanks to TWS weapons swapping down to it 90% of the time)
+								0.01, //Ultra Weapons = 1%
+								0.01, //TWS Weapons = 1% (Gets Reduced to 10% of this later, with 90% of time swapping to topSnipers)
 
-							    //SniperTopWeaps
-							    0.02,  
-							    0.02,   
-							    0.02,   
-							    0.02,   
-							    0.02,   
-							    0.02, 
-							    0.02,  
-							    0.02,   
-							    0.02,   
-							    0.02,   
-							    0.02,   
-
-							    //RocketWeaps
-							    0.02,  
-							    0.02,  
-							    0.02,   
-							    0.02,   
-							    0.02,   
-							    0.02, 
-							    0.02,  
-							    0.02,   
-							    0.02,  
-							    0.02,   
-							    0.02, 
-							    0.02,   
-							    0.02, 
-
-							    //TWSWeaps  = 0.22
-							    0.01,  
-							    0.01,  
-							    0.01,   
-							    0.01,   
-							    0.01,   
-							    0.01, 
-							    0.01,  
-							    0.01,   
-							    0.01,   
-							    0.01,   
-							    0.01, 
-							    0.01,  
-							    0.01,   
-							    0.01,  
-							    0.01, 
-							    0.01,   
-							    0.01,  
-							    0.01, 
-							    0.01, 
-							    0.01,   
-							    0.01,  
-							    0.01, 
-
-							    //ScarHighWeaps = 0.10
-							    0.02,  
-							    0.02,  
-							    0.02,   
-							    0.02,   
-							    0.02, 
-							     
-							    //PistolMilWeaps = 1.04
-							    0.04,  
-							    0.04,  
-							    0.04,   
-							    0.04,   
-							    0.04,   
-							    0.04, 
-							    0.04,  
-							    0.04,   
-							    0.04,  
-							    0.04, 
-							    0.04,   
-							    0.04,  
-							    0.04, 
-							    0.04, 
-							    0.04,   
-							    0.04,  
-							    0.04, 
-							    0.04,  
-							    0.04, 
-							    0.04,   
-							    0.04,  
-							    0.04, 
-							    0.04, 
-							    0.04,   
-							    0.04,  
-							    0.04, 
-
-							    //HK417Weaps = 0.51
-							    0.03, 
-							    0.03,   
-							    0.03,  
-							    0.03, 
-							    0.03, 
-							    0.03,   
-							    0.03,  
-							    0.03, 
-							    0.03,  
-							    0.03, 
-							    0.03,   
-							    0.03,  
-							    0.03, 
-							    0.03, 
-							    0.03,   
-							    0.03,  
-							    0.03, 
-
-							    //SVDWeaps = 0.56
-							    0.04,  
-							    0.04, 
-							    0.04, 
-							    0.04,   
-							    0.04,  
-							    0.04, 
-							    0.04,  
-							    0.04, 
-							    0.04,   
-							    0.04,  
-							    0.04, 
-							    0.04, 
-							    0.04,   
-							    0.04,  
-
-							    //SniperMedWeaps = 0.65
-							    0.05, 
-							    0.05, 
-							    0.05,   
-							    0.05,  
-							    0.05, 
-							    0.05,  
-							    0.05, 
-							    0.05,   
-							    0.05,  
-							    0.05, 
-							    0.05, 
-							    0.05,   
-							    0.05,  
-
-							    //RiflesMedWeaps = 1.86
-							    0.06, 
-							    0.06, 
-							    0.06,   
-							    0.06,  
-							    0.06, 
-							    0.06,  
-							    0.06, 
-							    0.06,   
-							    0.06,  
-							    0.06, 
-							    0.06, 
-							    0.06,   
-							    0.06, 
-							    0.06,  
-							    0.06, 
-							    0.06, 
-							    0.06,   
-							    0.06,  
-							    0.06, 
-							    0.06,  
-							    0.06, 
-							    0.06,   
-							    0.06,  
-							    0.06, 
-							    0.06, 
-							    0.06,   
-							    0.06, 
-							    0.06, 
-							    0.06, 
-							    0.06,   
+							    ///Misc. Loot = 20%
 							    0.06,
+							    0.06,
+							    0.07,
+							    0.01,
 
-							    //Misc. Loot
-							    0.09,
-							    0.09,
-							    0.09,
-
-							    //Skins **Percentages need to be adjusted**
-							    0.02,   
-							    0.02,  
-							    0.02, 
-							    0.02,  
+							    //Skins Total == 20% (Ghillie Suit Sniper1 given 1% boost for this crashsite ONLY)
 							    0.02, 
 							    0.02,   
-							    0.02,  
-							    0.02, 
-							    0.02, 
-							    0.02,   
-							    0.02, 
-							    0.02,  
-							    0.02, 
-							    0.02, 
-							    0.02,   
-							    0.02,  
-							    0.02, 
-							    0.02,  
-							    0.02, 
-							    0.02,   
-							    0.02,  
-							    0.02, 
+							    0.01,  
+							    0.01, 
 							    0.02, 
 							    0.02,   
 							    0.02, 
@@ -477,30 +113,159 @@ switch (_eventType) do {
 							    0.02, 
 							    0.02,   
 							    0.02
-
-
-							 ];
+				];
  				
  				_lootTable = [_itemTypes,_itemChance]; 
  			};
 
-
-                                                                                                    
-
-
-
-
-
- 			//Navy Heli Crash
+ 			/* Navy Heli Crash
+ 				Description: US Navy Crash (Navy MH60 Wreck - Img: http://tinyurl.com/pvv2cot)
+ 				LootTable:	Best of the best with High Powered HK417s and ACRs being the common rifles and western skin packages
+ 				*/
 			case 2: 				{ 
-				_itemTypes = [["PartWoodLumber", "magazine"],["PartWoodLumber", "magazine"],["PartWoodLumber", "magazine"],["AmmoBoxSmall_762", "object"],["DMR_DZ", "weapon"]];
-				_itemChance = [0.1,0.2,0.3,0.4,0,5];
+				_itemTypes = [
+							//Weapons
+							["ACRHighWeaps", "weapon"],	
+							["HK417Weaps", "weapon"],
+
+							["HMGWeaps", "weapon"],		
+							["PistolTopWeaps", "weapon"],						
+							["SniperMedWeaps", "weapon"],	
+							["LauncherWeaps", "weapon"],						
+							["RocketWeaps", "weapon"],							
+							["SniperTopWeaps", "weapon"],
+							["UltraWeaps", "weapon"],														
+							["TWSWeaps", "weapon"],						
+							//Misc Loot
+							["MedBox0", "object"],										//Misc. Loot
+							["AmmoBoxSmall_762", "object"],								//Misc. Loot
+							["AmmoBoxSmall_556", "object"],								//Misc. Loot
+							["Binocular_Vector", "weapon"],								//Misc. Loot
+							//Skins
+							["Skin_RU_Soldier_Crew_DZ  ", "magazine"]					//Crewman
+							["Skin_Sniper1_DZ", "magazine"]	,	     					//Ghillie Suit
+							["Skin_CZ_Soldier_Sniper_EP1_DZ  ", "magazine"]	,			//Desert Ghillie
+							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ ", "magazine"],   	//Special Forces 
+							["Skin_Soldier1_DZ", "magazine"],							//Soldier Clothing
+							["Skin_Rocket_DZ", "magazine"],	     						//Officer Suit
+							["Skin_Drake_Light_DZ", "magazine"]	,						//Desert Camo 
+							["Skin_FR_Rodriguez_DZ", "magazine"],						//Gunner Outfit
+							["Skin_Graves_Light_DZ", "magazine"],						//Urban Camo
+							["Skin_Soldier_TL_PMC_DZ", "magazine"],						//Team Leader
+							["Skin_Soldier_Sniper_PMC_DZ", "magazine"],					//Marksman 
+				];
+
+				_itemChance = [ 
+								//Weapons = 45%
+								//Main Spawners: (20%)
+								0.15,  //High Powered HK417
+								0.05,  //High Powered ACRs
+								//Global crash site spawners (25%)
+								0.10, //Top Pistols
+								0.04,  //Heavy Machine Guns
+								0.04, //Mid Snipers
+								0.03, //Launcher Weaps
+								0.01, //Rocket Weaps
+								0.01, //Top Snipers (Ends up as 0.019% thanks to TWS weapons swapping down to it 90% of the time)
+								0.01, //Ultra Weapons = 1%
+								0.01, //TWS Weapons = 1% (Gets Reduced to 10% of this later, remainder is set to TopSnipers, so actually ends up as 0.1% (1/1000) with 0.009% added to TopSniper Spawns)
+
+							    ///Misc. Loot = 20%
+							    0.06,
+							    0.06,
+							    0.07,
+							    0.01,
+
+							    //Skins Total == 20% 
+							    0.03, 
+							    0.01,   
+							    0.01,  
+							    0.01, 
+							    0.02, 
+							    0.02,   
+							    0.02, 
+							    0.02, 
+							    0.02, 
+							    0.02,   
+							    0.02
+							 ];
+ 				
  				_lootTable = [_itemTypes,_itemChance]; 
  			};
- 			//Army Heli Crash
+ 			//Army Heli Crash http://tinyurl.com/owegeg6
+ 			 /* Army Heli Crash
+ 				Description: US Army Crash (Army MH60 Wreck - Img: http://tinyurl.com/owegeg6
+ 				LootTable:	Best of the best with High Powered Scars being the common rifles and western skin packages
+ 			*/
 			case 3: 				{ 
-				_itemTypes = [["metal_floor_kit", "magazine"],["BAF_LRR_scoped_W", "weapon"],["AmmoBoxSmall_556", "object"],["cinder_door_kit", "magazine"],["DMR_DZ", "weapon"]];
-				_itemChance = [0.1,0.2,0.3,0.4,0,5];
+				_itemTypes = [
+							//Weapons
+							["ScarLowWeaps", "weapon"],	
+							["ScarHighWeaps", "weapon"],
+
+							["HMGWeaps", "weapon"],		
+							["PistolTopWeaps", "weapon"],						
+							["SniperMedWeaps", "weapon"],	
+							["LauncherWeaps", "weapon"],						
+							["RocketWeaps", "weapon"],							
+							["SniperTopWeaps", "weapon"],
+							["UltraWeaps", "weapon"],														
+							["TWSWeaps", "weapon"],						
+							//Misc Loot
+							["MedBox0", "object"],										//Misc. Loot
+							["AmmoBoxSmall_762", "object"],								//Misc. Loot
+							["AmmoBoxSmall_556", "object"],								//Misc. Loot
+							["Binocular_Vector", "weapon"],								//Misc. Loot
+							//Skins
+							["Skin_RU_Soldier_Crew_DZ  ", "magazine"]					//Crewman
+							["Skin_Sniper1_DZ", "magazine"]	,	     					//Ghillie Suit
+							["Skin_CZ_Soldier_Sniper_EP1_DZ  ", "magazine"]	,			//Desert Ghillie
+							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ ", "magazine"],   	//Special Forces 
+							["Skin_Soldier1_DZ", "magazine"],							//Soldier Clothing
+							["Skin_Rocket_DZ", "magazine"],	     						//Officer Suit
+							["Skin_Drake_Light_DZ", "magazine"]	,						//Desert Camo 
+							["Skin_FR_Rodriguez_DZ", "magazine"],						//Gunner Outfit
+							["Skin_Graves_Light_DZ", "magazine"],						//Urban Camo
+							["Skin_Soldier_TL_PMC_DZ", "magazine"],						//Team Leader
+							["Skin_Soldier_Sniper_PMC_DZ", "magazine"],					//Marksman 
+				];
+
+				_itemChance = [ 
+								//Weapons = 45%
+								
+								//Main Spawners: (20% overall, 50% of gun spawns.)
+								0.05,  //Low Powered Scars  (Mk16's)
+								0.15,  //High Powered Scars (mk17's)
+								//Global crash site spawners (25%)
+								0.10, //Top Pistols
+								0.04,  //Heavy Machine Guns
+								0.04, //Mid Snipers
+								0.03, //Launcher Weaps
+								0.01, //Rocket Weaps
+								0.01, //Top Snipers (Ends up as 0.019% thanks to TWS weapons swapping down to it 90% of the time)
+								0.01, //Ultra Weapons = 1%
+								0.01, //TWS Weapons = 1% (Gets Reduced to 10% of this later, remainder is set to TopSnipers, so actually ends up as 0.001% (1/1000) with 0.009% added to TopSniper Spawns)
+
+							    ///Misc. Loot = 20%
+							    0.06,
+							    0.06,
+							    0.07,
+							    0.01,
+
+							    //Skins Total == 20% 
+							    0.03, 
+							    0.01,   
+							    0.01,  
+							    0.01, 
+							    0.02, 
+							    0.02,   
+							    0.02, 
+							    0.02, 
+							    0.02, 
+							    0.02,   
+							    0.02
+				];
+ 				
  				_lootTable = [_itemTypes,_itemChance]; 
  			};
 		}; 
@@ -508,10 +273,101 @@ switch (_eventType) do {
 	case 2: { 
 	//Care Package Loot
 		switch (_eventSubType) do {
-			//Military Care Package
+			/*
+				Military Care Package
+			*/
 			case 1: 				{ 
-				_itemTypes = [["DMR_DZ", "weapon"],["BAF_LRR_scoped", "object"],["BAF_LRR_scoped_W", "weapon"],["MedBox0", "object"],["AmmoBoxSmall_762", "object"],["Skin_Soldier1_DZ", "magazine"],["Skin_Camo27_DZ", "magazine"],["M136", "weapon"],["Skin_Camo27_DZ", "magazine"],["Skin_Camo27_DZ", "magazine"],["M136", "weapon"],["Skin_Camo25_DZ", "magazine"],["M136", "weapon"],["Skin_Camo25_DZ", "magazine"],["Skin_Camo25_DZ", "magazine"],["Skin_Camo25_DZ", "magazine"],["Skin_Camo25_DZ", "magazine"],["Skin_Camo26_DZ", "magazine"],["Skin_Camo26_DZ", "magazine"],["Skin_Camo26_DZ", "magazine"],["Skin_Camo25_DZ", "magazine"],["Skin_Camo26_DZ", "magazine"],["Skin_Camo27_DZ", "magazine"],["Skin_Camo18_DZ", "magazine"],["Skin_Camo19_DZ", "magazine"],["DZ_CivilBackpack_EP1", "object"],["DZ_CivilBackpack_EP1", "object"],["DZ_CivilBackpack_EP1", "object"],["Skin_Camo23_DZ", "magazine"],["M136", "weapon"],["Skin_Sniper1_DZ", "magazine"],["Skin_Sniper2_DZ", "magazine"],["Skin_Sniper3_DZ", "magazine"],["Skin_Sniper4_DZ", "magazine"],["Skin_Sniper5_DZ", "magazine"],["Skin_Sniper6_DZ", "magazine"],["vil_USP45SD", "weapon"],["vil_uzi_SD", "weapon"],["vil_uzimini_SD", "weapon"],["vil_apssd", "weapon"],["RH_m9csd", "weapon"],["RH_uspsd", "weapon"],["RH_mk22sd", "weapon"],["RH_deagle", "weapon"],["RH_Deagles", "weapon"],["RH_Deaglem", "weapon"],["RH_Deaglemz", "weapon"],["RH_Deaglemzb", "weapon"],["RH_anac", "weapon"],["RH_anacg", "weapon"],["RH_bull", "weapon"],["RH_python", "weapon"],["AK_107_pso", "weapon"],["RH_hk417sdaim", "weapon"],["RH_hk417sdeotech", "weapon"],["RH_hk417sdacog", "weapon"],["RH_hk417sdsp", "weapon"],["RH_massdaim", "weapon"],["RH_massdeotech", "weapon"],["RH_massdacog", "weapon"],["RH_masbsdaim", "weapon"],["RH_masbsdeotech", "weapon"],["RH_masbsdacog", "weapon"],["RH_acrbglacog", "weapon"],["RH_m14eot", "weapon"],["RH_m21", "weapon"],["RH_sc2eot", "weapon"],["RH_sc2shd", "weapon"],["RH_sc2sp", "weapon"],["RH_m1seot", "weapon"],["RH_m1sshd", "weapon"],["RH_m1ssp", "weapon"],["m8_sharpshooter", "weapon"],["m8_SAW", "weapon"],["SCAR_H_STD_EGLM_Spect", "weapon"],["SCAR_H_LNG_Sniper", "weapon"],["SCAR_H_LNG_Sniper_SD", "weapon"],["SCAR_L_STD_EGLM_RCO", "weapon"],["M136", "weapon"],["SCAR_L_CQC_CCO_SD", "weapon"],["SCAR_H_CQC_CCO_SD", "weapon"],["FHQ_ACR_WDL_HAMR_SD", "weapon"],["FHQ_ACR_WDL_RCO_SD", "weapon"],["FHQ_ACR_BLK_HAMR_SD", "weapon"],["FHQ_ACR_BLK_RCO_SD", "weapon"],["FHQ_ACR_TAN_RCO_SD", "weapon"],["FHQ_ACR_TAN_HAMR_SD", "weapon"],["FHQ_ACR_SNW_RCO_GL_SD", "weapon"],["FHQ_ACR_SNW_HAMR_SD", "weapon"],["vil_RPD", "weapon"],["vil_AK_74m_EOT_FSB_60", "weapon"],["vil_Minimi", "weapon"],["vil_Mg3", "weapon"],["vil_M4_EOT", "weapon"],["VSS_vintorez", "weapon"],["USSR_cheytacM200", "weapon"],["DZ_CivilBackpack_EP1", "object"],["FHQ_MSR_DESERT", "weapon"],["FHQ_RSASS_TAN", "weapon"],["FHQ_XM2010_DESERT", "weapon"],["DZ_CivilBackpack_EP1", "object"]];
- 				_itemChance = [0.01,0.02,0.01,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.03,0.01,0.01,0.01,0.01,0.01,0.01];
+				_itemTypes = [
+							//Weapons
+							["PistolMilWeaps", "weapon"],
+							["PistolTopWeaps", "weapon"],			
+							["AKHighWeaps", "weapon"],									
+							["ScarLowWeaps", "weapon"],		
+							["HK416Weaps", "weapon"],
+							["RiflesMedWeaps", "weapon"],		
+							["ACRHighWeaps", "weapon"],		
+							["LMGWeaps", "weapon"],	
+							["L85Weaps", "weapon"],		
+							["LMGWeaps", "weapon"],		
+							["M4Weaps", "weapon"],	
+							["M8Weaps", "weapon"],					
+							["G36Weaps", "weapon"],					
+							["MasWeaps", "weapon"],	
+							["SVDWeaps", "weapon"],					
+							["HMGWeaps", "weapon"],					
+							["ScarHighWeaps", "weapon"],					
+							["HK417Weaps", "weapon"],					
+							["SniperMedWeaps", "weapon"],	
+							["LauncherWeaps", "weapon"],						
+							["RocketWeaps", "weapon"],	
+							//Misc Loot
+							["MedBox0", "object"],										//Misc. Loot
+							["AmmoBoxSmall_762", "object"],								//Misc. Loot
+							["AmmoBoxSmall_556", "object"],								//Misc. Loot
+							["Binocular_Vector", "weapon"],								//Misc. Loot
+							//Skins
+							["Skin_RU_Soldier_Crew_DZ  ", "magazine"]					//Crewman
+							["Skin_Sniper1_DZ", "magazine"]	,	     					//Ghillie Suit
+							["Skin_CZ_Soldier_Sniper_EP1_DZ  ", "magazine"]	,			//Desert Ghillie
+							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ ", "magazine"],   	//Special Forces 
+							["Skin_Soldier1_DZ", "magazine"],							//Soldier Clothing
+							["Skin_Rocket_DZ", "magazine"],	     						//Officer Suit
+							["Skin_Drake_Light_DZ", "magazine"]	,						//Desert Camo 
+							["Skin_FR_Rodriguez_DZ", "magazine"],						//Gunner Outfit
+							["Skin_Graves_Light_DZ", "magazine"],						//Urban Camo
+							["Skin_Soldier_TL_PMC_DZ", "magazine"],						//Team Leader
+							["Skin_Soldier_Sniper_PMC_DZ", "magazine"],					//Marksman 
+				];
+
+				_itemChance = [ 
+								//Weapons = 45%
+								//Pistols (10%)
+								0.05,
+								0.05,
+								//Good Low Power Rifles (9%) ((19%))
+								0.03,
+								0.03,
+								0.03,
+								//Decent Rifles (6%) ((25%))
+								0.02,
+								0.02,
+								0.02,
+								//Low Power Rifles (12%) ((37%))
+								0.02,
+								0.02,
+								0.02,
+								0.02,
+								0.02,
+								0.02,
+								//High Power, Top Rifles (8%) ((%45))
+								0.03,
+								0.02,
+								0.02,
+								0.02,
+								0.02,
+								0.02,
+								0.02,
+
+							    ///Misc. Loot = 20%
+							    0.06,
+							    0.06,
+							    0.07,
+							    0.01,
+
+							    //Skins Total == 20% (Ghillie Suit Sniper1 given 1% boost for this crashsite ONLY)
+							    0.02, 
+							    0.02,   
+							    0.01,  
+							    0.01, 
+							    0.02, 
+							    0.02,   
+							    0.02, 
+							    0.02, 
+							    0.02, 
+							    0.02,   
+							    0.02
+				];
+ 				
  				_lootTable = [_itemTypes,_itemChance]; 
  			};
  			//Medical Care Package
