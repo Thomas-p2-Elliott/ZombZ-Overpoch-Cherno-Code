@@ -337,7 +337,6 @@ RiflesMedWeaps[] = {
 
 
 HK416Weaps[] = {
-
 {"vil_HK416_Aim",0.50}, 
 {"vil_HK416_EOT",0.50}, 
 {"vil_HK416_GL",0.50}, 
@@ -463,21 +462,21 @@ G36Weaps[] = {
 	};
 
 
-
-SVDWeaps[] = {
-{"vil_SV_98",0.50}, 
-{"vil_SV_98_69",0.50}, 
-{"vil_SV_98_SD",0.50}, 
-{"SVD_des_EP1",0.50}, 
-{"SVD_CAMO",0.50}, 
-{"vil_SVD_63",0.50}, 
-{"vil_SVD_S",0.50}, 
-{"vil_SVD_M",0.50}, 
-{"vil_SVD_P21",0.50}, 
-{"vil_SVDK",0.50}, 
-{"SVD",0.50}, 
-{"vil_SVU",0.50} 
-};
+	/* Done */
+	SVDWeaps[] = {
+		{"vil_SV_98",0.14}, 
+		{"vil_SV_98_69",0.07}, 
+		{"vil_SV_98_SD",0.02}, 
+		{"SVD_des_EP1",0.05}, 
+		{"SVD_CAMO",0.05}, 
+		{"vil_SVD_63",0.11}, 
+		{"vil_SVD_S",0.10}, 
+		{"vil_SVD_M",0.10}, 
+		{"vil_SVD_P21",0.09}, 
+		{"vil_SVDK",0.10}, 
+		{"SVD",0.15}, 
+		{"vil_SVU",0.02} 
+	};
 
 	/* Done */
 	PistolMilWeaps[] = {
@@ -542,33 +541,31 @@ PistolsLow[] = {
 };
 
 
-
+/* Done */
 SubWeaps[] = {
-
-{"vil_uzimini",0.50}, 
-{"vil_uzi_c",0.50}, 
-{"vil_uzi_SD",0.50}, 
-{"vil_uzimini_SD",0.50}, 
-{"vil_9a91_c",0.50}, 
-{"vil_9a91_csd",0.50}, 
-{"MP5A5",0.50}, 
-{"MP5SD",0.50}, 
-{"vil_MP5SD_EOTech",0.50}, 
-{"vil_MP5_EOTech",0.50}, 
-{"bizon",0.50}, 
-{"bizon_silenced",0.50}, 
-{"vil_VAL_C",0.50}, 
-{"vil_Vikhr",0.50}, 
-{"vil_VAL",0.50}, 
-{"vil_9a91",0.50}, 
-{"vil_Groza_GL",0.50}, 
-{"vil_uzi",0.50} 
+	{"vil_uzimini",0.06}, 
+	{"vil_uzi_c",0.03}, 
+	{"vil_uzi_SD",0.03}, 
+	{"vil_uzimini_SD",0.03}, 
+	{"vil_9a91_c",0.07}, 
+	{"vil_9a91_csd",0.04}, 
+	{"MP5A5",0.03}, 
+	{"MP5SD",0.03}, 
+	{"vil_MP5_EOTech",0.03}, 
+	{"bizon",0.11}, 
+	{"bizon_silenced",0.02}, 
+	{"vil_VAL_C",0.07}, 
+	{"vil_Vikhr",0.11}, 
+	{"vil_VAL",0.11}, 
+	{"vil_9a91",0.11}, 
+	{"vil_Groza_GL",0.03}, 
+	{"vil_uzi",0.07},
+	{"vil_MP5SD_EOTech",0.02}
 };
 
 
 
 RiflesLowWeaps[] = {
-
 {"gms_k98",0.50}, 
 {"vil_AG3",0.50}, 
 {"LeeEnfield",0.50}, 
@@ -593,7 +590,6 @@ RiflesLowWeaps[] = {
 
 
 SniperLowWeaps[] = {
-
 {"gms_k98zf39",0.50}, 
 {"vil_Groza_SC",0.50}, 
 {"M24_des_EP1",0.50}, 
