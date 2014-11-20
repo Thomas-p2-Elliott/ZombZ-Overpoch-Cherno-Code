@@ -260,38 +260,38 @@ ACRHighWeaps[] = {
 
 /* Done */
 ScarLowWeaps[] = {
-	{"SCAR_L_CQC",0.4}, 
-	{"SCAR_H_CQC_CCO",0.15}, 
-	{"SCAR_L_CQC_Holo",0.15},
-	{"SCAR_L_STD_HOLO",0.15}, 
-	{"SCAR_L_STD_Mk4CQT",0.1}, 
-	{"SCAR_L_CQC_EGLM_Holo",0.03}, 
-	{"SCAR_L_CQC_CCO_SD",0.02}
+	{"SCAR_L_CQC",0.4},            //40 price
+	{"SCAR_H_CQC_CCO",0.15},       //70
+	{"SCAR_L_CQC_Holo",0.15},      //70
+	{"SCAR_L_STD_HOLO",0.15},      //70
+	{"SCAR_L_STD_Mk4CQT",0.1},     //80 
+	{"SCAR_L_CQC_EGLM_Holo",0.03}, //55
+	{"SCAR_L_CQC_CCO_SD",0.02}     //75
 };
 
 
 /* Done */
 ScarHighWeaps[] = {
-	{"SCAR_H_CQC_CCO_SD",0.75}, 
+	{"SCAR_H_CQC_CCO_SD",0.75}, //70
 	{"SCAR_L_STD_EGLM_RCO",0.08}, 
 	{"SCAR_H_LNG_Sniper",0.08},
 	{"SCAR_H_STD_EGLM_Spect",0.07},  
-	{"SCAR_H_LNG_Sniper_SD",0.02} 
+	{"SCAR_H_LNG_Sniper_SD",0.02} //80
 };
 
 
 /* Done */
 SniperMedWeaps[] = {
-	{"vil_DRM_BASE",0.2},
+	{"vil_DRM_BASE",0.2}, //150 below
 	{"DMR_SKN",0.2}, 
 	{"RH_sc2acog",0.15}, 
 	{"RH_sc2sp",0.15}, 
 	{"FHQ_RSASS_TAN",0.1}, 
-	{"FHQ_RSASS_SD_TAN",0.08},
-	{"vil_M110",0.03}, 
+	{"FHQ_RSASS_SD_TAN",0.08}, //175
+	{"vil_M110",0.03}, //200
 	{"vil_SR25",0.03}, 
 	{"RH_hk417sp",0.03}, 
-	{"vil_M110sd",0.01}, 
+	{"vil_M110sd",0.01}, //250 below
 	{"vil_SR25SD",0.01}, 
 	{"RH_hk417sdsp",0.01}
 };
@@ -449,7 +449,7 @@ G36Weaps[] = {
 
 	/* Done */
 	PistolTopWeaps[] = {
-		{"RH_deagle",	0.05}, 
+		{"RH_deagle",	0.05}, //80
 		{"RH_Deaglem",	0.04}, 
 		{"RH_Deaglemz",	0.03}, 
 		{"RH_Deaglemzb",0.02}, 
@@ -480,31 +480,31 @@ G36Weaps[] = {
 
 	/* Done */
 	PistolMilWeaps[] = {
-		{"glock17_EP1",	0.07},
+		{"glock17_EP1",	0.07}, //40
 		{"RH_g18",		0.05}, 
 		{"RH_g17",		0.04}, 
-		{"RH_g17sd",	0.03}, 
-		{"RH_g19",		0.03}, 
+		{"RH_g17sd",	0.03}, //50
+		{"RH_g19",		0.03}, //40
 		{"RH_g19t",		0.02}, 
 		{"vil_Glock",	0.03}, 
 		{"vil_Glock_o",	0.03}, 
 		{"vil_USP",		0.05}, 
-		{"vil_USPSD",	0.04}, 
-		{"vil_USP45",	0.05}, 
-		{"vil_USP45SD",	0.01}, 
-		{"RH_usp",		0.05}, 
-		{"RH_uspsd",	0.05}, 
-		{"UZI_EP1",		0.05}, 
+		{"vil_USPSD",	0.04}, //50
+		{"vil_USP45",	0.05}, //40
+		{"vil_USP45SD",	0.01}, //50
+		{"RH_usp",		0.05}, //40
+		{"RH_uspsd",	0.05}, //50
+		{"UZI_EP1",		0.05}, //40
 		{"Sa61_EP1",	0.05}, 
 		{"RH_vz61",		0.05}, 
 		{"RH_tec9",		0.04}, 
 		{"M9",			0.07}, 
-		{"M9SD",		0.06}, 
-		{"RH_m9",		0.05}, 
+		{"M9SD",		0.06}, //50
+		{"RH_m9",		0.05}, //40
 		{"RH_m9c",		0.02},
-		{"RH_m9sd",		0.04}, 
-		{"RH_m9csd",	0.01}, 
-		{"RH_anac",		0.01}
+		{"RH_m9sd",		0.04}, //50
+		{"RH_m9csd",	0.01}, //55
+		{"RH_anac",		0.01}  //55 **RH_muzi is listed in DB under PistolMilWeaps but doesnt exist on this document anywhere**
 	};
 
 
