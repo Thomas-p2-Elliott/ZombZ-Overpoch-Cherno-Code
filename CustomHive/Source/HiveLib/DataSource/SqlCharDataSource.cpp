@@ -34,7 +34,7 @@ SqlCharDataSource::~SqlCharDataSource() {}
 Sqf::Value SqlCharDataSource::fetchCharacterInitial( string playerId, int serverId, const string& playerName )
 {
 	bool newPlayer = false;
-	Sqf::Value debugMonSettings = lexical_cast<Sqf::Value>("[0,0,1,0.2]"); //Default blue debug monitor
+	Sqf::Value debugMonSettings = lexical_cast<Sqf::Value>("[0,0,0,0.2]"); //Default black debug monitor
 	//make sure player exists in db
 	{
 		auto playerRes(getDB()->queryParams(("SELECT `PlayerName`, `PlayerSex`, `DebugSetting` FROM `Player_DATA` WHERE `"+_idFieldName+"`='%s'").c_str(), getDB()->escape(playerId).c_str()));
