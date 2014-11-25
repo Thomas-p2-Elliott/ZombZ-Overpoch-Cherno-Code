@@ -25,7 +25,7 @@ if (_e) exitWith {	diag_log("P2HC:HordeZedSpawns: FATAL ERROR: Functions file co
 	Configuration
 ---------------------------------------------------------------------------*/
 P2DZ_HC_ZHorde_HordeCount = 			2;						//Amount of hordes
-P2DZ_HC_ZHorde_ZombiesPerHorde = 		6;						//Amount of zombies per horde
+P2DZ_HC_ZHorde_ZombiesPerHorde = 		50;						//Amount of zombies per horde
 P2DZ_HC_ZHorde_TriggerWaypointNames = 	["Horde1","Horde2"]; 	//Name of horde waypoint variables (P2DZ_HC_ZHorde_TriggerWayp_%VarName%)
 P2DZ_HC_ZHorde_PathWaypointNames = 		["Horde1","Horde2"]; 	//Name of horde waypoint variables (P2DZ_HC_ZHorde_PathWayp_%VarName%)
 P2DZ_HC_zHorde_waypointLoop_sleepTime = 30;						//Performance setting (seconds for each zed to check if it should update waypoint)
@@ -57,8 +57,8 @@ P2DZ_HC_ZHorde_PathWayp_Horde2 = 		[
 											[4711.19,10136.9,0]
 										];
 /* Release The hordes here */
-[1,"z_soldier"] 		call P2DZ_HC_ZHorde_spawnHorde;
-[2,"z_soldier_heavy"] 	call P2DZ_HC_ZHorde_spawnHorde;
+[1,"z_priest"] 		call P2DZ_HC_ZHorde_spawnHorde;
+[2,"z_doctor"] 	call P2DZ_HC_ZHorde_spawnHorde;
 
 /*---------------------------------------------------------------------------
 End of Typical-User Configuration
