@@ -74,8 +74,8 @@ if (_inZone) then {
 		/*These Weapons have a 10% Chance of actually spawning instead of being swapped*/
 		case "SniperTopWeaps": { 	_out = "SniperMedWeaps";	if (((random 1) > 0.90)) then { _out = "SniperTopWeaps" }; _out};
 		case "PistolTopWeaps": { 	_out = "PistolMilWeaps";	if (((random 1) > 0.90)) then { _out = "PistolTopWeaps" }; _out};
-		case "UltraWeaps": { 		_out = "SniperTopWeaps";	if (((random 1) > 0.90)) then { _out = "UltraWeaps" }; _out};
-		case "TWSWeaps": { 			_out = "SniperTopWeaps";	if (((random 1) > 0.90)) then { _out = "TWSWeaps" }; _out};
+		case "UltraWeaps": { 		_out = "SniperTopWeaps";	if (((random 1) > 0.90)) then { _out = "UltraWeaps" }; 	_out};
+		case "TWSWeaps": { 			_out = "SniperTopWeaps";	if (((random 1) > 0.90)) then { _out = "TWSWeaps" }; 	_out};
 		/**/
 
 		default {};
@@ -90,26 +90,26 @@ if (_inZone) then {
 	switch (_lootClass) do {
 
 		/*These Weapons have a 10% Chance of actually spawning instead of being swapped*/
-		case "M4Weaps": { 			_out = "AKHighWeaps";	if (((random 1) > 0.90)) then { _out = "M4Weaps" }; _out};
-		case "L85Weaps": { 			_out = "AKHighWeaps"; 	if (((random 1) > 0.90)) then { _out = "L85Weaps" }; _out};
+		case "M4Weaps": { 			_out = "AKHighWeaps";	if (((random 1) > 0.90)) then { _out = "M4Weaps" }; 	_out};
+		case "L85Weaps": { 			_out = "AKHighWeaps"; 	if (((random 1) > 0.90)) then { _out = "L85Weaps" }; 	_out};
 		/**/
-		case "ACRLowWeaps": { 		_out = "AKLowWeaps"};
-		case "ACRHighWeaps": { 		_out = "AKHighWeaps"};
-		case "ScarLowWeaps": { 		_out = "SubWeaps"};
-		case "ScarHighWeaps": { 	_out = "AKHighWeaps"};
-		case "HK416Weaps": { 		_out = "AKLowWeaps"};
-		case "HK417Weaps": { 		_out = "AKHighWeaps"};
-		case "MasWeaps": { 			_out = "SubWeaps"};
-		case "G36Weaps": { 			_out = "AKLowWeaps"};
-		case "M8Weaps": { 			_out = "AKLowWeaps"};
-		case "LMGWeaps": { 			_out = "RiflesLowWeaps"};
-		case "HMGWeaps": { 			_out = "RiflesLowWeaps"};
-		case "RiflesMedWeaps": { 	_out = "RiflesLowWeaps"};
-		case "SniperMedWeaps": { 	_out = "SVDWeaps"};
-		case "SniperTopWeaps": { 	_out = "SVDWeaps"};
-		case "PistolTopWeaps": { 	_out = "PistolMilWeaps"};
-		case "UltraWeaps": { 		_out = "LauncherWeaps"};
-		case "RocketWeaps": { 		_out = "LauncherWeaps"};
+		case "ACRLowWeaps": { 		_out = "AKLowWeaps";	if (((random 1) > 0.99)) then { _out = "ACRLowWeaps" }; 	_out};
+		case "ACRHighWeaps": { 		_out = "AKHighWeaps";	if (((random 1) > 0.99)) then { _out = "ACRHighWeaps" }; 	_out};
+		case "ScarLowWeaps": { 		_out = "SubWeaps";		if (((random 1) > 0.99)) then { _out = "ScarLowWeaps" }; 	_out};
+		case "ScarHighWeaps": { 	_out = "AKHighWeaps";	if (((random 1) > 0.99)) then { _out = "ScarHighWeaps" }; 	_out};
+		case "HK416Weaps": { 		_out = "AKLowWeaps";	if (((random 1) > 0.99)) then { _out = "HK416Weaps" }; 	_out};
+		case "HK417Weaps": { 		_out = "AKHighWeaps";	if (((random 1) > 0.99)) then { _out = "HK417Weaps" }; 	_out};
+		case "MasWeaps": { 			_out = "SubWeaps";		if (((random 1) > 0.99)) then { _out = "MasWeaps" }; 	_out};
+		case "G36Weaps": { 			_out = "AKLowWeaps";	if (((random 1) > 0.99)) then { _out = "G36Weaps" }; 	_out};
+		case "M8Weaps": { 			_out = "AKLowWeaps";	if (((random 1) > 0.99)) then { _out = "M8Weaps" }; 	_out};
+		case "LMGWeaps": { 			_out = "RiflesLowWeaps";if (((random 1) > 0.99)) then { _out = "LMGWeaps" }; 	_out};
+		case "HMGWeaps": { 			_out = "RiflesLowWeaps";if (((random 1) > 0.99)) then { _out = "HMGWeaps" }; 	_out};
+		case "RiflesMedWeaps": { 	_out = "RiflesLowWeaps";if (((random 1) > 0.99)) then { _out = "RiflesMedWeaps" }; 	_out};
+		case "SniperMedWeaps": { 	_out = "SVDWeaps";		if (((random 1) > 0.99)) then { _out = "SniperMedWeaps" }; 	_out};
+		case "SniperTopWeaps": { 	_out = "SVDWeaps";		if (((random 1) > 0.99)) then { _out = "SniperTopWeaps" }; 	_out};
+		case "PistolTopWeaps": { 	_out = "PistolMilWeaps";if (((random 1) > 0.99)) then { _out = "PistolTopWeaps" }; 	_out};
+		case "UltraWeaps": { 		_out = "LauncherWeaps";};
+		case "RocketWeaps": { 		_out = "LauncherWeaps";	if (((random 1) > 0.99)) then { _out = "RocketWeaps" }; 	_out};
 		case "TWSWeaps": { 			_out = "LauncherWeaps"};
 
 		default {};
