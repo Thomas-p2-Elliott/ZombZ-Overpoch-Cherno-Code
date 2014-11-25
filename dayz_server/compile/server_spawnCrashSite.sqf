@@ -25,13 +25,13 @@ while {1 == 1} do {
 	_timeToSpawn = time + _frequency + _timeAdjust;
 
 	//Adding some Random systems
-	_crashModel = ["UH60Wreck_DZ","UH1Wreck_DZ","UH60_NAVY_Wreck_DZ","UH60_ARMY_Wreck_DZ","UH60_NAVY_Wreck_burned_DZ","UH60_ARMY_Wreck_burned_DZ"] call BIS_fnc_selectRandom;
-
+	_crashModel = ["UH60Wreck_DZ","UH1Wreck_DZ","Mi8Wreck","UH60_NAVY_Wreck_DZ","UH60_ARMY_Wreck_DZ","UH60_NAVY_Wreck_burned_DZ","UH60_ARMY_Wreck_burned_DZ"] call BIS_fnc_selectRandom;
 
 	switch (_crashModel) do {
 		default 							{ _lootTable = [1,1] call fnc_specialLoot; };
 		case "UH60Wreck_DZ": 				{ _lootTable = [1,1] call fnc_specialLoot; };
 		case "UH1Wreck_DZ": 				{ _lootTable = [1,1] call fnc_specialLoot; };
+		case "Mi8Wreck":					{ _lootTable = [1,1] call fnc_specialLoot; };
 		case "UH60_NAVY_Wreck_DZ": 			{ _lootTable = [1,2] call fnc_specialLoot; };
 		case "UH60_NAVY_Wreck_burned_DZ": 	{ _lootTable = [1,2] call fnc_specialLoot; };
 		case "UH60_ARMY_Wreck_DZ": 			{ _lootTable = [1,3] call fnc_specialLoot; };
@@ -123,7 +123,7 @@ while {1 == 1} do {
 			_iClass = _itemType select 0;
 			_iType = _itemType select 1; 
 
-			  if (_iType == "custom_weapon") then {
+			if (_iType == "custom_weapon") then {
 				_itemTypes = [];
 				{
 					_itemTypes set [count _itemTypes, _x select 0]
@@ -174,7 +174,7 @@ while {1 == 1} do {
 		diag_log("---------------------------------------------");
 
 		// ReammoBox is preferred parent class here, as WeaponHolder wouldn't match MedBox0 && other such items.
-		_nearBy = _position nearObjects ["ReammoBox", sizeOf(_crashModel)];
+		_nearBy = _position nearObjects ["ReammoBox", sizeOf(_crashModel) + 15];
 		{
 			_x setVariable ["permaLoot",true];
 			_x call {
@@ -187,6 +187,12 @@ while {1 == 1} do {
 			        ]
 			    ];
 			};
+
+			//Grass Cutter Loot
+			_cookie = "ClutterCutter_small_2_EP1" createVehicle (getPosATL _x);
+			_cookie setPosATL (getPosATL _x);
+			_cookie = objNull;
+
 		} count _nearBy;
 
 	};
