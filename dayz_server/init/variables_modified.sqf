@@ -92,7 +92,7 @@ Debugging Settings
 
 	if(isServer) then {
 		//debug server player sync
-		P2DZE_debugServerPlayerSync = false;
+		P2DZE_debugServerPlayerSync = true;
 
 		//debug safe zone cleanup
 		P2DZE_safeZoneCleanupDebug = false;
@@ -144,7 +144,7 @@ Player/Spawn Settings
 		Dayz_Dark_UI = false;
 
 		//default debug monitor colour
-		P2DZE_debugCol = [0,0,1,0.1];
+		P2DZE_debugCol = [0,0,0,0.2];
 
 		//player as zed enabled?
 		DZE_PlayerZed = false;

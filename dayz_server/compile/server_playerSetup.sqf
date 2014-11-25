@@ -1,6 +1,6 @@
 private ["_debugMonSettings","_characterID","_playerObj","_playerID","_spawnSelection","_dummy","_worldspace","_state","_doLoop","_key","_primary","_medical","_stats","_humanity","_lastinstance","_friendlies","_randomSpot","_position","_debug","_distance","_hit","_fractures","_score","_findSpot","_pos","_isIsland","_w","_clientID","_spawnMC","_namespace"];
 
-diag_log ("P2DEBUG: SETUP: attempted with _this: " + str(_this));
+diag_log ("SETUP: attempted with _this: " + str(_this));
 _characterID = _this select 0;
 _playerObj = _this select 1;
 _playerID = getPlayerUID _playerObj;
@@ -8,7 +8,7 @@ _spawnSelection = _this select 3;
 _debugMonSettings  = _this select 4;
 
 if (isNull _playerObj) exitWith {
-	diag_log ("P2DEBUG: SETUP INIT FAILED: Exiting, player object null: " + str(_playerObj));
+	diag_log ("SETUP INIT FAILED: Exiting, player object null: " + str(_playerObj));
 };
 
 //Add MPHit event handler
@@ -20,13 +20,13 @@ if (_playerID == "") then {
 };
 
 if (_playerID == "") exitWith {
-	diag_log ("P2DEBUG: SETUP INIT FAILED: Exiting, no player ID: " + str(_playerObj));
+	diag_log ("SETUP INIT FAILED: Exiting, no player ID: " + str(_playerObj));
 };
 
 private["_dummy"];
 _dummy = getPlayerUID _playerObj;
 if ( _playerID != _dummy ) then { 
-	diag_log format["P2DEBUG: _playerID miscompare with UID! _playerID:%1",_playerID]; 
+	diag_log format["SETUP: _playerID miscompare with UID! _playerID:%1",_playerID]; 
 	_playerID = _dummy;
 };
 
@@ -49,11 +49,11 @@ while {_doLoop < 5} do {
 };
 
 if (isNull _playerObj || !isPlayer _playerObj) exitWith {
-	diag_log ("P2DEBUG: SETUP RESULT: Exiting, player object null: " + str(_playerObj));
+	diag_log ("SETUP RESULT: Exiting, player object null: " + str(_playerObj));
 };
 
 //Wait for HIVE to be free
-diag_log ("P2DEBUG: SETUP: RESULT: Successful with " + str(_primary));
+diag_log ("SETUP: RESULT: Successful with " + str(_primary));
 
 _medical =				_primary select 1;
 _stats =				_primary select 2;
@@ -105,18 +105,18 @@ if (count _worldspace > 0) then {
 	_randomSpot = true;
 };
 
-diag_log ("P2DEBUG: LOGIN: Location: " + str(_worldspace) + " doRnd?: " + str(_randomSpot));
+//diag_log ("LOGIN: Location: " + str(_worldspace) + " doRnd?: " + str(_randomSpot));
 
 //set debug mon settings values
 if (isNil '_debugMonSettings') then {
-	diag_log("P2DEBUG: server_playerSetup: _debugMonSettings: " + str _debugMonSettings);
+	diag_log("server_playerSetup: _debugMonSettings: " + str _debugMonSettings);
 	_debugMode = _debugMonSettings select 4;
 	_debugColours = [(_debugMonSettings select 0), (_debugMonSettings select 1), (_debugMonSettings select 2), (_debugMonSettings select 3)];
 
 	//Vaildate settings before saving to player
 
 	if (((_debugMonSettings select 4) > 3) || ((_debugMonSettings select 4) < 1) ) then {
-		diag_log("P2DEBUG: Invalid Debug Mon Mode: " + str (_debugMode));
+		diag_log("Invalid Debug Mon Mode: " + str (_debugMode));
 		_debugMode = 2;
 	} else {
 		_debugMode = _debugMonSettings select 4;

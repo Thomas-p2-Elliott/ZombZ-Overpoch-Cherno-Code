@@ -1,5 +1,5 @@
 private ["_doLoop","_hiveVer","_isHiveOk","_playerID","_playerObj","_primary","_key","_charID","_playerName","_backpack","_isNew","_inventory","_survival","_model","_distanceFoot","_mags","_wpns","_bcpk","_config","_newPlayer","_debugMonSettings"];
-diag_log("P2DEBUG: server_playerLogin.sqf: " + str _this);
+diag_log("PLAYERLOGIN: " + str _this);
 
 _playerID = _this select 0;
 _playerObj = _this select 1;
@@ -19,6 +19,7 @@ if (count _this > 2) then {
 //Variables
 _inventory =	[];
 _backpack = 	[];
+_p2loadout = 	[];
 _survival =		[0,0,0];
 _model =		"";
 _debugMonSettings =	[0,0,0,0.2,2];
@@ -31,8 +32,6 @@ if (_playerID == "") then {
 if ((_playerID == "") || (isNil "_playerID")) exitWith {
 	diag_log ("LOGIN FAILED: Player [" + _playerName + "] has no login ID");
 };
-
-//diag_log ("P2DEBUG: LOGIN ATTEMPT: " + str(_playerID) + " " + _playerName);
 
 //Do Connection Attempt
 _doLoop = 0;
@@ -82,12 +81,13 @@ if (!_isNew) then {
 	};
 
 } else {
-	//diag_log ("P2DEBUG: LOGIN RESULT: isNew: " + str(_primary));
+	diag_log ("LOGIN RESULT: isNew: " + str(_primary));
 
 	_model =				_primary select 4;
 	_hiveVer =				_primary select 5;
 	_debugMonSettings = 	_primary select 6;
-	_distanceFoot = 		_primary select 7;		_playerObj setVariable ["distanceFoot_CHK", _distanceFoot];
+	_distanceFoot = 		_primary select 7;		
+	_playerObj setVariable ["distanceFoot_CHK", _distanceFoot];
 
 	if (isNil "_model") then {
 		_model = "Survivor2_DZ";
@@ -99,7 +99,6 @@ if (!_isNew) then {
 			_model = "Survivor2_DZ";
 		};
 	};
-
 
 	/*---------------------------------------------------------------------------
 	Damn, Player2 Writes a new Loadout Script?!
@@ -216,4 +215,4 @@ if (worldName == "chernarus") then {
 
 dayzPlayerLogin = [_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,0,_debugMonSettings,_distanceFoot];
 (owner _playerObj) publicVariableClient "dayzPlayerLogin";
-//diag_log ("P2DEBUG: FINAL LOGIN RESULT: " + str([_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,0,_debugMonSettings,_distanceFoot]));
+diag_log ("FINAL LOGIN RESULT: " + str([_charID,_inventory,_backpack,_survival,_isNew,dayz_versionNo,_model,_isHiveOk,_newPlayer,0,_debugMonSettings,_distanceFoot]));
