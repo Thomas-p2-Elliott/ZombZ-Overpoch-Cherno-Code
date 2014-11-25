@@ -59,40 +59,6 @@ if (true) then
   _this setPos [11466.341, 11354.129, 3.0517578e-005];
 };
 
-_vehicle_60 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Land_Barrel_water", [11461.964, 11350.411], [], 0, "CAN_COLLIDE"];
-  _vehicle_60 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setDir -7.4119859;
-  _this setPos [11461.964, 11350.411];
-};
-
-_vehicle_62 = objNull;
-if (true) then
-{
-  _this = createVehicle ["LADAWreck", [11446.667, 11339.981, -6.1035156e-005], [], 0, "CAN_COLLIDE"];
-  _vehicle_62 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setDir -157.55025;
-  _this setPos [11446.667, 11339.981, -6.1035156e-005];
-};
-
 _vehicle_71 = objNull;
 if (true) then
 {
@@ -109,6 +75,7 @@ if (true) then
   _this setDir 36.088291;
   _this setPos [11465.908, 11356.04, -6.1035156e-005];
 };
+
 _unit_13 = objNull;
 if (true) then
 {
@@ -1134,23 +1101,6 @@ if (true) then
   _this setPos [4072.7244, 11676.598, -3.0517578e-005];
 };
 
-_vehicle_265 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Land_Fire_barrel", [4069.3713, 11677.529, -6.1035156e-005], [], 0, "CAN_COLLIDE"];
-  _vehicle_265 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setDir -37.201057;
-  _this setPos [4069.3713, 11677.529, -6.1035156e-005];
-};
-
 _vehicle_291 = objNull;
 if (true) then
 {
@@ -1398,23 +1348,6 @@ if (true) then
   _this setPos [6315.6763, 7841.8965, -0.056709375];
 };
 
-_vehicle_479 = objNull;
-if (true) then
-{
-  _this = createVehicle ["MAP_tent_west", [6330.9556, 7831.4258, -0.034371372], [], 0, "CAN_COLLIDE"];
-  _vehicle_479 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setDir 574.57404;
-  _this setPos [6330.9556, 7831.4258, -0.034371372];
-};
-
 _vehicle_480 = objNull;
 if (true) then
 {
@@ -1483,22 +1416,6 @@ if (true) then
   _this setPos [6300.7017, 7800.2729];
 };
 
-_vehicle_494 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Land_Fire_barrel", [6309.9814, 7800.6313], [], 0, "CAN_COLLIDE"];
-  _vehicle_494 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setPos [6309.9814, 7800.6313];
-};
-
 _vehicle_501 = objNull;
 if (true) then
 {
@@ -1516,22 +1433,6 @@ if (true) then
   _this setPos [6321.2383, 7798.9302];
 };
 
-_vehicle_503 = objNull;
-if (true) then
-{
-  _this = createVehicle ["MAP_tent_west", [6324.0571, 7836.3125, -0.022317491], [], 0, "CAN_COLLIDE"];
-  _vehicle_503 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setDir 574.63867;
-  _this setPos [6324.0571, 7836.3125, -0.022317491];
-};
 
 _vehicle_511 = objNull;
 if (true) then
@@ -1689,22 +1590,6 @@ if (true) then
   _this setPos [6319.2056, 7787.5439, -0.022046415];
 };
 
-_vehicle_527 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Land_Fire_barrel", [6320.9531, 7787.0967, 6.1035156e-005], [], 0, "CAN_COLLIDE"];
-  _vehicle_527 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setPos [6320.9531, 7787.0967, 6.1035156e-005];
-};
-
 _vehicle_531 = objNull;
 if (true) then
 {
@@ -1811,22 +1696,6 @@ if (true) then
 };
 
 
-_vehicle_550 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Land_Fire_barrel", [13533.103, 6358.1616, -8.5830688e-006], [], 0, "CAN_COLLIDE"];
-  _vehicle_550 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setPos [13533.103, 6358.1616, -8.5830688e-006];
-};
-
 _vehicle_559 = objNull;
 if (true) then
 {
@@ -1896,21 +1765,6 @@ if (true) then
   _this setPos [12948.999, 12771.618];
 };
 
-_vehicle_595 = objNull;
-if (true) then
-{
-  _this = createVehicle ["Land_Barrel_water", [12946.395, 12769.803, -0.00012207031], [], 0, "CAN_COLLIDE"];
-  _vehicle_595 = _this;
-  _this setVariable [
-    uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-    "hash_id" callExtension format [
-        "%1:%2",
-        netId _this,
-        typeOf _this
-    ]
-  ];
-  _this setPos [12946.395, 12769.803, -0.00012207031];
-};
 
 _vehicle_596 = objNull;
 if (true) then
