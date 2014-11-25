@@ -353,9 +353,9 @@ ui_goldDropEditOutOfFocus = {
 };
 
 
-	//This is still needed but the fsm should terminate if any errors pop up.
+//This is still needed but the fsm should terminate if any errors pop up.
 [] spawn {
-    private["_timeOut","_timeOutMax","_display","_control1","_control2"];
+    private["_timeOut","_timeOutMax","_display","_control1","_control2","_text"];
     disableSerialization;
     _timeOut = 0;
     dayz_loadScreenMsg = "";
@@ -377,14 +377,16 @@ ui_goldDropEditOutOfFocus = {
         if (dayz_clientPreload && dayz_authed) exitWith { endLoadingScreen; _display = uiNamespace getVariable "BIS_loadingScreen"; _display closeDisplay 0; };
         if (!isNil '_display') then {
             if ( isNull _display ) then {
+            		diag_log("P2DEBUG: Load Screen Started!");
                     waitUntil { !dialog; };
                     startLoadingScreen ["","RscDisplayLoadCustom"];
                     _display = uiNameSpace getVariable "BIS_loadingScreen";
                     _control1 = _display displayctrl 8400;
                     _control2 = _display displayctrl 102;
+                    _control1 	ctrlSetText "ZombZ: Please Wait - Loading Epoch & Overwatch...";
             };
-
-            if ( dayz_loadScreenMsg != "" ) then {
+            
+              if ( dayz_loadScreenMsg != "" ) then {
                     _control1 ctrlSetText dayz_loadScreenMsg;
                     dayz_loadScreenMsg = "";
             };
@@ -396,11 +398,13 @@ ui_goldDropEditOutOfFocus = {
 
         if (_timeOut >= _timeOutmax) then {
             1 cutText [("ZombZ: " + localize "str_player_login_timeout" + " Please Try Again!"), "PLAIN DOWN"];
-            sleep 5;
+            uiSleep 5;
             endLoadingScreen;
             endMission "END1";
         };
 
-        sleep 0.01;
+        uiSleep 0.01;
     };
+
+    diag_log("P2DEBUG: LoadScreen Timeout Max Reached?");
 };
