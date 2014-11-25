@@ -80,21 +80,22 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
 	/* Extra Zeds System by Player2 */
 	if (P2DZ_HC_extraZeds) then {
 		diag_log(format["P2DEBUG: %1 Executing Extra Zeds!", (getPlayerUID player)]);
+		P2DZ_HC_extraZeds_Done = false;
 		[] execVM "HC\zeds\init.sqf";
-
 	};
 
 	/* Zombie Hordes by Player2 */
 	if (P2DZ_HC_extraZeds && {(P2DZ_HC_zedHordes)}) then {
+		waitUntil{uiSleep 0.5; P2DZ_HC_extraZeds_Done}; //wait for P2DZ_HC_extraZeds_Done, gets set to true after configs for ExtraZeds have been loaded
 		diag_log(format["P2DEBUG: %1 Executing Zombie Hordes!", (getPlayerUID player)]);
 		[] execVM "HC\zeds\hordes\init.sqf";
 	};
 
-	/* HeadlessClient A.I. Missions by Player2 */
+	/* HeadlessClient A.I. Missions by Player2 
 	if (P2DZ_HC_AIMissions_Enabled) then {
 		diag_log(format["P2DEBUG: %1 Executing AI Missions!", (getPlayerUID player)]);
 		[] execVM "HC\DZMS\DZMSInit.sqf";
-	};
+	};*/
 
 	/* ArmaServerMonitor */
 	if (P2DZ_HC_ASM_Enabled) then {
