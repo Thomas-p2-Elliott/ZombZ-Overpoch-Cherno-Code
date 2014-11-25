@@ -38,7 +38,16 @@ if (local _unit) then {
 };
 
 //Wait
-sleep 0.3;
+//sleep 0.3; replaced with smaller sleeps and dir sets
+_dir = [_zpos,_tPos] call BIS_Fnc_dirTo;
+_unit setDir _dir;
+sleep 0.1;
+_dir = [_zpos,_tPos] call BIS_Fnc_dirTo;
+_unit setDir _dir;
+sleep 0.1;
+_dir = [_zpos,_tPos] call BIS_Fnc_dirTo;
+_unit setDir _dir;
+sleep 0.1;
 
 if (_vehicle != player) then {
 	_hpList = 	_vehicle call vehicle_getHitpoints;
