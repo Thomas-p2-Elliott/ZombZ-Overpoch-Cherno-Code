@@ -102,7 +102,7 @@ void HiveExtApp::setupClock()
 
 int HiveExtApp::main( const std::vector<std::string>& args )
 {
-	logger().information("HiveExt " + GIT_VERSION.substr(0,12));
+	//logger().information("HiveExt " + GIT_VERSION.substr(0,12));
 	setupClock();
 
 	if (!this->initialiseService())
