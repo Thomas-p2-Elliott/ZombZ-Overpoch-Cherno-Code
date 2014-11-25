@@ -1,16 +1,12 @@
-
 scriptName "Functions\misc\fn_damageHandler.sqf";
 /***********************************************************
-	PROCESS DAMAGE TO A UNIT
-	- Function
 	- [unit, selectionName, damage, source, projectile] call fnc_usec_damageHandler;
 ************************************************************/
-private ["_unit","_humanityHit","_myKills","_hit","_damage","_isPlayer","_unconscious","_wound","_isHit","_isInjured","_type","_hitPain","_isCardiac","_isHeadHit","_isMinor","_scale","_canHitFree","_rndPain","_rndInfection","_hitInfection","_lowBlood","_isPZombie","_source","_ammo","_unitIsPlayer","_isBandit"];
+private ["_unit","_humanityHit","_myKills","_hit","_damage","_isPlayer","_unconscious","_wound","_isHit","_isInjured","_type","_hitPain","_isCardiac","_isHeadHit","_isMinor","_scale","_canHitFree","_rndPain","_rndInfection","_hitInfection","_lowBlood","_source","_ammo","_unitIsPlayer","_isBandit"];
 _unit = _this select 0;
 _hit = _this select 1;
 _damage = _this select 2;
 _unconscious = _unit getVariable ["NORRN_unconscious", false];
-_isPZombie = player isKindOf "PZombie_VB";
 _source = _this select 3;
 _ammo = _this select 4;
 _type = [_damage,_ammo] call fnc_usec_damageType;
@@ -33,9 +29,8 @@ if (_unitIsPlayer) then {
 			};
 			_canHitFree = 	player getVariable ["freeTarget",false];
 			_isBandit = (player getVariable["humanity",0]) <= -5000;
-			_isPZombie = player isKindOf "PZombie_VB";
 
-			if (!_canHitFree && !_isBandit && !_isPZombie) then {
+			if (!_canHitFree && !_isBandit) then {
 				//Process Morality Hit
 				_myKills = 0 max (1 - (player getVariable ["humanKills",0]) / 5);
 				_humanityHit = -100 * _myKills * _damage;
@@ -84,6 +79,11 @@ if (_damage > 0.4) then {
 		*/
 		r_player_blood = r_player_blood - (_damage * _scale);
 	};
+};
+
+//Added by player2
+if (_ammo == "zombie") then {
+	_unit setVariable["lastZedHitTime", [((date) select 3),((date) select 4)], true];
 };
 
 //Record Damage to Minor parts (legs, arms)
@@ -141,7 +141,7 @@ if (_damage > 0.4) then {	//0.25
 		};
 		if (_hitInfection) then {
 			//Set Infection if not already
-			if (_unitIsPlayer && !_isPZombie) then {
+			if (_unitIsPlayer) then {
 				r_player_infected = true;
 				player setVariable["USEC_infected",true,true];
 			};
@@ -160,39 +160,38 @@ if (_damage > 0.4) then {	//0.25
 	};
 	if(!_isHit) then {
 
-		if(!_isPZombie) then {
-			//Create Wound
-			_unit setVariable[_wound,true,true];
+		//Create Wound
+		_unit setVariable[_wound,true,true];
 
-			[_unit,_wound,_hit] spawn fnc_usec_damageBleed;
-			/* PVS/PVC - Skaronator */
-			_pos = getPosATL _unit;
-			_inRange = _pos nearEntities ["CAManBase",1000];
-			{
-				// only send to other players
-				if(isPlayer _x && _x != player) then {
-					PVDZE_send = [_x,"Bleed",[_unit,_wound,_hit]];
-					publicVariableServer "PVDZE_send";
-				};
-			} count _inRange;
+		[_unit,_wound,_hit] spawn fnc_usec_damageBleed;
+		/* PVS/PVC - Skaronator */
+		_pos = getPosATL _unit;
+		_inRange = _pos nearEntities ["CAManBase",1000];
+		{
+			// only send to other players
+			if(isPlayer _x && _x != player) then {
+				PVDZE_send = [_x,"Bleed",[_unit,_wound,_hit]];
+				publicVariableServer "PVDZE_send";
+			};
+		} count _inRange;
 
-			//Set Injured if not already
-			_isInjured = _unit getVariable["USEC_injured",false];
-			if (!_isInjured) then {
-				_unit setVariable["USEC_injured",true,true];
-			if ((_unitIsPlayer) && (_ammo != "zombie")) then {
-					dayz_sourceBleeding = _source;
-				};
-			};
-			//Set ability to give blood
-			_lowBlood = _unit getVariable["USEC_lowBlood",false];
-			if (!_lowBlood) then {
-				_unit setVariable["USEC_lowBlood",true,true];
-			};
-			if (_unitIsPlayer) then {
-				r_player_injured = true;
+		//Set Injured if not already
+		_isInjured = _unit getVariable["USEC_injured",false];
+		if (!_isInjured) then {
+			_unit setVariable["USEC_injured",true,true];
+		if ((_unitIsPlayer) && (_ammo != "zombie")) then {
+				dayz_sourceBleeding = _source;
 			};
 		};
+		//Set ability to give blood
+		_lowBlood = _unit getVariable["USEC_lowBlood",false];
+		if (!_lowBlood) then {
+			_unit setVariable["USEC_lowBlood",true,true];
+		};
+		if (_unitIsPlayer) then {
+			r_player_injured = true;
+		};
+		
 	};
 };
 if (_type == 1) then {
