@@ -4,7 +4,26 @@ _uid = _input select 0;
 _name = _input select 1;
 
 /*---------------------------------------------------------------------------
-Stats Output
+Currently Connected Players Output
+---------------------------------------------------------------------------*/
+_uid call {
+	private["_uid","_guid"];
+	diag_log(format["P2DEBUG: OnPlayerConnected Input: %1", _this]);
+	if (typeName _this != typeName 'String') exitWith {diag_log('UID was not string');};
+	if ((count (toArray(_this))) < 6) exitWith {diag_log('UID was less than 6 chars long');};
+	_uid = format["%1",_this];
+	if (isNil '_uid') exitWith {diag_log('UID was nil');};
+	if (isNil 'P2DZ_connectedUids') then { P2DZ_connectedUids = []; };
+	if !(_uid in P2DZ_connectedUids) exitWith {
+		P2DZ_connectedUids = P2DZ_connectedUids + [_uid];
+		_guid = ("Arma2Net.Unmanaged" callExtension format ["p2Net1 ['getGUID','%1']", _uid]);
+		(format["%1,%2",_guid,_uid]) call stats_connects;
+	};
+};
+
+
+/*---------------------------------------------------------------------------
+All Connects Output
 ----------------------------------------------------------------------------*
 
 Output:
@@ -30,4 +49,4 @@ _statsMessage = format[
 ];
 
 //send to stats log
-_statsMessage call stats_connects;
+_statsMessage call stats_allConnects;
