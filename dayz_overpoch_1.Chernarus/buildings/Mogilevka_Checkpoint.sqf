@@ -874,7 +874,7 @@ if (true) then
 _checkpoint_244 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_HouseV2_04", [7516.3091, 5058.6909, 0.58773696], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_HouseV2_04_interier", [7516.3091, 5058.6909, 0.58773696], [], 0, "CAN_COLLIDE"];
   _checkpoint_244 = _this;
   _this setDir -63.748066;
   _this setPos [7516.3091, 5058.6909, 0.58773696];

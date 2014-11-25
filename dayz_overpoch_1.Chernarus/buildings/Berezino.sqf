@@ -1207,7 +1207,7 @@ if (true) then
 _berezino_305 = objNull;
 if (true) then
 {
-  _this = createVehicle ["Land_HouseV2_04", [12368.369, 9076.0371, -0.17677228], [], 0, "CAN_COLLIDE"];
+  _this = createVehicle ["Land_HouseV2_04_interier", [12368.369, 9076.0371, -0.17677228], [], 0, "CAN_COLLIDE"];
   _berezino_305 = _this;
   _this setDir 60.994209;
   _this setPos [12368.369, 9076.0371, -0.17677228];
