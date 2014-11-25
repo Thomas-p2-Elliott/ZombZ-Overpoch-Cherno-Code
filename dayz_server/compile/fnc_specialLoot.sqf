@@ -45,12 +45,12 @@ switch (_eventType) do {
  				*/
 				case 1: 				{ 
 				_itemTypes = [
-							//Weapons
-							["L85Weaps", "custom_weapon"],		
+							//Crashsite Specific Weapons
+							["ScarHighWeaps", "custom_weapon"],		
 							["RiflesMedWeaps", "custom_weapon"],		
 							["ACRHighWeaps", "custom_weapon"],		
-							["LMGWeaps", "custom_weapon"],		
-
+							["HK417Weaps", "custom_weapon"],
+							//Global Weapons		
 							["PistolTopWeaps", "custom_weapon"],			
 							["HMGWeaps", "custom_weapon"],					
 							["SniperMedWeaps", "custom_weapon"],	
@@ -60,59 +60,52 @@ switch (_eventType) do {
 							["UltraWeaps", "custom_weapon"],														
 							["TWSWeaps", "custom_weapon"],						
 							//Misc Loot
-							["MedBox0", "object"],										//Misc. Loot
-							["AmmoBoxSmall_762", "object"],								//Misc. Loot
-							["AmmoBoxSmall_556", "object"],								//Misc. Loot
-							["Binocular_Vector", "weapon"],								//Misc. Loot
+							["MedBox0", "object"],						
+							["AmmoBoxSmall_762", "object"],							
+							["AmmoBoxSmall_556", "object"],								
+							["Binocular_Vector", "weapon"],	
+							["hospital","hospital"],
+							["militaryammo","militaryammo"],
+							["militarypilot","militarypilot"],
+							["policeman","policeman"],
+							//Backpacks
+							["militarybackpacks","militarybackpacks"],
 							//Skins
-							["Skin_RU_Soldier_Crew_DZ", "magazine"],					//Crewman
-							["Skin_Sniper1_DZ", "magazine"]	,	     					//Ghillie Suit
-							["Skin_CZ_Soldier_Sniper_EP1_DZ", "magazine"],				//Desert Ghillie
-							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ", "magazine"],   	//Special Forces 
-							["Skin_Soldier1_DZ", "magazine"],							//Soldier Clothing
-							["Skin_Rocket_DZ", "magazine"],	     						//Officer Suit
-							["Skin_Drake_Light_DZ", "magazine"]	,						//Desert Camo 
-							["Skin_FR_Rodriguez_DZ", "magazine"],						//Gunner Outfit
-							["Skin_Graves_Light_DZ", "magazine"],						//Urban Camo
-							["Skin_Soldier_TL_PMC_DZ", "magazine"],						//Team Leader
-							["Skin_Soldier_Sniper_PMC_DZ", "magazine"]					//Marksman 
+							["militaryclothes", "militaryclothes"]
 				];
 
 				_itemChance = [ 
 								//Weapons = 45%
 								//Main Spawners (20%)
-								0.05,  //L85's
+								0.05,  //ScarHighWeaps
 								0.05,  //Medium Power Rifles
 								0.05,  //High Power ACRs
-								0.05,  //Light Machine Guns
+								0.05,  //HK417Weaps
 								//Global crash site spawners (25%) -> WARNING: Modified for this Class ONLY! (Rocket,TopSnip,Launch Changes)
 								0.10, //Top Pistols
 								0.04,  //Heavy Machine Guns
 								0.04, //Mid Snipers
 								0.01, //Launcher Weaps
 								0.02, //Rocket Weaps
-								0.02, //Top Snipers (Ends up as +0.019% thanks to TWS weapons swapping down to it 90% of the time)
-								0.01, //Ultra Weapons = 1%
-								0.01, //TWS Weapons = 1% (Gets Reduced to 10% of this later, with 90% of time swapping to topSnipers)
+								0.02, //Top Snipers 
+								0.01, //Ultra Weapons = 1%  (Gets Reduced to 40% of this later, with 90% of time swapping to MediumSnipers)
+								0.01, //TWS Weapons = 1% (Gets Reduced to 10% of this later, with 90% of time swapping to MediumSnipers)
 
-							    ///Misc. Loot = 20%
-							    0.06,
-							    0.06,
-							    0.07,
+							    ///Misc. Loot = 45%
+							    0.02,
 							    0.01,
+							    0.02,
+							    0.02,
+							    0.09,
+							    0.01,
+							    0.20,
+							    0.08,
 
-							    //Skins Total == 20% (Ghillie Suit Sniper1 given 1% boost for this crashsite ONLY)
-							    0.02, 
-							    0.02,   
-							    0.01,  
-							    0.01, 
-							    0.02, 
-							    0.02,   
-							    0.02, 
-							    0.02, 
-							    0.02, 
-							    0.02,   
-							    0.02
+							    //Backpacks = 5%
+							    0.05,
+
+							    //Skins Total = 5%
+							    0.05
 				];
  				
  				_lootTable = [_itemTypes,_itemChance]; 
@@ -124,10 +117,10 @@ switch (_eventType) do {
  				*/
 			case 2: 				{ 
 				_itemTypes = [
-							//Weapons
+							//Crashsite Specific Weapons
 							["ACRHighWeaps", "custom_weapon"],	
 							["HK417Weaps", "custom_weapon"],
-
+							//Global Weapons		
 							["HMGWeaps", "custom_weapon"],		
 							["PistolTopWeaps", "custom_weapon"],						
 							["SniperMedWeaps", "custom_weapon"],	
@@ -137,22 +130,18 @@ switch (_eventType) do {
 							["UltraWeaps", "custom_weapon"],														
 							["TWSWeaps", "custom_weapon"],						
 							//Misc Loot
-							["MedBox0", "object"],										//Misc. Loot
-							["AmmoBoxSmall_762", "object"],								//Misc. Loot
-							["AmmoBoxSmall_556", "object"],								//Misc. Loot
-							["Binocular_Vector", "weapon"],								//Misc. Loot
+							["MedBox0", "object"],						
+							["AmmoBoxSmall_762", "object"],							
+							["AmmoBoxSmall_556", "object"],								
+							["Binocular_Vector", "weapon"],	
+							["hospital","hospital"],
+							["militaryammo","militaryammo"],
+							["militarypilot","militarypilot"],
+							["policeman","policeman"],
+							//Backpacks
+							["militarybackpacks","militarybackpacks"],
 							//Skins
-							["Skin_RU_Soldier_Crew_DZ", "magazine"],					//Crewman
-							["Skin_Sniper1_DZ", "magazine"]	,	     					//Ghillie Suit
-							["Skin_CZ_Soldier_Sniper_EP1_DZ", "magazine"],				//Desert Ghillie
-							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ", "magazine"],   	//Special Forces 
-							["Skin_Soldier1_DZ", "magazine"],							//Soldier Clothing
-							["Skin_Rocket_DZ", "magazine"],	     						//Officer Suit
-							["Skin_Drake_Light_DZ", "magazine"]	,						//Desert Camo 
-							["Skin_FR_Rodriguez_DZ", "magazine"],						//Gunner Outfit
-							["Skin_Graves_Light_DZ", "magazine"],						//Urban Camo
-							["Skin_Soldier_TL_PMC_DZ", "magazine"],						//Team Leader
-							["Skin_Soldier_Sniper_PMC_DZ", "magazine"]					//Marksman 
+							["militaryclothes", "militaryclothes"]
 				];
 
 				_itemChance = [ 
@@ -166,28 +155,25 @@ switch (_eventType) do {
 								0.04, //Mid Snipers
 								0.03, //Launcher Weaps
 								0.01, //Rocket Weaps
-								0.01, //Top Snipers (Ends up as 0.019% thanks to TWS weapons swapping down to it 90% of the time)
-								0.01, //Ultra Weapons = 1%
-								0.01, //TWS Weapons = 1% (Gets Reduced to 10% of this later, remainder is set to TopSnipers, so actually ends up as 0.1% (1/1000) with 0.009% added to TopSniper Spawns)
+								0.01, //Top Snipers 
+								0.01, //Ultra Weapons = 1%  (Gets Reduced to 40% of this later, with 90% of time swapping to MediumSnipers)
+								0.01, //TWS Weapons = 1% (Gets Reduced to 10% of this later, with 90% of time swapping to MediumSnipers)
 
-							    ///Misc. Loot = 20%
-							    0.06,
-							    0.06,
-							    0.07,
+							    ///Misc. Loot = 45%
+							    0.02,
 							    0.01,
+							    0.02,
+							    0.02,
+							    0.09,
+							    0.01,
+							    0.20,
+							    0.08,
 
-							    //Skins Total == 20% 
-							    0.03, 
-							    0.01,   
-							    0.01,  
-							    0.01, 
-							    0.02, 
-							    0.02,   
-							    0.02, 
-							    0.02, 
-							    0.02, 
-							    0.02,   
-							    0.02
+							    //Backpacks = 5%
+							    0.05,
+
+							    //Skins Total = 5%
+							    0.05
 							 ];
  				
  				_lootTable = [_itemTypes,_itemChance]; 
@@ -199,10 +185,10 @@ switch (_eventType) do {
  			*/
 			case 3: 				{ 
 				_itemTypes = [
-							//Weapons
+							//Crashsite Specific Weapons
 							["ScarLowWeaps", "custom_weapon"],	
 							["ScarHighWeaps", "custom_weapon"],
-
+							//Global Weapons		
 							["HMGWeaps", "custom_weapon"],		
 							["PistolTopWeaps", "custom_weapon"],						
 							["SniperMedWeaps", "custom_weapon"],	
@@ -212,22 +198,18 @@ switch (_eventType) do {
 							["UltraWeaps", "custom_weapon"],														
 							["TWSWeaps", "custom_weapon"],						
 							//Misc Loot
-							["MedBox0", "object"],										//Misc. Loot
-							["AmmoBoxSmall_762", "object"],								//Misc. Loot
-							["AmmoBoxSmall_556", "object"],								//Misc. Loot
-							["Binocular_Vector", "weapon"],								//Misc. Loot
+							["MedBox0", "object"],						
+							["AmmoBoxSmall_762", "object"],							
+							["AmmoBoxSmall_556", "object"],								
+							["Binocular_Vector", "weapon"],	
+							["hospital","hospital"],
+							["militaryammo","militaryammo"],
+							["militarypilot","militarypilot"],
+							["policeman","policeman"],
+							//Backpacks
+							["militarybackpacks","militarybackpacks"],
 							//Skins
-							["Skin_RU_Soldier_Crew_DZ", "magazine"],					//Crewman
-							["Skin_Sniper1_DZ", "magazine"]	,	     					//Ghillie Suit
-							["Skin_CZ_Soldier_Sniper_EP1_DZ", "magazine"],				//Desert Ghillie
-							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ", "magazine"],   	//Special Forces 
-							["Skin_Soldier1_DZ", "magazine"],							//Soldier Clothing
-							["Skin_Rocket_DZ", "magazine"],	     						//Officer Suit
-							["Skin_Drake_Light_DZ", "magazine"]	,						//Desert Camo 
-							["Skin_FR_Rodriguez_DZ", "magazine"],						//Gunner Outfit
-							["Skin_Graves_Light_DZ", "magazine"],						//Urban Camo
-							["Skin_Soldier_TL_PMC_DZ", "magazine"],						//Team Leader
-							["Skin_Soldier_Sniper_PMC_DZ", "magazine"]					//Marksman 
+							["militaryclothes", "militaryclothes"]
 				];
 
 				_itemChance = [ 
@@ -242,28 +224,25 @@ switch (_eventType) do {
 								0.04, //Mid Snipers
 								0.03, //Launcher Weaps
 								0.01, //Rocket Weaps
-								0.01, //Top Snipers (Ends up as 0.019% thanks to TWS weapons swapping down to it 90% of the time)
-								0.01, //Ultra Weapons = 1%
-								0.01, //TWS Weapons = 1% (Gets Reduced to 10% of this later, remainder is set to TopSnipers, so actually ends up as 0.001% (1/1000) with 0.009% added to TopSniper Spawns)
+								0.01, //Top Snipers 
+								0.01, //Ultra Weapons = 1%  (Gets Reduced to 40% of this later, with 90% of time swapping to MediumSnipers)
+								0.01, //TWS Weapons = 1% (Gets Reduced to 10% of this later, with 90% of time swapping to MediumSnipers)
 
-							    ///Misc. Loot = 20%
-							    0.06,
-							    0.06,
-							    0.07,
+							    ///Misc. Loot = 45%
+							    0.02,
 							    0.01,
+							    0.02,
+							    0.02,
+							    0.09,
+							    0.01,
+							    0.20,
+							    0.08,
 
-							    //Skins Total == 20% 
-							    0.03, 
-							    0.01,   
-							    0.01,  
-							    0.01, 
-							    0.02, 
-							    0.02,   
-							    0.02, 
-							    0.02, 
-							    0.02, 
-							    0.02,   
-							    0.02
+							    //Backpacks = 5%
+							    0.05,
+
+							    //Skins Total = 5%
+							    0.05
 				];
  				
  				_lootTable = [_itemTypes,_itemChance]; 
@@ -301,23 +280,18 @@ switch (_eventType) do {
 							["LauncherWeaps", "custom_weapon"],						
 							["RocketWeaps", "custom_weapon"],	
 							//Misc Loot
-							["MedBox0", "object"],										//Misc. Loot
-							["AmmoBoxSmall_762", "object"],								//Misc. Loot
-							["AmmoBoxSmall_556", "object"],								//Misc. Loot
-							["Binocular_Vector", "weapon"],								//Misc. Loot
-
+							["MedBox0", "object"],						
+							["AmmoBoxSmall_762", "object"],							
+							["AmmoBoxSmall_556", "object"],								
+							["Binocular_Vector", "weapon"],	
+							["hospital","hospital"],
+							["militaryammo","militaryammo"],
+							["militarypilot","militarypilot"],
+							["policeman","policeman"],
+							//Backpacks
+							["militarybackpacks","militarybackpacks"],
 							//Skins
-							["Skin_RU_Soldier_Crew_DZ", "magazine"],					//Crewman
-							["Skin_Sniper1_DZ", "magazine"]	,	     					//Ghillie Suit
-							["Skin_CZ_Soldier_Sniper_EP1_DZ", "magazine"],				//Desert Ghillie
-							["Skin_CZ_Special_Forces_GL_DES_EP1_DZ", "magazine"],   	//Special Forces 
-							["Skin_Soldier1_DZ", "magazine"],							//Soldier Clothing
-							["Skin_Rocket_DZ", "magazine"],	     						//Officer Suit
-							["Skin_Drake_Light_DZ", "magazine"]	,						//Desert Camo 
-							["Skin_FR_Rodriguez_DZ", "magazine"],						//Gunner Outfit
-							["Skin_Graves_Light_DZ", "magazine"],						//Urban Camo
-							["Skin_Soldier_TL_PMC_DZ", "magazine"],						//Team Leader
-							["Skin_Soldier_Sniper_PMC_DZ", "magazine"]					//Marksman 
+							["militaryclothes", "militaryclothes"]
 				];
 
 				_itemChance = [ 
@@ -349,24 +323,21 @@ switch (_eventType) do {
 								0.02,
 								0.02,
 
-							    ///Misc. Loot = 20%
-							    0.06,
-							    0.06,
-							    0.07,
+							    ///Misc. Loot = 45%
+							    0.02,
 							    0.01,
+							    0.02,
+							    0.02,
+							    0.09,
+							    0.01,
+							    0.20,
+							    0.08,
 
-							    //Skins Total == 20% (Ghillie Suit Sniper1 given 1% boost for this crashsite ONLY)
-							    0.02, 
-							    0.02,   
-							    0.01,  
-							    0.01, 
-							    0.02, 
-							    0.02,   
-							    0.02, 
-							    0.02, 
-							    0.02, 
-							    0.02,   
-							    0.02
+							    //Backpacks = 5%
+							    0.05,
+
+							    //Skins Total = 5%
+							    0.05
 				];
  				
  				_lootTable = [_itemTypes,_itemChance]; 
@@ -524,5 +495,48 @@ switch (_eventType) do {
 };
 
 
+/*---------------------------------------------------------------------------
+Chance Reduction Section
+
+Think 1/100 is too damn high?! Reduce it here!
+
+Both TWS & UltraWeaps reduced by 90% and have random selection put in their place
+---------------------------------------------------------------------------*/
+
+_itemTypes = _itemTypes call {
+	if ((round(random 100)) > 10) exitWith {
+		private["_itemTypes"];
+		_itemTypes = _this;
+		_c = 0;
+		{	
+ 			if ((_x select 0) == "TWSWeaps") exitWith {
+				_itemTypes set [_c,(["PistolTopWeaps", "custom_weapon"])];
+				_itemTypes set [_c,(_itemTypes call BIS_fnc_selectRandom)];
+				_itemTypes;
+			};
+			_c = _c + 1;
+		} count _itemTypes;
+	};
+	_this
+};
+
+
+_itemTypes = _itemTypes call {
+	if ((round(random 100)) > 10) exitWith {
+		private["_itemTypes"];
+		_itemTypes = _this;
+		_c = 0;
+		{	
+			if ((_x select 0) == "UltraWeaps") exitWith {
+				_itemTypes set [_c,(["PistolTopWeaps", "custom_weapon"])];
+				_itemTypes set [_c,(_itemTypes call BIS_fnc_selectRandom)];
+				_itemTypes;
+			};
+			_c = _c + 1;
+		} count _itemTypes;
+	};
+	_this
+};
+	
 _lootTable = [_itemTypes,_itemChance];
 _lootTable
