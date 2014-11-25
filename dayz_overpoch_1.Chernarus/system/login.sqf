@@ -210,25 +210,54 @@ setViewdistance 1500;
 _p2_didYouKnow = [
 "Did you know: Higher value weapons spawn more often in-land away from the coast.",
 "Did you know: Self bloodbags give more blood and less infection chance if you are a hero.",
-"Did you know: Self bloodbags are more effective at hospitals, medical tents, churches, and UN vehicles.",
+"Did you know: Self bloodbags are more effective at hospitals, medical tents, churches, UN vehicles & more hidden areas!",
 "Did you know: You can upgrade deployed vehicles with parts just by scrolling on them!",
+"Did you know: You can build vehicles by right clicking your toolbox!",
+"Did you know: You can change your view distance by right clicking your binoculars/rangefinders!",
 "Did you know: Every single vehicle spawn point on this server was hand-made by a professional hide and seek player",
-"Did you know: Thermal weapons are the rarest items on this server.",
-"Did you know: You can press F6 to change your debug monitor colour!",
-"Did you know: We run dayz overwatch, dayz mod, epoch cherno, and epoch panthera servers! Just search ZombZ in your server browser!",
+"Did you know: Thermal weapons are the rarest items on this server. Some variants have a 1/100,000 spawn chance.",
+"Did you know: We run dayz other dayz overpoch & dayz overwatch servers! Just search ZombZ in your server browser!",
 "Did you know: There are medical, military, and industrial care packages marked by smoke.",
-"Did you know: Several Ultra-Rare weapons can be found at crashsites only! Including the Cheytec SD, MSR SD, XM2010 SD & Thermal Weapons!",
-"Did you know: You can press F6 to change your debug monitor colour!",
-"Did you know: We have a huge community of players on our teamspeak, find friends, form rivalries, get involved! ts3.zombz.net:9172",
+"Did you know: Several Ultra-Rare & Powerful weapons can be found at crashsites only!",
 "Did you know: A.I. Missions can be found, kill the bandits, grab the loot, and get out before another group shows up!",
 "Did you know: You can press F1 for a full run down of the features on this server!",
 "Did you know: This server is always subject to improvement and optimisation by a dedicated team!",
-"Did you know: Auto-Refuel is enabled, just get out of the vehicle first!",
-"Did you know: You can press F6 to change your debug monitor colour!",
-"Did you know: Nevermind, I forgot what I was going to say..."
+"Did you know: Heli Crash sites are animated and fly just like other choppers! They can even be shot down for loot!",
+"Did you know: Most of the Zombies are spawned by headless client to give you a performance boost!",
+"Did you know: You can type \killme into the chatbox and leave it open to respawn anytime! Type \help for more commands!",
+"Did you know: You can type \help into the chatbox and leave it open for a list of useful and fun chat commands!",
+"Did you know: You can type \clubbing into the chatbox and leave it open to dance! Type \help for more commands!",
+"Did you know: You can type \boxing into the chatbox and leave it open to box! Type \help for more commands!",
+"Did you know: AI Missions, Zombies, and Animated Crash sites all run on headless client for higher performance!",
+"Did you know: You can find, buy, and sell over 700 different weapon variations on this server!",
+"Did you know: You can find, buy, and sell over 300 different vehicle variations on this server!",
+"Did you know: Huge Zombie Hordes roam the map, being run by headless client instead of the server for performance!",
+"Did you know: The loot spawn system is very intricate and full of hidden patterns and niches!",
+"Did you know: Auto-Refuel is enabled, just get out of the vehicle and scroll on the fuel source!",
+"Did you know: Nevermind, I forgot what I was going to say...",
+"Did you know: Towing and lifting are enabled for certain vehicles only & You can only tow 1 vehicle at a time!",
+"Did you know: Most fast vehicles cannot tow and most small or attack helicopters cannot lift!",
+"Did you know: If you dont get a tow or lift option, the vehicle cannot tow or lift!",
+"Did you know: Heroes can bandage other players without needing or using a bandage!",
+"Did you know: Heroes can fix other players without needing or using morphine!",
+"Did you know: Heroes get better deals and better weapons at the traders!",
+"Did you know: We have a huge community of players on our teamspeak, find friends, form rivalries, get involved! ts3.zombz.net:9172",
+"Did you know: We have a huge community of players on our teamspeak, find friends, form rivalries, get involved! ts3.zombz.net:9172",
+"Did you know: We have a huge community of players on our teamspeak, find friends, form rivalries, get involved! ts3.zombz.net:9172",
+"Did you know: We have a huge community of players on our teamspeak, find friends, form rivalries, get involved! ts3.zombz.net:9172"
 ];
 
 _randomSelection = floor(random(count _p2_didYouKnow));
 //select a message to display post-halo/post-spawn
 _p2_selectedMsg = (_p2_didYouKnow select (_randomSelection));
 systemChat(_p2_selectedMsg);	
+
+//wait 10 seconds
+uiSleep 10;
+
+//tell player about debug mon colour / mode
+if (random 1 > 0.49) then {
+	systemChat("Did you know: You can change your debug monitor mode by pressing F5!");
+} else {
+	systemChat("Did you know: You can change your debug monitor color by pressing F6!");
+};
