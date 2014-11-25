@@ -107,16 +107,10 @@ switch (_iClass) do
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
 
 		_itemTypes = [];
-		if (DZE_MissionLootTable) then{
-			{
-				_itemTypes set[count _itemTypes, _x select 0]
-			} count getArray(missionConfigFile >> "CfgLootSmall" >> _iItem);
-		}
-		else {
-			{
-				_itemTypes set[count _itemTypes, _x select 0]
-			} count getArray(configFile >> "CfgLootSmall" >> _iItem);
-		};
+		{
+			_itemTypes set[count _itemTypes, _x select 0]
+		} count getArray(missionConfigFile >> "CfgLootSmall" >> _iItem);
+	
 		_index = dayzE_CLSBase find _iItem;
 		_weights = dayzE_CLSChances select _index;
 		_cntWeights = count _weights;

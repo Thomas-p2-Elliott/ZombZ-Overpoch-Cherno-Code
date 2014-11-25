@@ -46,11 +46,8 @@ if (_spawnRoll <= _spawnChance) then {
 
     _num = (round(random _randomizedLoot)) + _guaranteedLoot;
 	
-  	if (DZE_MissionLootTable) then {
-		_itemTypes = [] + getArray (missionConfigFile >> "CfgBuildingLoot" >> _lootTable >> "lootType");
-	} else {
-		_itemTypes = [] + getArray (configFile >> "CfgBuildingLoot" >> _lootTable >> "lootType");
-	};
+	_itemTypes = [] + getArray (missionConfigFile >> "CfgBuildingLoot" >> _lootTable >> "lootType");
+	
 	_CBLBase = dayz_CBLBase find (toLower(_lootTable));
 	_weights = dayz_CBLChances select _CBLBase;
 	_cntWeights = count _weights;

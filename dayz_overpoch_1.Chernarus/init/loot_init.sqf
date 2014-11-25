@@ -6,11 +6,9 @@ dayzE_CBLSChances = [];
 dayzE_CBLSBase = [];
 
 _config = [];
-if (DZE_MissionLootTable) then {
-	_config = missionConfigFile >> "CfgBuildingLoot";
-} else {
-	_config = configFile >> "CfgBuildingLoot";
-};
+
+_config = missionConfigFile >> "CfgBuildingLoot";
+
 
 for "_i" from 0 to ((count _config) - 1) do {
 	_classname = toLower(configName (_config select _i));
@@ -69,13 +67,9 @@ dayz_CLChances = [];
 dayz_CLBase = [];
 
 _config = [];
-if (DZE_MissionLootTable) then {
-	_config = missionConfigFile >> "cfgLoot";
-	//diag_log format["P2DEBUG loot_init: _config1: %1", _config];
-} else {
-	_config = configFile >> "cfgLoot";
-	//diag_log format["P2DEBUG loot_init: _config2: %1", _config];
-};
+_config = missionConfigFile >> "cfgLoot";
+//diag_log format["P2DEBUG loot_init: _config1: %1", _config];
+
 
 for "_i" from 0 to ((count (_config)) - 1) do {
 	_classname = configName (_config select _i);
@@ -103,11 +97,8 @@ dayzE_CLSChances = [];
 dayzE_CLSBase = [];
 
 _config = [];
-if (DZE_MissionLootTable) then {
-	_config = missionConfigFile >> "cfgLootSmall";
-} else {
-	_config = configFile >> "cfgLootSmall";
-};
+_config = missionConfigFile >> "cfgLootSmall";
+
 
 for "_i" from 0 to ((count (_config)) - 1) do {
 	_classname = configName (_config select _i);
@@ -129,11 +120,8 @@ dayz_ZombieBuildings = [];
 dayz_LootBuildings = [];
 
 _config = [];
-if (DZE_MissionLootTable) then {
-	_config = missionConfigFile >> "CfgBuildingLoot";
-} else {
-	_config = configFile >> "CfgBuildingLoot";
-};
+_config = missionConfigFile >> "CfgBuildingLoot";
+
 
 for "_i" from 0 to (count (_config) - 1) do {
 	_type = _config select _i;

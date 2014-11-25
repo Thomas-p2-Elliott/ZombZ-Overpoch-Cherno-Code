@@ -14,15 +14,11 @@ if (isNil "_iClass") exitWith {diag_log "_iClass isNil, exiting loot spawn!";};
 switch (_iClass) do {
 	default {
 		_itemTypes = [];
-		if (DZE_MissionLootTable) then {
-			{
-				_itemTypes set [count _itemTypes, _x select 0]
-			} count getArray (missionConfigFile >> "cfgLoot" >> _iClass);
-		} else {
-			{
-				_itemTypes set [count _itemTypes, _x select 0]
-			} count getArray (configFile >> "cfgLoot" >> _iClass);
-		};
+
+		{
+			_itemTypes set [count _itemTypes, _x select 0]
+		} count getArray (missionConfigFile >> "cfgLoot" >> _iClass);
+	
 		_qty = 0;
 		_max = ceil(random 2) + 1;
 		if (_iClass in ["trash","civilian","office","office2","food","generic","medical","hospital","military","militarypilot","policeman","hunter","worker"]) then {
@@ -99,16 +95,11 @@ switch (_iClass) do {
 		//Item is sigle, add 1 item from cfgloot
 		_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
 		_itemTypes = [];
-		if (DZE_MissionLootTable) then{
-			{
-				_itemTypes set[count _itemTypes, _x select 0]
-			} count getArray(missionConfigFile >> "cfgLoot" >> _iItem);
-		}
-		else {
-			{
-				_itemTypes set[count _itemTypes, _x select 0]
-			} count getArray(configFile >> "cfgLoot" >> _iItem);
-		};
+
+		{
+			_itemTypes set[count _itemTypes, _x select 0]
+		} count getArray(missionConfigFile >> "cfgLoot" >> _iItem);
+	
 		_index = dayz_CLBase find _iItem;
 		_weights = dayz_CLChances select _index;
 		_cntWeights = count _weights;
@@ -123,11 +114,9 @@ switch (_iClass) do {
 	{
 		//Item is single backpack
 		_itemTypes = [];
-		if (DZE_MissionLootTable) then {
-			_itemTypes = ((getArray (missionConfigFile >> "cfgLoot" >> _iItem)) select 0);
-		} else {
-			_itemTypes = ((getArray (configFile >> "cfgLoot" >> _iItem)) select 0);
-		};
+
+		_itemTypes = ((getArray (missionConfigFile >> "cfgLoot" >> _iItem)) select 0);
+
 		_index = dayz_CLBase find _iItem;
 		_weights = dayz_CLChances select _index;
 		_cntWeights = count _weights;
@@ -141,16 +130,10 @@ switch (_iClass) do {
 	case "cfglootweapon":
 	{
 		_itemTypes = [];
-		if (DZE_MissionLootTable) then{
-			{
-				_itemTypes set[count _itemTypes, _x select 0]
-			} count getArray(missionConfigFile >> "cfgLoot" >> _iItem);
-		}
-		else {
-			{
-				_itemTypes set[count _itemTypes, _x select 0]
-			} count getArray(configFile >> "cfgLoot" >> _iItem);
-		};
+		{
+			_itemTypes set[count _itemTypes, _x select 0]
+		} count getArray(missionConfigFile >> "cfgLoot" >> _iItem);
+	
 		_index = dayz_CLBase find _iItem;
 		_weights = dayz_CLChances select _index;
 		_cntWeights = count _weights;

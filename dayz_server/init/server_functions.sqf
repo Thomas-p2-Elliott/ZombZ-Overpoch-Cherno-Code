@@ -329,18 +329,11 @@ RoadList = MarkerPosition nearRoads DynamicVehicleArea;
 // Very taxing !!! but only on first startup
 BuildingList = [];
 {
-	if (DZE_MissionLootTable) then {
-		if (isClass (missionConfigFile >> "CfgBuildingLoot" >> (typeOf _x))) then
-		{
-				BuildingList set [count BuildingList,_x];
-		};
-	} else {
-		if (isClass (configFile >> "CfgBuildingLoot" >> (typeOf _x))) then
-		{
+
+	if (isClass (missionConfigFile >> "CfgBuildingLoot" >> (typeOf _x))) then
+	{
 			BuildingList set [count BuildingList,_x];
-		};
 	};
-	
 	
 } count (MarkerPosition nearObjects ["building",DynamicVehicleArea]);
 
@@ -470,16 +463,9 @@ spawn_vehicles = {
 				_iClass = _allCfgLoots call BIS_fnc_selectRandom;
 
 				_itemTypes = [];
-				if (DZE_MissionLootTable) then{
-					{
-						_itemTypes set[count _itemTypes, _x select 0]
-					} count getArray(missionConfigFile >> "cfgLoot" >> _iClass);
-				}
-				else {
-					{
-						_itemTypes set[count _itemTypes, _x select 0]
-					} count getArray(configFile >> "cfgLoot" >> _iClass);
-				};
+				{
+					_itemTypes set[count _itemTypes, _x select 0]
+				} count getArray(missionConfigFile >> "cfgLoot" >> _iClass);
 
 				_index = dayz_CLBase find _iClass;
 				_weights = dayz_CLChances select _index;

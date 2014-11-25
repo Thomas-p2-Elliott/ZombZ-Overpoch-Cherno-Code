@@ -51,10 +51,7 @@ if (_nearbyCount < 1) exitwith
 
 {
 	_type = typeOf _x;
-	_config = 		configFile >> "CfgBuildingLoot" >> _type;
-	if (DZE_MissionLootTable) then {
-		_config = missionConfigFile >> "CfgBuildingLoot" >> _type;
-	};
+	_config = missionConfigFile >> "CfgBuildingLoot" >> _type;
 	_canLoot = 		isClass (_config);
 
 	if(_canLoot) then {

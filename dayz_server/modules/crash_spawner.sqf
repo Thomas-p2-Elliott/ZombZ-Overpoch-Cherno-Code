@@ -82,11 +82,8 @@ if (_spawnRoll <= _spawnChance) then {
 		_crash setvariable ["fadeFire",_fadeFire,true];
 	};
 
-  	if (DZE_MissionLootTable) then {
-		_itemTypes = [] + getArray (missionConfigFile >> "CfgBuildingLoot" >> _lootTable >> "lootType");
-	} else {
-		_itemTypes = [] + getArray (configFile >> "CfgBuildingLoot" >> _lootTable >> "lootType");
-	};
+	_itemTypes = [] + getArray (missionConfigFile >> "CfgBuildingLoot" >> _lootTable >> "lootType");
+	
 	_CBLBase = dayz_CBLBase find (toLower(_lootTable));
 	_weights = dayz_CBLChances select _CBLBase;
 	_cntWeights = count _weights;
