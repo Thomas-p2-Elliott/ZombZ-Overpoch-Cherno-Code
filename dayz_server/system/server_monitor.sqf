@@ -431,73 +431,87 @@ if (isServer && isNil "sm_done") then {
 		[] spawn spawn_mineveins;
 	};
 
-	dayz_MapArea = 14000;					//Size of map
-	HeliCrashArea = dayz_MapArea / 2;		//Size of heli crashsite area (7km for Chernarus)
-	
-	/* Live Server Settings: 3 Hour restart
+ 	if (P2DZ_HC_HeliCrashes) then {
+ 		diag_log("P2DEBUG: HeliCrashes Running On Headless Client instead of Server!");
+ 		dayz_MapArea = 11000;					//Size of map
+		HeliCrashArea = dayz_MapArea / 2;		//Size of heli crashsite area (7km for Chernarus)
+        P2DZ_heliCrashSites_guaranteedLoot =    8;              
+        P2DZ_heliCrashSites_randomizedLoot =    4;              
+        P2DZ_heliCrashSites_spawnFire =         true;          
+        P2DZ_heliCrashSites_fadeFire =          false;          
+        server_spawnCrashSite  =      compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnCrashSiteHC.sqf";
 
-	Description: 
-		Spawns are given a 75% chance of appearing between 4 and 8 times per restart
-		At Intervals between 22 mins 30 seconds and 37 mins 30 seconds
-		Each crash site will spawn 4 garantueed loot items with up to 3 additional items
-	
-	P2DZ_heliCrashSites_guaranteedLoot = 	4; 				//How many loot piles will Spawn
- 	P2DZ_heliCrashSites_randomizedLoot =  	3; 				//How many possible (randomized) additional loot piles could spawn
- 	P2DZ_heliCrashSites_frequency =			(22.5 * 60); 	//How often they should be given a chance to spawn in secs, eg 60sec for 1 every 1min
- 	P2DZ_heliCrashSites_variance = 			(15 * 60); 		//How much  possible additional randomized time to add to the frequency time for each spawn chance in secs
- 	P2DZ_heliCrashSites_spawnChacne =		0.75; 			//Chance between 0-1 of crashsite spawning when it gets a chance to
- 	P2DZ_heliCrashSites_spawnMarker =		'center';		//Center point of spawn radius
- 	P2DZ_heliCrashSites_spawnRadius =   	HeliCrashArea; 	//Size of radius where they can spawn
- 	P2DZ_heliCrashSites_spawnFire =			true; 			//Add smoke to them?
- 	P2DZ_heliCrashSites_fadeFire =			false; 			//Fade smoke over time?
-	
-	*/
+ 	} else {
 
-	/* Live Server Settings: 2 Hour restart
+		server_spawnCrashSite  =    	compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnCrashSite.sqf";
 
-	Description: 
-		Spawns are given a 75% chance of appearing between 2 and 4 times per restart
-		At Intervals between 20 min and 30 mins
-		Each crash site will spawn 4 garantueed loot items with up to 3 additional items
+		/* Live Server Settings: 3 Hour restart
 
-	P2DZ_heliCrashSites_guaranteedLoot = 	4; 				//How many loot piles will Spawn
- 	P2DZ_heliCrashSites_randomizedLoot =  	3; 				//How many extra loot piles could spawn
- 	P2DZ_heliCrashSites_frequency =			(30 * 60); 		//How often they should be given a chance to spawn in secs, eg 60sec for 1 every 1min
- 	P2DZ_heliCrashSites_variance = 			(20 * 60); 		//How much randomized time to add to the frequency time for each spawn chance in secs
- 	P2DZ_heliCrashSites_spawnChacne =		0.75; 				//Chance between 0-1 of crashsite spawning when it gets a chance to
- 	P2DZ_heliCrashSites_spawnMarker =		'center';		//Center point of spawn radius
- 	P2DZ_heliCrashSites_spawnRadius =   	HeliCrashArea; 	//Size of radius where they can spawn
- 	P2DZ_heliCrashSites_spawnFire =			true; 			//Add smoke to them?
- 	P2DZ_heliCrashSites_fadeFire =			false; 			//Fade smoke over time?
-	
-	*/
+		Description: 
+			Spawns are given a 75% chance of appearing between 4 and 8 times per restart
+			At Intervals between 22 mins 30 seconds and 37 mins 30 seconds
+			Each crash site will spawn 4 garantueed loot items with up to 3 additional items
+		
+		P2DZ_heliCrashSites_guaranteedLoot = 	4; 				//How many loot piles will Spawn
+	 	P2DZ_heliCrashSites_randomizedLoot =  	3; 				//How many possible (randomized) additional loot piles could spawn
+	 	P2DZ_heliCrashSites_frequency =			(22.5 * 60); 	//How often they should be given a chance to spawn in secs, eg 60sec for 1 every 1min
+	 	P2DZ_heliCrashSites_variance = 			(15 * 60); 		//How much  possible additional randomized time to add to the frequency time for each spawn chance in secs
+	 	P2DZ_heliCrashSites_spawnChacne =		0.75; 			//Chance between 0-1 of crashsite spawning when it gets a chance to
+	 	P2DZ_heliCrashSites_spawnMarker =		'center';		//Center point of spawn radius
+	 	P2DZ_heliCrashSites_spawnRadius =   	HeliCrashArea; 	//Size of radius where they can spawn
+	 	P2DZ_heliCrashSites_spawnFire =			true; 			//Add smoke to them?
+	 	P2DZ_heliCrashSites_fadeFire =			false; 			//Fade smoke over time?
+		
+		*/
 
- 	/*	Test Server Settings: !!!!!!!!!!!! 1 every 10 Minutes!!!!!!!!!! WARNING !!!!!!!! 8 Loot piles garantueed.
- 	*/
- 	P2DZ_heliCrashSites_guaranteedLoot = 	8; 				//How many loot piles will Spawn
- 	P2DZ_heliCrashSites_randomizedLoot =  	0; 				//How many extra loot piles could spawn
- 	P2DZ_heliCrashSites_frequency =			(10 * 60); 		//How often they should be given a chance to spawn in secs, eg 60sec for 1 every 1min
- 	P2DZ_heliCrashSites_variance = 			(0 * 60); 		//How much randomized time to add to the frequency time for each spawn chance in secs
- 	P2DZ_heliCrashSites_spawnChacne =		1; 				//Chance between 0-1 of crashsite spawning when it gets a chance to
- 	P2DZ_heliCrashSites_spawnMarker =		'center';		//Center point of spawn radius
- 	P2DZ_heliCrashSites_spawnRadius =   	HeliCrashArea; 	//Size of radius where they can spawn
- 	P2DZ_heliCrashSites_spawnFire =			true; 			//Add smoke to them?
- 	P2DZ_heliCrashSites_fadeFire =			false; 			//Fade smoke over time?
- 	
+		/* Live Server Settings: 2 Hour restart
 
-	//Spawn Server CrashSites:
-	_nul = 	[P2DZ_heliCrashSites_guaranteedLoot,
-			P2DZ_heliCrashSites_randomizedLoot,
-			P2DZ_heliCrashSites_frequency,
-			P2DZ_heliCrashSites_variance,
-			P2DZ_heliCrashSites_spawnChacne,
-			P2DZ_heliCrashSites_spawnMarker,
-			P2DZ_heliCrashSites_spawnRadius,
-			P2DZ_heliCrashSites_spawnFire,
-			P2DZ_heliCrashSites_fadeFire] spawn server_spawnCrashSite;
-	
+		Description: 
+			Spawns are given a 75% chance of appearing between 2 and 4 times per restart
+			At Intervals between 20 min and 30 mins
+			Each crash site will spawn 4 garantueed loot items with up to 3 additional items
+
+		P2DZ_heliCrashSites_guaranteedLoot = 	4; 				//How many loot piles will Spawn
+	 	P2DZ_heliCrashSites_randomizedLoot =  	3; 				//How many extra loot piles could spawn
+	 	P2DZ_heliCrashSites_frequency =			(30 * 60); 		//How often they should be given a chance to spawn in secs, eg 60sec for 1 every 1min
+	 	P2DZ_heliCrashSites_variance = 			(20 * 60); 		//How much randomized time to add to the frequency time for each spawn chance in secs
+	 	P2DZ_heliCrashSites_spawnChacne =		0.75; 			//Chance between 0-1 of crashsite spawning when it gets a chance to
+	 	P2DZ_heliCrashSites_spawnMarker =		'center';		//Center point of spawn radius
+	 	P2DZ_heliCrashSites_spawnRadius =   	HeliCrashArea; 	//Size of radius where they can spawn
+	 	P2DZ_heliCrashSites_spawnFire =			true; 			//Add smoke to them?
+	 	P2DZ_heliCrashSites_fadeFire =			false; 			//Fade smoke over time?
+		
+		*/
+
+	 	/*	Test Server Settings: !!!!!!!!!!!! 1 every 10 Minutes!!!!!!!!!! WARNING !!!!!!!! 8 Loot piles garantueed.
+	 	*/
+	 
+
+	 	P2DZ_heliCrashSites_guaranteedLoot = 	8; 				//How many loot piles will Spawn
+	 	P2DZ_heliCrashSites_randomizedLoot =  	0; 				//How many extra loot piles could spawn
+	 	P2DZ_heliCrashSites_frequency =			(1 * 60); 		//How often they should be given a chance to spawn in secs, eg 60sec for 1 every 1min
+	 	P2DZ_heliCrashSites_variance = 			(0 * 60); 		//How much randomized time to add to the frequency time for each spawn chance in secs
+	 	P2DZ_heliCrashSites_spawnChance =		1; 				//Chance between 0-1 of crashsite spawning when it gets a chance to
+	 	P2DZ_heliCrashSites_spawnMarker =		'center';		//Center point of spawn radius
+	 	P2DZ_heliCrashSites_spawnRadius =   	HeliCrashArea; 	//Size of radius where they can spawn
+	 	P2DZ_heliCrashSites_spawnFire =			true; 			//Add smoke to them?
+	 	P2DZ_heliCrashSites_fadeFire =			false; 			//Fade smoke over time?
+	 	
 
 
+
+
+		//Spawn Server CrashSites:
+		_nul = 	[P2DZ_heliCrashSites_guaranteedLoot,
+				P2DZ_heliCrashSites_randomizedLoot,
+				P2DZ_heliCrashSites_frequency,
+				P2DZ_heliCrashSites_variance,
+				P2DZ_heliCrashSites_spawnChance,
+				P2DZ_heliCrashSites_spawnMarker,
+				P2DZ_heliCrashSites_spawnRadius,
+				P2DZ_heliCrashSites_spawnFire,
+				P2DZ_heliCrashSites_fadeFire] spawn server_spawnCrashSite;
+ 	};
 
 	if (isDedicated) then {
 		// Epoch Events
