@@ -1,7 +1,7 @@
-/*%FSM<COMPILE "C:\Users\Player2\DayZ\Tools\BI Tool Drive\FSM Editor Personal Edition\scriptedFSM.cfg, DayZ Zombie Agent">*/
+/*%FSM<COMPILE "C:\Program Files (x86)\Bohemia Interactive\Tools\FSM Editor Personal Edition\scriptedFSM.cfg, DayZ Zombie Agent">*/
 /*%FSM<HEAD>*/
 /*
-item0[] = {"init",0,4346,-75.000000,-250.000000,25.000000,-200.000000,0.000000,"init"};
+item0[] = {"init",0,250,-75.000000,-250.000000,25.000000,-200.000000,0.000000,"init"};
 item1[] = {"End",1,250,175.000000,-250.000000,275.000000,-200.000000,0.000000,"End"};
 item2[] = {"wait",4,218,-75.000000,0.000000,25.000000,50.000000,0.000000,"wait"};
 item3[] = {"Looking_for_Targ",2,250,-75.000000,75.000000,25.000000,125.000000,0.000000,"Looking for" \n "Target"};
@@ -56,7 +56,7 @@ item51[] = {"deleted",4,218,425.000000,-25.000000,525.000000,25.000000,0.000000,
 item52[] = {"",7,210,471.000000,-79.000000,479.000000,-71.000000,0.000000,""};
 item53[] = {"",7,210,471.000000,95.999977,479.000000,104.000023,0.000000,""};
 item54[] = {"",7,210,-104.000000,471.000000,-95.999992,479.000000,0.000000,""};
-item55[] = {"player_check",4,218,-450.000000,0.000000,-350.000000,50.000000,0.000000,"player" \n "check"};
+item55[] = {"player_check",4,4314,-450.000000,0.000000,-350.000000,50.000000,0.000000,"player" \n "check"};
 item56[] = {"player_check",4,218,50.000000,0.000000,150.000000,50.000000,0.000000,"player" \n "check"};
 item57[] = {"is_Dedicated",4,218,50.000000,-250.000000,150.000000,-200.000000,5.000000,"is" \n "Dedicated"};
 link0[] = {0,11};
@@ -134,8 +134,8 @@ link71[] = {54,32};
 link72[] = {55,7};
 link73[] = {56,3};
 link74[] = {57,1};
-globals[] = {25.000000,1,0,0,0,640,480,1,98,6316128,1,-514.747192,478.726563,696.012634,-341.615540,855,893,1};
-window[] = {2,-1,-1,-1,-1,805,25,1233,25,3,873};
+globals[] = {25.000000,1,0,0,0,640,480,1,98,6316128,1,-762.244202,231.229553,696.012634,-341.615540,855,890,1};
+window[] = {2,-1,-1,-1,-1,858,78,1286,78,3,873};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -288,9 +288,10 @@ class FSM
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
           condition=/*%FSM<CONDITION""">*/"(time - _entityTime) > 30"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/"_entityTime = time;" \n
-           "" \n
-           "_list = (getposATL _agent) nearEntities [[""CAManBase"",""AllVehicles""],300];" \n
-           "_isSomeone = ({isPlayer _x} count _list) > 0;" \n
+           "//Removed for hordes" \n
+           "//_list = (getposATL _agent) nearEntities [[""CAManBase"",""AllVehicles""],300];" \n
+           "//_isSomeone = ({isPlayer _x} count _list) > 0;" \n
+           "_isSomeone = true;" \n
            "if (_d) then {" \n
            "	diag_log(format[""P2HC:HCZedFSM: LookingForTarget PlayerCheck""]);" \n
            "};"/*%FSM</ACTION""">*/;
@@ -416,7 +417,7 @@ class FSM
            "//Changed for HordeFSM" \n
            "//_list = (getposATL _agent) nearEntities [[""CAManBase"",""AllVehicles""],300];" \n
            "//_isSomeone = ({isPlayer _x} count _list) > 0;" \n
-           "_isSomone = true;" \n
+           "_isSomeone = true;" \n
            "if (_d) then { diag_log(format[""P2HC:HCZedFSM: LoiterPlayerCheck""]); };" \n
            ""/*%FSM</ACTION""">*/;
         };
@@ -604,9 +605,9 @@ class FSM
        "if (_d) then {" \n
        "	diag_log(format[""P2HC:HCZedFSM: Cleanup?""]);" \n
        "};" \n
-       "_list = (getposATL _agent) nearEntities [[""CAManBase"",""AllVehicles""],300];" \n
-       "_isSomeone = ({isPlayer _x} count _list) > 0;" \n
-       "if (alive"/*%FSM</STATEINIT""">*/;
+       "//Removed for zombie hordes" \n
+       "//_list = (getposATL _agent) nearEntities [[""CAManBase"",""AllVehicles""],300];" \n
+       "_isSomeone = true;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
