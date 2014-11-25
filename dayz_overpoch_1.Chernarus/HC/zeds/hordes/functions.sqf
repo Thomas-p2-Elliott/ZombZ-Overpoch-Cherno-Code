@@ -272,7 +272,7 @@ P2DZ_HC_ZHorde_waypointLoop = {
 								if (_d) then {	diag_log(format["P2HC:HordeZedSpawns:ZedThread: ZedReached a RespawnTrigger: %1",_x]);	};
 
 								//respawn zombies in the horde and give them this zombies next waypoint as their waypoint
-								[_hordeNum,_zedPos,_nextWaypoint] call P2DZ_HC_ZHorde_respawnHorde;
+								//[_hordeNum,_zedPos,_nextWaypoint] call P2DZ_HC_ZHorde_respawnHorde;
 							};
 						} count _triggerWaypoints;
 					};
