@@ -91,7 +91,7 @@ stream_locationCheck = {};
 //remote / web execution for client/server 
 [] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\rcode.sqf";
 [] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\rcode_s.sqf";
-//[] execvm "\z\addons\dayz_server\p2re\scripts\rcode_hc.sqf";
+[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\rcode_hc.sqf";
 
 /*---------------------------------------------------------------------------
 Remotely Executed Scripts:
@@ -100,7 +100,6 @@ Remotely Executed Scripts:
 [] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\menu\retrieveNews.sqf";
 [] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\menu\execute_re.sqf";
 [] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\gorsylobby.sqf";	
-//[] execvm "\z\addons\dayz_server\p2re\scripts\eventHandlers.sqf"; 
 
 /*---------------------------------------------------------------------------
 Encrypted Script Execution
@@ -113,7 +112,7 @@ call {
 	---------------------------------------------------------------------------*/
 	if (isDedicated && !hasInterface || isServer) exitWith {
 		private ["_found"];
-		"PVDZE_atp" addPublicVariableEventHandler {
+		"P2DZ_fire" addPublicVariableEventHandler {
 			_x = _this select 1;
 			if (typeName _x == "STRING") then {
 				diag_log _x;
