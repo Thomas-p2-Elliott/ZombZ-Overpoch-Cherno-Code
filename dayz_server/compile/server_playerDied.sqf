@@ -1,4 +1,4 @@
-private ["_characterID", "_minutes", "_newObject", "_playerID", "_infected", "_victimName", "_deathMessageSent", "_victim", "_victimVehicle", "_pGold", "_killer", "_killerName", "_weapon", "_distance", "_victimPos", "_nearLocations", "_nearestLocation", "_loc_message","_method", "_canHitFree", "_isBandit", "_punishment", "_humanityHit", "_killModifier", "_kills", "_killsV", "_death_record", "_key", "_currentTime", "_day", "_hour", "_mins", "_secs", "_statsMessage"];
+private ["_lastZedHitTime","_lastHr","_lastMin","_curHr","_curMin","_zedHit","_characterID", "_minutes", "_newObject", "_playerID", "_infected", "_victimName", "_deathMessageSent", "_victim", "_victimVehicle", "_pGold", "_killer", "_killerName", "_weapon", "_distance", "_victimPos", "_nearLocations", "_nearestLocation", "_loc_message","_method", "_canHitFree", "_isBandit", "_punishment", "_humanityHit", "_killModifier", "_kills", "_killsV", "_death_record", "_key", "_currentTime", "_day", "_hour", "_mins", "_secs", "_statsMessage"];
 _characterID = 	_this select 0;
 _minutes =		_this select 1;
 _newObject = 	_this select 2;
@@ -91,10 +91,12 @@ if ((typeName _killer) != "STRING") then
 				P2DZE_systemChat = format["%1 committed suicide near %2 in a %3",(_victimName),(_nearestLocation),(typeOf _victimVehicle)];
 				publicVariable "P2DZE_systemChat";
 				_deathMessageSent = true;
+				_newObject setVariable ["deathType","vehsuicide",true];
 			} else {
 				P2DZE_systemChat = format["%1 committed suicide near %2",(_victimName),(_nearestLocation)];
 				publicVariable "P2DZE_systemChat";
 				_deathMessageSent = true;
+				_newObject setVariable ["deathType","suicide",true];
 			};
 		};
 	}
@@ -115,7 +117,6 @@ if ((typeName _killer) != "STRING") then
 		/*
 		Check if Victim was Innocent or Not
 		*/
-		_method = "shothead";
 		_canHitFree = _newObject getVariable ["freeTarget",false];
 		_isBandit = (_newObject getVariable["humanity",0]) <= -5000; //Default: 2000
 		_punishment = _canHitFree || _isBandit; //if u are bandit || start first - player will not recieve humanity drop
@@ -143,14 +144,14 @@ if ((typeName _killer) != "STRING") then
 			PVDZE_send call server_sendToClient;
 		};
 
-		_newObject setVariable ["deathType",_method,true];
+		_newObject setVariable ["deathType","pvp",true];
 
 		/*---------------------------------------------------------------------------
 		---------------------------------------------------------------------------*/
 	};
 
 	/*---------------------------------------------------------------------------
-	Death was caused by Other Killer? (Zombie kill / runover detection?)
+	Death was caused by Other Killer? (runover detection?)
 	---------------------------------------------------------------------------*/
 
 
@@ -182,6 +183,70 @@ if ((typeName _killer) != "STRING") then
 };
 
 /*---------------------------------------------------------------------------
+Death Was caused by Zombie?
+---------------------------------------------------------------------------*/
+if (!_deathMessageSent) then {
+	//Was player hit by zombie in the last 10 minutes?
+	_lastZedHitTime = _victim getVariable["lastZedHitTime", false];
+	waitUntil {!isNil "_lastZedHitTime"};
+
+	if (typeName _lastZedHitTime == typeName []) then {
+		_zedHit = false;
+		_lastHr	 = _lastZedHitTime select 0;
+		_lastMin = _lastZedHitTime select 1;
+		_curHr = ((date) select 3);
+		_curMin = ((date) select 4);
+		if (_lastHr == _curHr) then {
+			if ((_curMin - _lastMin) > 5) then {
+				//If cur minute (eg 56) - LastMin (eg 51) = 5, is not greater than 5, then zed hit player less than 5 mins ago!
+				_zedHit = false;
+			} else {
+				//If cur minute (eg 55) - lastMin (eg 3) = 52, is greater than 5, then zed hit player more than 5 mins ago!
+				_zedHit = true;
+			};
+		} else {
+			if (_lastHr == (_curHr - 1)) then {
+				if ((_lastMin - _curMin) > 54) then {
+					//If last minute (eg 56) - currentMin (eg 1) = 55, is greater than 54, then zed hit player less than 5 mins ago!
+					_zedHit = true;
+				} else {
+					//If last minute (eg 58) - currentMin (eg 4) = 54, is not greater than 54, then zed hit player more than 5 mins ago!
+					_zedHit = false;
+				};
+			} else {
+				_zedHit = false;
+			}
+		};
+
+		if (_zedHit) then {
+			P2DZE_systemChat = format["%1 was eaten by zombies near %2",(_victimName),(_nearestLocation)];
+			publicVariable "P2DZE_systemChat";
+			_deathMessageSent = true;
+			//Set death type to zombie
+			_newObject setVariable ["deathType","zombie",true];
+		};
+	};
+};
+
+
+
+/*---------------------------------------------------------------------------
+Unknown Causes Death Message (Chat)
+---------------------------------------------------------------------------*/
+
+if (P2DZ_DeathMessage_Chat_Enabled && !_deathMessageSent) then {
+	P2DZE_systemChat = format["%1 died near %2",(_victimName),(_nearestLocation)];
+	publicVariable "P2DZE_systemChat";
+	_deathMessageSent = true;
+};
+
+//Set Time of death for server-cleanup script
+_newObject setVariable["processedDeath",diag_tickTime];
+
+//Set Time of Death for study body warmth
+_newObject setVariable["tod",serverTime,true];
+
+/*---------------------------------------------------------------------------
 Death was caused by no Killer?
 ---------------------------------------------------------------------------*/
 
@@ -199,22 +264,6 @@ if (P2DZ_DeathMessage_Debug) then {
 	diag_log(format["									"]);
 };
 
-/*---------------------------------------------------------------------------
-Unknown Causes Death Message (Chat)
----------------------------------------------------------------------------*/
-
-if (P2DZ_DeathMessage_Chat_Enabled && !_deathMessageSent) then {
-	P2DZE_systemChat = format["%1 died near %2",(_victimName),(_nearestLocation)];
-	publicVariable "P2DZE_systemChat";
-	_deathMessageSent = true;
-};
-
-_newObject setVariable["processedDeath",diag_tickTime];
-
-if (typeName _minutes == "STRING") then
-{
-	_minutes = parseNumber _minutes;
-};
 
 /*---------------------------------------------------------------------------
 Send death to hive if legit character
