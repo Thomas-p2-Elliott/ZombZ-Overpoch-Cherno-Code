@@ -7,7 +7,7 @@ _hitpoints	= _array select 1;
 _damage	= damage _vehicle;
 
 _type = typeOf _vehicle;
-_text = getText (missionConfigFile >> "CfgVehicles" >> _type >> "displayName");
+_text = getText (configFile >> "CfgVehicles" >> _type >> "displayName");
 
 //Engineering
 {dayz_myCursorTarget removeAction _x} forEach s_player_repairActions;s_player_repairActions = [];
