@@ -41,9 +41,9 @@ P2DZ_AH_FunctionChecks = {
 	{
 		if (typeName TraderItemList == 'CODE') then
 		{
-			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",
+			P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",
 				_pname, _puid,  ('Trader Menu - not near a Trader!'),  (format["#1 - %1 @%2",_ltxt,getPosATL player])];
-			publicVariableServer 'PVDZE_atp';
+			publicVariableServer 'P2DZ_fire';
 			[] spawn P2DZ_AHKick;
 		};
 	};	
@@ -52,8 +52,8 @@ P2DZ_AH_FunctionChecks = {
 		if ((str (fnc_usec_damageHandler) == '{}' || (([(str fnc_usec_damageHandler)] call KRON_strLen) < 500))) then 
 		{
 			if (!([str (fnc_usec_damageHandler),"ZombZinSafeZone"] call KRON_strInStr) || !(player getVariable ["ZombZInSafeZone", false])) exitWith {
-				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'fnc_usec_damageHandler', (str fnc_usec_damageHandler)];
-				publicVariableServer 'PVDZE_atp';
+				P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'fnc_usec_damageHandler', (str fnc_usec_damageHandler)];
+				publicVariableServer 'P2DZ_fire';
 				[] spawn P2DZ_AHKick;
 			};
 		};
@@ -64,8 +64,8 @@ P2DZ_AH_FunctionChecks = {
 		if ((str (fnc_usec_unconscious) == '{}' || (([(str fnc_usec_unconscious)] call KRON_strLen) < 500))) then 
 		{
 			if (!([str (player_zombieCheck),"ZombZinSafeZone"] call KRON_strInStr) || !(player getVariable ["ZombZInSafeZone", false])) exitWith {
-				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'fnc_usec_unconscious', (str fnc_usec_unconscious)];
-				publicVariableServer 'PVDZE_atp';
+				P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'fnc_usec_unconscious', (str fnc_usec_unconscious)];
+				publicVariableServer 'P2DZ_fire';
 				[] spawn P2DZ_AHKick;
 			};
 		};
@@ -83,8 +83,8 @@ P2DZ_AH_FunctionChecks = {
 		if (str(player_zombieCheck) != orig_player_zombieCheck && (([(str fnc_usec_unconscious)] call KRON_strLen) < 500)) exitWith 
 		{
 			if (!(["ZombZinSafeZone", str (player_zombieCheck)] call KRON_strInStr) && !(player getVariable ["ZombZInSafeZone", false])) exitWith {
-				PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'player_zombieCheck', (str player_zombieCheck)];
-				publicVariableServer 'PVDZE_atp';
+				P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'player_zombieCheck', (str player_zombieCheck)];
+				publicVariableServer 'P2DZ_fire';
 				[] spawn P2DZ_AHKick;
 			};
 		};
@@ -100,8 +100,8 @@ P2DZ_AH_FunctionChecks = {
 	{
 		if (str(player_checkStealth) != orig_player_checkStealth) exitWith 
 		{
-			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  'player_checkStealth',  ('NotOriginal')];
-			publicVariableServer 'PVDZE_atp';
+			P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  'player_checkStealth',  ('NotOriginal')];
+			publicVariableServer 'P2DZ_fire';
 			[] spawn P2DZ_AHKick;
 		};
 	};
@@ -116,8 +116,8 @@ P2DZ_AH_FunctionChecks = {
 	{
 		if (str(player_zombieAttack) != orig_player_zombieAttack) exitWith 
 		{
-			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  'player_zombieAttack',  ('NotOriginal')];
-			publicVariableServer 'PVDZE_atp';
+			P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  'player_zombieAttack',  ('NotOriginal')];
+			publicVariableServer 'P2DZ_fire';
 			[] spawn P2DZ_AHKick;
 		};
 	};
@@ -136,18 +136,18 @@ P2DZ_AH_FunctionChecks = {
 	_ltxt = lbtext [12001,0];
 	if (str _TraderDialogBuy != str TraderDialogBuy) then
 	{
-		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",
 			_pname, _puid,  ('TraderDialogBuy modified: '),  (format["%1 @%2 %3",_ltxt,getPosATL player,TraderDialogBuy])];
-		publicVariableServer 'PVDZE_atp';
+		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 
 	};
 
 	if (str _TraderDialogSell != str TraderDialogSell) then
 	{
-		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",
 			_pname, _puid,  ('TraderDialogSell modified: '),  (format["%1 @%2 %3",_ltxt,getPosATL player,TraderDialogSell])];
-		publicVariableServer 'PVDZE_atp';
+		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 

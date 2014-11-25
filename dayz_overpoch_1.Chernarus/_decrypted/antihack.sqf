@@ -24,7 +24,24 @@ if (hasInterface && !isDedicated) exitWith {
 	_mPos = getMarkerPos 'respawn_west';
 
 	//	Exit if whitelist enabled and players uid is whitelisted
-	if (P2DZ_clientAHWhitelistEnabled && {(_puid in P2DZ_clientAHWhiteListUIDs)}) exitWith {};
+	if (P2DZ_clientAHWhitelistEnabled && {(_puid in P2DZ_clientAHWhiteListUIDs)}) exitWith {
+		fnc_usec_damageHandle = {
+			/*
+			ASSIGN DAMAGE HANDLER TO A UNIT
+			- Function
+			- [unit] call fnc_usec_damageHandle;
+			*/
+			private ["_unit"];
+			_unit = _this select 0;
+			
+			// Remove handle damage override
+			// _unit removeEventHandler ["HandleDamage",temp_handler];
+
+			mydamage_eh1 = _unit addeventhandler ["HandleDamage",{_this call fnc_usec_damageHandler; _this call DDOPP_taser_handleHit; } ];
+			mydamage_eh2 = _unit addEventHandler ["Fired", {_this call player_fired; _this call p2_fired}];
+			mydamage_eh3 = _unit addEventHandler ["Killed", {_id = [] spawn player_death;}];
+		};
+	};
 
 
 	/*===========================================================================
@@ -32,7 +49,7 @@ if (hasInterface && !isDedicated) exitWith {
 	---------------------------------------------------------------------------*/
 
 		//Set this to something other than nil so it doesnt kick us!
-		PVDZE_atp = "";
+		P2DZ_fire = "";
 
 		//Set this to the time early or get kicked
 		P2DZ_AH_loopTimeLast = diag_tickTime;

@@ -57,8 +57,8 @@ p2_bulletCheck = {
 
 	{
 		if (_x > (_maxBulletSpeed + 50)) then {
-			PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name _unit, getPlayerUID _unit, 'Bullet Check: Velocity too High.', ([str _currentBulletSpeed, str _maxBulletSpeed])];
-			publicVariableServer 'PVDZE_atp';
+			P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name _unit, getPlayerUID _unit, 'Bullet Check: Velocity too High.', ([str _currentBulletSpeed, str _maxBulletSpeed])];
+			publicVariableServer 'P2DZ_fire';
 			[] spawn P2DZ_AHKick;
 		};
 	} count _currentBulletSpeed;
@@ -69,8 +69,8 @@ p2_bulletCheck = {
 	_magAmmoText = (getText (configFile >> "CfgMagazines" >> _magazine >> "ammo"));
 
 	if ({_x == _magAmmoText} count [_projectileType] < 1) exitWith {	
-		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name _unit, getPlayerUID _unit, 'Bullet Check: Bullet Doesnt Match Magazine', ([str _magAmmoText, str _projectileType])];
-		publicVariableServer 'PVDZE_atp';
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name _unit, getPlayerUID _unit, 'Bullet Check: Bullet Doesnt Match Magazine', ([str _magAmmoText, str _projectileType])];
+		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 
@@ -78,8 +78,8 @@ p2_bulletCheck = {
 	_wepMagText = (getArray (configFile >> "CfgWeapons" >> _weapon >> "magazines"));
 
 	if ({_x == _magazine} count _wepMagText < 1 && !(count (getArray (configFile >> "cfgWeapons" >> _weapon >> "muzzles")) > 1)) exitWith {	
-		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name _unit, getPlayerUID _unit, 'Bullet Check: Magazine Does not Match Weapon', ([str _magazine, str _wepMagText])];
-		publicVariableServer 'PVDZE_atp';
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name _unit, getPlayerUID _unit, 'Bullet Check: Magazine Does not Match Weapon', ([str _magazine, str _wepMagText])];
+		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 };
@@ -140,8 +140,8 @@ p2_infAmmoCheck = {
 	};
 
 	if (P2DZ_blackMarkCount > 3) then {
-		PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name _unit, getPlayerUID _unit, 'p2_infAmmoCheck', ([P2DZ_LastShotInfo, P2DZ_blackMarkCount])];
-		publicVariableServer 'PVDZE_atp';
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",name _unit, getPlayerUID _unit, 'p2_infAmmoCheck', ([P2DZ_LastShotInfo, P2DZ_blackMarkCount])];
+		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 };

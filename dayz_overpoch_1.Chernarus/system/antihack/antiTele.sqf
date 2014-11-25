@@ -41,8 +41,8 @@ while {11250 == 11250} do {
 				if ((_speed > _topSpeed) && (alive player) && !(_lastVehicle in ["ParachuteWest","ParachuteC"]) && ((driver (vehicle player) == player) || (isNull (driver (vehicle player)))) && ((_debug distance _lastpos > 3000) && (_debug distance _curpos > 3000)) && !((vehicle player == player) && (_curheight < _lastheight) && ((_curheight - _terrainHeight) > 1)) && !(_isHalo)) then {
 					(vehicle player) setposATL  _lastpos;
 					_PUID = [player] call FNC_GetPlayerUID;
-					PVDZE_atp = format["TELEPORT REVERT: player (%6) UID (%1) to %2 from %3, %4 meters, now at %5", _PUID, _lastpos, _curPos, round(_lastpos distance _curpos), getPosATL player, name player];
-					publicVariableServer "PVDZE_atp";
+					P2DZ_fire = format["TELEPORT REVERT: player (%6) UID (%1) to %2 from %3, %4 meters, now at %5", _PUID, _lastpos, _curPos, round(_lastpos distance _curpos), getPosATL player, name player];
+					publicVariableServer "P2DZ_fire";
 				} else {
 					_lastpos = _curpos;
 					_lastheight = _curheight;
@@ -59,7 +59,7 @@ while {11250 == 11250} do {
 	sleep 0.1;
 };
 
-PVDZE_atp = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'AntiTeleport', 'Loop Exited'];
-publicVariableServer 'PVDZE_atp';
+P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'AntiTeleport', 'Loop Exited'];
+publicVariableServer 'P2DZ_fire';
 [] spawn P2DZ_AHKick;
 
