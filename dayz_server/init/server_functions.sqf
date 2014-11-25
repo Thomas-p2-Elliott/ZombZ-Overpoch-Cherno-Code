@@ -6,6 +6,11 @@ BIS_MPF_remoteExecutionServer = {
 	};
 };
 
+/* Logging Functions */
+p2net_log2 =	compile preprocessFileLineNumbers 	"\z\addons\dayz_server\init\p2net_logFunction.sqf";
+p2net_log1 =	compile preprocessFileLineNumbers 	"\z\addons\dayz_server\init\p2net_logFunction.sqf";
+
+/*Regular Functions */
 BIS_Effects_Burn =				{};
 server_playerLogin =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerLogin.sqf";
 server_playerSetup =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerSetup.sqf";
@@ -22,7 +27,6 @@ server_publishVeh3 = 			compile preprocessFileLineNumbers "\z\addons\dayz_server
 server_tradeObj = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_tradeObject.sqf";
 server_traders = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_traders.sqf";
 server_playerSync =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerSync.sqf";
-server_spawnCrashSite  =    	compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnCrashSite.sqf";
 server_spawnEvents =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnEvent.sqf";
 fnc_plyrHit   =					compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fnc_plyrHit.sqf";
 server_deaths = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDeaths.sqf";
@@ -1050,7 +1054,6 @@ server_spawnCleanAnimals = {
 P2DZ_debugLockUnlock = true;
 server_logUnlockLockEvent = compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_logUnlockLockEvent.sqf";
 
-p2net_log1 =	compile preprocessFileLineNumbers 	"\z\addons\dayz_server\init\p2net_logFunction.sqf";
 [] execVM 											"\z\addons\dayz_server\system\antihack_functions.sqf";
 [] execvm 											"\z\addons\dayz_server\init\deploy_functions.sqf";
 [] execvm 											"\z\addons\dayz_server\init\goldEventHandlers.sqf";
