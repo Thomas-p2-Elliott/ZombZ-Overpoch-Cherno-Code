@@ -77,7 +77,7 @@ if (_nearbyCount < 15) then
 					diag_log(format["P2HC:ZedSpawns: P2DZ_HC_spawnZeds (Wild): Spawning Zed %1 of %2",_cz,(ceil(_zeds2Spawn * 0.3))]);
 				};
 
-				[_position,_minDist,_maxDist] call player2_spawnZedsHC; //Spawn a zombie
+				[_position,_minDist,_maxDist] call player2_spawnZombieHC; //Spawn a zombie
 			};
 		};
 	};
@@ -109,7 +109,7 @@ if (_nearbyCount < 15) then
 					diag_log(format["P2HC:ZedSpawns: P2DZ_HC_spawnZeds (City): Spawning Zed %1 of %2",_cz,_zeds2Spawn]);
 				};
 
-				[_position,_minDist,_maxDist] call player2_spawnZedsHC;	//Spawn a zombie
+				[_position,_minDist,_maxDist] call player2_spawnZombieHC;	//Spawn a zombie
 			};
 		};
 	};
