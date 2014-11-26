@@ -130,6 +130,7 @@ _needText = localize "str_epoch_player_246";
 
 if(_isPole) then {
 	_distance = DZE_PlotPole select 1;
+	cutText ["Press [Space Bar] to Drop the Plot Pole!","PLAIN DOWN",2];
 };
 
 // check for near plot
