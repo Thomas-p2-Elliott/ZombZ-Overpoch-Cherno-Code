@@ -20,28 +20,34 @@ dayz_zombieSpeak = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\co
 
 dayz_losCheck = {
 	private ["_target","_agent","_cantSee","_tPos","_zPos"];
+	_cantSee = true;
 	_target = _this select 0;
 	_agent = _this select 1;
-	_cantSee = true;
-	
+
 	if (isNil '_target' || isNil '_agent') exitWith {
 		diag_log("dayz_losCheck:HC:Warning: agent or target was nil");
 		_cantSee
 	};
+
 	if (isNull _target || isNull _agent) exitWith {
 		diag_log("dayz_losCheck:HC:Warning: agent or target was null");
 		_cantSee
 	};
-	if (!(alive _target) || !(alive _agent)) exitWith {	_cantSee = true; };
-	
+
+	if (!(alive _target) || !(alive _agent)) exitWith {
+		diag_log("dayz_losCheck:HC:Warning: agent or target was dead");
+		_cantSee
+	};
+
 	_tPos = visiblePositionASL _target;		_zPos = visiblePositionASL _agent;
 	_tPos set [2,(_tPos select 2)+1];		_zPos set [2,(_zPos select 2)+1];
 	if ((count _tPos > 0) && (count _zPos > 0)) then { _cantSee = terrainIntersectASL [_tPos, _zPos];	if (!_cantSee) then {	_cantSee = lineIntersects [_tPos, _zPos, _agent, vehicle _target]; };};
-
+	if (isNil '_cantSee') then { _cantSee = true; diag_log("dayz_losCheck:HC:Warning: cantSee was nil"); };
 	_cantSee
 };
 
 //Headless Client Function Paths
+player2_zedAntiStuck =			compile preprocessFileLineNumbers "HC\zeds\player2_zedAntiStuck.sqf";
 zombie_loiterHC = 				compile preprocessFileLineNumbers "HC\zeds\zombie_loiterHC.sqf";
 player2_spawnZombieHC =			compile preprocessFileLineNumbers "HC\zeds\player2_spawnZombieHC.sqf";
 player2_spawnZedsHC = 			compile preprocessFileLineNumbers "HC\zeds\player2_spawnZedsHC.sqf"; 
