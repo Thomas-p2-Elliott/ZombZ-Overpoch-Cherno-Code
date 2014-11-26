@@ -46,8 +46,8 @@ P2DZ_HC_zedHordes = true;
 /*---------------------------------------------------------------------------
 UID WhiteLists - Door Management, Plot Management, Client-Side AntiHack
 ---------------------------------------------------------------------------*/
-testServer_AdminMenuList = 			["76561198147422604","76561197994454413","76561198143011904"];
-P2DZ_clientAHWhiteListUIDs = 		["76561198147422604","76561197994454413","76561198143011904"];
+testServer_AdminMenuList = 			["76561198147422604","76561197994454413","76561198143011904","76561198057349736"];
+P2DZ_clientAHWhiteListUIDs = 		["76561198147422604","76561197994454413","76561198143011904","76561198057349736"];
 P2DZ_plotManagerUIDs = 				["007"]; 
 P2DZ_DoorAdminList =   				["007"];
 
@@ -146,7 +146,7 @@ if (hasInterface && !isDedicated) then {
 	P2DZ_load9 = 	false;
 	P2DZ_load10 =	false;
 	//Enable client antihack whitelist?
-	P2DZ_clientAHWhitelistEnabled = 	false;
+	P2DZ_clientAHWhitelistEnabled = 	true;
 	//Enable client antihack debug?
 	P2DZ_AHDebug = 						false;
 	call compile preprocessFileLineNumbers "init\variables.sqf";	
