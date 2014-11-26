@@ -25,12 +25,13 @@ if (_e) exitWith {	diag_log("P2HC:HordeZedSpawns: FATAL ERROR: Functions file co
 	Configuration
 ---------------------------------------------------------------------------*/
 P2DZ_HC_ZHorde_HordeCount = 			2;						//Amount of hordes
-P2DZ_HC_ZHorde_ZombiesPerHorde = 		50;						//Amount of zombies per horde
+P2DZ_HC_ZHorde_ZombiesPerHorde = 		20;						//Amount of zombies per horde
 P2DZ_HC_ZHorde_TriggerWaypointNames = 	["Horde1","Horde2"]; 	//Name of horde waypoint variables (P2DZ_HC_ZHorde_TriggerWayp_%VarName%)
 P2DZ_HC_ZHorde_PathWaypointNames = 		["Horde1","Horde2"]; 	//Name of horde waypoint variables (P2DZ_HC_ZHorde_PathWayp_%VarName%)
-P2DZ_HC_zHorde_waypointLoop_sleepTime = 30;						//Performance setting (seconds for each zed to check if it should update waypoint)
-P2DZ_HC_HordeZedsDebug	= 	true;								//Debug Zombie Horde Script
-P2DZ_HC_debugHordeZedFSM = 	false;								//Debug Zombie Horde FSM / AntiStuck Loop
+P2DZ_HC_hordeZedSpeed =					10;						//Speed of zeds in horde (ONLY USE 2 or 10, 2 = the walking dead, 10 = 28 days later)
+P2DZ_HC_zHorde_waypointLoop_sleepTime = 1;						//Performance setting (seconds for each zed to check if it should update waypoint)
+P2DZ_HC_HordeZedsDebug	= 				true;								//Debug Zombie Horde Script
+P2DZ_HC_debugHordeZedFSM = 				false;								//Debug Zombie Horde FSM / AntiStuck Loop
 
 /*
 	Waypoint Configuration 

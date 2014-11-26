@@ -103,7 +103,7 @@ P2DZ_HC_ZHorde_waypointLoop = {
 				_hordeNum = _this select 1;
 				_pathWaypoints = _this select 2;
 				_triggerWaypoints = _this select 3;
-				_d = P2DZ_HC_HordeZedsDebug;
+				_d = P2DZ_HC_debugHordeZedFSM;
 				if (_d) then {	diag_log(format["P2HC:HordeZedSpawns:ZedThread: Start: Input: %1", (_this)]);	};
 
 				//randomize this sleep time per zombie so code isn't all running at same time for headless on each update
@@ -116,7 +116,7 @@ P2DZ_HC_ZHorde_waypointLoop = {
 				Check to make sure this code isn't already running on this zombie
 				---------------------------------------------------------------------------*/
 				if (_zed getVariable ["p2dz_hordeWaypointBrain", false]) exitWith {
-					diag_log(format["P2Horde:WPThread:Z-ID:%1: Fatal Error: Waypoint thread already running on this zombie, why run it twice?",(netId _zed)]);
+					if (_d) then { diag_log(format["P2Horde:WPThread:Z-ID:%1: Fatal Error: Waypoint thread already running on this zombie, why run it twice?",(netId _zed)]); };
 				};
 
 				/*---------------------------------------------------------------------------
@@ -333,7 +333,7 @@ zombieHorde_loiterHC = {
 		_unit domove _pos;
 	};
 
-	_unit forceSpeed 2;
+	_unit forceSpeed P2DZ_HC_hordeZedSpeed;
 };
 
 
@@ -344,25 +344,52 @@ Tracks a horde after it is first spawned
   to make sure it fully respawns when most of the zeds die.
 ---------------------------------------------------------------------------*/
 P2DZ_HC_ZHorde_tracker = {
-	private ["_hordeNum", "_zc", "_mn"];
-	_hordeNum = _this;
+	private ["_hordeNum", "_zc", "_mn","_d","_hordeAlreadyTracked"];
+	_hordeNum = _this select 0;
+	_hordeType = _this select 1;
+	_d = P2DZ_HC_HordeZedsDebug;
+
+	if (_d) then {		diag_log(format["P2HC:HordeZedSpawns:P2DZ_HC_ZHorde_tracker:Input: %1",_this]);	};
+
+	if (isNil 'P2DZ_HC_ZHorde_tracker_TrackedNums') then {
+		P2DZ_HC_ZHorde_tracker_TrackedNums = [];
+	};
+
+	_hordeAlreadyTracked = false;
+	{
+	  if (_hordeNum == _x) then {
+	  	_hordeAlreadyTracked = true;
+	  };
+	} forEach P2DZ_HC_ZHorde_tracker_TrackedNums;
+
+	if (_hordeAlreadyTracked) exitWith {
+		if (_d) then {		diag_log(format["P2HC:HordeZedSpawns:P2DZ_HC_ZHorde_tracker:Error, Horde %1 already Tracked!",_hordeNum]);	};
+	};
+	if (_d) then {		diag_log(format["P2HC:HordeZedSpawns:P2DZ_HC_ZHorde_tracker:Starting Horde Tracking For HordeNumber: %1",_hordeNum]);	};
+
+	P2DZ_HC_ZHorde_tracker_TrackedNums = P2DZ_HC_ZHorde_tracker_TrackedNums + [_hordeNum];
+	if (_d) then {		diag_log(format["P2HC:HordeZedSpawns:P2DZ_HC_ZHorde_tracker:TrackedHordes: %1",P2DZ_HC_ZHorde_tracker_TrackedNums]);	};
 
 	while {true} do {
+
+		//sleep 2 minutes between each check
+		uiSleep 120;
+
 		_zc = 0;	//reset z count
 		_mn = (getMarkerPos 'center') nearEntities ["CAManBase",25000]; 	//Count All Men on Map
 		//check if any of them men are living zombies that are part of this horde number
 		{ if (_x isKindof "zZombie_Base" && alive _x && (_x getVariable [(format["hordeZed_%1",_hordeNum]), false])) then { _zc = _zc + 1;	}; } foreach _mn;
 
-		//If less than 2 zombies left, respawn entire horde
-		if (_zc < 2) then {
+		//If less than 10% of zombies left, respawn entire horde
+		if (_zc < ((P2DZ_HC_ZHorde_ZombiesPerHorde * 0.1))) then {
+			if (_d) then {		diag_log(format["P2HC:HordeZedSpawns:P2DZ_HC_ZHorde_tracker:Respawning Horde! ZedsPerHorde * 0.1 (%2) > ZedsLeft(%2): %1",(P2DZ_HC_ZHorde_ZombiesPerHorde * 0.1),_zc]);	};
+
 			//delete existing horde
 			_hordeNum call P2DZ_HC_ZHorde_cleanupHorde;
 			//spawn new horde
-			_hordeNum call P2DZ_HC_ZHorde_spawnHorde;
+			[_hordeNum,_hordeType] call P2DZ_HC_ZHorde_spawnHorde;
 		};
 
-		//sleep 2 minutes between each check
-		uiSleep 120;
 	};
 };
 
@@ -371,11 +398,14 @@ Zombie Horde Spawner
 	Called on horde startup / Horde death
 ---------------------------------------------------------------------------*/
 P2DZ_HC_ZHorde_spawnHorde = {
-	private ["_hordeNum","_spawnPos","_waypoint","_pathVar","_pathWaypoints","_hordeType"];
+	private ["_hordeNum","_spawnPos","_waypoint","_pathVar","_pathWaypoints","_hordeType","_null"];
 	_hordeNum = _this select 0;
 	_hordeType = _this select 1;
+	_d = P2DZ_HC_HordeZedsDebug;
 
 	if (isNil '_hordeType') then { _hordeType = "z_soldier" };
+
+	if (_d) then {		diag_log(format["P2HC:HordeZedSpawns:HordeSpawner:Spawning Horde! HordeNum: %1, HordePos: %2",(_hordeNum),(_hordeType)]);	};
 
 	//get path variable from horde number
 	_pathVar = P2DZ_HC_ZHorde_PathWaypointNames select (_hordeNum - 1);
@@ -389,11 +419,20 @@ P2DZ_HC_ZHorde_spawnHorde = {
 	//select spawnpos as somewhere near (75m) starting point
 	_spawnPos = [_waypoint,5,75,0,0,0,0] call BIS_fnc_findSafePos;
 
+	if (_d) then {		diag_log(format["P2HC:HordeZedSpawns:HordeSpawner: HordeNum: %1, HordePath: %2, hordeSpawnPos: %3, firstWayPoint: %4",(_hordeNum),(_pathWaypoints),_spawnPos,_waypoint]);	};
+
+
 	//spawn zeds up to (max per horde - zombies within 200m that are part of horde)
 	for "_i" from 1 to (P2DZ_HC_ZHorde_ZombiesPerHorde) do {
 		//SpawnPos,HordeNum,NextWaypoint,MinDistfromSpawnPos,MaxDistfromSpawnPos,ZedType
 		[_spawnPos,_hordeNum,_waypoint,0,30,_hordeType] call P2DZ_HC_ZHorde_spawnZed;
 	};
+
+	uiSleep 5; //Give it a moment to spawn all the zeds in
+	if (_d) then {		diag_log(format["P2HC:HordeZedSpawns:HordeSpawner: HordeNum: %1, Adding Horde Tracker",(_hordeNum)]);	};
+
+	_null = [_hordeNum,_hordeType] spawn P2DZ_HC_ZHorde_tracker;
+	if (_d) then {		diag_log(format["P2HC:HordeZedSpawns:HordeSpawner: HordeNum: %1, Adding Horde Waypoint Loop",(_hordeNum)]);	};
 
 	//call waypoint adder to loop to all zeds spawned in horde that don't have it (GORSY: how does this work on each zombie its not in the zombie loop)
 	call P2DZ_HC_ZHorde_waypointLoop;
@@ -445,7 +484,7 @@ P2DZ_HC_ZHorde_respawnHorde = {
 Horde Zed Spawner
 ---------------------------------------------------------------------------*/
 P2DZ_HC_ZHorde_spawnZed = {
-	private ["_spawnPos", "_hordeNum", "_minDist", "_zedType", "_maxDist", "_unitTypes", "_loot", "_array", "_agent", "_method", "_radius", "_type", "_position", "_d", "_waypoint", "_lootType", "_index", "_weights", "_loot_count"];
+	private ["_null","_spawnPos", "_hordeNum", "_minDist", "_zedType", "_maxDist", "_unitTypes", "_loot", "_array", "_agent", "_method", "_radius", "_type", "_position", "_d", "_waypoint", "_lootType", "_index", "_weights", "_loot_count"];
 	_d = 	P2DZ_HC_HordeZedsDebug;																		//debugging
 
 	//if (_d) then { diag_log(format["P2HC:HordeZedSpawns: P2DZ_HC_ZHorde_spawnZed: Input: %1",	_this]); };
@@ -534,7 +573,7 @@ P2DZ_HC_ZHorde_spawnZed = {
 	_id = [_position,_agent] execFSM "HC\zeds\hordes\zombieHorde_agentHC.fsm";	//Start behavior (fsm ai)
 
 
-	if (_d) then { diag_log(format["P2HC:HordeZedSpawns: P2DZ_HC_ZHorde_spawnZed: ZedSpawned, id: %1",_id]); };
+	//if (_d) then { diag_log(format["P2HC:HordeZedSpawns: P2DZ_HC_ZHorde_spawnZed: ZedSpawned, id: %1",_id]); };
 
 	/*---------------------------------------------------------------------------
 	HeadlessZed Anti-Stuck by Player2
@@ -544,31 +583,39 @@ P2DZ_HC_ZHorde_spawnZed = {
 	 	if it doesnt move more than 10m in 2 checks...
 	 	Each check runs on 60sec interval
 	---------------------------------------------------------------------------*/
-	[_agent] spawn {
+	_null = [_agent] spawn {
 		private["_agent","_pos","_lastPos","_notMoveCount","_d"];
 		//Variable Initalization
 		_agent = objNull; _pos = [];	_lastPos = []; _notMoveCount = 0;
 		_agent = _this select 0;
-		_lastPos = getPosATL _agent;
-		_d = P2DZ_HC_debugHordeZedFSM;
+
+		if (isNil '_agent') exitWith {
+			diag_log("P2HC:HordeZedSpawns: ZedAntiStuck: Error input agent was nil");
+		};
+		
+		if (isNull _agent) exitWith {
+			diag_log("P2HC:HordeZedSpawns: ZedAntiStuck: Error input agent was null");
+		};
+
+		_lastPos = position _agent;
+		
+		_d = P2DZ_HC_HordeZedsDebug;
 		if (_d) then { diag_log(format["P2HC:HordeZedSpawns: ZedAntiStuck: Starting"]); };
 
 		while {!isNull _agent && {alive _agent}} do {
-			_pos = getPosATL _agent;
-			if ((_lastPos distance _pos) < 10) then {
+			_lastPos = position _agent;
+			uiSleep 60;
+			_pos = position _agent;
+
+			if ((_lastPos distance _pos) < 4) then {
 				_notMoveCount = _notMoveCount + 1;
 			} else {
 				_notMoveCount = 0;
 			};
 
-			if (_notMoveCount > 1) exitWith {
+			if (_notMoveCount > 3) exitWith {
 				if (_d) then { diag_log(format["P2HC:HordeZedSpawns: ZedAntiStuck: Zed Hasn't Moved More than 10m for %1 60 second interval checks...Deleting",_notMoveCount]); };
 			};
-
-			if (_d) then { diag_log(format["P2HC:HordeZedSpawns: ZedAntiStuck: Sleeping 60"]); };
-
-			uiSleep 60;
-
 		};
 
 		if (!isNull _agent) then {
@@ -576,9 +623,9 @@ P2DZ_HC_ZHorde_spawnZed = {
 			_agent call P2DZ_HC_ZHorde_cleanupZed;
 		};
 
-		if (_d) then { diag_log(format["P2HC:HordeZedSpawns: ZedAntiStuck: Finished"]); };
+		if (_d) then { diag_log(format["P2HC:HordeZedSpawns: ZedAntiStuck: Finished: IsNull? %1, isAlive: %2",(isNull _agent),(alive _agent)]); };
 	};
-
+	
 	/*---------------------------------------------------------------------------
 	www.ZombZ.net - Player2
 	---------------------------------------------------------------------------*/
@@ -589,7 +636,7 @@ delete each zombie in given horde number on map
 ---------------------------------------------------------------------------*/
 P2DZ_HC_ZHorde_cleanupHorde = {
 	private ["_hordeNum", "_mn"];
-	_hordeNum = _this select 0;
+	_hordeNum = _this;
 	_mn = [];
 	_mn = (getMarkerPos 'center') nearEntities ["CAManBase",25000]; 	//Count All Men on Map
 	{ 

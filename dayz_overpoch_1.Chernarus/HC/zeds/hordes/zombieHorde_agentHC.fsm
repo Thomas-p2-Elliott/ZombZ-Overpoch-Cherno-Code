@@ -9,7 +9,7 @@ item4[] = {"Not_Alive",4,218,0.000000,300.000000,100.000000,350.000000,5.000000,
 item5[] = {"Nobody_Near",4,218,0.000000,375.000000,100.000000,425.000000,4.000000,"Nobody" \n "Near"};
 item6[] = {"loiter",4,218,-325.000000,0.000000,-225.000000,50.000000,0.000000,"loiter"};
 item7[] = {"Loiter",2,250,-325.000000,75.000000,-225.000000,125.000000,0.000000,"Loiter"};
-item8[] = {"In_Position",4,218,-200.000000,75.000000,-100.000000,125.000000,1.000000,"In Position"};
+item8[] = {"In_Position",4,4314,-200.000000,75.000000,-100.000000,125.000000,1.000000,"In Position"};
 item9[] = {"",7,210,-29.000042,321.000000,-20.999958,329.000000,0.000000,""};
 item10[] = {"",7,210,-29.000042,395.999939,-20.999958,404.000061,0.000000,""};
 item11[] = {"true",8,218,-75.000000,-175.000000,25.000000,-125.000000,0.000000,"true"};
@@ -56,7 +56,7 @@ item51[] = {"deleted",4,218,425.000000,-25.000000,525.000000,25.000000,0.000000,
 item52[] = {"",7,210,471.000000,-79.000000,479.000000,-71.000000,0.000000,""};
 item53[] = {"",7,210,471.000000,95.999977,479.000000,104.000023,0.000000,""};
 item54[] = {"",7,210,-104.000000,471.000000,-95.999992,479.000000,0.000000,""};
-item55[] = {"player_check",4,4314,-450.000000,0.000000,-350.000000,50.000000,0.000000,"player" \n "check"};
+item55[] = {"player_check",4,218,-450.000000,0.000000,-350.000000,50.000000,0.000000,"player" \n "check"};
 item56[] = {"player_check",4,218,50.000000,0.000000,150.000000,50.000000,0.000000,"player" \n "check"};
 item57[] = {"is_Dedicated",4,218,50.000000,-250.000000,150.000000,-200.000000,5.000000,"is" \n "Dedicated"};
 link0[] = {0,11};
@@ -225,7 +225,7 @@ class FSM
        "	if (_newDest distance _myDest > 0) then {" \n
        "		_myDest = _newDest;" \n
        "		_agent moveTo _myDest;" \n
-       "		_agent forceSpeed 2;" \n
+       "		_agent forceSpeed P2DZ_HC_hordeZedSpeed;" \n
        "	};" \n
        "};" \n
        "" \n
@@ -319,14 +319,14 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"_isAlive = alive _agent;" \n
        "_target = _agent call zombie_findTargetAgent;" \n
        "" \n
-       "_agent forceSpeed 2;" \n
+       "_agent forceSpeed P2DZ_HC_hordeZedSpeed;" \n
        "" \n
        "_newDest = _agent getVariable [""myDest"",getposATL _agent];" \n
        "if (!isNil ""_newDest"") then {" \n
        "	if (_newDest distance _myDest > 0) then {" \n
        "		_myDest = _newDest;" \n
        "		_agent moveTo _myDest;" \n
-       "		_agent forceSpeed 2;" \n
+       "		_agent forceSpeed P2DZ_HC_hordeZedSpeed;" \n
        "	};" \n
        "};" \n
        "" \n
@@ -518,10 +518,11 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"_timeN = time;" \n
        "if (_d) then { diag_log(format[""P2HC:HCZedFSM: Chase""]); };" \n
        "" \n
-       "" \n
        "if (speed _agent < 0.1) then {_countr = _countr + 1} else {_countr = 0};" \n
        "_target = _agent call zombie_findTargetAgent;" \n
        "_isAlive = alive _agent;" \n
+       "" \n
+       "if (isNil ""_target"") then { _target = objNull; };" \n
        "_targetPos = getPosATL _target;" \n
        "" \n
        "" \n
