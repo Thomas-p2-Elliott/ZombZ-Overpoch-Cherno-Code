@@ -7,7 +7,7 @@ diag_log(format["P2HC:ZedSpawns: Initializing: %1",__FILE__]); //log output (can
 P2DZ_HC_playerZedRadius =			300;	//Distance around the player we should check for zeds 	(meters)
 P2DZ_HC_maxZedsPerPlayer = 			30;		//Max zeds around a player at a time 					(number)
 P2DZ_HC_globalMaxZeds = 			600;	//Max zeds on server 			 						(number)
-P2DZ_HC_zedRespawnTime	=			10;		//Time between checks for spawning new zeds 			(secs)
+P2DZ_HC_zedRespawnTime	=			180;	//Time between checks for spawning new zeds 			(secs)
 P2DZ_HC_playerSpeedCap =			26;		//Max player speed for zeds to spawn (sprint=25kmh)		(kmh)
 P2DZ_HC_ExtraZedsDebug 	=			false;	//Enables/disables logging outputs 						(boolean)
 P2DZ_HC_debugZedFSM =				false; 	//Enables/Disables FSM & zedAntiStuck logging outputs 	(boolean)
@@ -23,12 +23,21 @@ dayz_losCheck = {
 	_target = _this select 0;
 	_agent = _this select 1;
 	_cantSee = true;
-	if (!isNull _target && !isNull _agent) then {
-		if (!(alive _target) || !(alive _agent)) exitWith {	_cantSee = true; };
-		_tPos = visiblePositionASL _target;		_zPos = visiblePositionASL _agent;
-		_tPos set [2,(_tPos select 2)+1];		_zPos set [2,(_zPos select 2)+1];
-		if ((count _tPos > 0) && (count _zPos > 0)) then { _cantSee = terrainIntersectASL [_tPos, _zPos];	if (!_cantSee) then {	_cantSee = lineIntersects [_tPos, _zPos, _agent, vehicle _target]; };};
+	
+	if (isNil '_target' || isNil '_agent') exitWith {
+		diag_log("dayz_losCheck:HC:Warning: agent or target was nil");
+		_cantSee
 	};
+	if (isNull _target || isNull _agent) exitWith {
+		diag_log("dayz_losCheck:HC:Warning: agent or target was null");
+		_cantSee
+	};
+	if (!(alive _target) || !(alive _agent)) exitWith {	_cantSee = true; };
+	
+	_tPos = visiblePositionASL _target;		_zPos = visiblePositionASL _agent;
+	_tPos set [2,(_tPos select 2)+1];		_zPos set [2,(_zPos select 2)+1];
+	if ((count _tPos > 0) && (count _zPos > 0)) then { _cantSee = terrainIntersectASL [_tPos, _zPos];	if (!_cantSee) then {	_cantSee = lineIntersects [_tPos, _zPos, _agent, vehicle _target]; };};
+
 	_cantSee
 };
 
