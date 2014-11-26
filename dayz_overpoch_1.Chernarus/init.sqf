@@ -115,7 +115,7 @@ if (isDedicated && !hasInterface || isServer) then {
 	//enable antihack on test server?
 	AHe = 									false;
 	//enable object streaming from db?
-	P2DZE_serverStreamObjsEnabled = 		false;
+	P2DZE_serverStreamObjsEnabled = 		true;
 
 	//enable custom hive dll debugging
 	P2D_H = 								true;
@@ -146,7 +146,7 @@ if (hasInterface && !isDedicated) then {
 	P2DZ_load9 = 	false;
 	P2DZ_load10 =	false;
 	//Enable client antihack whitelist?
-	P2DZ_clientAHWhitelistEnabled = 	true;
+	P2DZ_clientAHWhitelistEnabled = 	false;
 	//Enable client antihack debug?
 	P2DZ_AHDebug = 						false;
 	call compile preprocessFileLineNumbers "init\variables.sqf";	
