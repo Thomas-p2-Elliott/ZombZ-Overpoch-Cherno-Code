@@ -368,24 +368,25 @@ HK416Weaps[] = {
 
 	/* Done */
 	HK417Weaps[] = {
-		{"RH_hk417",0.19}, 
+		{"RH_hk417",0.19}, //70 
 		{"vil_HK417s",0.16},
 		{"RH_hk417s",0.16},
-		{"RH_hk417sd",0.06},
-		{"RH_hk417eotech",0.05},
+		{"RH_hk417sd",0.06}, //80
+		{"RH_hk417eotech",0.05}, //70
 		{"RH_hk417sgl",0.05},
 		{"RH_hk417seotech",0.04}, 
 		{"RH_hk417aim",0.04},
 		{"RH_hk417saim",0.04},
 		{"RH_hk417sglaim",0.04},  
 		{"RH_hk417sgleotech",0.04},       
-		{"RH_hk417sdaim",0.03},
+		{"RH_hk417sdaim",0.03}, //80
 		{"RH_hk417sdeotech",0.03},
-		{"RH_hk417acog",0.02},
+		{"RH_hk417acog",0.02}, //300
 		{"RH_hk417sacog",0.02},
 		{"RH_hk417sglacog",0.02},  
 		{"RH_hk417sdacog",0.01}
 	};
+
 
 
 MasWeaps[] = {
@@ -464,7 +465,7 @@ G36Weaps[] = {
 
 	/* Done */
 	SVDWeaps[] = {
-		{"vil_SV_98",0.14}, 
+		{"vil_SV_98",0.14},  //130
 		{"vil_SV_98_69",0.07}, 
 		{"vil_SV_98_SD",0.02}, 
 		{"SVD_des_EP1",0.05}, 
@@ -543,24 +544,25 @@ PistolsLow[] = {
 
 /* Done */
 SubWeaps[] = {
-	{"vil_uzimini",0.06}, 
+	{"vil_uzimini",0.06}, //50
 	{"vil_uzi_c",0.03}, 
-	{"vil_uzi_SD",0.03}, 
-	{"vil_uzimini_SD",0.03}, 
-	{"vil_9a91_c",0.07}, 
-	{"vil_9a91_csd",0.04}, 
-	{"MP5A5",0.03}, 
-	{"MP5SD",0.03}, 
-	{"vil_MP5_EOTech",0.03}, 
-	{"bizon",0.11}, 
-	{"bizon_silenced",0.02}, 
-	{"vil_VAL_C",0.07}, 
+	{"vil_uzi_SD",0.03}, //60
+	{"vil_uzimini_SD",0.03}, //60
+	{"vil_9a91_c",0.07}, //50
+	{"vil_9a91_csd",0.04}, //60
+	{"MP5A5",0.03}, //50
+	{"MP5SD",0.03}, //50
+	{"vil_MP5SD_EOTech",0.02}, //60
+	{"vil_MP5_EOTech",0.03}, //50
+	{"bizon",0.11}, //50
+	{"bizon_silenced",0.02}, //55
+	{"vil_VAL_C",0.07}, //50
 	{"vil_Vikhr",0.11}, 
 	{"vil_VAL",0.11}, 
 	{"vil_9a91",0.11}, 
 	{"vil_Groza_GL",0.03}, 
-	{"vil_uzi",0.07},
-	{"vil_MP5SD_EOTech",0.02}
+	{"vil_uzi",0.07}
+	
 };
 
 
@@ -682,7 +684,7 @@ AKLowWeaps[] = {
 
 /* Done */
 AKHighWeaps[] = {
-	{"vil_AKMS",0.09}, 
+	{"vil_AKMS",0.09}, //60
 	{"vil_AKs_74_u",0.09}, 
 	{"vil_AMD",0.09}, 
 	{"vil_PMIS",0.09}, 
@@ -691,93 +693,93 @@ AKHighWeaps[] = {
 	{"vil_AK_74m_EOT",0.08}, 
 	{"vil_AK_74m_EOT_Alfa",0.08}, 
 	{"vil_AK_74m_EOT_FSB",0.08}, 
-	{"vil_AK_74m_EOT_FSB_45",0.07}, 
-	{"vil_AK_74m_EOT_FSB_60",0.07}, 
-	{"Sa58V_RCO_EP1",0.04}, 
-	{"vil_AKMSB",0.02}, 
-	{"Vil_AKS_74_UN_kobra",0.01}, 
-	{"AKS_74_UN_kobra",0.01} 
+	{"vil_AK_74m_EOT_FSB_45",0.07}, //65 
+	{"vil_AK_74m_EOT_FSB_60",0.07}, //65
+	{"Sa58V_RCO_EP1",0.04}, //60
+	{"vil_AKMSB",0.02}, //70
+	{"Vil_AKS_74_UN_kobra",0.01}, //70
+	{"AKS_74_UN_kobra",0.01} //70
 };
 
 
 /* Done */
 LMGWeaps[] = {
-	{"vil_Galil",0.07}, 
-	{"vil_Galil_arm",0.06}, 
-	{"vil_Insas_lmg",0.06}, 
-	{"vil_RPK",0.05}, 
-	{"vil_RPK75",0.05}, 
-	{"vil_RPK75_M72",0.05}, 
-	{"vil_RPK74",0.05}, 
-	{"vil_RPK74M",0.05}, 
-	{"vil_RPK74M_N",0.05}, 
-	{"RPK_74",0.05}, 
+	{"vil_Galil",0.07},  //75
+	{"vil_Galil_arm",0.06},  //75
+	{"vil_Insas_lmg",0.06}, //80
+	{"vil_RPK",0.05}, //80
+	{"vil_RPK75",0.05}, //80
+	{"vil_RPK75_M72",0.05}, //80
+	{"vil_RPK74",0.05}, //80
+	{"vil_RPK74M",0.05}, //80
+	{"vil_RPK74M_N",0.05}, //80
+	{"RPK_74",0.05}, //80
 	{"vil_RPK75_Romania",0.05}, 
-	{"vil_RPD",0.05}, 
-	{"vil_RPK74M_P29",0.05}, 
-	{"vil_Minimi",0.04}, 
-	{"vil_MG4",0.04}, 
-	{"M249_DZ",0.04}, 
-	{"vil_M249_Para",0.03}, 
-	{"M249_EP1_DZ",0.03}, 
-	{"MG36",0.03},
-	{"MG36_camo",0.03},
-	{"vil_MG4E",0.03},
-	{"M8_SAW",0.03}, 
-	{"BAF_L110A1_Aim",0.02}, 
-	{"M249_m145_EP1_DZE",0.01}
+	{"vil_RPD",0.05}, //80
+	{"vil_RPK74M_P29",0.05}, //80
+	{"vil_Minimi",0.04}, //80
+	{"vil_MG4",0.04}, //80
+	{"M249_DZ",0.04}, //80
+	{"vil_M249_Para",0.03}, //80
+	{"M249_EP1_DZ",0.03}, //80
+	{"MG36",0.03}, //80
+	{"MG36_camo",0.03}, //80
+	{"vil_MG4E",0.03},  //80
+	{"M8_SAW",0.03}, //80
+	{"BAF_L110A1_Aim",0.02}, //100
+	{"M249_m145_EP1_DZE",0.01} //100
 };
 
 /* Done */
 L85Weaps[] = {
-	{"BAF_L85A2_RIS_Holo",0.27}, 
-	{"BAF_L86A2_ACOG",0.13},
-	{"BAF_L85A2_UGL_Holo",0.20}, 
-	{"BAF_L85A2_RIS_SUSAT",0.10}, 
-	{"BAF_L85A2_RIS_ACOG",0.10}, 
-	{"BAF_L85A2_UGL_SUSAT",0.10}, 
-	{"BAF_L85A2_UGL_ACOG",0.10},
+	{"BAF_L85A2_RIS_Holo",0.27},  //80
+	{"BAF_L86A2_ACOG",0.13},      //80
+	{"BAF_L85A2_UGL_Holo",0.20},  //80
+	{"BAF_L85A2_RIS_SUSAT",0.10}, //80
+	{"BAF_L85A2_RIS_ACOG",0.10},  //80
+	{"BAF_L85A2_UGL_SUSAT",0.10}, //80
+	{"BAF_L85A2_UGL_ACOG",0.10},  //80
 };
 
 /* Done */
 M4Weaps[] = {
-	{"M16A2",0.1}, 
-	{"M4A1",0.1}, 
-	{"VIL_M4",0.1}, 
-	{"m16a4",0.1}, 
-	{"M16A4_GL",0.06}, 
-	{"M16A2GL",0.06}, 
-	{"vil_M4_EOT",0.06}, 
-	{"VIL_M4_aim",0.06}, 
-	{"M4A1_Aim",0.06}, 
-	{"M4A1_Aim_camo",0.06}, 
-	{"M4A3_CCO_EP1",0.06}, 
-	{"M4A1_HWS_GL",0.04}, 
-	{"M4A1_HWS_GL_camo",0.04}, 
-	{"M4A1_AIM_SD_camo",0.03}, 
-	{"M4A1_HWS_GL_SD_Camo",0.02}, 
-	{"M16A4_ACG",0.01}, 
-	{"M16A4_ACG_GL",0.01}, 
-	{"M4A1_RCO_GL",0.01}, 
-	{"M4A3_RCO_GL_EP1",0.01},
-	{"M4SPR",0.01}
+	{"M16A2",0.1}, //55
+	{"M4A1",0.1},  //55
+	{"VIL_M4",0.1}, //55
+	{"m16a4",0.1}, //55
+	{"M16A4_GL",0.06}, //60
+	{"M16A2GL",0.06}, //55
+	{"vil_M4_EOT",0.06}, //55
+	{"VIL_M4_aim",0.06}, //55
+	{"M4A1_Aim",0.06}, //55
+	{"M4A1_Aim_camo",0.06}, //55
+	{"M4A3_CCO_EP1",0.06}, //60
+	{"M4A1_HWS_GL",0.04}, //60
+	{"M4A1_HWS_GL_camo",0.04}, //60
+	{"M4A1_AIM_SD_camo",0.03}, //65
+	{"M4A1_HWS_GL_SD_Camo",0.02}, //65
+	{"M16A4_ACG",0.01}, //55
+	{"M16A4_ACG_GL",0.01}, //65
+	{"M4A1_RCO_GL",0.01}, //65
+	{"M4A3_RCO_GL_EP1",0.01}, //65
+	{"M4SPR",0.01} //65
 };
 
 /* Done */
 M8Weaps[] = {
-    {"m8_compact",0.20},
-    {"m8_compact_pmc",0.17},
-    {"m8_carbine_pmc",0.15},
-    {"m8_carbine",0.14}, 
-    {"m8_carbineGL",0.14}, 
-    {"m8_holo_sd",0.11},
-    {"m8_sharpshooter",0.09}
+    {"m8_compact",0.20}, //60
+    {"m8_compact_pmc",0.17}, //60
+    {"m8_carbine_pmc",0.15}, //60
+    {"m8_carbine",0.14}, //60
+    {"m8_carbineGL",0.14}, //65
+    {"m8_holo_sd",0.11}, //70
+    {"m8_sharpshooter",0.09} //70
 };
 
 
 /* Done */
 HMGWeaps[] = {
-	{"vil_zastava_m84",0.07}, 
+	{"vil_zastava_m84",0.07}, //125
 	{"skavil_M60",0.07}, 
 	{"skavil_M60e3",0.07}, 
 	{"vil_Mg3",0.07}, 
@@ -793,79 +795,79 @@ HMGWeaps[] = {
 	{"Mk_48_DZ",0.03}, 
 	{"vil_PKP_EOT",0.03},
 	{"Pecheneg_DZ",0.02}, 
-	{"m240_scoped_EP1_DZE",0.01}
+	{"m240_scoped_EP1_DZE",0.01} //140
 };
 
 
 /* Done */
 ShotgunWeaps[] = {
-	{"Winchester1866",0.30}, 
-	{"Crossbow_DZ",0.25}, 
-	{"Remington870",0.05},
-	{"Remington870_lamp",0.05}, 
-	{"M1014",0.15}, 
-	{"MR43",0.15}, 
-	{"Saiga12K",0.05}
+	{"Winchester1866",0.30}, //30
+	{"Crossbow_DZ",0.25},    //15
+	{"Remington870",0.05},   //30
+	{"Remington870_lamp",0.05},  //30
+	{"M1014",0.15},  //30
+	{"MR43",0.15},  //30
+	{"Saiga12K",0.05} //30
 };
 
 /* Done */
 MeleeWeaps[] = {
-	{"MeleeHatchet_DZE",0.35}, 
-	{"MeleeMachete",0.25}, 
-	{"MeleeCrowbar",0.2}, 
-	{"MeleeFishingPole",0.14}, 
-	{"MeleeSledge",0.05}, 
-	{"Chainsaw",0.01}
+	{"MeleeHatchet_DZE",0.35}, //15
+	{"MeleeMachete",0.25},  //15
+	{"MeleeCrowbar",0.2},  //15
+	{"MeleeFishingPole",0.14}, //15
+	{"MeleeSledge",0.05}, //35
+	{"Chainsaw",0.01} //10000
 };
 
 /* Done */
 RocketWeaps[] = {
-    {"Vil_RPG16",0.14},
-    {"Vil_RPO_A",0.14},
-    {"M136",0.12},
-    {"vilas_rpg22",0.12}, 
-    {"Vil_RPG7V_PGO",0.09},
-    {"Vil_RPG7d_PGO",0.09},
-    {"SMAW",0.08},  
-    {"vil_Panzerfaust3",0.07},
-    {"vil_CG84T",0.06},
-    {"Vil_RPG16",0.05},
-    {"Vil_RPG29",0.03},  
-    {"MAAWS",0.01}
+     
+    {"Vil_RPO_A",0.14}, //150
+    {"M136",0.12},		//150
+    {"vilas_rpg22",0.12}, //150
+    {"Vil_RPG7V_PGO",0.09}, //150
+    {"Vil_RPG7d_PGO",0.09}, //150
+    {"SMAW",0.08},  //150
+    {"vil_Panzerfaust3",0.07}, //150
+    {"vil_CG84T",0.06}, //150
+    {"Vil_RPG16",0.19}, //150
+    {"Vil_RPG29",0.03}, //150
+    {"MAAWS",0.01} //300
 };
 
 
 /* Done */
 UltraWeaps[] = {
-	{"revolver_gold_EP1",0.28}, 
-	{"RH_Deagleg",0.2}, 
-	{"RH_anacg",0.24}, 
-	{"Javelin",	0.05}, 
-	{"MetisLauncher",0.05},
-	{"AKS_GOLD",0.27} 
+	{"revolver_gold_EP1",0.28}, //1500
+	{"RH_Deagleg",0.2}, 		//1500
+	{"RH_anacg",0.24}, 			//1500
+	{"Javelin",	0.05}, 			//1500
+	{"MetisLauncher",0.05},		//1500
+	{"AKS_GOLD",0.27} 			//1500
 };
 
 /* Done */
 SniperTopWeaps[] = {
-	{"KSVK_DZE",0.25}, 
-	{"FHQ_XM2010_DESERT", 0.16},
-	{"BAF_LRR_scoped",0.16}, 
-	{"BAF_LRR_scoped_W",0.13}, 
-	{"FHQ_MSR_DESERT",0.12}, 
-	{"FHQ_XM2010_SD_DESERT",0.04},
-	{"FHQ_MSR_SD_DESERT",0.04}, 
-	{"USSR_cheytacM200",0.04}, 
-	{"USSR_cheytacM200_sd",0.03}, 
-	{"m107_SKN",0.02}, 
-	{"BAF_AS50_scoped_DZ",0.01}
+	{"KSVK_DZE",0.25}, //400
+	{"FHQ_XM2010_DESERT", 0.16}, //400
+	{"BAF_LRR_scoped",0.16}, //400
+	{"BAF_LRR_scoped_W",0.13}, //400
+	{"FHQ_MSR_DESERT",0.12},  //400
+	{"FHQ_XM2010_SD_DESERT",0.04}, //500
+	{"FHQ_MSR_SD_DESERT",0.04}, //500
+	{"USSR_cheytacM200",0.04}, //450
+	{"USSR_cheytacM200_sd",0.03}, //500
+	{"m107_SKN",0.02}, //550
+	{"BAF_AS50_scoped_DZ",0.01} //600
 };
 
 
 /* Done */
 LauncherWeaps[] = {
-	{"M32_EP1",0.05}, 
-	{"M79_EP1",0.6}, 
-	{"Mk13_EP1",0.35}
+	{"M32_EP1",0.05}, //200
+	{"M79_EP1",0.6},  //200
+	{"Mk13_EP1",0.35} //200
 };
 
 
