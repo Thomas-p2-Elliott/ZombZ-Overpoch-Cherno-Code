@@ -59,7 +59,7 @@ if (isServer) then {
 	// Dayz epoch custom
 	"PVDZE_veh_Publish"		addPublicVariableEventHandler {(_this select 1) spawn server_publishVeh};
 	"PVDZE_veh_Publish2"	addPublicVariableEventHandler {(_this select 1) spawn server_publishVeh2};
-	"PVDZE_veh_Upgrade"	addPublicVariableEventHandler {(_this select 1) spawn server_publishVeh3};
+	"PVDZE_veh_Upgrade"		addPublicVariableEventHandler {(_this select 1) spawn server_publishVeh3};
 	"PVDZE_obj_Trade"		addPublicVariableEventHandler {(_this select 1) spawn server_tradeObj};
 	"PVDZE_plr_TradeMenu"	addPublicVariableEventHandler {(_this select 1) spawn server_traders};
 	"PVDZE_plr_DeathB"		addPublicVariableEventHandler {(_this select 1) spawn server_deaths};
@@ -69,13 +69,14 @@ if (isServer) then {
 
 //Client only
 if (!isDedicated) then {
-	"PVDZE_plr_SetDate"		addPublicVariableEventHandler {setDate (_this select 1)};
-	"PVDZE_plr_SetSaveTime"	addPublicVariableEventHandler {DZE_SaveTime = (_this select 1)};
-	"PVDZE_obj_RoadFlare"	addPublicVariableEventHandler {(_this select 1) spawn object_roadFlare};
-	"PVDZE_plr_Morph2"		addPublicVariableEventHandler {(_this select 1) call player_serverModelChange};
-	"PVDZE_plr_Morph"		addPublicVariableEventHandler {(_this select 1) call server_switchPlayer};
-	"PVDZE_obj_Fire"		addPublicVariableEventHandler {nulexp=(_this select 1) spawn BIS_Effects_Burn};
-	"PVDZE_plr_FriendRQ"	addPublicVariableEventHandler {(_this select 1) call player_tagFriendlyMsg};
+	"PVDZE_plr_SetDate"		 addPublicVariableEventHandler {setDate (_this select 1)};
+	"PVDZE_plr_SetSaveTime"	 addPublicVariableEventHandler {DZE_SaveTime = (_this select 1)};
+	"PVDZE_obj_RoadFlare"	 addPublicVariableEventHandler {(_this select 1) spawn object_roadFlare};
+	"PVDZE_plr_Morph2"		 addPublicVariableEventHandler {(_this select 1) call player_serverModelChange};
+	"PVDZE_plr_Morph"		 addPublicVariableEventHandler {(_this select 1) call server_switchPlayer};
+	"PVDZE_obj_Fire"		 addPublicVariableEventHandler {nulexp=(_this select 1) spawn BIS_Effects_Burn};
+	"PVDZE_plr_FriendRQ"	 addPublicVariableEventHandler {(_this select 1) call player_tagFriendlyMsg};
+	'P2DZ_DeathMessage_GUI' addPublicVariableEventHandler {(_this select 1) spawn player_deathMessage;};
 
 	// "PVDZE_obj_Debris"		addPublicVariableEventHandler {(_this select 1) call local_roadDebris};
 

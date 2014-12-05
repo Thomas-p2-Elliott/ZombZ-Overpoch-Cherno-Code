@@ -65,8 +65,8 @@ if (!isDedicated) then {
 	/*	Gear Menu Compiles	*/
 	[] execVM 						"init\gearMenuCompiles.sqf";
 
-	/*Death Message Compile */
-	[] execVM 						"compile\player_deathMessage.sqf";
+	/*Death Messages */
+	player_deathMessage = 			compile preprocessFileLineNumbers "compile\player_deathMessage.sqf";
 
 	/* Menu Text Compile */
 	[] call compile preprocessFileLineNumbers "system\menu.sqf";
