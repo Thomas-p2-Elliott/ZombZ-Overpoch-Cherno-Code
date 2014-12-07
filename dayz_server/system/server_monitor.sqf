@@ -167,7 +167,7 @@ if (isServer && isNil "sm_done") then {
 			//comment out if statement to see ALL objects gold as they spawn
 			if (_gold > 500000) then {
 				private["_log"];
-				_log = format[str(typeOf _object) + ", Gold: " + str _gold + ", Pos: " + str(position _object)];
+				_log = format[str(typeOf _object) + "(_GLS_)" + str _gold + "(_GLS_)" + str(position _object)];
 				_log call stats_highGoldObjects;
 			};
 
