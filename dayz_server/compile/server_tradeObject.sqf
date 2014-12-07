@@ -36,8 +36,8 @@ if (_buyorsell == 0) then { //Buy
 
 	//build message
 	_statsMessage = format[
-		"%1,%2,%3,%4,%5,%6,%7,%8,%9",
-		_day,_hour,_mins,_secs,"Buy",_name,(getPlayerUID _player),_classname,_traderCity,_price
+		"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4(_GLS_)%5(_GLS_)%6",
+		"Buy",(getPlayerUID _player),_classname,_traderCity,_price,GORSYSEVERNUMBER
 	];
 
 	//send to stats log
@@ -67,8 +67,8 @@ if (_buyorsell == 0) then { //Buy
 
 	//build message
 	_statsMessage = format[
-		"%1,%2,%3,%4,%5,%6,%7,%8,%9",
-		_day,_hour,_mins,_secs,"Sell",_name,(getPlayerUID _player),_classname,_traderCity,_price
+		"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4(_GLS_)%5(_GLS_)%6",
+		"Sell",(getPlayerUID _player),_classname,_traderCity,_price,GORSYSEVERNUMBER
 	];
 
 	//send to stats log

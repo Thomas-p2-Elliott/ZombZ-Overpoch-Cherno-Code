@@ -30,7 +30,10 @@ stats_gold = {
 stats_highGoldObjects = {
 	[format["%1","stats_highGoldObjects"],format["%1",(_this)]] call p2net_log2; 
 };
-
+//compile/server_tradeObject.sqf
+stats_trades = {
+	[format["%1","stats_trader"],format["%1",(_this)]] call p2net_log2; 
+};
 
 
 
@@ -57,17 +60,14 @@ stats_connects = {
 
 //compile/server_onPlayerDisconnect.sqf
 stats_disconnects = {
-	[format["%1/%2",P2DZ_serverName,"stats_disconnects"],format["%1",(_this)]] call p2net_log2; 
+	//[format["%1/%2",P2DZ_serverName,"stats_disconnects"],format["%1",(_this)]] call p2net_log2; //done by BEC
 };
 
 
 
 
 
-//compile/server_tradeObject.sqf
-stats_trades = {
-	[format["%1/%2",P2DZ_serverName,"stats_trader"],format["%1",(_this)]] call p2net_log2; 
-};
+
 
 //p2re/p2re_init.sqf
 stats_hackers = {
