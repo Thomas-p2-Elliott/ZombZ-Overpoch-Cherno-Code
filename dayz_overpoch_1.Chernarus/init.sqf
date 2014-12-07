@@ -42,7 +42,10 @@ DZMS_HC_AIMissions_Enabled = false;
 P2DZ_HC_extraZeds = true;
 //enable zed hordes? (WARNING: Requires ExtraZeds)
 P2DZ_HC_zedHordes = true;
-
+//Set the server number
+if (isNil "GORSYSERVERNUMBER") then {
+	GORSYSERVERNUMBER = 5;
+};
 /*---------------------------------------------------------------------------
 UID WhiteLists - Door Management, Plot Management, Client-Side AntiHack
 ---------------------------------------------------------------------------*/

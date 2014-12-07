@@ -16,8 +16,23 @@ Logs:
 
 //compile/player2_deathMessage.sqf
 stats_kills = {
-	[format["%1/%2",P2DZ_serverName,"stats_kills"],format["%1",(_this)]] call p2net_log2; 
+	[format["%1","stats_kills"],format["%1",(_this)]] call p2net_log2; 
 };
+//compile/fnc_plyrHit.sqf
+stats_hits = {
+	[format["%1","stats_hits"],format["%1",(_this)]] call p2net_log2; 
+};
+//init/goldEventHandlers.sqf
+stats_gold = {
+	[format["%1","stats_gold"],format["%1",(_this)]] call p2net_log2; 
+};
+//init\server_monitor.sqf
+stats_highGoldObjects = {
+	[format["%1","stats_highGoldObjects"],format["%1",(_this)]] call p2net_log2; 
+};
+
+
+
 
 
 //compile/server_updateObject.sqf
@@ -45,15 +60,9 @@ stats_disconnects = {
 	[format["%1/%2",P2DZ_serverName,"stats_disconnects"],format["%1",(_this)]] call p2net_log2; 
 };
 
-//compile/fnc_plyrHit.sqf
-stats_hits = {
-	[format["%1/%2",P2DZ_serverName,"stats_hits"],format["%1",(_this)]] call p2net_log2; 
-};
 
-//init/goldEventHandlers.sqf
-stats_gold = {
-	[format["%1/%2",P2DZ_serverName,"stats_gold"],format["%1",(_this)]] call p2net_log2; 
-};
+
+
 
 //compile/server_tradeObject.sqf
 stats_trades = {
@@ -91,7 +100,3 @@ stats_publishLog = {
 	[format["%1/%2",P2DZ_serverName,"stats_publishLog"],format["%1",(_this)]] call p2net_log2; 
 };
 
-//init\server_monitor.sqf
-stats_highGoldObjects = {
-	[format["%1/%2",P2DZ_serverName,"stats_highGoldObjects"],format["%1",(_this)]] call p2net_log2; 
-};

@@ -189,11 +189,9 @@ _killerUID = [_killer] call FNC_GetPlayerUID;
 _victimUID = [_victim] call FNC_GetPlayerUID;
 
 
-//build message
 _statsMessage = format[
-	"%1,%2,%3,%4,%5,%6,%7,%8,%9,%10,%11,%12,%13,%14,%15",
-	_day,_hour,_mins,_secs,_killerName,_killerUID,_victimName,_victimUID,_killerPos,_victimPos,_killerDistance,_weaponClassname,(typeOf (vehicle _victim)),(typeOf (vehicle _killer)),_nearestLocation
+	"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4(_GLS_)%5(_GLS_)%6(_GLS_)%7",
+	_killerUID,_victimUID,_weaponClassname,_killerPos,_victimPos)_killerdistance,GORSYSEVERNUMBER
 ];
-
 //send to stats log
 _statsMessage call stats_kills;

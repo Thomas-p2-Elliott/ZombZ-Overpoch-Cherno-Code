@@ -181,8 +181,8 @@ P2DZE_dropGold = {
 
 				//build message
 				_statsMessage = format[
-					"%1,%2,%3,%4,%5,%6,%7,%8,%9,%10",
-					_day,_hour,_mins,_secs,"DropGold",(name _unit),(getPlayerUID _unit),_newObjGold,_plyrGoldVar,_newPlyrGold
+					"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4",
+					"DropGold",(getPlayerUID _unit),_newObjGold,GORSYSERVERNUMBER
 				];
 
 				//send to stats log
@@ -269,8 +269,8 @@ P2DZE_pickupGold = {
 
 				//build message
 				_statsMessage = format[
-					"%1,%2,%3,%4,%5,%6,%7,%8,%9",
-					_day,_hour,_mins,_secs,"PickupGold",(name _unit),(getPlayerUID _unit),_objGoldVar,_newPlyrGold
+					"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4",
+					"PickupGold",(getPlayerUID _unit),_objGoldVar,GORSYSERVERNUMBER
 				];
 
 				//send to stats log
@@ -332,8 +332,8 @@ P2DZE_giveChange = {
 
 				//build message
 				_statsMessage = format[
-					"%1,%2,%3,%4,%5,%6,%7,%8",
-					_day,_hour,_mins,_secs,"GiveChange",(name _unit),(getPlayerUID _unit),_change
+					"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4",
+					"GiveChange",(getPlayerUID _unit),_change,GORSYSERVERNUMBER
 				];
 
 				//send to stats log
