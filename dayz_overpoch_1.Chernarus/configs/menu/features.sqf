@@ -1,6 +1,6 @@
 _choose_section = _this select 0;
 
-	 _leftmenu = ["Auto Refuel","Anti Side Chat","A.I. Missions ","A.I Fortress","Altitude Meter","Base Building","Crafting Menu","Craftable Vehicles","Custom Mapping","Custom Displays","Custom Sounds","Colour Menu System","Code Rewrites","Custom Debug","Combat Log Punishment","Debug Kill Punishment","Death Messages","Extended Friends","Faster Traders","Ground Spawn","Halo Spawn","Halo Jump","Headless Client ","Humanity Levels","Lifting ","New Loot","New Vehicles","New Stances","Maintain Base","Medic System (heroes)","Menu UID","Paint Vehicle","Random Loadouts","Random Vehicle Spawns","Randomised Mags","Shoot from Vehicle","Server Antihack","Skynet Antihack","Snap Build Pro","Towing","Trader Zones","Tons of bug fixes","Watermark","",""];
+	 _leftmenu = ["Auto Refuel","Anti Side Chat","A.I. Missions ","A.I Fortress","Altitude Meter","Base Building","Crafting Menu","Craftable Vehicles","Custom Mapping","Custom Displays","Custom Sounds","Colour Menu System","Code Rewrites","Custom Debug","Combat Log Punishment","Debug Kill Punishment","Death Messages","Extra Zeds","Extended Friends","Faster Traders","Ground Spawn","Halo Spawn","Halo Jump","Headless Client ","Humanity Levels","Lifting ","New Loot","New Vehicles","New Stances","Maintain Base","Medic System (heroes)","Menu UID","Paint Vehicle","Random Loadouts","Random Vehicle Spawns","Randomised Mags","Shoot from Vehicle","Server Antihack","Skynet Antihack","Snap Build Pro","Towing","Trader Zones","Tons of bug fixes","Watermark","Zombie Hordes","",""];
 	//0 //1 //2 //3 //4 //5 //6
 	if (_choose_section == "Left") exitWith {
 	
@@ -474,9 +474,31 @@ Our own stamp to say that it is our server that you are playing on.
 There are alot of servers that try to steal our code, or copy our code. Always play official zombz for the best experiences.
 "
 };
+
+case ("Zombie Hordes"):{
+"<t color='#01DFD7'>Zombie Hordes</t>
+<br/><br/>
+<t color='#FFBF00'>Description: </t>
+<br/> 
+This feature has not been seen before in dayz. It is immense and ground breaking
+<br/><br/>
+Becareful when sitting around, at times the hordes may pass through your area. A huge group of zombies all grouped up together running around the map. There may even be more than one group running around at a time. If you see them... Be ready to run.
+"	
+}
+
+case ("Extra Zeds"):{
+"<t color='#01DFD7'>Extra Zeds</t>
+<br/><br/>
+<t color='#FFBF00'>Description: </t>
+<br/> 
+Our headless client spawns in extra zombies for each player on the server.
+<br/><br/>
+Our hope is that this will give you all a much scarier zombie game, the way Dayz was supposed to be.
+"	
+};
 case (""):{
 ""
-}
+};
 			};//end of switch
 		//sends text back to file
 
