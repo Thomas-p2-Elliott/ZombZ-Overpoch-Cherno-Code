@@ -17,7 +17,7 @@ P2DZ_HC_extraZedsconfigDone = false;
 
 //	Make sure config doesn't time out loading in due to bad syntax in settings file
 private["_s","_e"]; _s = 0; _e = false;
-waitUntil{	uiSleep 1; _s = _s + 1;	if (_s > 10) then {		_e = true;		P2DZ_HC_extraZedsconfigDone = true;	}; 	P2DZ_HC_extraZedsconfigDone};
+waitUntil{	uiSleep 1; _s = _s + 1;	if (_s > 120) then {		_e = true;		P2DZ_HC_extraZedsconfigDone = true;	}; 	P2DZ_HC_extraZedsconfigDone};
 if (_e) exitWith {	diag_log("2HC:ZedSpawns: FATAL ERROR: Config file could not be loaded!"); diag_log(format["File: %1, Line: %2",__FILE__,__LINE__]);  };
 P2DZ_HC_extraZeds_Done = true;	//used by horde system
 diag_log(format["P2HC:ZedSpawns: player2_extraZeds_config.sqf Finished"]); //log output (can be deleted)

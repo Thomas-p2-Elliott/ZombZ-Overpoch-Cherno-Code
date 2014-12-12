@@ -39,60 +39,62 @@ For each horde configured it runs this:
 Warning: Never call for this loop more than once! It will auto adjust live
 depending on how many hordes or zombies are in-game
 ---------------------------------------------------------------------------*/
-
-private["_d"];
+//vars specific to this horde
+private["_d","_hordeNum","_pathWaypoints","_pathVar","_triggerVar","_selectNum","_triggerWaypoints","_allZedsInHorde"];
+//Initialize variables (prevent undefined variable error)
+_allZedsInHorde = [];
+_triggerWaypoints = [];
+_pathWaypoints = [];
+_hordeNum = 0;
+_selectNum = 0;
+_pathVar = "";
+_triggerVar = "";
+_zed = objNull;
 _d = P2DZ_HC_HordeZedsDebug;
-if (_d) then {	diag_log("P2HC:HordeZedSpawns:WayPointLoop: Starting");	};
 
-//for 1 to amount of hordes, where _x = hordeNumber, so if 4 hordes _x would be 1, then 2, then 3, then 4.
-for "_x" from 1 to P2DZ_HC_ZHorde_HordeCount do {
-	//vars specific to this horde
-	private["_d","_hordeNum","_pathWaypoints","_pathVar","_triggerVar","_selectNum","_triggerWaypoints","_allZedsInHorde"];
-	//Initialize variables (prevent undefined variable error)
-	_allZedsInHorde = [];
-	_triggerWaypoints = [];
-	_pathWaypoints = [];
-	_hordeNum = 0;
-	_selectNum = 0;
-	_pathVar = "";
-	_triggerVar = "";
-	_d = P2DZ_HC_HordeZedsDebug;
+_hordeNum = _this select 0;
+_plusOrMinus = _this select 1;
 
-	//For each horde configured
- 	_hordeNum = _x;
+if (isNil '_plusOrMinus') then {
+	_plusOrMinus = "+";
+};
 
-	if (_d) then {	diag_log(format["P2HC:HordeZedSpawns:WayPointLoop: Looking for Zeds in Horde: %1",_hordeNum]);	};
+if (_d) then {	diag_log(format["P2HC:HordeZedSpawns:WayPointLoop: Looking for New Zeds in Horde %1",_hordeNum]);	};
 
- 	//take 1 away for 0 based array since for starts at 1
-	_selectNum = _hordeNum - 1;
+//take 1 away for 0 based array since for starts at 1
+_selectNum = _hordeNum - 1;
 
-	//Select horde path var name P2DZ_HC_ZHorde_PathWayp_%VarName%
-	_pathVar = P2DZ_HC_ZHorde_PathWaypointNames select _selectNum;
-	//Select horde trigger var name (P2DZ_HC_ZHorde_TriggerWayp_%VarName%)
-	_triggerVar = P2DZ_HC_ZHorde_TriggerWaypointNames select _selectNum; 
+//Select horde path var name P2DZ_HC_ZHorde_PathWayp_%VarName%
+_pathVar = P2DZ_HC_ZHorde_PathWaypointNames select _selectNum;
+//Select horde trigger var name (P2DZ_HC_ZHorde_TriggerWayp_%VarName%)
+_triggerVar = P2DZ_HC_ZHorde_TriggerWaypointNames select _selectNum; 
 
-	//Get path waypoints
-	_pathWaypoints = call compile format["P2DZ_HC_ZHorde_PathWayp_%1",_pathVar];
-	//Get trigger waypoints
-	_triggerWaypoints = call compile format["P2DZ_HC_ZHorde_TriggerWayp_%1",_triggerVar];
+//Get path waypoints
+_pathWaypoints = call compile format["P2DZ_HC_ZHorde_PathWayp_%1",_pathVar];
+//Get trigger waypoints
+_triggerWaypoints = call compile format["P2DZ_HC_ZHorde_TriggerWayp_%1",_triggerVar];
 
-	//Use horde number (_x) to get all zeds in horde as an array 
-	_allZedsInHorde = _x call P2DZ_HC_ZHorde_getAllZeds;
+//Use horde number (_x) to get all zeds in horde as an array 
+_allZedsInHorde = _hordeNum call P2DZ_HC_ZHorde_getAllZeds;
 
-	if (_d) then {	diag_log(format["P2HC:HordeZedSpawns:WayPointLoop: allZedsInHorde: %1", _allZedsInHorde]);	};
-	if (_d) then {	diag_log(format["P2HC:HordeZedSpawns:WayPointLoop: PathWaypoints: %1", _pathWaypoints]);	};
-	if (_d) then {	diag_log(format["P2HC:HordeZedSpawns:WayPointLoop: TriggerWaypoints: %1", _triggerWaypoints]);	};
 
-	//for each zombie in horde number _x
-	{
-		if (_d) then {	diag_log(format["P2HC:HordeZedSpawns:WayPointLoop: Starting Thread for Zed: %1", (_x)]);	};
+//for each zombie in horde number _x
+{
+	_zed = _x;
+
+	/*---------------------------------------------------------------------------
+	Check to make sure this code isn't already running on this zombie
+	---------------------------------------------------------------------------*/
+	if (!(_zed getVariable ["p2dz_hordeWaypointBrain", false])) then {
+
+		if (_d) then {	diag_log(format["P2HC:HordeZedSpawns:WayPointLoop: Adding WP loop to: %1",_zed]);	};
 
 		//Warning, _x has changed to the zombie itself. It is no longer the hordeNum
 		//Pass some variables into this code so the zombie knows what horde it is in and what waypoints it should be using
-		[_x,_hordeNum,_pathWaypoints,_triggerWaypoints] spawn P2DZ_HC_ZHorde_zedWaypointLoop;
+		[_zed,_hordeNum,_pathWaypoints,_triggerWaypoints,_plusOrMinus] spawn P2DZ_HC_ZHorde_zedWaypointLoop;
+	};
 
-		//end of for each zombie in horde
-	} forEach _allZedsInHorde;
-	//end of for each horde
-};
-//end of waypoint function
+
+	//end of for each zombie in horde
+} forEach _allZedsInHorde;
+

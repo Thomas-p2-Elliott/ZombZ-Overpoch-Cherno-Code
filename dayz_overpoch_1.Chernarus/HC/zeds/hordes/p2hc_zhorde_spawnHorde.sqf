@@ -7,6 +7,16 @@ _hordeNum = _this select 0;
 _hordeType = _this select 1;
 _d = P2DZ_HC_HordeZedsDebug;
 
+//zed respawn tracker var
+if (isNil 'P2DHZ_HC_zHorde_respawnTracker') then {
+
+	P2DHZ_HC_zHorde_respawnTracker =	[];
+
+	for "_x" from 1 to P2DZ_HC_ZHorde_HordeCount do {
+		P2DHZ_HC_zHorde_respawnTracker set [(_x -1), [_x, []]];
+	};
+};
+
 if (isNil '_hordeType') then { _hordeType = "z_soldier" };
 
 if (_d) then {		diag_log(format["P2HC:HordeZedSpawns:HordeSpawner:Spawning Horde! HordeNum: %1, HordePos: %2",(_hordeNum),(_hordeType)]);	};
@@ -39,5 +49,9 @@ if (_d) then {		diag_log(format["P2HC:HordeZedSpawns:HordeSpawner: HordeNum: %1,
 _null = [_hordeNum,_hordeType] spawn P2DZ_HC_ZHorde_tracker;
 if (_d) then {		diag_log(format["P2HC:HordeZedSpawns:HordeSpawner: HordeNum: %1, Adding Horde Waypoint Loop",(_hordeNum)]);	};
 
+//tell zeds to gogogo
+_hordeNum call P2DZ_HC_zHorde_carryOn;
 //call waypoint adder to loop to all zeds spawned in horde that don't have it (GORSY: how does this work on each zombie its not in the zombie loop)
-call P2DZ_HC_ZHorde_waypointLoop;
+
+//start waypoint loop with direction of travel being forward
+[_hordeNum,"+"] call P2DZ_HC_ZHorde_waypointLoop;

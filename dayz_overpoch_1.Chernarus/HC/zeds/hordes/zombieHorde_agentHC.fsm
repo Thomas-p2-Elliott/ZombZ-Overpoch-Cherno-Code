@@ -13,11 +13,11 @@ item8[] = {"In_Position",4,218,-200.000000,75.000000,-100.000000,125.000000,1.00
 item9[] = {"",7,210,-29.000042,321.000000,-20.999958,329.000000,0.000000,""};
 item10[] = {"",7,210,-29.000042,395.999939,-20.999958,404.000061,0.000000,""};
 item11[] = {"true",8,218,-75.000000,-175.000000,25.000000,-125.000000,0.000000,"true"};
-item12[] = {"Begin",2,250,-75.000000,-100.000000,25.000000,-50.000000,0.000000,"Begin"};
+item12[] = {"Begin",2,4346,-75.000000,-100.000000,25.000000,-50.000000,0.000000,"Begin"};
 item13[] = {"",7,210,-29.000006,-29.000004,-20.999996,-20.999996,0.000000,""};
 item14[] = {"",7,210,-279.000061,-29.000004,-270.999969,-20.999996,0.000000,""};
 item15[] = {"",7,210,-254.000046,146.000000,-245.999954,154.000000,0.000000,""};
-item16[] = {"Has_Target",4,4314,-150.000000,225.000000,-50.000000,275.000000,1.000000,"Has" \n "Target"};
+item16[] = {"Has_Target",4,218,-150.000000,225.000000,-50.000000,275.000000,1.000000,"Has" \n "Target"};
 item17[] = {"Chase",2,250,-150.000000,300.000000,-50.000000,350.000000,0.000000,"Chase"};
 item18[] = {"Time_Check",4,218,50.000000,75.000000,150.000000,125.000000,0.000000,"Time" \n "Check"};
 item19[] = {"",7,210,-29.000006,146.000000,-20.999996,154.000000,0.000000,""};
@@ -134,8 +134,8 @@ link71[] = {54,32};
 link72[] = {55,7};
 link73[] = {56,3};
 link74[] = {57,1};
-globals[] = {25.000000,1,0,0,0,640,480,1,98,6316128,1,-762.244202,231.229553,696.012634,-341.615540,855,890,1};
-window[] = {2,-1,-1,-1,-1,936,156,1364,156,3,873};
+globals[] = {25.000000,1,0,0,0,640,480,1,98,6316128,1,-519.050781,352.742676,666.942871,-275.822876,823,890,1};
+window[] = {2,-1,-1,-1,-1,1098,78,918,78,3,841};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -214,20 +214,41 @@ class FSM
     class Looking_for_Targ
     {
       name = "Looking_for_Targ";
-      init = /*%FSM<STATEINIT""">*/"diag_log(format[""P2HC:HCZedFSM: LookingForTarget""]);" \n
+      init = /*%FSM<STATEINIT""">*/"if (_d) then { diag_log(format[""P2HC:HCZedFSM:%1: LookingForTarget"",_agent]); };" \n
+       "" \n
+       "_carryOn = _agent getVariable[""carryOn"",true];" \n
+       "_standBy = _agent getVariable[""standBy"",[false,getposATL _agent]];" \n
        "" \n
        "_isAlive = alive _agent;" \n
        "_target = _agent call zombie_findTargetAgent;" \n
        "_timeN = time;" \n
        "" \n
        "_newDest = _agent getVariable [""myDest"",getposATL _agent];" \n
-       "if (!isNil ""_newDest"") then {" \n
-       "	if (_newDest distance _myDest > 0) then {" \n
-       "		_myDest = _newDest;" \n
-       "		_agent moveTo _myDest;" \n
-       "		_agent forceSpeed P2DZ_HC_hordeZedSpeed;" \n
+       "" \n
+       "if (isNil '_carryOn') then { _carryOn = true; };" \n
+       "" \n
+       "if (_carryOn) then {" \n
+       "	if (!isNil ""_newDest"") then {" \n
+       "		if (_newDest distance _myDest > 0) then {" \n
+       "			_myDest = _newDest;" \n
+       "			_agent moveTo _myDest;" \n
+       "			_agent forceSpeed P2DZ_HC_hordeZedSpeed;" \n
+       "		};" \n
        "	};" \n
        "};" \n
+       "" \n
+       "if (isNil '_standBy') then { _standBy = [false,getposATL _agent]; };" \n
+       "" \n
+       "if (_standBy select 0) then {" \n
+       "	if (((getposATL _agent) distance (_standBy select 1)) > 50) then {" \n
+       "		_agent moveTo (_standBy select 1);" \n
+       "		_agent forceSpeed P2DZ_HC_hordeZedSpeed;" \n
+       "	} else {" \n
+       "		[_agent,_standBy select 1] call zombieHorde_loiterHCStandBy;" \n
+       "		_agent forceSpeed 2;" \n
+       "	};" \n
+       "};" \n
+       "" \n
        "" \n
        "if (_d) then {" \n
        "	diag_log (""Zombie "" + str(_agent) + "" Wait "");" \n
@@ -303,7 +324,7 @@ class FSM
           priority = 0.000000;
           to="Looking_for_Targ";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"(time - _timeN) > 1"/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(time - _timeN) > 2"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/"if (_d) then {" \n
            "	diag_log(format[""P2HC:HCZedFSM: LookingForTarget TimeCheck""]);" \n
            "};"/*%FSM</ACTION""">*/;
@@ -319,22 +340,41 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"_isAlive = alive _agent;" \n
        "_target = _agent call zombie_findTargetAgent;" \n
        "" \n
-       "_agent forceSpeed P2DZ_HC_hordeZedSpeed;" \n
+       "_carryOn = _agent getVariable[""carryOn"",true];" \n
+       "_standBy = _agent getVariable[""standBy"",[false,getposATL _agent]];" \n
        "" \n
+       "_agent forceSpeed P2DZ_HC_hordeZedSpeed;" \n
        "_newDest = _agent getVariable [""myDest"",getposATL _agent];" \n
-       "if (!isNil ""_newDest"") then {" \n
-       "	if (_newDest distance _myDest > 0) then {" \n
-       "		_myDest = _newDest;" \n
-       "		_agent moveTo _myDest;" \n
+       "" \n
+       "if (isNil '_carryOn') then { _carryOn = true; };" \n
+       "" \n
+       "if (_carryOn) then {" \n
+       "	if (!isNil ""_newDest"") then {" \n
+       "		if (_newDest distance _myDest > 0) then {" \n
+       "			_myDest = _newDest;" \n
+       "			_agent moveTo _myDest;" \n
+       "			_agent forceSpeed P2DZ_HC_hordeZedSpeed;" \n
+       "		};" \n
+       "	};" \n
+       "};" \n
+       "" \n
+       "if (isNil '_standBy') then { _standBy = [false,getposATL _agent]; };" \n
+       "" \n
+       "if (_standBy select 0) then {" \n
+       "	if (((getposATL _agent) distance (_standBy select 1)) > 50) then {" \n
+       "		_agent moveTo (_standBy select 1);" \n
        "		_agent forceSpeed P2DZ_HC_hordeZedSpeed;" \n
+       "	} else {" \n
+       "		[_agent,_standBy select 1] call zombieHorde_loiterHCStandBy;" \n
+       "		_agent forceSpeed 2;" \n
        "	};" \n
        "};" \n
        "" \n
        "_timeN = time;" \n
        "" \n
        "if (_d) then {" \n
-       "	diag_log (""loitering..."" + str(_agent distance (_agent getVariable [""myDest"",getposATL _agent])));" \n
-       "	diag_log(format[""P2HC:HCZedFSM: LoiterState""]);" \n
+       "	diag_log (""loitering...distfromTarget"" + str(_agent distance (_agent getVariable [""myDest"",getposATL _agent])));" \n
+       "	diag_log(format[""P2HC:HCZedFSM:%1: LoiterState"",_agent]);" \n
        "};" \n
        "" \n
        "if (_secondHand) then {" \n
@@ -399,8 +439,22 @@ class FSM
           to="Loiter";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
           condition=/*%FSM<CONDITION""">*/"_agent distance (_agent getVariable [""myDest"",getposATL _agent]) < 3"/*%FSM</CONDITION""">*/;
-          action=/*%FSM<ACTION""">*/"[_agent,_position] call zombieHorde_loiterHC;" \n
+          action=/*%FSM<ACTION""">*/"_carryOn = _agent getVariable[""carryOn"",true];" \n
+           "_standBy = _agent getVariable[""standBy"",[false,getposATL _agent]];" \n
            "_myDest = _agent getVariable [""myDest"",getposATL _agent];" \n
+           "" \n
+           "if (_carryOn) then {" \n
+           "	[_agent,_myDest] call zombieHorde_loiterHC;" \n
+           "};" \n
+           "" \n
+           "if (_standBy select 0) then {" \n
+           "	if (((getposATL _agent) distance (_standBy select 1)) > 100) then {" \n
+           "		[_agent,_standBy select 1] call zombieHorde_loiterHC;" \n
+           "	} else {" \n
+           "		[_agent,_standBy select 1] call zombieHorde_loiterHCStandBy;" \n
+           "	};" \n
+           "};" \n
+           "" \n
            "if (_d) then {" \n
            "	diag_log(format[""P2HC:HCZedFSM: Loiter InPosition""]);" \n
            "};"/*%FSM</ACTION""">*/;
@@ -428,9 +482,9 @@ class FSM
           priority = 0.000000;
           to="Loiter";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"(time - _timeN) > 1"/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(time - _timeN) > 2"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/"if (_d) then {" \n
-           "	diag_log(format[""P2HC:HCZedFSM: LoiterTimeCheck""]);" \n
+           "	diag_log(format[""P2HC:HCZedFSM:%1: LoiterTimeCheck"",_agent]);" \n
            "};"/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
@@ -452,9 +506,10 @@ class FSM
        "_hasMoved = _doLoiter;" \n
        "" \n
        "_agent disableAI ""FSM"";" \n
-       "_agent setBehaviour ""CARELESS"";" \n
+       "_agent setBehaviour ""COMBAT"";" \n
        "_agent setCombatMode ""RED"";" \n
        "_agent setSkill 0;" \n
+       "_agent setFormation ""DELTA"";" \n
        "" \n
        "_newDest = getPosATL _agent;" \n
        "_timeN = time;" \n
@@ -516,25 +571,79 @@ class FSM
     {
       name = "Chase";
       init = /*%FSM<STATEINIT""">*/"_timeN = time;" \n
-       "if (_d) then { diag_log(format[""P2HC:HCZedFSM: Chase""]); };" \n
+       "if (_d) then { diag_log(format[""P2HC:HCZedFSM:%1: Chase"",_agent]); };" \n
+       "_carryOn = _agent getVariable[""carryOn"",true];" \n
+       "_standBy = _agent getVariable[""standBy"",[false,getposATL _agent]];" \n
        "" \n
        "if (speed _agent < 0.1) then {_countr = _countr + 1} else {_countr = 0};" \n
-       "_target = _agent call zombie_findTargetAgent;" \n
+       "" \n
        "_isAlive = alive _agent;" \n
        "" \n
-       "if (isNil ""_target"") then { _target = objNull; };" \n
-       "_targetPos = getPosATL _target;" \n
+       "if (isNil '_carryOn') then { _carryOn = true; };" \n
        "" \n
+       "if (_carryOn) then {" \n
+       "	if (_d) then { diag_log(format[""P2HC:HCZedFSM: Chase:carryOn:true""]); };" \n
        "" \n
-       "//Move to target" \n
-       "_agent moveTo _targetPos;" \n
-       "_agent forceSpeed 10;" \n
+       "	_target = _agent call zombie_findTargetAgent;" \n
        "" \n
-       "if (_losCheck == 2) then {" \n
-       "	_losCheck = 0;	_cantSee = [_agent,_target] call dayz_losCheck;" \n
-       "	if (_d) then { diag_log(format[""P2HC:HCZedFSM: Chase: _cantSee: %1"",_cantSee]); };" \n
+       "	if (isNil ""_target"") then { " \n
+       "" \n
+       "		if (_d) then { diag_log(format[""P2HC:HCZedFSM: Chase:carryOn:targetNil""]); }; " \n
+       "" \n
+       "	} else {" \n
+       "" \n
+       "		if (!isNull _target) then {" \n
+       "			_targetPos = getPosATL _target;" \n
+       "			if (!isNil ""_targetPos"") then {" \n
+       "" \n
+       "				//Move to target" \n
+       "				_agent moveTo _targetPos;" \n
+       "				_agent forceSpeed 10;" \n
+       "" \n
+       "					if (_d) then { diag_log(format[""P2HC:HCZedFSM:%4: Chase: MoveToTargetPos: %1,  ZPos: %3,  TargetType: %2"", _targetPos, (typeOf _target), (getPosATL _agent), _agent]); };" \n
+       "" \n
+       "				if (_losCheck == 2) then {" \n
+       "					_losCheck = 0;	" \n
+       "					_cantSee = [_agent,_target] call dayz_losCheck;" \n
+       "					if (_d) then { diag_log(format[""P2HC:HCZedFSM:%2: Chase: _cantSee: %1"",_cantSee,_agent]); };" \n
+       "				};" \n
+       "			} else {" \n
+       "				" \n
+       "				if (_d) then { diag_log(format[""P2HC:HCZedFSM:%1: Chase:carryOn:targetPosNill"",_agent]); };" \n
+       "			};" \n
+       "		} else {" \n
+       "			" \n
+       "			if (_d) then { diag_log(format[""P2HC:HCZedFSM:%1:  Chase:carryOn:targetNull"",_agent]); };" \n
+       "		};" \n
+       "	};" \n
+       "} else {" \n
+       "	if (_d) then { diag_log(format[""P2HC:HCZedFSM:%1: Chase:carryOn:false"",_agent]); };" \n
+       "" \n
+       "	if (isNil '_standBy') then { _standBy = [false,getposATL _agent]; };" \n
+       "	if (_standBy select 0) then {" \n
+       "		if (_d) then { diag_log(format[""P2HC:HCZedFSM:%1: Chase:standby:true"",_agent]); };" \n
+       "		if (((getposATL _agent) distance (_standBy select 1)) > 200) then {" \n
+       "			_agent moveTo (_standBy select 1);" \n
+       "			_agent forceSpeed P2DZ_HC_hordeZedSpeed;" \n
+       "			_carryOn = false;" \n
+       "			_target = objNull;" \n
+       "			_cantSee = true;" \n
+       "			if (_d) then { diag_log(format[""P2HC:HCZedFSM:%2: Chase: MoveToStandByPos: %1"", (_standBy select 1), _agent]); };" \n
+       "		} else {" \n
+       "			_carryOn = true;" \n
+       "			_agent setVariable[""carryOn"",true];" \n
+       "			if (_d) then { diag_log(format[""P2HC:HCZedFSM:%1: Chase:standbyCarryOn:true(within200)"",_agent]); };" \n
+       "		};" \n
+       "	};" \n
+       "" \n
        "};" \n
-       ""/*%FSM</STATEINIT""">*/;
+       "" \n
+       "" \n
+       "if (_countr > 40) then {" \n
+       "	_cantSee = true;" \n
+       "	_target = objNull;" \n
+       "	if (_d) then { diag_log(format[""P2HC:HCZedFSM:%1: Chase:stuck, reset"",_agent]); };" \n
+       "};"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -588,7 +697,7 @@ class FSM
           priority = 0.000000;
           to="Chase";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"(time - _timeN) > 1"/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"(time - _timeN) > 2"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/"_losCheck = _losCheck + 1;" \n
            "if (_d) then { diag_log(format[""P2HC:HCZedFSM: Chase TimeCheck""]); };" \n
            ""/*%FSM</ACTION""">*/;

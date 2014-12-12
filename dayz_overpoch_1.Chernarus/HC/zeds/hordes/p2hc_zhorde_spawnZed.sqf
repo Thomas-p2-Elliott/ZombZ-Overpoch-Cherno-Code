@@ -43,6 +43,9 @@ _agent 			removeAllEventHandlers "local";														//Remove its handlers for
 _id = 			_agent addEventHandler ["local", { diag_log "Locality Event"; if(_this select 1) then {[(position (_this select 0)),(_this select 0),true] execFSM "HC\zeds\hordes\zombieHorde_agentHC.fsm" };}];
 _agent setDir 	round(random 180);																	//Make zed face random direction instead of N
 
+//set them to stand
+_agent setUnitPos "UP";
+
 //If agent is null and failed to create, exit with error code
 if (isNull _agent) exitWith {	if (_d) then { diag_log ("P2HC:HordeZedSpawns: P2DZ_HC_ZHorde_spawnZed: FATAL ERROR: _agent is Null!"); }; };
 
