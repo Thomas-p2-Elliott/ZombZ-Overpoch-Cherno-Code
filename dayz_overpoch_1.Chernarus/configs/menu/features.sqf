@@ -36,7 +36,7 @@ case ("A.I. Missions "):{
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/>
-Always 2 AI missions will be live on the server. Visit these areas, kill the AI, and take the reward. Check your map for the locations.
+You will always find 2 AI missions active on the server. Visit these areas, kill the AI, and take the reward. Check your map for the locations.
 <br/><br/>
 AI missions are done via our headless client to remove any lag that would normally be caused. 
 "
@@ -47,6 +47,7 @@ case ("A.I Fortress"):{
 <t color='#FFBF00'>Description: </t>
 <br/>
 If you can manage to take on the AI fortress, your going to get some very nice rewards. Although, we would not recomend trying to do this alone! Check your map for the location.
+We have added some scary surprises to this place. If you want to know what they are, well... you'll just have to try and take it on.
 <br/><br/>
 The AI fortress is done via our headless client to remove any lag that would normally be caused.
 "
@@ -56,7 +57,7 @@ case ("Altitude Meter"):{
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-Well one thing we noticed when players HALO jump, sometimes they tend to go splat. So we attatched each player with a pretty altitude watch. 
+Well one thing we noticed when players HALO jump, sometimes they tend to go splat. So we attatched each player with a pretty altitude watch. That also shows the direction your player is facing.
 <br/><br/>
 Watch it carefully to know when to pull your parachute.
 "
@@ -66,7 +67,8 @@ case ("Base Building"):{
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-Allows you to build a base, after you have placed a plot pole on the map. Build it to look however you want.
+Allows you to build a base, after you have placed a plot pole on the map. Build it to look however you want. Store your valuables here, But make sure to plan for attacks. 
+We intend to add booby traps to allow you to protect your base while offline.
 <br/><br/>
 There is a detailed write up on base building located on the menu. Look there for more information, recipes and guides.
 "
@@ -86,9 +88,9 @@ case ("Craftable Vehicles"):{
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-Allows you to build vehicles out of vehicle parts. WHich can then be upgraded with more parts.
+Allows you to build vehicles out of vehicle parts. You can then upgrade these with more parts.
 <br/><br/>
-Check out the detailed write up on the menu.
+Check out the detailed write up on the menu to find out what you need and what you can build.
 "
 };
 case ("Custom Mapping"):{
@@ -98,7 +100,7 @@ case ("Custom Mapping"):{
 <br/> 
 Thats right, we have improved towns. Built new areas to explore. Just to add to the fun.
 <br/><br/>
-Lets face it, Cherno is old and boring. So find new roads, airfields, towns and outposts located around the map.
+Lets face it, Cherno is old and boring. So find new roads, airfields, towns and outposts located around the map. We rotate these to other outposts at different periods of time to give you a nice fresh field
 "
 };
 case ("Custom Displays"):{
@@ -108,7 +110,7 @@ case ("Custom Displays"):{
 <br/> 
 We have added alot of custom displays to the game, and continue to redesign and add more.
 <br/><br/>
-As you will notice the gear menu has changed -it now shows your gold.
+As you will notice the gear menu has changed. It now shows your gold.
 <br/><br/>
 We have a completly custom debug monitor. New information menus. Log out screens, etc etc.
 "
@@ -132,7 +134,7 @@ case ("Colour Menu System"):{
 <br/> 
 We know that not everyone likes the same thing. Therefore we have added the ability to customise your experience.
 <br/><br/>
-Change and swap around the colors of your menus to what suits you.
+Change and swap around the colors of your menus to what suits you best.
 "
 };
 case ("Code Rewrites"):{
@@ -140,7 +142,7 @@ case ("Code Rewrites"):{
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-We have rewritten alot of the code that came with the mod. We did this to improve efficiency. Reduce lag and desync to give the game a more real feel.
+We have rewritten alot of the code that came with the mod. We did this to improve efficiency. Reduce lag and desync to give the game a more real feel. Alot of this goes unseen, but it has been a 6 month non stop project. We have added in tons of security to also help stop hacks.
 "
 };
 case ("Custom Debug"):{
@@ -150,7 +152,7 @@ case ("Custom Debug"):{
 <br/> 
 Our debug monitor is pretty awesome. 
 <br/><br/>
-You can change the way it looks, Switch it off completly. Or even change the color from the Menu.
+You can change the way it looks, Switch it off completly. Or even change the color from the Menu. Have a play around, F5 changes the way it looks.
 "
 };
 case ("Combat Log Punishment"):{
@@ -172,7 +174,7 @@ Even more annoying than combat logging. You change clothes and boom you get shot
 <br/><br/>
 Our code which has been running for a long time on Overwatch. It checks players locations when they shoot someone. 
 <br/><br/>
-If your in debug... Well I hope you enjoy the 10k feet, fall way out over the ocean, if you dont die, your going to die swimming.
+If your in debug... Well your going to enjoy the 10,000 feet drop, over the ocean, if you dont die, your going to die swimming. A helicopter cant even get there and back on 1 tank of fuel.
 "
 };
 case ("Death Messages"):{
@@ -202,7 +204,7 @@ case ("Faster Traders"):{
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-While it might not seem it. We have massivly improved the speed of traders by moving them from databases to text. We do have over 800 weapons, and 600 vehicles.
+While it might not seem it. We have massivly improved the speed of trader lists. We do have over 800 weapons, and 600 vehicles for sale.
 <br/><br/>
 So yeh. We had to change the way they work to make it load alooooot faster.
 <br/><br/>
@@ -246,7 +248,7 @@ case ("Headless Client "):{
 <br/> 
 Now this is a complicated one to explain. Basically we connect to the server as a PLAYER. We then use this player to run certain code and calculations. This helps take the load off the server, and put the load onto the (imaginary) player.
 <br/><br/>
-This means we can do things like add 100 AI to the map with no lag created what so ever. It actually causes less lag than a real player running around.
+This means we can do things like add 100 AI to the map, multiple huge zombie hordes and extra zombies for each player with no lag created what so ever. It actually causes less lag than a real player running around.
 <br/><br/> 
 Our headless client runs on 1gb internet line, so its super fast and can process and send information really quickly.
 "
@@ -318,7 +320,7 @@ case ("Maintain Base"):{
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-You can maintain with gold, by visiting the plot pole for your base. Alternatively you can read up more by going to the basebuilding section of the menu.
+You can maintain your base with gold, by visiting the plot pole for your base. Alternatively you can read up more by going to the basebuilding section of the menu.
 "
 };
 case ("Medic System - heroes"):{
@@ -379,6 +381,7 @@ Controls
 <br/>
 Scroll wheel to shoot
 Insert to get back to the pasenger seat
+Unfortunatly at this moment, there are only 2 vehicles this works with. We are working to fix some serious bugs we encountered.
 "
 };
 case ("Server Antihack"):{
@@ -386,7 +389,7 @@ case ("Server Antihack"):{
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-We have server anti hacks, that dont add load and fps to the server. Just a serious of checks on your players to make sure you arnt doing anything you shouldnt be, or have anything you shouldnt have. This will then talk with our skynet program, Having skynet investigate you further, and hand out a ban if required.
+We have server anti hacks, that dont add load and fps to the server. Just a ton of checks on your players to make sure you arnt doing anything you shouldnt be, or have anything you shouldnt have. This will then talk with our skynet program, Having skynet investigate you further, and hand out a ban if required.
 "
 };
 case ("Skynet Antihack"):{
@@ -394,7 +397,7 @@ case ("Skynet Antihack"):{
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-Our baby. One of the most efficient Anti Hacks going. Completly coded by us, and kept really hush hush. This helps us automatically ban players from the server and we keep it quiet because we dont player to work out how it works. Once people know, getting around it becomes easier.
+Our baby. One of the most efficient Anti Hacks going. Completly coded by us, and kept really hush hush. This helps us automatically ban players from the server and we keep it quiet because we dont want players to work out how it works. Once people know, getting around it becomes easier.
 So fear not, skynet is watching you.
 "
 };
@@ -451,7 +454,7 @@ Unable to fire weapons
 <br/>
 God Mode
 <br/>
-Vehicles dumped and unlocked, outside of trader zones on restart
+Vehicles dumped and unlocked, outside of trader zones on restart. Remember though, Not every trader zone is protected. If it is, it will say as you enter.
 "
 };
 case ("Tons of bug fixes"):{
