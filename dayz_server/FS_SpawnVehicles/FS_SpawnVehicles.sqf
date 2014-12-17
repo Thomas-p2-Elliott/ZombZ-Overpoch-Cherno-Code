@@ -173,13 +173,6 @@ _fnc_spawn_vehicle = {
 					    ];
 					};
 					
-					if(DZEdebug) then {
-						_marker = createMarker [str((_spawnPos select 1)) , (_spawnPos select 1)];
-						_marker setMarkerShape "ICON";
-						_marker setMarkerType "DOT";
-						_marker setMarkerText _vehicle;
-					};	
-				
 					// Get position
 					_objPosition = GetPosATL _veh;
 					if (_p2d) then {	diag_log(" "); diag_log("Static Spawn Vehicle of Type: " + str _veh + " Created At: " + str _objPosition + " With Direction: " + str _dir); };
