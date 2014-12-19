@@ -268,7 +268,11 @@ class RscTitles
 #include "configs\halodefines.hpp"
 #include "configs\halo.hpp"
 
-//gorsys menu system
+//options menu
+#include "configs\player2optionsbase.hpp"
+#include "configs\player2options.hpp"
+
+//f1 menu
 #include "configs\menu\defines.hpp"
 #include "configs\menu\menu.hpp"
 #include "configs\menu\lb.hpp"
