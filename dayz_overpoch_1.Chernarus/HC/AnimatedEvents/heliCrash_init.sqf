@@ -13,7 +13,7 @@ Previous Version Authors:
 /*---------------------------------------------------------------------------
 Configuration
 ---------------------------------------------------------------------------*/
-P2DZ_heliCrashSites_guaranteedLoot =           4;       //Garantueed loot pile amount
+P2DZ_heliCrashSites_guaranteedLoot =           6;       //Garantueed loot pile amount
 P2DZ_heliCrashSites_randomizedLoot =           3;       //Randomized loot pile amount
 P2DZ_heliCrashSites_spawnFire =             true;       //HeliCrash Smoke?
 P2DZ_heliCrashSites_fadeFire =             false;       //Fade smoke over time?
@@ -50,8 +50,7 @@ P2DZ_HC_debugCrashOutput = {
 
 
 /* Is Server */
-if (isDedicated && !hasInterface || isServer) then {
-
+if (isDedicated && !hasInterface || isServer) exitWith {
 
     /* Run Heli Crash at this Pos with these Loot Settings */
     "P2HC_rqCrash" addPublicVariableEventHandler {
