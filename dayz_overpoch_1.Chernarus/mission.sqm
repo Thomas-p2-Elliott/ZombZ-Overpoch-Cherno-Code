@@ -1333,7 +1333,7 @@ class Mission
 		{
 			position[]={1606.6443,289.70795,7803.5156};
 			name="BanditDen";
-			text="Bandit Camp";
+			text="Bandit Trader";
 			type="mil_dot";
 			colorName="ColorRed";
 		};
@@ -1365,7 +1365,7 @@ class Mission
 		{
 			position[]={12944.227,210.19823,12766.889};
 			name="HeroTrader";
-			text="Hero Camp";
+			text="Hero Trader";
 			type="mil_dot";
 			colorName="ColorBlue";
 		};
