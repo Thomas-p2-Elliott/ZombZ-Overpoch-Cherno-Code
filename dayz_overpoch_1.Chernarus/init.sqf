@@ -36,16 +36,13 @@ P2DZ_serverName = "Test";
 P2DZ_HC_HeliCrashes = true;
 
 //enable headless client ai missions
-DZMS_HC_AIMissions_Enabled = false;
+P2DZ_HC_AIMissions_Enabled = true;
 
 //enable headless client extra-zeds?
 P2DZ_HC_extraZeds = true;
 //enable zed hordes? (WARNING: Requires ExtraZeds)
 P2DZ_HC_zedHordes = true;
-//Set the server number
-if (isNil "GORSYSERVERNUMBER") then {
-	GORSYSERVERNUMBER = 5;
-};
+
 /*---------------------------------------------------------------------------
 UID WhiteLists - Door Management, Plot Management, Client-Side AntiHack
 ---------------------------------------------------------------------------*/
@@ -54,15 +51,35 @@ P2DZ_clientAHWhiteListUIDs = 		["76561198147422604","76561197994454413","7656119
 P2DZ_plotManagerUIDs = 				["007"]; 
 P2DZ_DoorAdminList =   				["007"];
 
+//Set the server number
+if (isNil "GORSYSERVERNUMBER") then {
+	GORSYSERVERNUMBER = 5;
+};
+
+
+/*---------------------------------------------------------------------------
+Headless Client & Dedicated Server
+---------------------------------------------------------------------------*/
+if ((!hasInterface && !isDedicated && !isServer) || (isDedicated && !hasInterface || isServer)) then {
+
+	/* Animated Heli Crash Sites by Player2 */
+	if (P2DZ_HC_HeliCrashes) then {
+		diag_log(format["P2DEBUG: %1 Executing AnimatedEvents: HeliCrashes!", (getPlayerUID player)]);
+		[] execVM "HC\AnimatedEvents\heliCrash_init.sqf";
+	};
+
+	/* HeadlessClient A.I. Missions by Player2 */
+	if (P2DZ_HC_AIMissions_Enabled) then {
+		diag_log(format["P2DEBUG: %1 Executing AI Missions!", (getPlayerUID player)]);
+		[] execVM "HC\P2AI\init.sqf";
+	};
+};
+
 /*---------------------------------------------------------------------------
 Headless Client
 ---------------------------------------------------------------------------*/
-
 if (!hasInterface && !isDedicated && !isServer) exitWith {
 	p2d_headless = true;
-
-	//startup wait for dzms
-	P2DZMS_startWait = 5;
 	
 	//Wait for BIS Functions to load	
   	waitUntil {!isNil "BIS_fnc_init"}; 
@@ -74,12 +91,6 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
    	BIS_Effects_Secondaries = 			{};
    	BIS_Effects_AirDestruction = 		{};
 
-	/* Animated Heli Crash Sites by Player2 */
-	if (P2DZ_HC_HeliCrashes) then {
-		diag_log(format["P2DEBUG: %1 Executing AnimatedEvents: HeliCrashes!", (getPlayerUID player)]);
-		[] execVM "HC\AnimatedEvents\heliCrash_init.sqf";
-	};
-
 	/* Extra Zeds System by Player2 */
 	if (P2DZ_HC_extraZeds) then {
 		diag_log(format["P2DEBUG: %1 Executing Extra Zeds!", (getPlayerUID player)]);
@@ -89,16 +100,10 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
 
 	/* Zombie Hordes by Player2 */
 	if (P2DZ_HC_extraZeds && {(P2DZ_HC_zedHordes)}) then {
-		waitUntil{uiSleep 0.5; P2DZ_HC_extraZeds_Done}; //wait for P2DZ_HC_extraZeds_Done, gets set to true after configs for ExtraZeds have been loaded
+		waitUntil{uiSleep 0.5; P2DZ_HC_extraZeds_Done}; //zhordes requires extrazeds
 		diag_log(format["P2DEBUG: %1 Executing Zombie Hordes!", (getPlayerUID player)]);
 		[] execVM "HC\zeds\hordes\init.sqf";
 	};
-
-	/* HeadlessClient A.I. Missions by Player2 
-	if (P2DZ_HC_AIMissions_Enabled) then {
-		diag_log(format["P2DEBUG: %1 Executing AI Missions!", (getPlayerUID player)]);
-		[] execVM "HC\DZMS\DZMSInit.sqf";
-	};*/
 
 	/* ArmaServerMonitor */
 	if (P2DZ_HC_ASM_Enabled) then {

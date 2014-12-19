@@ -1,0 +1,22 @@
+ToDo:
+
+	Port Overwatch DZMS to OverPoch:
+		- File Structure Change
+		- Config Update
+		- Plot Pole Checking
+		- Debugging Outputs
+
+	Upgrades:
+		- Add Map Markers to AI Units & AI Waypoints
+			- Test AI Aggro
+			- Test waypoint types
+			- Test high reveal dist
+
+		- DevilsCastle Mission Update
+		- More Positions for Minor&Major Missions
+
+		- Integrate parts of WAI
+			- Test Vehicles
+
+		- Test Rocket Launchers
+		- Test Mounted Guns
