@@ -9,11 +9,6 @@ if (_dikCode in[0x02,0x03,0x04,0x58,0x57,0x44,0x43,0x42,0x41,0x3E,0x3D,0x3C,0x3B
 	_handled = true;
 };
 
-if (_dikCode == 0x3B )then{
-	_ok = createDialog "RscGorsyMenu";
-	_handed=true;
-};
-
 if ((_dikCode == 0x3E || _dikCode == 0x0F || _dikCode == 0xD3)) then {
 	if(diag_tickTime - dayz_lastCheckBit > 10) then {
 		dayz_lastCheckBit = diag_tickTime;
@@ -151,7 +146,7 @@ if (_dikCode == 0x3F && (diag_tickTime - dayz_lastCheckBit > 1)) then {
 	};
 };
 
-/*Move Into Nearest Heli / HeliDoor Script */
+/*Move Into Nearest Heli / HeliDoor Script - Disabled 
 if (_dikCode == 0xD2  && (diag_tickTime - dayz_lastCheckBit > 1) && (player getVariable ["NORRN_inVehMount", false])) then {
 	diag_log("P2DEBUG: Insert Key presed!");
 	[] spawn {
@@ -164,8 +159,9 @@ if (_dikCode == 0xD2  && (diag_tickTime - dayz_lastCheckBit > 1) && (player getV
 	dayz_lastCheckBit = diag_tickTime;
 	_handled = true;
 };
+*/
 
-/*Q and E Lean / HeliDoor */
+/*Q and E Lean / HeliDoor - Disabled
 if ((player getVariable ["NORRN_inVehMount", false]) && (diag_tickTime - dayz_lastCheckBit > 1) && {(_dikCode in actionKeys "LeanRight")}) then {
 	player setDir ((getDir player) + 4);
 	dayz_lastCheckBit = diag_tickTime;
@@ -176,20 +172,26 @@ if ((player getVariable ["NORRN_inVehMount", false]) && (diag_tickTime - dayz_la
 	dayz_lastCheckBit = diag_tickTime;
 	_handled = true;
 };
-
-/* HeliDoor reload magazine with reloadMagazine Key */
+*/
+/* HeliDoor reload magazine with reloadMagazine Key - Disabled
 if ((player getVariable ["NORRN_inVehMount", false]) && (diag_tickTime - dayz_lastCheckBit > 1) && {(_dikCode in actionKeys "ReloadMagazine")}) then {
 	reload player;
 	dayz_lastCheckBit = diag_tickTime;
 	_handled = true;
 };
-
+*/
 
 /* Debug Mon Colour GUI */
 if (_dikCode == 0x40 && (diag_tickTime - dayz_lastCheckBit > 1)) then {
-	[] spawn fnc_p2debugMonColorGUI;
+	if (!dialog) then {	[] spawn fnc_p2debugMonColorGUI; } else { [] spawn { closeDialog 0; uiSleep 0.1; [] call fnc_p2debugMonColorGUI; }; }; 
 	_handled = true;
 	dayz_lastCheckBit = diag_tickTime;
+};
+
+/* F1 Menu */
+if (_dikCode == 0x3B && (diag_tickTime - dayz_lastCheckBit > 1)) then {
+	if (!dialog) then {	createDialog "RscGorsyMenu"; } else { [] spawn { closeDialog 0; uiSleep 0.1; createDialog "RscGorsyMenu"; }; }; 
+	_handed = true;
 };
 
 //if (_dikCode == 57) then {_handled = true}; // space
@@ -203,7 +205,6 @@ if (_dikCode in actionKeys "PushToTalk" && (diag_tickTime - dayz_lastCheckBit > 
 if (_dikCode in actionKeys "VoiceOverNet" && (diag_tickTime - dayz_lastCheckBit > 10)) then {
 	dayz_lastCheckBit = diag_tickTime;
 	[player,50,true,(getPosATL player)] spawn player_alertZombies;
-	diag_log("SideChat?");
 };
 if (_dikCode in actionKeys "PushToTalkDirect" && (diag_tickTime - dayz_lastCheckBit > 10)) then {
 	dayz_lastCheckBit = diag_tickTime;

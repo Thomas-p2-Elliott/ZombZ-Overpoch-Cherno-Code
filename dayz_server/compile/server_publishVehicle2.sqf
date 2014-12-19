@@ -95,11 +95,11 @@ _key call server_hiveWrite;
 		};
 
 		/*---------------------------------------------------------------------------
-		Shoot From Vehicles - UH1Y & MH60S & MH6J & V3S
+		Shoot From Vehicles - UH1Y & MH60S & MH6J & V3S - Disabled
 		---------------------------------------------------------------------------*/
-		if ((typeOf _object) in P2DZ_DriveByVehicles) then {
-			_object setVehicleInit "[this] execVM ""heliDoor\heliDoor_init.sqf"";";
-		};	
+		//if ((typeOf _object) in P2DZ_DriveByVehicles) then {
+		//	_object setVehicleInit "[this] execVM ""heliDoor\heliDoor_init.sqf"";";
+		//};	
 		
 	} else {
 		_object = createVehicle [_class, _location, [], 0, "CAN_COLLIDE"];
@@ -116,11 +116,11 @@ _key call server_hiveWrite;
 		};	
 
 		/*---------------------------------------------------------------------------
-		Shoot From Vehicles - UH1Y & MH60S & MH6J & V3S
+		Shoot From Vehicles - UH1Y & MH60S & MH6J & V3S - Disabled
 		---------------------------------------------------------------------------*/
-		if ((typeOf _object) in P2DZ_DriveByVehicles) then {
-			_object setVehicleInit "[this] execVM ""heliDoor\heliDoor_init.sqf"";";
-		};
+		//if ((typeOf _object) in P2DZ_DriveByVehicles) then {
+		//	_object setVehicleInit "[this] execVM ""heliDoor\heliDoor_init.sqf"";";
+		//};
 
 	};
 
