@@ -34,14 +34,9 @@ switch (_crashModel) do {
 	case "UH60_ARMY_Wreck_burned_DZ": 	{ _lootTable = [1,3] call fnc_specialLoot; };
 };
 
-if (_d) then { diag_log(format["SpawnCrashSiteHC: _lootTable (%1)",_lootTable]); };
-
 _crashName	= getText (configFile >> "CfgVehicles" >> _crashModel >> "displayName");
 
-if (_d) then { diag_log(format["SpawnCrashSiteHC: _crashName (%1)",_lootTable]); };
-
-
-if (_d) then { diag_log(format["---- Heli Crash: %1 --- Pos: %2 --- Loot: ", _crashName,_spawnPos]); };
+if (_d) then { 	diag_log(format["---- Heli Crash: %1 / %2 --- Pos: %3 --- Loot: %4", _crashModel, _crashName, _spawnPos, _lootTable]); };
 
 _crash = createVehicle [_crashModel,_spawnPos, [], 0, "CAN_COLLIDE"];
 // Randomize the direction the wreck is facing
