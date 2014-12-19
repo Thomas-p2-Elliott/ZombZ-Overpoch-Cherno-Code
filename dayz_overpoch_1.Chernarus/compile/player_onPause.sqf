@@ -19,10 +19,10 @@ while {!isNull _display} do {
 	_btnTitle2 ctrlSetText 						format["%1",_playeruid];
 
 	_btnTitle3 = _display displayCtrl 			103;
-	_btnTitle3 ctrlSetText 						"Server Menu";
+	_btnTitle3 ctrlSetText 						"Server Info";
 	_btnTitle3 ctrlEnable true;
 	_btnTitle3 ctrlRemoveAllEventHandlers		"ButtonClick";
-	_btnTitle3 ctrlAddEventHandler 				["ButtonClick","_ok = createDialog ""RscGorsyMenu""; "];
+	_btnTitle3 ctrlAddEventHandler 				["ButtonClick","disableSerialization; _display = findDisplay 49; if (!((str _display) == 'No display')) then { _display closeDisplay 1; }; if (!dialog) then {	createDialog 'RscGorsyMenu'; } else { closeDialog 0; uiSleep 0.1; createDialog 'RscGorsyMenu'; }; "];
   	
   	_btnTitle4 = _display displayCtrl 			119;	
 	_btnTitle4 ctrlSetText 						"Player Stats";
@@ -35,8 +35,7 @@ while {!isNull _display} do {
 	_btnTitle5 ctrlSetText 						"Player Options";
 	_btnTitle5 ctrlEnable true;
 	_btnTitle5 ctrlRemoveAllEventHandlers		"ButtonClick";
-	_btnTitle5 ctrlAddEventHandler 				["ButtonClick","[['<t size=''1'' font=''Bitstream'' align=''left'' color=''#FFFFFF''>Information</t>',  
-	'<br /><t size=''1.5'' font=''Bitstream'' align=''center'' color=''#F7F2E0''>Coming Soon!</t>'],4] spawn p2_miniMsg;"];
+	_btnTitle5 ctrlAddEventHandler 				["ButtonClick","disableSerialization; _display = findDisplay 49; if (!((str _display) == 'No display')) then { _display closeDisplay 1; }; if (!dialog) then {	createDialog 'p2_options'; } else { closeDialog 0; uiSleep 0.1; createDialog 'p2_options'; }; "];
     
 	sleep 0.05;
 };
