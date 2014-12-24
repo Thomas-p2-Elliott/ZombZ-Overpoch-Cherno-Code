@@ -1,6 +1,6 @@
-private ["_debugMonSettings","_characterID","_playerObj","_playerID","_spawnSelection","_dummy","_worldspace","_state","_doLoop","_key","_primary","_medical","_stats","_humanity","_lastinstance","_friendlies","_randomSpot","_position","_debug","_distance","_hit","_fractures","_score","_findSpot","_pos","_isIsland","_w","_clientID","_spawnMC","_namespace"];
+private ["_debugMonSettings","_output","_given","_characterID","_playerObj","_playerID","_spawnSelection","_dummy","_worldspace","_state","_doLoop","_key","_primary","_medical","_stats","_humanity","_lastinstance","_friendlies","_randomSpot","_position","_debug","_distance","_hit","_fractures","_score","_findSpot","_pos","_isIsland","_w","_clientID","_spawnMC","_namespace"];
 
-diag_log ("SETUP: attempted with _this: " + str(_this));
+//diag_log ("SETUP: attempted with _this: " + str(_this));
 _characterID = _this select 0;
 _playerObj = _this select 1;
 _playerID = getPlayerUID _playerObj;
@@ -53,7 +53,7 @@ if (isNull _playerObj || !isPlayer _playerObj) exitWith {
 };
 
 //Wait for HIVE to be free
-diag_log ("SETUP: RESULT: Successful with " + str(_primary));
+//diag_log ("SETUP: RESULT: Successful with " + str(_primary));
 
 _medical =				_primary select 1;
 _stats =				_primary select 2;
@@ -109,14 +109,14 @@ if (count _worldspace > 0) then {
 
 //set debug mon settings values
 if (isNil '_debugMonSettings') then {
-	diag_log("server_playerSetup: _debugMonSettings: " + str _debugMonSettings);
+	//diag_log("server_playerSetup: _debugMonSettings: " + str _debugMonSettings);
 	_debugMode = _debugMonSettings select 4;
 	_debugColours = [(_debugMonSettings select 0), (_debugMonSettings select 1), (_debugMonSettings select 2), (_debugMonSettings select 3)];
 
 	//Vaildate settings before saving to player
 
 	if (((_debugMonSettings select 4) > 3) || ((_debugMonSettings select 4) < 1) ) then {
-		diag_log("Invalid Debug Mon Mode: " + str (_debugMode));
+		//diag_log("Invalid Debug Mon Mode: " + str (_debugMode));
 		_debugMode = 2;
 	} else {
 		_debugMode = _debugMonSettings select 4;
@@ -131,20 +131,68 @@ if (isNil '_debugMonSettings') then {
 
 };
 
+/*---------------------------------------------------------------------------
+Returning Player & NewSpawn Gold
+---------------------------------------------------------------------------*/
+
+//if freshspawn gold enabled and player is freshspawn with less 1 or less gold then give them the freshspawn gold amount
+
+//check if giving newspawns gold
+if (isNil "P2DZ_giveNewSpawnsGold") then 	{ 	P2DZ_giveNewSpawnsGold = false; };
+if (isNil "P2DZ_newSpawnGoldAmount") then { 	P2DZ_newSpawnGoldAmount = 0; };
+
+_given = false; //used for gold
+
 //set gold values
 if (count _currentCharGoldArr > 0) then {
-	_playerObj setVariable["ZombZGold", (_currentCharGold), true];
-	//_playerObj setVariable["ZombZATMCard", (_currentCharATM), true]; //unused
 
-	//save for jip check
-	_playerObj setVariable["ZombZGold_CHK", (_currentCharGold)];
+	if ((_playerID in P2DZ_newSpawnsNeedingGold) && P2DZ_giveNewSpawnsGold && (P2DZ_newSpawnGoldAmount > 0) && (_currentCharGold < 1)) then {
+		_output = false;
+		_output = ((serverTime - (P2DZ_newSpawnsNeedingGold select ((P2DZ_newSpawnsNeedingGold find _playerID) + 1))) < 120); 
+	 	if (isNil "_output") then { _output = false; }; 
+	 	if (_output) then {
+
+			P2DZ_newSpawnsNeedingGold = P2DZ_newSpawnsNeedingGold - [(P2DZ_newSpawnsNeedingGold select ((P2DZ_newSpawnsNeedingGold find _playerID) + 1))];
+			P2DZ_newSpawnsNeedingGold = P2DZ_newSpawnsNeedingGold - [_playerID];
+			_currentCharGold = P2DZ_newSpawnGoldAmount;
+			_playerObj setVariable["ZombZGold", P2DZ_newSpawnGoldAmount, true];
+
+			//diag_log("P2DEBUG: Gave Newspawn Gold!"); // test server
+
+	 		_given = true;
+	 	};
+	};
+
+	
+	if (!_given) then {
+	//	diag_log("P2DEBUG: No Newspawn Gold!"); // test server
+
+		_playerObj setVariable["ZombZGold", (_currentCharGold), true];
+		//_playerObj setVariable["ZombZATMCard", (_currentCharATM), true]; //unused
+		//save for jip check
+		_playerObj setVariable["ZombZGold_CHK", (_currentCharGold)];
+	};
 //reset gold values to [0,0]...data has been broken and is no longer in array format of [currentGold,currentATMCard]
 } else {
+//	diag_log("P2DEBUG: No Newspawn Gold cuz Array broken!"); // test server
+
 	_playerObj setVariable["ZombZGold", 0, true];
 	//_playerObj setVariable["ZombZATMCard", 0, true]; //unused
 	_playerObj setVariable["ZombZGold_CHK", 0];
-
 };
+
+//make sure player is removed from new spawns needing gold if they get past this point no matter what!
+_output = false;
+_output = ((serverTime - (P2DZ_newSpawnsNeedingGold select ((P2DZ_newSpawnsNeedingGold find _playerID) + 1))) < 120); 
+if (isNil "_output") then { _output = false; }; 
+if (_output) then {
+	P2DZ_newSpawnsNeedingGold = P2DZ_newSpawnsNeedingGold - [(P2DZ_newSpawnsNeedingGold select ((P2DZ_newSpawnsNeedingGold find _playerID) + 1))];
+	P2DZ_newSpawnsNeedingGold = P2DZ_newSpawnsNeedingGold - [_playerID];
+};
+
+//destroy vars
+_output = nil;
+_given = nil;
 
 //set medical values
 if (count _medical > 0) then {
@@ -232,7 +280,7 @@ if (_randomSpot) then {
 	
 	//Spawn modify via mission init.sqf
 	if(isnil "spawnArea") then {
-		spawnArea = 1500;
+		spawnArea = 800;
 	};
 	if(isnil "spawnShoremode") then {
 		spawnShoremode = 1;
