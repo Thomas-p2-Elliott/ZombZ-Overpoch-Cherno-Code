@@ -194,13 +194,14 @@ fnc_debugMon = {
 				    {
 				        667 cutText ["", "PLAIN"];
 						P2DZ_debugMonitor = false;
+						player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true];
 				    };
 				    case 2:
 				    {
 				    	P2DZ_debugBloodCol = [] call fnc_bloodCol;
 				        _handle2 = [] call fnc_debugFull;
 						P2DZ_debugMonitor = true;
-						if (random 10 > 8) then { player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true]; };
+						player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true];
 						sleep P2DZ_debugMonSleep; //double sleep for full mode
 				    };
 				    case 3:
@@ -208,7 +209,7 @@ fnc_debugMon = {
 				    	P2DZ_debugBloodCol = [] call fnc_bloodCol;
 						_handle3 = [] call fnc_debugMini;
 						P2DZ_debugMonitor = true;
-						if (random 10 > 8) then { player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true]; };
+						player setVariable ["P2_DebugMonMode", P2DZ_dbCurMode, true];
 					};
 					default
 					{
