@@ -4,7 +4,7 @@ P2DZ_AH_BannedCommands = {
 	_puid = _this select 1;
 
 	if (P2DZ_AHDebug) then {
-		//diag_log(format["P2AntiHackDebug: %1", "P2DZ_AH_BannedCommands"]);
+		diag_log(format["P2AntiHackDebug: P2DZ_AH_BannedCommands: Input: %1", _this]);
 	};
 
 	call compile("
@@ -53,97 +53,97 @@ P2DZ_AH_BannedCommands = {
 	setGroupIconsVisible [false,false];
 
 	BIS_fnc_spawnCrew = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('spawnCrew'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('spawnCrew'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	BIS_fnc_spawnGroup = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('spawnGroup'),  (str missionStart)];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('spawnGroup'),  (str missionStart)];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	BIS_fnc_help = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('help'),  (str missionStart)];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('help'),  (str missionStart)];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	bis_fnc_3Dcredits = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('3Dcredits'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('3Dcredits'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	BIS_fnc_crows = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('crows'),  (str missionStart)];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('crows'),  (str missionStart)];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	bis_fnc_customGPSvideo = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('customGPSvideo'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('customGPSvideo'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	bis_fnc_customGPS = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('customGPS'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('customGPS'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	bis_fnc_destroyCity = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('destroyCity'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('destroyCity'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	BIS_fnc_dirIndicator = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('dirIndicator'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('dirIndicator'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	bis_fnc_playVideo = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('playVideo'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('playVideo'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	bis_fnc_spawnvehicle = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('spawnvehicle'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('spawnvehicle'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	BIS_fnc_spawnEnemy = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('spawnEnemy'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('spawnEnemy'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	BIS_fnc_AAN = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('AAN'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('AAN'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	bis_fnc_taskPatrol = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('taskPatrol'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('taskPatrol'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	bis_fnc_taskDefend = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('taskDefend'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('taskDefend'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	BIS_fnc_taskAttack = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('taskAttack'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('taskAttack'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	BIS_fnc_supplydrop = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('supplydrop'),  (_this select 1)];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('supplydrop'),  (_this select 1)];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	BIS_fnc_spotter = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('spotter'),  (str(_this select 0))];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('spotter'),  (str(_this select 0))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
 	BIS_fnc_listPlayers = {
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  ('listPlayers'),  (str missionStart)];
+		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",(name player), (getPlayerUID player),  ('listPlayers'),  (str missionStart)];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};

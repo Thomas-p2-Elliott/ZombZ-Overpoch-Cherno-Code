@@ -6,7 +6,10 @@
 
 private ["_date","_key","_result","_outcome","_handle","_time","_datestr"];
 
-diag_log("EPOCH EVENTS INIT");
+//diag_log("EPOCH EVENTS INIT");
+
+if (true) exitWith {};
+
 EventSchedulerLastTime = "";
 
 epoch_eventIsAny = {

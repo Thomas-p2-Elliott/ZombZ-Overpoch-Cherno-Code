@@ -1,4 +1,4 @@
-diag_log("Adding Deploy Functions/PubVar Handlers...");
+//diag_log("Adding Deploy Functions/PubVar Handlers...");
 
 //original code by dami modified by player2
 "PVDZ_OBJ_DEPLOY" addPublicVariableEventHandler {
@@ -8,46 +8,6 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
         _select = _array select 2;
         if (_select in ['Old_bike_TK_CIV_EP1','ATV_US_EP1','TT650_TK_CIV_EP1','350z_white_DZ','BTR40_TK_GUE_EP1','BTR40_MG_TK_GUE_EP1','HMMWV_DZ','HMMWV_Armored','CSJ_GyroC','MH6J_DZ','Mi17_Civilian_DZ','UH1H_TK_EP1']) then {
                
-
-               	if (_select == 'Old_bike_TK_CIV_EP1') then {
-               		_select = 'Ka52Black';
-  					_object = _select createVehicle _positn;
-               		_object setVariable ["ObjectID", "1", true];
-                	_object setVariable ["ObjectUID", "1", true];
-
-					 _object call {
-					    _this setVariable [
-					        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-					        "hash_id" callExtension format [
-					            "%1:%2",
-					            netId _this,
-					            typeOf _this
-					        ]
-					    ];
-					};
-
-               	} else {
-               		_object = _select createVehicle _positn;
-               	 	_object setVariable ["ObjectID", "1", true];
-                	_object setVariable ["ObjectUID", "1", true];
-                	_object setVariable ["Deployed", true, true];
-
-					 _object call {
-					    _this setVariable [
-					        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-					        "hash_id" callExtension format [
-					            "%1:%2",
-					            netId _this,
-					            typeOf _this
-					        ]
-					    ];
-					};
-                	
-               	};
-               	
-               /*
-                Removed for test server to make ka52s deployable and sellable with toolbox.
-                
 				//turn old bike to mountain bike
                 if (_select == 'Old_bike_TK_CIV_EP1') then {	_select = "MMT_CIV" };
 
@@ -56,6 +16,10 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
                 _object setVariable ["ObjectUID", "1", true];
                 _object setVariable ["Deployed", true, true];
 
+				clearWeaponCargoGlobal  	_object;
+				clearMagazineCargoGlobal  	_object;
+				_object setVehicleAmmo DZE_vehicleAmmo;
+
                 _object call {
 				    _this setVariable [
 				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
@@ -66,9 +30,9 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				        ]
 				    ];
 				};
-*/
-                _log = format ["OBJECT DEPLOY LOG: %1 spanwed a %2 at %3.", name _player,_select,mapGridPosition _positn];
-                diag_log (_log);
+
+             //   _log = format ["OBJECT DEPLOY LOG: %1 spanwed a %2 at %3.", name _player,_select,mapGridPosition _positn];
+//                diag_log (_log);
         } else {
 	         if (_select in ['ArmedLittlebird']) then {
 	           	_object = "MH6J_DZ" createVehicle _positn;
@@ -76,10 +40,12 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 	            _object setVariable ["ObjectUID", "1", true];
 	            _object setVariable ["Deployed", true, true];
 	            _object setVariable ["ArmedLittlebird", true, true];
-				_object addMagazine "500Rnd_145x115_KPVT";
-				_object addMagazine "500Rnd_145x115_KPVT";
-				_object addMagazine "500Rnd_145x115_KPVT";
-				_object addWeapon "KPVT";
+				_object addMagazine "2000Rnd_762x51_M134";
+				_object addWeapon "M134";
+
+				clearWeaponCargoGlobal  _veh;
+				clearMagazineCargoGlobal  _veh;
+				_object setVehicleAmmo DZE_vehicleAmmo;
 
                 _object call {
 				    _this setVariable [
@@ -92,12 +58,11 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 				    ];
 				};
 
-
-	           	_log = format ["OBJECT DEPLOY LOG: %1 spanwed a %2 at %3.", name _player,_select,mapGridPosition _positn];
-	            diag_log (_log);
+	        //   	_log = format ["OBJECT DEPLOY LOG: %1 spanwed a %2 at %3.", name _player,_select,mapGridPosition _positn];
+	         //   diag_log (_log);
 	        } else {
-	            _log = format ["OBJECT DEPLOY LOG: %1 tried to spawn %2 at %3.", name _player,_select,mapGridPosition _positn];
-	            diag_log (_log);
+	        //    _log = format ["OBJECT DEPLOY LOG: %1 tried to spawn %2 at %3.", name _player,_select,mapGridPosition _positn];
+	        //    diag_log (_log);
 	        };
         };
 };
@@ -308,7 +273,10 @@ diag_log("Adding Deploy Functions/PubVar Handlers...");
 		};
 		if (typeOf _obj == "MH6J_DZ") then {
 			_origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric"];
-			if (_armedLittleBird) then {	diag_log("OBJECT DEPLOY LOG: The littlebird is agggressive"); _origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartGeneric","ItemToolbox"];	};
+			if (_armedLittleBird) then {	
+				_origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartGeneric","ItemToolbox"];	
+			};
+			
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
 				_bag modelToWorld getPosATL _player;
