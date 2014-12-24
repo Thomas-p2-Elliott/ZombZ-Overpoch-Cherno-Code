@@ -1,7 +1,8 @@
 /*
-	A bandit hunting party has broken down
+	A bandit convoy has broken down
 */
-private ["_missName", "_findPosRes", "_coords", "_dir", "_gps"];
+
+private ["_missName", "_findPosRes", "_coords", "_dir", "_gps", "_getPos", "_nearLocations", "_nearestLocation"];
 
 //Name of the Mission
 _missName = "Bandit Convoy";
@@ -10,10 +11,17 @@ _missName = "Bandit Convoy";
 _findPosRes = ["Minor"] call P2AIFindPos;
 _coords = _findPosRes select 0;
 _dir = _findPosRes select 1;
-
 _gps = mapGridPosition _coords;
-P2DZ_mH = ["2", "A bandit supply convoy has broken down!", _gps, "HMMWV_DZ"];
-publicVariable "P2DZ_mH";
+
+P2DZE_guiMsg = [
+	"Event Notification: Major Mission",
+	format["The U.N. have spotted a broken down bandit supply convoy at %1, kill them for humanity and their loot!", _gps],
+	"img\un.paa",
+	5,
+	0
+];
+
+publicVariable "P2DZE_guiMsg";
 
 //P2AIAddMinMarker is a simple script that adds a marker to the location
 [_coords,_missName] call P2AIAddMinMarker;
@@ -56,8 +64,15 @@ uiSleep 5;
 //If saving is off, the script will exit.
 
 //Let everyone know the mission is over
-P2DZ_mH = ["2", "The bandit supply convoy has been overrun by survivors!", _gps, "HMMWV_DZ"];
-publicVariable "P2DZ_mH";
+P2DZE_guiMsg = [
+	"Event Notification: Major Mission",
+	format["The bandit supply convoy at %1 is defeated, the loot is now under survivor control!", _gps],
+	"img\ru.paa",
+	5,
+	0
+];
+
+publicVariable "P2DZE_guiMsg";
 
 diag_log text format["[P2AI]: Minor Bandit convoy has Ended."];
 deleteMarker "P2AIMinMarker";

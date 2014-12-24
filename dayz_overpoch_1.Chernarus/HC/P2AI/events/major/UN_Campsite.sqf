@@ -2,7 +2,7 @@
 	UN Camspite Overrun
 */
 
-private ["_missName", "_findPosRes", "_coords", "_dir", "_gps"];
+private ["_missName", "_findPosRes", "_coords", "_dir", "_gps", "_getPos", "_nearLocations", "_nearestLocation"];
 
 //Name of the Mission
 _missName = 	"UN campsite";
@@ -13,8 +13,16 @@ _coords =		_findPosRes select 0;
 _dir = 			_findPosRes select 1;
 _gps = 			mapGridPosition _coords;
 
-P2DZ_mH = 		["1", "Bandits have overrun a UN campsite!", _gps, "US_WarfareBFieldhHospital_Base_EP1"];
-publicVariable 	"P2DZ_mH";
+P2DZE_guiMsg = [
+	"Event Notification: Major Mission",
+	format["Bandits have overrun a U.N. campsite at %1, kill them for humanity and their loot!", _gps],
+	"img\un.paa",
+	5,
+	0
+];
+
+publicVariable "P2DZE_guiMsg";
+
 
 //P2AIAddMajMarker is a simple script that adds a marker to the location
 [_coords,_missName] call P2AIAddMajMarker;
@@ -57,8 +65,15 @@ uiSleep 5;
 [_coords,"P2AIUnitsMajor"] call P2AIWaitMissionComp;
 
 //Let everyone know the mission is over
-P2DZ_mH = 		["1", "The UN campsite is under survivor control!", _gps, "US_WarfareBFieldhHospital_Base_EP1"];
-publicVariable 	"P2DZ_mH";
+P2DZE_guiMsg = [
+	"Event Notification: Major Mission",
+	format["The bandits are defeated, the U.N. campsite at %1 is now under survivor control!", _gps],
+	"img\un.paa",
+	5,
+	0
+];
+
+publicVariable "P2DZE_guiMsg";
 
 diag_log text format["[P2AI]: The UN campsite is under survivor control!"];
 deleteMarker "P2AIMajMarker";
