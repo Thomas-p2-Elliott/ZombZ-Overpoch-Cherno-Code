@@ -18,14 +18,20 @@ notif_Loop = {
 		_end = 'none';
 		_oldVal = P2DZE_guiMsg;
 		_result = ("Arma2Net.Unmanaged" callExtension format ["p2Net1 ['readText','%3','%1','%2']", _start, _end, ZombZ_Notif_File_Name]);
-		P2DZE_guiMsg = (call compile _result);
+		if (!isNil "_result") then {
+
 
 		if (!(str(P2DZE_guiMsg) == str(_oldVal))) then {
 
 			_logOutput = format ["[p2Re] P2DZE_guiMsg: %1", P2DZE_guiMsg];
 			diag_log("ZombZ Notification Received: " + (_logOutput));
+			_result = (call compile _result);
+			if (!isNil "_result") then {	
+				P2DZE_guiMsg = _result;
+				publicVariable "P2DZE_guiMsg";
+			};
+		};
 
-			publicVariable "P2DZE_guiMsg";
 		};
 
 		uiSleep 10; 
