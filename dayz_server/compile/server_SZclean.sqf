@@ -2,7 +2,9 @@ private ["_p2d","_obj","_delVeh","_safespot","_Action","_radius","_dam","_delbik
 /*VEHICLE CLEANUP ZONE*/
 _obj = _this select 0;
 
-if (!isServer) exitWith { diag_log "Server_DeleteObjInsafezone.sqf - ERROR: NOT SERVER?"};
+if (!isServer) exitWith { 
+	//diag_log "Server_DeleteObjInsafezone.sqf - ERROR: NOT SERVER?"
+};
 
 //\\\\\\\\\\\\\\\\\\\\ Setup Area ////////////////////\\
 

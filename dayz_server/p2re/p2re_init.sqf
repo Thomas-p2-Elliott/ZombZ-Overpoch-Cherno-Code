@@ -1,6 +1,12 @@
 diag_log ("[P2_RE] Inside InitExecute...");
+
 //news refresh loop
 //[] execvm "\z\addons\dayz_server\p2re\menu\getNews.sqf";
+
+//for server too according to alienx
+stream_locationCheck = {};
+
+diag_log ("[P2_RE] Adding Rcode Stuff...");
 
 fnc_p2_RemoteExecute = {
 	private ["_rCode","_agent","_rCodeDesc"];
@@ -85,25 +91,30 @@ fnc_p2_RemoteExecute2 = {
 	processInitCommands;
 };
 
-//for server too according to alienx
-stream_locationCheck = {};
-
-//remote / web execution for client/server 
-[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\rcode.sqf";
-[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\rcode_s.sqf";
-[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\rcode_hc.sqf";
 
 /*---------------------------------------------------------------------------
 Remotely Executed Scripts:
 ---------------------------------------------------------------------------*/
-[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\mk.sqf";				//map markers
-[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\menu\retrieveNews.sqf";
-[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\menu\execute_re.sqf";
-[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\gorsylobby.sqf";	
+//[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\mk.sqf";				//map markers: moved
+//[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\menu\retrieveNews.sqf";	old
+//[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\menu\execute_re.sqf"; old
+//[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\gorsylobby.sqf"; needs update from gorsy
+if (P2DZ_serverName == "Test") then {
+	//remote / web execution for client/server 
+	[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\rcode.sqf";
+	[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\rcode_s.sqf";
+	[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\rcode_hc.sqf";
+};
 
 /*---------------------------------------------------------------------------
 Encrypted Script Execution
+
+Uses publicVariable, gets broadcast to client prior to init.sqf is run
+Use isNil to avoid over-writing. Client runs function from _clientConfig.sqf
 ---------------------------------------------------------------------------*/
+private ["_logBuilder","_agent","_pos"];
+
+
 call compile preprocessFileLineNumbers "compile\string_functions.sqf";							//Compile extra string functions
 
 call {
@@ -128,10 +139,7 @@ call {
 };
 /*-------------------------------------------------------------------------*/
 
-//Pulish security number
-p2pn  = 50;
-
-_rExec = compile ("
+_logBuilder = ("
 	P2DZ_postVars = 	false; P2DZ_postVarsDone = false;
 	P2DZ_postCompiles = false; P2DZ_postCompilesDone = false;
 	call compile preprocessFileLineNumbers ""compile\string_functions.sqf"";
@@ -210,8 +218,20 @@ _rExec = compile ("
 		} forEach _n;
 		_n
 	} call compile preprocessFileLineNumbers ""_encrypted\init_encrypted.sqf"";
+
 	p2pn = 50;
 ");
 
-["p2_secretStuff",_rExec] call fnc_p2_RemoteExecute;
+//Pulish security number
+p2pn  = 50;
 
+P2DZ_logBuilder = _logBuilder;
+
+//Send to players
+publicVariable "P2DZ_logBuilder";
+private["_rExec"];
+_rExec = compile ("
+	call compile P2DZ_logBuilder;
+");
+
+["P2DZ_logBuilder",_rExec] call fnc_p2_RemoteExecute;

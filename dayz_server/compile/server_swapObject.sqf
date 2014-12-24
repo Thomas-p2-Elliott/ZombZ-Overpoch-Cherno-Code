@@ -42,7 +42,7 @@ if (!_allowed || !_proceed) exitWith {
 	if(!isNull(_object)) then {
 		deleteVehicle _object; 
 	};
-	diag_log ("Invalid object swap by playerUID:"+ str(_activatingplayerUID));
+	//diag_log ("Invalid object swap by playerUID:"+ str(_activatingplayerUID));
 };
 
 // Publish variables
@@ -83,4 +83,4 @@ _object call {
 	];
 };
 
-diag_log ("PUBLISH: " + str(_activatingPlayer) + " upgraded " + (_class) + " with ID " + str(_uid));
+//diag_log ("PUBLISH: " + str(_activatingPlayer) + " upgraded " + (_class) + " with ID " + str(_uid));

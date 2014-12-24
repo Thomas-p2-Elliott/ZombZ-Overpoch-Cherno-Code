@@ -32,10 +32,10 @@ File & Debugging Configuration
 
 P2AI_FileLocation = "HC\P2AI";	//disclude last slash
 
-P2AI_debugEvents = 	true;
+P2AI_debugEvents = 	false;
 P2AI_debugStatic = 	false;
 P2AI_debugAI = 		false;
-P2AI_debug = 		true;
+P2AI_debug = 		false;
 
 /*---------------------------------------------------------------------------
 Debugging Log Output

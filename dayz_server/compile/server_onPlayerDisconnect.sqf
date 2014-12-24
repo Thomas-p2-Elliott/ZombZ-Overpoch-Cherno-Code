@@ -8,17 +8,17 @@ _playerPos = [];
 } count playableUnits;
 
 if (isNil "_playerObj") then {
-	diag_log format["nil player object attempting PV, :%1", _this];
+//	diag_log format["nil player object attempting PV, :%1", _this];
 	
 	// fall back to using PV for now so we have a better chance at finding the player
 	_playerObj = call compile format["PVDZE_player%1",_playerUID];
 };
 
 if (isNil "_playerObj") exitWith {
-	diag_log format["%1: nil player object, _this:%2", __FILE__, _this];
+	//diag_log format["%1: nil player object, _this:%2", __FILE__, _this];
 };
 
-diag_log format["get: %1 (%2), sent: %3 (%4)",typeName (getPlayerUID _playerObj), getPlayerUID _playerObj, typeName _playerUID, _playerUID];
+//diag_log format["get: %1 (%2), sent: %3 (%4)",typeName (getPlayerUID _playerObj), getPlayerUID _playerObj, typeName _playerUID, _playerUID];
 
 if (!isNull _playerObj) then {
 
@@ -31,7 +31,7 @@ if (!isNull _playerObj) then {
 	if (vehicle _playerObj != _playerObj) then {
 		_playerObj action ["eject", vehicle _playerObj];
 		_invehicle = true;
-		diag_log format["LOGOUT IN VEHICLE: %1 at location %2", _playerName,(getPos _playerObj)];
+		//diag_log format["LOGOUT IN VEHICLE: %1 at location %2", _playerName,(getPos _playerObj)];
 	};
 
 	if ((_timeout - time) > 0) then {
@@ -39,15 +39,15 @@ if (!isNull _playerObj) then {
 		_playerObj setVariable["NORRN_unconscious",true, true];
 		_playerObj setVariable["unconsciousTime",15,true];
 	
-		diag_log format["COMBAT LOGGED: %4/%1 (%2) at location %3", _playerName,_timeout,(getPos _playerObj),_playerUID];
+		//diag_log format["COMBAT LOGGED: %4/%1 (%2) at location %3", _playerName,_timeout,(getPos _playerObj),_playerUID];
 	
 		// Message whole server when player combat logs
 		_message = format["%1 Combat Logged, KO Timer Set.",_playerName];
-		P2DZE_systemChat = _message;
+		P2DZE_systemChat = [2,_message];
 		publicVariable 'P2DZE_systemChat'; 
 	};
 
-	diag_log format["DISCONNECT: %1 (%2) Object: %3, _characterID: %4 at loc %5", _playerName,_playerUID,_playerObj,_characterID, (getPos _playerObj)];
+	//diag_log format["DISCONNECT: %1 (%2) Object: %3, _characterID: %4 at loc %5", _playerName,_playerUID,_playerObj,_characterID, (getPos _playerObj)];
 
 	_id = [_playerUID,_characterID,2] spawn dayz_recordLogin;
 

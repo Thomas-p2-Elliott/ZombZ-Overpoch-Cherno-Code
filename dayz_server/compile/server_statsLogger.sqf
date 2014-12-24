@@ -35,14 +35,10 @@ stats_trades = {
 	[format["%1","stats_trader"],format["%1",(_this)]] call p2net_log2; 
 };
 
-
-
-
 //compile/server_updateObject.sqf
 stats_vehicleKills = {
 	[format["%1/%2",P2DZ_serverName,"stats_publishLog"],format["%1",(_this)]] call p2net_log2; 
 };
-
 
 //compile/server_playerDied.sqf
 stats_deaths = {
@@ -62,11 +58,6 @@ stats_connects = {
 stats_disconnects = {
 	//[format["%1/%2",P2DZ_serverName,"stats_disconnects"],format["%1",(_this)]] call p2net_log2; //done by BEC
 };
-
-
-
-
-
 
 
 //p2re/p2re_init.sqf

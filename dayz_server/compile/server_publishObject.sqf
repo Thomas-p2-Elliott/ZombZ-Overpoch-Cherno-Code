@@ -7,7 +7,7 @@ _class = 		_this select 3;
 _playerUID = 	_worldspace select 2;
 _num = 			_this select 4;
 
-diag_log ("PUBLISH: Attempt " + str(_this));
+//diag_log ("PUBLISH: Attempt " + str(_this));
 
 
 if ((_num) < (p2pn - 1)) exitWith {
@@ -24,7 +24,7 @@ if (!_allowed) exitWith {
 	_publishLog call stats_badPublishLog;
 };
 
-diag_log(diag_log ("PUBLISH: Success " + str(_this)));
+//diag_log(diag_log ("PUBLISH: Success " + str(_this)));
 
 //get UID
 _uid = [random(100),_worldspace select 1] call dayz_objectUID2;

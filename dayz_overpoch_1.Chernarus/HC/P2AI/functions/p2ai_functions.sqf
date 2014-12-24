@@ -15,6 +15,7 @@ P2AI_shootRocket = 		compile preprocessFileLineNumbers format["%1\functions\p2ai
 if (_d) then { diag_log(format["[P2AI]:%1: Compiled: P2AI_aiThread & P2AI_spawnAI", _f]); };
 if (_d) then { diag_log(format["[P2AI]:%1: Compiling Other Functions...", _f]); };
 
+
 /*---------------------------------------------------------------------------
 FindPos - Grabs a new mission location from P2AI_MinorLocs & P2AI_MajorLocs
 ---------------------------------------------------------------------------*/

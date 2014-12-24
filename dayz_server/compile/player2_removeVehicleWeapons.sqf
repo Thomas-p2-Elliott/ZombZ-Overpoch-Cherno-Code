@@ -4,7 +4,7 @@ DZE_vehicleAmmo = 0.2;
 //add m134 cannon back on removal?
 P2DZ_addNewWeaponsOnRemoval = true;
 
-P2DZ_debugWepRemovals = true;
+P2DZ_debugWepRemovals = false;
 
 //To Use:
 // _obj call player2_removeVehicleWeapons;

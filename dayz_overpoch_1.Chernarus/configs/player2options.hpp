@@ -12,10 +12,10 @@
 
 class p2_options
 {
-	idd = 8732;
+	idd = 8849;
 	movingenable = 1;
 	name = "p2_options";
-	onLoad = "uiNamespace setVariable ['p2_options', _this select 0]; comment 'Name Tags: '; ((_this select 0) displayCtrl 7601) lbAdd 'Enabled'; ((_this select 0) displayCtrl 7601) lbAdd 'Disabled';							comment 'View Distance: '; ((_this select 0) displayCtrl 7602) lbAdd '500'; ((_this select 0) displayCtrl 7602) lbAdd '750'; ((_this select 0) displayCtrl 7602) lbAdd '1000'; ((_this select 0) displayCtrl 7602) lbAdd '1250'; ((_this select 0) displayCtrl 7602) lbAdd '1500'; ((_this select 0) displayCtrl 7602) lbAdd '1750'; ((_this select 0) displayCtrl 7602) lbAdd '2000'; ((_this select 0) displayCtrl 7602) lbAdd '2500'; ((_this select 0) displayCtrl 7602) lbAdd '3000';	comment 'Event Notifications: '; ((_this select 0) displayCtrl 7603) lbAdd 'Enabled (Full)'; ((_this select 0) displayCtrl 7603) lbAdd 'Enabled (Chat)'; ((_this select 0) displayCtrl 7603) lbAdd 'Disabled';																												comment 'Kill Notifications: '; ((_this select 0) displayCtrl 7604) lbAdd 'Enabled (Full)'; ((_this select 0) displayCtrl 7604) lbAdd 'Enabled (Chat)'; ((_this select 0) displayCtrl 7604) lbAdd 'Disabled';					 																							comment 'Server Notifications: '; ((_this select 0) displayCtrl 7605) lbAdd 'Enabled (Full)'; ((_this select 0) displayCtrl 7605) lbAdd 'Enabled (Chat)'; ((_this select 0) displayCtrl 7605) lbAdd 'Disabled';																										comment 'Debug Monitor Mode: '; ((_this select 0) displayCtrl 7606) lbAdd 'Enabled (Full)'; ((_this select 0) displayCtrl 7606) lbAdd 'Enabled (Mini)'; ((_this select 0) displayCtrl 7606) lbAdd 'Disabled';																													comment 'Setting Default values'; 	{  ((_this select 0) displayCtrl _x) lbSetCurSel 0; } count [7601,7602,7603,7604,7605,7606];";
+	onLoad = "uiNamespace setVariable ['p2_options', _this select 0]; _nil = [] spawn { uiSleep 0.1; call compile preprocessFileLineNumbers 'actions\player2_openMenu.sqf'; };";
 	class Controls
 	{
 		/* Frames */
@@ -53,7 +53,7 @@ class p2_options
 			text = "Cancel";
 			x = 0.392591 * safezoneW + safezoneX;
 			y = 0.665 * safezoneH + safezoneY;
-			w = 0.0803571 * safezoneW;
+			w = 0.079 * safezoneW;
 			h = 0.11;
 			action = "closeDialog 0";
 		};
@@ -75,6 +75,7 @@ class p2_options
 			y = 0.610 * safezoneH + safezoneY;
 			w = 0.107422 * safezoneW;
 			h = 0.11;
+			action = "closeDialog 0; [] call fnc_p2debugMonColorGUI;";
 		};
 		/* Combo Boxes */
 		class p2_cfgNameTags: p2Combo
@@ -85,6 +86,8 @@ class p2_options
 			y = 0.307575 * safezoneH + safezoneY;
 			w = 0.107422 * safezoneW;
 			h = 0.0274893 * safezoneH;
+			onLBSelChanged = "switch (_this select 1) do {	default { };	case 0:	{ _p setVariable ['DZE_display_name', true]; };		case 1:	{ _p setVariable ['DZE_display_name', false]; };		};";
+
 		};
 		class p2_cfgViewDistance: p2Combo
 		{
@@ -94,8 +97,7 @@ class p2_options
 			y = 0.362554 * safezoneH + safezoneY;
 			w = 0.107422 * safezoneW;
 			h = 0.0274893 * safezoneH;
-			onLoad = "diag_log(format['OnLoad: %1',_this]);";
-			onLBSelChanged = "diag_log(format['onLBSelChanged: %1',_this]);";
+			onLBSelChanged = "switch (_this select 1) do {			default { setViewDistance 1500; };			case 0: { setViewDistance 500;	};			case 1: { setViewDistance 750;	};			case 2: { setViewDistance 1000;	};			case 3: { setViewDistance 1250;	};			case 4: { setViewDistance 1500;	};			case 5: { setViewDistance 1750;	};			case 6: { setViewDistance 2000;	};			case 7: { setViewDistance 2500;	};			case 8: { setViewDistance 3000;	};		};";
 		};
 		class p2_cfgEventNotifications: p2Combo
 		{
@@ -105,6 +107,7 @@ class p2_options
 			y = 0.417532 * safezoneH + safezoneY;
 			w = 0.107422 * safezoneW;
 			h = 0.0274893 * safezoneH;
+			onLBSelChanged = "switch (_this select 1) do {	default {};	case 0: { P2DZ_notifsEvents = 2 };	case 1: { P2DZ_notifsEvents = 1; };	case 2: { P2DZ_notifsEvents = 0; };};";
 		};
 		class p2_cfgKillNotifications: p2Combo
 		{
@@ -114,6 +117,7 @@ class p2_options
 			y = 0.472511 * safezoneH + safezoneY;
 			w = 0.107422 * safezoneW;
 			h = 0.0274893 * safezoneH;
+			onLBSelChanged = "switch (_this select 1) do {	default {};	case 0: { P2DZ_notifsKills = 2 };	case 1: { P2DZ_notifsKills = 1; };	case 2: { P2DZ_notifsKills = 0; };};";
 		};
 		class p2_cfgServerNotifications: p2Combo
 		{
@@ -123,6 +127,7 @@ class p2_options
 			y = 0.527489 * safezoneH + safezoneY;
 			w = 0.107422 * safezoneW;
 			h = 0.0274893 * safezoneH;
+			onLBSelChanged = "switch (_this select 1) do {	default {};	case 0: { P2DZ_notifsKills = 2 };	case 1: { P2DZ_notifsKills = 1; };	case 2: { P2DZ_notifsKills = 0; };};";
 		};
 		class p2_cfgDebugMonMode: p2Combo
 		{
@@ -132,6 +137,7 @@ class p2_options
 			y = 0.582468 * safezoneH + safezoneY;
 			w = 0.107422 * safezoneW;
 			h = 0.0274893 * safezoneH;
+			onLBSelChanged = "switch (_this select 1) do {	default {};	case 0: { P2DZ_dbCurMode = 2; P2DZ_debugMonitor = true; player setVariable ['P2_DebugMonMode', P2DZ_dbCurMode, true]; };	case 1: { P2DZ_dbCurMode = 3; P2DZ_debugMonitor = true; player setVariable ['P2_DebugMonMode', P2DZ_dbCurMode, true]; };	case 2: { P2DZ_dbCurMode = 1; P2DZ_debugMonitor = false;  667 cutText ['', 'PLAIN']; player setVariable ['P2_DebugMonMode', P2DZ_dbCurMode, true]; };};";
 		};
 		/* Text */
 		class p2_txtTop: RscStructuredText

@@ -13,7 +13,7 @@ _allowed = [_charID, _object, _worldspace, _class, _charID] call check_publishob
 
 if (!_allowed) exitWith { deleteVehicle _object; };
 
-diag_log ("PUBLISH: Attempt " + str(_object));
+//diag_log ("PUBLISH: Attempt " + str(_object));
 
 //get UID
 _uid = _worldspace call dayz_objectUID2;
@@ -37,4 +37,4 @@ _object enableSimulation false;
 
 PVDZE_serverObjectMonitor set [count PVDZE_serverObjectMonitor,_object];
 
-diag_log ("PUBLISH: Created " + (_class) + " with ID " + _uid);
+//diag_log ("PUBLISH: Created " + (_class) + " with ID " + _uid);

@@ -6,7 +6,7 @@ private ["_object_gold","_null","_object","_type","_objectID","_uid","_lastUpdat
 _object = 	_this select 0;
 
 if(isNull(_object)) exitWith {
-	diag_log format["Skipping Null Object: %1", _object];
+//	diag_log format["Skipping Null Object: %1", _object];
 };
 
 _type = 	_this select 1;
@@ -20,7 +20,7 @@ _uid = 		_object getVariable ["ObjectUID","0"];
 
 if ((typeName _objectID != "string") || (typeName _uid != "string")) then
 { 
-    diag_log(format["Non-string Object: ID %1 UID %2", _objectID, _uid]);
+   // diag_log(format["Non-string Object: ID %1 UID %2", _objectID, _uid]);
     //force fail
     _objectID = "0";
     _uid = "0";
@@ -37,7 +37,10 @@ if (!_parachuteWest && !(locked _object)) then {
 if (_isNotOk && _isbuildable) exitWith {  };
 
 // delete if still not ok
-if (_isNotOk) exitWith { deleteVehicle _object; diag_log(format["Deleting object %1 with invalid ID at pos [%2,%3,%4]",typeOf _object,_object_position select 0,_object_position select 1, _object_position select 2]); };
+if (_isNotOk) exitWith { 
+	deleteVehicle _object; 
+	//diag_log(format["Deleting object %1 with invalid ID at pos [%2,%3,%4]",typeOf _object,_object_position select 0,_object_position select 1, _object_position select 2]); 
+};
 
 
 _lastUpdate = _object getVariable ["lastUpdate",time];

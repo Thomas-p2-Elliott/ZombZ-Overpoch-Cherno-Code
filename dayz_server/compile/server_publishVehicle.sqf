@@ -10,7 +10,7 @@ _fuel = 1;
 _damage = 0;
 _array = [];
 
-diag_log ("PUBLISH: Attempt " + str(_object));
+//diag_log ("PUBLISH: Attempt " + str(_object));
 _dir = 		_worldspace select 0;
 _location = _worldspace select 1;
 
@@ -53,7 +53,7 @@ if (_spawnDMG) then {
 
 //Send request
 _key = format["CHILD:308:%1:%2:%3:%4:%5:%6:%7:%8:%9:",dayZ_instance, _class, _damage , _characterID, _worldspace, [], _array, _fuel,_uid];
-diag_log ("HIVE: WRITE: "+ str(_key)); 
+//diag_log ("HIVE: WRITE: "+ str(_key)); 
 _key call server_hiveWrite;
 
 // Switched to spawn so we can wait a bit for the ID
@@ -76,23 +76,25 @@ _key call server_hiveWrite;
 		uiSleep 1;
 		// GET DB ID
 		_key = format["CHILD:388:%1:",_uid];
-		diag_log ("HIVE: WRITE: "+ str(_key));
+		//diag_log ("HIVE: WRITE: "+ str(_key));
 		_result = _key call server_hiveReadWrite;
 		_outcome = _result select 0;
 		if (_outcome == "PASS") then {
 			_oid = _result select 1;
 			_object setVariable ["ObjectID", _oid, true];
-			diag_log("CUSTOM: Selected " + str(_oid));
+			//diag_log("CUSTOM: Selected " + str(_oid));
 			_done = true;
 			_retry = 100;
 
 		} else {
-			diag_log("CUSTOM: trying again to get id for: " + str(_uid));
+			//diag_log("CUSTOM: trying again to get id for: " + str(_uid));
 			_done = false;
 			_retry = _retry + 1;
 		};
 	};
-	if(!_done) exitWith { deleteVehicle _object; diag_log("CUSTOM: failed to get id for : " + str(_uid)); };
+	if(!_done) exitWith { deleteVehicle _object; 
+		//diag_log("CUSTOM: failed to get id for : " + str(_uid)); 
+	};
 
 	_object setVariable ["lastUpdate",time];
 	_object setVariable ["CharacterID", _characterID, true];
@@ -124,5 +126,5 @@ _key call server_hiveWrite;
 	//	_object setVehicleInit "[this] execVM ""heliDoor\heliDoor_init.sqf"";";
 	//};
 
-	diag_log ("PUBLISH: Created " + (_class) + " with ID " + str(_uid));
+	//diag_log ("PUBLISH: Created " + (_class) + " with ID " + str(_uid));
 };

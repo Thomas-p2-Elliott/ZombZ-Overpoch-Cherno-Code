@@ -13,7 +13,7 @@ _name = if (alive _player) then { name _player; } else { "Dead Player"; };
 
 if (_buyorsell == 0) then { //Buy
 
-	diag_log format["EPOCH SERVERTRADE: Player: %1 (%2) bought a %3 in/at %4 for %5", _name, (getPlayerUID _player), _classname, _traderCity, _price];
+//	diag_log format["EPOCH SERVERTRADE: Player: %1 (%2) bought a %3 in/at %4 for %5", _name, (getPlayerUID _player), _classname, _traderCity, _price];
 
 	/*---------------------------------------------------------------------------
 	Stats Output
@@ -37,7 +37,7 @@ if (_buyorsell == 0) then { //Buy
 	//build message
 	_statsMessage = format[
 		"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4(_GLS_)%5(_GLS_)%6",
-		"Buy",(getPlayerUID _player),_classname,_traderCity,_price,GORSYSEVERNUMBER
+		"Buy",(getPlayerUID _player),_classname,_traderCity,_price,GORSYSERVERNUMBER
 	];
 
 	//send to stats log
@@ -45,7 +45,7 @@ if (_buyorsell == 0) then { //Buy
 
 } else { //SELL
 
-	diag_log format["EPOCH SERVERTRADE: Player: %1 (%2) sold a %3 in/at %4 for %5",_name, (getPlayerUID _player), _classname, _traderCity, _price];
+	//diag_log format["EPOCH SERVERTRADE: Player: %1 (%2) sold a %3 in/at %4 for %5",_name, (getPlayerUID _player), _classname, _traderCity, _price];
 	/*---------------------------------------------------------------------------
 	Stats Output
 	----------------------------------------------------------------------------*
@@ -68,7 +68,7 @@ if (_buyorsell == 0) then { //Buy
 	//build message
 	_statsMessage = format[
 		"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4(_GLS_)%5(_GLS_)%6",
-		"Sell",(getPlayerUID _player),_classname,_traderCity,_price,GORSYSEVERNUMBER
+		"Sell",(getPlayerUID _player),_classname,_traderCity,_price,GORSYSERVERNUMBER
 	];
 
 	//send to stats log

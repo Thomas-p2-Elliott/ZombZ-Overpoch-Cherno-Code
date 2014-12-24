@@ -31,7 +31,7 @@ private["_eventType","_eventSubType","_itemTypes","_lootTable","_itemChance"];
 _eventType = _this select 0;
 _eventSubType = _this select 1;
 _itemTypes = []; _itemChance = []; _lootTable = []; 
-diag_log("fnc_specialLoot: " + str(_this));
+//diag_log("fnc_specialLoot: " + str(_this));
 _lootTable = [_itemTypes,_itemChance];
 switch (_eventType) do {
 	default 				{ diag_log("Error undefined _eventType: Default: " + __FILE__); };

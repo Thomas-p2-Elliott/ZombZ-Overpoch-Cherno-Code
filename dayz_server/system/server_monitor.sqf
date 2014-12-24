@@ -20,10 +20,10 @@ if(isnil "MaxDynamicDebris") then {
 	MaxDynamicDebris = 50;
 };
 if(isnil "MaxAmmoBoxes") then {
-	MaxAmmoBoxes = 50;
+	MaxAmmoBoxes = 0;
 };
 if(isnil "MaxMineVeins") then {
-	MaxMineVeins = 25;
+	MaxMineVeins = 0;
 };
 // Custon Configs End
 
@@ -33,7 +33,7 @@ if (isServer && isNil "sm_done") then {
 	_hiveResponse = [];
 
 	for "_i" from 1 to 5 do {
-		diag_log "HIVE: trying to get objects";
+		//diag_log "HIVE: trying to get objects";
 		_key = format["CHILD:302:%1:", dayZ_instance];
 		_hiveResponse = _key call server_hiveReadWrite;  
 		if ((((isnil "_hiveResponse") || {(typeName _hiveResponse != "ARRAY")}) || {((typeName (_hiveResponse select 1)) != "SCALAR")})) then {
@@ -41,16 +41,16 @@ if (isServer && isNil "sm_done") then {
 				_superkey = profileNamespace getVariable "SUPERKEY";
 				_shutdown = format["CHILD:400:%1:", _superkey];
 				_res = _shutdown call server_hiveReadWrite;
-				diag_log ("HIVE: attempt to kill.. HiveExt response:"+str(_res));
+				//diag_log ("HIVE: attempt to kill.. HiveExt response:"+str(_res));
 			} else {
-				diag_log ("HIVE: connection problem... HiveExt response:"+str(_hiveResponse));
+				//diag_log ("HIVE: connection problem... HiveExt response:"+str(_hiveResponse));
 			
 			};
 			_hiveResponse = ["",0];
 		} 
 		else {
 			if (P2DZE_serverStreamObjsEnabled) then {
-				diag_log ("HIVE: found "+str(_hiveResponse select 1)+" objects" );
+				//diag_log ("HIVE: found "+str(_hiveResponse select 1)+" objects" );
 				_i = 99; // break
 			};
 		};
@@ -82,7 +82,7 @@ if (isServer && isNil "sm_done") then {
 				_vQty = _vQty + 1;
 			};
 		};
-		diag_log ("HIVE: got " + str(_bQty) + " Epoch Objects and " + str(_vQty) + " Vehicles");
+		//diag_log ("HIVE: got " + str(_bQty) + " Epoch Objects and " + str(_vQty) + " Vehicles");
 	};
 	
 	// # NOW SPAWN OBJECTS #
@@ -117,7 +117,7 @@ if (isServer && isNil "sm_done") then {
 			if (count _worldspace >= 1) then { _dir = _worldspace select 0; };
 			_pos = [getMarkerPos "center",0,4000,10,0,2000,0] call BIS_fnc_findSafePos;
 			if (count _pos < 3) then { _pos = [_pos select 0,_pos select 1,0]; };
-			diag_log ("MOVED OBJ: " + str(_idKey) + " of class " + _type + " to pos: " + str(_pos));
+			//diag_log ("MOVED OBJ: " + str(_idKey) + " of class " + _type + " to pos: " + str(_pos));
 		};
 		
 		// Realign characterID to OwnerPUID - need to force save though.
@@ -402,11 +402,11 @@ if (isServer && isNil "sm_done") then {
 	if (_hiveLoaded) then {
 		if (DZE_FS_UseStaticVehicleSpawn) then {
 			_vehLimit = 1000;
-			diag_log ("HIVE: Spawning Vehicles Using Static Vehicle Spawn System by Player2");
+			//diag_log ("HIVE: Spawning Vehicles Using Static Vehicle Spawn System by Player2");
 			[_vehLimit] spawn fs_spawnVehicles;
 		} else {
 			_vehLimit = 100;
-			diag_log ("HIVE: Spawning Vehicles Using defualt Epoch System, Amount to Spawn: " + str (_vehLimit));
+			//diag_log ("HIVE: Spawning Vehicles Using defualt Epoch System, Amount to Spawn: " + str (_vehLimit));
 			for "_x" from 1 to _vehLimit do {
 				//[] spawn spawn_vehicles;
 			};
@@ -416,17 +416,17 @@ if (isServer && isNil "sm_done") then {
 	};
 	
 	//  spawn_roadblocks
-	diag_log ("HIVE: Spawning # of Debris: " + str(MaxDynamicDebris));
+	//diag_log ("HIVE: Spawning # of Debris: " + str(MaxDynamicDebris));
 	for "_x" from 1 to MaxDynamicDebris do {
 		[] spawn spawn_roadblocks;
 	};
 	//  spawn_ammosupply at server start 1% of roadblocks
-	diag_log ("HIVE: Spawning # of Ammo Boxes: " + str(MaxAmmoBoxes));
+	//diag_log ("HIVE: Spawning # of Ammo Boxes: " + str(MaxAmmoBoxes));
 	for "_x" from 1 to MaxAmmoBoxes do {
 		[] spawn spawn_ammosupply;
 	};
 	// call spawning mining veins
-	diag_log ("HIVE: Spawning # of Veins: " + str(MaxMineVeins));
+	//diag_log ("HIVE: Spawning # of Veins: " + str(MaxMineVeins));
 	for "_x" from 1 to MaxMineVeins do {
 		[] spawn spawn_mineveins;
 	};

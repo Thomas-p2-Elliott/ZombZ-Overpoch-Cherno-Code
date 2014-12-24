@@ -11,7 +11,7 @@ _characterID = _keySelected;
 _isOK = isClass(configFile >> "CfgVehicles" >> _class);
 if(!_isOK || isNull _object) exitWith { diag_log ("HIVE-pv3: Vehicle does not exist: "+ str(_class)); };
 
-diag_log ("PUBLISH: Attempt " + str(_object));
+//diag_log ("PUBLISH: Attempt " + str(_object));
 _dir = 		_worldspace select 0;
 _location = _worldspace select 1;
 
@@ -20,7 +20,7 @@ _uid = [random(100),_worldspace select 1] call dayz_objectUID3;
 
 //Send request
 _key = format["CHILD:308:%1:%2:%3:%4:%5:%6:%7:%8:%9:",dayZ_instance, _class, 0 , _characterID, _worldspace, [], [], 1,_uid];
-diag_log ("HIVE: WRITE: "+ str(_key)); 
+//diag_log ("HIVE: WRITE: "+ str(_key)); 
 _key call server_hiveWrite;
 
 // Switched to spawn so we can wait a bit for the ID
@@ -47,24 +47,26 @@ _key call server_hiveWrite;
 		uiSleep 1;
 		// GET DB ID
 		_key = format["CHILD:388:%1:",_uid];
-		diag_log ("HIVE: WRITE: "+ str(_key));
+		//diag_log ("HIVE: WRITE: "+ str(_key));
 		_result = _key call server_hiveReadWrite;
 		_outcome = _result select 0;
 		if (_outcome == "PASS") then {
 			_oid = _result select 1;
 			//_object setVariable ["ObjectID", _oid, true];
-			diag_log("CUSTOM: Selected " + str(_oid));
+			//diag_log("CUSTOM: Selected " + str(_oid));
 			_done = true;
 			_retry = 100;
 
 		} else {
-			diag_log("CUSTOM: trying again to get id for: " + str(_uid));
+			//diag_log("CUSTOM: trying again to get id for: " + str(_uid));
 			_done = false;
 			_retry = _retry + 1;
 		};
 	};
 
-	if(!_done) exitWith { diag_log("CUSTOM: failed to get id for : " + str(_uid)); };
+	if(!_done) exitWith { 
+		//diag_log("CUSTOM: failed to get id for : " + str(_uid)); 
+	};
 
 	// add items from previous vehicle here
 	_weapons = 		getWeaponCargo _object;
@@ -147,5 +149,5 @@ _key call server_hiveWrite;
 	PVDZE_veh_Init = _object;
 	publicVariable "PVDZE_veh_Init";
 	
-	diag_log ("PUBLISH: " + str(_activatingPlayer) + " Upgraded " + (_class) + " with ID " + str(_uid));
+	//diag_log ("PUBLISH: " + str(_activatingPlayer) + " Upgraded " + (_class) + " with ID " + str(_uid));
 };

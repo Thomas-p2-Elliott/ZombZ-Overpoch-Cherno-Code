@@ -11,8 +11,8 @@ P2DZ_HC_hordeZedSpeed =					10;						//Speed of zeds in horde (ONLY USE 2 or 10,
 P2DZ_HC_zHorde_regroupTime	=			60;						//time zeds are given to regroup at major waypoints
 
 P2DZ_HC_zHorde_waypointLoop_sleepTime = 1;						//Performance setting (seconds for each zed to check if it should update waypoint)
-P2DZ_HC_HordeZedsDebug	= 				true;					//Debug Zombie Horde Script
-P2DZ_HC_debugHordeZedFSM = 				true;					//Debug Zombie Horde FSM / AntiStuck Loop
+P2DZ_HC_HordeZedsDebug	= 				false;					//Debug Zombie Horde Script
+P2DZ_HC_debugHordeZedFSM = 				false;					//Debug Zombie Horde FSM / AntiStuck Loop
 
 /*
 	Waypoint Configuration 

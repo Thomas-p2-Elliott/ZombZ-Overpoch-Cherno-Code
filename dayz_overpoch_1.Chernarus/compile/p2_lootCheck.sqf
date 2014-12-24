@@ -35,11 +35,10 @@ www.ZombZ.net
 ---------------------------------------------------------------------------*/
 private ["_lootClass","_position","_out","_p2d","_centerPoint","_radius","_dist","_inZone","_timeStart","_timeEnd","_timeBetween"];
 
-/* For Testing */
 P2DZ_lootClassCheck_centerPoint = [2677,11891,0];
 P2DZ_lootClassCheck_radius = 6100;
 P2DZ_lootClassCheck_enabled = true;
-P2DZ_lootClassCheck_debug = true;
+P2DZ_lootClassCheck_debug = false;
 
 if(P2DZ_lootClassCheck_enabled) then {
 

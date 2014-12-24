@@ -218,7 +218,7 @@ class FSM
        "_timeStart = diag_tickTime;" \n
        "_readytoAuth = false;" \n
        "_startCheck = 0;" \n
-       "_debug = true;" \n
+       "_debug = false;" \n
        "" \n
        "if (_debug) then {" \n
        "diag_log (""DAYZ: CLIENT IS RUNNING DAYZ_CODE "" + str(dayz_versionNo));" \n

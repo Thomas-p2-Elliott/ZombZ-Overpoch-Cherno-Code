@@ -153,7 +153,7 @@ for "_x" from 1 to _num do {
 
 };
 
-diag_log("---------------------------------------------");
+//diag_log("---------------------------------------------");
 
 // ReammoBox is preferred parent class here, as WeaponHolder wouldn't match MedBox0 && other such items.
 _nearBy = _spawnPos nearObjects ["ReammoBox", sizeOf(_crashModel) + 15];
