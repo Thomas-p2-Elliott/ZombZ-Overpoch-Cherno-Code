@@ -48,7 +48,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 	if (isNil '_amnt') then { _amnt = 5; };
 	if (_amnt < 0) then { _amnt = 5; };
 
-	diag_log(format["[P2AI]:SpawnMission:LootCrate: Input: %1",_x]);
+	//diag_log(format["[P2AI]:SpawnMission:LootCrate: Input: %1",_x]);
 
 	_lTable = []; _lChance = []; //init as empty
 	_boxType = "USBasicAmmunitionBox"; //init as medical box type
@@ -71,7 +71,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 		};
 	};
 
-	diag_log(format["[P2AI]:SpawnMission:LootCrate:%1: BuiltPos: %2",_lootCrateCount,_lPos]);
+	//diag_log(format["[P2AI]:SpawnMission:LootCrate:%1: BuiltPos: %2",_lootCrateCount,_lPos]);
 
 
 	//generate loot from type given
@@ -161,8 +161,9 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 		};
 	};
 
+	//was boxtype - not working though?? da fuck...
 	//create object
-	_crate = _boxType createVehicle _lPos;
+	_crate = "RUBasicWeaponsBox" createVehicle _lPos;
 
 	//secure object against cleanup
   	_crate call {
@@ -190,7 +191,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 	Add Loot to Crates
 	---------------------------------------------------------------------------*/
 
-	diag_log(format["[P2AI]:SpawnMission:LootCrate: LootTable: %1", _lTable]);
+	//diag_log(format["[P2AI]:SpawnMission:LootCrate: LootTable: %1", _lTable]);
 
 	//generate random loot items to add to crate from loot table
 	_itemTypes =	_lTable;
@@ -200,8 +201,8 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 	_index = _weights call BIS_fnc_selectRandom;
 
 	for "_x" from 1 to _amnt do {
-		diag_log(format["[P2AI]:SpawnMission:LootCrate: Adding Item %1 of %2", _x, _amnt]);
-		diag_log("[P2AI]:SpawnMission:LootCrate: ");
+		//diag_log(format["[P2AI]:SpawnMission:LootCrate: Adding Item %1 of %2", _x, _amnt]);
+		//diag_log("[P2AI]:SpawnMission:LootCrate: ");
 
 		_index = floor(random _cntWeights);
 		_index = _weights select _index;
@@ -212,7 +213,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 		_iClass = _itemType select 0;
 		_iType = _itemType select 1; 
 
-		diag_log(format["[P2AI]:SpawnMission:LootCrate: Selected: %1", _itemType]);
+		//diag_log(format["[P2AI]:SpawnMission:LootCrate: Selected: %1", _itemType]);
 
 		if (_iType == "custom_weapon") then {
 			_itemTypes = [];
@@ -259,7 +260,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 			_iClass = _this select 1;
 			_crate = _this select 2;
 
-			diag_log(format["[P2AI]:SpawnMission:LootCrate: AddLoot: Item: %1, Class: %2", _iItem, _iClass]);
+			//diag_log(format["[P2AI]:SpawnMission:LootCrate: AddLoot: Item: %1, Class: %2", _iItem, _iClass]);
 
 
 			switch (_iClass) do {
@@ -283,7 +284,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 						_item2 = _itemTypes select _index;
 						if ((_item2 != "") && (isClass(configFile >> "CfgWeapons" >> _item2))) then{
 							_crate addWeaponCargoGlobal[_item2, 1];
-							diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Added: %1", _item2]);
+						//	diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Added: %1", _item2]);
 
 							if ((count _mags) > 0) then{
 								if (_mags select 0 == "20Rnd_556x45_Stanag") then{ _mags set[0, "30Rnd_556x45_Stanag"] };
@@ -291,17 +292,17 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 								if (_mags select 0 == "30Rnd_556x45_G36SD") then{ _mags set[0, "30Rnd_556x45_StanagSD"] };
 								if (!(_item2 in MeleeWeapons)) then{
 									_crate addMagazineCargoGlobal[(_mags select 0), (ceil(random 2) + 2)];
-									diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Magazines Added: %1", _item2]);
+								//	diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Magazines Added: %1", _item2]);
 								};
 							};
 						};
 						if ((_item2 != "") && (isClass(configFile >> "CfgMagazines" >> _item2))) then{
 							_crate addMagazineCargoGlobal[_item2, 1];
-							diag_log(format["[P2AI]:SpawnMission:LootCrate: Magazine Added: %1", _item2]);
+						//	diag_log(format["[P2AI]:SpawnMission:LootCrate: Magazine Added: %1", _item2]);
 						};
 						if ((_item2 != "") && (isClass(configFile >> "CfgVehicles" >> _item2))) then{
 							_crate addWeaponCargoGlobal[_item2, 1];
-							diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Added: %1", _item2]);
+						//	diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Added: %1", _item2]);
 						};
 					};
 					
@@ -322,7 +323,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 					_canType = _itemTypes select _index;
 					_crate addMagazineCargoGlobal [_canType,1];
 
-					diag_log(format["[P2AI]:SpawnMission:LootCrate: Magazine Added: %1", _canType]);
+				//	diag_log(format["[P2AI]:SpawnMission:LootCrate: Magazine Added: %1", _canType]);
 				};
 				case "cfglootweapon":
 				{
@@ -346,7 +347,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 					//Item is a weapon, add it && a random quantity of magazines
 					_crate addWeaponCargoGlobal [_iItem,1];
 
-					diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Added: %1", _iItem]);
+					//diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Added: %1", _iItem]);
 
 					_mags = [] + getArray (configFile >> "cfgWeapons" >> _iItem >> "magazines");
 					if ((count _mags) > 0) then
@@ -357,14 +358,14 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 						if (_mags select 0 == "30Rnd_556x45_G36SD") then { _mags set [0, "30Rnd_556x45_StanagSD"] };
 						_crate addMagazineCargoGlobal [(_mags select 0), (round(random 2))];
 
-						diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Magazines Added: %1", (_mags select 0)]);
+						//diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Magazines Added: %1", (_mags select 0)]);
 					};
 					
 				};
 				case "weapon":
 				{
 					_crate addWeaponCargoGlobal [_iItem,1];
-					diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Added: %1", _iItem]);
+					//diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Added: %1", _iItem]);
 
 					_mags = [] + getArray (configFile >> "cfgWeapons" >> _iItem >> "magazines");
 					if ((count _mags) > 0) then
@@ -376,14 +377,14 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 						if (!(_iItem in MeleeWeapons)) then {
 							_crate addMagazineCargoGlobal [(_mags select 0), (ceil(random 2) + 2)];
 
-							diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Magazines Added: %1", (_mags select 0)]);
+							//diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Magazines Added: %1", (_mags select 0)]);
 						};
 					};
 				};
 				case "magazine":
 				{
 					_crate addMagazineCargoGlobal [_iItem,1];
-					diag_log(format["[P2AI]:SpawnMission:LootCrate: Magazine Added: %1", _iItem]);
+					//diag_log(format["[P2AI]:SpawnMission:LootCrate: Magazine Added: %1", _iItem]);
 				};
 			};
 		};
@@ -421,11 +422,11 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 		    ];
 		};
 
-		diag_log(format["[P2AI]:SpawnMission:Scenery: Obj: %3 SpawnPos: %1, objSize*1.5: %2",_oPos,((sizeOf (typeOf _obj)) * 0.3), (typeOf _obj)]);
+		//diag_log(format["[P2AI]:SpawnMission:Scenery: Obj: %3 SpawnPos: %1, objSize*1.5: %2",_oPos,((sizeOf (typeOf _obj)) * 0.3), (typeOf _obj)]);
 
 		//find safe pos to create object within 15m/30m of pos given
 		_safePos = [_oPos,5,_rad,((sizeOf (typeOf _obj))),0,2000,0] call BIS_fnc_findSafePos;
-		diag_log(format["[P2AI]:SpawnMission:Scenery: SafePos: %1",_safePos]);
+		//diag_log(format["[P2AI]:SpawnMission:Scenery: SafePos: %1",_safePos]);
 
 		_loopC = 0;
 
@@ -437,11 +438,10 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 			_safePos = [_oPos,5,(_rad + (_loopC * 5)),((sizeOf (typeOf _obj))),0,2000,0] call BIS_fnc_findSafePos;
 			_loopC = _loopC + 1;
 
-			diag_log(format["[P2AI]:SpawnMission:Scenery: FindPosLoop: _safePos: %1, loopCount: %2, Rad: %3",_safePos, _loopC, (_rad + (_loopC * 5))]);
-
+			//diag_log(format["[P2AI]:SpawnMission:Scenery: FindPosLoop: _safePos: %1, loopCount: %2, Rad: %3",_safePos, _loopC, (_rad + (_loopC * 5))]);
 		};
 
-		diag_log(format["[P2AI]:SpawnMission:Scenery: FinalPos: %1",_safePos]);
+		//diag_log(format["[P2AI]:SpawnMission:Scenery: FinalPos: %1",_safePos]);
 
 		//set object pos to safePos
 		_obj setPos _safePos;
@@ -454,7 +454,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 
 		//delete scenery that spawns at invalid pos
 		if ((_safePos select 0 == 7100) && (_safePos select 1 == 7750) && (_safePos select 2 == 300)) then {
-			diag_log("[P2AI]:SpawnMission:Scenery: Deleting Obj: " + (typeOf _obj));
+			//diag_log("[P2AI]:SpawnMission:Scenery: Deleting Obj: " + (typeOf _obj));
 			deleteVehicle _obj;
 		};
 	};
