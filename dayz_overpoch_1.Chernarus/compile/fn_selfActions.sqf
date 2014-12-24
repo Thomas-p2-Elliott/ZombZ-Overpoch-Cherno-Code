@@ -62,6 +62,7 @@ if(DZE_HaloJump) then {
 	};
 };
 
+/* 	Disabled - Moved to Player Options Menu
 if (!DZE_ForceNameTagsOff) then {
 	if (s_player_showname < 0 && !_isPZombie) then {
 		if (DZE_ForceNameTags) then {
@@ -73,7 +74,7 @@ if (!DZE_ForceNameTagsOff) then {
 		};
 	};
 };
-
+*/
 if(_isPZombie) then {
 	if (s_player_callzombies < 0) then {
 		s_player_callzombies = player addAction [localize "STR_EPOCH_ACTIONS_RAISEHORDE", "\z\addons\dayz_code\actions\call_zombies.sqf",player, 5, true, false, "",""];
