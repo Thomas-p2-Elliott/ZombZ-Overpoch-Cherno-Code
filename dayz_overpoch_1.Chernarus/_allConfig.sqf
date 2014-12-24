@@ -6,14 +6,13 @@ Global Settings - Client, Server, and Headless Client
 dayZ_instance =	11;		
 
 //Set the server number - Used for gold logs
-GORSYSERVERNUMBER = 5;
+GORSYSERVERNUMBER = 1;
 
 //Sets text in escape menu & Any non-gold Server Logs
-P2DZ_serverName = "Test";
+P2DZ_serverName = "Overpoch_1";
 
 //Server notification file name
-ZombZ_Notif_File_Name = "notification_op5";
-
+ZombZ_Notif_File_Name = "notification_op1";
 
 //Spawn Location Settings
 spawnShoremode = 1; 		// Default = 1 (on shore)
@@ -89,6 +88,8 @@ P2DZ_lootCheck_radius = 6100;			//Radius for this dome for the size of the imrpo
 P2DZ_lootCheck_enabled = true;	//enable lootcheck balancing system
 //Pistols List (Pistols listed here will spawn 4 - 8 mags)
 P2DZ_pistolList = ["Makarov","MakarovSD","M9","Colt1911","revolver_EP1","revolver_gold_EP1","glock17_EP1","M9SD","MakarovSD","Sa61_EP1","UZI_EP1","UZI_SD_EP1"];
+MeleeWeapons = ["MeleeFishingPole","MeleeCrowbar","MeleeBaseBallBatNails","MeleeBaseBallBatBarbed","MeleeBaseBallBat","Crossbow_DZ","MeleeSledge","MeleeMachete","MeleeHatchet_DZE"];
+MeleeWeaps = ["MeleeFishingPole","MeleeCrowbar","MeleeBaseBallBatNails","MeleeBaseBallBatBarbed","MeleeBaseBallBat","Crossbow_DZ","MeleeSledge","MeleeMachete","MeleeHatchet_DZE"];
 
 //how long after a building has bbeen looted can it respawn loot?
 DZE_LootSpawnTimer = 10;
