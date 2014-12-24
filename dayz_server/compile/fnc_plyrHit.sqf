@@ -44,7 +44,7 @@ Output:
 //build message
 _statsMessage = format[
 	"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4(_GLS_)%5(_GLS_)%6(_GLS_)%7",
-	(getPlayerUID _attacker)(getPlayerUID _victim),_weapon,(getPosATL _attacker),(getPosATL _victim)_distance,GORSYSERVERNUMBER
+	(getPlayerUID _attacker),(getPlayerUID _victim),_weapon,(getPosATL _attacker),(getPosATL _victim),_distance,GORSYSERVERNUMBER
 ];
 //send to stats log
 _statsMessage call stats_hits;
