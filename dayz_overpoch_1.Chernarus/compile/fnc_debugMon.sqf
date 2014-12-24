@@ -129,7 +129,7 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	_zombzVehCount = (count (player nearEntities [["LandVehicle", "Ship", "Air"], 14500]));
 	_zombzZedCount = (({alive _x} count (getPos vehicle player nearEntities [["zZombie_Base"], 12000])));
 
-	_zombztimeToRestart = 	(90 - (round(serverTime / 60)));
+	_zombztimeToRestart = 	(180 - (round(serverTime / 60)));
 
 	_pDir = (round(getDir (vehicle player))); _gpsP2osZombZ = (mapGridPosition getPos player);
 	_pDirT = call fnc_pDir;
