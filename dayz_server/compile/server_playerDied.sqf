@@ -19,7 +19,7 @@ _newObject call {
 //diag_log(format["P2DEBUG: %1: Input: %2","playerDied",_this]);
 
 //Enable Debug Messages?
-P2DZ_DeathMessage_Debug = true;
+P2DZ_DeathMessage_Debug = false;
 
 //Enable Death Messages in Chat?
 P2DZ_DeathMessage_Chat_Enabled = true;
@@ -88,12 +88,12 @@ if ((typeName _killer) != "STRING") then
 
 			/* if the victim was in a vehicle */
 			if ((getText (configFile >> "CfgVehicles" >> (typeOf _victimVehicle) >> "vehicleClass")) in ["CarW","Car","CarD","Armored","Ship","Support","Air","ArmouredW","ArmouredD","SupportWoodland_ACR"]) then {
-				P2DZE_systemChat = format["%1 committed suicide near %2 in a %3",(_victimName),(_nearestLocation),(typeOf _victimVehicle)];
+				P2DZE_systemChat = [1,format["%1 committed suicide near %2 in a %3",(_victimName),(_nearestLocation),(typeOf _victimVehicle)]];
 				publicVariable "P2DZE_systemChat";
 				_deathMessageSent = true;
 				_newObject setVariable ["deathType","vehsuicide",true];
 			} else {
-				P2DZE_systemChat = format["%1 committed suicide near %2",(_victimName),(_nearestLocation)];
+				P2DZE_systemChat = [1,format["%1 committed suicide near %2",(_victimName),(_nearestLocation)]];
 				publicVariable "P2DZE_systemChat";
 				_deathMessageSent = true;
 				_newObject setVariable ["deathType","suicide",true];
@@ -159,7 +159,7 @@ if ((typeName _killer) != "STRING") then
 	Other Killer Death Message (Chat)
 	---------------------------------------------------------------------------*/
 	if (P2DZ_DeathMessage_Chat_Enabled && !_deathMessageSent) then {
-		P2DZE_systemChat = format["%1 was killed near %2",(_victimName),(_nearestLocation)];
+		P2DZE_systemChat = [1,format["%1 was killed near %2",(_victimName),(_nearestLocation)]];
 		publicVariable "P2DZE_systemChat";
 		_deathMessageSent = true;
 	};
@@ -219,7 +219,7 @@ if (!_deathMessageSent) then {
 		};
 
 		if (_zedHit) then {
-			P2DZE_systemChat = format["%1 was eaten by zombies near %2",(_victimName),(_nearestLocation)];
+			P2DZE_systemChat = [1,format["%1 was eaten by zombies near %2",(_victimName),(_nearestLocation)]];
 			publicVariable "P2DZE_systemChat";
 			_deathMessageSent = true;
 			//Set death type to zombie
@@ -235,7 +235,7 @@ Unknown Causes Death Message (Chat)
 ---------------------------------------------------------------------------*/
 
 if (P2DZ_DeathMessage_Chat_Enabled && !_deathMessageSent) then {
-	P2DZE_systemChat = format["%1 died near %2",(_victimName),(_nearestLocation)];
+	P2DZE_systemChat = [1,format["%1 died near %2",(_victimName),(_nearestLocation)]];
 	publicVariable "P2DZE_systemChat";
 	_deathMessageSent = true;
 };
@@ -269,7 +269,7 @@ if (P2DZ_DeathMessage_Debug) then {
 Send death to hive if legit character
 ---------------------------------------------------------------------------*/
 
-diag_log ("PDEATH: Player Died " + _playerID);
+//diag_log ("PDEATH: Player Died " + _playerID);
 if (!isNil '_characterID') then {
 	if (_characterID != "0") then
 	{

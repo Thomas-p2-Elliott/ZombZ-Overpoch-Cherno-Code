@@ -77,12 +77,10 @@ if (!isDedicated) then {
 	"PVDZE_obj_Fire"		 addPublicVariableEventHandler {nulexp=(_this select 1) spawn BIS_Effects_Burn};
 	"PVDZE_plr_FriendRQ"	 addPublicVariableEventHandler {(_this select 1) call player_tagFriendlyMsg};
 	'P2DZ_DeathMessage_GUI' addPublicVariableEventHandler {(_this select 1) spawn player_deathMessage;};
-
 	// "PVDZE_obj_Debris"		addPublicVariableEventHandler {(_this select 1) call local_roadDebris};
-
 	"norrnRaDrag"			addPublicVariableEventHandler {(_this select 1) execVM "\z\addons\dayz_code\medical\publicEH\animDrag.sqf"};
 	"norrnRnoAnim"			addPublicVariableEventHandler {(_this select 1) execVM "\z\addons\dayz_code\medical\publicEH\noAnim.sqf"};
-
-	'P2DZE_systemChat'	 	addPublicVariableEventHandler {	systemChat(format["%1",(_this select 1)]);	};
+	'P2DZE_systemChat'	 	addPublicVariableEventHandler {(_this select 1) call P2DZ_sysChat; };
+	'P2DZE_guiMsg'	 		addPublicVariableEventHandler { _id2 = (_this select 1) spawn P2DZ_guiNotif; };
 	'P2DZE_miniMsg'			addPublicVariableEventHandler {	_id = (_this select 1) spawn p2_miniMsg; };
 };

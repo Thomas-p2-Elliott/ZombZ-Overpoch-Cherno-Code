@@ -22,7 +22,7 @@ _hour = 			0;
 _mins = 			0;
 _secs = 			0;
 
-P2DZ_DeathMessage_Debug = true;
+P2DZ_DeathMessage_Debug = false;
 
 if (P2DZ_DeathMessage_Debug) then { diag_log(format["P2DZ_DeathMessage_Debug: Input: %1", (str _this)]); };
 
@@ -174,7 +174,7 @@ if (!isNil "_victimName" && !isNil "_killerName" && !isNil "_killerDistance" && 
 		diag_log format["%1 was %2 with a %3 from %4m by %5 near %6",(_victimName),(_adjective),(_weaponClassname),(_killerDistance),(_killerName),(_nearestLocation)];
 	 };
 
-	P2DZE_systemChat = format["%1 was %2 with a %3 from %4m by %5 near %6",(_victimName),(_adjective),(_weaponClassname),(_killerDistance),(_killerName),(_nearestLocation)];
+	P2DZE_systemChat = [1,format["%1 was %2 with a %3 from %4m by %5 near %6",(_victimName),(_adjective),(_weaponClassname),(_killerDistance),(_killerName),(_nearestLocation)]];
 	publicVariable "P2DZE_systemChat";
 };
 
@@ -191,7 +191,7 @@ _victimUID = [_victim] call FNC_GetPlayerUID;
 
 _statsMessage = format[
 	"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4(_GLS_)%5(_GLS_)%6(_GLS_)%7",
-	_killerUID,_victimUID,_weaponClassname,_killerPos,_victimPos)_killerdistance,GORSYSEVERNUMBER
+	_killerUID,_victimUID,_weaponClassname,_killerPos,_victimPos)_killerdistance,GORSYSERVERNUMBER
 ];
 //send to stats log
 _statsMessage call stats_kills;

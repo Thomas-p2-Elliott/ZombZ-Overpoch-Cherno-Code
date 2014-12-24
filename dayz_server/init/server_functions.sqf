@@ -47,6 +47,9 @@ fnc_removeExtraBars = 			compile preprocessFileLineNumbers "\z\addons\dayz_serve
 //PVP death messages
 player2_deathMessage =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\player2_deathMessage.sqf";
 
+//notification system
+[] execVM 	"\z\addons\dayz_server\system\zombz_notifications.sqf"; 
+
 //player2 stats logger compiles
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_statsLogger.sqf";
 
@@ -81,7 +84,7 @@ Vehicle Painting
 	_PUID = ((_this select 1) select 3);
 	_pname = ((_this select 1) select 4);
 
-	diag_log format [
+/*	diag_log format [
 		"VEHICLE PAINT DEBUG: _colour (%5) _colour2 = (%6) _clrinit (%1) _clrinit2 (%2) form _clrinit (%3) form _clrinit2 (%4)",
 		_clrinit,
 		_clrinit2,
@@ -90,8 +93,9 @@ Vehicle Painting
 		_colour,
 		_colour2
 	];
+*/
 
-	diag_log format ["VEHICLE PAINT: Player %1 (%2) has painted a %3!",_pname,_PUID,_name];
+//	diag_log format ["VEHICLE PAINT: Player %1 (%2) has painted a %3!",_pname,_PUID,_name];
 	
 	_position = getPosATL _object;
 	
@@ -312,7 +316,7 @@ server_characterSync = {
 	
 	_key = format["CHILD:201:%1:%2:%3:%4:%5:%6:%7:%8:%9:%10:%11:%12:%13:%14:%15:%16:",_characterID,_playerPos,_playerGear,_playerBackp,_medical,false,false,0,0,0,0,_currentState,0,0,_currentModel,0];
 	_key call server_hiveWrite;
-	diag_log("Ran character server_characterSync! (has no gold var, is it used? tell me if you see this message!");
+//	diag_log("Ran character server_characterSync! (has no gold var, is it used? tell me if you see this message!");
 };
 
 if(isnil "dayz_MapArea") then {
@@ -365,7 +369,7 @@ spawn_vehicles = {
 	};
 
 	if (count AllowedVehiclesList == 0) then {
-		diag_log("DEBUG: unable to find suitable vehicle to spawn");
+		//diag_log("DEBUG: unable to find suitable vehicle to spawn");
 	} else {
 
 		// add vehicle to counter for next pass

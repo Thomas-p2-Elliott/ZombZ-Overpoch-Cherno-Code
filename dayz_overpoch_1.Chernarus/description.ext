@@ -240,6 +240,8 @@ class RscTitles
 	#include "configs\zombz_hint.h" 
 	//altimeter
 	#include "configs\altimeter.h"  
+	//notifications
+	#include "configs\p2notif.h"
 };
 
 //# plot management 

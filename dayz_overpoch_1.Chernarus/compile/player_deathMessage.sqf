@@ -1,3 +1,4 @@
+if (!isNil "P2DZ_notifsKills" && {(P2DZ_notifsKills != 2)}) exitWith {};
 private ["_victimName","_killerName","_killerDist","_picture","_adjective","_safeZoneOffset","_layer","_fullmessage"];
 _victimName = _this select 0;
 _killerName = _this select 1;
