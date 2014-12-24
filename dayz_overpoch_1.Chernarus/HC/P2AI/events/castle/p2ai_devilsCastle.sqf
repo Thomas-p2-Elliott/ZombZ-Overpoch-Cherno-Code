@@ -7,45 +7,24 @@ Devils Castle AI Mission by Player2 & Gorsy for www.ZombZ.net
 ---------------------------------------------------------------------------*/
 
 /*---------------------------------------------------------------------------
-Spawn Vehicles (1 heli 2 humvees)
----------------------------------------------------------------------------*/
-/*
-_ranChopper = "UH1Y_DZ";
-_ranChopper = ["UH1Y_DZ","Ka60_GL_DZ"] call BIS_fnc_selectRandom;
-
-_chopper = createVehicle [_ranChopper, [6885.8403, 11438.752],[], 0, "NONE"];
-[_chopper] call P2AISetupVehicle; //P2AISetupVehicle prevents the vehicle from disappearing and sets fuel and such
-_chopper setDir 77.57029;
-_truck = createVehicle ["HMMWV_DZ",[6877.8027, 11452.186, -3.0517578e-005],[], 0, "CAN_COLLIDE"];
-[_truck] call P2AISetupVehicle;
-_truck setDir 87.20118;
-_truck2 = createVehicle ["HMMWV_DZ",[6877.459, 11458.206],[], 0, "CAN_COLLIDE"];
-[_truck2] call P2AISetupVehicle;
-_truck2 setDir 87.20118;
-*/
-/*---------------------------------------------------------------------------
-Spawn Gear Creates (1x Med, 1x Industrial, 1x HeliCrash Guns)
+Spawn Gear Creates (2x Med (10 Items), 3x Western Guns (12 Items))
 ---------------------------------------------------------------------------*/
 
-/*
-P2AI_CastleLoot = {
-    _crate = createVehicle ["USLaunchersBox",[6893.439, 11414.722],[], 0, "CAN_COLLIDE"];
-    [_crate,"AIFortress"] ExecVM P2AIBoxSetup; 
-    [_crate] call P2AIProtectObj;
-    _crate setDir -23.391731;
-    _crate1 = createVehicle ["USLaunchersBox",[6884.3755, 11416.529],[], 0, "CAN_COLLIDE"];
-    [_crate1,"industrial"] ExecVM P2AIBoxSetup;
-    [_crate1] call P2AIProtectObj;
-    _crate1 setDir -23.391731;
-    _crate2 = createVehicle ["USLaunchersBox",[6886.3838, 11411.481],[], 0, "CAN_COLLIDE"];
-    [_crate2,"medical"] ExecVM P2AIBoxSetup;
-    [_crate2] call P2AIProtectObj;
-    _crate2 setDir -23.391731;
-    P2AICastleCrates = [_crate,_crate1,_crate2];
-};
 
-[] call P2AI_CastleLoot;
-*/
+P2HC_mRq =  [                  
+                //Loot Table Type & Pos & Loot Item Amount (Pos gets replaced with bisFindSafePos version)
+                [
+                    ["WesternWeapons",[6884.3755, 11416.529],4],
+                    ["WesternWeapons",[6884.3755, 11416.529],4],
+                    ["WesternWeapons",[6884.3755, 11416.529],4],
+                    ["Medical",[6884.3755, 11416.529],10],
+                    ["Medical",[6884.3755, 11416.529],10]
+                ]   
+            ];
+
+publicVariableServer "P2HC_mRq";
+
+
 /*---------------------------------------------------------------------------
 Spawn AI Units
 
@@ -66,8 +45,19 @@ sleep 5;
 sleep 5;
 [[(P2AI_DC_COORDS select 0),(P2AI_DC_COORDS select 1),0],round(P2AI_DcAI_Amount * 0.2),1,"P2AIUnitsDevilsCastle"] spawn P2AI_spawnAI;
 
+
+P2DZE_guiMsg = [
+    "Event Notification: Special Mission",
+    "Bandits have fortified Devils Castle and stashed stolen U.N. special forces weapons inside! Kill them and take the loot!",
+    "img\ru.paa",
+    10,
+    0
+];
+
+publicVariable "P2DZE_guiMsg";
+
 /*---------------------------------------------------------------------------
-Create AI Delayed Respawn Function
+Create AI Delayed Respawn Function - Disabled for now
 
 respawn ai function
 spawns 2 ai at a time...takes 2 inputs:
