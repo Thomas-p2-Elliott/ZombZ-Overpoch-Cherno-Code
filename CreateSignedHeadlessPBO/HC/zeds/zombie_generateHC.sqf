@@ -44,7 +44,7 @@ if (_doLoiter) then {
 if (_d) then { diag_log ("P2HC:ZedSpawns: zombie_generateHC: SpawnedZed: " + str([_type, _position, [], _radius, _method])); };
 _agent = createAgent [_type, _position, [], _radius, _method]; 	//Crete Zombie
 _agent removeAllEventHandlers "local";  						//Remove local handler and Add our own local handler (below)
-_agent addEventHandler ["local", { diag_log "Locality Event"; if(_this select 1) then {[(position (_this select 0)),(_this select 0),true] execFSM "zombzHC\addonszeds\zombie_agentHC.fsm" };}];
+_agent addEventHandler ["local", { diag_log "Locality Event"; if(_this select 1) then {[(position (_this select 0)),(_this select 0),true] execFSM "zombzHC\addons\zeds\zombie_agentHC.fsm" };}];
 PVDZE_zed_Spawn = [_agent];										//Set up var to send to server
 publicVariableServer "PVDZE_zed_Spawn";							//Tell server we spawned a zed, sending zed obj
 
@@ -105,7 +105,7 @@ if (_rnd < 0.2) then {
 };
 
 //Start behavior
-_id = [_position,_agent] execFSM "zombzHC\addonszeds\zombie_agentHC.fsm";
+_id = [_position,_agent] execFSM "zombzHC\addons\zeds\zombie_agentHC.fsm";
 
 if (P2DZ_HC_ExtraZedsDebug) then {
 	diag_log(format["P2HC:ZedSpawns: zombie_generateHC: SpawnedZed, id: %1",_id]);
