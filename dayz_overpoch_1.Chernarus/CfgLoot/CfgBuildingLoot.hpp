@@ -61,35 +61,35 @@
                  lootChance = 0.8;
                  lootPos[] = {};
                  lootType[] = {
-                         {"ItemKnife","generic",0.04},
-                         {"ItemMatchbox_DZE","generic",0.01},
-                         {"backpacks","backpacks",0.04},
-                         {"tents","tents",0.01},
-                         {"PartPlywoodPack","magazine",0.02},
-                         {"clothes","clothes",0.02},
-                         {"specialclothes","specialclothes",0.01},
-                         {"", "PistolsLow",  0.08 }, 
-                         {"", "ShotgunWeaps",  0.03 }, 
-                         {"", "MeleeWeaps",  0.06 }, 
-                         {"", "RiflesLowWeaps",  0.01 }
+                         {"ItemKnife","generic",                        0.15},
+                         {"ItemMatchbox_DZE","generic",                 0.15},
+                         {"backpacks","backpacks",                      0.15},
+                         {"tents","tents",                              0.15},
+                         {"PartPlywoodPack","magazine",                 0.15},
+                         {"", "MeleeWeaps",                             0.15}, 
+                         {"clothes","clothes",                          0.02},
+                         {"specialclothes","specialclothes",            0.01},
+                         {"", "PistolsLow",                             0.03}, 
+                         {"", "ShotgunWeaps",                           0.03}, 
+                         {"", "RiflesLowWeaps",                         0.01}
                  };
                  lootTypeSmall[] = {
-                         { "ItemSodaMdew","magazine",0.01 },
-                         { "ItemSodaRbull","magazine",0.01 },
-                         { "ItemSodaOrangeSherbet","magazine",0.02 },
-                         { "", "PistolsLow",  0.1 }, 
-                         { "ItemKnife","weapon",0.04 },
-                         { "ItemMatchbox_DZE","weapon",0.03 },
-                         { "","generic",0.08 },
-                         { "","civilian",0.08 },
-                         { "","military",0.04 },
-                         { "","food",0.1},
-                         { "","office",0.03 },
-                         { "","office2",0.03 },
-                         { "","trash",0.08 },
-                         { "clothes","single",0.01},
-                         { "ItemToolbox","weapon",0.03},
-                         { "specialclothes","single",0.01 }
+                         { "ItemSodaMdew","magazine",                   0.1 },
+                         { "ItemSodaRbull","magazine",                  0.15 },
+                         { "ItemSodaOrangeSherbet","magazine",          0.13 },
+                         { "", "PistolsLow",                            0.02 }, 
+                         { "ItemKnife","weapon",                        0.1 },
+                         { "ItemMatchbox_DZE","weapon",                 0.1 },
+                         { "","generic",                                0.08 },
+                         { "","civilian",                               0.04 },
+                         { "","military",                               0.06 },
+                         { "","food",                                   0.2  },
+                         { "","office",                                 0.03 },
+                         { "","office2",                                0.03 },
+                         { "","trash",                                  0.04 },
+                         { "clothes","single",                          0.02 },
+                         { "ItemToolbox","weapon",                      0.07 },
+                         { "specialclothes","single",                   0.01 }
                  };
          };
          class Office: Default {
@@ -175,32 +175,32 @@
                  lootChance = 0.8;
                  lootPos[] = {};
                  lootType[] = {
-                         {"ItemGenerator","magazine",0.01},
-                         {"fuel_pump_kit","magazine",0.01},
-                         {"backpacks","backpacks",0.01},
-                         {"PartGeneric","magazine",0.04},
-                         {"PartWheel","magazine",0.05},
-                         {"PartFueltank","magazine",0.02},
-                         {"PartEngine","magazine",0.02},
-                         {"PartGlass","magazine",0.04},
-                         {"PartVRotor","magazine",0.01},
-                         {"ItemJerrycan","magazine",0.04},
-                         {"WeaponHolder_ItemHatchet_DZE","object",0.07},
-                         {"ItemKnife","military",0.07},
-                         {"ItemToolbox","weapon",0.06},
-                         {"ItemWire","magazine",0.01},
-                         {"ItemTankTrap","magazine",0.04},
-                         {"", "PistolsLow",  0.08}, 
-                         {"", "MeleeWeaps",  0.01}, 
-                         {"ItemKeyKit","weapon",0.01}
+                         {"ItemGenerator","magazine",                   0.01},
+                         {"fuel_pump_kit","magazine",                   0.01},
+                         {"backpacks","backpacks",                      0.01},
+                         {"PartGeneric","magazine",                     0.04},
+                         {"PartWheel","magazine",                       0.05},
+                         {"PartFueltank","magazine",                    0.02},
+                         {"PartEngine","magazine",                      0.02},
+                         {"PartGlass","magazine",                       0.04},
+                         {"PartVRotor","magazine",                      0.01},
+                         {"ItemJerrycan","magazine",                    0.04},
+                         {"WeaponHolder_ItemHatchet_DZE","object",      0.07},
+                         {"ItemKnife","military",                       0.07},
+                         {"ItemToolbox","weapon",                       0.06},
+                         {"ItemWire","magazine",                        0.01},
+                         {"ItemTankTrap","magazine",                    0.04},
+                         {"", "PistolsLow",                             0.08}, 
+                         {"", "MeleeWeaps",                             0.01}, 
+                         {"ItemKeyKit","weapon",                        0.01}
                  };
                  lootTypeSmall[] = {
-                         { "","generic",0.2 },
-                         { "","trash",0.14 },
-                         { "","military",0.14 },
-                         { "", "PistolsLow",  0.1}, 
-                         { "ItemKnife","weapon",0.02 },
-                         { "ItemKeyKit","weapon",0.01 }
+                         { "","generic",                                0.2  },
+                         { "","trash",                                  0.14 },
+                         { "","military",                               0.14 },
+                         { "", "PistolsLow",                            0.1  }, 
+                         { "ItemKnife","weapon",                        0.02 },
+                         { "ItemKeyKit","weapon",                       0.01 }
                  };
          };
          class Farm: Default {
@@ -210,24 +210,24 @@
                  lootChance = 0.8;
                  lootPos[] = {};
                  lootType[] = {
-                         {"ItemJerrycan","magazine",0.02},
-                         {"PartPlankPack","magazine",0.02},
-                         {"ItemFuelBarrelEmpty","magazine",0.01},
-                         {"", "PistolsLow",  0.05}, 
-                         {"", "SniperLowWeaps",  0.01}, 
-                         {"", "RiflesLowWeaps",  0.01}, 
-                         {"", "ShotgunWeaps",  0.08}, 
-                         {"backpacks","backpacks",0.03},
-                         {"", "MeleeWeaps",  0.1}, 
-                         {"ItemSledgeHandle","magazine",0.02}
+                         {"ItemJerrycan","magazine",            0.3},
+                         {"PartPlankPack","magazine",           0.1},
+                         {"ItemFuelBarrelEmpty","magazine",     0.1},
+                         {"", "PistolsLow",                     0.03}, 
+                         {"", "SniperLowWeaps",                 0.01}, 
+                         {"", "RiflesLowWeaps",                 0.01}, 
+                         {"", "ShotgunWeaps",                   0.02}, 
+                         {"backpacks","backpacks",              0.03},
+                         {"", "MeleeWeaps",                     0.2}, 
+                         {"ItemSledgeHandle","magazine",        0.2}
                  };
                  lootTypeSmall[] = {
-                         { "","generic", 0.19},
-                         { "","trash",0.14 },
-                         { "","military",0.05},
-                         {"ItemToolbox","weapon",0.03},
-                         {"", "PistolsLow",  0.2}, 
-                         { "ItemSledgeHead","magazine",0.01}
+                         { "","generic",                        0.3},
+                         { "","trash",                          0.2},
+                         { "","military",                       0.1},
+                         {"ItemToolbox","weapon",               0.2},
+                         {"", "PistolsLow",                     0.02}, 
+                         { "ItemSledgeHead","magazine",         0.18}
                  };
          };
          class Supermarket: Default {
@@ -237,32 +237,33 @@
                  zombieChance = 0.5;
                  zombieClass[] = {"zZombie_Base","zZombie_Base","z_teacher","z_suit1","z_suit2"};
                  lootType[] = {
-                         {"ItemSodaMdew","magazine",0.01},
-                         {"ItemSodaRbull","magazine",0.01},
-                         {"ItemSodaOrangeSherbet","magazine",0.03},
-                         {"ItemFlashlight","generic",0.01},
-                         {"ItemKnife","generic",0.02},
-                         {"ItemToolbox","weapon",0.01},
-                         {"ItemMatchbox_DZE","generic",0.04},
-                         {"backpacks","backpacks",0.07},
-                         {"tents","tents",0.01},
-                         {"", "PistolsLow",  0.1}, 
-                         {"", "ShotgunWeaps",  0.05}, 
-                         {"PartPlywoodPack","magazine",0.02}
+                         {"ItemSodaMdew","magazine",            0.1},
+                         {"ItemSodaRbull","magazine",           0.1},
+                         {"ItemSodaOrangeSherbet","magazine",   0.1},
+                         {"ItemFlashlight","generic",           0.1},
+                         {"ItemKnife","generic",                0.1},
+                         {"ItemToolbox","weapon",               0.1},
+                         {"ItemMatchbox_DZE","generic",         0.1},
+                         {"backpacks","backpacks",              0.1},
+                         {"tents","tents",                      0.1},
+                         {"", "PistolsLow",                     0.01}, 
+                         {"", "ShotgunWeaps",                   0.01}, 
+                         {"PartPlywoodPack","magazine",         0.08}
+
+
                  };
                  lootTypeSmall[] = {
-                         {"", "PistolsLow",  0.15}, 
-                         {"", "ShotgunWeaps",  0.05}, 
-                         { "ItemSodaMdew","magazine",0.01 },
-                         { "ItemSodaRbull","magazine",0.01 },
-                         { "ItemSodaOrangeSherbet","magazine",0.01 },
-                         { "ItemWatch","weapon",0.01 },
-                         { "ItemKnife","weapon",0.01 },
-                         { "ItemMatchbox_DZE","weapon",0.02 },
-                         { "","generic",0.21 },
-                         { "","food",0.24 },
-                         { "","trash",0.1 },
-                         { "ItemMixOil", "magazine",0.02}
+                         {"", "PistolsLow",                     0.01 }, 
+                         { "ItemMixOil", "magazine",            0.1},
+                         { "ItemSodaMdew","magazine",           0.08 },
+                         { "ItemSodaRbull","magazine",          0.1 },
+                         { "ItemSodaOrangeSherbet","magazine",  0.1 },
+                         { "ItemWatch","weapon",                0.1 },
+                         { "ItemKnife","weapon",                0.1 },
+                         { "ItemMatchbox_DZE","weapon",         0.1},
+                         { "","generic",                        0.1},
+                         { "","food",                           0.21},
+                         
                  };
          };
  
