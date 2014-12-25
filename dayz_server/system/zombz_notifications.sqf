@@ -19,7 +19,10 @@ notif_Loop = {
 		_oldVal = P2DZE_guiMsg;
 		_result = ("Arma2Net.Unmanaged" callExtension format ["p2Net1 ['readText','%3','%1','%2']", _start, _end, ZombZ_Notif_File_Name]);
 		P2DZE_guiMsg = (call compile _result);
-
+		if (isNil "P2DZE_guiMsg") then {
+			_oldVal = [];
+			P2DZE_guiMsg = [];
+		};
 		if (!(str(P2DZE_guiMsg) == str(_oldVal))) then {
 
 			_logOutput = format ["[p2Re] P2DZE_guiMsg: %1", P2DZE_guiMsg];
