@@ -25,8 +25,6 @@ Headless Client
 if (!hasInterface && !isDedicated && !isServer) exitWith {
 	p2d_headless = true;
 
-	diag_log("Init.sqf: ZombZ Headless Client");
-
 	//Wait for BIS Functions to load	
   	waitUntil {!isNil "BIS_fnc_init"}; 
 
@@ -42,19 +40,19 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
 
 	/* Animated Heli Crash Sites by Player2 */
 	if (P2DZ_HC_HeliCrashes) then {
-		diag_log(format["P2DEBUG: %1 Executing AnimatedEvents: HeliCrashes!", (getPlayerUID player)]);
+		//diag_log(format["P2DEBUG: %1 Executing AnimatedEvents: HeliCrashes!", (getPlayerUID player)]);
 		[] execVM "\zombzHC\addons\AnimatedEvents\heliCrash_init.sqf";
 	};
 
 	/* HeadlessClient A.I. Missions by Player2 */
 	if (P2DZ_HC_AIMissions_Enabled) then {
-		diag_log(format["P2DEBUG: %1 Executing AI Missions!", (getPlayerUID player)]);
+		//diag_log(format["P2DEBUG: %1 Executing AI Missions!", (getPlayerUID player)]);
 		[] execVM "\zombzHC\addons\HC\P2AI\init.sqf";
 	};
 
 	/* Extra Zeds System by Player2 */
 	if (P2DZ_HC_extraZeds) then {
-		diag_log(format["P2DEBUG: %1 Executing Extra Zeds!", (getPlayerUID player)]);
+		//diag_log(format["P2DEBUG: %1 Executing Extra Zeds!", (getPlayerUID player)]);
 		P2DZ_HC_extraZeds_Done = false;
 		[] execVM "\zombzHC\addons\HC\zeds\init.sqf";
 	};
@@ -62,13 +60,13 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
 	/* Zombie Hordes by Player2 */
 	if (P2DZ_HC_extraZeds && {(P2DZ_HC_zedHordes)}) then {
 		waitUntil{uiSleep 0.5; P2DZ_HC_extraZeds_Done}; //zhordes requires extrazeds
-		diag_log(format["P2DEBUG: %1 Executing Zombie Hordes!", (getPlayerUID player)]);
+		//diag_log(format["P2DEBUG: %1 Executing Zombie Hordes!", (getPlayerUID player)]);
 		[] execVM "\zombzHC\addons\zeds\hordes\init.sqf";
 	};
 
 	/* ArmaServerMonitor */
 	if (P2DZ_HC_ASM_Enabled) then {
-		diag_log(format["P2DEBUG: %1 Executing ArmaServerMonitor!", (getPlayerUID player)]);
+		//diag_log(format["P2DEBUG: %1 Executing ArmaServerMonitor!", (getPlayerUID player)]);
 		["OverPoch_HeadlessClient"] execFSM  "\ASM\fn_ASM.fsm"
 	};
 };
