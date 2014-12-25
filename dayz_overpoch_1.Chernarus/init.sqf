@@ -18,23 +18,6 @@ p2d_client = false;
 p2d_server = false;
 p2d_headless = false;
 
-/*---------------------------------------------------------------------------
-Headless Client & Dedicated Server
----------------------------------------------------------------------------*/
-if ((!hasInterface && !isDedicated && !isServer) || (isDedicated && !hasInterface || isServer)) then {
-
-	/* Animated Heli Crash Sites by Player2 */
-	if (P2DZ_HC_HeliCrashes) then {
-		//diag_log(format["P2DEBUG: %1 Executing AnimatedEvents: HeliCrashes!", (getPlayerUID player)]);
-		[] execVM "HC\AnimatedEvents\heliCrash_init.sqf";
-	};
-
-	/* HeadlessClient A.I. Missions by Player2 */
-	if (P2DZ_HC_AIMissions_Enabled) then {
-		//diag_log(format["P2DEBUG: %1 Executing AI Missions!", (getPlayerUID player)]);
-		[] execVM "HC\P2AI\init.sqf";
-	};
-};
 
 /*---------------------------------------------------------------------------
 Headless Client
@@ -55,18 +38,30 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
    	//Load in Config
    	call compile preprocessFileLineNumbers "_hcConfig.sqf";
 
+	/* Animated Heli Crash Sites by Player2 */
+	if (P2DZ_HC_HeliCrashes) then {
+		//diag_log(format["P2DEBUG: %1 Executing AnimatedEvents: HeliCrashes!", (getPlayerUID player)]);
+		[] execVM "\zombzHC\addons\AnimatedEvents\heliCrash_init.sqf";
+	};
+
+	/* HeadlessClient A.I. Missions by Player2 */
+	if (P2DZ_HC_AIMissions_Enabled) then {
+		//diag_log(format["P2DEBUG: %1 Executing AI Missions!", (getPlayerUID player)]);
+		[] execVM "\zombzHC\addons\HC\P2AI\init.sqf";
+	};
+
 	/* Extra Zeds System by Player2 */
 	if (P2DZ_HC_extraZeds) then {
 		//diag_log(format["P2DEBUG: %1 Executing Extra Zeds!", (getPlayerUID player)]);
 		P2DZ_HC_extraZeds_Done = false;
-		[] execVM "HC\zeds\init.sqf";
+		[] execVM "\zombzHC\addons\HC\zeds\init.sqf";
 	};
 
 	/* Zombie Hordes by Player2 */
 	if (P2DZ_HC_extraZeds && {(P2DZ_HC_zedHordes)}) then {
 		waitUntil{uiSleep 0.5; P2DZ_HC_extraZeds_Done}; //zhordes requires extrazeds
 		//diag_log(format["P2DEBUG: %1 Executing Zombie Hordes!", (getPlayerUID player)]);
-		[] execVM "HC\zeds\hordes\init.sqf";
+		[] execVM "\zombzHC\addons\zeds\hordes\init.sqf";
 	};
 
 	/* ArmaServerMonitor */
@@ -83,6 +78,18 @@ Dedicated Server
 
 if (isDedicated && !hasInterface || isServer) then {
 	p2d_server = true;
+
+	/* Animated Heli Crash Sites by Player2 */
+	if (P2DZ_HC_HeliCrashes) then {
+		//diag_log(format["P2DEBUG: %1 Executing AnimatedEvents: HeliCrashes!", (getPlayerUID player)]);
+		[] execVM "HC\AnimatedEvents\heliCrash_init.sqf";
+	};
+
+	/* HeadlessClient A.I. Missions by Player2 */
+	if (P2DZ_HC_AIMissions_Enabled) then {
+		//diag_log(format["P2DEBUG: %1 Executing AI Missions!", (getPlayerUID player)]);
+		[] execVM "HC\P2AI\init.sqf";
+	};
 
 	//Server Variables & Config
 	call compile preprocessFileLineNumbers "\z\addons\dayz_server\_serverConfig.sqf";
