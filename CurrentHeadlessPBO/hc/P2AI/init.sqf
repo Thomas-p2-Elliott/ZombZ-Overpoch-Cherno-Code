@@ -30,7 +30,7 @@ waitUntil {!isNil "BIS_fnc_findSafePos"};
 File & Debugging Configuration
 ---------------------------------------------------------------------------*/
 
-P2AI_FileLocation = "zombzHC\addonsP2AI";	//disclude last slash
+P2AI_FileLocation = "zombzHC\addons\P2AI";	//disclude last slash
 
 P2AI_debugEvents = 	false;
 P2AI_debugStatic = 	false;

@@ -13,7 +13,7 @@ diag_log(format["P2HC:ZedSpawns: Initializing: %1",__FILE__]); //log output (can
 
 //	Load in Configuration
 P2DZ_HC_extraZedsconfigDone = false;
-[] execVM "zombzHC\addonszeds\player2_extraZeds_config.sqf";
+[] execVM "zombzHC\addons\zeds\player2_extraZeds_config.sqf";
 
 //	Make sure config doesn't time out loading in due to bad syntax in settings file
 private["_s","_e"]; _s = 0; _e = false;
