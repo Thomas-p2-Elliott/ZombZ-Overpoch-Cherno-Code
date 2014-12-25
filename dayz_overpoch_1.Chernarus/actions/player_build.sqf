@@ -2,13 +2,66 @@
 	DayZ Base Building
 	Made for DayZ Epoch please ask permission to use/edit/distrubute email vbawol@veteranbastards.com.
 */
-private ["_location","_dir","_classname","_item","_hasrequireditem","_missing","_hastoolweapon","_cancel","_reason","_started","_finished","_animState","_isMedic","_dis","_sfx","_hasbuilditem","_tmpbuilt","_onLadder","_isWater","_require","_text","_offset","_IsNearPlot","_isOk","_location1","_location2","_counter","_limit","_proceed","_num_removed","_position","_object","_canBuildOnPlot","_friendlies","_nearestPole","_ownerID","_findNearestPoles","_findNearestPole","_distance","_classnametmp","_ghost","_isPole","_needText","_lockable","_zheightchanged","_rotate","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_combinationDisplay","_zheightdirection","_abort","_isNear","_need","_needNear","_vehicle","_inVehicle","_requireplot","_objHDiff","_isLandFireDZ","_isTankTrap","_playerID", "_playerUID","_ownerID"];
+private ["_location","_p2badpos","_isBad","_dir","_classname","_item","_hasrequireditem","_missing","_hastoolweapon","_cancel","_reason","_started","_finished","_animState","_isMedic","_dis","_sfx","_hasbuilditem","_tmpbuilt","_onLadder","_isWater","_require","_text","_offset","_IsNearPlot","_isOk","_location1","_location2","_counter","_limit","_proceed","_num_removed","_position","_object","_canBuildOnPlot","_friendlies","_nearestPole","_ownerID","_findNearestPoles","_findNearestPole","_distance","_classnametmp","_ghost","_isPole","_needText","_lockable","_zheightchanged","_rotate","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_combinationDisplay","_zheightdirection","_abort","_isNear","_need","_needNear","_vehicle","_inVehicle","_requireplot","_objHDiff","_isLandFireDZ","_isTankTrap","_playerID", "_playerUID","_ownerID"];
 
 if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_40") , "PLAIN DOWN"]; };
 DZE_ActionInProgress = true;
 
 // disallow building if too many objects are found within DZE_PlotPole select 0
 if((count ((getPosATL player) nearObjects ["All",DZE_PlotPole select 0])) >= DZE_BuildingLimit) exitWith {DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_41"), "PLAIN DOWN"];};
+
+//disallow building if in one of P2DZE_badPlotPlaces
+_isBad = false;
+_p2badpos = nil;
+
+if (isNil "P2DZE_badPlotPlaces") then {
+	P2DZE_badPlotPlaces = [
+		[6897.4219, 11429.939, 0], 
+		[5935.0542, 5355.3545, 1.5258789e-005],
+		[11256.908, 9892.2734, -3.8146973e-006],
+		[13317.989, 12723.604, 1.5258789e-005],
+		[7143.0352, 7209.0063, -3.0517578e-005], 
+		[8871.6924, 8759.8994, -3.0517578e-005],
+		[9179.6484, 9642.6465, 0.00015258789],
+		[9770.8359, 10999.466, 7.6293945e-005],
+		[9991.2637, 12358.043, 0],
+		[7168.6616, 10378.236, 3.0517578e-005],
+		[5267.0698, 11725.927, 0],
+		[3874.012, 12074.601, -6.1035156e-005],
+		[2246.4185, 11197.324, 0.00012207031],
+		[5295.1411, 9639.2891, 0],
+		[4825.2813, 10786.549, 0],
+		[9186.5449, 7151.8335, 3.0517578e-005],
+		[12068.737, 5884.4365, 6.1035156e-005],
+		[11628.901, 4702.979, 4.5776367e-005],
+		[8435.8506, 4414.5776, -9.1552734e-005],
+		[6719.5049, 5021.0469, 0],
+		[5385.2637, 5052.3374, 0.00021362305],
+		[4552.0649, 3417.5769, -2.2888184e-005],
+		[2358.7024, 3672.6147, 0],
+		[5197.8809, 6910.9766, 6.1035156e-005],
+		[5807.0044, 6050.1514, -1.5258789e-005],
+		[7394.5854, 6512.0566, 1.5258789e-005],
+		[7631.8462, 6671.0298, 3.0517578e-005]
+	];
+};
+
+{
+	_p2badpos = _x;
+	if (!isNil "_p2badpos") then {
+		diag_log(format["Dist: %1", getPosATL player distance _p2badpos]);
+  		if ((getPosATL player distance _p2badpos) < 350) then {
+  			_isBad = true;
+  		};
+	};
+} count P2DZE_badPlotPlaces;
+
+if (!isNil "_isBad") then {
+	if (_isBad) exitWith {
+		DZE_ActionInProgress = false;
+		diag_log ("This land is reserved for server events. You cannot build here.");
+	};
+};
 
 _onLadder =		(getNumber (configFile >> "CfgMovesMaleSdr" >> "States" >> (animationState player) >> "onLadder")) == 1;
 _isWater = 		dayz_isSwimming;
