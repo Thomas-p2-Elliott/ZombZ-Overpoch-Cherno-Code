@@ -121,92 +121,109 @@ if (hasInterface && !isDedicated) then {
 	[] spawn {
 		waitUntil {!isNil "dayz_gui"};
 
-		_bank1 = createMarker ["Drozhina", [3847.0142, 4787.8877, 1.5258789e-005]];
-		_bank1 setMarkerText "Drozlovka Town";
-		_bank1 setMarkerType "Defend";
-		_bank1 setMarkerColor "ColorGreenAlpha";
-		bank1 = _bank1;
+		_marker1 = createMarker ["Drozhina", [3847.0142, 4787.8877, 1.5258789e-005]];
+		_marker1 setMarkerText "Drozlovka Town";
+		_marker1 setMarkerType "Defend";
+		_marker1 setMarkerColor "ColorGreenAlpha";
+		marker1 = _marker1;
 
-		_bank2 = createMarker ["NEA", [12199.364, 12736.952, 0.22427459]];
-		_bank2 setMarkerText "International Airport";
-		_bank2 setMarkerType "Defend";
-		_bank2 setMarkerColor "ColorRedAlpha";
-		bank2 = _bank2;
+		_marker2 = createMarker ["NEA", [12199.364, 12736.952, 0.22427459]];
+		_marker2 setMarkerText "International Airport";
+		_marker2 setMarkerType "Defend";
+		_marker2 setMarkerColor "ColorRedAlpha";
+		marker2 = _marker2;
 
-		_bank3 = createMarker ["NovyLug", [9577.7266, 11299.333, 0.4098191]];
-		_bank3 setMarkerText "Novy Lug Outpost";
-		_bank3 setMarkerType "Defend";
-		_bank3 setMarkerColor "ColorRedAlpha";
-		bank3 = _bank3;
+		_marker3 = createMarker ["NovyLug", [9577.7266, 11299.333, 0.4098191]];
+		_marker3 setMarkerText "Novy Lug Outpost";
+		_marker3 setMarkerType "Defend";
+		_marker3 setMarkerColor "ColorRedAlpha";
+		marker3 = _marker3;
 
-		_bank4 = createMarker ["NWA", [4874.4219, 9974.2324, 0.11848836]];
-		_bank4 setMarkerText "Military Airbase";
-		_bank4 setMarkerType "Defend";
-		_bank4 setMarkerColor "ColorRedAlpha";
-		bank4 = _bank4;
+		_marker4 = createMarker ["NWA", [4874.4219, 9974.2324, 0.11848836]];
+		_marker4 setMarkerText "Military Airbase";
+		_marker4 setMarkerType "Defend";
+		_marker4 setMarkerColor "ColorRedAlpha";
+		marker4 = _marker4;
 
-		_bank5 = createMarker ["Skalka Town", [1902.0646, 11947.333, 2]];
-		_bank5 setMarkerText "Winterfell City";
-		_bank5 setMarkerType "Defend";
-		_bank5 setMarkerColor "ColorGreenAlpha";
-		bank5 = _bank5;
+		_marker5 = createMarker ["Skalka Town", [1902.0646, 11947.333, 2]];
+		_marker5 setMarkerText "Winterfell City";
+		_marker5 setMarkerType "Defend";
+		_marker5 setMarkerColor "ColorGreenAlpha";
+		marker5 = _marker5;
 
-		_bank6 = createMarker ["Skalka Outpost", [2282.0522, 10825.35, 1]];
-		_bank6 setMarkerText "Winterfell Outpost";
-		_bank6 setMarkerType "Defend";
-		_bank6 setMarkerColor "ColorRedAlpha";
-		bank6 = _bank6;
+		_marker6 = createMarker ["Skalka Outpost", [2282.0522, 10825.35, 1]];
+		_marker6 setMarkerText "Winterfell Outpost";
+		_marker6 setMarkerType "Defend";
+		_marker6 setMarkerColor "ColorRedAlpha";
+		marker6 = _marker6;
 
-		_bank7 = createMarker ["Balota Outpost", [4048.4211, 2613.1758, 2]];
-		_bank7 setMarkerText "Abandoned US Armory";
-		_bank7 setMarkerType "Faction_US";
-		_bank7 setMarkerColor "ColorRedAlpha";
-		bank7 = _bank7;
+		_marker7 = createMarker ["Balota Outpost", [4048.4211, 2613.1758, 2]];
+		_marker7 setMarkerText "Abandoned US Armory";
+		_marker7 setMarkerType "Faction_US";
+		_marker7 setMarkerColor "ColorRedAlpha";
+		marker7 = _marker7;
 
-		_bank8 = createMarker ["Zelengorsk", [2501.8564, 5090.1445, 0.014888633]];
-		_bank8 setMarkerText "Zelengorsk Hospital";
-		_bank8 setMarkerType "Defend";
-		_bank8 setMarkerColor "ColorGreenAlpha";
-		bank8 = _bank8;
+		_marker8 = createMarker ["Zelengorsk", [2501.8564, 5090.1445, 0.014888633]];
+		_marker8 setMarkerText "Zelengorsk Hospital";
+		_marker8 setMarkerType "Defend";
+		_marker8 setMarkerColor "ColorGreenAlpha";
+		marker8 = _marker8;
 
-		_bank9 = createMarker ["SurvivorCity", [6549.8652, 14154.829, 0.16039793]];
-		_bank9 setMarkerText "Smugglers Airfield";
-		_bank9 setMarkerType "Attack";
-		_bank9 setMarkerColor "ColorBlue";
-		bank9 = _bank9;
+		_marker9 = createMarker ["SurvivorCity", [6549.8652, 14154.829, 0.16039793]];
+		_marker9 setMarkerText "Smugglers Airfield";
+		_marker9 setMarkerType "Attack";
+		_marker9 setMarkerColor "ColorBlue";
+		marker9 = _marker9;
 
-		_bank9 = createMarker ["KumyrnaOutpost", [8355.7813, 5918.0068, 3.0517578e-005]];
-		_bank9 setMarkerText "Ruins of Kumyrna";
-		_bank9 setMarkerType "Defend";
-		_bank9 setMarkerColor "ColorGreenAlpha";
-		bank9 = _bank9;
+		_marker9 = createMarker ["KumyrnaOutpost", [8355.7813, 5918.0068, 3.0517578e-005]];
+		_marker9 setMarkerText "Ruins of Kumyrna";
+		_marker9 setMarkerType "Defend";
+		_marker9 setMarkerColor "ColorGreenAlpha";
+		marker9 = _marker9;
 
-		_bank10 = createMarker ["MogilevkaCheckpoint", [8245.3574, 4897.6006, 3.0517578e-005]];
-		_bank10 setMarkerText "Abandoned Checkpoint";
-		_bank10 setMarkerType "Defend";
-		_bank10 setMarkerColor "ColorRedAlpha";
-		bank10 = _bank10;
+		_marker10 = createMarker ["MogilevkaCheckpoint", [8245.3574, 4897.6006, 3.0517578e-005]];
+		_marker10 setMarkerText "Abandoned Checkpoint";
+		_marker10 setMarkerType "Defend";
+		_marker10 setMarkerColor "ColorRedAlpha";
+		marker10 = _marker10;
 
-		_bank11 = createMarker ["KamenkaTents", [1117.6555, 2455.2349, 2.2888184e-005]];
-		_bank11 setMarkerText "Abandoned Camp";
-		_bank11 setMarkerType "Defend";
-		_bank11 setMarkerColor "ColorGreenAlpha";
-		bank11 = _bank11;
+		_marker11 = createMarker ["KamenkaTents", [1117.6555, 2455.2349, 2.2888184e-005]];
+		_marker11 setMarkerText "Abandoned Camp";
+		_marker11 setMarkerType "Defend";
+		_marker11 setMarkerColor "ColorGreenAlpha";
+		marker11 = _marker11;
 
-		_bank12 = createMarker ["Gorka", [9788.2813, 8763.2217, 1]];
-		_bank12 setMarkerText "Gorka Defence Force HQ";
-		_bank12 setMarkerType "Defend";
-		_bank12 setMarkerColor "ColorRedAlpha";
-		bank12 = _bank12;
+		_marker12 = createMarker ["Gorka", [9788.2813, 8763.2217, 1]];
+		_marker12 setMarkerText "Gorka Defence Force HQ";
+		_marker12 setMarkerType "Defend";
+		_marker12 setMarkerColor "ColorRedAlpha";
+		marker12 = _marker12;
 
-		_bank13 = createMarker ["KamyshovoRoadblock", [12985.606, 3800.031, -1.6689301e-005]];
-		_bank13 setMarkerText "Abandoned Roadblock";
-		_bank13 setMarkerType "Defend";
-		_bank13 setMarkerColor "ColorGreenAlpha";
-		bank13 = _bank13;
-	};
+		_marker13 = createMarker ["KamyshovoRoadblock", [12985.606, 3800.031, -1.6689301e-005]];
+		_marker13 setMarkerText "Abandoned Roadblock";
+		_marker13 setMarkerType "Defend";
+		_marker13 setMarkerColor "ColorGreenAlpha";
+		marker13 = _marker13;
+
+		_marker14 = createMarker ["Devils Castle AI", [6888.728, 11427.035]];
+		_marker14 setMarkerText "Bandit Fortress";
+		_marker14 setMarkerType "Flag";
+		_marker14 setMarkerColor "ColorBlue";
+		_marker14 setMarkerShape "ELLIPSE";
+		_marker14 setMarkerBrush "Grid";
+		_marker14 setMarkerSize [300,300];
+		marker14 = _marker14;
+
+		_marker15 = createMarker ["Devils Castle AI Map Text", [6898.5972, 11431.343]];
+		_marker15 setMarkerText "Bandit Fortress";
+		_marker15 setMarkerType "selector_selectedEnemy";
+		_marker15 setMarkerColor "ColorYellow";
+		_marker15 setMarkerBrush "Solid";
+		marker15 = _marker15;
+
+		};
 
 };
 
 /*---------------------------------------------------------------------------
----------------------------------------------------------------------------*/
+-------------------sensi--------------------------------------------------------*/
