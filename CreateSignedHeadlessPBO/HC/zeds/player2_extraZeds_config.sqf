@@ -47,11 +47,11 @@ dayz_losCheck = {
 };
 
 //Headless Client Function Paths
-player2_zedAntiStuck =			compile preprocessFileLineNumbers "HC\zeds\player2_zedAntiStuck.sqf";
-zombie_loiterHC = 				compile preprocessFileLineNumbers "HC\zeds\zombie_loiterHC.sqf";
-player2_spawnZombieHC =			compile preprocessFileLineNumbers "HC\zeds\player2_spawnZombieHC.sqf";
-player2_spawnZedsHC = 			compile preprocessFileLineNumbers "HC\zeds\player2_spawnZedsHC.sqf"; 
-nearest_player = 				compile preprocessFileLineNumbers "HC\zeds\nearest_player.sqf"; 
+player2_zedAntiStuck =			compile preprocessFileLineNumbers "zombzHC\addonszeds\player2_zedAntiStuck.sqf";
+zombie_loiterHC = 				compile preprocessFileLineNumbers "zombzHC\addonszeds\zombie_loiterHC.sqf";
+player2_spawnZombieHC =			compile preprocessFileLineNumbers "zombzHC\addonszeds\player2_spawnZombieHC.sqf";
+player2_spawnZedsHC = 			compile preprocessFileLineNumbers "zombzHC\addonszeds\player2_spawnZedsHC.sqf"; 
+nearest_player = 				compile preprocessFileLineNumbers "zombzHC\addonszeds\nearest_player.sqf"; 
 call 	 						compile preprocessFileLineNumbers "init\loot_init.sqf";
 
 //tell main code that I've finished setting up the configuration

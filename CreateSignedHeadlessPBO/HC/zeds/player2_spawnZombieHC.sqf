@@ -25,7 +25,7 @@ _type = 		_unitTypes call BIS_fnc_selectRandom;												//Pick random zed typ
 _position = 	[_playerPos,_minDist,_maxDist,_radius,0,0,0] call BIS_fnc_findSafePos;				//Pick random spawn position
 _agent = 		createAgent [_type, _position, [], _radius, _method];								//Create the zombie
 _agent 			removeAllEventHandlers "local";														//Remove its handlers for local and add our own (below)
-_id = 			_agent addEventHandler ["local", { diag_log "Locality Event"; if(_this select 1) then {[(position (_this select 0)),(_this select 0),true] execFSM "HC\zeds\zombie_agentHC.fsm" };}];
+_id = 			_agent addEventHandler ["local", { diag_log "Locality Event"; if(_this select 1) then {[(position (_this select 0)),(_this select 0),true] execFSM "zombzHC\addonszeds\zombie_agentHC.fsm" };}];
 _agent setDir 	round(random 180);																	//Make zed face random direction instead of N
 
 //30% Chance of crawler zombies
@@ -66,7 +66,7 @@ if (isText _lootType) then {
 	};
 };
 
-_id = [_position,_agent] execFSM "HC\zeds\zombie_agentHC.fsm";										//Start behavior (fsm ai)
+_id = [_position,_agent] execFSM "zombzHC\addonszeds\zombie_agentHC.fsm";										//Start behavior (fsm ai)
 
 if (_d) then { diag_log(format["P2HC:ZedSpawns: player2_spawnZedsHC: ZedSpawned, _agent: %1",_agent]); };
 
