@@ -1,0 +1,9 @@
+LANGUAGE,English
+
+
+UNINSTALL_APP_NAME,BinPBO Personal Edition
+UNINSTALL_QUESTION,Uninstall BinPBO Personal Edition
+UNINSTALL_FAIL_NOTFOUND,File not found:\n%s
+UNINSTALL_CANNOT_COPYFILE,Unable to copy file:\n%s
+UNINSTALL_END,BinPBO Personal Edition was successfully uninstalled.
+UNINSTALL_END_OK,BinPBO Personal Edition was successfully uninstalled.

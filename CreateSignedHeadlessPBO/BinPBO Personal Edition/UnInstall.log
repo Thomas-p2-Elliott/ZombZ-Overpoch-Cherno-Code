@@ -1,0 +1,50 @@
+BinPBO Personal Edition
+D:C:\Users
+D:C:\Users\Player2
+D:C:\Users\Player2\DayZ
+D:C:\Users\Player2\DayZ\Tools
+D:C:\Users\Player2\DayZ\Tools\BI Tool Drive
+D:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition
+F:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition\.\BinPBO.exe
+D:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition\DSSignFile
+F:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition\.\DSSignFile\DSSignFile.exe
+D:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition\filebank
+F:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition\.\filebank\exclude.lst
+F:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition\.\filebank\FileBank.exe
+F:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition\.\filebank\readme.txt
+F:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition\.\readme.doc
+F:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition\.\readme.txt
+F:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition\.\Uninstall.csv
+F:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition\.\UnInstall.exe
+D:C:\Users\Player2\AppData
+D:C:\Users\Player2\AppData\Roaming
+D:C:\Users\Player2\AppData\Roaming\Microsoft
+D:C:\Users\Player2\AppData\Roaming\Microsoft\Windows
+D:C:\Users\Player2\AppData\Roaming\Microsoft\Windows\Start Menu
+D:C:\Users\Player2\AppData\Roaming\Microsoft\Windows\Start Menu\Programs
+D:C:\Users\Player2\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Bohemia Interactive
+D:C:\Users\Player2\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Bohemia Interactive\Tools
+D:C:\Users\Player2\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Bohemia Interactive\Tools\BinPBO Personal Edition
+F:C:\Users\Player2\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Bohemia Interactive\Tools\BinPBO Personal Edition\BinPBO Personal Edition.lnk
+F:C:\Users\Player2\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Bohemia Interactive\Tools\BinPBO Personal Edition\Uninstall BinPBO Personal Edition.lnk
+F:C:\Users\Player2\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Bohemia Interactive\Tools\BinPBO Personal Edition\Show ReadMe file.lnk
+K:Software\Microsoft\Windows\CurrentVersion\Uninstall\BinPBO Personal Edition
+K:Software\Bohemia Interactive\BinPBO Personal Edition
+K:SOFTWARE\BIStudio\BinMake
+K:SOFTWARE\BIStudio\FileBank
+K:SOFTWARE\BIStudio\dsSignFile
+U:Software\Bohemia Interactive\PBOPacker:ARMAREGPATH
+U:Software\Bohemia Interactive\PBOPacker:DestPATH
+U:Software\Bohemia Interactive\PBOPacker:SourcePATH
+U:Software\Bohemia Interactive\PBOPacker:TempPATH
+U:Software\Bohemia Interactive\PBOPacker:Project path
+U:Software\Bohemia Interactive\PBOPacker:Addon prefix
+U:Software\Bohemia Interactive\PBOPacker:White list
+U:Software\Bohemia Interactive\PBOPacker:Signature file
+U:Software\Bohemia Interactive\PBOPacker:Use signatures
+U:Software\Bohemia Interactive\PBOPacker:Using project
+U:Software\Bohemia Interactive\PBOPacker:Force Binarize
+U:Software\Bohemia Interactive\PBOPacker:Clear temp
+U:Software\Bohemia Interactive\PBOPacker:Use addon prefix
+U:Software\Bohemia Interactive\PBOPacker:Create log
+F:C:\Users\Player2\DayZ\Tools\BI Tool Drive\BinPBO Personal Edition\UnInstall.log
