@@ -5,8 +5,8 @@ Extra Zeds (Headless Client) by Player2
 ---------------------------------------------------------------------------*/
 diag_log(format["P2HC:ZedSpawns: Initializing: %1",__FILE__]); //log output (can delete if you want)
 P2DZ_HC_playerZedRadius =			300;	//Distance around the player we should check for zeds 	(meters)
-P2DZ_HC_maxZedsPerPlayer = 			15;		//Max zeds around a player at a time 					(number)
-P2DZ_HC_globalMaxZeds = 			600;	//Max zeds on server 			 						(number)
+P2DZ_HC_maxZedsPerPlayer = 			5;		//Max zeds around a player at a time 					(number)
+P2DZ_HC_globalMaxZeds = 			100;	//Max zeds on server 			 						(number)
 P2DZ_HC_zedRespawnTime	=			180;	//Time between checks for spawning new zeds 			(secs)
 P2DZ_HC_playerSpeedCap =			26;		//Max player speed for zeds to spawn (sprint=25kmh)		(kmh)
 P2DZ_HC_ExtraZedsDebug 	=			false;	//Enables/disables logging outputs 						(boolean)

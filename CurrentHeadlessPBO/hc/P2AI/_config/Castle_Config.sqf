@@ -4,7 +4,7 @@ Devils Castle Missions
 // Do you want AI Fortress at Devils Castle?
 P2AI_Devils_Enabled = true;
 //amount of AI to keep at fortress
-P2AI_DcAI_Amount = 35; 
+P2AI_DcAI_Amount = 20; 
 //amount of minutes before respawn check
 P2AI_DC_resSleep = 45;
 //spawn point of ai fortress

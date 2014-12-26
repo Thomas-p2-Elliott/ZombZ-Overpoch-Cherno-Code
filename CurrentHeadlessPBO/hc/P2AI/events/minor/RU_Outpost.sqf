@@ -16,7 +16,7 @@ _gps = mapGridPosition _coords;
 P2DZE_guiMsg = [
 	"Event Notification: Major Mission",
 	format["The U.N. have spotted a bandit outpost at %1, kill them for humanity and their loot!", _gps],
-	"img\un.paa",
+	"img\ru.paa",
 	5,
 	0
 ];

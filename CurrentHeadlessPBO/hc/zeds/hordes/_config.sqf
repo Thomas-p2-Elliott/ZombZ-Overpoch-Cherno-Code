@@ -2,7 +2,7 @@
 	Player2's Zombie Horde Configuration
 ---------------------------------------------------------------------------*/
 P2DZ_HC_ZHorde_HordeCount = 			2;						//Amount of hordes
-P2DZ_HC_ZHorde_ZombiesPerHorde = 		50;						//Amount of zombies per horde
+P2DZ_HC_ZHorde_ZombiesPerHorde = 		20;						//Amount of zombies per horde
 P2DZ_HC_ZHorde_HordeRespawnPerc = 		10;						//Horde Respawn Threshold Percentage (Eg, 10 if you want the horde to respawn when only 10% of P2DZ_HC_ZHorde_ZombiesPerHorde remain)
 P2DZ_HC_ZHorde_TriggerWaypointNames = 	["Horde1","Horde2"]; 	//Name of horde waypoint variables (P2DZ_HC_ZHorde_TriggerWayp_%VarName%)
 P2DZ_HC_ZHorde_PathWaypointNames = 		["Horde1","Horde2"]; 	//Name of horde waypoint variables (P2DZ_HC_ZHorde_PathWayp_%VarName%)
