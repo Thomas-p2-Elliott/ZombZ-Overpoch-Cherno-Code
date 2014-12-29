@@ -37,13 +37,13 @@ if (hasInterface && !isDedicated) then {
 	DZE_R3F_WEIGHT = false;
 
 	//how often should we ask the server to save the char
-	DZE_SaveTime = 90;
+	DZE_SaveTime = 240;
 
 	//default debug monitor colour - gets overwritten by hivedll but still needs to be declared!
 	P2DZE_debugCol = [0,0,0,0.2];
 
 	//Loadscreen Timeout Length (Seconds) (Default: 120)
-	P2DZ_LoadingTimeOut = 45;
+	P2DZ_LoadingTimeOut = 300;
 
 	/* Default Client Performance/Visual Settings */
 
@@ -63,13 +63,13 @@ if (hasInterface && !isDedicated) then {
 	dayz_lootWait =			-300;
 
 	//Max global zeds
-	dayz_maxGlobalZeds = 3000;
+	dayz_maxGlobalZeds = 400;
 
 	//Maximum zeds (client-side)
 	dayz_maxLocalZombies = 15;
 
 	// max quantity of Z controlled by local gameclient, used by player_spawnCheck. Below this limit we can spawn Z
-	dayz_maxNearByZombies = 50; 
+	dayz_maxNearByZombies = 15; 
 
 	//Maximum global zombies per 400m
 	dayz_maxGlobalZombiesInit = 15;
@@ -203,6 +203,17 @@ if (hasInterface && !isDedicated) then {
 		_bank13 setMarkerType "Defend";
 		_bank13 setMarkerColor "ColorGreenAlpha";
 		bank13 = _bank13;
+
+		_bank14 = createMarker ["Devils Castle AI", [6888.728, 11427.035, 1]];
+		_bank14 setMarkerText "Bandit Fortress";
+		_bank14 setMarkerShape "ELLIPSE";
+		_bank14 setMarkerType "Flag";
+		_bank14 setMarkerColor "ColorBlue";
+		_bank14 setMarkerBrush "Grid";
+		_bank14 setMarkerSize [300, 300];
+		bank14 = _bank14;
+	
+
 	};
 
 };
