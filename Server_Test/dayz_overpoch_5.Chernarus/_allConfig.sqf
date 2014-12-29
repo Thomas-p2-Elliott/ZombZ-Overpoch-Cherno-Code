@@ -6,13 +6,13 @@ Global Settings - Client, Server, and Headless Client
 dayZ_instance =	11;		
 
 //Set the server number - Used for gold logs
-GORSYSERVERNUMBER = 1;
+GORSYSERVERNUMBER = 5;
 
 //Sets text in escape menu & Any non-gold Server Logs
-P2DZ_serverName = "1";
+P2DZ_serverName = "Test";
 
 //Server notification file name
-ZombZ_Notif_File_Name = "notification_op1";
+ZombZ_Notif_File_Name = "notification_op5";
 
 //Spawn Location Settings
 spawnShoremode = 1; 		// Default = 1 (on shore)

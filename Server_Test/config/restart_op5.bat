@@ -14,15 +14,15 @@ D:
 ::Set the server exe folder
 set ServerFolder=D:\SteamLibrary\steamapps\common\Arma 2 Operation Arrowhead
 ::Set the server exe file name
-set ExeFile=overpoch_s1
+set ExeFile=overpoch_s5
 ::	Set the server pbo folder name
-set ServerPbo=@OverpochServer_1
+set ServerPbo=@OverpochServer_5
 ::	Set the mission file folder name
-set MissionPbo=dayz_overpoch_zombz_1.Chernarus
+set MissionPbo=dayz_overpoch_zombz_5.Chernarus
 ::	Set the server config folder name
 set ConfigFolder=config_overpoch_1
 ::	Set the server config file name (include file extension)
-set ConfigFile=config_zombz_1.cfg
+set ConfigFile=config_zombz_5.cfg
 :: 	Set the network config file name (include file extension)
 set netConfigFile=network.cfg
 ::	Set the server game port (steamport and steamquery port set through ConfigFile)
@@ -30,17 +30,17 @@ set Port=6666
 ::	Set the servers mods (-mod param)
 set ServerMods=@DayzOverwatch;@DayZ_Epoch;%ServerPbo%;@Arma2NET;
 ::	Set the server max cpu core usage (must be used in conjunction with a proper affinity, for more than 2 cores nocb cannot be used in launch opts)
-set CPUCount=4
+set CPUCount=1
 ::	Set the cpu core(s) affinity (see chart at bottom for help)
-set CPUAffinity=AA
+set CPUAffinity=9
 ::  Set the server max RAM (-maxMem param, 2047 is max)
 set MaxRAM=2047
 
 ::	Set any additional launch options (noCB disables multi-core, noLogs disables script error log) 
 ::	Test Server Version
-::set LaunchOpts=-bandwidthAlg=2 -noCB
+set LaunchOpts=-bandwidthAlg=2 -noCB -noLogs
 ::	Live Server Version:
-set LaunchOpts=-bandwidthAlg=2 -noLogs
+::set LaunchOpts=-bandwidthAlg=2 -noLogs
 
 ::CPU Core Affinity Binary/Decimal -> Hex Helper by Player2
 ::DECIMAL			1		2		3		4		5		6		7		8		9		10		11		12		13		14		15

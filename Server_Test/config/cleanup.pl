@@ -17,8 +17,8 @@ $database = "overpoch_test"; 	#Databse Name
 $user = 	"opochTestServer"; 	# Username 
 
 #	Live Server
-#$database = "overpoch_live"; 	#Databse Name
-#$user = 	"opochLiveServer"; 	# Username 
+# $database = "overpoch_live"; 	#Databse Name
+# $user = 	"opochLiveServer"; 	# Username 
 
 $host = "localhost";			# IP
 $port = "3306"; 				# Port (default 3306)

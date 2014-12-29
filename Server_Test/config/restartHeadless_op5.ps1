@@ -8,7 +8,7 @@ Invoke-Command -session $s -ScriptBlock {
     $results = query session;
     $id = $results | Select-String "Administrator\s+(\w+)" |
                          Foreach {$_.Matches[0].Groups[1].Value}
-    & psexec -d -u Administrator -p STsucks6969 -i $id.GetValue(0) "C:\headlessclientrestart\op1\restart.bat";
+    & psexec -d -u Administrator -p STsucks6969 -i $id.GetValue(0) "C:\headlessclientrestart\op5\restart.bat";
 };
 
 
