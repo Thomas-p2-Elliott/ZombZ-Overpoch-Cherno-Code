@@ -1,0 +1,309 @@
+/*Custom Loot Tables By ZombZ.net Gorsy & DJ*/
+#include "CfgLoot\CfgBuildingLoot.hpp"
+#include "CfgServerTrader\CfgServerTrader.hpp"
+respawn = "BASE";
+respawndelay = 5;
+onLoadMission= "DayZ Epoch Chernarus";
+OnLoadIntro = "Welcome to DayZ Epoch Chernarus";
+OnLoadIntroTime = False;
+OnLoadMissionTime = False;
+disabledAI = true;
+disableChannels[]={0,2,6};
+enableItemsDropping = 0;
+
+briefing = 0;
+debriefing = 0;
+
+onPauseScript = "compile\player_onPause.sqf";
+loadScreen = "img\loadimage.paa";
+
+class Header
+{
+ gameType = COOP;            //DM, Team, Coop, ...
+ minPlayers = 1;             //min # of players the mission supports
+ maxPlayers = 101;            //Max # of players the mission supports
+};
+
+aiKills = 1;
+diagRadio = 1;
+diagHit = 1;
+
+class RscText
+{
+	type = 0;
+	idc = -1;
+	x = 0;
+	y = 0;
+	h = 0.037;
+	w = 0.3;
+	style = 0x100; 
+	font = Zeppelin32;
+	SizeEx = 0.03921;
+	colorText[] = {1,1,1,1};
+	colorBackground[] = {0, 0, 0, 0};
+	linespacing = 1;
+};
+class RscPicture
+{
+	access=0;
+	type=0;
+	idc=-1;
+	style=48;
+	colorBackground[]={0,0,0,0};
+	colorText[]={1,1,1,1};
+	font="TahomaB";
+	sizeEx=0;
+	lineSpacing=0;
+	text="";
+};
+class RscLoadingText : RscText
+{
+	style = 2;
+	x = 0.323532;
+	y = 0.666672;
+	w = 0.352944;
+	h = 0.039216;
+	sizeEx = 0.03921;
+	colorText[] = {0.543,0.5742,0.4102,1.0};
+};
+class RscProgress
+{
+	x = 0.344;
+	y = 0.619;
+	w = 0.313726;
+	h = 0.0261438;
+	texture = "\ca\ui\data\loadscreen_progressbar_ca.paa";
+	colorFrame[] = {0,0,0,0};
+	colorBar[] = {1,1,1,1};
+};
+class RscProgressNotFreeze
+{
+	idc = -1;
+	type = 45;
+	style = 0;
+	x = 0.022059;
+	y = 0.911772;
+	w = 0.029412;
+	h = 0.039216;
+	texture = "#(argb,8,8,3)color(0,0,0,0)";
+};
+//
+// the loading screen itself
+//
+class DayZ_loadingScreen
+{ 
+	idd = -1;
+	duration = 10e10;
+	fadein = 0;
+	fadeout = 0;
+	name = "loading screen";
+	class controlsBackground
+	{
+		class blackBG : RscText
+		{
+			x = safezoneX;
+			y = safezoneY;
+			w = safezoneW;
+			h = safezoneH;
+			text = "";
+			colorText[] = {0,0,0,0};
+			colorBackground[] = {0,0,0,1};
+		};
+		/*
+		class nicePic : RscPicture
+		{
+			style = 48 + 0x800; // ST_PICTURE + ST_KEEP_ASPECT_RATIO
+			x = safezoneX + safezoneW/2 - 0.25;
+			y = safezoneY + safezoneH/2 - 0.2;
+			w = 0.5;
+			h = 0.4;
+			text = "img\nicePic.paa";
+		};
+		*/
+	};
+	class controls
+	{
+		class Title1 : RscLoadingText
+		{
+			text = "$STR_LOADING"; // "Loading" text in the middle of the screen
+		};
+		class CA_Progress : RscProgress // progress bar, has to have idc 104
+		{
+			idc = 104;
+			type = 8; // CT_PROGRESS
+			style = 0; // ST_SINGLE
+			texture = "\ca\ui\data\loadscreen_progressbar_ca.paa";
+		};
+		class CA_Progress2 : RscProgressNotFreeze // progress bar that will go reverse
+		{
+			idc = 103;
+		};
+		class Name2: RscText // the text on the top-left
+		{
+			idc = 101;
+			x = 0.05;
+			y = 0.029412;
+			w = 0.9;
+			h = 0.04902;
+			text = "";
+			sizeEx = 0.05;
+			colorText[] = {0.543,0.5742,0.4102,1.0};
+		};
+	};
+};
+//altimeter functions
+class CfgFunctions
+{
+	class ALTIMETER
+	{
+		tag="ALTIMETER";
+		class ALTIMETER
+		{
+			file="compile";
+			class Init
+			{
+				postInit=1;
+			};
+			class KeyPressed
+			{
+			};
+			class AltimData
+			{
+			};
+			class AltimGetData
+			{
+			};
+			class HideCtrl
+			{
+			};
+		};
+	};
+	class A3
+	{
+		class ArmaServerMonitor
+		{
+			file="ASM";
+			class ASM
+			{
+				ext=".fsm";
+				preInit=1;
+			};
+		};
+	};
+};
+/*Custom Sounds + DayZ_Sfx sounds fix by DJ*/
+class CfgSounds
+{
+    sounds[] =
+    {
+    	introSong,
+    	administer_iv_02,
+    	morphine_01,
+    	painkiller_01
+    };
+    //spawn music
+    class introSong
+    {
+	    name="introSong";
+	    sound[]={sounds\introSong.ogg,0.5,1};
+	    titles[] = {};
+    };
+	class administer_iv_02
+	{
+		name="administer_iv_02";
+		sound[]={sounds\administer_iv_02.ogg,1,1};
+		titles[]={};
+	};
+	class morphine_01
+	{
+		name="morphine_01";
+		sound[]={sounds\morphine_01.ogg,1,1};
+		titles[]={};
+	};
+	class painkiller_01
+	{
+		name="painkiller_01";
+		sound[]={sounds\painkiller_01.ogg,1,1};
+		titles[]={};
+	};
+};
+
+//##Snap Build Pro##
+#include "compile\snappoints.hpp"
+//## p2 Extra Right Clickables ##
+#include "configs\rc.hpp"
+//##DJ Skin System##
+#include "configs\ZombZSkins.hpp"
+class RscTitles
+{
+	//hintui
+	#include "configs\zombz_hint.h" 
+	//altimeter
+	#include "configs\altimeter.h"  
+	//notifications
+	#include "configs\p2notif.h"
+};
+
+//# plot management 
+#include "plotManagement\defines.hpp"
+#include "plotManagement\plotManagement.hpp"
+
+//# door management
+#include "doorManagement\defines.hpp"
+#include "doorManagement\doorUnlock.hpp"
+#include "doorManagement\doorManagement.hpp"
+#include "doorManagement\ComboLockUI.hpp"
+
+//inspect vehicle
+#include "configs\inspectvehicles.hpp"
+
+//paint vehicle
+#include "Paint\defines.hpp"
+#include "Paint\vehiclecolour.hpp"
+
+//debugmon colour dialog
+#include "configs\debugcolgui.hpp"
+//gold drop ui
+#include "configs\goldDropUI.hpp"
+
+//#include halo dialogs
+#include "configs\halodefines.hpp"
+#include "configs\halo.hpp"
+
+//options menu
+#include "configs\player2optionsbase.hpp"
+#include "configs\player2options.hpp"
+
+//f1 menu
+#include "configs\menu\defines.hpp"
+#include "configs\menu\menu.hpp"
+#include "configs\menu\lb.hpp"
+//default loadout
+class CfgNewSpawn
+{
+	class Inventory
+	{
+		class Default
+		{
+			magazines[]=
+			{
+				"ItemBandage",
+				"ItemBandage",
+				"ItemPainkiller",
+				"15Rnd_W1866_Slug",
+				"ItemSodaRabbit",
+				"DDOPP_1Rnd_X26",
+				"DDOPP_1Rnd_X26"
+			};
+			weapons[]=
+			{
+				"DDOPP_X26_b",
+				"Winchester1866",
+				"ItemMap",
+				"ItemCompass"
+			};
+			backpackItemsAndWeps="";
+			backpack="DZ_Patrol_Pack_EP1";
+		};
+	};
+};
