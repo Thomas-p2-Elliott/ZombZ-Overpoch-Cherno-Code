@@ -171,7 +171,7 @@ if ((typeName _killer) != "STRING") then
 		_killerName,
 		_weapon,
 		_distance,
-		ServerCurrentTime
+		serverTime
 	];
 	PlayerDeaths set [count PlayerDeaths,_death_record];
 
