@@ -13,7 +13,7 @@ if ((count _this) > 4) then {
 };
 
 if (isNull _character) exitWith {
-//	diag_log ("Player is Null FAILED: Exiting, player sync: " + str(_character));
+	diag_log ("Player is Null FAILED: Exiting, player sync: " + str(_character));
 };
 
 _characterID =	_character getVariable ["CharacterID","0"];
@@ -25,15 +25,15 @@ _humanity =		0;
 //diag_log ("DW_DEBUG: (isnil _characterID): " + str(isnil "_characterID"));
 _name = if (alive _character) then { name _character; } else { "Dead Player"; };
 if (_character isKindOf "Animal") exitWith {
-//	diag_log ("ERROR: Cannot Sync Character " + (_name) + " is an Animal class");
+	diag_log ("ERROR: Cannot Sync Character " + (_name) + " is an Animal class");
 };
 
 if (isnil "_characterID") exitWith {
-//	diag_log ("ERROR: Cannot Sync Character " + (_name) + " has nil characterID");	
+	diag_log ("ERROR: Cannot Sync Character " + (_name) + " has nil characterID");	
 };
 
 if (_characterID == "0") exitWith {
-//	diag_log ("ERROR: Cannot Sync Character " + (_name) + " as no characterID");
+	diag_log ("ERROR: Cannot Sync Character " + (_name) + " as no characterID");
 };
 
 private["_debug","_distance"];

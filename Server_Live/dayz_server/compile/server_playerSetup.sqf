@@ -1,6 +1,6 @@
 private ["_debugMonSettings","_output","_given","_characterID","_playerObj","_playerID","_spawnSelection","_dummy","_worldspace","_state","_doLoop","_key","_primary","_medical","_stats","_humanity","_lastinstance","_friendlies","_randomSpot","_position","_debug","_distance","_hit","_fractures","_score","_findSpot","_pos","_isIsland","_w","_clientID","_spawnMC","_namespace"];
 
-//diag_log ("SETUP: attempted with _this: " + str(_this));
+diag_log ("SETUP: attempted with _this: " + str(_this));
 _characterID = _this select 0;
 _playerObj = _this select 1;
 _playerID = getPlayerUID _playerObj;
@@ -145,7 +145,7 @@ _given = false; //used for gold
 
 //set gold values
 if (count _currentCharGoldArr > 0) then {
-
+	/* Newspawn gold disabled
 	if ((_playerID in P2DZ_newSpawnsNeedingGold) && P2DZ_giveNewSpawnsGold && (P2DZ_newSpawnGoldAmount > 0) && (_currentCharGold < 1)) then {
 		_output = false;
 		_output = ((serverTime - (P2DZ_newSpawnsNeedingGold select ((P2DZ_newSpawnsNeedingGold find _playerID) + 1))) < 120); 
@@ -162,7 +162,7 @@ if (count _currentCharGoldArr > 0) then {
 	 		_given = true;
 	 	};
 	};
-
+	*/
 	
 	if (!_given) then {
 	//	diag_log("P2DEBUG: No Newspawn Gold!"); // test server
@@ -182,13 +182,15 @@ if (count _currentCharGoldArr > 0) then {
 };
 
 //make sure player is removed from new spawns needing gold if they get past this point no matter what!
+/*
 _output = false;
 _output = ((serverTime - (P2DZ_newSpawnsNeedingGold select ((P2DZ_newSpawnsNeedingGold find _playerID) + 1))) < 120); 
-if (isNil "_output") then { _output = false; }; 
+if (isNil "_output") then { _output = false; };  
 if (_output) then {
 	P2DZ_newSpawnsNeedingGold = P2DZ_newSpawnsNeedingGold - [(P2DZ_newSpawnsNeedingGold select ((P2DZ_newSpawnsNeedingGold find _playerID) + 1))];
 	P2DZ_newSpawnsNeedingGold = P2DZ_newSpawnsNeedingGold - [_playerID];
 };
+*/
 
 //destroy vars
 _output = nil;
@@ -358,7 +360,7 @@ if (!isNull _playerObj) then {
 _playerObj setVariable ["lastTime",time];
 //_playerObj setVariable ["model_CHK",typeOf _playerObj];
 
-//diag_log ("P2DEBUG: LOGIN PUBLISHING: " + str(_playerObj) + " Type: " + (typeOf _playerObj));
+diag_log ("P2DEBUG: LOGIN PUBLISHING: " + str(_playerObj) + " Type: " + (typeOf _playerObj));
 
 PVDZE_plr_Login = nil;
 PVDZE_plr_Login2 = nil;
