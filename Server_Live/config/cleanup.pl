@@ -13,12 +13,12 @@ print "\n\nGORSYS AWESOME CLEANUP TOOL\n---------------------------------------\
 # Database Info
 $platform = "mysql";
 #	Test Server
-$database = "overpoch_test"; 	#Databse Name
-$user = 	"opochTestServer"; 	# Username 
+# $database = "overpoch_test"; 	#Databse Name
+# $user = 	"opochTestServer"; 	# Username 
 
 #	Live Server
-#$database = "overpoch_live"; 	#Databse Name
-#$user = 	"opochLiveServer"; 	# Username 
+$database = "overpoch_live"; 	#Databse Name
+$user = 	"opochLiveServer"; 	# Username 
 
 $host = "localhost";			# IP
 $port = "3306"; 				# Port (default 3306)
