@@ -32,7 +32,7 @@ set ServerMods=@DayzOverwatch;@DayZ_Epoch;%ServerPbo%;@Arma2NET;
 ::	Set the server max cpu core usage (must be used in conjunction with a proper affinity, for more than 2 cores nocb cannot be used in launch opts)
 set CPUCount=1
 ::	Set the cpu core(s) affinity (see chart at bottom for help)
-set CPUAffinity=9
+set CPUAffinity=2
 ::  Set the server max RAM (-maxMem param, 2047 is max)
 set MaxRAM=2047
 
