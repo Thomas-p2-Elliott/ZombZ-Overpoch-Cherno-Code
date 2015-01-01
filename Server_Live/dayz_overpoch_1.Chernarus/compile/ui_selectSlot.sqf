@@ -6,6 +6,14 @@ _parent = 	findDisplay 106;
 
 //if ((time - dayzClickTime) < 1) exitWith {};
 if (!DZE_SelfTransfuse && ((gearSlotData _control) == "ItemBloodBag")) exitWith {};
+
+
+//block actions for: vil_20Rnd_762x51_G3 & vil_20Rnd_762x51_SG & vil_30Rnd_762x51_SG
+if (((gearSlotData _control) == "vil_20Rnd_762x51_G3")) exitWith {};
+if (((gearSlotData _control) == "vil_20Rnd_762x51_SG")) exitWith {};
+if (((gearSlotData _control) == "vil_30Rnd_762x51_SG")) exitWith {};
+
+
 if (_button == 1) then {
 	//dayzClickTime = time;
 	_group = _parent displayCtrl 6902;
@@ -22,12 +30,11 @@ if (_button == 1) then {
 	};
 	_name = getText(_conf >> "displayName");
 	
-
 	_cfgActions = _conf >> "ItemActions";
 	_numActions = (count _cfgActions);
 	_height = 0;
 
-	//Block standard RC options for gold bars!
+	//Block standard RC options for gold bars 
 	if !(_item == "ItemGoldBar10oz") then 
 	{
 		for "_i" from 0 to (_numActions - 1) do 
