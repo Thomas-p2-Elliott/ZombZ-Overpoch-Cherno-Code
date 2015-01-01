@@ -8,11 +8,11 @@ class ExtraRc {
     class ItemToolbox {
         class Use {
             text = "Build Bike";
-            script = "execVM ""actions\deploys\bike\deploy.sqf""";
+            script = "closeDialog 0; execVM ""actions\deploys\bike\deploy.sqf""";
         };
         class Use2 {
             text = "Build GyroCopter";
-            script = "execVM ""actions\deploys\gyro\deploy.sqf""";
+            script = "closeDialog 0; execVM ""actions\deploys\gyro\deploy.sqf""";
         };
     };
     class Binocular_Vector  {
