@@ -3,7 +3,7 @@
         Please request permission to use/alter/distribute from project leader (R4Z0R49)
 		Modified for DayZ Epoch by [VB]AWOL vbawol@veteranbastards.com.
 */
-private ["_lootChance"];
+private ["_lootChance","_findNearestPole","_findNearestPoles","_IsNearPlot","_IsNearPlot"];
 _obj = _this;
 
 // lower case to prevent issues with differing case for buildings from map to map.
@@ -47,6 +47,22 @@ _bias = (_bias + random(100 - _bias)) / 100;
 		_rnd = (random 1) / _bias;
 		_iPos = _obj modelToWorld _x;
 		_nearBy = nearestObjects [_iPos, ["ReammoBox"], 2];
+
+		_findNearestPoles = nearestObjects [_iPos, ["Plastic_Pole_EP1_DZ"], 75];
+		_findNearestPole = [];
+
+		{
+			if (alive _x) then {
+				_findNearestPole set [(count _findNearestPole),_x];
+			};
+		} count _findNearestPoles;
+
+		_IsNearPlot = count (_findNearestPole);
+
+		// If building is near plot pole then no loot will spawn :)
+		if(_IsNearPlot > 0) then {
+			_lootChance = -1;
+		};
 
 		if (count _nearBy > 0) then {
 			_lootChance = _lootChance + 0.05;
