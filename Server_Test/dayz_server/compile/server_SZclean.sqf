@@ -69,14 +69,14 @@ if(isNil "HALV_VEHICLE_CLEANUPZONES")then{
 			if (_p2d) then { diag_log format["%2: Cleanup zones for chernarus selected! (check: %1)",_WorldName,_txt]; }; //logging if right worldname was selected, if uncommented
 			HALV_VEHICLE_CLEANUPZONES = [
 			//position					radius		cityname/text
-			[[12060.471,12638.533,0], 	100,	"Aircraft Dealer"],
+			[[12060.471,12638.533,0], 	75,		"Aircraft Dealer"],
 			[[1606.6443,7803.5156,0],	100,	"Bandit Camp"],
 			[[13532.614,6355.9497,0],	10,		"Boat Dealer East"],
 			[[7989.3354,2900.9946,0],	10,		"Boat Dealer South"],
 			[[12944.227,12766.889,0],	50,		"Hero Camp"],
 			[[4063.4226,11664.19,0],	100,	"Trader City Bash"],
-			[[11447.472,11364.504,0],	100,	"Trader City Klen"],
-			[[6326.4805,7809.4888,0],	150,	"Trader City Stary"]
+			[[11447.472,11364.504,0],	50,		"Trader City Klen"],
+			[[6326.4805,7809.4888,0],	125,	"Trader City Stary"]
 			];
 		};
 //tavi
@@ -150,7 +150,7 @@ if(_possiblematch)then{
 			if(_delbikmot)then{{if(_obj isKindOf _x)then{_defdel = true};}forEach _defdelar;};
 			if(_defdel)then{_Action=3;if (_p2d) then { diag_log format["%2: %1 is Model to delete by default!",_typeOf,_txt];};};
 			if(getDammage _obj > _dam)then{_Action=3;if (_p2d) then { diag_log format["%2: %1 too damaged",_typeOf,_txt];};};
-			if(_unlock and !_defdel and (locked _obj))then{_obj setVehicleLock "UNLOCKED";_obj setVariable ["R3F_LOG_disabled",false,true];if (_p2d) then { diag_log format["%2: %1 Un-Locked",_typeOf,_txt];};};
+			if(_unlock and !_defdel and (locked _obj))then{_obj setVehicleLock "UNLOCKED";_obj setVariable ["LOG_disabled",false,true];if (_p2d) then { diag_log format["%2: %1 Un-Locked",_typeOf,_txt];};};
 			switch(_Action)do{
 				case 0:{deleteVehicle _obj;if (_p2d) then { diag_log format["%2: %1 Deleted, but remains in DB (Dont forget to clean this up)",_typeOf,_txt];};};
 				case 1:{

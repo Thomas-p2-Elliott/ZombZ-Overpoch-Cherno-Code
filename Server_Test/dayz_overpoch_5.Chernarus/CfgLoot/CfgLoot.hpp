@@ -815,9 +815,7 @@ MeleeWeaps[] = {
 	{"MeleeHatchet_DZE",0.35}, //15
 	{"MeleeMachete",0.25},  //15
 	{"MeleeCrowbar",0.2},  //15
-	{"MeleeFishingPole",0.14}, //15
-	{"MeleeSledge",0.05}, //35
-	{"Chainsaw",0.01} //10000
+	{"MeleeFishingPole",0.14}
 };
 
 /* Done */
@@ -1091,12 +1089,12 @@ TWSWeaps[] = {
 		,{"FoodCanSardines",0.06}
 		,{"FoodCanFrankBeans",0.06}
 		,{"FoodCanPasta",0.06}
-		,{"ItemBandage",0.1}
+		,{"ItemBandage",0.11}
 		,{"ItemPainkiller",0.06}
 		,{"ItemWire",0.01}
 		,{"ItemTankTrap",0.03}
 		,{"ItemComboLock",0.04}
-		,{"ItemSledgeHead",0.02}
+		,{"ItemSledgeHead",0.01}
 		,{"ItemDocument",0.02}
 	};
 	clothes[] = {
@@ -1174,10 +1172,11 @@ TWSWeaps[] = {
 		,{"DZ_LargeGunBag_EP1",0.1}
 	};
 	militaryammo[] = {
-		{"2000Rnd_762x51_M134",0.1}
-		,{"29Rnd_30mm_AGS30",0.2}
-		,{"50Rnd_127x107_DSHKM",0.2}
-		,{"48Rnd_40mm_MK19",0.2}
-		,{"100Rnd_127x99_M2",0.3}
+		{"2000Rnd_762x51_M134",0.01}
+		,{"PipeBomb",0.01}
+		,{"29Rnd_30mm_AGS30",0.01}
+		,{"50Rnd_127x107_DSHKM",0.6}
+		,{"48Rnd_40mm_MK19",0.01}
+		,{"100Rnd_127x99_M2",0.36}
 	};
 };

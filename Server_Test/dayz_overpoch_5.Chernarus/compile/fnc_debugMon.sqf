@@ -76,6 +76,30 @@ fnc_pDir = {
 	_o
 };
 
+//function by player2
+fnc_p2goldUI = {
+	private["_di","_cg"];
+	disableSerialization;
+	_di = uiNamespace getVariable 'p2GoldUI';
+	if (!isNil "_di") then {
+		if (str (_di) == "no display") then 
+		{
+			659 cutRsc ["p2GoldUI", "PLAIN"];
+		};
+
+		_cg = [false,player] call p2_gv;
+		if (!isNil "_cg") then {
+			((uiNamespace getVariable 'p2GoldUI') displayCtrl 8290) ctrlSetStructuredText parseText("<t align='right'>"+str(_cg)+"</t>");
+		} else {
+			((uiNamespace getVariable 'p2GoldUI') displayCtrl 8290) ctrlSetStructuredText parseText("<t align='right'>"+str(0)+"</t>");
+		};
+	} else {
+		659 cutRsc ["p2GoldUI", "PLAIN"];	
+	};
+
+	true
+};
+
 
 fnc_debugFull = {
 private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills","_p2zKills","_p2wep","_p2skin","_zombzVehCount","_zombzZedCount","_zombztimeToRestart","_pDir","_gpsP2osZombZ","_p2bl","_p2c"];
@@ -218,6 +242,9 @@ fnc_debugMon = {
 					};
 				};
 			};
+
+			[] call fnc_p2goldUI;
+
 			//function by player2
 			sleep P2DZ_debugMonSleep;
 		};

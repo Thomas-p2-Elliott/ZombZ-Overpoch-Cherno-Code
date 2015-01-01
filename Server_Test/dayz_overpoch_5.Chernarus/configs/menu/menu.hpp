@@ -3,7 +3,7 @@ class RscGorsyMenu
 {
 	idd=1986;
 	enableDisplay=1;
-	onLoad="uiNamespace setVariable ['ZombZ_GorsyMenu', _this select 0];    ((uiNamespace getVariable 'ZombZ_GorsyMenu') displayCtrl 1800) ctrlSetBackgroundColor P2DZE_debugCol;  ";
+	onLoad="uiNamespace setVariable ['ZombZ_GorsyMenu', _this select 0]; if ((P2DZE_debugCol select 3) < 0.85) then {	((uiNamespace getVariable 'ZombZ_GorsyMenu') displayCtrl 1800) ctrlSetBackgroundColor [(P2DZE_debugCol select 0),(P2DZE_debugCol select 1),(P2DZE_debugCol select 2),(P2DZE_debugCol select 3) + 0.149]; } else {	((uiNamespace getVariable 'ZombZ_GorsyMenu') displayCtrl 1800) ctrlSetBackgroundColor P2DZE_debugCol; };";
 	name = "ZombZ_GorsyMenu";
 	class controls
 	{
@@ -211,7 +211,7 @@ class RscGorsyMenu
 			h = 0.15125 * safezoneH;
 			color[] = { 0.5, 0.5, 0.5, 1 };
 			colorActive[] = { 1, 1, 1, 1 };
-			action = "diag_log(""hello""); closeDialog 0;";
+			action = "closeDialog 0;";
 			onMouseEnter = "ctrlSetFocus (_this select 0)";
 		};
 	};

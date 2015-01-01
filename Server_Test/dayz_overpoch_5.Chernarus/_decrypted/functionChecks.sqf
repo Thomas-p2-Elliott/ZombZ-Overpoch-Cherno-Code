@@ -122,6 +122,23 @@ P2DZ_AH_FunctionChecks = {
 		};
 	};
 
+	if (!isNil 'gearDialog_create') then 
+	{
+		if (isNil 'orig_gearDialog_create') then 
+		{
+			orig_gearDialog_create = str(gearDialog_create);
+		};
+	};
+	if (!isNil 'orig_gearDialog_create') then 
+	{
+		if (str(gearDialog_create) != orig_gearDialog_create) exitWith 
+		{
+			P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  'gearDialog_create',  ('NotOriginal')];
+			publicVariableServer 'P2DZ_fire';
+			[] spawn P2DZ_AHKick;
+		};
+	};
+
 	if (!isNil 'player_humanityMorph') then
 	{
 		if (isNil 'oplayer_humanityMorph') then {oplayer_humanityMorph = player_humanityMorph};

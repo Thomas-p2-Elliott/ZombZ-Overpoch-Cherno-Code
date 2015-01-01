@@ -1,7 +1,7 @@
 private ["_gearControl","_itemName","_itemPic","_itemDesc","_imageText","_gold","_plyrGoldVar","_object","_objGoldVar","_objectName","_strResult","_control","_text","_nearObjects","_onPlayer","_itemText","_lbIDC","_lbcontrol","_lbsize","_lbRows","_inCargo"];
 disableSerialization;
 
-if (alive player) then {
+if (alive player && !P2DZE_goldRunning) then {
 	_gold = [false,player] call p2_gv;
 	_gearControl = controlNull;
 	_itemName = controlNull;
@@ -62,7 +62,7 @@ if (alive player) then {
 	 
 				if !(isNull _object) then {
 					_objGoldVar = [false,_object] call p2_gv;
-		 			_lbcontrol lnbSetText [[_i,1], (str _objGoldVar + " Gold Bars")]; 
+		 			_lbcontrol lnbSetText [[_i,1], (str _objGoldVar + " Gold Bars")];
 				} else {
 					disableSerialization;
 					_control = (findDisplay 106) displayCtrl 156;
@@ -76,6 +76,16 @@ if (alive player) then {
 							_object = _x;
 							_objGoldVar = [false,_object] call p2_gv;
 		 					_lbcontrol lnbSetText [[_i,1], (str _objGoldVar + " Gold Bars")]; 
+		 					if (_objGoldVar > 0) then {
+		 						private["_mags","_goldCount"];
+		 						_mags = []; _goldCount = 0;
+		 						_mags = magazines _object;
+								_goldCount = {"ItemGoldBar10oz" == _x} count _mags;
+								if (_goldCount < 1) then {
+									systemChat(str(typeOf _obj)+" has "+(str(_objGoldVar))+" but no Gold Item! Re-Open the gear Menu!");
+								};
+		 					};
+
 						};
 
 					} forEach _nearObjects;
@@ -83,8 +93,6 @@ if (alive player) then {
 		 	};
 		};
 	};
-
-	[_gold] spawn fnc_removeExtraBars;
 };
 
 true

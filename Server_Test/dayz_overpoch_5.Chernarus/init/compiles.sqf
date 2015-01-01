@@ -280,6 +280,7 @@ Both Server & Client Side Scripts
 ---------------------------------------------------------------------------*/
 
 	//modified
+	local_lockUnlock =				compile preprocessFileLineNumbers "compile\local_lockUnlock.sqf";			//When vehicle is local to unit perform locking vehicle
 	spawn_loot =					compile preprocessFileLineNumbers "compile\spawn_loot.sqf";
 	spawn_loot_small = 				compile preprocessFileLineNumbers "compile\spawn_loot_small.sqf";
 	if (isServer) then {
@@ -344,7 +345,6 @@ Both Server & Client Side Scripts
 	dayz_zombieSpeak = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_speak.sqf";				//Used to generate random speech for a unit
 	vehicle_getHitpoints =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\vehicle_getHitpoints.sqf";
 	local_gutObject =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\local_gutObject.sqf";			//Generated on the server (|| local to unit) when gutting an object
-	local_lockUnlock =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\local_lockUnlock.sqf";			//When vehicle is local to unit perform locking vehicle
 	local_gutObjectZ =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\local_gutObjectZ.sqf";			//Generated on the server (|| local to unit) when gutting an object
 	local_eventKill = 				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\local_eventKill.sqf";			//Generated when something is killed
 	//player_weaponCheck =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_weaponCheck.sqf";			//Run by the player || server to monitor whether they have picked up a new weapon

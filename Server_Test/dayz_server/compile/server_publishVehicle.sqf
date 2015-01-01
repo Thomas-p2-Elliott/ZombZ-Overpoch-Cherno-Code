@@ -98,6 +98,7 @@ _key call server_hiveWrite;
 
 	_object setVariable ["lastUpdate",time];
 	_object setVariable ["CharacterID", _characterID, true];
+	_object setVariable ["LOG_disabled",false,true];
 	_object setDamage _damage;
 
 	// Set Hits after ObjectID is set

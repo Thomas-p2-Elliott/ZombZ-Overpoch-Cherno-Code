@@ -11,7 +11,7 @@ _amount = _this select 0; //amount to drop
 if (isNil "_amount") then {
 	_amount = -1;
 };
-if (_amount < 0) then {
+if (_amount < 0 || _amount >= _pGold) then {
 	_amount = _pGold;
 };
 
@@ -33,6 +33,7 @@ if (P2DZE_gearOnContainer) then {
 		if (_amount < 0 || _amount >= _pGold) then {
 			//set has gold var
 			P2DZE_hasGold = false;
+			player removeMagazine "ItemGoldBar10oz";
 			if (P2DZ_enableGoldSystemChat) then {
 				systemChat(format["Gold: %1 dropped to %2.",_pGold,(typeOf _object)]);
 			};
@@ -63,6 +64,7 @@ if (P2DZE_gearOnContainer) then {
 				if (_amount < 0 || _amount >= _pGold) then {
 					//set has gold var
 					P2DZE_hasGold = false;
+					player removeMagazine "ItemGoldBar10oz";
 					if (P2DZ_enableGoldSystemChat) then {
 						systemChat(format["Gold: %1 dropped to %2.",_pGold,(typeOf _x)]);
 					};
@@ -123,6 +125,7 @@ if (P2DZE_gearOnContainer) then {
 
 			//set has gold var
 			P2DZE_hasGold = false;
+			player removeMagazine "ItemGoldBar10oz";
 
 			if (P2DZ_enableGoldSystemChat) then {
 				systemChat(format["Gold: %1 dropped to ground.",_pGold]);
@@ -136,14 +139,12 @@ if (P2DZE_gearOnContainer) then {
 				_clutter = "ClutterCutter_small_EP1" createVehicleLocal _pos;
 				_clutter setPosATL _pos;
 			};
-
 		};
 		 
 	} else {
 		//Partial amount going to ground
 		P2DZE_plr_dropGold = [player,objNull,_amount];
 		publicVariableServer "P2DZE_plr_dropGold";
-
 
 		//set has gold var
 		P2DZE_hasGold = true;

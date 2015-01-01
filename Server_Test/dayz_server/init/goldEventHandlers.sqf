@@ -16,6 +16,25 @@ P2DZE_removeGoldFromBackpack = {
 };
 
 /*---------------------------------------------------------------------------
+Add Gold To Player Body
+	Inputs:
+		Player Body (Object)
+---------------------------------------------------------------------------*/
+"P2DZE_plr_gGold"		addPublicVariableEventHandler {_id = (_this select 1) spawn P2DZE_giveGoldItem};
+P2DZE_giveGoldItem = {
+	private["_obj"];
+	_obj = _this;
+	if (!isNil "_obj") then {
+		if (!isNull _obj) then {
+			_obj addMagazine "ItemGoldBar10oz";
+			if (P2DZE_goldItemHandlingDebug) then {
+				diag_log(format["P2DEBUG: Giving Gold Bar Item to Obj: %1",(typeOf _obj)]);
+			};
+		};
+	};
+};
+
+/*---------------------------------------------------------------------------
 Drop Gold
 
 Inputs:
@@ -82,6 +101,18 @@ P2DZE_dropGold = {
 
 					//set objects gold
 					_object setVariable ["ZombZGold", _newObjGold, true];
+
+					if (_object isKindOf "Man") then {
+						private["_uMags","_ugc"];
+						_uMags = magazines _object;
+						_ugc = {"ItemGoldBar10oz" == _x} count _uMags;
+						if (_uMags < 1) then {
+							_object addMagazine "ItemGoldBar10oz";
+						};
+						if (_uMags > 1) then {
+							_object removeMagazine "ItemGoldBar10oz";
+						};
+					};
 
 
 					if (P2DZE_goldItemHandlingDebug) then {

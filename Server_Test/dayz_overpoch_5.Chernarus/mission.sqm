@@ -1376,14 +1376,14 @@ class Mission
 		class Item0
 		{
 			position[]={6325.6772,304.99033,7807.7412};
-			a=100;
-			b=100;
+			a=200;
+			b=200;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="zonestary";
-			expCond="(player distance zonestary) < 100;";
+			expCond="(player distance zonestary) < 200;";
 			expActiv="[""trader city Stary"",true,""enter""] spawn player_traderCity;";
 			expDesactiv="[""trader city Stary"",true,""leave""] spawn player_traderCity;";
 			class Effects
@@ -1393,14 +1393,14 @@ class Mission
 		class Item1
 		{
 			position[]={4063.4226,365.00577,11664.19};
-			a=100;
-			b=100;
+			a=200;
+			b=200;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="zonebash";
-			expCond="(player distance zonebash) < 100;";
+			expCond="(player distance zonebash) < 200;";
 			expActiv="[""trader city Bash"",true,""enter""] spawn player_traderCity;";
 			expDesactiv="[""trader city Bash"",true,""leave""] spawn player_traderCity;";
 			class Effects
@@ -1410,14 +1410,14 @@ class Mission
 		class Item2
 		{
 			position[]={11447.472,317.26886,11364.504};
-			a=100;
-			b=100;
+			a=200;
+			b=200;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="zoneklen";
-			expCond="(player distance zoneklen) < 100;";
+			expCond="(player distance zoneklen) < 200;";
 			expActiv="[""trader city Klen"",true,""enter""] spawn player_traderCity;";
 			expDesactiv="[""trader city Klen"",true,""leave""] spawn player_traderCity;";
 			class Effects
@@ -1427,14 +1427,14 @@ class Mission
 		class Item3
 		{
 			position[]={1606.6443,289.70795,7803.5156};
-			a=100;
-			b=100;
+			a=200;
+			b=200;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="zonebandit";
-			expCond="(player distance zonebandit) < 100;";
+			expCond="(player distance zonebandit) < 200;";
 			expActiv="[""Bandit Trader"",false,""enter""] spawn player_traderCity;";
 			expDesactiv="[""Bandit Trader"",false,""leave""] spawn player_traderCity;";
 			class Effects
@@ -1444,14 +1444,14 @@ class Mission
 		class Item4
 		{
 			position[]={12944.227,210.19823,12766.889};
-			a=100;
-			b=100;
+			a=200;
+			b=200;
 			activationBy="WEST";
 			repeating=1;
 			interruptable=1;
 			age="UNKNOWN";
 			name="zonehero";
-			expCond="(player distance zonehero) < 100;";
+			expCond="(player distance zonehero) < 200;";
 			expActiv="[""Hero Trader"",false,""enter""] spawn player_traderCity;";
 			expDesactiv="[""Hero Trader"",false,""leave""] spawn player_traderCity;";
 			class Effects

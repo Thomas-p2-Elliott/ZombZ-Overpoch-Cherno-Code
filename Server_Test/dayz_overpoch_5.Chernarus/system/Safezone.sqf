@@ -6,7 +6,7 @@ Private ["_EH_Fired", "_ehID", "_fix","_inVehicle","_inVehicleLast","_EH_Fired_V
 		
 private ["_ZombZ_SZ_Godmode","_ZombZ_SZ_Messages","_ZombZ_SZ_Clothing","_ZombZ_SZ_Zombie_Zapper","_ZombZ_SZ_LootPiles","_ZombZ_SZ_NoZeds",
 "_ZombZ_SZ_SpeedLimit","_ZombZ_SZ_GearFromVehicles","_ZombZ_SZ_DeadPlayers","_ZombZ_SZ_DisableMountedGuns","_ZombZ_SZ_DisableWeaponFiring",
-"_ZombZ_SZ_Backpack_EnableAntiBackpack","_ZombZ_SZ_GearFromWithinVehicles"];
+"_ZombZ_SZ_Backpack_EnableAntiBackpack","_ZombZ_SZ_GearFromWithinVehicles","_ZombZ_SZ_antiBackPack","_ZombZ_SZ_allowFriendlyAccess"];
 
 //Main Settings
 _ZombZ_SZ_Debug 				 = false;//Debug notes on screen.
@@ -25,6 +25,8 @@ _ZombZ_SZ_LootPiles 			 = true; //Should players be able to loot from loot piles
 _ZombZ_SZ_NoZeds				 = true; //Should zombies not be able to spawn in safezones?
 _ZombZ_SZ_SpeedLimit 			 = true; //Should players vehicles be limited to 25km/h in safezones?
 _ZombZ_SZ_VehicleSalvage 		 = true; //Should we allow salavage options in the trader cities?
+_ZombZ_SZ_allowFriendlyAccess 	 = true; //Should we allow players tagged as friendly into other players backpacks?
+_ZombZ_SZ_antiBackPack 			 = true; //Should we prevent players from stealing from others backpacks and vehicles etc?
 
 //Main Script Coding
 disableSerialization;
@@ -144,7 +146,113 @@ while {true} do {
 	} else {
 		waitUntil {canbuild};
 	};
+
+	if ( _ZombZ_SZ_antiBackPack ) then
+	{
+		ZombZ_LastPlayerLookedAt = objNull;
+		ZombZ_LastPlayerLookedAtCountDown = 5;
+		_antiBackpackThread = [] spawn {
+			private [ "_ct","_ip","_ia","_dis"] ;
+			while {!canBuild} do
+			{
+				if ( isNull ZombZ_LastPlayerLookedAt ) then
+				{
+					waitUntil {!isNull cursorTarget};
+					_ct = cursorTarget;
+					_ip = isPlayer _ct;
+					if ( _ip ) then { _ia = alive _ct; _dis = _ct distance player; } else { _ia = false; _dis = 1000; };
+					
+					if ( (_ip && _ia) && (_dis < 6.5) ) then
+					{
+						ZombZ_LastPlayerLookedAt = _ct;
+					};
+				} else {
+					ZombZ_LastPlayerLookedAtCountDown = ZombZ_LastPlayerLookedAtCountDown - 1;
+					if ( ZombZ_LastPlayerLookedAtCountDown < 0 ) then { ZombZ_LastPlayerLookedAtCountDown = 5; ZombZ_LastPlayerLookedAt = objNull; };
+					sleep 1;
+				};
+			};
+		};
+			
+		_antiBackpackThread2 = [] spawn {
+			private ["_to","_dis","_inchk","_ip","_ia","_skip","_ct","_iv","_lp","_inv","_ctOwnerID","_friendlies","_if"];
+			_ctOwnerID = 0;
+			while {!canBuild} do
+			{
+				_ct = cursorTarget;
+				_skip = false;
+				
+				if ( !isNull (_ct) ) then
+				{
+					_to = typeOf _ct;
+					_dis = _ct distance player;
+					_inchk = ["WeaponHolder","ReammoBox"];
+					
+					_lp = false;
+					{
+						if ( (_to isKindOf _x) && (_dis < 10) && ZombZ_safeZone_Backpack_AllowGearFromLootPiles ) then
+						{
+							_lp = true;
+						};
+					} forEach ( _inchk );
+
+					_ip = isPlayer _ct;
+					_ia = alive _ct;
+					_iv = _ct isKindOf "AllVehicles";
+					_inv = (vehicle player != player);
+					
+					_if = false;
+					if ( _ip ) then {
+						_ctOwnerID = _ct getVariable["CharacterID","0"];
+						_friendlies	= player getVariable ["friendlyTo",[]];
+						if(_ctOwnerID in _friendlies) then {	
+							if ( _ZombZ_SZ_allowFriendlyAccess ) then
+							{
+								_if = true;
+							};
+						};
+					};
+					
+					//Lootpile check
+					if ( _lp ) then {_skip = true;};
+					
+					//Dead body check
+					if ( !(_ia) && _ZombZ_SZ_DeadPlayers ) then {_skip = true;};
+					
+					//Vehicle check
+					if ( _iv && (_dis < 10) && !(_ip) && _ZombZ_SZ_GearFromVehicles ) then {_skip = true;};
+					
+					//In a vehicle check
+					if ( _inv && _ZombZ_SZ_GearFromWithinVehicles ) then { _skip = true; };
+					
+					//Is player friendly?
+					if ( _if ) then { _skip = true; };
+				};
+				
+				if( !isNull (FindDisplay 106) && !_skip ) then
+				{
+					if ( isNull ZombZ_LastPlayerLookedAt ) then
+					{
+						(findDisplay 106) closeDisplay 1;
+						waitUntil { isNull (FindDisplay 106) };
+						createGearDialog [(player), 'RscDisplayGear'];
+						if ( _ZombZ_SZ_Messages ) then { systemChat ("[ZombZ] Anti Backpack Stealing - Redirecting you to your own gear!"); };
+						waitUntil { isNull (FindDisplay 106) };
+					} else {
+						if ( _ZombZ_SZ_Messages ) then { systemChat (format["[ZombZ] You cannot open your gear at this time as you have looked at a player in the last 5 seconds."]); };
+						(findDisplay 106) closeDisplay 1;
+						waitUntil { isNull (FindDisplay 106) };
+					};
+				};
+			};
+		};
+	};
 	
+	
+	ZombZ_LastPlayerLookedAt = objNull;
+	ZombZ_LastPlayerLookedAtCountDown = 5;
+	terminate _antiBackpackThread;
+	terminate _antiBackpackThread2;
 	if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] Exiting Safezone Trader Area - God Mode Disabled"); };
 	
 	if (_ZombZ_SZ_DisableMountedGuns) then

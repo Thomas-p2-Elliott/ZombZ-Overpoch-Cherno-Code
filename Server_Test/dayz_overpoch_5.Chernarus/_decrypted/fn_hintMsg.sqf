@@ -12,7 +12,7 @@ P2DZ_hintFull						= {
    hFTx = _this select 1;
    hFC = _this select 2;
    ((uiNamespace getVariable 'zombz_hintFull') displayCtrl 9105) ctrlSetBackgroundColor hFC;
-   ((uiNamespace getVariable 'zombz_hintFull') displayCtrl 9105) ctrlSetStructuredText parseText(hFTx);;
+   ((uiNamespace getVariable 'zombz_hintFull') displayCtrl 9105) ctrlSetStructuredText parseText(hFTx);
    ((uiNamespace getVariable 'zombz_hintFull') displayCtrl 9106) ctrlSetStructuredText parseText(hFT);
    ((uiNamespace getVariable 'zombz_hintFull') displayCtrl 9107) ctrlSetStructuredText parseText(hFTx);
 };
@@ -28,7 +28,7 @@ P2DZ_hintMini						= {
    hMTx = _this select 1;
    hMC = _this select 2;
    ((uiNamespace getVariable 'zombz_hintMini') displayCtrl 9101) ctrlSetBackgroundColor hMC;
-   ((uiNamespace getVariable 'zombz_hintFull') displayCtrl 9101) ctrlSetStructuredText parseText(hMTx);;
+   ((uiNamespace getVariable 'zombz_hintFull') displayCtrl 9101) ctrlSetStructuredText parseText(hMTx);
    ((uiNamespace getVariable 'zombz_hintMini') displayCtrl 9102) ctrlSetStructuredText parseText(hMT);
    ((uiNamespace getVariable 'zombz_hintMini') displayCtrl 9103) ctrlSetStructuredText parseText(hMTx);
 };

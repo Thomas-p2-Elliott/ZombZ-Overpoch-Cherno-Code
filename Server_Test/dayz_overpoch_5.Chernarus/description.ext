@@ -242,6 +242,8 @@ class RscTitles
 	#include "configs\altimeter.h"  
 	//notifications
 	#include "configs\p2notif.h"
+	//goldui
+	#include "configs\goldUI.h"
 };
 
 //# plot management 

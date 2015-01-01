@@ -145,14 +145,14 @@ case ("Code Rewrites"):{
 We have rewritten alot of the code that came with the mod. We did this to improve efficiency. Reduce lag and desync to give the game a more real feel. Alot of this goes unseen, but it has been a 6 month non stop project. We have added in tons of security to also help stop hacks.
 "
 };
-case ("Custom Debug"):{
-"<t color='#01DFD7'>Custom Debug</t>
+case ("Custom Stats Monitor"):{
+"<t color='#01DFD7'>Custom Stats Monitor</t>
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-Our debug monitor is pretty awesome. 
+Our debug / stats monitor is pretty awesome. 
 <br/><br/>
-You can change the way it looks, Switch it off completly. Or even change the color from the Menu. Have a play around, F5 changes the way it looks.
+You can change the way it looks, Switch it off completly. Or even change the color from the Menu. Have a play around, F5 changes the way it looks. F6 changes the colour.
 "
 };
 case ("Combat Log Punishment"):{
@@ -250,7 +250,7 @@ Now this is a complicated one to explain. Basically we connect to the server as 
 <br/><br/>
 This means we can do things like add 100 AI to the map, multiple huge zombie hordes and extra zombies for each player with no lag created what so ever. It actually causes less lag than a real player running around.
 <br/><br/> 
-Our headless client runs on 1gb internet line, so its super fast and can process and send information really quickly.
+Our headless client runs on a powerful and completely seperate 16-core machine in the same datacenter with a solid 1gbps connection to the server to send information FAST.
 "
 };
 case ("Humanity Levels"):{
@@ -323,12 +323,16 @@ case ("Maintain Base"):{
 You can maintain your base with gold, by visiting the plot pole for your base. Alternatively you can read up more by going to the basebuilding section of the menu.
 "
 };
-case ("Medic System - heroes"):{
+case ("Medic System - Heroes"):{
 "<t color='#01DFD7'>Medic System - heroes</t>
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-So theres not really much call for heroes anymore. Thats why we have added in the ability, to bandage, fix legs, and heal unconcious, without the need for bandages/morphine/epi pen. Lets hope this means you will be a hero and save my life.
+So theres not really much call for heroes anymore. Thats why we have added in the ability to bandage, fix legs, wake the unconcious, without the need for bandages, morphine, or an epi pen. 
+<br/> 
+Depending on how high a level hero you are the benefits increase, self blood bagging also gives extra benefits to heroes such as less wait time between uses and 0 infection chance.
+<br/> 
+Hopefully we will see more friendly player interactions because of this!
 "
 };
 case ("Menu UID"):{
@@ -344,7 +348,7 @@ case ("Paint Vehicle"):{
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-Mouse wheel on certain vehicles and you can set your own colors. This will cost you some gold. But it will save after restart. Rock the server with Pink bus if thats what floats your boat
+Mouse wheel on certain trader-purchased vehicles and you can set your own colors. This will cost you some gold. But it will save after restart. Rock the server with Pink bus if thats what floats your boat.
 "
 };
 case ("Random Loadouts"):{
@@ -389,7 +393,28 @@ case ("Server Antihack"):{
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-We have server anti hacks, that dont add load and fps to the server. Just a ton of checks on your players to make sure you arnt doing anything you shouldnt be, or have anything you shouldnt have. This will then talk with our skynet program, Having skynet investigate you further, and hand out a ban if required.
+ZombZ recognised a long time ago that giving our admins supernatural abilities in-game was NOT the answer to combatting cheaters.
+<br/> 
+Since then we have been constantly developing our own server-side antihack without ingame cheat menu equivelants for staff.
+<br/>
+Our anticheat just dumps logs of anything it thinks is fishy for the admins to read on a website. 
+<br/>
+It is heavily optimized and includes many forms of protection InfiStar or other so called antihacks fail to provide.
+<br/>
+So fear not, the admins or server owners here cannot fuck with you in-game because you killed them, they have no ingame powers, all the administration is done externally via logs and a website.
+<br/>
+This means when someone gets banned, we have hard evidence in a log file, not an admin saying he saw player X teleport to player Y.
+<br/><br/><br/>
+Why not Just use InfiStar?
+<br/>
+* It is constantly targeted and bypassed by cheat writers<br/>
+* It often has backdoors for cheaters built in, Infi collaberates with private cheat makers to cash in on both ends of the bargain<br/>
+* It gives admins access to supernatural and griefing abilities while playing, meaning you can never trust an admin fully with this menu on a server <br/>
+* It is lacking compared to the amount of protection we have packed into our pure, no-bullshit anticheat <br/>
+* It has huge amounts of useless code that drain performance for both the server and client<br/>
+* Any group would be out of their mind to stay on a server where the admins could be using invisibility, ESP, infinite ammo, and no-recoil while playing. Never trust anyone in DayZ!<br/>
+<br/><br/>
+PS: Our custom server-side script-based no-bullshit anti-hack is only 1 layer out of 4 in the server security system: battlEye, SkyNet, Server AntiHack, Admin Team
 "
 };
 case ("Skynet Antihack"):{
@@ -397,8 +422,10 @@ case ("Skynet Antihack"):{
 <br/><br/>
 <t color='#FFBF00'>Description: </t>
 <br/> 
-Our baby. One of the most efficient Anti Hacks going. Completly coded by us, and kept really hush hush. This helps us automatically ban players from the server and we keep it quiet because we dont want players to work out how it works. Once people know, getting around it becomes easier.
-So fear not, skynet is watching you.
+Our baby. One of the most efficient Anti Hacks going. Completly coded by us, and kept really hush hush. This helps us automatically ban players from the server and we keep it quiet because we dont want any cheaters knowing how it works to find ways around it.
+So fear not, skynet is watching you. 
+<br/><br/> 
+PS: Our custom skynet anti-hack is only 1 layer out of 4 in the server security system: battlEye, SkyNet, Server AntiHack, Admin Team
 "
 };
 case ("Snap Build Pro"):{
@@ -464,8 +491,8 @@ case ("Tons of bug fixes"):{
 <br/> 
 We have been through all the files, and fixed tons of bugs caused by the epoch and overwatch code. If you find any more bugs please post them on forums so we can add them to our todo list.
 <br/><br/>
-Unfortunatly some bugs are caused by the arma engine and we are unable to do anything with these
-"
+Unfortunatly some bugs are caused by the arma engine and we are unable to do anything with these, some others can be caused by bad config files in overwatch or epoch mod, alas these too are unfixable in most scenarios.
+We will always strive to do our best though."
 };
 case ("Watermark"):{
 "<t color='#01DFD7'>Watermark</t>
@@ -474,7 +501,7 @@ case ("Watermark"):{
 <br/> 
 Our own stamp to say that it is our server that you are playing on.
 <br/><br/>
-There are alot of servers that try to steal our code, or copy our code. Always play official zombz for the best experiences.
+There are alot of servers that try to steal our code, or copy our code. Always play official ZombZ servers for the best experiences.
 "
 };
 
@@ -485,9 +512,9 @@ case ("Zombie Hordes"):{
 <br/> 
 This feature has not been seen before in dayz. It is immense and ground breaking
 <br/><br/>
-Becareful when sitting around, at times the hordes may pass through your area. A huge group of zombies all grouped up together running around the map. There may even be more than one group running around at a time. If you see them... Be ready to run.
+Be careful when sitting around, at times the hordes may pass through your area. A huge group of zombies all grouped up together sprinting around the map. There may even be more than one group running around at a time. If you see them...Don't try to shoot, just run and hide.
 "	
-}
+};
 
 case ("Extra Zeds"):{
 "<t color='#01DFD7'>Extra Zeds</t>
@@ -496,7 +523,9 @@ case ("Extra Zeds"):{
 <br/> 
 Our headless client spawns in extra zombies for each player on the server.
 <br/><br/>
-Our hope is that this will give you all a much scarier zombie game, the way Dayz was supposed to be.
+Usually zombies were run by players, aka your computer was processing them. We've shifted 50% of these zombies over to headless client to take the load off your PC.
+<br/>
+Our hope is that this will give you both better frames and a much scarier zombie game, the way DayZ should be.
 "	
 };
 case (""):{

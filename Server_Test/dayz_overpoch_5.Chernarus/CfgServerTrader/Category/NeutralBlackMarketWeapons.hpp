@@ -9,11 +9,6 @@
  		buy[]={150};
  		sell[]={75};
  	};
- 	class 100c124c139c128c138c99c120c140c133c122c127c124c137 {
- 		type = "trade_weapons";
- 		buy[]={150};
- 		sell[]={75};
- 	};
  	class 97c91c79c101 {
  		type = "trade_weapons";
  		buy[]={150};

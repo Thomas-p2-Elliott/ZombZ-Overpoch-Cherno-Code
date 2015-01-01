@@ -41,8 +41,8 @@
  	};
  	class 97c140c125c133c94c141c125c132c90c121c138c138c125c132 {
  		type = "trade_items";
-            buy[] = {250};
-            sell[] = {25};
+            buy[] = {500};
+            sell[] = {100};
  	};
  };
  class Category_509 {

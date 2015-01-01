@@ -189,11 +189,6 @@
  		buy[]={6250};
  		sell[]={4375};
  	};
- 	class 84c91c73c71c87c114c88c99c68 {
- 		type = "trade_any_vehicle";
- 		buy[]={7120};
- 		sell[]={4984};
- 	};
  	class 92c91c96c121c91c138c123c125c130c127c121c91c98c75c121c94 {
  		type = "trade_any_vehicle";
  		buy[]={7150};

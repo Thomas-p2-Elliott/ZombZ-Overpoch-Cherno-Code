@@ -212,22 +212,23 @@
                  lootType[] = {
                          {"ItemJerrycan","magazine",            0.3},
                          {"PartPlankPack","magazine",           0.1},
-                         {"ItemFuelBarrelEmpty","magazine",     0.1},
+                         { "","generic",                        0.19},
+                         {"ItemFuelBarrelEmpty","magazine",     0.01},
                          {"", "PistolsLow",                     0.03}, 
                          {"", "SniperLowWeaps",                 0.01}, 
                          {"", "RiflesLowWeaps",                 0.01}, 
                          {"", "ShotgunWeaps",                   0.02}, 
                          {"backpacks","backpacks",              0.03},
                          {"", "MeleeWeaps",                     0.2}, 
-                         {"ItemSledgeHandle","magazine",        0.2}
+                         {"ItemSledgeHandle","magazine",        0.01}
                  };
                  lootTypeSmall[] = {
                          { "","generic",                        0.3},
                          { "","trash",                          0.2},
                          { "","military",                       0.1},
-                         {"ItemToolbox","weapon",               0.2},
-                         {"", "PistolsLow",                     0.02}, 
-                         { "ItemSledgeHead","magazine",         0.18}
+                         {"ItemToolbox","weapon",               0.15},
+                         {"", "PistolsLow",                     0.07}, 
+                         { "ItemSledgeHead","magazine",         0.01}
                  };
          };
          class Supermarket: Default {
@@ -361,8 +362,8 @@
                          {"PartVRotor","magazine",0.01},
                          {"militarybackpacks","militarybackpacks",0.03},
                          {"ItemEtool","weapon",0.03},
-                         {"ItemSandbag","magazine",0.02},
-                         {"ItemFuelBarrelEmpty","magazine",0.03},
+                         {"ItemSandbag","magazine",0.04},
+                         {"ItemFuelBarrelEmpty","magazine",0.01},
                          {"fuel_pump_kit","magazine",0.01}
                  };
                  lootTypeSmall[] = {
@@ -412,8 +413,8 @@
                          {"militarybackpacks","militarybackpacks",0.03},
                          {"militaryclothes","militaryclothes",0.05 },
                          {"ItemEtool","weapon",0.03},
-                         {"ItemSandbag","magazine",0.02},
-                         {"ItemFuelBarrelEmpty","magazine",0.03},
+                         {"ItemSandbag","magazine",0.04},
+                         {"ItemFuelBarrelEmpty","magazine",0.01},
                          {"fuel_pump_kit","magazine",0.01}
                  };
                  lootTypeSmall[] = {
@@ -457,7 +458,6 @@
                          {"", "UltraWeaps",  0.01},
                          {"", "PistolTopWeaps",  0.01}, 
                          {"", "SniperTopWeaps",  0.01},
-                         { "PipeBomb", "magazine", 0.01 },
                          {"AmmoBoxSmall_556","object",0.05},
                          {"AmmoBoxSmall_762","object",0.05},
                          {"ItemFlashlightRed","military",0.02},
@@ -476,7 +476,6 @@
                          { "ItemFlashlightRed","military",0.01 },
                          { "ItemGPS","weapon",0.02 },
                          { "ItemToolbox","weapon",0.03},
-                         { "PipeBomb", "magazine", 0.01 },
                          { "Binocular_Vector","weapon",0.03},
                          { "","medical",0.08},
                          { "","generic",0.15},
@@ -599,7 +598,7 @@
                          { "bulk_PartGeneric", "magazine", 0.2 },
                          { "bulk_ItemSandbag", "magazine", 0.1 },
                          { "bulk_ItemTankTrap", "magazine", 0.1 },
-                         { "ItemSledge", "weapon", 0.1 }
+                         { "ItemSledge", "weapon", 0.01 }
                  };
          };
          class MassGrave: Default {
@@ -623,7 +622,6 @@
                          { "", "medical", 0.05 },
                          { "", "generic", 0.05 },
                          { "", "military", 0.13 },
-                         { "PipeBomb", "magazine", 0.01 },
                          { "", "militaryclothes", 0.05 },
                          { "WeaponHolder_ItemMachete", "object", 0.02 },
                          {"", "PistolMilWeaps",  0.1}, 

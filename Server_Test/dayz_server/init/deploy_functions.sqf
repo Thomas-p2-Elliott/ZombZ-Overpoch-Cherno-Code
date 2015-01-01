@@ -19,7 +19,8 @@
 				clearWeaponCargoGlobal  	_object;
 				clearMagazineCargoGlobal  	_object;
 				_object setVehicleAmmo DZE_vehicleAmmo;
-
+				_object setVariable ["LOG_disabled",false,true];
+				
                 _object call {
 				    _this setVariable [
 				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
@@ -42,6 +43,7 @@
 	            _object setVariable ["ArmedLittlebird", true, true];
 				_object addMagazine "2000Rnd_762x51_M134";
 				_object addWeapon "M134";
+				_object setVariable ["LOG_disabled",false,true];
 
 				clearWeaponCargoGlobal  _veh;
 				clearMagazineCargoGlobal  _veh;
@@ -79,7 +81,7 @@
 		/* Check hash of object trying to pack */
 		_obj call KK_fnc_checkHash;
 
-		if (typeOf _obj == "Old_bike_TK_CIV_EP1") then {
+		if (typeOf _obj == "MMT_CIV") then {
 			_origMat = ["ItemToolbox"];
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];

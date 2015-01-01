@@ -1,5 +1,5 @@
 P2DZ_AHDecrypted = false;
-P2DZ_decryptionDebug = true;
+P2DZ_decryptionDebug = false;
 P2DZ_postVarsDone_Thread1 = false;
 P2DZ_postVarsDone_Thread2 = false;
 

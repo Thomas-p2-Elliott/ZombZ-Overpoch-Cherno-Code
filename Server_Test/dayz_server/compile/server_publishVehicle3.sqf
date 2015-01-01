@@ -140,7 +140,7 @@ _key call server_hiveWrite;
 	_object setVariable ["ObjectID", _oid, true];
 	
 	_object setVariable ["lastUpdate",time];
-	
+	_object setVariable ["LOG_disabled",false,true];
 	_object setVariable ["CharacterID", _characterID, true];
 
 	_object call fnc_veh_ResetEH;
