@@ -20,6 +20,7 @@ if (_dikCode == 0x01) then {
 	DZE_cancelBuilding = true;
 	call dayz_EjectPlayer;
 };
+
 // Disable ESC after death
 if (_dikCode == 0x01 && r_player_dead) then {
 	_handled = true;
@@ -120,16 +121,16 @@ if (_dikCode in (actionKeys "GetOver") && (diag_tickTime - dayz_lastCheckBit > 1
 	};
 };
 
-
-if (_dikCode == 0x3F && (diag_tickTime - dayz_lastCheckBit > 1)) then {
+/* Debug Mon HotKeys */
+if (_dikCode == 0x3F || _dikCode in actionKeys "User20") then {
 	if (isNil "P2DZ_dbCurMode") then {
 		P2DZ_dbCurMode = 2;
 		P2DZ_dbCurMode = P2DZ_DebugMonDefault;
-		diag_log("Debug Mon Start!");
+		//diag_log("Debug Mon Start!");
 		dayz_lastCheckBit = diag_tickTime;
 		_handled = true;
 	} else {
-		diag_log("Debug Mon Pressed (F5)! Mode: " + str P2DZ_dbCurMode);
+		//diag_log("Debug Mon Pressed (F5)! Mode: " + str P2DZ_dbCurMode);
 		if (P2DZ_dbCurMode < 3) then {
 			P2DZ_dbCurMode = P2DZ_dbCurMode + 1;
 			P2DZ_debugMonitor = true;
@@ -143,6 +144,21 @@ if (_dikCode == 0x3F && (diag_tickTime - dayz_lastCheckBit > 1)) then {
 		};
 	};
 };
+
+/* Debug Mon Colour GUI */
+if (_dikCode == 0x40) then {
+	if (!dialog) then {	[] spawn fnc_p2debugMonColorGUI; } else { [] spawn { closeDialog 0; uiSleep 0.1; [] call fnc_p2debugMonColorGUI; }; }; 
+	dayz_lastCheckBit = diag_tickTime;
+	_handled = true;
+};
+
+/* F1 Menu */
+if (_dikCode == 0x3B) then {
+	if (!dialog) then {	createDialog "RscGorsyMenu"; } else { [] spawn { closeDialog 0; uiSleep 0.1; createDialog "RscGorsyMenu"; }; }; 
+	dayz_lastCheckBit = diag_tickTime;
+	_handed = true;
+};
+
 
 /*Move Into Nearest Heli / HeliDoor Script - Disabled 
 if (_dikCode == 0xD2  && (diag_tickTime - dayz_lastCheckBit > 1) && (player getVariable ["NORRN_inVehMount", false])) then {
@@ -179,19 +195,6 @@ if ((player getVariable ["NORRN_inVehMount", false]) && (diag_tickTime - dayz_la
 };
 */
 
-/* Debug Mon Colour GUI */
-if (_dikCode == 0x40 && (diag_tickTime - dayz_lastCheckBit > 1)) then {
-	if (!dialog) then {	[] spawn fnc_p2debugMonColorGUI; } else { [] spawn { closeDialog 0; uiSleep 0.1; [] call fnc_p2debugMonColorGUI; }; }; 
-	_handled = true;
-	dayz_lastCheckBit = diag_tickTime;
-};
-
-/* F1 Menu */
-if (_dikCode == 0x3B && (diag_tickTime - dayz_lastCheckBit > 1)) then {
-	if (!dialog) then {	createDialog "RscGorsyMenu"; } else { [] spawn { closeDialog 0; uiSleep 0.1; createDialog "RscGorsyMenu"; }; }; 
-	_handed = true;
-};
-
 //if (_dikCode == 57) then {_handled = true}; // space
 //if (_dikCode in actionKeys 'MoveForward' || _dikCode in actionKeys 'MoveBack') then {r_interrupt = true};
 
@@ -212,26 +215,8 @@ if (_dikCode in actionKeys "Chat" && (diag_tickTime - dayz_lastCheckBit > 10)) t
 	dayz_lastCheckBit = diag_tickTime;
 	[player,15,false,(getPosATL player)] spawn player_alertZombies;
 };
-if (_dikCode in actionKeys "User20" && (diag_tickTime - dayz_lastCheckBit > 1)) then {
-	dayz_lastCheckBit = diag_tickTime;
-	if (isNil "P2DZ_dbCurMode") then {
-		P2DZ_dbCurMode = 2;
-		P2DZ_dbCurMode = P2DZ_DebugMonDefault;
-		diag_log("Debug Mon Start!");
-		_handled = true;
-	} else {
-		diag_log("Debug Mon Pressed (User20)! Mode: " + str P2DZ_dbCurMode);
-		if (P2DZ_dbCurMode < 3) then {
-			P2DZ_dbCurMode = P2DZ_dbCurMode + 1;
-			P2DZ_debugMonitor = true;
-			_handled = true;
-		} else {
-			P2DZ_dbCurMode = 1;
-			P2DZ_debugMonitor = true;
-			_handled = true;
-		};
-	};
-};
+
+
 
 // numpad 8 0x48 now pgup 0xC9 1
 if ((_dikCode == 0xC9 && (!_alt || !_ctrl)) || (_dikCode in actionKeys "User15")) then {
