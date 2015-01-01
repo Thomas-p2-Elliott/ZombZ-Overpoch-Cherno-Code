@@ -31,6 +31,34 @@ call compile ("
 'addMagazine','setDamage','setDammage','addEventHandler','getVariable','setVariable'];
 ");
 
+/*---------------------------------------------------------------------------
+Count 109 / 108 / 1001 / 1006
+---------------------------------------------------------------------------*/
+call compile ("
+[] spawn {
+	private['_c1','_c2','_c3','_c4'];
+
+	_c1 = 0; 
+	_c2 = 0;
+	_c3 = 0;
+	_c4 = 0;
+
+	while{true} do {
+
+			_c1 = lbSize 109;
+			_c2 = lbSize 108;
+			_c3 = lbSize 1001;
+			_c4 = lbSize 1006;
+
+			if (_c1 > 70 || _c2 > 70 || _c3 > 70 || _c4 > 70) then {
+				P2DZ_fire = format['NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)', "+(str _pname)+", " +(str _puid)+ ", 'Bad Menu Size! SlothMenu!',  ([str _c1,str _c2,str _c3,str _c4])];
+				publicVariableServer 'P2DZ_fire';
+				[] spawn P2DZ_AHKick;
+			};
+		uiSleep 3;
+	};
+};
+");
 
 _worldName = toArray worldName;
 uiSleep 25;
