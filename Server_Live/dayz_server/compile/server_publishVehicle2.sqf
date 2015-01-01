@@ -131,6 +131,12 @@ _key call server_hiveWrite;
 	if(!_donotusekey) then {
 		// Lock vehicle
 		_object setvehiclelock "locked";
+		_object setVariable ["LOG_disabled",true,true];
+		diag_log("P2DEBUG: Towing disabled for new vehicle...");
+	} else {
+		_object setVariable ["LOG_disabled",false,true];
+		diag_log("P2DEBUG: Towing enabled for new vehicle...");
+
 	};
 
 	clearWeaponCargoGlobal  _object;
