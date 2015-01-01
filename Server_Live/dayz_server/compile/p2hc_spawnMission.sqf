@@ -36,7 +36,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 
 //foreach loot object
 {
-	private ["_lType", "_lPos", "_amnt", "_lTable", "_lChance", "_boxType", "_crate", "_itemTypes", "_itemChance", "_weights", "_cntWeights", "_index", "_itemType", "_iClass", "_iType", "_item2"];
+	private ["_goldAmount","_lType", "_lPos", "_amnt", "_lTable", "_lChance", "_boxType", "_crate", "_itemTypes", "_itemChance", "_weights", "_cntWeights", "_index", "_itemType", "_iClass", "_iType", "_item2"];
 	//get input for this object
 	_lType = _x select 0;
 	_lPos = _x select 1;
@@ -72,6 +72,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 	};
 
 	//diag_log(format["[P2AI]:SpawnMission:LootCrate:%1: BuiltPos: %2",_lootCrateCount,_lPos]);
+	_goldAmount = 0;
 
 
 	//generate loot from type given
@@ -95,6 +96,8 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 				0.17	
 			];
 
+			_goldAmount = 0;
+
 			_boxType = "USBasicAmmunitionBox"; 
 		};
 		case "Medical": 	
@@ -117,6 +120,8 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 				0.17	
 			];		 	
 
+			_goldAmount = 0;	 	
+
 			_boxType = "USBasicAmmunitionBox";
 		};
 		case "WesternWeapons": 	
@@ -135,7 +140,10 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 				0.20,
 				0.30,
 				0.10
-			];		 	
+			];
+
+			_goldAmount = 75;	 	
+		 	
 
 			_boxType = "USBasicWeaponsBox";
 		};
@@ -155,7 +163,9 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 				0.30,
 				0.30,
 				0.10
-			];		 	
+			];
+
+			_goldAmount = 50;	 	
 
 			_boxType = "RUBasicWeaponsBox";
 		};
@@ -186,6 +196,16 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 	//empty object
 	clearWeaponCargoGlobal _crate;
 	clearMagazineCargoGlobal _crate;
+
+	/*---------------------------------------------------------------------------
+	Add Gold to Crate
+	---------------------------------------------------------------------------*/
+	if (!isNil "_goldAmount") then {
+		if (_goldAmount > 0 && _goldAmount < 100) then {
+			_crate setVariable ["ZombZGold", _goldAmount, true];
+			_crate addMagazineCargoGlobal "ItemGoldBar10oz";
+		};
+	};
 
 	/*---------------------------------------------------------------------------
 	Add Loot to Crates
