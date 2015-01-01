@@ -11,22 +11,23 @@ private ["_ZombZ_SZ_Godmode","_ZombZ_SZ_Messages","_ZombZ_SZ_Clothing","_ZombZ_S
 //Main Settings
 _ZombZ_SZ_Debug 				 = false;//Debug notes on screen.
 _ZombZ_SZ_Godmode				 = true; //Should safezone Godmode be enabled?
-_ZombZ_SZ_Messages				 = true; //Should players get messages when entering and exiting the safe zone?
+_ZombZ_SZ_Messages				 = true; ZombZ_SZ_Messages = true; //Should players get messages when entering and exiting the safe zone?
 
 //Script Settings
-_ZombZ_SZ_AntiGear				 = true; //Should players be able open their gear near other players?
+_ZombZ_SZ_AntiGear				 = true; ZombZ_SZ_AntiGear = true; //Should players be able open their gear near other players?
 _ZombZ_SZ_Clothing				 = true; //Should players not be able to change clothes in safe zone?
-_ZombZ_SZ_DeadPlayers 			 = true; //Should players be able to loot from a dead players corpse?
-_ZombZ_SZ_DisableMountedGuns 	 = true; //Should players not be able to shoot bullets/projectiles from mounted guns?
+_ZombZ_SZ_DeadPlayers 			 = true; ZombZ_SZ_DeadPlayers = true; //Should players be able to loot from a dead players corpse?
+_ZombZ_SZ_DisableMountedGuns 	 = true; ZombZ_SZ_DisableMountedGuns = true; //Should players not be able to shoot bullets/projectiles from mounted guns?
 _ZombZ_SZ_DisableWeaponFiring 	 = true; //Should players not be able to shoot bullets/projectiles from their weapon(s)?
-_ZombZ_SZ_GearFromVehicles 		 = false;//Should players be able to loot from a vehicles gear?
-_ZombZ_SZ_GearFromWithinVehicles = true; //Should players be able to open the gear screen while they are inside a vehicle?
+_ZombZ_SZ_GearFromVehicles 		 = false; ZombZ_SZ_GearFromVehicles = false; //Should players be able to loot from a vehicles gear?
+_ZombZ_SZ_GearFromWithinVehicles = true; ZombZ_SZ_GearFromWithinVehicles = true; //Should players be able to open the gear screen while they are inside a vehicle?
 _ZombZ_SZ_LootPiles 			 = true; //Should players be able to loot from loot piles?
 _ZombZ_SZ_NoZeds				 = true; //Should zombies not be able to spawn in safezones?
 _ZombZ_SZ_SpeedLimit 			 = true; //Should players vehicles be limited to 25km/h in safezones?
-_ZombZ_SZ_VehicleSalvage 		 = true; //Should we allow salavage options in the trader cities?
-_ZombZ_SZ_allowFriendlyAccess 	 = true; //Should we allow players tagged as friendly into other players backpacks?
-_ZombZ_SZ_antiBackPack 			 = true; //Should we prevent players from stealing from others backpacks and vehicles etc?
+_ZombZ_SZ_VehicleSalvage 		 = false; //Should we allow salavage options in the trader cities?
+_ZombZ_SZ_allowFriendlyAccess 	 = true; ZombZ_SZ_allowFriendlyAccess = true; //Should we allow players tagged as friendly into other players backpacks?
+_ZombZ_SZ_antiBackPack 			 = true; ZombZ_SZ_antiBackPack = true; //Should we prevent players from stealing from others backpacks and vehicles etc?
+ZombZ_safeZone_Backpack_AllowGearFromLootPiles = true;
 
 //Main Script Coding
 disableSerialization;
@@ -101,53 +102,59 @@ while {true} do {
 		}];
 	};
 
-	if (_ZombZ_SZ_DisableMountedGuns) then
-	{
-		while {!canBuild} do
+	_disableGunThread = [] spawn {
+		if (ZombZ_SZ_DisableMountedGuns) then
 		{
-			sleep 0.1;
-			if ( !(isNull _inVehicle) && (vehicle player == player)) then
-			{
-				_inVehicle removeEventHandler ["Fired", _EH_Fired_Vehicle];
-				_inVehicleLast = _inVehicle;
-				_inVehicleLast removeEventHandler ["Fired", _EH_Fired_Vehicle];
-				_inVehicle = objNull;
+			_inVehicle = objNull;
+			_inVehicleLast = objNull;
+				while {!canBuild} do
+				{
+					sleep 0.1;
+					if ( !(isNull _inVehicle) && (vehicle player == player)) then
+					{
+						_inVehicle removeEventHandler ["Fired", _EH_Fired_Vehicle];
+						_inVehicleLast = _inVehicle;
+						_inVehicleLast removeEventHandler ["Fired", _EH_Fired_Vehicle];
+						_inVehicle = objNull;
+					};
+					
+					if ( vehicle player != player && isNull _inVehicle) then
+					{
+						if (ZombZ_SZ_Messages) then {systemChat ("[ZombZ] No Firing Vehicle Guns Enabled");};
+						_inVehicle = vehicle player;
+						_inVehicleDamage = getDammage _inVehicle;
+						_EH_Fired_Vehicle = _inVehicle addEventHandler ["Fired", {
+							"ZombZinSafeZone";
+							systemChat ("[ZombZ] You can not fire your vehicles weapon in a Trader City Area");
+							NearestObject [_this select 0,_this select 4] setPos[0,0,0];
+						}];
+					};
+				};
+			} else {
+				waitUntil {canBuild};
 			};
-			
-			if ( vehicle player != player && isNull _inVehicle) then
-			{
-				if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] No Firing Vehicle Guns Enabled");};
-				_inVehicle = vehicle player;
-				_inVehicleDamage = getDammage _inVehicle;
-				_EH_Fired_Vehicle = _inVehicle addEventHandler ["Fired", {
-					"ZombZinSafeZone";
-					systemChat ("[ZombZ] You can not fire your vehicles weapon in a Trader City Area");
-					NearestObject [_this select 0,_this select 4] setPos[0,0,0];
-				}];
-			};
-		};
-	} else {
-		waitUntil {canBuild};
 	};
 
-	if (_ZombZ_SZ_AntiGear) then
-	{
-		while {!canbuild} do
+	_antiGearThread = [] spawn {
+		if (ZombZ_SZ_AntiGear) then
 		{
-			_cnt = {isPlayer _x && _x != player} count (player nearEntities [['CAManBase'], 3]);
-			if ((_cnt > 0) && (!isNull (findDisplay 106))) then
+			while {!canbuild} do
 			{
-				(findDisplay 106) closedisplay 0;
-				closeDialog 0;
-				_log = format ["%1 You are not allowed to open Gear while near another player!",name player];
-				cutText [_log,"PLAIN"];
+				_cnt = {isPlayer _x && _x != player} count (player nearEntities [['CAManBase'], 3]);
+				if ((_cnt > 0) && (!isNull (findDisplay 106))) then
+				{
+					(findDisplay 106) closedisplay 0;
+					closeDialog 0;
+					_log = format ["[ZombZ] %1 You are not allowed to open Gear while near another player!",name player];
+					systemChat(_log);
+				};
 			};
+		} else {
+			waitUntil {canbuild};
 		};
-	} else {
-		waitUntil {canbuild};
 	};
 
-	if ( _ZombZ_SZ_antiBackPack ) then
+	if (_ZombZ_SZ_antiBackPack) then
 	{
 		ZombZ_LastPlayerLookedAt = objNull;
 		ZombZ_LastPlayerLookedAtCountDown = 5;
@@ -206,7 +213,7 @@ while {true} do {
 						_ctOwnerID = _ct getVariable["CharacterID","0"];
 						_friendlies	= player getVariable ["friendlyTo",[]];
 						if(_ctOwnerID in _friendlies) then {	
-							if ( _ZombZ_SZ_allowFriendlyAccess ) then
+							if ( ZombZ_SZ_allowFriendlyAccess ) then
 							{
 								_if = true;
 							};
@@ -217,13 +224,13 @@ while {true} do {
 					if ( _lp ) then {_skip = true;};
 					
 					//Dead body check
-					if ( !(_ia) && _ZombZ_SZ_DeadPlayers ) then {_skip = true;};
+					if ( !(_ia) && ZombZ_SZ_DeadPlayers ) then {_skip = true;};
 					
 					//Vehicle check
-					if ( _iv && (_dis < 10) && !(_ip) && _ZombZ_SZ_GearFromVehicles ) then {_skip = true;};
+					if ( _iv && (_dis < 10) && !(_ip) && ZombZ_SZ_GearFromVehicles ) then {_skip = true;};
 					
 					//In a vehicle check
-					if ( _inv && _ZombZ_SZ_GearFromWithinVehicles ) then { _skip = true; };
+					if ( _inv && ZombZ_SZ_GearFromWithinVehicles ) then { _skip = true; };
 					
 					//Is player friendly?
 					if ( _if ) then { _skip = true; };
@@ -236,10 +243,10 @@ while {true} do {
 						(findDisplay 106) closeDisplay 1;
 						waitUntil { isNull (FindDisplay 106) };
 						createGearDialog [(player), 'RscDisplayGear'];
-						if ( _ZombZ_SZ_Messages ) then { systemChat ("[ZombZ] Anti Backpack Stealing - Redirecting you to your own gear!"); };
+						if ( ZombZ_SZ_Messages ) then { systemChat ("[ZombZ] Anti Backpack Stealing - Redirecting you to your own gear!"); };
 						waitUntil { isNull (FindDisplay 106) };
 					} else {
-						if ( _ZombZ_SZ_Messages ) then { systemChat (format["[ZombZ] You cannot open your gear at this time as you have looked at a player in the last 5 seconds."]); };
+						if ( ZombZ_SZ_Messages ) then { systemChat (format["[ZombZ] You cannot open your gear at this time as you have looked at a player in the last 5 seconds."]); };
 						(findDisplay 106) closeDisplay 1;
 						waitUntil { isNull (FindDisplay 106) };
 					};
@@ -248,11 +255,14 @@ while {true} do {
 		};
 	};
 	
-	
+	waitUntil {canBuild};
+
 	ZombZ_LastPlayerLookedAt = objNull;
 	ZombZ_LastPlayerLookedAtCountDown = 5;
 	terminate _antiBackpackThread;
 	terminate _antiBackpackThread2;
+	terminate _disableGunThread;
+	terminate _antiGearThread;
 	if (_ZombZ_SZ_Messages) then {systemChat ("[ZombZ] Exiting Safezone Trader Area - God Mode Disabled"); };
 	
 	if (_ZombZ_SZ_DisableMountedGuns) then
