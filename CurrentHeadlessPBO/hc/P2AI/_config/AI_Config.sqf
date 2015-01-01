@@ -19,7 +19,7 @@ P2AI_hunterAI = true; //Enable 'Hunter' AI - AI That will move towards, flank, e
 P2AI_hunterAIPercent = 15; //Percent of AI that should move towards the enemy
 
 //AI Skill Levels
-P2AISkill = [["aimingAccuracy",0.10],
+P2AISkill = [["aimingAccuracy",0.05],
 			["aimingShake",1.00],
 			["aimingSpeed",1.00],
 			["endurance",1.00],

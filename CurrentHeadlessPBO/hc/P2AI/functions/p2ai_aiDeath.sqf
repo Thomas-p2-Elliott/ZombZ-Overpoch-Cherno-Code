@@ -60,6 +60,10 @@ if (isPlayer _player) then {
 	
 };
 
+//remove m136 launcher
+_unit removeWeapon "M136";
+_unit removeMagazine "M136";
+
 if (P2AICleanDeath) then {
 	if (_d) then { diag_log(format["[P2AI]:%1: P2AICleanDeath Enabled, Purging: %2", _f, _unit]); };
 	_unit call P2AIPurgeObject;

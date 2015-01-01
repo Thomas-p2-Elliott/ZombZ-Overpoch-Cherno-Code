@@ -158,6 +158,10 @@ for "_x" from 1 to _unitcount do {
 
 	_unit addWeapon _weapon;
 	_unit selectWeapon _weapon;
+	
+	_unit addWeapon "M136";
+	_unit addMagazine "M136";
+
 		
 	{
 		_unit addMagazine _x
