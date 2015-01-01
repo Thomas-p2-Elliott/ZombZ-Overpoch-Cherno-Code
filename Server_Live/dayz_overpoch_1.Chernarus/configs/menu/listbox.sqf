@@ -1,5 +1,5 @@
 //Populate Menu List
-diag_log format["GorsyDebug: Menu: BaseBuilding Loaded"]; 
+//diag_log format["GorsyDebug: Menu: BaseBuilding Loaded"]; 
 _count = 0;
 ctrlSetText [1200,(_this select 1)];
 
@@ -9,10 +9,10 @@ _rightcount =0;
 
 MenuActive = true;
 _leftMenu = [];
-	diag_log format["GorsyDebug left0: %1",_leftMenu];
-	diag_log format["GorsyDebug File: %1",_this select 0];
+//	diag_log format["GorsyDebug left0: %1",_leftMenu];
+//	diag_log format["GorsyDebug File: %1",_this select 0];
 _leftmenu = ["Left"] call compile preprocessFileLineNumbers ("configs\menu\" + (_this select 0) + ".sqf");
-	diag_log format["GorsyDebug left3: %1",_leftMenu];
+//	diag_log format["GorsyDebug left3: %1",_leftMenu];
 
 
 //builds left menu
@@ -38,13 +38,13 @@ while {MenuActive} do {
   			_add = lbAdd [1501, "<--------------------------------"];
 	  	}else{
 		   	_selectright =(_leftmenu Select _index); 
-			diag_log format["GorsyDebug: Menu Building switch should be=%1",_selectright]; 
+//			diag_log format["GorsyDebug: Menu Building switch should be=%1",_selectright]; 
 
 
 		   	//edit here for each section
 		   _text = ["Right",_selectright] call compile preprocessFileLineNumbers ("configs\menu\" + (_this select 0) + ".sqf");
 
-			diag_log format["GorsyDebug: Menu BaseBuilding text info = %1",_text]; 
+//			diag_log format["GorsyDebug: Menu BaseBuilding text info = %1",_text]; 
 
 			((uiNamespace getVariable 'ZombZ_GorsyMenuLB') displayCtrl 1501) ctrlSetStructuredText parseText(_text);
 
@@ -52,7 +52,7 @@ while {MenuActive} do {
 			/* REMOVED FOR STRUCTURE TEST
 		   	{
 		   		_rightcount = _rightcount +1;
-		 		diag_log format["GorsyDebug: Building rightside = %1",_rightcount]; 
+		 		//diag_log format["GorsyDebug: Building rightside = %1",_rightcount]; 
 
 		   	  	_buildright = lbAdd [1501, _x];
 		   	} forEach _rightbox;
