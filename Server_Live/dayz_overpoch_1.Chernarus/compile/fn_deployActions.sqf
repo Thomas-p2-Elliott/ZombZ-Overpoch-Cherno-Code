@@ -31,7 +31,7 @@ while {true} do {
 				_onLadder = (getNumber (configFile >> "CfgMovesMaleSdr" >> "States" >> (animationState player) >> "onLadder")) == 1; 
 				_hasToolbox = "ItemToolbox" in items player; 
 				_canDo = (!r_drag_sqf and !r_player_unconscious and !_onLadder);  
-				_isBike = typeOf _cursorTarget in ["Old_bike_TK_INS_EP1","Old_bike_TK_CIV_EP1"]; 
+				_isBike = typeOf _cursorTarget in ["MMT_Civ"]; 
 				_isATV = typeOf _cursorTarget in ["ATV_US_EP1"]; 
 				_isMoto = typeOf _cursorTarget in ["TT650_TK_CIV_EP1"]; 
 				_isBtr = typeOf _cursorTarget in ["BTR40_TK_GUE_EP1"]; 
