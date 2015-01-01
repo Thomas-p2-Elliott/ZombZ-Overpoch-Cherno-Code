@@ -5,7 +5,7 @@ _goldVar = 0;
 _goldVar = [false,player] call p2_gv;
 _unit = player;
 _goldCount = 0;
-_result2 = "nochange";
+_result2 = "nochange0";
 _mags = magazines _unit;
 _goldCount = {"ItemGoldBar10oz" == _x} count _mags;
 
@@ -105,7 +105,12 @@ if (!P2DZE_goldRunning) then {
 				//if player has no gold
 				} else {
 					P2DZE_hasGold = false;
-					_result2 = "nochange";
+					if (_goldCount > 0) then {
+						_result2 = "HasNoGold: Player shouldnt have gold bar, removing item...";
+						_unit removeMagazine "ItemGoldBar10oz";
+					} else {
+						_result2 = "nochange";
+					};
 				};
 			} else {
 				_result2 = "Failed: goldVar is equal to nil!";

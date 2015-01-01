@@ -10,6 +10,8 @@ _strResult = false;
 _text = "";
 _nearObjects = [];
 
+diag_log("P2DEBUG: player_pickupGold");
+
 //If gear is coming from vehicle/storage/weaponholder (+<storage gold amount> in gold)
 if (P2DZE_gearOnContainer || P2DZE_gearOnWeaponHolder) then {
 
@@ -47,7 +49,7 @@ if (P2DZE_gearOnContainer || P2DZE_gearOnWeaponHolder) then {
 		if !(isNull _object) then {
 			//output error info (they will get 1 free gold per reproduction of this bug)
 			if (P2DZE_goldItemHandlingDebug) then {diag_log("P2DEBUG: player_pickupGold: ERROR: _object is Null!"); };
-			systemChat("Drop Gold Error: Cursor Target is Null!");
+			systemChat("PickUp Gold Error: Cursor Target is Null!");
 		};
 
 	};
@@ -58,9 +60,34 @@ if (P2DZE_gearOnContainer || P2DZE_gearOnWeaponHolder) then {
 
 //if gear is coming from ground
 } else {
-	if (P2DZE_goldItemHandlingDebug) then {
-		diag_log("ERROR: Gold has no value or was hacked in and has no value! Sorry to get your hopes up!");
+
+	_object = cursorTarget;
+
+	//ensure object isnt null
+	if (!(isNull _object) && {(((player distance _object) < 10))} && {((((getMagazineCargo _object) select 0)select 0) == "ItemGoldBar10oz")}) then {
+		P2DZE_plr_pickupGold = [player,_object];
+		publicVariableServer "P2DZE_plr_pickupGold";
+		if (P2DZE_goldItemHandlingDebug) then {
+			diag_log(format[" pickupGold: onContainer: (false) Container/Type: %1 / %2", _object, typeOf _object]);
+		};
 	};
+
+	if (isNull _object) then {
+		//if object is null, get nearest weaponHolder
+		_nearObjects = (getPosATL player) nearObjects ["WeaponHolder",15];
+		{
+			if ((((getMagazineCargo _x) select 0)select 0) == "ItemGoldBar10oz") then {
+				_object = _x;
+				P2DZE_plr_pickupGold = [player,_object];
+				publicVariableServer "P2DZE_plr_pickupGold";
+				if (P2DZE_goldItemHandlingDebug) then {
+					diag_log(format[" pickupGold: onContainer: (false) Container/Type: %1 / %2", _object, typeOf _object]);
+				};
+			};
+		} forEach _nearObjects;
+	};
+
+
 };
 //close gear menu
 closeDialog 0;

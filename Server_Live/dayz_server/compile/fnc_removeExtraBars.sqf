@@ -15,65 +15,89 @@ _contents = [];
 _itemCount = 0;
 _addBackCount = 0;
 _goldBarCount = 0;
-_contents = getMagazineCargo _object;
+_isMan = _object isKindOf "Man";
 
-/* Count amount of gold bars in objects inventory */
-{
-	if (((_contents select 0) select _itemCount) == _itemType) then {
-		_goldBarCount = (_contents select 1) select _itemCount;
+if (_isMan) then {
+	
+	/* Count amount of gold bars in objects inventory */
+	_contents = magazines _unit;
+	_goldBarCount = {"ItemGoldBar10oz" == _x} count _mags;
+
+	if (_goldBarCount > 0) then {
+		if (_goldBarCount > 1) then {
+			_object removeMagazine "ItemGoldBar10oz";
+		};
+	} else {
+		if (_keep1Bar) then {
+			_object addMagazine "ItemGoldBar10oz";
+		};
 	};
-	_itemCount = _itemCount + 1;
-} count (_contents select 0);
 
-if (_goldBarCount > 0) then {
+} else {
+	/* Count amount of gold bars in objects inventory */
+	_contents = getMagazineCargo _object;
 
-
-	if (_d) then { diag_log("P2DEBUG: Object Has " + str _goldBarCount + " " + str _itemType + " items inside! Removing all of them then adding 1 back" + str _itemType); };
-	_arr2_1 = [];
-	_arr2_2 = [];
-	_arr2 = [];
-	_itemCount = 0;
-
-	if (_d) then { diag_log("P2DEBUG: Before: " + str _contents); };
-
-	/* Build a magazine style array without any gold bar items */
 
 	{
-		if (((_contents select 0) select _itemCount) != _itemType) then {
-			_arr2_1 = _arr2_1 + [(_contents select 0) select _itemCount];
-			_arr2_2 = _arr2_2 + [(_contents select 1) select _itemCount];
+		if (((_contents select 0) select _itemCount) == _itemType) then {
+			_goldBarCount = (_contents select 1) select _itemCount;
 		};
 		_itemCount = _itemCount + 1;
 	} count (_contents select 0);
-	_arr2 = [_arr2_1,_arr2_2];
 
-	if (_d) then { diag_log("P2DEBUG: WithoutGold: " + str _arr2); };
-
-	/* Remove all magazine items from the object */
-
-	clearMagazineCargoGlobal _object;
-
-	/* add back each non-gold item, (for each item do: for each item amount, add 1 magazine) */
-	{
-	 	for "_i" from 0 to ((((_arr2 select 1) select _addBackCount)) -1) do {
-	 		_object addMagazineCargoGlobal [_x, 1];
-	 	};
-
-	 	_addBackCount = _addBackCount + 1;
-	} count (_arr2 select 0); 
+	if (_goldBarCount > 0) then {
 
 
-	/* Add single gold bar item to object */
-	if (_keep1Bar) then { _object addMagazineCargoGlobal [_itemType, 1]; };
+		if (_d) then { diag_log("P2DEBUG: Object Has " + str _goldBarCount + " " + str _itemType + " items inside! Removing all of them then adding 1 back" + str _itemType); };
+		_arr2_1 = [];
+		_arr2_2 = [];
+		_arr2 = [];
+		_itemCount = 0;
 
-} else {
-	if (_keep1Bar) then { if (_d) then { 
-		diag_log("P2DEBUG: Object Has no " + str _itemType + " items, adding 1!"); };
-		_object addMagazineCargoGlobal [_itemType, 1]; 
+		if (_d) then { diag_log("P2DEBUG: Before: " + str _contents); };
+
+		/* Build a magazine style array without any gold bar items */
+
+		{
+			if (((_contents select 0) select _itemCount) != _itemType) then {
+				_arr2_1 = _arr2_1 + [(_contents select 0) select _itemCount];
+				_arr2_2 = _arr2_2 + [(_contents select 1) select _itemCount];
+			};
+			_itemCount = _itemCount + 1;
+		} count (_contents select 0);
+		_arr2 = [_arr2_1,_arr2_2];
+
+		if (_d) then { diag_log("P2DEBUG: WithoutGold: " + str _arr2); };
+
+		/* Remove all magazine items from the object */
+
+		clearMagazineCargoGlobal _object;
+
+		/* add back each non-gold item, (for each item do: for each item amount, add 1 magazine) */
+		{
+		 	for "_i" from 0 to ((((_arr2 select 1) select _addBackCount)) -1) do {
+		 		_object addMagazineCargoGlobal [_x, 1];
+		 	};
+
+		 	_addBackCount = _addBackCount + 1;
+		} count (_arr2 select 0); 
+
+
+		/* Add single gold bar item to object */
+		if (_keep1Bar) then { _object addMagazineCargoGlobal [_itemType, 1]; _object addMagazine _itemType; };
+
+	} else {
+		if (_keep1Bar) then { 
+			if (_d) then { 	diag_log("P2DEBUG: Object Has no " + str _itemType + " items, adding 1!"); };
+			_object addMagazineCargoGlobal [_itemType, 1];
+			_object addMagazine _itemType;
+		};
 	};
+
+	_contents = getMagazineCargo _object;
+	if (_d) then { diag_log("P2DEBUG: Object processed, contents now = " + str _contents); };
 };
 
-_contents = getMagazineCargo _object;
-if (_d) then { diag_log("P2DEBUG: Object processed, contents now = " + str _contents); };
+
 
 true
