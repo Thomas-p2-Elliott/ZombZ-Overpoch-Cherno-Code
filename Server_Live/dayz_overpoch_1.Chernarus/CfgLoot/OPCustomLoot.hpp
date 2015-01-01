@@ -866,18 +866,11 @@ ShotgunWeaps[] = {
 
 
 MeleeWeaps[] = {
-
-{"Chainsaw",0.01}, 
 {"MeleeBaseBallBat",0.50}, 
 {"MeleeCrowbar",0.50}, 
 {"MeleeFishingPole",0.50}, 
-{"MeleeSledge",0.50}, 
 {"MeleeHatchet_DZE",0.50}, 
-{"MeleeMachete",0.50}, 
-{"ChainSawB",0.01}, 
-{"ChainSawG",0.01}, 
-{"ChainSawP",0.01}, 
-{"ChainSawR",0.01} 
+{"MeleeMachete",0.50}
 };
 
 

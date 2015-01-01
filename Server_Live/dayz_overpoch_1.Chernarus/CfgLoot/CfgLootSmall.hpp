@@ -55,9 +55,7 @@ class CfgLootSmall {
 		{"MeleeHatchet_DZE",0.35}, 
 		{"MeleeMachete",0.25}, 
 		{"MeleeCrowbar",0.2}, 
-		{"MeleeFishingPole",0.14}, 
-		{"MeleeSledge",0.05}, 
-		{"Chainsaw",0.01}
+		{"MeleeFishingPole",0.14}
 	};
 
 
@@ -274,12 +272,12 @@ class CfgLootSmall {
 		,{"FoodCanSardines",0.06}
 		,{"FoodCanFrankBeans",0.06}
 		,{"FoodCanPasta",0.06}
-		,{"ItemBandage",0.1}
+		,{"ItemBandage",0.11}
 		,{"ItemPainkiller",0.06}
 		,{"ItemWire",0.01}
 		,{"ItemTankTrap",0.03}
 		,{"ItemComboLock",0.04}
-		,{"ItemSledgeHead",0.02}
+		,{"ItemSledgeHead",0.01}
 		,{"ItemDocument",0.02}
 	};
 	clothes[] = {
