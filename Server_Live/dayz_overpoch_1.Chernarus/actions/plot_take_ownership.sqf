@@ -6,16 +6,18 @@
 // This code calls server_publishFullObject which also saves damage, inventory and fuel.  Hitpoints are assumed to be empty as this is for buildables only.
 
 private ["_distance","_plotpole","_playerUID","_isowner", "_findNearestObjects","_classname","_objectID", "_objectUID", "_position", "_worldspace", "_object", "_key","_invW","_invM","_invB","_itemsExist","_charID","_inventory"];
-
 _distance = (DZE_PlotPole select 0) + 1;
 _plotpole = nearestobject [(vehicle player),"Plastic_Pole_EP1_DZ"];
 
 _playerUID = [player] call FNC_GetPlayerUID;
 
 // Check is owner of the plot pole.
-
 _isowner = [player, _plotpole] call FNC_check_owner;
 _itemsExist = false;
+
+//declare or reset dis shit nigguhhh
+p2plotItemsTaken = [];
+p2plotItemsOwned = [];
 
 if ((_isowner select 0 )) then {
 	_findNearestObjects = nearestObjects [_plotpole, [], _distance];
@@ -76,13 +78,33 @@ if ((_isowner select 0 )) then {
 				
 				PVDZE_fullobj_Publish = [_charID,_object,_worldspace,_classname, _inventory, _hitpoints, _damage, _fuel];
 				publicVariableServer "PVDZE_fullobj_Publish";
+
+				//add type of object to dis shit so we can tell dem what dey done did liek
+				p2plotItemsTaken = p2plotItemsTaken + [(typeOf _object)];
 				
 				if !(DZE_APlotforLife) then {
 					_object setvariable["ownerPUID", dayz_characterID];
 				}else{
 					_object setvariable["ownerPUID", _playerUID];	
 				};	
+			} else {
+				//add item type for display later n dat
+				p2plotItemsOwned = p2plotItemsOwned + [(typeOf _object)];
 			};
 		};
 	} count _findNearestObjects;
+} else {
+	cutText [format["You must be added to the plot pole before you can take ownership."], "PLAIN DOWN"];
+};
+
+if (!isNil "p2plotItemsTaken" && {(count p2plotItemsTaken > 0)}) then {
+	cutText [(format["You have taken ownership of: %1",p2plotItemsTaken]), "PLAIN DOWN"];
+} else {
+	cutText [format["You have taken ownership of nothing."], "PLAIN DOWN"];
+};
+
+if (!isNil "p2plotItemsOwned" && {(count p2plotItemsOwned > 0)}) then {
+	systemChat(format["ZombZ: Items you already owned in this plot: %1", p2plotItemsOwned]);
+} else {
+	systemChat("ZombZ: You own nothing in this plot.");	
 };
