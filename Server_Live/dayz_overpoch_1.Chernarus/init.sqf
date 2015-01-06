@@ -175,7 +175,9 @@ if (!isDedicated) then {
 	[] 	execVM 								"compile\fn_deployActions.sqf";	
 	call compile preprocessFileLineNumbers 	"compile\fnc_debugMon.sqf";
 	call compile preprocessFileLineNumbers 	"init\notifs_init.sqf";
-	[] execVM 								"system\safezone.sqf";
+	//[] execVM 								"system\safezone.sqf";
+	[] execVM 								"sz\init.sqf";
+
 };
 
 //#define RESEC_VERBOSE
