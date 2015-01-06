@@ -120,69 +120,70 @@ _fnc_spawn_vehicle = {
 					_attemptCount = _attemptCount + 1;
 					if (_p2d) then {	diag_log("Static Vehicle Spawn: Failed for Vehicles: " + str _vehicle + " Reason: " + str _reasonForNoSpawn); };
 				} else {
-					
-					if ((_vehicle) == "SUV_TK_CIV_EP1_DZE1") then {
-						private["_randCount","_randSel"];
-						_randCount = 0;
-						_randSel = 0;
-						_randCount = count SUV_VEHICLE_LIST;
-						_randSel = (random(_randCount));
-						_randSel = floor _randSel;
-						_vehicle = SUV_VEHICLE_LIST select _randSel;
-						if (_p2d) then { diag_log("P2DEBUG: Random SUV Selected: " + str _vehicle)};
+					private["_p2newrandChance"];
+					_p2newrandChance = random 1;
+					//if it gets this far, give vehicle a 10% chance of spawning
+					if (_p2newrandChance > 0.8999) then {
+						if ((_vehicle) == "SUV_TK_CIV_EP1_DZE1") then {
+							private["_randCount","_randSel"];
+							_randCount = 0;
+							_randSel = 0;
+							_randCount = count SUV_VEHICLE_LIST;
+							_randSel = (random(_randCount));
+							_randSel = floor _randSel;
+							_vehicle = SUV_VEHICLE_LIST select _randSel;
+							if (_p2d) then { diag_log("P2DEBUG: Random SUV Selected: " + str _vehicle)};
+						};
+
+						if ((_vehicle) == "350z") then {
+							private["_randCount","_randSel"];
+							_randCount = 0;
+							_randSel = 0;
+							_randCount = count (Nissan350z_VEHICLE_LIST);
+							_randSel = (random(_randCount));
+							_randSel = floor _randSel;
+							_vehicle = (Nissan350z_VEHICLE_LIST) select _randSel;
+							if (_p2d) then { diag_log("P2DEBUG: Random 350z Selected: " + str _vehicle)};
+						};
+
+						//place vehicle 
+						_veh = createVehicle [_vehicle, (_spawnPos select 1), [], 0, "CAN_COLLIDE"];
+						_veh setdir _dir;
+						_veh setposATL (_spawnPos select 1);		
+
+						//add to veh spawned
+						_vehSpawned = _vehSpawned + 1;
+
+						//remove magazines
+						clearMagazineCargoGlobal _veh;
+
+						//remove weapons
+						clearWeaponCargoGlobal _veh;
+
+						if (isNil "DZE_vehicleAmmo") then { DZE_vehicleAmmo = 0; };
+						//remove vehicle weapon ammo (eg m240 on humvee ammo)
+						_veh setAmmo DZE_vehicleAmmo;
+						
+						_veh call player2_removeVehicleWeapons;
+
+						_veh call {
+						    _this setVariable [
+						        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+						        "hash_id" callExtension format [
+						            "%1:%2",
+						            netId _this,
+						            typeOf _this
+						        ]
+						    ];
+						};
+						
+						// Get position
+						_objPosition = GetPosATL _veh;
+						if (_p2d) then {	diag_log(" "); diag_log("Static Spawn Vehicle of Type: " + str _veh + " Created At: " + str _objPosition + " With Direction: " + str _dir); };
+
+						[_veh,[_dir,_objPosition],_vehicle,true,"0"] call server_publishVeh;
+						_vehicle = _this select 0; // just in case it was modified by suv/350z changes...
 					};
-
-					if ((_vehicle) == "350z") then {
-						private["_randCount","_randSel"];
-						_randCount = 0;
-						_randSel = 0;
-						_randCount = count (Nissan350z_VEHICLE_LIST);
-						_randSel = (random(_randCount));
-						_randSel = floor _randSel;
-						_vehicle = (Nissan350z_VEHICLE_LIST) select _randSel;
-						if (_p2d) then { diag_log("P2DEBUG: Random 350z Selected: " + str _vehicle)};
-					};
-
-					//place vehicle 
-					_veh = createVehicle [_vehicle, (_spawnPos select 1), [], 0, "CAN_COLLIDE"];
-					_veh setdir _dir;
-					_veh setposATL (_spawnPos select 1);		
-
-					//add to veh spawned
-					_vehSpawned = _vehSpawned + 1;
-
-					//remove magazines
-					clearMagazineCargoGlobal _veh;
-
-					//remove weapons
-					clearWeaponCargoGlobal _veh;
-
-					//remove vehicle weapon ammo (eg m240 on humvee ammo)
-					//_veh setAmmo 0;
-					
-					_veh call player2_removeVehicleWeapons;
-
-					_veh call {
-					    _this setVariable [
-					        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-					        "hash_id" callExtension format [
-					            "%1:%2",
-					            netId _this,
-					            typeOf _this
-					        ]
-					    ];
-					};
-					
-					// Get position
-					_objPosition = GetPosATL _veh;
-					if (_p2d) then {	diag_log(" "); diag_log("Static Spawn Vehicle of Type: " + str _veh + " Created At: " + str _objPosition + " With Direction: " + str _dir); };
-
-					clearWeaponCargoGlobal  _veh;
-					clearMagazineCargoGlobal  _veh;
-					_veh setVehicleAmmo DZE_vehicleAmmo;
-
-					[_veh,[_dir,_objPosition],_vehicle,true,"0"] call server_publishVeh;
-					_vehicle = _this select 0; // just in case it was modified by suv/350z changes...
 				};
 			} else {
 				diag_log("Static Veh Spawn: Position Failed: " + str _spawnPos);
