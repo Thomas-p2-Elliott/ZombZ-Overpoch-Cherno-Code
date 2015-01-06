@@ -226,11 +226,6 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		    };
 		 };
 
-		 if (s_player_maintain_area < 0) then {
-		  	s_player_maintain_area = player addAction [format["<t color='#ff0000'>%1</t>",localize "STR_EPOCH_ACTIONS_MAINTAREA"], "compile\maintain_areaSC.sqf", "maintain", 5, false];
-		 	s_player_maintain_area_preview = player addAction [format["<t color='#ff0000'>%1</t>",localize "STR_EPOCH_ACTIONS_MAINTPREV"], "plotManagement\plotToggleMarkers.sqf", "preview", 5, false];
-		 };
-
 		 _plotDistance = (DZE_PlotPole select 0);
 		_PlotsmarkersNear = count (nearestObjects [_cursorTarget, ["Land_coneLight"], _PlotDistance]);
 
@@ -671,25 +666,6 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		s_player_downgrade_build = -1;
 	};
 
-	// inplace maintenance tool
-	if((_cursorTarget isKindOf "ModularItems" || _cursorTarget isKindOf "DZE_Housebase" || _typeOfCursorTarget == "LightPole_DZ") && (damage _cursorTarget >= DZE_DamageBeforeMaint)) then {
-		if ((s_player_lastTarget select 2) != _cursorTarget) then {
-			if (s_player_maint_build > 0) then {	
-				player removeAction s_player_maint_build;
-				s_player_maint_build = -1;
-			};
-		};
-
-		if (s_player_maint_build < 0) then {
-			s_player_lastTarget set [2,_cursorTarget];
-			s_player_maint_build = player addAction [format[localize "STR_EPOCH_ACTIONS_MAINTAIN",_text], "\z\addons\dayz_code\actions\player_buildingMaint.sqf",_cursorTarget, -2, false, true, "",""];
-		};
-	} else {
-		player removeAction s_player_maint_build;
-		s_player_maint_build = -1;
-	};
-
-
 	//Start Generator
 	if(_cursorTarget isKindOf "Generator_DZ") then {
 		if (s_player_fillgen < 0) then {
@@ -721,18 +697,6 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	} else {
 		player removeAction s_player_sleep;
 		s_player_sleep = -1;
-	};
-
-	//Take Clothes
-	_clothesTaken = _cursorTarget getVariable["clothesTaken",false];
-	// Take clothes by Zabn
-	if (_isMan and !_isAlive and !_isZombie and !_clothesTaken) then {
-		if (s_player_clothes < 0) then {
-			s_player_clothes = player addAction [("<t color='#0096ff'>")+("Take Clothes")+("</t>"), "actions\player_takeClothes.sqf",[_cursorTarget], -10, false, true, "",""];
-		};
-	} else {
-		player removeAction s_player_clothes;
- 		s_player_clothes = -1;
 	};
 
 	//Repairing Vehicles

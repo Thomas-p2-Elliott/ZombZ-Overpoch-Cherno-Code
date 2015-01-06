@@ -37,7 +37,7 @@ while {true} do {
 				_isBtr = typeOf _cursorTarget in ["BTR40_TK_GUE_EP1"]; 
 				_isHumvee = typeOf _cursorTarget in ["HMMWV_DZ"]; 
 				_isGyro = typeOf _cursorTarget in ["CSJ_GyroC"]; 
-				_isLittlebird = typeOf _cursorTarget in ["MH6J_DZ"]; 
+				_isLittlebird = typeOf _cursorTarget in ["AH6X_DZ"]; 
 				_isMerlin = typeOf _cursorTarget in ["Mi17_Civilian_DZ"]; 
 				
 				if (player distance _cursorTarget < 6 && {_cursorTarget == cursorTarget}) then {

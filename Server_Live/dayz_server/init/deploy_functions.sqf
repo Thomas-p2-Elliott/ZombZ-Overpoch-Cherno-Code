@@ -6,7 +6,7 @@
         _positn = _array select 0;
         _player = _array select 1;
         _select = _array select 2;
-        if (_select in ['Old_bike_TK_CIV_EP1','ATV_US_EP1','TT650_TK_CIV_EP1','350z_white_DZ','BTR40_TK_GUE_EP1','BTR40_MG_TK_GUE_EP1','HMMWV_DZ','HMMWV_Armored','CSJ_GyroC','MH6J_DZ','Mi17_Civilian_DZ','UH1H_TK_EP1']) then {
+        if (_select in ['Old_bike_TK_CIV_EP1','ATV_US_EP1','TT650_TK_CIV_EP1','350z_white_DZ','BTR40_TK_GUE_EP1','BTR40_MG_TK_GUE_EP1','HMMWV_DZ','HMMWV_Armored','CSJ_GyroC','AH6X_DZ','Mi17_Civilian_DZ','UH1H_TK_EP1']) then {
                
 				//turn old bike to mountain bike
                 if (_select == 'Old_bike_TK_CIV_EP1') then {	_select = "MMT_CIV" };
@@ -36,7 +36,7 @@
 //                diag_log (_log);
         } else {
 	         if (_select in ['ArmedLittlebird']) then {
-	           	_object = "MH6J_DZ" createVehicle _positn;
+	           	_object = "AH6X_DZ" createVehicle _positn;
 	            _object setVariable ["ObjectID", "1", true];
 	            _object setVariable ["ObjectUID", "1", true];
 	            _object setVariable ["Deployed", true, true];
@@ -273,7 +273,7 @@
 
 			} forEach _origMat;
 		};
-		if (typeOf _obj == "MH6J_DZ") then {
+		if (typeOf _obj == "AH6X_DZ") then {
 			_origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric"];
 			if (_armedLittleBird) then {	
 				_origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartGeneric","ItemToolbox"];	
