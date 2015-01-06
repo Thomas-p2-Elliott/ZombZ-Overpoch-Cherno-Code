@@ -29,7 +29,7 @@ if(!zombzsafezone) then
 	if( isPlayer cursorTarget and alive cursorTarget and vehicle cursorTarget == cursorTarget ) then
 	{
 		_friendlies = player getVariable ["friendlyTo",[]];
-		_ownerID = cursorTarget getVariable ["CharacterID", "0"];
+		_ownerID = getplayerUID cursorTarget;
 
 		_friend = _ownerID in _friendlies;
 
