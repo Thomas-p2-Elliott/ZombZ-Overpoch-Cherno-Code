@@ -29,7 +29,7 @@ dayz_dawn = 6;
 dayz_dusk = 18;
 
 //Amount of ammo for vehicles to have
-DZE_vehicleAmmo = 0.2;
+DZE_vehicleAmmo = 0;
 
 P2DZ_postVars = false; //early var
 
