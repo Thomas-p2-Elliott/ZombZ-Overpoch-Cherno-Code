@@ -285,7 +285,7 @@ while {true} do {
 		if (p2sz_as )then{
 			//check if player has entered safezone recently
 			if (p2sz) then{
-				[] execVM "sz\agn_timer.sqf";
+				[] execVM "sz\sz_timer.sqf";
 			};
 		};
 	};
