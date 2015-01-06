@@ -71,6 +71,8 @@ if (!isDedicated) then {
 	/* Menu Text Compile */
 	[] call compile preprocessFileLineNumbers "system\menu.sqf";
 
+	player_traderCity = 			compile preprocessFileLineNumbers "compile\player_traderCity.sqf";
+
 	ui_changeDisplay = 				compile preprocessFileLineNumbers "compile\ui_changeDisplay.sqf";
 	player_selectSlot =				compile preprocessFileLineNumbers "compile\ui_selectSlot.sqf";
 	player_wearClothes =			compile preprocessFileLineNumbers "actions\player_wearClothes.sqf";
@@ -85,7 +87,6 @@ if (!isDedicated) then {
 	player_humanityMorph =			compile preprocessFileLineNumbers "compile\player_humanityMorph.sqf";
 
 	BIS_Effects_Burn = 				compile preprocessFile "\ca\Data\ParticleEffects\SCRIPTS\destruction\burn.sqf";
-	player_traderCity = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_traderCity.sqf";
 	player_throwObject = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_throwObject.sqf";
 	fnc_inAngleSector =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_inAngleSector.sqf";		//Checks which actions for nearby casualty
 	player_temp_calculation	=		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_temperatur.sqf";			//Temperatur System	//TeeChange
