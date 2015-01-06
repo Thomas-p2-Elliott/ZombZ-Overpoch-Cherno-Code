@@ -26,14 +26,14 @@ _objects = _objects_filtered;
 _count = count _objects;
 
 if (_count == 0) exitWith {
-			_ctrl = ((uiNamespace getVariable "PlotManagement") displayCtrl 7012);
-			_result =  format["Objects to maintain: %1" , _count];
-			_ctrl ctrlSetText   _result;
-		
-			_ctrl = ((uiNamespace getVariable "PlotManagement") displayCtrl 7013);
-			_result =  format["Price to maintain: %1 %2" , 0, CurrencyName];
-			
-			_ctrl ctrlSetText   _result;	
+	_ctrl = ((uiNamespace getVariable "PlotManagement") displayCtrl 7012);
+	_result =  format["Objects to maintain: %1" , _count];
+	_ctrl ctrlSetText   _result;
+
+	_ctrl = ((uiNamespace getVariable "PlotManagement") displayCtrl 7013);
+	_result =  format["Price to maintain: %1 %2" , 0, CurrencyName];
+	
+	_ctrl ctrlSetText   _result;	
 	DZE_ActionInProgress = false;
 	s_player_maintain_area = -1;
 	s_player_maintain_area_preview = -1;
@@ -41,6 +41,16 @@ if (_count == 0) exitWith {
 
 _theCost = _count * 5;
 _requirements = [[CurrencyName,_theCost]];
+
+_ctrl = ((uiNamespace getVariable "PlotManagement") displayCtrl 7012);
+_result =  format["Objects to maintain: %1" , _count];
+_ctrl ctrlSetText   _result;
+
+_ctrl = ((uiNamespace getVariable "PlotManagement") displayCtrl 7013);
+_result =  format["Price to maintain: %1 %2" , _theCost, CurrencyName];
+
+_ctrl ctrlSetText   _result;
+DZE_ActionInProgress = false;
 
 
 _option = _this select 0;
