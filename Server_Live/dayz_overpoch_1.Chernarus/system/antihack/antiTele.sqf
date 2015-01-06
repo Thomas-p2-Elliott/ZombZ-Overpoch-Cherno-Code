@@ -21,13 +21,13 @@ while {11250 == 11250} do {
 		_distance = _lastpos distance _curpos;
 		_curtime = diag_ticktime;
 		_difftime = _curtime - _lasttime;
-		_acceptableDistance = if (_lastVehicle isKindOf "Plane") then { 15; } else { 10; };
+		_acceptableDistance = if (_lastVehicle isKindOf "Plane") then { 25; } else { 20; };
 		_isHalo = player getVariable ["bis_fnc_halo_now", false];
 
 		if ((_distance > _acceptableDistance) || {(_difftime > 1)}) then {
 			_curheight = (ATLtoASL _curpos) select 2;
 			_speed = _distance / _difftime;
-			_topSpeed = if (_acceptableDistance == 15) then { 20; } else { 10; };
+			_topSpeed = if (_acceptableDistance == 15) then { 25; } else { 20; };
 			if (vehicle player != player) then {
 				if (_acceptableDistance == 15) then {
 					_topSpeed = (getNumber (configFile >> "CfgVehicles" >> typeOf (vehicle player) >> "maxSpeed")) max 500;
@@ -38,13 +38,23 @@ while {11250 == 11250} do {
 			_terrainHeight = getTerrainHeightASL [_curpos select 0, _curpos select 1];
 			_safetyVehicle = vehicle player;
 			if (_lastVehicle == vehicle player) then {
-				if ((_speed > _topSpeed) && (alive player) && !(_lastVehicle in ["ParachuteWest","ParachuteC"]) && ((driver (vehicle player) == player) || (isNull (driver (vehicle player)))) && ((_debug distance _lastpos > 3000) && (_debug distance _curpos > 3000)) && !((vehicle player == player) && (_curheight < _lastheight) && ((_curheight - _terrainHeight) > 1)) && !(_isHalo)) then {
-					(vehicle player) setposATL  _lastpos;
-					_PUID = [player] call FNC_GetPlayerUID;
-					P2DZ_fire = format["TELEPORT REVERT: player (%6) UID (%1) to %2 from %3, %4 meters, now at %5", _PUID, _lastpos, _curPos, round(_lastpos distance _curpos), getPosATL player, name player];
-					publicVariableServer "P2DZ_fire";
+				if ((_speed > _topSpeed) 
+					&& (alive player) 
+					&& !(_lastVehicle in ["ParachuteWest","ParachuteC"])
+					&& ((driver (vehicle player) == player) || (isNull (driver (vehicle player)))) 
+					&& ((_debug distance _lastpos > 3000) 
+					&& (_debug distance _curpos > 3000)
+					&& (((getPos (vehicle player)) distance [-7239.02,19538.6,0]) > 3000)) 
+					&& !((vehicle player == player) 
+					&& (_curheight < _lastheight) 
+					&& ((_curheight - _terrainHeight) > 1)) 
+					&& !(_isHalo)) then {
+						(vehicle player) setposATL  _lastpos;
+						_PUID = [player] call FNC_GetPlayerUID;
+						P2DZ_fire = format["TELEPORT REVERT: player (%6) UID (%1) to %2 from %3, %4 meters, now at %5", _PUID, _lastpos, _curPos, round(_lastpos distance _curpos), getPosATL player, name player];
+						publicVariableServer "P2DZ_fire";
 				} else {
-					_lastpos = _curpos;
+					_lastpos = (getPos (vehicle player));
 					_lastheight = _curheight;
 				};
 				_lasttime = _curtime;
@@ -54,9 +64,9 @@ while {11250 == 11250} do {
 			};
 
 		};
-		sleep 0.25;
+		uisleep 0.25;
 	};
-	sleep 0.1;
+	uisleep 0.1;
 };
 
 P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'AntiTeleport', 'Loop Exited'];
