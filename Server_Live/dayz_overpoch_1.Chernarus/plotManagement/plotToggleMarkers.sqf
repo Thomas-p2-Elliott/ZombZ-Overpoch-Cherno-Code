@@ -14,7 +14,7 @@ _obj = false;	_tmp = -1;
 if (!isNil "PP_Marks") then {
 	if (((PP_Marks select 0) distance _thePlot) < 10) then {  _obj = true; };
 	_tmp = (PP_Marks select 0) distance _thePlot;
-	{ deleteVehicle _x; } count PP_Marks;	PP_Marks = nil;		sleep 1;
+	{ deleteVehicle _x; } count PP_Marks;	PP_Marks = nil;
 };
 //-----------------------------------------------------------------------------------------
 if ((isNil "PP_Marks") && (!_obj)) then {
@@ -24,6 +24,32 @@ if ((isNil "PP_Marks") && (!_obj)) then {
 	_obj setPosASL [_center select 0, _center select 1, _center select 2];
 	_obj setObjectTexture [0, "#(argb,16,16,1)color(0,1,0,0.4)"];	_axis = _obj;
 	_obj setVectorUp [0, 0, 0];		PP_Marks set [count PP_Marks, _obj];
+	//--------------------------------------------------------------------------------
+	//Written by Player2 - Marks with Red Objects that need Maintenance
+	private ["_p2objectClasses", "_p2range", "_p2objects", "_p2o", "_p2c", "_p2obj"];
+	_p2objectClasses = DZE_maintainClasses;
+	_p2range = DZE_PlotPole select 0;
+	_p2objects = nearestObjects [_thePlot, _p2objectClasses, _p2range];
+
+	_p2o = [];
+	{
+	    if (damage _x >= DZE_DamageBeforeMaint) then {
+	        _p2o set [count _p2o, _x];
+	   };
+	} count _p2objects;
+	_p2objects = _p2o;
+
+	_p2c = count _p2objects;
+
+	if (_p2c > 0) then {
+		{
+		 	_p2obj = _model createVehicleLocal [0,0,0];
+			_p2obj setPosATL (getPosATL _x);
+			_p2obj setObjectTexture [0, "#(argb,16,16,1)color(1,0,0,0.4)"];
+			PP_Marks set [count PP_Marks, _p2obj];
+		} forEach _p2objects;
+	};
+
 	//--------------------------------------------------------------------------------
 	_angle = 0;	
 	for "_idx" from 0 to _count do	{
