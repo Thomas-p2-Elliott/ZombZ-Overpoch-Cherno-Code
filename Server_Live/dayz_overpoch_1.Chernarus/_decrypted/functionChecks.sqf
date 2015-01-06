@@ -51,8 +51,8 @@ P2DZ_AH_FunctionChecks = {
 	{
 		if ((str (fnc_usec_damageHandler) == '{}' || (([(str fnc_usec_damageHandler)] call KRON_strLen) < 500))) then 
 		{
-			if (!([str (fnc_usec_damageHandler),"ZombZinSafeZone"] call KRON_strInStr) || !(player getVariable ["ZombZInSafeZone", false])) exitWith {
-				P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'fnc_usec_damageHandler', (str fnc_usec_damageHandler)];
+			if (!([str (fnc_usec_damageHandler), "ZombZinSafeZone"] call KRON_strInStr)) exitWith {
+				P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'fnc_usec_damageHandler', ('NotOriginal')];
 				publicVariableServer 'P2DZ_fire';
 				[] spawn P2DZ_AHKick;
 			};
@@ -63,8 +63,8 @@ P2DZ_AH_FunctionChecks = {
 	{
 		if ((str (fnc_usec_unconscious) == '{}' || (([(str fnc_usec_unconscious)] call KRON_strLen) < 500))) then 
 		{
-			if (!([str (player_zombieCheck),"ZombZinSafeZone"] call KRON_strInStr) || !(player getVariable ["ZombZInSafeZone", false])) exitWith {
-				P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'fnc_usec_unconscious', (str fnc_usec_unconscious)];
+			if (!([str (fnc_usec_unconscious), "ZombZinSafeZone"] call KRON_strInStr)) exitWith {
+				P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'fnc_usec_unconscious', ('NotOriginal')];
 				publicVariableServer 'P2DZ_fire';
 				[] spawn P2DZ_AHKick;
 			};
@@ -80,10 +80,10 @@ P2DZ_AH_FunctionChecks = {
 	};
 	if (!isNil 'orig_player_zombieCheck') then 
 	{
-		if (str(player_zombieCheck) != orig_player_zombieCheck && (([(str fnc_usec_unconscious)] call KRON_strLen) < 500)) exitWith 
+		if (str(player_zombieCheck) != orig_player_zombieCheck && (([(str player_zombieCheck)] call KRON_strLen) < 500)) exitWith 
 		{
-			if (!(["ZombZinSafeZone", str (player_zombieCheck)] call KRON_strInStr) && !(player getVariable ["ZombZInSafeZone", false])) exitWith {
-				P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'player_zombieCheck', (str player_zombieCheck)];
+			if (!([str (player_zombieCheck), "ZombZinSafeZone"] call KRON_strInStr)) exitWith {
+				P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'player_zombieCheck', ('NotOriginal')];
 				publicVariableServer 'P2DZ_fire';
 				[] spawn P2DZ_AHKick;
 			};
