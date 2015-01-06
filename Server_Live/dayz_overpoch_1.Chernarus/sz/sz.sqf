@@ -7,7 +7,7 @@ p2sz_as = true;								// puts a time limit on God mode when trying to leave and
 p2sz_d = false; 								//Debug notes on screen.
 p2sz_p_godOk = true; 							//Should safezone God mode be enabled?
 p2sz_msg = true;								//Should players get messages when entering and exiting the safe zone?
-p2sz_bp_EnableAntiBackpack = true;				//Should players not be able to take from peoples bags?
+p2sz_bp_EnableAntiBackpack = false;				//Should players not be able to take from peoples bags?
 p2sz_bp_LootPiles = true;						//Should players be able to loot from loot piles?
 p2sz_bp_Vehicles = true;						//Should players be able to loot from a vehicles gear?
 p2sz_bp_DeadPlayers = true;						//Should players be able to loot from a dead players corpse?
@@ -266,11 +266,11 @@ while {true} do {
 		_thePlayer removeEventHandler ["Fired", _EH_Fired];
 	};
 
-	if (ZombZ_SZ_NoZeds) then	{
+	if (p2sz_NoZeds) then	{
 		building_spawnZombies =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\building_spawnZombies.sqf";
 	};
 	
-	if (ZombZ_SZ_Clothing) then	{
+	if (p2sz_Clothing) then	{
 		player_wearClothes =			compile preprocessFileLineNumbers "actions\player_wearClothes.sqf";
 	};
 	

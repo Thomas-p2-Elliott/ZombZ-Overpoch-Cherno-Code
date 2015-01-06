@@ -21,3 +21,30 @@ if((locked _cTarget) && _isOk && (((vehicle player) distance _cTarget) < 12)) th
 	cutText [(localize "str_epoch_player_7") , "PLAIN DOWN"];
 	_display closeDisplay 1;
 };
+
+
+// IN SAFE ZONE - Moved to agn_safeZoneCommander.sqf antibackpackthread2
+if(!zombzsafezone) then
+{
+	if( isPlayer cursorTarget and alive cursorTarget and vehicle cursorTarget == cursorTarget ) then
+	{
+		_friendlies = player getVariable ["friendlyTo",[]];
+		_ownerID = cursorTarget getVariable ["CharacterID", "0"];
+
+		_friend = _ownerID in _friendlies;
+
+		// check if friendly to owner
+		if( !_friend ) then {
+			_display closeDisplay 1;
+			if (isNil 'FixSilly') then { FixSilly = true; };
+			if (FixSilly) then {
+				systemChat ("[ZombZ] This player is not tagged friendly, you do not have access to their bag."); FixSilly = false; [] spawn { uiSleep 5; FixSilly = true; };
+			};
+		} else {
+			if (isNil 'FixSilly2') then { FixSilly2 = true; };
+			if (FixSilly2) then {
+				systemChat ("[ZombZ] This player is tagged friendly, you have access to this players bag."); FixSilly2 = false; [] spawn { uiSleep 5; FixSilly2 = true; };
+			};
+		};
+	};
+};
