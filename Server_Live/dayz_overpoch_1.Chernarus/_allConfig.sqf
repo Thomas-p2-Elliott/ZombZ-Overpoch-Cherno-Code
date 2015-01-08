@@ -6,7 +6,7 @@ Global Settings - Client, Server, and Headless Client
 dayZ_instance =	11;		
 
 //Set the server number - Used for gold logs
-GORSYSERVERNUMBER = 1;
+GORSYSERVERNUMBER = 5;
 
 //Sets text in escape menu & Any non-gold Server Logs
 P2DZ_serverName = "1";
