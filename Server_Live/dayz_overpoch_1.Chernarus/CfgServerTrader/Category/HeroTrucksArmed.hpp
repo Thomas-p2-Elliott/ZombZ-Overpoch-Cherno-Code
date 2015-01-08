@@ -4,11 +4,6 @@
  		buy[]={500};
  		sell[]={350};
  	};
- 	class 95c111c97c106c79c124c101c110c124c113c104c124c100c114c98c124c98c109c78 {
- 		type = "trade_any_vehicle";
- 		buy[]={1400};
- 		sell[]={980};
- 	};
  	class 95c113c111c81c77c124c106c100c124c113c104c124c100c114c98c124c98c109c78 {
  		type = "trade_any_vehicle";
  		buy[]={700};
@@ -39,20 +34,15 @@
  		buy[]={1000};
  		sell[]={700};
  	};
- 	class 85c103c101c76c67c114c87c109c88 {
+ 	class 87c105c103c78c69c116c93c102c116c89c111 {
  		type = "trade_any_vehicle";
- 		buy[]={1700};
- 		sell[]={1190};
+ 		buy[]={0};
+ 		sell[]={0};
  	};
  	class 88c106c104c79c70c117c94c103c117c90c112c91 {
  		type = "trade_any_vehicle";
  		buy[]={1400};
  		sell[]={980};
- 	};
- 	class 95c84c105c69c72c114c87c109c88 {
- 		type = "trade_any_vehicle";
- 		buy[]={1800};
- 		sell[]={1260};
  	};
  	class 98c87c108c72c75c117c94c103c117c90c112c91 {
  		type = "trade_any_vehicle";

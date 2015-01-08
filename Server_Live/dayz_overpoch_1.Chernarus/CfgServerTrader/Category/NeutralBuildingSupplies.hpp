@@ -26,8 +26,8 @@
  	};
  	class 92c135c120c128c105c116c136c127c135 {
  		type = "trade_items";
-            buy[] = {400};
-            sell[] = {200};
+            buy[] = {40};
+            sell[] = {20};
  	};
  	class 96c139c124c132c107c124c133c139c91c134c132c124c123 {
  		type = "trade_items";
@@ -88,8 +88,8 @@
  	};
  	class 92c135c120c128c105c116c136c127c135 {
  		type = "trade_items";
-            buy[] = {400};
-            sell[] = {200};
+            buy[] = {40};
+            sell[] = {20};
  	};
  	class 96c139c124c132c107c124c133c139c91c134c132c124c123 {
  		type = "trade_items";

@@ -256,38 +256,38 @@
  	};
  	class 111c129c134c123c128c125c139c140c125c138c73c80c78c78 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={60};
+ 		sell[]={30};
  	};
  	class 91c96c66c65 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={60};
+ 		sell[]={30};
  	};
  	class 101c115c123c121c115c67c68c93 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={60};
+ 		sell[]={30};
  	};
  	class 109c128c136c132c137c130c143c138c137c83c82c75c122c135c124c136c139 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={60};
+ 		sell[]={30};
  	};
  	class 88c135c132c136c136c119c132c140c116c89c111 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={15};
+ 		sell[]={8};
  	};
  	class 92c64c63c64c67 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={15};
+ 		sell[]={8};
  	};
  	class 104c123c131c127c132c125c138c133c132c78c77c70 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={15};
+ 		sell[]={8};
  	};
  };
  class Category_620 {
@@ -548,37 +548,37 @@
  	};
  	class 111c129c134c123c128c125c139c140c125c138c73c80c78c78 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={60};
+ 		sell[]={30};
  	};
  	class 91c96c66c65 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={60};
+ 		sell[]={30};
  	};
  	class 101c115c123c121c115c67c68c93 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={60};
+ 		sell[]={30};
  	};
  	class 109c128c136c132c137c130c143c138c137c83c82c75c122c135c124c136c139 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={60};
+ 		sell[]={30};
  	};
  	class 88c135c132c136c136c119c132c140c116c89c111 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={15};
+ 		sell[]={8};
  	};
  	class 92c64c63c64c67 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={15};
+ 		sell[]={8};
  	};
  	class 104c123c131c127c132c125c138c133c132c78c77c70 {
  		type = "trade_weapons";
- 		buy[]={20};
- 		sell[]={10};
+ 		buy[]={15};
+ 		sell[]={8};
  	};
  };
