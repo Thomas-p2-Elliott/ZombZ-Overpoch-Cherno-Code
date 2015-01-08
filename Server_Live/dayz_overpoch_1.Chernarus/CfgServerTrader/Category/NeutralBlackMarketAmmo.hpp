@@ -9,15 +9,10 @@
  		buy[]={300};
  		sell[]={150};
  	};
- 	class 94c85c69c100 {
+ 	class 93c68c99 {
  		type = "trade_items";
  		buy[]={220};
  		sell[]={110};
- 	};
- 	class 79c98c63c65  {
- 		type = "trade_items";
- 		buy[]={280};
- 		sell[]={140};
  	};
  	class 102c96c84c106c114c91c88c84c84 {
  		type = "trade_items";

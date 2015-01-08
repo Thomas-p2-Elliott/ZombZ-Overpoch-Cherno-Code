@@ -61,7 +61,7 @@
       };
       class 102c145c130c138c99c146c130c137c95c126c143c143c130c137c98c138c141c145c150 {
             type = "trade_items";
-            buy[] = {20};
+            buy[] = {250};
             sell[] = {10};
       };
  };
@@ -195,7 +195,7 @@
       };
       class 102c145c130c138c99c146c130c137c95c126c143c143c130c137c98c138c141c145c150 {
             type = "trade_items";
-            buy[] = {20};
+            buy[] = {250};
             sell[] = {10};
       };
  };

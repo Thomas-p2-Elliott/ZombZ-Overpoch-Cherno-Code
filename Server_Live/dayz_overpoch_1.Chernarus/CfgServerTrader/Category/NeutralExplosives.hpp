@@ -6,8 +6,8 @@
  	};
  	class 98c123c130c119c84c129c127c116 {
  		type = "trade_items";
-            buy[] = {40};
-            sell[] = {20};
+            buy[] = {1000};
+            sell[] = {200};
  	};
  	class 71c104c132c122c117c94c91c117c99c72c70c73 {
  		type = "trade_items";

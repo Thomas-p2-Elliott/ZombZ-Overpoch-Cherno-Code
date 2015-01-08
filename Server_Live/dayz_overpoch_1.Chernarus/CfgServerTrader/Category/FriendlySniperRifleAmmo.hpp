@@ -39,11 +39,6 @@
  		buy[]={30};
  		sell[]={15};
  	};
- 	class 78c107c135c125c120c80c79c75c145c78c74c120c102c75c77  {
- 		type = "trade_items";
- 		buy[]={20};
- 		sell[]={10};
- 	};
  	class 78c145c120c75c75c120c101c107c120c74c80c120c97c102c107  {
  		type = "trade_items";
  		buy[]={20};
@@ -150,11 +145,6 @@
  		type = "trade_items";
  		buy[]={30};
  		sell[]={15};
- 	};
- 	class 78c107c135c125c120c80c79c75c145c78c74c120c102c75c77  {
- 		type = "trade_items";
- 		buy[]={20};
- 		sell[]={10};
  	};
  	class 78c145c120c75c75c120c101c107c120c74c80c120c97c102c107  {
  		type = "trade_items";
