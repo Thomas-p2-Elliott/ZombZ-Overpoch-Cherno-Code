@@ -1,6 +1,8 @@
-private ["_vehicle","_part","_hitpoint","_type","_selection","_array"];
+private ["_array", "_vehicle", "_hitpoints", "_damage", "_type", "_text", "_ctrlTitle", "_a1", "_a2", "_a3", "_a4", "_s1", "_s2", "_s3", "_s4", "_damageOverallPercent", "_ctrlOverall", "_ctrlVehicleOut", "_ctrlVehicleIn", "_ctrlText", "_repairText", "_damagePercent", "_fullPartName", "_humanPartName", "_humanPartNameString", "_partNoWheel", "_partNoWheelString", "_tmpText"];
 disableSerialization;
-
+_array = [];
+_vehicle = objNull;
+_hitpoints = [];
 _array	= _this select 3;
 _vehicle	= _array select 0;
 _hitpoints	= _array select 1;
@@ -19,9 +21,33 @@ _ctrlTitle = ((uiNamespace getVariable 'ZombZ_vehicleInspect') displayCtrl 6661)
 
 _ctrlTitle ctrlSetText format["Vehicle Inspection: %1", _text];
 
+ _a1 = ""; _a2 = ""; _a3 = ""; _a4 = "";
+ _s1 = ""; _s2 = ""; _s3 = ""; _s4 = ""; 
+if ({_type isKindOf _x} count LOG_CFG_CANTOW > 0) then {
+	_a1 = "<br /><br /><t color='#7FFF00'>This vehicle can tow.</t>";
+} else {
+	_s1 = "<br /><t color='#FB0000'>This vehicle cannot tow.</t>";
+};
+if ({_type isKindOf _x} count LOG_CFG_ISTOWABLE > 0) then {
+	_a2 = "<br /><t color='#7FFF00'>This vehicle can be towed.</t>";
+} else {
+	_s2 = "<br /><t color='#FB0000'>This vehicle cannot be towed.</t>";
+};
+
+if ({_type isKindOf _x} count LOG_CFG_CANLIFT > 0) then {
+	_a3 = "<br /><t color='#7FFF00'>This vehicle can air lift.</t>";
+} else {
+	_s3 = "<br /><t color='#FB0000'>This vehicle cannot air lift.</t>";
+};
+if ({_type isKindOf _x} count LOG_CFG_ISLIFTABLE > 0) then {
+	_a4 = "<br /><t color='#7FFF00'>This vehicle can be air lifted.</t>";
+} else {
+	_s4 = "<br /><t color='#FB0000'>This vehicle cannot be air lifted.</t>";
+};
+
 _damageOverallPercent = round((1 - _damage) * 100);
 _ctrlOverall = ((uiNamespace getVariable 'ZombZ_vehicleInspect') displayCtrl 6665);
-_ctrlOverall ctrlSetText format["General Vehicle Health: %1%2", _damageOverallPercent, '%'];
+_ctrlOverall  ctrlSetStructuredText parseText(format["General Vehicle Health: %1%2%3%4%5%6%7%8%9%10", _damageOverallPercent, '%', _a1, _a2, _a3, _a4, _s1, _s2, _s3, _s4]);
 
 _ctrlVehicleOut = ((uiNamespace getVariable 'ZombZ_vehicleInspect') displayCtrl 6663);
 _ctrlVehicleOut ctrlSetText "img\inspection_skoda_outer.paa";
@@ -94,6 +120,10 @@ _repairText = "";
 } forEach _hitpoints;
 
 _ctrlText ctrlSetText _repairText;
+
+
+
+
 
 if (P2DZE_deugVehIns) then {
 	diag_log(format["P2DEBUG: ctrl 6661: %2 VehInspect: Vehicle Inspection: %1", _text, _ctrlTitle]);
