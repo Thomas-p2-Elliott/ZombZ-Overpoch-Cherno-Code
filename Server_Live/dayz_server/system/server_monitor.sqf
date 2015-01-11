@@ -229,6 +229,8 @@ if (isServer && isNil "sm_done") then {
 					_object addEventHandler ["HandleDamage", {false}];
 				} else {
 					_object addMPEventHandler ["MPKilled",{_this call object_handleServerKilled;}];
+					_object setVariable ["selections", []]; _object setVariable ["gethit", []];
+					_object addEventHandler ["HandleDamage",{ _this call server_baseDamage}];
 				};
 				// Test disabling simulation server side on buildables only.
 				_object enableSimulation false;
@@ -248,49 +250,43 @@ if (isServer && isNil "sm_done") then {
 					//Add weapons
 					_objWpnTypes = (_inventory select 0) select 0;
 					_objWpnQty = (_inventory select 0) select 1;
-					if (typeName _objWpnTypes == typeName []) then {
+					_countr = 0;					
+					{
+						if(_x in (DZE_REPLACE_WEAPONS select 0)) then {
+							_x = (DZE_REPLACE_WEAPONS select 1) select ((DZE_REPLACE_WEAPONS select 0) find _x);
+						};
+						_isOK = 	isClass(configFile >> "CfgWeapons" >> _x);
+						if (_isOK) then {
+							_object addWeaponCargoGlobal [_x,(_objWpnQty select _countr)];
+						};
+						_countr = _countr + 1;
+					} count _objWpnTypes; 
+				
+					//Add Magazines
+					_objWpnTypes = (_inventory select 1) select 0;
+					_objWpnQty = (_inventory select 1) select 1;
+					_countr = 0;
+					{
+						if (_x == "BoltSteel") then { _x = "WoodenArrow" }; // Convert BoltSteel to WoodenArrow
+						if (_x == "ItemTent") then { _x = "ItemTentOld" };
+						_isOK = 	isClass(configFile >> "CfgMagazines" >> _x);
+						if (_isOK) then {
+							_object addMagazineCargoGlobal [_x,(_objWpnQty select _countr)];
+						};
+						_countr = _countr + 1;
+					} count _objWpnTypes;
 
-						_countr = 0;					
-						{
-							if(_x in (DZE_REPLACE_WEAPONS select 0)) then {
-								_x = (DZE_REPLACE_WEAPONS select 1) select ((DZE_REPLACE_WEAPONS select 0) find _x);
-							};
-							_isOK = 	isClass(configFile >> "CfgWeapons" >> _x);
-							if (_isOK) then {
-								_object addWeaponCargoGlobal [_x,(_objWpnQty select _countr)];
-							};
-							_countr = _countr + 1;
-						} count _objWpnTypes; 
-					
-						//Add Magazines
-						_objWpnTypes = (_inventory select 1) select 0;
-						_objWpnQty = (_inventory select 1) select 1;
-						_countr = 0;
-						{
-							if (_x == "BoltSteel") then { _x = "WoodenArrow" }; // Convert BoltSteel to WoodenArrow
-							if (_x == "ItemTent") then { _x = "ItemTentOld" };
-							_isOK = 	isClass(configFile >> "CfgMagazines" >> _x);
-							if (_isOK) then {
-								_object addMagazineCargoGlobal [_x,(_objWpnQty select _countr)];
-							};
-							_countr = _countr + 1;
-						} count _objWpnTypes;
-
-						//Add Backpacks
-						_objWpnTypes = (_inventory select 2) select 0;
-						_objWpnQty = (_inventory select 2) select 1;
-						_countr = 0;
-						{
-							_isOK = 	isClass(configFile >> "CfgVehicles" >> _x);
-							if (_isOK) then {
-								_object addBackpackCargoGlobal [_x,(_objWpnQty select _countr)];
-							};
-							_countr = _countr + 1;
-						} count _objWpnTypes;
-
-					} else {
-						diag_log("Error:" + str(typeOf _object));
-					};
+					//Add Backpacks
+					_objWpnTypes = (_inventory select 2) select 0;
+					_objWpnQty = (_inventory select 2) select 1;
+					_countr = 0;
+					{
+						_isOK = 	isClass(configFile >> "CfgVehicles" >> _x);
+						if (_isOK) then {
+							_object addBackpackCargoGlobal [_x,(_objWpnQty select _countr)];
+						};
+						_countr = _countr + 1;
+					} count _objWpnTypes;
 				};
 			};	
 
@@ -408,7 +404,7 @@ if (isServer && isNil "sm_done") then {
 	if (_hiveLoaded) then {
 		if (DZE_FS_UseStaticVehicleSpawn) then {
 			_vehLimit = 1000;
-			//diag_log ("HIVE: Spawning Vehicles Using Static Vehicle Spawn System by Player2");
+			diag_log ("HIVE: Spawning Vehicles Using Static Vehicle Spawn System by Player2");
 			[_vehLimit] spawn fs_spawnVehicles;
 		} else {
 			_vehLimit = 100;
@@ -539,7 +535,7 @@ if (isServer && isNil "sm_done") then {
 			};
 			
 		};
-		diag_log format["Total Number of spawn locations %1", actualSpawnMarkerCount];
+		diag_log format["Total Number of player spawn locations %1", actualSpawnMarkerCount];
 		
 		endLoadingScreen;
 	};
