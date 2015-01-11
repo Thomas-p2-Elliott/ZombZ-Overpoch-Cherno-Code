@@ -204,6 +204,7 @@ dayz_resetSelfActions = {
 	s_build_Hedgehog_DZ =	-1;
 	s_build_Wire_cat1 =		-1;
 	s_player_deleteBuild =	-1;
+	s_player_checkBuild =	-1;
 	s_player_forceSave = 	-1;
 	s_player_checkGear = 	-1;
 	s_player_flipveh = 		-1;
@@ -236,7 +237,6 @@ dayz_resetSelfActions = {
 	s_player_lockUnlock_crtl = -1;
 	s_player_toggleSnap = -1;
     s_player_toggleSnapSelect = -1;
-	s_player_clothes = -1; //Take Clothes
     s_player_toggleSnapSelectPoint=[];
     snapActions = -1;
 	s_player_plot_boundary_on = -1;
@@ -245,6 +245,8 @@ dayz_resetSelfActions = {
 	s_player_plotManagement = -1;
 	s_player_manageDoor = -1;
 	s_player_takeGold = -1;
+	s_player_paint = -1;
+
 };
 call dayz_resetSelfActions;
 
