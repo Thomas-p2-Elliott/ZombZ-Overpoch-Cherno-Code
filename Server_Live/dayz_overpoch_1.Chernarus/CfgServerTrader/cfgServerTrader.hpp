@@ -29,7 +29,6 @@ class CfgTraderCategory {
 	#include "Category\FriendlyBikesandATV.hpp"
 	#include "Category\FriendlyBuildingSupplies.hpp"
 	#include "Category\FriendlyBusesandVans.hpp"
-	#include "Category\FriendlyCargoTrucks.hpp"
 	#include "Category\FriendlyChemlitesFlares.hpp"
 	#include "Category\FriendlyClothes.hpp"
 	#include "Category\FriendlyCookedMeats.hpp"
@@ -100,4 +99,6 @@ class CfgTraderCategory {
 	#include "Category\NeutralUtilityVehicles.hpp"
 	#include "Category\NeutralVehicleParts.hpp"
 	#include "Category\NeutralWholesale.hpp"
+	#include "Category\NeutralHelicopterArmed.hpp"
+	#include "Category\HeroHelicopterUnarmed.hpp"
 };

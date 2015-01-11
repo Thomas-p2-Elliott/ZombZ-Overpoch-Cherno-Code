@@ -2,25 +2,25 @@
 serverTraders = ["RU_Functionary1","RU_Citizen3","Rocker4","Profiteer4","Rita_Ensler_EP1","CIV_EuroMan01_EP1","CIV_EuroMan02_EP1","TK_GUE_Soldier_5_EP1","GUE_Soldier_MG","Worker2","Worker3","Woodlander1","UN_CDF_Soldier_Pilot_EP1","RU_WorkWoman1","Dr_Annie_Baker_EP1","RU_Citizen4","RU_WorkWoman5","RU_Citizen1","RU_Villager3","TK_CIV_Takistani04_EP1","Pilot_EP1","RU_Profiteer4","Woodlander3","Dr_Hladik_EP1","Doctor","HouseWife1","GUE_Woodlander2"];
 // Hero Vendor
 menu_RU_Functionary1 = [
-	[["Ammunition",478],["Clothes",476],["Helicopters",493],["Military Vehicles",562],["Trucks",479],["Weapons",477]],
+	[["Ammunition",478],["Clothes",476],["Helicopters Armed",493],["Helicopters UnArmed",494],["Military Vehicles",562],["Trucks",479],["Weapons",477]],
 	[],
 	"hero"
 ];
 // Ammunition Friendly
 menu_RU_Citizen3 = [
-	[["Assault Rifle Ammo",480],["Light Machine Gun Ammo",481],["Pistol Ammo",484],["Shotguns and Single-shot Ammo",573],["Sniper Rifle Ammo",482],["Submachine Gun Ammo",483]],
+	[["Assault Rifle Ammo",609],["Light Machine Gun Ammo",610],["Pistol Ammo",611],["Shotguns and Single-shot Ammo",613],["Sniper Rifle Ammo",614],["Submachine Gun Ammo",612]],
 	[],
 	"friendly"
 ];
 // Weapons Friendly
 menu_Rocker4 = [
-	[["Assault Rifle",485],["Light Machine Gun",486],["Pistols",489],["Shotguns and Single-shot",574],["Sniper Rifle",487],["Submachine Guns",488]],
+	[["Assault Rifle",637],["Light Machine Gun",638],["Pistols",674],["Shotguns and Single-shot",641],["Sniper Rifle",640],["Submachine Guns",642]],
 	[],
 	"friendly"
 ];
 // Friendly Vehicles
 menu_Profiteer4 = [
-	[["Bikes and ATV",608],["Buses and Vans",563],["Cargo Trucks",564],["Fuel Trucks",492],["Military Vehicles",491],["Trucks",495],["Used Cars",585],["Utility Vehicles",565]],
+	[["Bikes and ATV",587],["Buses and Vans",588],["Cargo Trucks",586],["Fuel Trucks",589],["Military Vehicles",598],["Trucks",590],["Used Cars",520],["Utility Vehicles",591]],
 	[],
 	"friendly"
 ];
@@ -56,7 +56,7 @@ menu_GUE_Soldier_MG = [
 ];
 // Aircraft Dealer
 menu_Worker2 = [
-	[["Airplanes",517],["Helicopter Unarmed",519],["Helicopter Armed",512]],
+	[["Airplanes",517],["Helicopter Unarmed",519],["Helicopter Armed",513]],
 	[],
 	"neutral"
 ];
@@ -68,25 +68,25 @@ menu_Worker3 = [
 ];
 // Friendly Building/Parts
 menu_Woodlander1 = [
-	[["Building Supplies",530],["Toolbelt Items",532],["Vehicle Parts",531]],
+	[["Building Supplies",662],["Toolbelt Items",663],["Vehicle Parts",664]],
 	[],
 	"friendly"
 ];
 // Friendly Vehicles 2
 menu_UN_CDF_Soldier_Pilot_EP1 = [
-	[["Bikes and ATV",536],["Buses and Vans",592],["Cargo Trucks",570],["Fuel Trucks",595],["Military Vehicles",599],["Trucks",535],["Used Cars",600],["Utility Vehicles",568]],
+	[["Bikes and ATV",536],["Buses and Vans",592],["Cargo Trucks",586],["Fuel Trucks",595],["Military Vehicles",599],["Trucks",535],["Used Cars",600],["Utility Vehicles",568]],
 	[],
 	"friendly"
 ];
 // General Store 2
 menu_RU_WorkWoman1 = [
-	[["Backpacks",538],["Clothes",628],["Cooked Meats",630],["Drinks",601],["Packaged Food",629]],
+	[["Backpacks",632],["Clothes",631],["Cooked Meats",634],["Drinks",633],["Packaged Food",635]],
 	[["ItemTinBar","TrashJackDaniels",1,1,"buy","Empty Whiskey Bottle","Tin Bar",101]],
 	"friendly"
 ];
 // Medical Supplies
 menu_Dr_Annie_Baker_EP1 = [
-	[["Chem-lites/Flares",542],["Medical Supplies",541],["Smoke Grenades",543]],
+	[["Chem-lites/Flares",666],["Medical Supplies",665],["Smoke Grenades",668]],
 	[["FoodBioMeat","ItemZombieParts",1,1,"buy","Zombie Parts","Bio Meat",101]],
 	"friendly"
 ];
