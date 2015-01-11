@@ -1,4 +1,6 @@
-private["_countMagazines","_countWeapons","_countBackpacks","_countFreeSlots","_getControlText","_setControlText","_object","_objectName","_controlText","_magazinesMax","_weaponsMax","_backpacksMax","_distance","_isVehicle","_isMan","_isStorage","_isOK","_magazines","_weapons","_backpacks","_freeSlots","_timeout"];
+private["_isOk","_countMagazines","_countWeapons","_countBackpacks","_countFreeSlots","_getControlText","_setControlText","_object","_objectName","_controlText","_magazinesMax","_weaponsMax","_backpacksMax","_distance","_isVehicle","_isMan","_isStorage","_isOK","_magazines","_weapons","_backpacks","_freeSlots","_timeout"];
+
+_isOk = false;
 
 _countWeapons = {
 	private["_weapons","_return"];	
@@ -187,9 +189,86 @@ if ((_isVehicle || _isStorage || _isnewstorage) && (!_isMan) && (!_isZed) && (!_
 };
 
 if (P2DZE_gearOnContainer && {(({_x == "ItemGoldBar10oz"} count (magazines cursorTarget)) < 1)} && {(([false,cursorTarget] call p2_gv) > 0)}) then {
-	diag_log("P2DEBUG: object_monitorGear.sqf: Gold: " + (typeOf cursorTarget) + " had no gold item, not gonna go adding it.");
-	P2DZE_plr_gGold = cursorTarget;
-	publicVariableServer "P2DZE_plr_gGold";
-	closeDialog 0;
-	[] call ui_displayGold;
+	diag_log("P2DEBUG: object_monitorGear.sqf: Gold: " + (typeOf cursorTarget) + " had no gold item, not gonna go adding it. Checking some things before I ask the server to do it.");
+	//reset isOk val
+	_isOk = false;
+	//ensure object can take gold items
+	_isOk = _object call {
+		private ["_isVehicle", "_hasMagMax", "_MagMax", "_canHoldMags", "_d", "_targ", "_magazines", "_return"];
+		//var init
+		_isVehicle = false;
+		_hasMagMax = false;
+		_canHoldMags = false;
+		_magazines = [];
+		_return = 0;	
+		_MagMax = 0;
+		_d = P2DZE_goldItemHandlingDebug;
+		_targ = _this;	//input target
+		//target validation
+		if (isNil '_targ') then {
+			_targ = cursorTarget;
+		};
+		if (isNull _targ) then {
+			_targ = cursorTarget;
+		};
+		//code
+		if (_d) then { diag_log(format["Target: %1",typeOf _targ]); };
+		_isVehicle = isClass (configFile >> "CfgVehicles" >> (typeOf _targ));
+		if (_d) then { diag_log(format["_isVehicle: %1",_isVehicle]); };
+		if (_isVehicle) then {
+			_hasMagMax = isNumber (configFile >> "CfgVehicles" >> (typeOf _targ) >> "transportmaxmagazines");
+			if (_d) then { diag_log(format["_hasMagMax: %1",_hasMagMax]); };
+			if (_hasMagMax) then {
+				_MagMax = getNumber (configFile >> "CfgVehicles" >> (typeOf _targ) >> "transportmaxmagazines");
+				if (_d) then { diag_log(format["_MagMax: %1",_MagMax]); };
+				if (_MagMax > 0) then {
+					_magazines = [];
+					_return = 0;			
+					_magazines = (getMagazineCargo _object) select 1;
+					if (_d) then { diag_log(format["_magazines: %1",_magazines]); };
+
+					{ _return = _return + _x } count _magazines;
+					if (_d) then { diag_log(format["_return: %1",_return]); };
+
+					if (_return > (_MagMax - 1)) then {
+						_canHoldMags = false;
+					} else {
+						_canHoldMags = true;
+					};
+
+				} else {
+					_canHoldMags = false;
+				};
+			};
+		};
+		//output
+		if (_d) then { diag_log(format["_canHoldMags: %1",_canHoldMags]); };
+		_canHoldMags
+	};
+	
+	diag_log(format["P2DEBUG: _isOk: %1", _isOk]);
+
+	if (_isOk) then {
+		P2DZE_plr_gGold = _object;
+		publicVariableServer "P2DZE_plr_gGold";
+		systemChat(format["Gold: %1 has gold, but no gold item. Please re-open the gear menu to request a gold item.",typeOf _object]);
+	} else {
+		if (P2DZ_enableGoldSystemChat) then {
+			_magazines = [];
+			_magazines = (getMagazineCargo _object);
+			_itemCount = 0;
+			_goldBarCount = 0;
+			if (!isNil '_magazines' && !isNil '_itemCount') then { 
+				{
+					if (((_magazines select 0) select _itemCount) == "ItemGoldBar10oz") then {
+						_goldBarCount = (_magazines select 1) select _itemCount;
+					};
+					_itemCount = _itemCount + 1;
+				} count (_magazines select 0);
+				if (_goldBarCount < 1) then {
+					systemChat(format["Gold: %1 has a gold value, but no room for a gold item to be added. Please remove an item and re-open the gear menu to request a gold item.",typeOf _object]);
+				};
+			};
+		};
+	};
 };
