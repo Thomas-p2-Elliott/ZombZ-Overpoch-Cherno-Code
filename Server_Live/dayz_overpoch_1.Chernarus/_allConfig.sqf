@@ -9,10 +9,10 @@ dayZ_instance =	11;
 GORSYSERVERNUMBER = 5;
 
 //Sets text in escape menu & Any non-gold Server Logs
-P2DZ_serverName = "1";
+P2DZ_serverName = "Test";
 
 //Server notification file name
-ZombZ_Notif_File_Name = "notification_op1";
+ZombZ_Notif_File_Name = "notification_op5";
 
 //Spawn Location Settings
 spawnShoremode = 1; 		// Default = 1 (on shore)
@@ -126,7 +126,7 @@ Trader Settings
 DZE_ConfigTrader = true;
 
 //trader sell distances
-dayz_sellDistance_vehicle = 10;
+dayz_sellDistance_vehicle = 20;
 dayz_sellDistance_boat = 30;
 dayz_sellDistance_air = 40;
 
