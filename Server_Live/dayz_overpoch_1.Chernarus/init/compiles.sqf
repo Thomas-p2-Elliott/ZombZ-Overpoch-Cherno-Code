@@ -73,6 +73,7 @@ if (!isDedicated) then {
 
 	player_traderCity = 			compile preprocessFileLineNumbers "compile\player_traderCity.sqf";
 
+	player_reloadMag =				{ false };
 	ui_changeDisplay = 				compile preprocessFileLineNumbers "compile\ui_changeDisplay.sqf";
 	player_selectSlot =				compile preprocessFileLineNumbers "compile\ui_selectSlot.sqf";
 	player_wearClothes =			compile preprocessFileLineNumbers "actions\player_wearClothes.sqf";
@@ -143,7 +144,6 @@ if (!isDedicated) then {
 	//actions
 
 	player_copyKey =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_copyKey.sqf";
-	player_reloadMag =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_reloadMags.sqf";
 	player_loadCrate =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_loadCrate.sqf";
 	player_craftItem =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_craftItem.sqf";
 	player_drink =				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_drink.sqf";
@@ -179,7 +179,7 @@ if (!isDedicated) then {
 	player_deathBoard =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\list_playerDeathsAlt.sqf";
 
 	player_plotPreview = 		compile preprocessFileLineNumbers "actions\object_showPlotRadius.sqf";
-	player_upgradeVehicle =		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_upgradeVehicle.sqf";
+	player_upgradeVehicle =		compile preprocessFileLineNumbers "compile\player_upgradeVehicle.sqf";
 
 
 	//System
