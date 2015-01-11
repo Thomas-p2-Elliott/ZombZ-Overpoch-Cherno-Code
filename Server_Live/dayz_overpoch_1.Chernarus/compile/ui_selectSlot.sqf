@@ -1,4 +1,4 @@
-private ["_control","_button","_parent","_group","_pos","_item","_conf","_name","_cfgActions","_numActions","_height","_menu","_config","_type","_script","_outputOriented","_compile","_array","_outputClass","_outputType"];
+private ["_m","_r","_v","_k","_c","_p","_control","_button","_parent","_group","_pos","_item","_conf","_name","_cfgActions","_numActions","_height","_menu","_config","_type","_script","_outputOriented","_compile","_array","_outputClass","_outputType"];
 disableSerialization;
 _control = 	_this select 0;
 _button =	_this select 1;
@@ -6,13 +6,6 @@ _parent = 	findDisplay 106;
 
 //if ((time - dayzClickTime) < 1) exitWith {};
 if (!DZE_SelfTransfuse && ((gearSlotData _control) == "ItemBloodBag")) exitWith {};
-
-
-//block actions for: vil_20Rnd_762x51_G3 & vil_20Rnd_762x51_SG & vil_30Rnd_762x51_SG
-if (((gearSlotData _control) == "vil_20Rnd_762x51_G3")) exitWith {};
-if (((gearSlotData _control) == "vil_20Rnd_762x51_SG")) exitWith {};
-if (((gearSlotData _control) == "vil_30Rnd_762x51_SG")) exitWith {};
-
 
 if (_button == 1) then {
 	//dayzClickTime = time;
@@ -33,6 +26,31 @@ if (_button == 1) then {
 	_cfgActions = _conf >> "ItemActions";
 	_numActions = (count _cfgActions);
 	_height = 0;
+
+	/* Block Exploits */
+	_k = false;
+	_k = isClass (configFile >> "CfgMagazines" >> _item);
+ 	_c = (configFile >> "CfgMagazines" >> "20Rnd_762x51_DMR");
+
+	//block actions for: DMR type rounds that aren't actually DMR rounds to prevent duping - pending new split script overwrite
+	_r = false; _v = false; _p = [];
+	if (_k) then {
+		_c = (configFile >> "CfgMagazines" >> _item);
+		_p = [_c,true] call BIS_fnc_returnParents;
+	};
+	if ("20Rnd_762x51_DMR" in _p && _item != "20Rnd_762x51_DMR") then { _r = true; };
+	//diag_log(format["_r: (%1) _p: (%2) _v: (%4) _c: (%4) _k: (%5) _item: (%6)",_r,_p,_v,_c,_k,_item]);
+	if (_r) exitWith {  };
+
+	//block combine actions for magazines
+	_a = false;
+	if (_k) then {
+		_a = ((isClass ((configFile >> "CfgMagazines" >> _item) >> "ItemActions" >> "ReloadMag")) && (_item != "20Rnd_762x51_DMR"));
+	};
+	if (_a) exitWith { };
+
+	//Disable broken female skins - Handled via humanity morph model exist check
+	//if ((_item == "Skin_SurvivorWsequisha_DZ") || (_item == "Skin_SurvivorWsequishaD_DZ")) exitWith { };
 
 	//Block standard RC options for gold bars 
 	if !(_item == "ItemGoldBar10oz") then 
