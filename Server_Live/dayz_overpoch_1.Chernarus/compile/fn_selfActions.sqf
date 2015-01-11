@@ -4,7 +4,7 @@ scriptName "Functions\misc\fn_selfActions.sqf";
 	- Function
 	- [] call fnc_usec_selfActions;
 ************************************************************/
-private ["_isWreckBuilding","_temp_keys","_magazinesPlayer","_isPZombie","_vehicle","_inVehicle","_hasFuelE","_hasRawMeat","_hasKnife","_hasToolbox","_onLadder","_nearLight","_canPickLight","_canDo","_text","_isHarvested","_isVehicle","_isVehicletype","_isMan","_traderType","_ownerID","_isAnimal","_isDog","_isZombie","_isDestructable","_isTent","_isFuel","_isAlive","_Unlock","_lock","_buy","_dogHandle","_lieDown","_warn","_hastinitem","_allowedDistance","_menu","_menu1","_humanity_logic","_low_high","_cancel","_metals_trader","_traderMenu","_isWreck","_isRemovable","_isDisallowRepair","_rawmeat","_humanity","_speed","_dog","_hasbottleitem","_isAir","_isShip","_playersNear","_findNearestGens","_findNearestGen","_IsNearRunningGen","_cursorTarget","_isnewstorage","_itemsPlayer","_ownerKeyId","_typeOfCursorTarget","_hasKey","_oldOwner","_combi","_key_colors","_player_deleteBuild","_player_flipveh","_player_lockUnlock_crtl","_player_butcher","_player_studybody","_player_cook","_player_boil","_player_clothes","_hasFuelBarrelE","_hasHotwireKit","_player_SurrenderedGear","_isSurrendered","_isModular","_isModularDoor","_ownerKeyName","_temp_keys_names","_hasAttached","_allowTow","_liftHeli","_found","_posL","_posC","_height","_liftHelis","_attached","_playerUID","_characterID","_plotDistance","_PlotsNear", "_classname","_isowner"];
+private ["_player_paint","_player_checkBuildHealth","_isWreckBuilding","_temp_keys","_magazinesPlayer","_isPZombie","_vehicle","_inVehicle","_hasFuelE","_hasRawMeat","_hasKnife","_hasToolbox","_onLadder","_nearLight","_canPickLight","_canDo","_text","_isHarvested","_isVehicle","_isVehicletype","_isMan","_traderType","_ownerID","_isAnimal","_isDog","_isZombie","_isDestructable","_isTent","_isFuel","_isAlive","_Unlock","_lock","_buy","_dogHandle","_lieDown","_warn","_hastinitem","_allowedDistance","_menu","_menu1","_humanity_logic","_low_high","_cancel","_metals_trader","_traderMenu","_isWreck","_isRemovable","_isDisallowRepair","_rawmeat","_humanity","_speed","_dog","_hasbottleitem","_isAir","_isShip","_playersNear","_findNearestGens","_findNearestGen","_IsNearRunningGen","_cursorTarget","_isnewstorage","_itemsPlayer","_ownerKeyId","_typeOfCursorTarget","_hasKey","_oldOwner","_combi","_key_colors","_player_deleteBuild","_player_flipveh","_player_lockUnlock_crtl","_player_butcher","_player_studybody","_player_cook","_player_boil","_player_clothes","_hasFuelBarrelE","_hasHotwireKit","_player_SurrenderedGear","_isSurrendered","_isModular","_isModularDoor","_ownerKeyName","_temp_keys_names","_hasAttached","_allowTow","_liftHeli","_found","_posL","_posC","_height","_liftHelis","_attached","_playerUID","_characterID","_plotDistance","_PlotsNear", "_classname","_isowner"];
 
 if (DZE_ActionInProgress) exitWith {}; // Do not allow if any script is running.
 
@@ -62,19 +62,6 @@ if(DZE_HaloJump) then {
 	};
 };
 
-/* 	Disabled - Moved to Player Options Menu
-if (!DZE_ForceNameTagsOff) then {
-	if (s_player_showname < 0 && !_isPZombie) then {
-		if (DZE_ForceNameTags) then {
-			s_player_showname = 1;
-			player setVariable["DZE_display_name",true,true];
-		} else {
-			s_player_showname = player addAction [localize "STR_EPOCH_ACTIONS_NAMEYES", "\z\addons\dayz_code\actions\display_name.sqf",true, 0, true, false, "",""];
-			s_player_showname1 = player addAction [localize "STR_EPOCH_ACTIONS_NAMENO", "\z\addons\dayz_code\actions\display_name.sqf",false, 0, true, false, "",""];
-		};
-	};
-};
-*/
 if(_isPZombie) then {
 	if (s_player_callzombies < 0) then {
 		s_player_callzombies = player addAction [localize "STR_EPOCH_ACTIONS_RAISEHORDE", "\z\addons\dayz_code\actions\call_zombies.sqf",player, 5, true, false, "",""];
@@ -207,7 +194,9 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	// logic vars
 	_player_flipveh = false;
 	_player_deleteBuild = false;
+	_player_checkBuildHealth = false;
 	_player_lockUnlock_crtl = false;
+	_player_paint = false;
 
 	 if (_canDo && (speed player <= 1) && (_cursorTarget isKindOf "Plastic_Pole_EP1_DZ")) then {
 	 	 if (s_player_plotManagement < 0) then {
@@ -267,6 +256,10 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		
 		//Allow player to delete objects
 		if(_isDestructable || _isWreck || _isRemovable || _isWreckBuilding) then {
+
+			//Allow player to check a buildings health
+			_player_checkBuildHealth = true;
+
 			if(_hasToolbox && "ItemCrowbar" in _itemsPlayer) then {
 				_player_deleteBuild = true;
 			};
@@ -280,8 +273,10 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 
 		//Allow owners to delete modulars
 		if(_isModular) then {
+			//Allow player to check a buildings health
+			_player_checkBuildHealth = true;
 	        if(_hasToolbox && "ItemCrowbar" in _itemsPlayer) then {
-	                _player_deleteBuild = true;
+				_player_deleteBuild = true;
 	        };
 		};
 
@@ -291,6 +286,8 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 				
 		//Allow owners to delete modular doors without locks
 		if(_isModularDoor) then {
+			//Allow player to check a buildings health
+			_player_checkBuildHealth = true;
             if(_hasToolbox && "ItemCrowbar" in _itemsPlayer) then {
 				_player_deleteBuild = true;
              };		
@@ -306,13 +303,26 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 				};
 			};
 
-
 			if(!_isMan && _characterID != "0" && !(_cursorTarget isKindOf "Bicycle")) then {
 				_player_lockUnlock_crtl = true;
 			};
 
+			/* Vehicle Painting */
+			if ((_typeOfCursorTarget in ColourVehicles)) then {
+				_player_paint = true;
+			};
 		};
 	
+	};
+
+	//allow player to check buildings health by player2 & lupo
+	if (_player_checkBuildHealth) then {
+		if (s_player_checkBuild < 0) then {
+			s_player_checkBuild = player addAction ["Check Damage", "actions\player2_checkHealth.sqf", _cursorTarget, 1, true, true, "", ""];
+		};
+	} else {
+		player removeAction s_player_checkBuild;
+		s_player_checkBuild = -1;
 	};
 
 	if(_player_deleteBuild) then {
@@ -348,12 +358,6 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 					_lock = player addAction [format[localize "STR_EPOCH_ACTIONS_LOCK",_text], "\z\addons\dayz_code\actions\lock_veh.sqf",_cursorTarget, 1, true, true, "", ""];
 					s_player_lockunlock set [count s_player_lockunlock,_lock];
 					s_player_lockUnlock_crtl = 1;
-				};
-				/* Vehicle Painting */
-				if (_typeOfCursorTarget in ColourVehicles) then {
-					private ["_paint"];
-					_paint = player addAction ["Paint", "Paint\player_paint_init.sqf",_cursorTarget, 2, true, true, "", ""];
-					s_player_lockunlock set [count s_player_lockunlock,_paint];
 				};
 			};
 		};
@@ -397,6 +401,16 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	} else {
 		player removeAction s_player_flipveh;
 		s_player_flipveh = -1;
+	}; 
+
+	//Allow player to paint a vehicle
+	if(_player_paint) then {
+		if (s_player_paint  < 0) then {
+			s_player_paint = player addAction ["Paint Vehicle", "Paint\player_paint_init.sqf",_cursorTarget, 2, true, true, "", ""];
+		};
+	} else {
+		player removeAction s_player_paint;
+		s_player_paint = -1;
 	}; 
 	
 	//Allow player to fill jerrycan
@@ -641,7 +655,7 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		if (s_player_upgrade_build < 0) then {
 			// s_player_lastTarget = _cursorTarget;
 			s_player_lastTarget set [0,_cursorTarget];
-			s_player_upgrade_build = player addAction [format[localize "STR_EPOCH_ACTIONS_UPGRADE",_text], "actions\player_upgrade.sqf",_cursorTarget, -1, false, true, "",""];
+			s_player_upgrade_build = player addAction [format[localize "STR_EPOCH_ACTIONS_UPGRADE",_text], "compile\player_upgrade.sqf",_cursorTarget, -1, false, true, "",""];
 		};
 	} else {
 		player removeAction s_player_upgrade_build;
@@ -823,26 +837,20 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	};
 
 } else {
-	//Engineering
-	{dayz_myCursorTarget removeAction _x} count s_player_repairActions;s_player_repairActions = [];
-	s_player_repair_crtl = -1;
-
-	{player removeAction _x} count s_player_combi;s_player_combi = [];
-		
+	{dayz_myCursorTarget removeAction _x} count s_player_repairActions;s_player_repairActions = [];	s_player_repair_crtl = -1;
+	{player removeAction _x} count s_player_combi; s_player_combi = [];
 	dayz_myCursorTarget = objNull;
 	s_player_lastTarget = [objNull,objNull,objNull,objNull,objNull];
-
-	{player removeAction _x} count s_player_parts;s_player_parts = [];
+	{player removeAction _x} count s_player_parts; s_player_parts = [];
 	s_player_parts_crtl = -1;
-
-	{player removeAction _x} count s_player_lockunlock;s_player_lockunlock = [];
+	{player removeAction _x} count s_player_lockunlock; s_player_lockunlock = [];
 	s_player_lockUnlock_crtl = -1;
-
 	player removeAction s_player_checkGear;
 	s_player_checkGear = -1;
-
 	player removeAction s_player_SurrenderedGear;
 	s_player_SurrenderedGear = -1;
+	player removeAction s_player_paint;
+	s_player_paint = -1;
 
 	//Others
 	player removeAction s_player_plotManagement;
@@ -863,6 +871,8 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	s_player_flipveh = -1;
 	player removeAction s_player_sleep;
 	s_player_sleep = -1;
+	player removeAction s_player_checkBuild;
+	s_player_checkBuild = -1;
 	player removeAction s_player_deleteBuild;
 	s_player_deleteBuild = -1;
 	player removeAction s_player_butcher;
@@ -879,8 +889,6 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	s_player_fillfuel = -1;
 	player removeAction s_player_studybody;
 	s_player_studybody = -1;
-	player removeAction s_player_clothes;
-	s_player_clothes = -1;
 	//Dog
 	player removeAction s_player_tamedog;
 	s_player_tamedog = -1;
