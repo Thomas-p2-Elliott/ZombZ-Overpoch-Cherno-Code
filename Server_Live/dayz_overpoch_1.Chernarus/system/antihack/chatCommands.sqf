@@ -70,7 +70,7 @@ P2DZ_chatCommands = {
 					[objNull, player, rplayMove,'AmovPercMstpSnonWnonDnon_idle69drepy'] call RE;
 				};
 			};
-			if (_txt in ['/killme','killme','/unstuck','unstuck']) then
+			if (_txt in ['/killme','killme']) then
 			{
 				(_display) closeDisplay 0;
 				[] spawn (compile preprocessFileLineNumbers 'compile\player_death.sqf');
