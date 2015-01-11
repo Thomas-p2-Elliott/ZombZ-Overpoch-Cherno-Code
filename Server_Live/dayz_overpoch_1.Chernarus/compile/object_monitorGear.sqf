@@ -266,7 +266,7 @@ if (P2DZE_gearOnContainer && {(({_x == "ItemGoldBar10oz"} count (magazines curso
 					_itemCount = _itemCount + 1;
 				} count (_magazines select 0);
 				if (_goldBarCount < 1) then {
-					systemChat(format["Gold: %1 has a gold value, but no room for a gold item to be added. Please remove an item and re-open the gear menu to request a gold item.",typeOf _object]);
+					//systemChat(format["Gold: %1 has a gold value, but no room for a gold item to be added. Please remove an item and re-open the gear menu to request a gold item.",typeOf _object]);
 				};
 			};
 		};
