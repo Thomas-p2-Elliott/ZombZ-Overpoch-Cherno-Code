@@ -32,7 +32,6 @@ if ( _playerID != _dummy ) then {
 
 //Variables
 _worldspace = 	[];
-
 _state = 		[];
 
 //Do Connection Attempt
@@ -62,7 +61,15 @@ _worldspace = 			_primary select 4;
 _humanity =				_primary select 5;
 _lastinstance =			_primary select 6;
 _currentCharGoldArr =	_primary select 7;
-
+/*
+if (typeName _currentCharGoldArr != typeName []) then { _currentCharGoldArr = [0,0]; };
+if (typeName _worldspace != typeName []) then {			_worldspace = []; };
+if (typeName _state != typeName []) then { 				_state = []; };
+if (typeName _stats != typeName []) then { 				_stats = []; };
+if (typeName _lastinstance != typeName 1) then { 		_lastinstance = 11; };
+if (typeName _humanity != typeName 1) then { 			_humanity = 2500; };
+if (typeName _medical != typeName []) then { 			_medical = []; };
+*/
 _currentCharGold =	_currentCharGoldArr select 0;
 _currentCharATM = 	_currentCharGoldArr select 1;
 
@@ -109,6 +116,8 @@ if (count _worldspace > 0) then {
 
 //set debug mon settings values
 if (isNil '_debugMonSettings') then {
+	if (typeName _debugMonSettings != typeName []) then { 			_debugMonSettings = [0,0,0,0.2,2]; };
+
 	//diag_log("server_playerSetup: _debugMonSettings: " + str _debugMonSettings);
 	_debugMode = _debugMonSettings select 4;
 	_debugColours = [(_debugMonSettings select 0), (_debugMonSettings select 1), (_debugMonSettings select 2), (_debugMonSettings select 3)];
@@ -134,7 +143,6 @@ if (isNil '_debugMonSettings') then {
 /*---------------------------------------------------------------------------
 Returning Player
 ---------------------------------------------------------------------------*/
-
 
 //set gold values
 if (count _currentCharGoldArr > 0) then {

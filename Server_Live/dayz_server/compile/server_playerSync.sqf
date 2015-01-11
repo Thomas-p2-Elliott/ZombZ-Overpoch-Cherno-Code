@@ -148,12 +148,25 @@ if (_characterID != "0") then {
 		//set debug mon array
 		_debugMonSettings = 	[(_debugColours select 0), (_debugColours select 1), (_debugColours select 2), (_debugColours select 3), _debugMode];
 
-		//update debug mon settings
-		_key2 = format["CHILD:222:%1:%2:",_playerUID,_debugMonSettings];
-		if (P2DZE_debugServerPlayerSync) then { diag_log ("HIVE: WRITE: "+ str(_key2) + " / " + _playerUID); };
-		_key2 call server_hiveReadWrite;
+		//update debug mon settings 5 sec later
+		nil = [_playerUID,_debugMonSettings] spawn {
+			private["_playerUID","_debugMonSettings","_key2"];
+			_debugMonSettings = [];
+			_playerUID = [];
+			_key2 = "";
 
+			_debugMonSettings = _this select 1;
+			_playerUID = _this select 0;
 
+			uiSleep 5;
+
+			_key2 = format["CHILD:222:%1:%2:",_playerUID,_debugMonSettings];
+			_key2 call server_hiveWrite;
+
+			//if (P2DZE_debugServerPlayerSync) then { diag_log ("HIVE: WRITE: "+ str(_key2) + " / " + _playerUID); };
+			diag_log ("P2DEBUG: HIVE: WRITE: "+ str(_key2) + " / " + _playerUID);
+		};
+	
 		//add distance
 		_distanceFoot = 		_distanceFootPrevious + _distanceFootCurrent;
 
