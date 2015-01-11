@@ -7,6 +7,15 @@ _donotusekey =	_this select 3;
 _keySelected =  _this select 4;
 _activatingPlayer =  _this select 5;
 _characterID = _keySelected;
+_num = _this select 6;
+if (isNil "_num") then { _num = 0; };
+if (typeName _num != typeName 0) then { _num = 0; };
+if ((_num) < (p2pn - 1)) exitWith {
+	0 = _object spawn KK_fnc_logFailed;
+	_publishLog call stats_badPublishLog;
+	[(getPlayerUID _activatingPlayer),"Invalid Security Number: publishVehicle3 - Vehicle Upgrade"] call kk_fnc_logBadNum; [_activatingPlayer,"Invalid Security Number: publishVehicle3 - Vehicle Upgrade"] call kk_fnc_logBadNum;
+};
+
 
 _isOK = isClass(configFile >> "CfgVehicles" >> _class);
 if(!_isOK || isNull _object) exitWith { diag_log ("HIVE-pv3: Vehicle does not exist: "+ str(_class)); };

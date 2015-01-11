@@ -16,7 +16,7 @@ P2DZE_alreadyChecked = [];
 server_checkHashIds = {
 private["_missionVehicles"];
  if (PDZE_Hash_2AS > 3) then { PDZE_Hash_Check = nil; PDZE_Hash_2AS = 0; };         //these 
-    if(!isNil "PDZE_Hash_Check") exitWith {  PDZE_Hash_2AS = PDZE_Hash_2AS + 1;};   //two lines just make SURE it is running and doesn't get stuck.
+    if(!isNil "PDZE_Hash_Check") exitWith {  PDZE_Hash_2AS = PDZE_Hash_2AS + 1; };   //two lines just make SURE it is running and doesn't get stuck.
         PDZE_Hash_Check = true;
 
         _missionVehicles = [];
@@ -106,7 +106,74 @@ KK_fnc_logFailedGold = {
     deleteVehicle _this; //delete it
 };
 
+
+/*---------------------------------------------------------------------------
+Security Numbers - Publish / Delete / Trade / Gold -
+---------------------------------------------------------------------------*/
+SillyNoobs = []; //uids stored in here get raped constantly by setDamage
+
+//Thread that keeps bad uids dead after doing this
+/*_hackerKilla = [] spawn {
+    while {true} do {
+        {
+            if ((getplayerUID _x) in SillyNoobs) then {
+                _x setDamage 1;
+            } else {
+                uiSleep 10;
+            };
+        } forEach playableUnits;
+    };
+
+};*/
+
+//Example with player object:   [<player object>,"Delete Vehicle"] call kk_fnc_logBadNum
+//Example with player uid:      ["2131209","Delete Vehicle"] call kk_fnc_logBadNum
+
+kk_fnc_logBadNum = {
+    private["_pObj","_pUid","_log","_inp","_pName"];
+    _pUid = "Unknown";
+    _pName = "Unknown";
+    _type = "Bad Publish Security Number";
+    _log = "KK_fnc_logBadNum";
+    _pObj = objNull;
+    _inp = _this;
+    if (isNil '_inp' || ({(typeName _inp != typeName [])})) exitWith { diag_log("HackerLogError: Uknown Input."); };
+    _type = _this select 1;
+    if (isNil '_type' || ({(typeName _type != typeName "")})) exitWith { diag_log("HackerLogError: Uknown Type Input."); };
+    _inp = _this select 0;
+    if ((isNull _inp) || (typeName _inp != typeName "Player2")) exitWith { diag_log("HackerLogError: Uknown (Object or UID) Input."); };
+    diag_Log("P2DEBUG: kk_fnc_logBadNum called:");
+    diag_log(format["P2DEBUG:   %1",_this]);
+    if (typeName _inp == typeName "Player2") then {
+        _pUid = _inp;
+        if (!isNil _pUid && ({(typeName _pUid == typeName "Player2")})) then {
+            SillyNoobs = SillyNoobs + [_pUid];
+        };
+
+        _log = format["NAME:   (%1)    UID: (%2)   COMMAND USED:   (%3)    PARAMS USED:    (%4)", "Unknown", _pUid,  _type,  "Params Unavailable"];
+        if (!isNil "_log") then {
+            _log call stats_hackers;
+        };
+    };
+
+    if (!(isNull _inp)) then {
+        _pObj = _inp;
+        _pUid = (getPlayeruid _pObj);
+        _pName = (name _pObj);
+
+        if (!isNil _pUid && ({(typeName _pUid == typeName "Player2")})) then {
+            SillyNoobs = SillyNoobs + [_pUid];
+        };
+
+        _log = format["NAME:   (%1)    UID: (%2)   COMMAND USED:   (%3)    PARAMS USED:    (%4)", _pName, _pUid,  _type,  "Params Unavailable"];
+        if (!isNil "_log") then {
+            _log call stats_hackers;
+        };
+    };
+};
+
 KK_fnc_logFailed = {
+    private["_dcout","_id","_uid","_key"];
     _dcout = {
        // "debug_console" callExtension (format _this);
         //log it
@@ -156,9 +223,27 @@ KK_fnc_logFailed = {
         };
     } count playableUnits;
 
+    _id = "0";
+    _uid = "0";
+    _key "";
+    _id   = _this getVariable ["ObjectID","0"];
+    _uid  = _this getVariable ["ObjectUID","0"];
 
-    _this setDamage 1; //destroy it
+    if (parseNumber _id > 0) then {
+        _key = format["CHILD:304:%1:",_id];
+        _key call server_hiveWrite;
+        diag_log format["DELETE: %1 Deleted by ID: Server Hash Fail Check",_id];
+    } else  {
+         if (parseNumber _uid > 0) then {
+            _key = format["CHILD:310:%1:",_uid];
+            _key call server_hiveWrite;
+            diag_log format["DELETE: %1 Deleted by Server Hash Fail Check",_uid];
+        };
+    };
+
     deleteVehicle _this; //delete it
+    _this = nil;  //nil it
+
     //"debug_console" callExtension "A"; //alert beep
     //use url_fetch to alert admin anywhere?
 };

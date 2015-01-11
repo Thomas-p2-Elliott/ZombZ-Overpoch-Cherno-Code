@@ -6,6 +6,9 @@ _class = 		_this select 2;
 _spawnDMG =		_this select 3;
 _characterID =  	_this select 4;
 
+//make sure object isnt hacked in
+_object call KK_fnc_checkHash;
+
 _fuel = 1;
 _damage = 0;
 _array = [];

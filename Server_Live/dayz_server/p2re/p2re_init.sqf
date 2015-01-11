@@ -219,11 +219,50 @@ _logBuilder = ("
 		_n
 	} call compile preprocessFileLineNumbers ""_encrypted\init_encrypted.sqf"";
 
-	p2pn = 50;
+	p2pn = 3213; p2tn = 4243; p2dn = 1303;
 ");
 
 //Pulish security number
-p2pn  = 50;
+p2pn  = 3213;
+/* Files that use p2pn: 
+Server:
+	publishFullObject
+	publishObject
+	swapObject
+	publishVehicle3
+Client:
+	player_build
+	player_build_publish
+	player_buildingDowngrade
+	player_upgrade
+	player_upgradeVehicle
+	plot_take_ownership
+	tent_pitch
+	vault_pitch
+*/
+
+//Trade security number
+p2tn = 4243;
+/* Files that use p2tn: 
+Server:
+	publishVehicle2
+Client:
+	trade_any_bicycle/boat/vehicle/vehicle_free
+*/
+
+//Delete security number
+p2dn = 1303;
+/* Files that use p2dn: 
+Server:
+	deleteObj
+Client:
+	trade_any_bicycle/boat/vehicle/vehicle_free
+	remove
+	plot_take_ownership
+	player_packTent
+	player_packVault
+*/
+
 
 P2DZ_logBuilder = _logBuilder;
 

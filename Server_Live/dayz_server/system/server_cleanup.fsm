@@ -24,7 +24,7 @@ item19[] = {"sync_time",2,250,450.000000,-25.000000,550.000000,25.000000,0.00000
 item20[] = {"cleanup_loot",2,250,300.000000,-25.000000,400.000000,25.000000,0.000000,"cleanup" \n "loot"};
 item21[] = {"group_cleanup",2,250,50.000000,25.000000,150.000000,75.000000,0.000000,"group" \n "cleanup"};
 item22[] = {"update_objects",2,250,175.000000,0.000000,275.000000,50.000000,0.000000,"update objects"};
-item23[] = {"__0s_loop",4,218,250.000000,-200.000000,350.000000,-150.000000,0.000000,"30s" \n "loop"};
+item23[] = {"__s_loop",4,218,250.000000,-200.000000,350.000000,-150.000000,0.000000,"6s" \n "loop"};
 item24[] = {"____spawn_server",2,4346,125.000000,-200.000000,225.000000,-150.000000,0.000000,"[] spawn server" \n "_checkHashIds;"};
 link0[] = {0,2};
 link1[] = {1,3};
@@ -57,7 +57,8 @@ link27[] = {20,5};
 link28[] = {21,5};
 link29[] = {22,5};
 link30[] = {23,24};
-globals[] = {25.000000,1,0,0,0,640,480,1,143,6316128,1,-53.328339,954.791992,443.544983,-436.145996,1044,859,1};
+link31[] = {24,5};
+globals[] = {25.000000,1,0,0,0,640,480,1,143,6316128,1,-53.328339,954.791992,443.544983,-436.145996,1044,893,1};
 window[] = {2,-1,-1,-1,-1,987,175,1467,175,3,1062};
 *//*%FSM</HEAD>*/
 class FSM
@@ -196,13 +197,13 @@ class FSM
           action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
-        /*%FSM<LINK "__0s_loop">*/
-        class __0s_loop
+        /*%FSM<LINK "__s_loop">*/
+        class __s_loop
         {
           priority = 0.000000;
           to="____spawn_server";
           precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
-          condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _lastHashCheck) > 30)"/*%FSM</CONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"((diag_tickTime - _lastHashCheck) > 6)"/*%FSM</CONDITION""">*/;
           action=/*%FSM<ACTION""">*/"_lastHashCheck = diag_tickTime;"/*%FSM</ACTION""">*/;
         };
         /*%FSM</LINK>*/
@@ -382,6 +383,16 @@ class FSM
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
+        /*%FSM<LINK "true">*/
+        class true
+        {
+          priority = 0.000000;
+          to="general_cleanup";
+          precondition = /*%FSM<CONDPRECONDITION""">*/""/*%FSM</CONDPRECONDITION""">*/;
+          condition=/*%FSM<CONDITION""">*/"true"/*%FSM</CONDITION""">*/;
+          action=/*%FSM<ACTION""">*/""/*%FSM</ACTION""">*/;
+        };
+        /*%FSM</LINK>*/
       };
     };
     /*%FSM</STATE>*/

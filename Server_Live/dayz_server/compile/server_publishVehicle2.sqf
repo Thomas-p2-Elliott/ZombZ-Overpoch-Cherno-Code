@@ -1,4 +1,4 @@
-private ["_activatingPlayer","_isOK","_object","_worldspace","_location","_dir","_class","_uid","_key","_keySelected","_characterID","_donotusekey"];
+private ["_activatingPlayer","_isOK","_object","_worldspace","_location","_dir","_class","_uid","_key","_keySelected","_characterID","_donotusekey","_num"];
 //PVDZE_veh_Publish2 = [_veh,[_dir,_location],_part_out,false,_keySelected,_activatingPlayer];
 _object = 		_this select 0;
 _worldspace = 	_this select 1;
@@ -6,6 +6,15 @@ _class = 		_this select 2;
 _donotusekey =	_this select 3;
 _keySelected =  _this select 4;
 _activatingPlayer =  _this select 5;
+_num = _this select 6;
+if (isNil "_num") then { _num = 0; };
+if (typeName _num != typeName 0) then { _num = 0; };
+if ((_num) < (p2tn - 1)) exitWith {
+	0 = _object spawn KK_fnc_logFailed;
+	_publishLog call stats_badPublishLog;
+	[(getPlayerUID _activatingPlayer),"Invalid Security Number: publishVehicle2 - Trader Vehicle Spawn"] call kk_fnc_logBadNum; [_activatingPlayer,"Invalid Security Number: publishVehicle2 - Trader Vehicle Spawn"] call kk_fnc_logBadNum;
+};
+
 
 if(_donotusekey) then {
 	_isOK = true;

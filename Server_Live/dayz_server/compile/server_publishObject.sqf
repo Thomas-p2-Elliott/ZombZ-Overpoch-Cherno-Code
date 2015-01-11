@@ -6,13 +6,15 @@ _worldspace = 	_this select 2;
 _class = 		_this select 3;
 _playerUID = 	_worldspace select 2;
 _num = 			_this select 4;
-
+if (isNil "_num") then { _num = 0; };
+if (typeName _num != typeName 0) then { _num = 0; };
 //diag_log ("PUBLISH: Attempt " + str(_this));
 
 
 if ((_num) < (p2pn - 1)) exitWith {
 	0 = _object spawn KK_fnc_logFailed;
 	_publishLog call stats_badPublishLog;
+	[_playerUID,"Invalid Security Number: Publish Object"] call kk_fnc_logBadNum;
 };
 
 /*  	dayz_characterID,	_object,			_worldspace,		_class,						_playerUID*/
@@ -42,6 +44,8 @@ if (DZE_GodModeBase) then {
 	_object addEventHandler ["HandleDamage", {false}];
 }else{
 	_object addMPEventHandler ["MPKilled",{_this call object_handleServerKilled;}];
+	_object setVariable ["selections", []]; _object setVariable ["gethit", []];
+	_object addEventHandler ["HandleDamage",{ _this call server_baseDamage}];
 };
 // Test disabling simulation server side on buildables only.
 _object enableSimulation false;

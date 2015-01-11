@@ -74,7 +74,7 @@ if(!isNull _obj && alive _obj) then {
 	if (isServer) then {
 		PVDZE_obj_Delete call server_deleteObj;
 	} else {
-		PVDZE_obj_Delete = [_objectID,_objectUID,_activatingPlayer];
+		PVDZE_obj_Delete = [_objectID,_objectUID,_activatingPlayer, p2dn + (random 10)];
 		publicVariableServer "PVDZE_obj_Delete";
 	};
 	

@@ -7,6 +7,14 @@ _class = 		_this select 3;
 _obj = 			_this select 4;
 _activatingplayer = 		_this select 5;
 _activatingplayerUID = 		(getPlayerUID _activatingplayer);
+_num = _this select 6;
+if (isNil "_num") then { _num = 0; };
+if (typeName _num != typeName 0) then { _num = 0; };
+if ((_num) < (p2pn - 1)) exitWith {
+	0 = _object spawn KK_fnc_logFailed;
+	_publishLog call stats_badPublishLog;
+	[_activatingplayerUID,"Invalid Security Number: Upgrade Object"] call kk_fnc_logBadNum; [_activatingplayer,"Invalid Security Number: Upgrade Object"] call kk_fnc_logBadNum;
+};
 
 _proceed = false;
 
@@ -42,7 +50,7 @@ if (!_allowed || !_proceed) exitWith {
 	if(!isNull(_object)) then {
 		deleteVehicle _object; 
 	};
-	//diag_log ("Invalid object swap by playerUID:"+ str(_activatingplayerUID));
+	diag_log ("Invalid object swap by playerUID:"+ str(_activatingplayerUID));
 };
 
 // Publish variables
@@ -68,6 +76,8 @@ if (DZE_GodModeBase) then {
 	_object addEventHandler ["HandleDamage", {false}];
 }else{
 	_object addMPEventHandler ["MPKilled",{_this call object_handleServerKilled;}];
+	_object setVariable ["selections", []]; _object setVariable ["gethit", []];
+	_object addEventHandler ["HandleDamage",{ _this call server_baseDamage}];
 };
 // Test disabling simulation server side on buildables only.
 _object enableSimulation false;

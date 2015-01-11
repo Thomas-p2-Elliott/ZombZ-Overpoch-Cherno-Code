@@ -35,7 +35,7 @@ if ((_isowner select 0 )) then {
 				_objectID 	= _object getVariable ["ObjectID","0"];
 				_objectUID	= _object getVariable ["ObjectUID","0"];
 				
-				PVDZE_obj_Delete = [_objectID, _objectUID, player];
+				PVDZE_obj_Delete = [_objectID, _objectUID, player, p2dn + (random 10)];
 				publicVariableServer "PVDZE_obj_Delete";
 				
 				if (_classname in DZE_DoorsLocked) then {
@@ -76,7 +76,7 @@ if ((_isowner select 0 )) then {
 				_damage =		damage _object;
 				_fuel =			fuel _object;
 				
-				PVDZE_fullobj_Publish = [_charID,_object,_worldspace,_classname, _inventory, _hitpoints, _damage, _fuel];
+				PVDZE_fullobj_Publish = [_charID,_object,_worldspace,_classname, _inventory, _hitpoints, _damage, _fuel, (p2pn + (random 10))];
 				publicVariableServer "PVDZE_fullobj_Publish";
 
 				//add type of object to dis shit so we can tell dem what dey done did liek

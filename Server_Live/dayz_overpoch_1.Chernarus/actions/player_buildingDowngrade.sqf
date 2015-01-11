@@ -159,7 +159,7 @@ if ((count _upgrade) > 0) then {
 		cutText [format[(localize "str_epoch_player_142"),_text], "PLAIN DOWN", 5];
 
 		_playerUID = [player] call FNC_GetPlayerUID;
-		PVDZE_obj_Swap = [_objectCharacterID,_object,[_dir,_location,_playerUID],_classname,_obj,player];
+		PVDZE_obj_Swap = [_objectCharacterID,_object,[_dir,_location,_playerUID],_classname,_obj,player,p2pn + (random 10)];
 		publicVariableServer "PVDZE_obj_Swap";
 
 		player reveal _object;

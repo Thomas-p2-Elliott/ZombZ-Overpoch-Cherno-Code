@@ -17,13 +17,17 @@ server_playerSetup =			compile preprocessFileLineNumbers "\z\addons\dayz_server\
 server_onPlayerDisconnect = 	compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_onPlayerDisconnect.sqf";
 server_updateObject =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_updateObject.sqf";
 server_playerDied =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDied.sqf";
-server_publishObj = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishObject.sqf";
-server_publishFullObject = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishFullObject.sqf";
-server_deleteObj =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_deleteObj.sqf";
-server_swapObject =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_swapObject.sqf"; 
+
+//Using p2pn publish security number only (player created vehicles - given hashid by server, p2pn checked to verify legitimacy)
 server_publishVeh = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle.sqf";
+server_publishFullObject = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishFullObject.sqf";
+server_publishObj = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishObject.sqf";
+
+//Using hashid system security (server spawn only, no hashid added by publishing)
+server_swapObject =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_swapObject.sqf"; 
 server_publishVeh2 = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle2.sqf";
 server_publishVeh3 = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle3.sqf";
+
 server_tradeObj = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_tradeObject.sqf";
 server_traders = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_traders.sqf";
 server_playerSync =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerSync.sqf";
@@ -31,6 +35,9 @@ server_spawnEvents =			compile preprocessFileLineNumbers "\z\addons\dayz_server\
 fnc_plyrHit   =					compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\fnc_plyrHit.sqf";
 server_deaths = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_playerDeaths.sqf";
 server_maintainArea = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_maintainArea.sqf";
+
+//custom base damage handler with anti-ramming/kamikazee damage
+server_baseDamage = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\baseDamageHandler.sqf";
 
 //by player2 just for stats logging
 server_onPlayerConnect = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_onPlayerConnect.sqf";

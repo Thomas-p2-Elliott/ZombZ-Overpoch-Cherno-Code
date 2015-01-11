@@ -72,7 +72,7 @@ if(!isNull _obj && alive _obj) then {
 	_backpacks = 	getBackpackCargo _obj;
 	
 	// Remove from database
-	PVDZE_obj_Delete = [_objectID,_objectUID,_activatingPlayer];
+	PVDZE_obj_Delete = [_objectID,_objectUID,_activatingPlayer, p2dn + (random 10)];
 	publicVariableServer "PVDZE_obj_Delete";
 	
 	// Set down vault "take" item

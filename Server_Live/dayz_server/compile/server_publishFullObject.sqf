@@ -8,10 +8,20 @@ _inventory =	_this select 4;
 _hitpoints =	_this select 5;
 _damage =		_this select 6;
 _fuel =			_this select 7;
+_num = 			_this select 8;
+
+if ((_num) < (p2pn - 1)) exitWith {
+	0 = _object spawn KK_fnc_logFailed;
+	_publishLog call stats_badPublishLog;
+};
 
 _allowed = [_charID, _object, _worldspace, _class, _charID] call check_publishobject;
 
-if (!_allowed) exitWith { deleteVehicle _object; };
+if (!_allowed) exitWith { 
+	0 = _object spawn KK_fnc_logFailed;
+	_publishLog = format ["Failed Spawn: %1",_this];
+	_publishLog call stats_badPublishLog;
+};
 
 //diag_log ("PUBLISH: Attempt " + str(_object));
 
@@ -31,6 +41,8 @@ if (DZE_GodModeBase) then {
 	_object addEventHandler ["HandleDamage", {false}];
 }else{
 	_object addMPEventHandler ["MPKilled",{_this call object_handleServerKilled;}];
+	_object setVariable ["selections", []]; _object setVariable ["gethit", []];
+	_object addEventHandler ["HandleDamage",{ _this call server_baseDamage}];
 };
 // Test disabling simulation server side on buildables only.
 _object enableSimulation false;
