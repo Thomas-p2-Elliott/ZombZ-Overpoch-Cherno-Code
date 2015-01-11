@@ -146,7 +146,7 @@ TraderDialogLoadItemList = {
 			_afile = _x select 7;
 			_File = "\z\addons\dayz_code\actions\" + _afile + ".sqf";
 				
-			if (_afile == "trade_items") then {
+			if (_afile == "trade_items" || _afile == "trade_any_bicycle" || _afile == "trade_any_boat" || _afile == "trade_any_vehicle" || _afile == "trade_any_vehicle_free") then {
 				_File = "actions\" + _afile + ".sqf";
 			};
 
@@ -168,7 +168,7 @@ TraderDialogLoadItemList = {
 						if (_name isKindOf "Ship") then {
 							_distance = dayz_sellDistance_boat;
 						};
-						_count = {(((typeOf _x) == _name) && {(alive _x)} && {(!(_x getVariable ["Deployed",false]))})} count (nearestObjects [(getPosATL player), [_name], _distance]);
+						_count = ({(((typeOf _x) == _name) && {(alive _x)} && {(!(_x getVariable ["Deployed",false]))})} count (nearestObjects [(getPosATL player), [_name], _distance]));
 					};
 				};
 			};
@@ -216,10 +216,8 @@ TraderDialogShowPrices = {
 	private ["_index", "_item"];
 	_index = _this select 0;
 	if (_index < 0) exitWith {};
-	while {count TraderItemList < 1} do { sleep 1; };
+	while {count TraderItemList < 1} do { uiSleep 1; };
 	_item = TraderItemList select _index;
-
-	_qty = {_x == (_item select 3)} count magazines player;
 
 	ctrlSetText [TraderDialogBuyPrice, format["%1 %2", _item select 2, _item select 4]];
 	ctrlSetText [TraderDialogSellPrice, format["%1 %2", _item select 5, _item select 7]];
