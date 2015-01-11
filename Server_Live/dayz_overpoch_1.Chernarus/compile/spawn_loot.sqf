@@ -19,7 +19,7 @@ switch (_iClass) do {
 	
 		_qty = 0;
 		_max = ceil(random 2) + 1;
-		if (_iClass in ["trash","civilian","office","office2","food","generic","medical","hospital","military","militarypilot","policeman","hunter","worker"]) then {
+		if (_iClass in ["trash","civilian","office","office2","food","generic","medical","hospital","military","militarypilot","policeman","hunter","worker","militaryammo"]) then {
 			_item = createVehicle ["WeaponHolder", _iPos, [], _radius, "CAN_COLLIDE"];
 			while {_qty < _max} do {
 				_index = dayz_CLBase find _iClass;
