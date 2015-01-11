@@ -6,6 +6,35 @@ deathHandled = true;
 
 _pGold = [false,player] call p2_gv;
 
+/*---------------------------------------------------------------------------
+Add Skin to Dead Body on Death by Player2 - Either backpack or Main Inv
+---------------------------------------------------------------------------*/
+[] call {
+	private ["_b", "_p", "_s", "_k", "_r", "_h"];
+	_b = objNull;	_p = objNull;	_s = "";	_k = false;	_r = false;	_h = false;
+	_b = player;	_s = (typeOf _b);	_s = "Skin_" + _s;	_k = isClass (configFile >> "CfgMagazines" >> _s); 	_p = unitBackpack _b;
+	if (!_k) then {
+		_k = isClass (missionConfigFile >> "ZombZSkins" >> _s);
+		if (_k) then {
+			_h = isText (missionConfigFile >> "ZombZSkins" >> _s >> "package");
+			if (_h) then {
+				_s = getText (missionConfigFile >> "ZombZSkins" >> _s >> "package");
+				if (!isNil "_s") then { _k = true; } else { _k = false };
+			};
+		};
+	};
+	if (_k) then {
+		_r = [_b,_s] call BIS_fnc_invAdd;
+		if (!_r) then {
+			if (!isNil "_p") then { 
+				if (!isNull _p) then {
+					_p addMagazineCargoGlobal [_s,1];
+				};
+			};
+		};
+	};   
+};
+
 if ((alive player) && {isNil {dayz_playerName}}) then {
 	dayz_playerName = name player;
 };
