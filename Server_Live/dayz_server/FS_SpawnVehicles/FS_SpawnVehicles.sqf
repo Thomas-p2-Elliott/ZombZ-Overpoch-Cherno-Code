@@ -7,25 +7,29 @@ private ["_vehLimit","_p2d","_fnc_spawn_vehicle","_fnc_GetStaticVehicleLocationC
 _vehLimit = _this select 0;
 
 /*** DEBUG MESSAGES ***/
+if (!isNil '__FILE__') then {	diag_log(format["%1",__FILE__]); } else {	diag_log("FS_SpawnVehicles.sqf: Starting."); };
+
 // Set to true to display debug messages to the RPT file.
 _p2d = P2DZ_Debug_StaticVehSpawns;
 /*** DEBUG MESSAGES ***/
 
 if (isNil "_p2d") then {
-	_p2d = false;
+	_p2d = true;
 };
 
-if (isNil ("StaticVehicleUsageConfig")) then {
+if (isNil "StaticVehicleUsageConfig") then {
 	StaticVehicleUsageConfig = [];
+	diag_log("StaticVehicleUsageConfig Empty");
 };
 
-if (isNil ("StaticVehicleSpawnConfig")) then {
+if (isNil "StaticVehicleSpawnConfig") then {
 	StaticVehicleSpawnConfig = ["AllVehicles",""];
 	diag_log ("Static Vehicle Spawn: ERROR: StaticVehicleSpawnConfig missing. Please check the Locations file.");
 }
 else {
 	if (count StaticVehicleSpawnConfig == 0) then {
 		StaticVehicleSpawnConfig = ["AllVehicles",""];
+		diag_log("StaticVehicleSpawnConfig Empty");
 	};
 };
 
@@ -49,7 +53,7 @@ fnc_SwitchOffUsageConfig = {
 // Parameter: vehicle and array containing location configuration name, usage (bool) & index of usage config.
 _fnc_spawn_vehicle = {
 	private ["_vehicle","_usageConfig","_position","_p2d","_dir","_veh","_marker","_objPosition","_dontSpawn","_reasonForNoSpawn","_nearbyList","_nearbyCount"];	
-	if (!isDedicated) exitWith { }; // Be sure to run this
+	if (!isDedicated) exitWith { diag_log("FS_spawnVehicles.sqf: !isDedicated exit."); }; // Be sure to run this
 	
 	_vehicle = _this select 0;
 	_usageConfig = _this select 1;
@@ -104,7 +108,10 @@ _fnc_spawn_vehicle = {
 
 			// only proceed if two params otherwise BIS_fnc_findSafePos failed and may spawn in air
 			if ((count (_spawnPos) == 2)) then { 
-		
+				private["_p2newrandChance","_chance2beat","_randomFail"];
+				_p2newrandChance = 0;
+				_chance2beat = 0;
+				_p2newrandChance = random 1;
 				_dir = _spawnPos select 0;
 
 				_nearbyList = (_spawnPos select 1) nearEntities [["Air","LandVehicle","Ship"], P2DZ_StaticVehSpawns_DupeDistanceCheck];
@@ -116,84 +123,89 @@ _fnc_spawn_vehicle = {
 					_dontSpawn = false;
 				};
 
+				_chance2beat = P2DZ_vehspawnChance / 100;
+				_chance2beat = 1 - _chance2beat;
+				_randomFail = false;
+
+				//if it gets this far, give vehicle a randomised chance of spawning
+				if (_p2newrandChance < _chance2beat) then {
+					_dontSpawn = true;
+					_randomFail = true;
+					_reasonForNoSpawn = format["Randomised Failure Chance: %1 was less than generated value of %2",_p2newrandChance, _chance2beat];
+				} else {
+					_p2newrandChance = nil;
+					_chance2beat = nil;
+				};
+
 				if (_dontSpawn) then {
-					_attemptCount = _attemptCount + 1;
+					if (_randomFail) then { _attemptCount = 666; } else { _attemptCount = _attemptCount + 1; };
 					if (_p2d) then {	diag_log("Static Vehicle Spawn: Failed for Vehicles: " + str _vehicle + " Reason: " + str _reasonForNoSpawn); };
 				} else {
-					private["_p2newrandChance"];
-					_p2newrandChance = random 1;
-					//if it gets this far, give vehicle a 10% chance of spawning
-					if (_p2newrandChance > 0.8999) then {
-						if ((_vehicle) == "SUV_TK_CIV_EP1_DZE1") then {
-							private["_randCount","_randSel"];
-							_randCount = 0;
-							_randSel = 0;
-							_randCount = count SUV_VEHICLE_LIST;
-							_randSel = (random(_randCount));
-							_randSel = floor _randSel;
-							_vehicle = SUV_VEHICLE_LIST select _randSel;
-							if (_p2d) then { diag_log("P2DEBUG: Random SUV Selected: " + str _vehicle)};
-						};
 
-						if ((_vehicle) == "350z") then {
-							private["_randCount","_randSel"];
-							_randCount = 0;
-							_randSel = 0;
-							_randCount = count (Nissan350z_VEHICLE_LIST);
-							_randSel = (random(_randCount));
-							_randSel = floor _randSel;
-							_vehicle = (Nissan350z_VEHICLE_LIST) select _randSel;
-							if (_p2d) then { diag_log("P2DEBUG: Random 350z Selected: " + str _vehicle)};
-						};
-
-						//place vehicle 
-						_veh = createVehicle [_vehicle, (_spawnPos select 1), [], 0, "CAN_COLLIDE"];
-						_veh setdir _dir;
-						_veh setposATL (_spawnPos select 1);		
-
-						//add to veh spawned
-						_vehSpawned = _vehSpawned + 1;
-
-						//remove magazines
-						clearMagazineCargoGlobal _veh;
-
-						//remove weapons
-						clearWeaponCargoGlobal _veh;
-
-						if (isNil "DZE_vehicleAmmo") then { DZE_vehicleAmmo = 0; };
-						//remove vehicle weapon ammo (eg m240 on humvee ammo)
-						_veh setAmmo DZE_vehicleAmmo;
-						
-						_veh call player2_removeVehicleWeapons;
-
-						_veh call {
-						    _this setVariable [
-						        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
-						        "hash_id" callExtension format [
-						            "%1:%2",
-						            netId _this,
-						            typeOf _this
-						        ]
-						    ];
-						};
-						
-						// Get position
-						_objPosition = GetPosATL _veh;
-						if (_p2d) then {	diag_log(" "); diag_log("Static Spawn Vehicle of Type: " + str _veh + " Created At: " + str _objPosition + " With Direction: " + str _dir); };
-
-						[_veh,[_dir,_objPosition],_vehicle,true,"0"] call server_publishVeh;
-						_vehicle = _this select 0; // just in case it was modified by suv/350z changes...
+					if ((_vehicle) == "SUV_TK_CIV_EP1_DZE1") then {
+						private["_randCount","_randSel"];
+						_randCount = 0;
+						_randSel = 0;
+						_randCount = count SUV_VEHICLE_LIST;
+						_randSel = (random(_randCount));
+						_randSel = floor _randSel;
+						_vehicle = SUV_VEHICLE_LIST select _randSel;
+						if (_p2d) then { diag_log("P2DEBUG: Random SUV Selected: " + str _vehicle)};
 					};
+
+					if ((_vehicle) == "350z") then {
+						private["_randCount","_randSel"];
+						_randCount = 0;
+						_randSel = 0;
+						_randCount = count (Nissan350z_VEHICLE_LIST);
+						_randSel = (random(_randCount));
+						_randSel = floor _randSel;
+						_vehicle = (Nissan350z_VEHICLE_LIST) select _randSel;
+						if (_p2d) then { diag_log("P2DEBUG: Random 350z Selected: " + str _vehicle)};
+					};
+
+					//place vehicle 
+					_veh = createVehicle [_vehicle, (_spawnPos select 1), [], 0, "CAN_COLLIDE"];
+					_veh setdir _dir;
+					_veh setposATL (_spawnPos select 1);		
+
+					//add to veh spawned
+					_vehSpawned = _vehSpawned + 1;
+
+					//remove magazines
+					clearMagazineCargoGlobal _veh;
+
+					//remove weapons
+					clearWeaponCargoGlobal _veh;
+
+					if (isNil "DZE_vehicleAmmo") then { DZE_vehicleAmmo = 0; };
+					//remove vehicle weapon ammo (eg m240 on humvee ammo)
+					_veh setVehicleAmmo DZE_vehicleAmmo;
+					
+					_veh call player2_removeVehicleWeapons;
+
+					_veh call {
+					    _this setVariable [
+					        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+					        "hash_id" callExtension format [
+					            "%1:%2",
+					            netId _this,
+					            typeOf _this
+					        ]
+					    ];
+					};
+					
+					// Get position
+					_objPosition = GetPosATL _veh;
+					if (_p2d) then {	diag_log(" "); diag_log("Static Spawn Vehicle of Type: " + str _veh + " Created At: " + str _objPosition + " With Direction: " + str _dir); };
+
+					[_veh,[_dir,_objPosition],_vehicle,true,"0"] call server_publishVeh;
+					_vehicle = _this select 0; // just in case it was modified by suv/350z changes...
 				};
 			} else {
-				diag_log("Static Veh Spawn: Position Failed: " + str _spawnPos);
+				if (_p2d) then { diag_log(format["StaticVehSpawnError: SpawnPos Array Error for: %1", _spawnPos]); };
 			};
-
-
 		};
-
-
-		
 	};
 };
 
@@ -241,15 +253,15 @@ _fnc_GetStaticVehicleUsageConfig = {
 };
 
 /****    FUNCTIONS END    ****/
-
+diag_log("Finished functions for spawning vehicles...");
 // Create the StaticVehicleUsageConfig array.
 // Each element contains the [LocationName, UseStatic (bool), InUse (bool)]
-if (count StaticVehicleSpawnConfig > 0 && (count StaticVehicleUsageConfig == 0)) then {
+if ((count StaticVehicleSpawnConfig > 0) && (count StaticVehicleUsageConfig < 1)) then {
 	{
 		private ["_name","_found"];
 		_name = _x select 1;
 		_numToSpawn = _x select 2;
-
+		if (_p2d) then { if (!isNil '_name' && !isNil '_numToSpawn') then { diag_log(format["Vehicle: %1		Amount to Spawn: %2", _name, _numToSpawn])}  };
 		_found = false;
 		{	// Find if the location is already added.
 			private ["_usageName"];
@@ -271,6 +283,8 @@ if (count StaticVehicleSpawnConfig > 0 && (count StaticVehicleUsageConfig == 0))
 			};
 		};
 	} forEach StaticVehicleSpawnConfig;
+} else {
+	diag_log("StaticVehicleUsageConfig and/or StaticVehicleSpawnConfig empty");
 };
 //www.ZombZ.net
 // Spawn the vehicles upto the vehicle limit or lower the limit to what can be spawned in.
@@ -295,4 +309,6 @@ if(_vehLimit > 0) then {
 			[_vehicle,_usageConfig,_p2d] call _fnc_spawn_vehicle;
 
 	} forEach StaticVehicleSpawnConfig;
+} else {
+	diag_log("Vehicle limit not greater than 0");
 };

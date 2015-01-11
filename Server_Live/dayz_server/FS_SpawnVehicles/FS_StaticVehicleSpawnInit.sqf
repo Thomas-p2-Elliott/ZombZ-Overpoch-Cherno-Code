@@ -9,7 +9,7 @@ _usageConfig = _this select 1;
 _debugMessages = _this select 2;
 
 if (isNil ("_debugMessages")) then {
-	_debugMessages = false;
+	_debugMessages = true;
 };
 
 _staticLocationsName = _usageConfig select 0;
