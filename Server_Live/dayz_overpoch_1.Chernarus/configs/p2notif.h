@@ -81,9 +81,9 @@ class p2_notif
 	  "p2_bgMain",
 	  "p2_bgPicBox",
 	  "p2_bgTop",
+	  "p2_bgMainCol",
 	  "p2_txtTop",
 	  "p2_txtMain",
-	  "p2_bgMainCol",
 	  "p2_picBox"
 	};
 	class p2_bgMainCol: p2_notifFrame2
