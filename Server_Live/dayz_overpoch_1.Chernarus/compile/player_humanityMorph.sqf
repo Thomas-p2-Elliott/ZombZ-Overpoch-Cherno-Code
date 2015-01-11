@@ -4,6 +4,7 @@ _charID 	= _this select 1;
 _model 		= _this select 2;
 
 if (typeOF player == _model) exitWith {cutText ['You already wear this Skin!', 'PLAIN'];};
+if (!(isClass (configFile >> "CfgVehicles" >> _model))) exitWith { cutText ['Error: Model for this skin not found!', 'PLAIN']; };
 
 _old = player;
 player allowDamage false;
