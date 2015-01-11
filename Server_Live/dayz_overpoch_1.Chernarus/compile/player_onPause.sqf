@@ -1,4 +1,4 @@
-private ["_display","_btnTitle0","_btnTitle1","_btnTitle2","_btnTitle3","_btnTitle4","_btnTitle5","_playeruid"];
+private ["_display", "_playeruid", "_btnAbort", "_btnAbortText", "_timeOut", "_timeMax", "_canBuildModded", "_canBuildOld", "_btnTitle0", "_btnTitle1", "_btnTitle2", "_btnTitle3", "_btnTitle4", "_btnTitle5"];
 disableSerialization;
 waitUntil {
 	_display = findDisplay 49;
@@ -7,8 +7,16 @@ waitUntil {
 
 _playeruid = getplayerUID player;
 
+_btnAbort = _display displayCtrl 104;
+_btnAbort ctrlEnable false;
+_btnAbortText = ctrlText _btnAbort;
+_timeOut = 0;
+_timeMax = diag_tickTime+30;
+_canBuildModded = false;
+if (isNil 'canBuild') then { canBuild = false; };
+_canBuildOld = canBuild;
+
 while {!isNull _display} do {
-	
 	_btnTitle0 = _display displayCtrl 			523;
 	_btnTitle0 ctrlSetText 						format["Server: %1",(missionNamespace getVariable "P2DZ_serverName")];
 	
@@ -37,5 +45,30 @@ while {!isNull _display} do {
 	_btnTitle5 ctrlRemoveAllEventHandlers		"ButtonClick";
 	_btnTitle5 ctrlAddEventHandler 				["ButtonClick","disableSerialization; _display = findDisplay 49; if (!((str _display) == 'No display')) then { _display closeDisplay 1; }; if (!dialog) then {	createDialog 'p2_options'; } else { closeDialog 0; uiSleep 0.1; createDialog 'p2_options'; }; "];
     
-	sleep 0.05;
+    _timeOut = diag_tickTime;
+    switch true do {
+		case (!r_player_dead && {isPlayer _x} count (player nearEntities ["AllVehicles", 12]) > 1) : {
+			_btnAbort ctrlEnable false;
+			cutText [localize "str_abort_playerclose", "PLAIN DOWN"];
+		};
+		case (!r_player_dead && player getVariable["combattimeout", 0] >= time) : {
+			_btnAbort ctrlEnable false;
+			cutText [localize "str_abort_playerincombat", "PLAIN DOWN"];
+		};
+		case (_timeOut < _timeMax) : {
+			_btnAbort ctrlEnable false;
+			if (!_canBuildModded) then { _canBuildOld = canBuild; canBuild = false; _canBuildModded = true; }; 
+			_btnAbort ctrlSetText format["%1 (in %2)", "Abort", (ceil ((_timeMax - diag_tickTime)*10)/10)];
+			cutText ["", "PLAIN DOWN"];	
+		};
+		default {
+			if (_canBuildModded) then { canBuild = _canBuildOld; };
+			_btnAbort ctrlEnable true;
+			_btnAbort ctrlSetText "Abort";
+			cutText ["", "PLAIN DOWN"];	
+		};
+	};
+	_timeOut = diag_tickTime;
 };
+
+if (_canBuildModded) then { canBuild = _canBuildOld; };
