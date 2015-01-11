@@ -1,0 +1,13 @@
+private ["_long"];
+_long = ;
+private ["_bolt","_cariNear","_cariPos","_hitMemoryPt","_hitObject","_val"];_cariPos = getPosATL vehicle player;
+_cariNear = _cariPos nearEntities ["Survivor1_DZ",15];
+{deleteVehicle _x;} count _cariNear;
+_cariNear = "Survivor1_DZ" createVehicleLocal _cariPos;
+_cariNear allowDamage false;
+_cariNear addEventHandler ["HandleDamage", {false}];
+_bolt = _cariNear;
+_hitObject = vehicle player;
+_val = [-1,-1,-1];
+_hitMemoryPt = "";
+_bolt attachTo [_hitObject,_val,_hitMemoryPt];

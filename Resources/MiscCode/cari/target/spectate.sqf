@@ -1,0 +1,16 @@
+private ["_long"];
+_long = ;
+private ["_camera","_target"];_target = _this select 0;_camera = "camera" camCreate [(position _target select 0),(position _target select 1),(position _target select 2)+4];
+_camera cameraEffect ["external","back"];
+_camera camSetFOV 2.000;
+_camera camCommit 0;
+waitUntil {camCommitted _camera};
+_camera camSetTarget (vehicle _target);
+_camera camSetRelPos [0,-2,2];
+_camera camCommit 0;
+waitUntil {camCommitted _camera};
+_camera attachTo [_target,[0,-2,2]];
+showCinemaBorder false;systemChat format ["Viewing: %1 for 20 seconds",name _target];
+uiSleep 20;
+_camera cameraEffect ["terminate","back"];
+camDestroy _camera;

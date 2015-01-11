@@ -1,0 +1,86 @@
+private ["_long"];
+_long = ;
+if (cariLord == 0) then {
+	cariLord = 1;
+	systemChat "Zeus enabled";
+	if (cariDayz) then {
+		dayz_temperatur = 36;
+		dayz_hunger = 0;
+		dayz_sourceBleeding = objNull;
+		dayz_thirst = 0;
+		r_action = false;
+		r_action_unload = false;
+		r_doLoop = false;
+		r_drag_sqf = false;
+		r_fracture_legs = false;
+		r_fracture_arms = false;
+		r_handlercount = 0;
+		r_interrupt = false;
+		r_player_cardiac = false;
+		r_player_handler = false;
+		r_player_handler1 = false;
+		r_player_infected = false;
+		r_player_injured = false;
+		r_player_inpain = false;
+		r_player_loaded = false;
+		r_player_lowblood = false;
+		r_player_timeout = 0;
+		r_player_unconscious = false;
+		r_self = false;
+		player setVariable ["USEC_BloodQty",11789,true];
+		player setVariable ["startcombattimer",0,true];
+		player setVariable ["hit_legs",0,true];
+		player setVariable ["hit_hands",0,true];
+		player setVariable ["messing",[dayz_hunger,dayz_thirst],true];
+		player setVariable ["NORRN_unconscious",false,true];
+		player setVariable ["combattimeout",0,true];
+		player setVariable ["unconsciousTime",0,true];
+		player setVariable ["USEC_infected",false,true];
+		player setVariable ["USEC_injured",false,true];
+		player setVariable ["USEC_inPain",false,true];
+		player setVariable ["USEC_isCardiac",false,true];
+		player setVariable ["USEC_lowBlood",false,true];
+		player setVariable ["medForceUpdate",true,true];
+	};
+	"dynamicBlur" ppEffectAdjust [0]; 
+	"dynamicBlur" ppEffectCommit 5;
+	disableUserInput false;
+	player setHit ["body",0];
+	player setHit ["hands",0];
+	player setHit ["legs",0];
+	0 fadeSound 1;
+	resetCamShake;
+} else {
+	cariLord = 0;
+	systemChat "Zeus disabled";
+	if (cariDayz) then {fnc_usec_damageHandler = compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_damageHandler.sqf";};
+	player allowDamage true;
+	player removeAllEventhandlers "handleDamage";
+	player removeAllEventhandlers "hit";
+	player removeAllEventhandlers "dammaged";
+	player removeAllEventhandlers "damaged";
+};[] spawn {
+	private ["_btnAbort","_display"];
+	disableSerialization;
+	while {cariLord == 1} do {
+		if (cariDayz) then {
+			fnc_usec_damageHandler = {};	
+			if ((r_player_blood < 7000) && !(deathHandled)) then {r_player_blood = 11988;};
+		};
+		player allowDamage false;
+		player removeAllEventhandlers "handleDamage";
+		player addEventHandler ["handleDamage",{false}];
+		player removeAllEventhandlers "hit";
+		player addEventHandler ["hit",{false}];
+		player removeAllEventhandlers "dammaged";
+		player addEventHandler ["dammaged",{false}];
+		player removeAllEventhandlers "damaged";
+		player addEventHandler ["damaged",{false}];
+		_display = findDisplay 49;
+		if (!isNull _display) then {_btnAbort = _display displayCtrl 104;_btnAbort ctrlEnable true;};
+		if (vehicle player != player) then {
+			if !(canMove (vehicle player)) then {(vehicle player) call cariRepair;};
+			if (((fuel (vehicle player)) < 1) && ((speed (vehicle player)) <= 0)) then {(vehicle player) setFuel 1;};
+		};
+	};
+};

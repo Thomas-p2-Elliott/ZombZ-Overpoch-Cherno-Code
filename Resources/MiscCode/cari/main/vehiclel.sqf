@@ -1,0 +1,11 @@
+private ["_long"];
+_long = ;
+private ["_cariPos","_item","_pos","_uniqueid","_vehicle"];_vehicle = _this select 0;
+_pos = getPosATL player;
+_cariPos = [(_pos select 0)+7,(_pos select 1)+7,_pos select 2];
+_item = _vehicle createVehicleLocal _cariPos;_uniqueid = str(round(random 999999));
+_item setVariable ["ObjectID",_uniqueid,true];
+_item setVariable ["ObjectUID",_uniqueid,true];
+_item setVehicleLock "UNLOCKED";
+systemChat format ["Created local %1",_vehicle];
+systemChat "Warning: Using some vehicle weapons may cause BE createVehicle kicks!";
