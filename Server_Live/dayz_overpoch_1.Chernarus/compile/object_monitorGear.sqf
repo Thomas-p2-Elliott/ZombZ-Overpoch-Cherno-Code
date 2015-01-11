@@ -188,7 +188,7 @@ if ((_isVehicle || _isStorage || _isnewstorage) && (!_isMan) && (!_isZed) && (!_
 	};      
 };
 
-if (P2DZE_gearOnContainer && {(({_x == "ItemGoldBar10oz"} count (magazines cursorTarget)) < 1)} && {(([false,cursorTarget] call p2_gv) > 0)}) then {
+if (P2DZE_gearOnContainer && (({_x == "ItemGoldBar10oz"} count (magazines cursorTarget)) < 1) && (([false,cursorTarget] call p2_gv) > 0)) then {
 	diag_log("P2DEBUG: object_monitorGear.sqf: Gold: " + (typeOf cursorTarget) + " had no gold item, not gonna go adding it. Checking some things before I ask the server to do it.");
 	//reset isOk val
 	_isOk = false;
