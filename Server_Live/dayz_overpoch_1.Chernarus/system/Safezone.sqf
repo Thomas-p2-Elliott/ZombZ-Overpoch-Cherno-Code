@@ -9,11 +9,6 @@ private ["_inVehicle", "_inVehicleLast", "_thePlayer", "_noSalvage", "_slimit", 
 ZombZ_safeZoneDebug = false; 							//AlienX Debug notes on screen instead of diag log for some reason...get 2 monitors bruh.
 ZombZ_safeZoneGodmode = true; 							//Should safezone Godmode be enabled?
 ZombZ_SZ_Messages = true;								//Should players get messages when entering and exiting the safe zone?
-ZombZ_SZ_BP_EnableAntiBackpack = true;					//Should players not be able to take from peoples bags?
-ZombZ_SZ_BP_AllowGearFromLootPiles = true;				//Should players be able to loot from loot piles?
-ZombZ_SZ_BP_AllowGearFromVehicles = false;				//Should players be able to loot from a vehicles gear?
-ZombZ_SZ_BP_AllowGearFromDeadPlayers = true;			//Should players be able to loot from a dead players corpse?
-ZombZ_SZ_BP_AllowFriendlyTaggedAccess = true;			//Should players who are tagged friendly be able to access eachothers bags?
 ZombZ_SZ_Vehicles_DisableMountedGuns = true;			//Should players not be able to shoot bullets/projectiles from mounted guns?
 ZombZ_SZ_Vehicles_AllowGearFromWithinVehicles = true;	//Should players be able to open the gear screen while they are inside a vehicle?
 ZombZ_SZ_Players_DisableWeaponFiring = true;			//Should players not be able to shoot bullets/projectiles from their weapon(s)?
@@ -34,6 +29,7 @@ if (isNil "zombzsafezoneFin") then { zombzsafezoneFin = true; };
 
 while {true} do {
 	waitUntil { !zombzsafezone };
+
 	diag_log("P2DEBUG: Entered the safezone, waiting for zombzsafezoneFin");
 
 	if ( ZombZ_SZ_Messages ) then { systemChat ("[ZombZ] Trader Protection Started - God Mode Enabled - Weapons Disabled"); };
@@ -103,119 +99,6 @@ while {true} do {
 		}];
 	};
 	
-	if ( ZombZ_SZ_BP_EnableAntiBackpack ) then {
-		ZombZ_LastPlayerLookedAt = objNull;
-		ZombZ_LastPlayerLookedAtCountDown = 5;
-		_antiBackpackThread = [] spawn {
-			private [ "_ct","_ip","_ia","_dis"] ;
-			while {!zombzsafezone} do
-			{
-				if ( isNull ZombZ_LastPlayerLookedAt ) then	{
-					waitUntil {!isNull cursorTarget};
-					_ct = cursorTarget;
-					_ip = isPlayer _ct;
-					if ( _ip ) then { _ia = alive _ct; _dis = _ct distance player; } else { _ia = false; _dis = 1000; };
-					
-					if ( (_ip && _ia) && (_dis < 6.5) ) then {
-						ZombZ_LastPlayerLookedAt = _ct;
-					};
-				} else {
-					ZombZ_LastPlayerLookedAtCountDown = ZombZ_LastPlayerLookedAtCountDown - 1;
-					if ( ZombZ_LastPlayerLookedAtCountDown < 0 ) then { ZombZ_LastPlayerLookedAtCountDown = 5; ZombZ_LastPlayerLookedAt = objNull; };
-					sleep 1;
-				};
-			};
-		};
-			
-		_antiBackpackThread2 = [] spawn {
-			disableSerialization;
-			private ["_to","_dis","_inchk","_ip","_ia","_skip","_ct","_iv","_lp","_inv","_ctOwnerID","_friendlies","_if"];
-			_ctOwnerID = 0;
-			FixAlienXSillyCode = true;
-			while {!zombzsafezone} do
-			{
-				_ct = cursorTarget;
-				_skip = false;
-
-				if ( !isNull (_ct) ) then	{
-					_to = typeOf _ct;
-					_dis = _ct distance player;
-					_inchk = ["WeaponHolder","ReammoBox"];
-					
-					_lp = false;
-					{
-						if ( (_to isKindOf _x) && (_dis < 10) && ZombZ_SZ_BP_AllowGearFromLootPiles ) then
-						{
-							_lp = true;
-						};
-					} forEach ( _inchk );
-
-					_ip = isPlayer _ct;
-					_ia = alive _ct;
-					_iv = _ct isKindOf "AllVehicles";
-					_inv = (vehicle player != player);
-					
-					_if = false;
-					if ( _ip ) then {
-						_ctOwnerID = _ct getVariable["CharacterID","0"];
-						_friendlies	= player getVariable ["friendlyTo",[]];
-						if(_ctOwnerID in _friendlies) then {	
-							if (ZombZ_SZ_BP_AllowFriendlyTaggedAccess) then
-							{
-								_if = true;
-							};
-						};
-					};
-
-					if (isNil '_skip') then { _skip = false; };
-					if (isNil '_lp') then { _lp = false; };
-					if (isNil '_ia') then { _ia = false; };
-					if (isNil '_iv') then { _iv = true; };
-					if (isNil '_dis') then { _dis = 50; };
-					if (isNil '_inv') then { _inv = true; };
-					if (isNil '_if') then { _if = false; };
-
-					//Lootpile check
-					if ( _lp ) then {_skip = true;};
-					
-					//Dead body check
-					if ( !(_ia) && ZombZ_SZ_BP_AllowGearFromDeadPlayers ) then {_skip = true;};
-					
-					//Vehicle check
-					if ( _iv && (_dis < 10) && !(_ip) && ZombZ_SZ_BP_AllowGearFromVehicles ) then {_skip = true;};
-					
-					//In a vehicle check
-					if ( _inv && ZombZ_SZ_Vehicles_AllowGearFromWithinVehicles ) then { _skip = true; };
-					
-					//Is player friendly?
-					if (_if) then { _skip = true; };
-
-					if (isNil '_skip') then { _skip = false; };
-				};
-
-				if (isNil '_if') then { _if = false; };
-				if (isNil '_skip') then { _skip = false; };
-
-				if(!isNull (FindDisplay 106) && !_skip) then {
-					if ( isNull ZombZ_LastPlayerLookedAt ) then	{
-						(findDisplay 106) closeDisplay 1;
-						waitUntil { isNull (FindDisplay 106) };
-						createGearDialog [(player), 'RscDisplayGear'];
-						if ( ZombZ_SZ_Messages ) then { systemChat ("[ZombZ] Anti Backpack Stealing - Redirecting you to your own gear!"); };
-						waitUntil { isNull (FindDisplay 106) };
-					} else {
-						if ( ZombZ_SZ_Messages ) then { systemChat (format["[ZombZ] You cannot open your gear at this time as you have looked at a player in the last 5 seconds."]); };
-						(findDisplay 106) closeDisplay 1;
-						waitUntil { isNull (FindDisplay 106) };
-					};
-				};
-				if ( _skip && _if ) then {
-					if ( ZombZ_SZ_Messages && FixAlienXSillyCode ) then { systemChat ("[ZombZ] This player is tagged friendly, you have access to this players bag"); FixAlienXSillyCode = false; [] spawn { uiSleep 5; FixAlienXSillyCode = true; }; };
-				};
-			};
-		};
-	};
-
 	if (isNil "_inVehicle") then {
 		_inVehicle = (vehicle player);
 	};
@@ -303,10 +186,6 @@ while {true} do {
 	waitUntil { zombzsafezone };
 	diag_log("P2DEBUG: Player Left the safezone");
 
-	ZombZ_LastPlayerLookedAt = objNull;
-	ZombZ_LastPlayerLookedAtCountDown = 5;
-	if (!isNil '_antiBackpackThread') then { terminate _antiBackpackThread; };
-	if (!isNil '_antiBackpackThread2') then { terminate _antiBackpackThread2; };
 	if (!isNil '_slimit') then { terminate _slimit; };
 	if (!isNil '_noSalvage') then { terminate _noSalvage; };
 
@@ -364,7 +243,7 @@ while {true} do {
 			};
 		};
 		
-		if (ZombZ_SZ_Vehicles_DisableMountedGuns && zombzsafezone) then {
+		if (ZombZ_SZ_Vehicles_DisableMountedGuns) then {
 			{
 				diag_log("P2DEBUG: -- Firing Enabled for: " + str(typeOf (_x select 0)));
 				diag_log("P2DEBUG: -- Handler Removed: " + str((_x select 1)));
@@ -376,13 +255,13 @@ while {true} do {
 			ZombZFucktVehicles = [];
 		};
 
-		if (ZombZ_SZ_Players_DisableWeaponFiring && zombzsafezone) then {
+		if (ZombZ_SZ_Players_DisableWeaponFiring) then {
 			if (!isNil "_EH_Fired") then { _thePlayer removeEventHandler ["Fired", _EH_Fired]; };
 			diag_log("P2DEBUG: Weapon Fire Pins being Added...");
 
 		};
 
-		if (ZombZ_safeZoneGodmode && zombzsafezone) then {
+		if (ZombZ_safeZoneGodmode) then {
 			if (ZombZ_SZ_Messages) then { systemChat ( "[ZombZ] Trader Protection Ended - GodMode Disabled - Weapons Enabled" ); };
 			_thePlayer setVariable ['ZombZInSafeZone', false];
 			player_zombieCheck = 		compile preprocessFileLineNumbers "compile\player_zombieCheck.sqf";
