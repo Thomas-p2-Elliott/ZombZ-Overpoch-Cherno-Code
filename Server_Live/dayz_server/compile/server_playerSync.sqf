@@ -1,4 +1,4 @@
-private ["_currentCharATMCard","_currentCharGoldArr","_currentCharGold","_playerUID","_key2","_result","_debugMonSettings","_empty","_name","_playerwasNearby","_character","_magazines","_force","_characterID","_charPos","_isInVehicle","_timeSince","_humanity","_debug","_distance","_isNewMed","_isNewPos","_isNewGear","_playerPos","_playerGear","_playerBackp","_medical","_distanceFoot","_distanceFootCurrent","_distanceFootPrevious","_lastPos","_backpack","_kills","_killsB","_killsH","_headShots","_lastTime","_timeGross","_timeLeft","_currentWpn","_currentAnim","_config","_onLadder","_isTerminal","_currentModel","_modelChk","_muzzles","_temp","_currentState","_array","_key","_pos","_forceGear","_friendlies"];
+private ["_rand","_currentCharATMCard","_currentCharGoldArr","_currentCharGold","_playerUID","_key2","_result","_debugMonSettings","_empty","_name","_playerwasNearby","_character","_magazines","_force","_characterID","_charPos","_isInVehicle","_timeSince","_humanity","_debug","_distance","_isNewMed","_isNewPos","_isNewGear","_playerPos","_playerGear","_playerBackp","_medical","_distanceFoot","_distanceFootCurrent","_distanceFootPrevious","_lastPos","_backpack","_kills","_killsB","_killsH","_headShots","_lastTime","_timeGross","_timeLeft","_currentWpn","_currentAnim","_config","_onLadder","_isTerminal","_currentModel","_modelChk","_muzzles","_temp","_currentState","_array","_key","_pos","_forceGear","_friendlies"];
 
 _character = 	_this select 0;
 _magazines = 	_this select 1;
@@ -47,6 +47,7 @@ if (_distance < 2000) exitWith {
 _isNewMed =		_character getVariable["medForceUpdate",false];		//Med Update is forced when a player receives some kind of med incident
 _isNewPos =		_character getVariable["posForceUpdate",false];		//Med Update is forced when a player receives some kind of med incident
 _isNewGear =	(count _magazines) > 0;
+_rand = 0;
 
 //Check for player initiated updates
 if (_characterID != "0") then {
@@ -147,25 +148,33 @@ if (_characterID != "0") then {
 
 		//set debug mon array
 		_debugMonSettings = 	[(_debugColours select 0), (_debugColours select 1), (_debugColours select 2), (_debugColours select 3), _debugMode];
+		_rand = 0;
+		_rand = random 1;
 
 		//update debug mon settings 5 sec later
-		nil = [_playerUID,_debugMonSettings] spawn {
-			private["_playerUID","_debugMonSettings","_key2"];
-			_debugMonSettings = [];
-			_playerUID = [];
-			_key2 = "";
+		if (!isNil '_rand') then {
+			if (typeName _rand == typeName 0) then {
+				if (_rand > 0.8) then {
+					nil = [_playerUID,_debugMonSettings] spawn {
+						private["_playerUID","_debugMonSettings","_key2"];
+						_debugMonSettings = [];
+						_playerUID = [];
+						_key2 = "";
 
-			_debugMonSettings = _this select 1;
-			_playerUID = _this select 0;
+						_debugMonSettings = _this select 1;
+						_playerUID = _this select 0;
+						uiSleep 5;
 
-			uiSleep 5;
+						_key2 = format["CHILD:222:%1:%2:",_playerUID,_debugMonSettings];
+						_key2 call server_hiveWrite;
 
-			_key2 = format["CHILD:222:%1:%2:",_playerUID,_debugMonSettings];
-			_key2 call server_hiveWrite;
-
-			//if (P2DZE_debugServerPlayerSync) then { diag_log ("HIVE: WRITE: "+ str(_key2) + " / " + _playerUID); };
-			diag_log ("P2DEBUG: HIVE: WRITE: "+ str(_key2) + " / " + _playerUID);
+						if (P2DZE_debugServerPlayerSync) then { diag_log ("HIVE: WRITE: "+ str(_key2) + " / " + _playerUID); };
+						//diag_log ("P2DEBUG: HIVE: WRITE: "+ str(_key2) + " / " + _playerUID);
+					};
+				};
+			};
 		};
+		
 	
 		//add distance
 		_distanceFoot = 		_distanceFootPrevious + _distanceFootCurrent;
