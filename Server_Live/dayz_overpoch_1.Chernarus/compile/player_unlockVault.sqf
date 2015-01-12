@@ -19,7 +19,8 @@ if (!(_objType in DZE_LockedStorage)) exitWith {
 	DZE_ActionInProgress = false;
 };
 
-_playerNear = _obj call dze_isnearest_player;
+_nearPlayers = _obj nearEntities ["Man", 13];
+_playerNear = ({isPlayer _x} count _nearPlayers) > 1;
 if(_playerNear) exitWith { DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_20") , "PLAIN DOWN"];  };
 
 // Silently exit if object no longer exists || alive
