@@ -46,7 +46,7 @@ if (isDedicated && !hasInterface || isServer) then {
 	P2DZE_debugCrashSites = false;
 
 	//enable debug output for static vehicle spawns?
-	P2DZ_Debug_StaticVehSpawns = true;
+	P2DZ_Debug_StaticVehSpawns = false;
 
 	//enable mapp markers for static veh spawned (only first player in can see)
 	P2DZ_staticSpawnMarkers = false;

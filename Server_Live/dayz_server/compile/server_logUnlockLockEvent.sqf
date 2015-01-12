@@ -35,7 +35,12 @@ if (!isNull(_obj)) then {
 		if (!isNil '_objGoldServer') then {
 
 			if (P2DZ_debugLockUnlock) then { diag_log(format["!isNil: _objGoldServer: %1", _objGoldServer]); };
-			_gold = _objGoldServer;
+
+			if (typeName _objGoldServer == typeName 0) then {	
+				_gold = _objGoldServer;	
+			} else {
+				_gold = 0; 
+			};
 
 		} else {
 
@@ -74,10 +79,15 @@ if (!isNull(_obj)) then {
 
 			if (P2DZ_debugLockUnlock) then { diag_log("2isNil: _objGold:"); };
 
-			if (!isNil '_objGoldServer') then {
+			if (!isNil _objGoldServer) then {
 
 				if (P2DZ_debugLockUnlock) then { diag_log(format["2!isNil: _objGoldServer: %1", _objGoldServer]); };
-				_gold = _objGoldServer;
+				if (typeName '_objGoldServer' == typeName 0) then {	
+					_gold = _objGoldServer;	
+				} else {
+					_gold = 0; 
+				};
+
 
 			} else {
 

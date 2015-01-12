@@ -190,6 +190,8 @@ _object_repair = {
 _object_gold = {
 	private["_objGoldVar","_key"];
 	_objGoldVar = _object getVariable ["ZombZGold", 0];
+	if (isNil "_objGoldVar") then { _objGoldVar = 0; };
+	if (!(typeName _objGoldVar == typeName 0)) then { _objGoldVar = 0; };
 	_objGoldVar = [_objGoldVar,0];
 	if (_objectID == "0") then {
 		_key = format["CHILD:323:%1:%2:",_uid,_objGoldVar];
