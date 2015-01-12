@@ -77,7 +77,7 @@ KK_fnc_checkHash = {
             (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])), "NULL"
         ]
     ] == "PASS") exitWith {true};
-    0 = _this spawn KK_fnc_logFailed;
+    0 = _this spawn kk_fnc_logFailed;
     //"debug_console" callExtension format["Obj: %1 FAILED #1001", typeOf _this];
     false
 };
@@ -225,7 +225,7 @@ KK_fnc_logFailed = {
 
     _id = "0";
     _uid = "0";
-    _key "";
+    _key = "";
     _id   = _this getVariable ["ObjectID","0"];
     _uid  = _this getVariable ["ObjectUID","0"];
 
