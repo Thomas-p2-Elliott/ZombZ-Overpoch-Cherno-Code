@@ -272,7 +272,7 @@ DZE_getModelName = {
 dze_isnearest_player = {
 	private ["_notClosest","_playerDistance","_nearPlayers","_playerNear"];
 	if(!isNull _this) then {
-		_nearPlayers = _this nearEntities ["CAManBase", 12];
+		_nearPlayers = _this nearEntities ["CAManBase", 13];
 		_playerNear = ({isPlayer _x} count _nearPlayers) > 1;
 		_notClosest = false;
 		if (_playerNear) then {
