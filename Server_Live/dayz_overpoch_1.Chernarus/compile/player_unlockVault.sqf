@@ -19,7 +19,7 @@ if (!(_objType in DZE_LockedStorage)) exitWith {
 	DZE_ActionInProgress = false;
 };
 
-_nearPlayers = _obj nearEntities ["Man", 13];
+_nearPlayers = _obj nearEntities ["Man", 9];
 _playerNear = ({isPlayer _x} count _nearPlayers) > 1;
 if(_playerNear) exitWith { DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_20") , "PLAIN DOWN"];  };
 

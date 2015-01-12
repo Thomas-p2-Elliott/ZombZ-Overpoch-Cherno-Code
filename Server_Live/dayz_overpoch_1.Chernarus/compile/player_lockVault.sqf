@@ -25,7 +25,7 @@ sleep 1;
 [player,"tentpack",0,false] call dayz_zombieSpeak;
 sleep 5;
 
-_nearPlayers = _obj nearEntities ["Man", 13];
+_nearPlayers = _obj nearEntities ["Man", 9];
 _playerNear = ({isPlayer _x} count _nearPlayers) > 1;
 if(_playerNear) exitWith { DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_11") , "PLAIN DOWN"];  };
 
