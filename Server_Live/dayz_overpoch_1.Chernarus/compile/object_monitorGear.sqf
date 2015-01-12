@@ -72,7 +72,7 @@ _objDist = _object distance player;
 _isTrader = (typeOf _object) in ["RU_Functionary1","RU_Citizen3","Rocker4","Profiteer4","Rita_Ensler_EP1","CIV_EuroMan01_EP1","CIV_EuroMan02_EP1","TK_GUE_Soldier_5_EP1","GUE_Soldier_MG","Worker2","Worker3","Woodlander1","UN_CDF_Soldier_Pilot_EP1","RU_WorkWoman1","Dr_Annie_Baker_EP1","RU_Citizen4","RU_WorkWoman5","RU_Citizen1","RU_Villager3","TK_CIV_Takistani04_EP1","Pilot_EP1","RU_Profiteer4","Woodlander3","Dr_Hladik_EP1","Doctor","HouseWife1","GUE_Woodlander2"];
 _isZed = _object isKindOf "zZombie_base";
 _alive = alive _object;
-
+_gv = [false,cursorTarget] call p2_gv;
 _timeout = time + 2;
 waitUntil { !(isNull (findDisplay 106)) || (_timeout < time) };
 _objDist = _object distance player;
@@ -188,7 +188,12 @@ if ((_isVehicle || _isStorage || _isnewstorage) && (!_isMan) && (!_isZed) && (!_
 	};      
 };
 
-if (P2DZE_gearOnContainer && (({_x == "ItemGoldBar10oz"} count (magazines cursorTarget)) < 1) && (([false,cursorTarget] call p2_gv) > 0)) then {
+if (isNil '_gv') then { _gv = 0; };
+if (!(typeName _gv == typeName 0)) then {
+	_gv = 0;
+};
+
+if (P2DZE_gearOnContainer && (({_x == "ItemGoldBar10oz"} count (magazines cursorTarget)) < 1) && (_gv > 0)) then {
 	diag_log("P2DEBUG: object_monitorGear.sqf: Gold: " + (typeOf cursorTarget) + " had no gold item, not gonna go adding it. Checking some things before I ask the server to do it.");
 	//reset isOk val
 	_isOk = false;
@@ -266,7 +271,7 @@ if (P2DZE_gearOnContainer && (({_x == "ItemGoldBar10oz"} count (magazines cursor
 					_itemCount = _itemCount + 1;
 				} count (_magazines select 0);
 				if (_goldBarCount < 1) then {
-					//systemChat(format["Gold: %1 has a gold value, but no room for a gold item to be added. Please remove an item and re-open the gear menu to request a gold item.",typeOf _object]);
+					systemChat(format["Gold: %1 has a gold value, but no room for a gold item to be added. Please remove an item and re-open the gear menu to request a gold item.",typeOf _object]);
 				};
 			};
 		};
