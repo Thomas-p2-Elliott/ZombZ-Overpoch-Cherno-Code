@@ -1,5 +1,5 @@
 P2DZ_safeVehWeaps = ["Horn","M240","M134","Smoke","m32","m203","PKT","Vickers","Grenade","FFAR","762","556","pook","127x107","DShKM","127x99","M2","40mm","MK19"];
-if (isNil "DZE_vehicleAmmo" then { DZE_vehicleAmmo = 0; };
+if (isNil "DZE_vehicleAmmo") then { DZE_vehicleAmmo = 0; };
 
 //add m134 cannon back on removal?
 P2DZ_addNewWeaponsOnRemoval = true;
