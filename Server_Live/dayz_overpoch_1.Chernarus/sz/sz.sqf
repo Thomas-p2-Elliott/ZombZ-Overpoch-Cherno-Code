@@ -81,7 +81,7 @@ while {true} do {
 		
 		_slimit = [] spawn 	{
 			private ["_vehicle", "_curspeed", "_maxspeed", "_vel", "_dir", "_speed"];
-			_maxspeed = 26.5999;
+			_maxspeed = 23.5999;
 			while {!zombzsafezone} do 
 			{
 				waitUntil {vehicle player != player and !((vehicle player) isKindOf 'Air')};
