@@ -1,11 +1,10 @@
-3ffbcd075d9941bd59296afd3dd1e4fa -1 SCRIPTS -H (~Lupo~) Appeal at ZombZ.net or on the Teamspeak! Evi
-b217cb42552335733cecc4c4f204a046 -1 SCRIPTS Banned by ~Lupo~ Apply at ZombZ.net or come into the Tea
-63d5454eadb374a9b16860f0b4b800f6 -1 -H Banned by ~Lupo~ Apply at ZombZ.net or come into the Teamspea
-6f77ddcf020a6dc949fd8d9d1df1695a -1 Permenant Ban - Do not remove - NR to ZombZ.net AUTH: GhostZ Ska
-f29c7328acb9572af2bbac241cf4c0fe 1420187567 Come into the Teamspeak - DayBan for Trader Camping
-76.189.252.8 -1 SCRIPTS -H (~Lupo~) Appeal at ZombZ.net or on the Teamspeak! Evi
-107.188.29.253 -1 SCRIPTS Banned by ~Lupo~ Apply at ZombZ.net or come into the Tea
-67.80.69.82 -1 -H Banned by ~Lupo~ Apply at ZombZ.net or come into the Teamspea
-24.159.178.144 -1 Permenant Ban - Do not remove - NR to ZombZ.net AUTH: GhostZ Ska
-98.222.0.140 1420172063 G3 Magazine Exploit
-24.183.210.126 1420187567 Come into the Teamspeak - DayBan for Trader Camping
+3ffbcd075d9941bd59296afd3dd1e4fa -1 Perma Ban - Appeal at ZombZ.net  Lupo -H
+b217cb42552335733cecc4c4f204a046 -1 Perma Ban - Appeal at ZombZ.net  Lupo -H
+63d5454eadb374a9b16860f0b4b800f6 -1 Perma Ban - Appeal at ZombZ.net  Lupo -H
+6f77ddcf020a6dc949fd8d9d1df1695a -1 Perma Ban - Appeal at ZombZ.net  Skard -H
+7a1045583398511c79dbfd2dd49f29d5 -1 Perma Ban - Appeal at ZombZ.net -H
+c688c62fa2c2b94e6476a9f944e31c5c -1 Perma Ban - Appeal at ZombZ.net -H
+106141f0d1b43ebc2dcaf43c0705a804 -1 Perma Ban - Appeal at ZombZ.net -H
+aa5c6b5bae997980b20047feb12c6dbd -1 Perma Ban - Appeal at ZombZ.net -H
+0b6f2d0eccb86c848ad5d73a63ddee44 -1 Perma Ban - Appeal at ZombZ.net -H
+f6cfa35b45d8a301241602f13905b742 -1 Perma Ban - Appeal at ZombZ.net Lupo -H

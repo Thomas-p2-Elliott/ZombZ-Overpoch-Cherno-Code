@@ -1,2 +1,2 @@
 //new
-1 ""
+1 "" !"WoodSmallWallThird_DZ"!"WoodFloorHalf_DZ"!"WoodFloorQuater_DZ"!"WoodStairsSans_DZ"!"Land_DZE_GarageWoodDoor"!"SKODAWreck"!"datsun02Wreck"!"BagFenceRound_DZ"!"Land_HBarrier5_DZ"!"Land_HBarrier1_DZ"!"BagFenceRound_DZ"!"WoodSmallWallWin_DZ"!"WoodLadder_DZ"!"FuelPump_DZ"!"WoodSmallWall_DZ"!"WorkBench_DZ"!"Land_coneLight"!"MMT_Civ"!"WoodFloor_DZ"!"HMMWVWreck"!"Land_DZE_WoodDoor"!"WoodLargeWall_DZ"
