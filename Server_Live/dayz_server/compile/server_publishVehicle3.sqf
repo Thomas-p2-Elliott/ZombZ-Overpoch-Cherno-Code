@@ -92,7 +92,7 @@ _key call server_hiveWrite;
 	_newobject = createVehicle [_class, [0,0,0], [], 0, "CAN_COLLIDE"];
 
 	// remove old vehicle from DB
-	[_objectID,_objectUID,_activatingPlayer] call server_deleteObj;
+	[_objectID,_objectUID,_activatingPlayer,p2dn + (random 10)] call server_deleteObj;
 
 	// switch var to new vehicle at this point.
 	_object = _newobject;

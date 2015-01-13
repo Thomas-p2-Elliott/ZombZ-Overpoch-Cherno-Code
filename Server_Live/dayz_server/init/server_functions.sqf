@@ -22,6 +22,7 @@ server_playerDied =				compile preprocessFileLineNumbers "\z\addons\dayz_server\
 server_publishVeh = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishVehicle.sqf";
 server_publishFullObject = 		compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishFullObject.sqf";
 server_publishObj = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_publishObject.sqf";
+server_deleteObj = 				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_deleteObj.sqf";
 
 //Using hashid system security (server spawn only, no hashid added by publishing)
 server_swapObject =				compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_swapObject.sqf"; 
@@ -193,7 +194,7 @@ object_handleServerKilled = {
 	_objectID =	 _unit getVariable ["ObjectID","0"];
 	_objectUID = _unit getVariable ["ObjectUID","0"];
 		
-	[_objectID,_objectUID,_killer] call server_deleteObj;
+	[_objectID,_objectUID,_killer,p2dn + (random 10)] call server_deleteObj;
 	
 	_unit removeAllMPEventHandlers "MPKilled";
 	_unit removeAllEventHandlers "Killed";

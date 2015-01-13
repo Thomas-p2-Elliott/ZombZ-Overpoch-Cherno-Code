@@ -42,7 +42,7 @@ if(isNull(_object)) then {
 if(_objectID == "0" && _objectUID == "0") then { 
 	_proceed = false;
 } else {
-	[_objectID,_objectUID,_activatingplayer] call server_deleteObj;
+	[_objectID,_objectUID,_activatingplayer,p2dn + (random 10)] call server_deleteObj;
 };
 
 _allowed = [_charID, _object, _worldspace, _class, _activatingplayerUID] call check_publishobject;

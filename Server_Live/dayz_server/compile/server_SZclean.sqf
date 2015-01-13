@@ -189,7 +189,7 @@ if(_possiblematch)then{
 					};
 					if (_p2d) then { diag_log format["%6: %5 TP from %1 %2 to %3 %4",_pos,mapgridposition _pos,_newPos,mapgridposition _newPos,_typeOf,_txt];};
 				};
-				default{_msg = format["%2: %1",_typeOf,_txt];deleteVehicle _obj;[_objID,_objUID,_msg] call server_deleteObj;};
+				default{ _msg = format["%2: %1",_typeOf,_txt]; deleteVehicle _obj; [_objID,_objUID,"SafeZoneCleaner",p2dn + (random 10)] call server_deleteObj; diag_log(format["%1",_msg]); };
 			};
 		};
 	}forEach HALV_VEHICLE_CLEANUPZONES;
