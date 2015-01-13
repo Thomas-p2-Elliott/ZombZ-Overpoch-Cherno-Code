@@ -12,8 +12,9 @@ TraderCatList = -1;
 TraderItemList = -1;
 
 TraderDialogLoadItemList = {
-	private ["_index","_trader_id","_activatingPlayer","_distance","_objclass","_item_list","_pthrough"];
+	private ["_index","_trader_id","_activatingPlayer","_distance","_objclass","_item_list","_pthrough","_dataAdded"];
 	TraderItemList = -1;
+	_dataAdded = false;
 	_index = _this select 0;
 
 	if (_index < 0) exitWith {};
@@ -41,42 +42,48 @@ TraderDialogLoadItemList = {
 
 
 		_cfgTraderCategory = missionConfigFile >> "CfgTraderCategory" >> (format["Category_%1",_trader_id]);	
-
-		PVDZE_plr_TradeMenuResult = [];
-	
-		for "_i" from 0 to ((count _cfgTraderCategory) - 1) do {
-
-
-
-			//output percentage through in window
-			lbClear TraderDialogItemList;
-			_pthrough = ((_i / ((count _cfgTraderCategory) - 1)) * 100);
-			lbAdd [TraderDialogItemList, format["Please Wait, Trader List Loading...(%1%2)", round _pthrough, "%"]];
-
-			_class = configName (_cfgTraderCategory select _i);
-
-			_type  = getText ((_cfgTraderCategory select _i) >> "type");	
-			_buy  = getArray ((_cfgTraderCategory select _i) >> "buy");	
-			_sell = getArray ((_cfgTraderCategory select _i) >> "sell");
-			
-			_buy set [2,1]; 
-			_sell set [2,1];
-
-			_typeNum = 1;
-			if (_type == "trade_weapons") then {
-				_typeNum = 3;
-			} else { 
-				if (_type in ["trade_backpacks", "trade_any_vehicle", "trade_any_vehicle_free", "trade_any_boat", "trade_any_bicycle"]) then {
-					_typeNum = 2;
-				};
+		if (!isNil 'P2DZE_cachedTraderCategory' && !isNil 'P2DZE_cachedTraderList') then {
+			if (((count P2DZE_cachedTraderList) > 10) && (_cfgTraderCategory == P2DZE_cachedTraderCategory)) then {
+				_dataAdded = true;
+				PVDZE_plr_TradeMenuResult = P2DZE_cachedTraderList;
 			};
-
-			_class = _class call P2DZ_decryptFunction;
-			_data = [9999,[_class,_typeNum],99999,_buy,_sell,0,_trader_id,_type];
-			
-			PVDZE_plr_TradeMenuResult set [count PVDZE_plr_TradeMenuResult, _data];
 		};
+		if (!_dataAdded) then {
+			PVDZE_plr_TradeMenuResult = [];
+	
+			for "_i" from 0 to ((count _cfgTraderCategory) - 1) do {
+				//output percentage through in window
+				lbClear TraderDialogItemList;
+				_pthrough = ((_i / ((count _cfgTraderCategory) - 1)) * 100);
+				lbAdd [TraderDialogItemList, format["Please Wait, Trader List Loading...(%1%2)", round _pthrough, "%"]];
 
+				_class = configName (_cfgTraderCategory select _i);
+
+				_type  = getText ((_cfgTraderCategory select _i) >> "type");	
+				_buy  = getArray ((_cfgTraderCategory select _i) >> "buy");	
+				_sell = getArray ((_cfgTraderCategory select _i) >> "sell");
+				
+				_buy set [2,1]; 
+				_sell set [2,1];
+
+				_typeNum = 1;
+				if (_type == "trade_weapons") then {
+					_typeNum = 3;
+				} else { 
+					if (_type in ["trade_backpacks", "trade_any_vehicle", "trade_any_vehicle_free", "trade_any_boat", "trade_any_bicycle"]) then {
+						_typeNum = 2;
+					};
+				};
+
+				_class = _class call P2DZ_decryptFunction;
+				_data = [9999,[_class,_typeNum],99999,_buy,_sell,0,_trader_id,_type];
+				
+				PVDZE_plr_TradeMenuResult set [count PVDZE_plr_TradeMenuResult, _data];			
+			};
+			
+			P2DZE_cachedTraderList = PVDZE_plr_TradeMenuResult;
+			P2DZE_cachedTraderCategory = _cfgTraderCategory;	
+		};
 
 		lbClear TraderDialogItemList;
 		_item_list = [];
@@ -216,6 +223,7 @@ TraderDialogShowPrices = {
 	private ["_index", "_item"];
 	_index = _this select 0;
 	if (_index < 0) exitWith {};
+	diag_log(format["P2DEBUG: _this: (%1) / TraderItemList: (%2)", _this, TraderItemList]);
 	while {count TraderItemList < 1} do { uiSleep 1; };
 	_item = TraderItemList select _index;
 
