@@ -9,7 +9,7 @@ switch _enterORleave do {
 			cutText [format [localize "STR_EPOCH_TRADER_ENTER", _traderName], "PLAIN DOWN"];
 		};
 		canbuild = false;
-		zombzsafezone = false;
+		zombzsafezone = 1;
 		inTraderCity = _traderName;
 		isInTraderCity = true;
 	};
@@ -20,7 +20,7 @@ switch _enterORleave do {
 		};
 
 		canbuild = true;
-		zombzsafezone = true;
+		zombzsafezone = 0;
 		inTraderCity = "Any";
 		isInTraderCity = false;
 	};

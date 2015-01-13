@@ -299,7 +299,7 @@ r_isBandit =			false;
 isInTraderCity =		false;
 NORRN_dropAction =		-1;
 DZE_PROTOBOX = objNull;
-zombzsafezone = true;
+zombzsafezone = 0;
 
 //ammo routine
 r_player_actions2 = [];

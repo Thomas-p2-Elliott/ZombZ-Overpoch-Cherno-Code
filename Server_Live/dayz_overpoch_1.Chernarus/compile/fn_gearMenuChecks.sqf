@@ -24,7 +24,7 @@ if((locked _cTarget) && _isOk && (((vehicle player) distance _cTarget) < 12)) th
 
 
 // IN SAFE ZONE - Moved to agn_safeZoneCommander.sqf antibackpackthread2
-if(!zombzsafezone) then
+if(zombzsafezone != 1) then
 {
 	if( isPlayer cursorTarget and alive cursorTarget and vehicle cursorTarget == cursorTarget ) then
 	{
