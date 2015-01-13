@@ -148,7 +148,7 @@ while {true} do {
 			};
 		};
 	};
-	
+
 	_aBpT2 = [] spawn {
 		private ["_to","_dis","_inchk","_ip","_ia","_skip","_ct","_iv","_lp","_inv","_ctOwnerID","_friendlies","_if"];
 		_ctOwnerID = 0;
@@ -223,16 +223,16 @@ while {true} do {
 	_sLimit = [] spawn 	{
 		private ["_vehicle", "_curspeed","_nearPlayers", "_playerNearMaxSpeed", "_noPlayerNearMaxSpeed", "_maxSpeed", "_vel", "_dir", "_speed","_playerNear"];
 		if (((vehicle player) != player) and (!((vehicle player) isKindOf 'Air'))) then	{
-			systemChat ("[ZombZ] Safezone 25-KMPH Speed Limit Enabled");
+			systemChat ("[ZombZ] Safezone 22-KMPH Speed Limit Enabled");
 		}; 
-		_playerNearMaxSpeed = 24; //Max speed with players within 100m
-		_noPlayerNearMaxSpeed = 40;	//Max speed with 0 players within 100m
-		_maxSpeed = 24;			_playerNear = false;			_nearPlayers = [];			_curspeed = 0;			_vel = [];			_dir = 0;			_speed = 0;
+		_playerNearMaxSpeed = 21.5; //Max speed with players within range
+		_noPlayerNearMaxSpeed = 40;	//Max speed with 0 players within range
+		_maxSpeed = 21.5;			_playerNear = false;			_nearPlayers = [];			_curspeed = 0;			_vel = [];			_dir = 0;			_speed = 0;
 		while {zombzsafezone == 1} do 
 		{
 			waitUntil {(((vehicle player) != player) and (!((vehicle player) isKindOf 'Air')))};
 			_vehicle = vehicle player;
-			_nearPlayers = _vehicle nearEntities ["Man", 100];
+			_nearPlayers = _vehicle nearEntities ["Man", 60];
 			sleep 0.08;
 			_playerNear = ({isPlayer _x && alive _x} count _nearPlayers) > 0;
 			_curspeed = speed _vehicle;
