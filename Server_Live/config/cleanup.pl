@@ -13,8 +13,8 @@ print "\n\nGORSYS AWESOME CLEANUP TOOL\n---------------------------------------\
 # Database Info
 $platform = "mysql";
 #	Test Server
-# $database = "overpoch_test"; 	#Databse Name
-# $user = 	"opochTestServer"; 	# Username 
+#$database = "overpoch_test"; 	#Databse Name
+#$user = 	"opochTestServer"; 	# Username 
 
 #	Live Server
 $database = "overpoch_live"; 	#Databse Name
