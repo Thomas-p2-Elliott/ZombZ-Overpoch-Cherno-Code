@@ -12,15 +12,13 @@
                 if (_select == 'Old_bike_TK_CIV_EP1') then {	_select = "MMT_CIV" };
 
                 _object = _select createVehicle _positn;
+                _object setvelocity [0,0,1];
+
                 _object setVariable ["ObjectID", "1", true];
                 _object setVariable ["ObjectUID", "1", true];
                 _object setVariable ["Deployed", true, true];
-
-				clearWeaponCargoGlobal  	_object;
-				clearMagazineCargoGlobal  	_object;
-				_object setVehicleAmmo DZE_vehicleAmmo;
 				_object setVariable ["LOG_disabled",false,true];
-				
+
                 _object call {
 				    _this setVariable [
 				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
@@ -31,23 +29,27 @@
 				        ]
 				    ];
 				};
+
+				clearWeaponCargoGlobal  	_object;
+				clearMagazineCargoGlobal  	_object;
+				_object setVehicleAmmo DZE_vehicleAmmo;
+
+				_object call fnc_veh_ResetEH;
+				PVDZE_veh_Init = _object;
+				publicVariable "PVDZE_veh_Init";
 
              //   _log = format ["OBJECT DEPLOY LOG: %1 spanwed a %2 at %3.", name _player,_select,mapGridPosition _positn];
 //                diag_log (_log);
         } else {
 	         if (_select in ['ArmedLittlebird']) then {
 	           	_object = "AH6X_DZ" createVehicle _positn;
+	           	_object setvelocity [0,0,1];
+
 	            _object setVariable ["ObjectID", "1", true];
 	            _object setVariable ["ObjectUID", "1", true];
 	            _object setVariable ["Deployed", true, true];
 	            _object setVariable ["ArmedLittlebird", true, true];
-				_object addMagazine "2000Rnd_762x51_M134";
-				_object addWeapon "M134";
-				_object setVariable ["LOG_disabled",false,true];
-
-				clearWeaponCargoGlobal  _veh;
-				clearMagazineCargoGlobal  _veh;
-				_object setVehicleAmmo DZE_vehicleAmmo;
+	            _object setVariable ["LOG_disabled",false,true];
 
                 _object call {
 				    _this setVariable [
@@ -59,6 +61,17 @@
 				        ]
 				    ];
 				};
+
+				_object addMagazine "2000Rnd_762x51_M134";
+				_object addWeapon "M134";
+				clearWeaponCargoGlobal  _veh;
+				clearMagazineCargoGlobal  _veh;
+				_object setVehicleAmmo 0.25;
+
+				_object call fnc_veh_ResetEH;
+				PVDZE_veh_Init = _object;
+				publicVariable "PVDZE_veh_Init";
+
 
 	        //   	_log = format ["OBJECT DEPLOY LOG: %1 spanwed a %2 at %3.", name _player,_select,mapGridPosition _positn];
 	         //   diag_log (_log);
