@@ -63,7 +63,7 @@ if (_inVehicle) then {
 			_weapons = _vehicle weaponsTurret _turret;
 			{
 				_weaponName = getText (configFile >> "cfgWeapons" >> _x >> "displayName");
-				_action = _vehicle addAction [format["Add AMMO to %1",_weaponName], "\z\addons\dayz_code\actions\ammo.sqf",[_vehicle,_x,_turret], 0, false, true];
+				_action = _vehicle addAction [format["Add AMMO to %1",_weaponName], "actions\ammo.sqf",[_vehicle,_x,_turret], 0, false, true];
 				r_player_actions2 set [count r_player_actions2,_action];
 				r_action2 = true;
 			} count _weapons;
@@ -73,7 +73,7 @@ if (_inVehicle) then {
 			_weapons = _vehicle weaponsTurret [-1];
 			{
 				_weaponName = getText (configFile >> "cfgWeapons" >> _x >> "displayName");
-				_action = _vehicle addAction [format["Add AMMO to %1",_weaponName], "\z\addons\dayz_code\actions\ammo.sqf",[_vehicle,_x,[-1]], 0, false, true];
+				_action = _vehicle addAction [format["Add AMMO to %1",_weaponName], "actions\ammo.sqf",[_vehicle,_x,[-1]], 0, false, true];
 				r_player_actions2 set [count r_player_actions2,_action];
 				r_action2 = true;
 			} count _weapons;
