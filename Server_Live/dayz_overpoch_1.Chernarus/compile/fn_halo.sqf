@@ -66,7 +66,7 @@ if (typename _this == typename objnull) then {
 		[] spawn {
             private ["_vAnim","_hAnim","_anim","_fpsCoef","_time","_dir","_vel","_v","_h","_vLimit","_hLimit"];
             _time = time - 0.1;
-			while {alive player && vehicle player == player && isnil {player getvariable "bis_fnc_halo_terminate"}} do {
+			while {alive player && vehicle player == player && isnil {player getvariable "bis_fnc_halo_terminate"} && ((position vehicle player select 2) > 2)} do {
 			
 				_fpsCoef = ((time - _time) * 60) / acctime; //Script is optimized for 60 FPS
 				_time = time;
@@ -131,6 +131,10 @@ if (typename _this == typename objnull) then {
 				[objNull, player, rSwitchMove,"adthppnemstpsraswrfldnon_1"] call RE;
 				player switchmove "adthppnemstpsraswrfldnon_1";
 				player setvelocity [0,0,0];
+			};
+
+			if (((position vehicle player select 2) < 2)) then {
+				[player] spawn bis_fnc_halo;
 			};
 		};
 	} else {
