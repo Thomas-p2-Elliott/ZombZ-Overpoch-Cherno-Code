@@ -116,7 +116,7 @@ class RscGorsyMenu
 			colorFocused[] = {0,0,0,0};
 			colorShadow[] = {0,0,0,0};
 			colorBorder[] = {0,0,0.0,0};
-			action = "closeDialog 0; [] spawn fnc_p2debugMonColorGUI;";
+			action = "[] spawn { disableSerialization; _display = findDisplay 49; if (!((str _display) == 'No display')) then { _display closeDisplay 1; }; if (!dialog) then {	createDialog 'p2_options'; } else { closeDialog 0; uiSleep 0.1; createDialog 'p2_options'; }; };";
 			onMouseEnter = "ctrlSetFocus (_this select 0)";
 		};
 		class MenuPic4: RscGorsyPicture
