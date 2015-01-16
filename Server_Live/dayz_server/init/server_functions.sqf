@@ -884,8 +884,8 @@ server_timeSync = {
 
 		setDate _date;
 		PVDZE_plr_SetDate = _date;
-		publicVariable "PVDZE_plr_SetDate";
-		diag_log ("TIME SYNC: Local Time set to " + str(_date));	
+		//publicVariable "PVDZE_plr_SetDate";
+		//diag_log ("TIME SYNC: Local Time set to " + str(_date));	
 	};
 };
 
