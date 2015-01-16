@@ -86,6 +86,7 @@ if (!isDedicated) then {
 	//call 							compile preprocessFileLineNumbers "compile\fn_hintMsg.sqf";								##encrypted
 	//p2_randomMags =				compile preprocessFileLineNumbers "compile\p2_randomMags.sqf";							##encrypted
 	player_humanityMorph =			compile preprocessFileLineNumbers "compile\player_humanityMorph.sqf";
+	player_craftItem =				compile preprocessFileLineNumbers "actions\player_craftItem.sqf";
 
 	BIS_Effects_Burn = 				compile preprocessFile "\ca\Data\ParticleEffects\SCRIPTS\destruction\burn.sqf";
 	player_throwObject = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_throwObject.sqf";
@@ -145,7 +146,6 @@ if (!isDedicated) then {
 
 	player_copyKey =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_copyKey.sqf";
 	player_loadCrate =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_loadCrate.sqf";
-	player_craftItem =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_craftItem.sqf";
 	player_drink =				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_drink.sqf";
 	player_eat =				compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_eat.sqf";
 	player_fillWater = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\water_fill.sqf";
@@ -297,7 +297,7 @@ Both Server & Client Side Scripts
 	p2_lootCheck = 					compile preprocessFileLineNumbers "compile\p2_lootCheck.sqf";
 	p2_checkWepBpSlot = 			compile preprocessFileLineNumbers "compile\p2_checkWepBpSlot.sqf"; 
 	//towing and lifting
-	call 							compile preprocessFileLineNumbers "logistic\init.sqf";
+	[] execVM "logistic\init.sqf";
 	
 	//coming soon to epoch
 	FNC_GetPlayerUID = {
