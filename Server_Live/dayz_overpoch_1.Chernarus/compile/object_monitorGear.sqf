@@ -199,9 +199,9 @@ if (P2DZE_gearOnContainer && (({_x == "ItemGoldBar10oz"} count (magazines cursor
 	_isOk = false;
 	//ensure object can take gold items
 	_isOk = _object call {
-		private ["_isVehicle", "_hasMagMax", "_MagMax", "_canHoldMags", "_d", "_targ", "_magazines", "_return"];
-		//var init
+		private ["_isVehicle", "_hasMagMax", "_MagMax", "_canHoldMags", "_d", "_targ", "_isMan", "_magazines", "_return"];
 		_isVehicle = false;
+		_isMan = false;
 		_hasMagMax = false;
 		_canHoldMags = false;
 		_magazines = [];
@@ -219,8 +219,10 @@ if (P2DZE_gearOnContainer && (({_x == "ItemGoldBar10oz"} count (magazines cursor
 		//code
 		if (_d) then { diag_log(format["Target: %1",typeOf _targ]); };
 		_isVehicle = isClass (configFile >> "CfgVehicles" >> (typeOf _targ));
-		if (_d) then { diag_log(format["_isVehicle: %1",_isVehicle]); };
-		if (_isVehicle) then {
+		_isMan = _targ isKindOf "Man";
+		if (_d) then { diag_log(format["_isVehicle: %1 _isMan: %2",_isVehicle,_isMan]); };
+		if (_isMan) then  { _canHoldMags = true; };
+		if (_isVehicle && !_isMan) then {
 			_hasMagMax = isNumber (configFile >> "CfgVehicles" >> (typeOf _targ) >> "transportmaxmagazines");
 			if (_d) then { diag_log(format["_hasMagMax: %1",_hasMagMax]); };
 			if (_hasMagMax) then {
@@ -231,7 +233,6 @@ if (P2DZE_gearOnContainer && (({_x == "ItemGoldBar10oz"} count (magazines cursor
 					_return = 0;			
 					_magazines = (getMagazineCargo _object) select 1;
 					if (_d) then { diag_log(format["_magazines: %1",_magazines]); };
-
 					{ _return = _return + _x } count _magazines;
 					if (_d) then { diag_log(format["_return: %1",_return]); };
 
