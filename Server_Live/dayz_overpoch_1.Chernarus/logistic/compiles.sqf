@@ -37,10 +37,10 @@ if (!isDedicated) then {
 	};
 
 	LOG_P2FNCT_PLOTNEAR = {
-		private ["_return","_distance","_findNearestPoles","_findNearestPole","_IsNearPlot","_nearestPole","_ownerID","_friendlies"];
+		private ["_return","_distance","_findNearestPoles","_findNearestPole","_IsNearPlot","_nearestPole","_ownerID","_friendlies","_playerID"];
 		_target = (_this select 0);
 		_return = true;
-
+		_playerID = (getPlayerUID player);
 		if !(P2LOG_CFG_ALLOW_FROMPLOT) then  { 	
 			_pos = getPosASL _target;
 
@@ -71,9 +71,9 @@ if (!isDedicated) then {
 				_nearestPole = _findNearestPole select 0;
 
 				// Find owner
-				_ownerID = _nearestPole getVariable ["CharacterID","0"];
-
-				if(dayz_characterID == _ownerID) then { 
+				_ownerID = _nearestPole getVariable ["ownerPUID","0"];
+ 
+				if(_playerID == _ownerID) then { 
 					// owner can tow or lift here
 					_return = true;
 				} else {
