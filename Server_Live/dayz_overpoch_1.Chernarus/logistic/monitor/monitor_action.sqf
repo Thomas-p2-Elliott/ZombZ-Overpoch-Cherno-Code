@@ -40,7 +40,7 @@ while {true} do{
 				LOG_TRAILER_SELECT_VALID = false;
 			
 				LOG_HELI_LIFT_VALID = (driver LOG_OBJECT_ADDACTION == player &&
-					({_x != LOG_OBJECT_ADDACTION && !(_x getVariable "LOG_disabled") && ( [_target] call LOG_P2FNCT_PLOTNEAR ) &&  [_x] call LOG_FNCT_LOCKED  } count (nearestObjects [LOG_OBJECT_ADDACTION, LOG_CFG_ISLIFTABLE, 10]) > 0) &&
+					({_target != LOG_OBJECT_ADDACTION && !(_target getVariable "LOG_disabled") && ( [_target] call LOG_P2FNCT_PLOTNEAR ) &&  [_target] call LOG_FNCT_LOCKED  } count (nearestObjects [LOG_OBJECT_ADDACTION, LOG_CFG_ISLIFTABLE, 10]) > 0) &&
 					isNull (LOG_OBJECT_ADDACTION getVariable "LOG_heliporte") && ([0,0,0] distance velocity LOG_OBJECT_ADDACTION < 8 ) && (getPos LOG_OBJECT_ADDACTION select 2 > 1) &&
 					!(LOG_OBJECT_ADDACTION getVariable "LOG_disabled"));
 				
