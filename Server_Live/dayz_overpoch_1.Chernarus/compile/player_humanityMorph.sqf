@@ -80,7 +80,7 @@ player setVariable["tagList",_tagList,true];
 call dayz_resetSelfActions;
 
 eh_player_killed = player addeventhandler ["FiredNear",{_this call player_weaponFiredNear;} ];
-
+player addEventHandler ["AnimChanged", { (_this) spawn p2_antiWallCrawl; }];
 [player] call fnc_usec_damageHandle;
 player allowDamage true;
 
