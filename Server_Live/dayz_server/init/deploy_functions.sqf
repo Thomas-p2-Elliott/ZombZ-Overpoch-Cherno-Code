@@ -42,7 +42,7 @@
 //                diag_log (_log);
         } else {
 	         if (_select in ['ArmedLittlebird']) then {
-	           	_object = "AH6X_DZ" createVehicle _positn;
+	           	_object = "AH6J_EP1_DZE" createVehicle _positn;
 	           	_object setvelocity [0,0,1];
 
 	            _object setVariable ["ObjectID", "1", true];
@@ -63,10 +63,9 @@
 				};
 
 				_object addMagazine "2000Rnd_762x51_M134";
-				_object addWeapon "M134";
 				clearWeaponCargoGlobal  _veh;
 				clearMagazineCargoGlobal  _veh;
-				_object setVehicleAmmo 0.25;
+				_object setVehicleAmmo 0.05;
 
 				_object call fnc_veh_ResetEH;
 				PVDZE_veh_Init = _object;
@@ -76,8 +75,8 @@
 	        //   	_log = format ["OBJECT DEPLOY LOG: %1 spanwed a %2 at %3.", name _player,_select,mapGridPosition _positn];
 	         //   diag_log (_log);
 	        } else {
-	        //    _log = format ["OBJECT DEPLOY LOG: %1 tried to spawn %2 at %3.", name _player,_select,mapGridPosition _positn];
-	        //    diag_log (_log);
+	            _log = format ["OBJECT DEPLOY LOG: %1 tried to spawn %2 at %3.", name _player,_select,mapGridPosition _positn];
+	            diag_log (_log);
 	        };
         };
 };
@@ -87,8 +86,8 @@
         _array = _this select 1;
         _obj = _array select 0;
         _player = _array select 1;
-		_objPos = getPosATL _obj;
-		_armedLittleBird = _obj getVariable ["ArmedLittlebird", false];
+        _objPos = getPos _obj;
+        if (surfaceIsWater _objPos) then { _objPos = getPosASL _obj; } else { _objPos = getPosATL _obj; };
 		_debug = getMarkerpos "respawn_west";
 		
 		/* Check hash of object trying to pack */
@@ -288,10 +287,29 @@
 		};
 		if (typeOf _obj == "AH6X_DZ") then {
 			_origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric"];
-			if (_armedLittleBird) then {	
-				_origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartGeneric","ItemToolbox"];	
-			};
-			
+
+			{
+				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				_bag modelToWorld getPosATL _player;
+				_bag setdir (getDir _player);
+				_player reveal _bag;
+
+                _bag call {
+				    _this setVariable [
+				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+				        "hash_id" callExtension format [
+				            "%1:%2",
+				            netId _this,
+				            typeOf _this
+				        ]
+				    ];
+				};
+
+			} forEach _origMat;
+		};
+		if (typeOf _obj == "AH6J_EP1_DZE") then {
+			_origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartGeneric","ItemToolbox"];	
+	
 			{
 				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
 				_bag modelToWorld getPosATL _player;
