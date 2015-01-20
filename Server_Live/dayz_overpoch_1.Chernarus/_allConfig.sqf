@@ -34,7 +34,7 @@ DZE_vehicleAmmo = 0;
 P2DZ_postVars = false; //early var
 
 //Enable client antihack whitelist (development only, not for live use!)
-P2DZ_clientAHWhitelistEnabled = 	false;
+P2DZ_clientAHWhitelistEnabled = false;
 
 //Bad plot places
 P2DZE_badPlotPlaces = [
