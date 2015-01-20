@@ -11,12 +11,22 @@ Spawn Gear Creates (2x Med (10 Items), 3x Western Guns (12 Items))
 ---------------------------------------------------------------------------*/
 
 
-P2HC_mRq =  [                  
+P2HC_mRq =  [
+                //Scenery Object Type & Pos & Amount to Spawn (pos gets replaced with bisFindSafePos version)
+                [
+                    ["Body1",[6884.3755, 11416.529],6],
+                    ["Body2",[6884.3755, 11416.529],6],                   
+                    ["Rubbish3",[6884.3755, 11416.529],3],
+                    ["Rubbish4",[6884.3755, 11416.529],3]
+                    
+                ],     
                 //Loot Table Type & Pos & Loot Item Amount (Pos gets replaced with bisFindSafePos version)
                 [
                     ["WesternWeapons",[6884.3755, 11416.529],4],
                     ["WesternWeapons",[6884.3755, 11416.529],4],
                     ["WesternWeapons",[6884.3755, 11416.529],4],
+                    ["WesternWeapons",[6884.3755, 11416.529],4],
+                    ["EasternWeapons",[6884.3755, 11416.529],4],
                     ["Medical",[6884.3755, 11416.529],10],
                     ["Medical",[6884.3755, 11416.529],10]
                 ]   

@@ -51,27 +51,26 @@ for "_x" from 1 to _unitcount do {
 				P2AI_DC_unusedRPL = P2AI_Castle_RoofAIPosList;
 			};
 
-			//pick random selection index
-			_randS = (floor (random ((count P2AI_DC_unusedRPL) -1 )));
+			if (!(str P2AI_DC_unusedRPL == str [])) then {
+				//pick random selection index
+				_randS = (floor (random ((count P2AI_DC_unusedRPL) -1 )));
 
-			//select position using index
-			_position = P2AI_DC_unusedRPL select _randS;
-			//if (_d) then { diag_log(format["[P2AI]:%1: Chose (%3) from P2AI_DC_unusedRPL: %2", _f, P2AI_DC_unusedRPL, _position]); };
-
-			//if nil position is retrieved, set to non-roof ai pos
-			if (isNil '_position') then {
-				_position = P2AI_Castle_GroundAIPosList select (floor (random ((count P2AI_Castle_GroundAIPosList) -1 )));
-				_roofAI = false;
-				_wpRadius = 10;
-			} else {
-	 			//set it to a string so we can remove it from the array
+				//select position using index
+				_position = P2AI_DC_unusedRPL select _randS;
+				//if (_d) then { diag_log(format["[P2AI]:%1: Chose (%3) from P2AI_DC_unusedRPL: %2", _f, P2AI_DC_unusedRPL, _position]); };
+				//set it to a string so we can remove it from the array
 				P2AI_DC_unusedRPL set [_randS, -1];
 
 				//remove it from the array
 				P2AI_DC_unusedRPL = P2AI_DC_unusedRPL - [-1];
-			//	if (_d) then { diag_log(format["[P2AI]:%1: Removed (%3) from P2AI_DC_unusedRPL: %2", _f, P2AI_DC_unusedRPL, _position]); };
+				//	if (_d) then { diag_log(format["[P2AI]:%1: Removed (%3) from P2AI_DC_unusedRPL: %2", _f, P2AI_DC_unusedRPL, _position]); };
 				_roofAI = true;
 				_wpRadius = 5;
+			} else {
+				//if array has emptied and we've run out of roof ai spawn points, use ground spawn points
+				_position = P2AI_Castle_GroundAIPosList select (floor (random ((count P2AI_Castle_GroundAIPosList) -1 )));
+				_roofAI = false;
+				_wpRadius = 10;
 			};
 		} else {
 			//95% chance: select a ground position
