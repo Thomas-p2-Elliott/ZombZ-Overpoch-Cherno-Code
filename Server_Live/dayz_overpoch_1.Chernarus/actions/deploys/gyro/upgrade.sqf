@@ -46,7 +46,7 @@ _isInCombat = player getVariable["startcombattimer",0]; if (_isInCombat == 1) th
 			
 			sleep 5;
 						
-			cutText [format["Warning: Spawned LittleBirds do Not Save after server restart!"], "PLAIN DOWN"];
+			cutText [format["Warning: Spawned Helicopters do Not Save after server restart!"], "PLAIN DOWN"];
 			
 		} else {
 			cutText [format["You need an Engine and Scrap Metal to upgrade this."], "PLAIN DOWN"];

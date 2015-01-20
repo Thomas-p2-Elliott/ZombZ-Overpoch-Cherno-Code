@@ -52,7 +52,7 @@ _isInCombat = player getVariable["startcombattimer",0]; if (_isInCombat == 1) th
 			
 			sleep 5;
 						
-			cutText [format["Warning: Spawned Hueys do Not Save after server restart!"], "PLAIN DOWN"];
+			cutText [format["Warning: Spawned Helicopters do Not Save after server restart!"], "PLAIN DOWN"];
 			
 		} else {
 			cutText [format["You need Scrap Metal and a Machine Gun (e.g. M240) to upgrade this."], "PLAIN DOWN"];

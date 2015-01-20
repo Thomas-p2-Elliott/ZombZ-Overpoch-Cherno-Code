@@ -40,7 +40,7 @@ _isInCombat = player getVariable["startcombattimer",0]; if (_isInCombat == 1) th
 			
 			sleep 15;
 						
-			cutText [format["Warning: Spawned Choppers do Not Save after server restart!"], "PLAIN DOWN"];
+			cutText [format["Warning: Spawned Helicopters do Not Save after server restart!"], "PLAIN DOWN"];
 			
 		} else {
 			cutText [format["You need an Engine and a Main Rotor to build this."], "PLAIN DOWN"];
