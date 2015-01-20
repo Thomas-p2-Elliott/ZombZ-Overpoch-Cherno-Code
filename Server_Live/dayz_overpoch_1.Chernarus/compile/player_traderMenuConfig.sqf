@@ -12,7 +12,7 @@ TraderCatList = -1;
 TraderItemList = -1;
 
 TraderDialogLoadItemList = {
-	private ["_index","_trader_id","_activatingPlayer","_distance","_objclass","_item_list","_pthrough","_dataAdded"];
+	private ["_index","_trader_id","_activatingPlayer","_distance","_objclass","_item_list","_pthrough","_dataAdded","_resultData"];
 	TraderItemList = -1;
 	_dataAdded = false;
 	_index = _this select 0;
@@ -41,12 +41,20 @@ TraderDialogLoadItemList = {
 		lbAdd [TraderDialogItemList, format["Please Wait (%1) Is Loading...", _trader_id]];
 
 
-		_cfgTraderCategory = missionConfigFile >> "CfgTraderCategory" >> (format["Category_%1",_trader_id]);	
-		if (!isNil 'P2DZE_cachedTraderCategory' && !isNil 'P2DZE_cachedTraderList') then {
-			if (((count P2DZE_cachedTraderList) > 10) && (_cfgTraderCategory == P2DZE_cachedTraderCategory)) then {
-				_dataAdded = true;
-				PVDZE_plr_TradeMenuResult = P2DZE_cachedTraderList;
+		_cfgTraderCategory = missionConfigFile >> "CfgTraderCategory" >> (format["Category_%1",_trader_id]);
+		//cache list check
+		if (!isNil 'P2DZE_cachedTraders') then {
+			if (((count P2DZE_cachedTraders) > 0)) then {
+				{
+					if (_cfgTraderCategory == _x select 0) then {
+						_resultData = _x select 1;
+						_dataAdded = true;
+						PVDZE_plr_TradeMenuResult = _resultData;
+					};
+				} count P2DZE_cachedTraders;
 			};
+		} else {
+			P2DZE_cachedTraders = [];
 		};
 		if (!_dataAdded) then {
 			PVDZE_plr_TradeMenuResult = [];
@@ -81,14 +89,14 @@ TraderDialogLoadItemList = {
 				PVDZE_plr_TradeMenuResult set [count PVDZE_plr_TradeMenuResult, _data];			
 			};
 			
-			P2DZE_cachedTraderList = PVDZE_plr_TradeMenuResult;
-			P2DZE_cachedTraderCategory = _cfgTraderCategory;	
+			//cache traders
+			P2DZE_cachedTraders set [count P2DZE_cachedTraders, [_cfgTraderCategory,PVDZE_plr_TradeMenuResult]];		
 		};
 
 		lbClear TraderDialogItemList;
 		_item_list = [];
 		{
-			private ["_header", "_item", "_name", "_type", "_textPart", "_qty", "_buy", "_bqty", "_btype", "_sell", "_sqty", "_stype", "_order", "_order", "_afile", "_File", "_count", "_bag", "_bagclass", "_index", "_image"];
+			private ["_header", "_item", "_name", "_type", "_textPart", "_qty", "_buy", "_bqty", "_btype", "_sell", "_sqty", "_stype", "_mags", "_order", "_order", "_afile", "_File", "_count", "_magCount", "_magCount2", "_bag", "_bagclass", "_index", "_image"];
 			_header = _x select 0; // "TRD"
 			_item = _x select 1;
 			_name = _item select 0;
@@ -194,6 +202,25 @@ TraderDialogLoadItemList = {
 				lbSetColor [TraderDialogItemList, _index, [0, 1, 0, 1]];
 			};
 
+			//Mag Highligting: Yellow for Main Weapon Magtype, Orange for other magtypes the weapon can use
+			_magCount = 0;
+			_magCount2 = 0;
+
+			if (_count < 1) then {
+				{
+				  _mags = [] + getArray (configFile >> "cfgWeapons" >> _x >> "magazines");
+				  if (_mags select 0 == _name) exitWith { _magCount2 = _magCount2 + 1; };
+				  { if (_x == _name) then { _magCount = _magCount + 1; }; } forEach _mags;
+				} count weapons player;
+
+				if (_magCount2 > 0) then {
+					lbSetColor [TraderDialogItemList, _index, [0.77, 1, 0, 1]];
+				};
+				if (_magCount > 0) then {
+					lbSetColor [TraderDialogItemList, _index, [0.9, 1, 0, 1]];
+				};
+			};
+
 			_image = getText(configFile >> _type >> _name >> "picture");
 			lbSetPicture [TraderDialogItemList, _index, _image];
 
@@ -223,7 +250,7 @@ TraderDialogShowPrices = {
 	private ["_index", "_item"];
 	_index = _this select 0;
 	if (_index < 0) exitWith {};
-	diag_log(format["P2DEBUG: _this: (%1) / TraderItemList: (%2)", _this, TraderItemList]);
+	//diag_log(format["P2DEBUG: _this: (%1) / TraderItemList: (%2)", _this, TraderItemList]);
 	while {count TraderItemList < 1} do { uiSleep 1; };
 	_item = TraderItemList select _index;
 

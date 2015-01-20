@@ -419,6 +419,7 @@ PVDZE_veh_Publish = [];		// for vehicle traders
 PVDZE_obj_Trade = [];		// For all traders increment qty
 PVDZE_plr_TradeMenu = [];  		// For all traders
 PVDZE_plr_DeathB = [];
+P2DZE_cachedTraders = [];
 
 dayz_cantseeDist = 150; // distance from which we can spawn a Z in front of any player without ray-tracing && angle checks
 dayz_cantseefov = 70; // half player field-of-view. Visible Z won't be spawned in front of any near players
