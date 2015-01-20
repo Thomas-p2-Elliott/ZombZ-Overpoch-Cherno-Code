@@ -228,7 +228,7 @@ if (P2DZE_gearOnContainer) then {
 			_PMagCnt2 = 0;
 			_wepHolder = objNull;
 			{
-				if (!(getNumber(configFile >> "CfgMagazines" >> _x >> "type") == 16) && (((_PMagCnt) - _PMagCnt2) > 12) && (_x != "ItemGoldBar10oz")) then {
+				if (!(getNumber(configFile >> "CfgMagazines" >> _x >> "type") == 16) && (((_PMagCnt) - _PMagCnt2) >= 12) && (_x != "ItemGoldBar10oz")) then {
 					_PMagCnt2 = _PMagCnt2 + 1;
 					if (isNull _wepHolder) then {
 						_wepHolder = "WeaponHolder" createVehicle (getPosATL player);
