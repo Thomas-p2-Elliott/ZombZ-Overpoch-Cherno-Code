@@ -1,14 +1,14 @@
-P2DZ_HC_ZHorde_tracker = 			compile preprocessFileLineNumbers "zombzHC\addons\zeds\hordes\p2hc_zhorde_tracker.sqf";
-P2DZ_HC_ZHorde_spawnHorde = 		compile preprocessFileLineNumbers "zombzHC\addons\zeds\hordes\p2hc_zhorde_spawnHorde.sqf";
-P2DZ_HC_ZHorde_respawnHorde = 		compile preprocessFileLineNumbers "zombzHC\addons\zeds\hordes\p2hc_zhorde_respawnHorde.sqf";
-P2DZ_HC_ZHorde_spawnZed = 			compile preprocessFileLineNumbers "zombzHC\addons\zeds\hordes\p2hc_zhorde_spawnZed.sqf";
-P2DZ_HC_ZHorde_waypointLoop = 		compile preprocessFileLineNumbers "zombzHC\addons\zeds\hordes\p2hc_zhorde_hordeWaypointLoop.sqf";
-P2DZ_HC_ZHorde_zedWaypointLoop	= 	compile preprocessFileLineNumbers "zombzHC\addons\zeds\hordes\p2hc_zhorde_zedWaypointLoop.sqf";
-zombieHorde_loiterHC =				compile preprocessFileLineNumbers "zombzHC\addons\zeds\hordes\p2hc_zhorde_loiter.sqf";
-zombieHorde_loiterHCStandBy =		compile preprocessFileLineNumbers "zombzHC\addons\zeds\hordes\zombieHorde_loiterHCStandBy.sqf";
-P2DZ_HC_ZHorde_getAllZeds =			compile preprocessFileLineNumbers "zombzHC\addons\zeds\hordes\p2hc_zhorde_getAllZeds.sqf";
-P2DZ_HC_ZHorde_cleanupZed =			compile preprocessFileLineNumbers "zombzHC\addons\zeds\hordes\p2hc_zhorde_cleanupZed.sqf";
-P2DZ_HC_ZHorde_cleanupHorde =		compile preprocessFileLineNumbers "zombzHC\addons\zeds\hordes\p2hc_zhorde_cleanupHorde.sqf";
+P2DZ_HC_ZHorde_tracker = 			compile preprocessFileLineNumbers ("" + (P2HC_Path) + "zeds\hordes\p2hc_zhorde_tracker.sqf");
+P2DZ_HC_ZHorde_spawnHorde = 		compile preprocessFileLineNumbers ("" + (P2HC_Path) + "zeds\hordes\p2hc_zhorde_spawnHorde.sqf");
+P2DZ_HC_ZHorde_respawnHorde = 		compile preprocessFileLineNumbers ("" + (P2HC_Path) + "zeds\hordes\p2hc_zhorde_respawnHorde.sqf");
+P2DZ_HC_ZHorde_spawnZed = 			compile preprocessFileLineNumbers ("" + (P2HC_Path) + "zeds\hordes\p2hc_zhorde_spawnZed.sqf");
+P2DZ_HC_ZHorde_waypointLoop = 		compile preprocessFileLineNumbers ("" + (P2HC_Path) + "zeds\hordes\p2hc_zhorde_hordeWaypointLoop.sqf");
+P2DZ_HC_ZHorde_zedWaypointLoop	= 	compile preprocessFileLineNumbers ("" + (P2HC_Path) + "zeds\hordes\p2hc_zhorde_zedWaypointLoop.sqf");
+zombieHorde_loiterHC =				compile preprocessFileLineNumbers ("" + (P2HC_Path) + "zeds\hordes\p2hc_zhorde_loiter.sqf");
+zombieHorde_loiterHCStandBy =		compile preprocessFileLineNumbers ("" + (P2HC_Path) + "zeds\hordes\zombieHorde_loiterHCStandBy.sqf");
+P2DZ_HC_ZHorde_getAllZeds =			compile preprocessFileLineNumbers ("" + (P2HC_Path) + "zeds\hordes\p2hc_zhorde_getAllZeds.sqf");
+P2DZ_HC_ZHorde_cleanupZed =			compile preprocessFileLineNumbers ("" + (P2HC_Path) + "zeds\hordes\p2hc_zhorde_cleanupZed.sqf");
+P2DZ_HC_ZHorde_cleanupHorde =		compile preprocessFileLineNumbers ("" + (P2HC_Path) + "zeds\hordes\p2hc_zhorde_cleanupHorde.sqf");
 
 
 

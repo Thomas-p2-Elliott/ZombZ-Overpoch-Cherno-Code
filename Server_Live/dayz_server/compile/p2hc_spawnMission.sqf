@@ -14,7 +14,7 @@ Input Example:
 		//Scenery Object Type & Pos & Amount (Pos gets replaced with bisFindSafePos version)
 		[
 			["UralWreck",_coords,1],
-			["CampingTent",_coords,5],
+			["Land_A_tent",_coords,5],
 		],						
 		//Loot Table Type & Pos & Gear Amount (Pos gets replaced with bisFindSafePos version)
 		[
@@ -96,7 +96,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 				0.17	
 			];
 
-			_goldAmount = 0;
+			_goldAmount = 50;
 
 			_boxType = "USBasicAmmunitionBox"; 
 		};
@@ -120,7 +120,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 				0.17	
 			];		 	
 
-			_goldAmount = 0;	 	
+			_goldAmount = 50; 	
 
 			_boxType = "USBasicAmmunitionBox";
 		};
@@ -142,7 +142,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 				0.10
 			];
 
-			_goldAmount = 75;	 	
+			_goldAmount = 150;	 	
 		 	
 
 			_boxType = "USBasicWeaponsBox";
@@ -165,15 +165,14 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 				0.10
 			];
 
-			_goldAmount = 50;	 	
+			_goldAmount = 100;	 	
 
 			_boxType = "RUBasicWeaponsBox";
 		};
 	};
 
-	//was boxtype - not working though?? da fuck...
 	//create object
-	_crate = "RUBasicWeaponsBox" createVehicle _lPos;
+	_crate = _boxType createVehicle _lPos;
 
 	//secure object against cleanup
   	_crate call {
@@ -196,16 +195,6 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 	//empty object
 	clearWeaponCargoGlobal _crate;
 	clearMagazineCargoGlobal _crate;
-
-	/*---------------------------------------------------------------------------
-	Add Gold to Crate
-	---------------------------------------------------------------------------*/
-	if (!isNil "_goldAmount") then {
-		if (_goldAmount > 0 && _goldAmount < 100) then {
-			_crate setVariable ["ZombZGold", _goldAmount, true];
-			_crate addMagazineCargoGlobal "ItemGoldBar10oz";
-		};
-	};
 
 	/*---------------------------------------------------------------------------
 	Add Loot to Crates
@@ -312,7 +301,7 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 								if (_mags select 0 == "30Rnd_556x45_G36SD") then{ _mags set[0, "30Rnd_556x45_StanagSD"] };
 								if (!(_item2 in MeleeWeapons)) then{
 									_crate addMagazineCargoGlobal[(_mags select 0), (ceil(random 2) + 2)];
-								//	diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Magazines Added: %1", _item2]);
+									//diag_log(format["[P2AI]:SpawnMission:LootCrate: Weapon Magazines Added: %1", _item2]);
 								};
 							};
 						};
@@ -408,7 +397,18 @@ diag_log(format["[P2AI]:SpawnMission: Input: %1",_in]);
 				};
 			};
 		};
+	};
 
+
+	/*---------------------------------------------------------------------------
+	Add Gold to Crate
+	---------------------------------------------------------------------------*/
+	if (!isNil "_goldAmount") then {
+		if (_goldAmount > 0 && _goldAmount < 500) then {
+			_crate setVariable ["ZombZGold", _goldAmount, true];
+			_crate addMagazineCargoGlobal ["ItemGoldBar10oz", 1];
+			diag_log(format["[P2AI]:SpawnMission:LootCrate: Gold Added: %1",_goldAmount]);
+		};
 	};
 } forEach _loot;
 

@@ -43,27 +43,27 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
 	/* Animated Heli Crash Sites by Player2 */
 	if (P2DZ_HC_HeliCrashes) then {
 		diag_log(format["P2DEBUG: %1 Executing AnimatedEvents: HeliCrashes!", (getPlayerUID player)]);
-		[] execVM "\zombzHC\addons\AnimatedEvents\heliCrash_init.sqf";
+		[] execVM ("" + (P2HC_Path) + "AnimatedEvents\heliCrash_init.sqf");
 	};
 
 	/* HeadlessClient A.I. Missions by Player2 */
 	if (P2DZ_HC_AIMissions_Enabled) then {
 		diag_log(format["P2DEBUG: %1 Executing AI Missions!", (getPlayerUID player)]);
-		[] execVM "\zombzHC\addons\P2AI\init.sqf";
+		[] execVM ("" + (P2HC_Path) + "P2AI\init.sqf");
 	};
 
 	/* Extra Zeds System by Player2 */
 	if (P2DZ_HC_extraZeds) then {
 		diag_log(format["P2DEBUG: %1 Executing Extra Zeds!", (getPlayerUID player)]);
 		P2DZ_HC_extraZeds_Done = false;
-		[] execVM "\zombzHC\addons\zeds\init.sqf";
+		[] execVM ("" + (P2HC_Path) + "zeds\init.sqf");
 	};
 
 	/* Zombie Hordes by Player2 */
 	if (P2DZ_HC_extraZeds && {(P2DZ_HC_zedHordes)}) then {
 		waitUntil{uiSleep 0.5; P2DZ_HC_extraZeds_Done}; //zhordes requires extrazeds
 		diag_log(format["P2DEBUG: %1 Executing Zombie Hordes!", (getPlayerUID player)]);
-		[] execVM "\zombzHC\addons\zeds\hordes\init.sqf";
+		[] execVM ("" + (P2HC_Path) + "zeds\hordes\init.sqf");
 	};
 
 	/* ArmaServerMonitor */
@@ -152,7 +152,7 @@ if (isServer) then {
 		_handle = 				[] execVM "\z\addons\dayz_server\FS_SpawnVehicles\FS_StaticVehicleSpawnCompiles.sqf";
 		waitUntil{scriptDone _handle};
 	};
-	// Add trader citys
+	// Add trader citys & custom buildings
 	_nil = 						[] execVM "\z\addons\dayz_server\missions\DayZ_Epoch_11.Chernarus\mission.sqf";
 	_nil2 = 					[] execVM "buildings\init_buildings.sqf";
 	//Execute server monitor

@@ -30,7 +30,7 @@ waitUntil {!isNil "BIS_fnc_findSafePos"};
 File & Debugging Configuration
 ---------------------------------------------------------------------------*/
 
-P2AI_FileLocation = "zombzHC\addons\P2AI";	//disclude last slash
+P2AI_FileLocation = ("" + (P2HC_Path) + "P2AI");	//disclude last slash
 
 P2AI_debugEvents = 	false;
 P2AI_debugStatic = 	false;
@@ -43,6 +43,7 @@ Debugging Log Output
 private["_f","_d"]; 
 _f = "init"; 
 _d = (P2AI_debug or P2AI_debugEvents or P2AI_debugStatic or P2AI_debugAI);
+if (isNil '_d') then { _d = false; };
 if (_d) then {
 	diag_log(format["[P2AI]:%1: Debugging Enabled:", _f]); 
 	diag_log(format["[P2AI]:%1: P2AI_debug: %2", _f, 		P2AI_debug]); 
@@ -57,7 +58,8 @@ Load Config Files
 
 P2AI_configLoaded = false;
 [] spawn {
-	if (_d) then { diag_log(format["[P2AI]:%1: Loading Configs From: %2\_config\", _f, P2AI_FileLocation]); };
+	_f = "init";
+	if ((P2AI_debug or P2AI_debugEvents or P2AI_debugStatic or P2AI_debugAI)) then { diag_log(format["[P2AI]:%1: Loading Configs From: %2\_config\", _f, P2AI_FileLocation]); };
 	call compile preprocessFileLineNumbers format["%1\_config\Events_Config.sqf",P2AI_FileLocation];
 	call compile preprocessFileLineNumbers format["%1\_config\Loot_Config.sqf",P2AI_FileLocation];
 	call compile preprocessFileLineNumbers format["%1\_config\AI_Config.sqf",P2AI_FileLocation];

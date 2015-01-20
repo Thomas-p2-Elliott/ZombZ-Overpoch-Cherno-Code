@@ -124,11 +124,11 @@ if (!hasInterface && !isDedicated && !isServer) then {
 
     P2HC_spawnHeliCrash = {        
         private["_timeAdjust","_timeToSpawn","_spawnRoll","_crash","_hasAdjustment","_newHeight","_adjustedPos","_useStatic","_crashDamage","_lootRadius","_preWaypoints","_preWaypointPos","_endTime","_startTime","_safetyPoint","_heliStart","_deadBody","_exploRange","_heliModel","_lootPos","_list","_craters","_dummy","_wp2","_wp3","_landingzone","_aigroup","_wp","_helipilot","_crash","_crashwreck","_smokerand","_staticcoords","_pos","_dir","_position","_num","_config","_itemType","_itemChance","_weights","_index","_iArray","_crashModel","_lootTable","_guaranteedLoot","_randomizedLoot","_frequency","_variance","_spawnChance","_spawnMarker","_spawnRadius","_spawnFire"];
-        _preWaypoints    = P2DZ_HC_heliCrash_preWaypoints;                //Amount of waypoints the heli flys to before crashing
-        _crashDamage    = P2DZ_HC_crashDamage;                //Amount of dammage the heli can take before crashing (between 0.1 and 1) Lower the number and the heli can take less damage before crashing 1 dammage is fully destroyed and 0.1 something like a DMR could one shot the heli
+        _preWaypoints    = P2DZ_HC_heliCrash_preWaypoints;  //Amount of waypoints the heli flys to before crashing
+        _crashDamage    = P2DZ_HC_crashDamage;              //Amount of dammage the heli can take before crashing (between 0.1 and 1) Lower the number and the heli can take less damage before crashing 1 dammage is fully destroyed and 0.1 something like a DMR could one shot the heli
         _exploRange    = P2DZ_HC_exploRange;                //How far away from the predefined crash point should the heli start crashing
-        _heliModel        = P2DZ_HC_heliModel;     //flying model used
-        _crashModel    =    P2DZ_HC_crashModel;    //The type of Crash model used after the heli crashes
+        _heliModel        = P2DZ_HC_heliModel;              //flying model used
+        _crashModel    =    P2DZ_HC_crashModel;             //The type of Crash model used after the heli crashes
         _plane            = false;
         _spawnRadius = HeliCrashArea;
         _spawnMarker    = 'center';
@@ -145,7 +145,7 @@ if (!hasInterface && !isDedicated && !isServer) then {
         _crashwreck engineOn true;
 
         _crashwreck flyInHeight 200;
-        _crashwreck forceSpeed 40; //145kmh
+        _crashwreck forceSpeed 32; //115kmh
         _crashwreck setspeedmode "NORMAL";
 
         _landingzone = createVehicle ["HeliHEmpty", [_position select 0, _position select 1,0], [], 0, "CAN_COLLIDE"];

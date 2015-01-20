@@ -10,6 +10,10 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
 
 	//enable zed hordes? (WARNING: Requires ExtraZeds)
 	P2DZ_HC_zedHordes = true;
+
+	//Set Headless Folder Path
+	P2HC_Path = "\zombzHC\addons\";
+	//P2HC_Path = "HC\";
 };
 
 /*---------------------------------------------------------------------------
