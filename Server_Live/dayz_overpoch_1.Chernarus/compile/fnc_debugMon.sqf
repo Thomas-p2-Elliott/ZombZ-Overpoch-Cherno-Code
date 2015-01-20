@@ -135,8 +135,12 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 
 	P2DZ_debugMon_Mode = "Full"; P2DZ_debugMon_ToggleKey = "F5";
 
-	_p2totalPlayers = (({isPlayer _x} count (getPos vehicle player nearEntities [["AllVehicles"], 14000])));
-	_p2within2500 = (({isPlayer _x} count (getPos vehicle player nearEntities [["AllVehicles"], 2500]))-1);
+	_p2totalPlayers = 0;
+	_p2within2500 = 0;
+	{  { 
+	   if (isPlayer _x) then { _p2totalPlayers = _p2totalPlayers + 1; };
+	   if ((isPlayer _x) && (((position player) distance (position _x)) < 3000) && (player != _x)) then { _p2within2500 = _p2within2500 + 1; };
+	} count (units _x); } forEach allGroups;
 
 	_p2mkills = (player getVariable['humanKills', 0]);
 	_p2bKills = (player getVariable['banditKills', 0]);
@@ -161,7 +165,7 @@ private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills
 	["<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Mode: " + P2DZ_debugMon_Mode + "</t><t size='1' font='Bitstream' align='right'>Key: " + P2DZ_debugMon_ToggleKey + "</t>", 
 	"<img align='center' size=" + str _p2ps + " image=" + str _p2p + "/><br/>
 	<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Players:</t><t size='1' font='Bitstream' align='right' color='#FFFFFF'>" + str _p2totalPlayers + "</t><br/>
-	<t size='1' font='Bitstream' align='left' color='#FFFFFF'> Players (2500m): </t><t size='1' font='Bitstream' align='right' color='#FFFFFF'>" + str _p2within2500 + "</t><br/>
+	<t size='1' font='Bitstream' align='left' color='#FFFFFF'> Players (3000m): </t><t size='1' font='Bitstream' align='right' color='#FFFFFF'>" + str _p2within2500 + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#FC473A'>Murders: </t><t size='1' font='Bitstream' align='right' color='#FC473A'>" + str _p2mkills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#8BFF6B'>Bandit Kills: </t><t size='1' font='Bitstream' align='right' color='#8BFF6B'>" + str _p2bKills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Blood: </t><t size='1' font='Bitstream' align='right' color=" + str P2DZ_debugBloodCol + ">" + str r_player_blood + "</t><br/><br/>
@@ -183,7 +187,11 @@ fnc_debugMini = {
 private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
 	P2DZ_debugMon_Mode = "Mini";
 	P2DZ_debugMon_ToggleKey = "F5";
-	_p2within2500 = (({isPlayer _x} count (getPos vehicle player nearEntities [["AllVehicles"], 2500]))-1);
+	_p2within2500 = 0;
+	{  { 
+	   if (isPlayer _x) then { _p2totalPlayers = _p2totalPlayers + 1; };
+	   if ((isPlayer _x) && (((position player) distance (position _x)) < 3000) && (player != _x)) then { _p2within2500 = _p2within2500 + 1; };
+	} count (units _x); } forEach allGroups;
 	_p2mkills = (player getVariable['humanKills', 0]);
 	_p2bKills = (player getVariable['banditKills', 0]);
 	_pDir = (round(getDir (vehicle player)));
@@ -191,7 +199,7 @@ private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
 	_pDirT = call fnc_pDir;
 
 	["<t size='1' font='Bitstream' align='left' color='#FFFFFF'>Mode: " + P2DZ_debugMon_Mode + "</t><t size='1' font='Bitstream' align='right'>Key: " + P2DZ_debugMon_ToggleKey + "</t>", 
-	"<t size='1' font='Bitstream' align='left' color='#FFFFFF'> Players (2500m): </t><t size='1' font='Bitstream' align='right' color='#FFFFFF'>" + str _p2within2500 + "</t><br/>
+	"<t size='1' font='Bitstream' align='left' color='#FFFFFF'> Players (3000m): </t><t size='1' font='Bitstream' align='right' color='#FFFFFF'>" + str _p2within2500 + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#FC473A'>Murders:</t><t size='1' font='Bitstream' align='right' color='#FC473A'>" + str _p2mkills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#8BFF6B'>Bandit Kills:</t><t size='1' font='Bitstream' align='right' color='#8BFF6B'>" + str _p2bKills + "</t><br/>
 	<t size='1' font='Bitstream' align='left' color='#01DFD7'>Blood: </t><t size='1' font='Bitstream' align='right' color=" + str P2DZ_debugBloodCol + ">" + str r_player_blood + "</t><br/>
