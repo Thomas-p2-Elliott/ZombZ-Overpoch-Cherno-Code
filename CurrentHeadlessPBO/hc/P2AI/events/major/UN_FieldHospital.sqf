@@ -2,7 +2,7 @@
 	UN Field Hospital Overrun
 */
 
-private ["_missName", "_findPosRes", "_coords", "_dir", "_gps", "_getPos", "_nearLocations", "_nearestLocation"];
+private ["_missName", "_findPosRes", "_coords", "_dir", "_gps", "_nearLocations", "_nearestLocation"];
 
 //Name of the Mission
 _missName = 	"UN Field Hospital";
@@ -13,7 +13,6 @@ _coords =		_findPosRes select 0;
 _dir = 			_findPosRes select 1;
 _gps = 			mapGridPosition _coords;
 
-_getPos = ([_coords] call FNC_GetPos);
 _nearLocations = nearestLocations [(_coords), ["NameCityCapital","NameCity","NameVillage","NameLocal"],2500];
 _nearestLocation = "Wilderness";
 if (count _nearLocations > 0) then {

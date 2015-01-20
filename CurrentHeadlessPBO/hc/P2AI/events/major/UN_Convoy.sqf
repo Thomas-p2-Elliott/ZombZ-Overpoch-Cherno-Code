@@ -15,7 +15,7 @@ _gps = 			mapGridPosition _coords;
 
 P2DZE_guiMsg = [
 	"Event Notification: Major Mission",
-	format["Bandits have overrun a U.N. supply convoy at %1, kill them for humanity and their loot!", _gps, _nearestLocation],
+	format["Bandits have overrun a U.N. supply convoy at %1, kill them for humanity and their loot!", _gps],
 	"img\un.paa",
 	5,
 	0

@@ -14,7 +14,7 @@ _dir = _findPosRes select 1;
 _gps = mapGridPosition _coords;
 
 P2DZE_guiMsg = [
-	"Event Notification: Major Mission",
+	"Event Notification: Minor Mission",
 	format["The U.N. have spotted a broken down bandit hunting party at %1, kill them for humanity and their loot!", _gps],
 	"img\ru.paa",
 	5,
