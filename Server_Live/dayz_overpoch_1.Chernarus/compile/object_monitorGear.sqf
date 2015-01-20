@@ -67,7 +67,7 @@ if (vehicle player != player) then {
 _isVehicle = _object isKindOf "AllVehicles";
 _isMan = (_object isKindOf "Man" && !(alive _object));
 _isStorage = _object isKindOf "Land_A_tent";
-_isnewstorage = (typeOf _object) in DZE_isNewStorage;
+_isnewstorage = ((typeOf _object) in DZE_isNewStorage || (typeOf _object) in ["RUBasicWeaponsBox","USBasicWeaponsBox","USBasicAmmunitionBox","RUVehicleBox"]);
 _objDist = _object distance player;
 _isTrader = (typeOf _object) in ["RU_Functionary1","RU_Citizen3","Rocker4","Profiteer4","Rita_Ensler_EP1","CIV_EuroMan01_EP1","CIV_EuroMan02_EP1","TK_GUE_Soldier_5_EP1","GUE_Soldier_MG","Worker2","Worker3","Woodlander1","UN_CDF_Soldier_Pilot_EP1","RU_WorkWoman1","Dr_Annie_Baker_EP1","RU_Citizen4","RU_WorkWoman5","RU_Citizen1","RU_Villager3","TK_CIV_Takistani04_EP1","Pilot_EP1","RU_Profiteer4","Woodlander3","Dr_Hladik_EP1","Doctor","HouseWife1","GUE_Woodlander2"];
 _isZed = _object isKindOf "zZombie_base";
@@ -193,7 +193,7 @@ if (!(typeName _gv == typeName 0)) then {
 	_gv = 0;
 };
 
-if (P2DZE_gearOnContainer && (({_x == "ItemGoldBar10oz"} count (magazines cursorTarget)) < 1) && (_gv > 0)) then {
+if (P2DZE_gearOnContainer && ((({_x == "ItemGoldBar10oz"} count (magazines cursorTarget)) < 1) && (({_x == "ItemGoldBar10oz"} count ((getMagazineCargo cursorTarget) select 0)) < 1)) && (_gv > 0)) then {
 	diag_log("P2DEBUG: object_monitorGear.sqf: Gold: " + (typeOf cursorTarget) + " had no gold item, not gonna go adding it. Checking some things before I ask the server to do it.");
 	//reset isOk val
 	_isOk = false;

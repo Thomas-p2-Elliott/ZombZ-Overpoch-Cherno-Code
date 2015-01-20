@@ -14,6 +14,7 @@ diag_log("P2DEBUG: player_pickupGold");
 
 //If gear is coming from vehicle/storage/weaponholder (+<storage gold amount> in gold)
 if (P2DZE_gearOnContainer || P2DZE_gearOnWeaponHolder) then {
+	if (P2DZE_goldItemHandlingDebug) then { diag_log("P2DEBUG player_pickupGold: Gold coming from storage; P2DZE_gearOnContainer: " + str P2DZE_gearOnContainer + " || GearOnWeaponHolder: " + str(P2DZE_gearOnWeaponHolder)); };
 
 	//get object
 	if (vehicle player != player) then {
@@ -33,7 +34,7 @@ if (P2DZE_gearOnContainer || P2DZE_gearOnWeaponHolder) then {
 		disableSerialization;
 		_control = (findDisplay 106) displayCtrl 156;
 		_text = ctrlText _control;
-		_nearObjects = nearestObjects [position player, ["Man","AllVehicles","Land_A_Tent","VaultStorage","OutHouse_DZ","Wooden_shed_DZ","WoodShack_DZ","StorageShed_DZ","GunRack_DZ","WoodCrate_DZ"], 15];
+		_nearObjects = nearestObjects [position player, ["Man","RUBasicWeaponsBox","LockboxStorage","TentStorageDomed","TentStorageDomed2","USBasicWeaponsBox","WorkBench_DZ","USBasicAmmunitionBox","RUVehicleBox","AllVehicles","Land_A_Tent","VaultStorage","OutHouse_DZ","Wooden_shed_DZ","WoodShack_DZ","StorageShed_DZ","GunRack_DZ","WoodCrate_DZ"], 15];
 		{
 			_objectName = getText (configFile >> "CfgVehicles" >> (typeof _x) >> "displayName");
 			_strResult = [_text,_objectName] call KRON_StrInStr;
@@ -60,6 +61,7 @@ if (P2DZE_gearOnContainer || P2DZE_gearOnWeaponHolder) then {
 
 //if gear is coming from ground
 } else {
+	if (P2DZE_goldItemHandlingDebug) then { diag_log("P2DEBUG player_pickupGold: Gold coming from ground; P2DZE_gearOnContainer: " + str P2DZE_gearOnContainer + " || GearOnWeaponHolder: " + str(P2DZE_gearOnWeaponHolder)); };
 
 	_object = cursorTarget;
 
@@ -86,8 +88,6 @@ if (P2DZE_gearOnContainer || P2DZE_gearOnWeaponHolder) then {
 			};
 		} forEach _nearObjects;
 	};
-
-
 };
 //close gear menu
 closeDialog 0;
