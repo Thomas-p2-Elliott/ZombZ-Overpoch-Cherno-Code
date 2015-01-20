@@ -1,4 +1,4 @@
-/* anti-teleport */
+/* anti-teleport 
 private ["_isWater","_puid","_pname","_mPos","_debug","_lastpos","_lastheight","_lasttime","_lastVehicle","_v","_h","_topv","_toph","_isHalo","_curpos","_distance","_curtime","_difftime","_acceptableDistance","_curheight","_speed","_topSpeed","_terrainHeight","_safetyVehicle","_PUID","_curPos"];
 _pname = _this select 0; _puid = _this select 1; _mPos = _this select 2;
 
@@ -46,15 +46,15 @@ while {11250 == 11250} do {
 					&& (_debug distance _curpos > 3000)
 					&& (((getPos (vehicle player)) distance [-7239.02,19538.6,0]) > 3000)
 					&& (((getPos (vehicle player)) distance [0,0,0]) > 3000)
+					&& ((_lastpos distance [0,0,0]) > 3000)
+					&& ((_curpos distance [0,0,0]) > 3000)
 					&& !((vehicle player == player) 
-					&& (_curheight < _lastheight) 
-					&& ((_curheight - _terrainHeight) > 1))
 					&& !(_isWater)
-					&& !(_isHalo)) then {
-						(vehicle player) setposATL  _lastpos;
-						_PUID = [player] call FNC_GetPlayerUID;
-						P2DZ_fire = format["TELEPORT REVERT: player (%6) UID (%1) to %2 from %3, %4 meters, now at %5", _PUID, _lastpos, _curPos, round(_lastpos distance _curpos), getPosATL player, name player];
-						publicVariableServer "P2DZ_fire";
+					&& !(_isHalo))) then {
+						//(vehicle player) setposATL  _lastpos;
+						//_PUID = [player] call FNC_GetPlayerUID;
+						//P2DZ_fire = format["TELEPORT REVERT: player (%6) UID (%1) to %2 from %3, %4 meters, now at %5", _PUID, _lastpos, _curPos, round(_lastpos distance _curpos), getPosATL player, name player];
+						//publicVariableServer "P2DZ_fire";
 				} else {
 					_lastpos = (getPos (vehicle player));
 					_lastheight = _curheight;
@@ -70,8 +70,8 @@ while {11250 == 11250} do {
 	};
 	uisleep 0.1;
 };
-
-P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'AntiTeleport', 'Loop Exited'];
-publicVariableServer 'P2DZ_fire';
-[] spawn P2DZ_AHKick;
+*/
+//P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'AntiTeleport', 'Loop Exited'];
+//publicVariableServer 'P2DZ_fire';
+//[] spawn P2DZ_AHKick;
 
