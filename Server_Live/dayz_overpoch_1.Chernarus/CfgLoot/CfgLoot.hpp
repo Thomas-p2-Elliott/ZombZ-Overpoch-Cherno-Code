@@ -1172,7 +1172,7 @@ TWSWeaps[] = {
 		,{"DZ_LargeGunBag_EP1",0.1}
 	};
 	militaryammo[] = {
-		{"2000Rnd_762x51_M134",0.01}
+		{"2000Rnd_762x51_M134",0.02}
 		,{"PipeBomb",0.01}
 		,{"29Rnd_30mm_AGS30",0.01}
 		,{"50Rnd_127x107_DSHKM",0.6}
