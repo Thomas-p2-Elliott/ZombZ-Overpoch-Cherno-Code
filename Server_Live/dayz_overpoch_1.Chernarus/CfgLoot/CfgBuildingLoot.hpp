@@ -6,7 +6,7 @@
                  minRoaming = 0;
                  maxRoaming = 2;
                  zombieClass[] = {"zZombie_Base","z_hunter","z_teacher","z_suit1","z_suit2","z_worker1","z_worker2","z_worker3","z_villager1","z_villager2","z_villager3"};
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
  
                  lootPosSmall[] = {};
@@ -23,7 +23,7 @@
          };
          
          class Castle: Default {
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                  //one spawn
@@ -58,7 +58,7 @@
                  zombieChance = 0.5;
                  maxRoaming = 2;
                  zombieClass[] = {"zZombie_Base","z_hunter","z_teacher","z_villager1","z_villager2","z_villager3"};
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          {"ItemKnife","generic",                        0.15},
@@ -96,7 +96,7 @@
                  maxRoaming = 3;
                  zombieClass[] = {"z_suit1","z_suit2"};
                  zombieChance = 0.5;
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          {"ItemKnife","generic",0.04},
@@ -136,7 +136,7 @@
                  zombieChance = 0.5;
                  zombieClass[] = {"z_worker1","z_worker2","z_worker3"};
                  maxRoaming = 2;
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          {"ItemGenerator","magazine",0.01},
@@ -172,7 +172,7 @@
                  zombieChance = 0.5;
                  zombieClass[] = {"z_worker1","z_worker2","z_worker3"};
                  maxRoaming = 2;
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          {"ItemGenerator","magazine",                   0.01},
@@ -207,7 +207,7 @@
                  zombieChance = 0.5;
                  maxRoaming = 3;
                  zombieClass[] = {"zZombie_Base","z_hunter","z_hunter","z_hunter","z_villager1","z_villager2","z_villager3"};
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          {"ItemJerrycan","magazine",            0.3},
@@ -232,7 +232,7 @@
                  };
          };
          class Supermarket: Default {
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  minRoaming = 2;
                  maxRoaming = 6;
                  zombieChance = 0.5;
@@ -273,7 +273,7 @@
                  minRoaming = 2;
                  maxRoaming = 6;
                  zombieClass[] = {"z_doctor","z_doctor","z_doctor"};
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          {"","hospital",0.7},
@@ -289,7 +289,7 @@
                  zombieChance = 0.5;
                  maxRoaming = 6;
                  zombieClass[] = {"z_soldier","z_soldier_heavy","z_policeman"};
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          {"ItemFlashlightRed","military",0.04},
@@ -333,7 +333,7 @@
                  zombieChance = 0.5;
                  maxRoaming = 6;
                  zombieClass[] = {"z_soldier","z_soldier_heavy","z_policeman","z_soldier","z_soldier_heavy","z_policeman","z_worker1","z_worker2","z_worker3"};
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          {"", "MeleeWeaps",  0.04}, 
@@ -383,7 +383,7 @@
                  zombieChance = 0.5;
                  maxRoaming = 6;
                  zombieClass[] = {"z_soldier","z_soldier_heavy","z_policeman","z_soldier","z_soldier_heavy","z_policeman","z_worker1","z_worker2","z_worker3"};
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          {"", "MeleeWeaps",  0.08}, 
@@ -436,7 +436,7 @@
                  minRoaming = 2;
                  maxRoaming = 6;
                  zombieClass[] = {"z_soldier_heavy"};
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          {"", "PistolMilWeaps",  0.1}, 
@@ -489,7 +489,7 @@
                  minRoaming = 1;
                  maxRoaming = 3;
                  zombieClass[] = {"z_hunter","z_hunter","z_hunter"};
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          {"ItemKnife","generic",0.01},
@@ -519,7 +519,7 @@
          };
          class DynamicDebris: Default
          {
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  minRoaming = 0;
                  maxRoaming = 2;
                  zombieChance = 0.5;
@@ -544,7 +544,7 @@
          };
          class DynamicDebrisMilitary: Default
          {
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  minRoaming = 0;
                  maxRoaming = 2;
                  zombieChance = 0.5;
@@ -588,7 +588,7 @@
                  zombieChance = 1;
                  maxRoaming = 3;
                  zombieClass[] = {"zZombie_Base","z_hunter","z_hunter","z_hunter","z_villager1","z_villager2","z_villager3","z_doctor","z_soldier_pilot","z_soldier_heavy"};
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          { "PartPlywoodPack", "magazine", 0.1 },
@@ -605,7 +605,7 @@
                  zombieChance = 1;
                  maxRoaming = 3;
                  zombieClass[] = {"zZombie_Base","z_hunter","z_hunter","z_hunter","z_villager1","z_villager2","z_villager3","z_doctor","z_soldier_pilot","z_soldier_heavy"};
-                 lootChance = 0.8;
+                 lootChance = 0.6;
                  lootPos[] = {};
                  lootType[] = {
                          { "AmmoBoxSmall_556", "object", 0.03 },
