@@ -554,7 +554,7 @@ if(!isDedicated) then {
 	//Used to limit overall zed counts
 	dayz_tickTimeOffset = 0;
 	dayz_currentWeaponHolders = 0;
-	dayz_maxMaxWeaponHolders = 80;
+	dayz_maxMaxWeaponHolders = 120;
 	dayz_maxCurrentZeds = 	0;
 	dayz_inVehicle =		false;
 	dayz_Magazines = 		[];
