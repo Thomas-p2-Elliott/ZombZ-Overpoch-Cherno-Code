@@ -62,6 +62,10 @@ if (!isDedicated) then {
 	player_paint =					compile preprocessFileLineNumbers "Paint\player_paint.sqf";
 	/* End */
 
+	/*AdvancedTradingZupaPlayer2Edit*/
+	call compile preprocessFileLineNumbers "system\advancedTrading\init.sqf";
+
+
 	/*	Gear Menu Compiles	*/
 	[] execVM 						"init\gearMenuCompiles.sqf";
 
@@ -84,7 +88,8 @@ if (!isDedicated) then {
 	fnc_removeExtraBars =			compile preprocessFileLineNumbers "compile\fnc_removeExtraBars.sqf";
 	player2_haloSpawn =				compile preprocessFileLineNumbers "actions\player2_haloSpawn.sqf";
 	//call 							compile preprocessFileLineNumbers "compile\fn_hintMsg.sqf";								##encrypted
-	//p2_randomMags =				compile preprocessFileLineNumbers "compile\p2_randomMags.sqf";							##encrypted
+	fnc_p2debugMonColorGUI = 		compile preprocessFileLineNumbers "compile\fnc_debugMon_ColourGUI.sqf";
+	p2_randomMags =					compile preprocessFileLineNumbers "compile\p2_randomMags.sqf";
 	player_humanityMorph =			compile preprocessFileLineNumbers "compile\player_humanityMorph.sqf";
 	player_craftItem =				compile preprocessFileLineNumbers "actions\player_craftItem.sqf";
 

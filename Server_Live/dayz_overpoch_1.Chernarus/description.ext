@@ -259,6 +259,10 @@ class RscTitles
 //inspect vehicle
 #include "configs\inspectvehicles.hpp"
 
+//advanced trading
+#include "configs\ZSCdefines.hpp" 
+#include "configs\advancedTrading.hpp"
+
 //paint vehicle
 #include "Paint\defines.hpp"
 #include "Paint\vehiclecolour.hpp"
