@@ -2,7 +2,7 @@
 	DayZ Safe
 	Made for DayZ Epoch please ask permission to use/edit/distrubute email vbawol@veteranbastards.com.
 */
-private ["_tent","_location","_isOk","_cancel","_location3","_location4","_location1","_location2","_counter","_pondPos","_isPond","_ppos","_hastentitem","_dir","_building","_isBuilding","_playerPos","_item","_offset_x","_offset_y","_offset_z","_offset_z_attach","_config","_text","_tmpvault","_vault_location","_objectsPond","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_removed","_playerUID","_OwnerUID"];
+private ["_distance","_isNearLootBuild","_tent","_location","_isOk","_cancel","_location3","_location4","_location1","_location2","_counter","_pondPos","_isPond","_ppos","_hastentitem","_dir","_building","_isBuilding","_playerPos","_item","_offset_x","_offset_y","_offset_z","_offset_z_attach","_config","_text","_tmpvault","_vault_location","_objectsPond","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_removed","_playerUID","_OwnerUID"];
 //check if can pitch here
 
 if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_108") , "PLAIN DOWN"]; };
@@ -43,6 +43,56 @@ if (!_hastentitem) exitWith {cutText [format[(localize "str_player_31"),_text,"p
 // Allow on concrete since we dont force to ground.
 // if (["concrete",dayz_surfaceType] call fnc_inString) then { _isOk = true; diag_log ("surface concrete"); };
 
+_isNearLootBuild = 0;
+_isNearLootBuild = count (nearestObjects [player, ["Land_Mil_Barracks_i","Land_A_Hospital","Land_a_stationhouse","Land_A_GeneralStore_01a","Land_A_GeneralStore_01","land_barn_metal","Land_A_BuildingWIP","Land_A_MunicipalOffice","Land_Mil_Barracks_i_EP1","Land_Mil_House_EP1","Land_Barrack2","land_st_vez","land_mil_house","Land_Mil_House_EP1","Land_Mil_hangar_EP1","Land_Mil_ControlTower_EP1","Land_Mil_ControlTower","Land_Farm_Cowshed_a","Land_Farm_Cowshed_b","Land_Farm_Cowshed_c","Land_SS_hangar","Land_A_TVTower_Base","Land_A_Castle_Bergfrit","Land_A_Castle_Gate","Land_Mil_Barracks_L","Land_Barn_W_02","land_repair_center","Land_Mil_Barracks_L_EP1","Land_Mil_Barracks_EP1","Land_Barn_W_01","Land_stodola_old_open","Land_Hangar_2","Land_A_Office01"], 60]);
+if (_isNearLootBuild > 0) exitWith { cutText [format["You cannot build within 60m of a loot-spawning building."], "PLAIN DOWN"]; };
+
+//no building of safes unless near a plot
+_p2require = false;
+
+_p2require = call {
+	private ["_distance", "_canBuildOnPlot", "_playerID", "_findNearestPoles", "_findNearestPole", "_IsNearPlot", "_nearestPole", "_ownerID", "_friendlies", "_fuid", "_friendUID", "_builder"];
+	_findNearestPoles = []; _findNearestPole = [];
+	_distance = 55; _distance = DZE_PlotPole select 1;
+	_canBuildOnPlot = false;
+	_playerID = "";  _playerID = getPlayerUID player;
+	_IsNearPlot = 0; _nearestPole = objNull; _ownerID = "";
+	_friendlies = []; _fuid = []; _friendUID = "";
+	_builder = ""; _builder = getPlayerUID player;
+
+	_findNearestPoles = nearestObjects [(vehicle player), ["Plastic_Pole_EP1_DZ"], _distance];
+	_findNearestPole = [];
+	{
+		if (alive _x) then {
+			_findNearestPole set [(count _findNearestPole),_x];
+		};
+	} count _findNearestPoles;
+	_IsNearPlot = count (_findNearestPole);
+
+	if(_IsNearPlot == 0) then {
+		_canBuildOnPlot = false;
+	} else {
+		_nearestPole = _findNearestPole select 0;
+		_ownerID = _nearestPole getVariable ["ownerPUID","0"];
+		if(_playerID == _ownerID) then {
+			_canBuildOnPlot = true;
+		} else {
+			_friendlies = _nearestPole getVariable ["plotfriends",[]];
+			_fuid  = [];
+			{
+			      _friendUID = _x select 0;
+			      _fuid  =  _fuid  + [_friendUID];
+			} forEach _friendlies;
+			_builder  = getPlayerUID player;
+			if(_builder in _fuid) then {
+			    _canBuildOnPlot = true;
+			}; 
+		};
+	};
+	_canBuildOnPlot
+};
+
+if (!_p2require) exitWith { cutText [format[(localize "STR_EPOCH_PLAYER_135"),"Plot Pole",55] , "PLAIN DOWN"]; };
 
 
 //diag_log ("Pitch Tent: " + str(_isok) );

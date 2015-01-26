@@ -1,4 +1,4 @@
-private ["_location","_p2badpos","_isBad","_dir","_classname","_item","_hasrequireditem","_missing","_hastoolweapon","_cancel","_reason","_started","_finished","_animState","_isMedic","_dis","_sfx","_hasbuilditem","_tmpbuilt","_onLadder","_isWater","_require","_text","_offset","_IsNearPlot","_isOk","_location1","_location2","_counter","_limit","_proceed","_num_removed","_position","_object","_canBuildOnPlot","_friendlies","_nearestPole","_ownerID","_findNearestPoles","_findNearestPole","_distance","_classnametmp","_ghost","_isPole","_needText","_lockable","_zheightchanged","_rotate","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_combinationDisplay","_zheightdirection","_abort","_isNear","_need","_needNear","_vehicle","_inVehicle","_requireplot","_objHDiff","_isLandFireDZ","_isTankTrap","_playerID", "_playerUID","_ownerID"];
+private ["_isNearLootBuild","_location","_p2badpos","_isBad","_dir","_classname","_item","_hasrequireditem","_missing","_hastoolweapon","_cancel","_reason","_started","_finished","_animState","_isMedic","_dis","_sfx","_hasbuilditem","_tmpbuilt","_onLadder","_isWater","_require","_text","_offset","_IsNearPlot","_isOk","_location1","_location2","_counter","_limit","_proceed","_num_removed","_position","_object","_canBuildOnPlot","_friendlies","_nearestPole","_ownerID","_findNearestPoles","_findNearestPole","_distance","_classnametmp","_ghost","_isPole","_needText","_lockable","_zheightchanged","_rotate","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_combinationDisplay","_zheightdirection","_abort","_isNear","_need","_needNear","_vehicle","_inVehicle","_requireplot","_objHDiff","_isLandFireDZ","_isTankTrap","_playerID", "_playerUID","_ownerID"];
 if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_40") , "PLAIN DOWN"]; };
 DZE_ActionInProgress = true;
 if((count ((getPosATL player) nearObjects ["All",DZE_PlotPole select 0])) >= DZE_BuildingLimit) exitWith {DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_41"), "PLAIN DOWN"];};
@@ -19,9 +19,9 @@ if (!isNil "_isBad") then {
 		systemChat("This land is Government property. You cannot build here.");
 	};
 };
-_isNearLootBuild = 0;
 
-_isNearLootBuild = count (nearestObjects [player, ["Land_Mil_Barracks_i","Land_A_Hospital","Land_a_stationhouse","Land_A_GeneralStore_01a","Land_A_GeneralStore_01","land_barn_metal","Land_A_BuildingWIP","Land_A_MunicipalOffice","Land_Mil_Barracks_i_EP1","Land_Mil_House_EP1","Land_Barrack2","land_st_vez","land_mil_house","Land_Mil_House_EP1","Land_Mil_hangar_EP1","Land_Mil_ControlTower_EP1","Land_Mil_ControlTower","Land_Farm_Cowshed_a","Land_Farm_Cowshed_b","Land_Farm_Cowshed_c","Land_SS_hangar","Land_A_TVTower_Base","Land_A_Castle_Bergfrit","Land_A_Castle_Gate","Land_Mil_Barracks_L","Land_Barn_W_02","land_repair_center","Land_Mil_Barracks_L_EP1","Land_Mil_Barracks_EP1","Land_Barn_W_01","Land_stodola_old_open","Land_Hangar_2","Land_A_Office01"], 100]);
+_isNearLootBuild = 0;
+_isNearLootBuild = count (nearestObjects [player, ["Land_Mil_Barracks_i","Land_A_Hospital","Land_a_stationhouse","Land_A_GeneralStore_01a","Land_A_GeneralStore_01","land_barn_metal","Land_A_BuildingWIP","Land_A_MunicipalOffice","Land_Mil_Barracks_i_EP1","Land_Mil_House_EP1","Land_Barrack2","land_st_vez","land_mil_house","Land_Mil_House_EP1","Land_Mil_hangar_EP1","Land_Mil_ControlTower_EP1","Land_Mil_ControlTower","Land_Farm_Cowshed_a","Land_Farm_Cowshed_b","Land_Farm_Cowshed_c","Land_SS_hangar","Land_A_TVTower_Base","Land_A_Castle_Bergfrit","Land_A_Castle_Gate","Land_Mil_Barracks_L","Land_Barn_W_02","land_repair_center","Land_Mil_Barracks_L_EP1","Land_Mil_Barracks_EP1","Land_Barn_W_01","Land_stodola_old_open","Land_Hangar_2","Land_A_Office01"], 60]);
 
 _onLadder =		(getNumber (configFile >> "CfgMovesMaleSdr" >> "States" >> (animationState player) >> "onLadder")) == 1;
 _isWater = 		dayz_isSwimming;
@@ -48,7 +48,7 @@ DZE_6 = false;
 DZE_cancelBuilding = false;
 call gear_ui_init;
 closeDialog 1;
-if (_isNearLootBuild > 0) exitWith { DZE_ActionInProgress = false; cutText [format["You cannot build within 100m of a loot-spawning building."], "PLAIN DOWN"]; };
+if (_isNearLootBuild > 0) exitWith { DZE_ActionInProgress = false; cutText [format["You cannot build within 60m of a loot-spawning building."], "PLAIN DOWN"]; };
 if (_isWater) exitWith {DZE_ActionInProgress = false; cutText [localize "str_player_26", "PLAIN DOWN"];};
 if (_inVehicle) exitWith {DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_42"), "PLAIN DOWN"];};
 if (_onLadder) exitWith {DZE_ActionInProgress = false; cutText [localize "str_player_21", "PLAIN DOWN"];};
@@ -125,7 +125,7 @@ _distance = DZE_PlotPole select 0;
 _needText = localize "str_epoch_player_246";
 if(_isPole) then {
 	_distance = DZE_PlotPole select 1;
-	cutText ["Press [Space Bar] to Drop the Plot Pole!","PLAIN DOWN",2];
+	cutText ["Press [Space Bar] to Place the Plot Pole!", "PLAIN DOWN"];
 };
 _findNearestPoles = nearestObjects [(vehicle player), ["Plastic_Pole_EP1_DZ"], _distance];
 _findNearestPole = [];

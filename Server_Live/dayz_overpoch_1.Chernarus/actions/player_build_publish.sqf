@@ -1,4 +1,4 @@
-private ["_passArray","_cancel","_position","_reason","_classnametmp","_classname","_tmpbuilt","_dir","_location","_text","_limit","_isOk","_proceed","_counter","_dis","_sfx","_started","_finished","_animState","_isMedic","_num_removed","_lockable","_combinationDisplay","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_playerUID","_OwnerUID"];
+private ["_isNearLootBuild","_isBad","_p2badpos","_passArray","_cancel","_position","_reason","_classnametmp","_classname","_tmpbuilt","_dir","_location","_text","_limit","_isOk","_proceed","_counter","_dis","_sfx","_started","_finished","_animState","_isMedic","_num_removed","_lockable","_combinationDisplay","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_playerUID","_OwnerUID"];
 
 //defines
 _cancel = _this select 0;
@@ -30,15 +30,40 @@ _location = [0,0,0];
 if (!DZE_BuildOnRoads) then {
 	if (isOnRoad _position) then {
 		_cancel = true;
-		_reason = "Cannot build on a road.";
+		_reason = "Cannot build on a road";
 	};
 };
 
 // No building in trader zones
 if(!canbuild) then {
 	_cancel = true;
-	_reason = "Cannot build in a city.";
+	_reason = "Cannot build in a city";
 };
+
+_isBad = false;
+_p2badpos = nil;
+{
+	_p2badpos = _x;
+	if (!isNil "_p2badpos") then {
+  		if ((getPosATL player distance _p2badpos) < 450) then {
+  			_isBad = true;
+  		};
+	};
+} count P2DZE_badPlotPlaces;
+if (!isNil "_isBad") then {
+	if (_isBad) then {
+		_cancel = true;
+		_reason = "Cannot build on reserved land";
+	};
+};
+
+_isNearLootBuild = 0;
+_isNearLootBuild = count (nearestObjects [player, ["Land_Mil_Barracks_i","Land_A_Hospital","Land_a_stationhouse","Land_A_GeneralStore_01a","Land_A_GeneralStore_01","land_barn_metal","Land_A_BuildingWIP","Land_A_MunicipalOffice","Land_Mil_Barracks_i_EP1","Land_Mil_House_EP1","Land_Barrack2","land_st_vez","land_mil_house","Land_Mil_House_EP1","Land_Mil_hangar_EP1","Land_Mil_ControlTower_EP1","Land_Mil_ControlTower","Land_Farm_Cowshed_a","Land_Farm_Cowshed_b","Land_Farm_Cowshed_c","Land_SS_hangar","Land_A_TVTower_Base","Land_A_Castle_Bergfrit","Land_A_Castle_Gate","Land_Mil_Barracks_L","Land_Barn_W_02","land_repair_center","Land_Mil_Barracks_L_EP1","Land_Mil_Barracks_EP1","Land_Barn_W_01","Land_stodola_old_open","Land_Hangar_2","Land_A_Office01"], 60]);
+if (_isNearLootBuild > 0) then {
+	_cancel = true;
+	_reason = "- within 60m of a loot spawning building"
+};
+
 
 if(!_cancel) then {
 
