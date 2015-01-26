@@ -31,7 +31,7 @@ disableSerialization;
 			};
 			if (((_data select 0) < 300) && ((_data select 0) > 130)) then {
 				(_display displayCtrl 5102) ctrlSetTextColor [0, 1, 0, 1];
-				if !(_displayedHint) then { titleText ["Open your Parachute!", "PLAIN"]; _displayedHint = true; };
+				if !(_displayedHint && (vehicle player == player)) then { titleText ["Open your Parachute!", "PLAIN"]; _displayedHint = true; };
 			};
 			if (((_data select 0) < 130) && ((_data select 0) > 50) || ((_data select 0) > 600)) then {
 				(_display displayCtrl 5102) ctrlSetTextColor [0.7, 0, 0, 1];
