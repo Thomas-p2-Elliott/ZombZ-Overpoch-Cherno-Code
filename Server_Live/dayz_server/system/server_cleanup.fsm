@@ -282,7 +282,7 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"if (DZE_DiagFpsSlow) then {" \n
        "	call dze_diag_fps;" \n
        "};" \n
-       "call server_timeSync;"/*%FSM</STATEINIT""">*/;
+       "//call server_timeSync;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {

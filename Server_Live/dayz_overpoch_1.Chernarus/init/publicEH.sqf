@@ -68,7 +68,7 @@ if (isServer) then {
 
 //Client only
 if (!isDedicated) then {
-	"PVDZE_plr_SetDate"		 addPublicVariableEventHandler {setDate (_this select 1)};
+	"PVDZE_plr_SetDate"		 addPublicVariableEventHandler { if (isNil 'P2DZ_Date') then { setDate [2013,8,3,11,0]; P2DZ_Date = "set"; diag_log("P2DEBUG: DateSet"); } else { diag_log("P2DEBUG: Date already set. Ignoring"); }; };
 	"PVDZE_plr_SetSaveTime"	 addPublicVariableEventHandler {DZE_SaveTime = (_this select 1)};
 	"PVDZE_obj_RoadFlare"	 addPublicVariableEventHandler {(_this select 1) spawn object_roadFlare};
 	"PVDZE_plr_Morph2"		 addPublicVariableEventHandler {(_this select 1) call player_serverModelChange};
