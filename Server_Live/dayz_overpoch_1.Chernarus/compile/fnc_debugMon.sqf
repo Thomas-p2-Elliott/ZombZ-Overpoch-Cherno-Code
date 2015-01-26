@@ -189,7 +189,6 @@ private ["_p2within2500","_p2mkills","_p2bKills","_pDir","_gpsP2osZombZ"];
 	P2DZ_debugMon_ToggleKey = "F5";
 	_p2within2500 = 0;
 	{  { 
-	   if (isPlayer _x) then { _p2totalPlayers = _p2totalPlayers + 1; };
 	   if ((isPlayer _x) && (((position player) distance (position _x)) < 3000) && (player != _x)) then { _p2within2500 = _p2within2500 + 1; };
 	} count (units _x); } forEach allGroups;
 	_p2mkills = (player getVariable['humanKills', 0]);
