@@ -49,7 +49,7 @@ switch (_iClass) do
 					if ((count _mags) > 0) then{
 
 						for "_x" from 1 to (round(random 3) + 1) do {
-							private["_p2mag"];
+							_p2mag = "";
 
 							_p2mag = [_canType,_mags,[false,false]] call p2_randomMags;
 
@@ -57,6 +57,8 @@ switch (_iClass) do
 							if (_p2mag == "30Rnd_556x45_G36") then { _p2mag =  "30Rnd_556x45_Stanag"; };
 							if (_p2mag == "30Rnd_556x45_G36SD") then { _p2mag =  "30Rnd_556x45_StanagSD"; };
 							_item addMagazineCargoGlobal[_p2mag, 1];
+
+							_p2mag = nil;
 						};
 					};
 				};
