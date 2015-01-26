@@ -9,10 +9,10 @@ dayZ_instance =	11;
 GORSYSERVERNUMBER = 5;
 
 //Sets text in escape menu & Any non-gold Server Logs
-P2DZ_serverName = "Test";
+P2DZ_serverName = "1";
 
 //Server notification file name
-ZombZ_Notif_File_Name = "notification_op5";
+ZombZ_Notif_File_Name = "notification_op1";
 
 //Spawn Location Settings
 spawnShoremode = 1; 		// Default = 1 (on shore)
