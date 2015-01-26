@@ -32,6 +32,8 @@ if((count _offset) <= 0) then {
 
 _isPole = (_classname == "Plastic_Pole_EP1_DZ"); //check if item is plotpole
 _isLandFireDZ = (_classname == "Land_Fire_DZ"); //check if item is campfire
+if (_classname == "VaultStorageLocked") then { _requireplot = 1; };
+
 
 _passArray = [_classname,_classnametmp,_require,_text,_ghost,_lockable,_requireplot,_isAllowedUnderGround,_offset,_isPole,_isLandFireDZ]; //create new array to pass to caller
 
