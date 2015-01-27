@@ -35,7 +35,7 @@ my $cleanup_old_players 	= 1; #Deletes players from database completly.
 #------
 my $cleanup_old_lives 		= 1; #Removes old lives. Leaves the last remaining one to save stats.
 #------
-my $cleanup_objects 		= 1; #Deletes objects from database.
+my $cleanup_objects 		= 0; #Deletes objects from database.
 	my $object_from_creation_time = 15; # days to delete if not updated after first build
 	my $object_after_creation_time = 10; # after first build time has passed, how many days before deletion
 #------
@@ -43,9 +43,50 @@ my $cleanup_player_data		= 1; #will clear out the player_data table if the UID i
 #------
 my $cleanup_player_login 	= 1; #will clear out the login table
 	my $player_login_months	= 0; # if set to 0 will clear all, if set to 1 then it will save 1 months worth 2 is 2 months, and so on.
+#---
+my $cleanup_damage_objects = 1; #damage the objects 
+	my $damage_time = 1; #amount of days to add damage (days)
+	my $damage_amount = 0.1; # amount of damage to inflict per the value above
+#--
+my $unlockvehicles = 1; # unlocks vehicles where no key exists (e.g. player dies, key is lost)
+#---
+my $cleanup_destroyed = 1; #cleansup destroyed vehicles
 
 
 #-----------------------------------------------------------------------------------------------
+#delete destroyed objects
+$destroyedquery = "DELETE FROM `Object_DATA` WHERE Damage = 1";
+	$query_handle = $connect->prepare($destroyedquery);
+	# EXECUTE THE QUERY
+	$query_handle->execute();
+#unlock vehicles
+$unlockquery ="UPDATE
+			`Object_DATA`
+		SET
+			`Object_DATA`.`CharacterID` = 0
+		WHERE
+			`Object_DATA`.`CharacterID` <> 0
+			AND `Object_DATA`.`CharacterID` <= 12500
+			AND `Object_DATA`.`Classname` NOT LIKE 'Tent%'
+			AND `Object_DATA`.`Classname` NOT LIKE '%Locked'
+			AND `Object_DATA`.`Classname` NOT LIKE 'Land%'
+			AND `Object_DATA`.`Classname` NOT LIKE 'Cinder%'
+			AND `Object_DATA`.`Classname` NOT LIKE 'Wood%'
+			AND `Object_DATA`.`Classname` NOT LIKE 'Metal%'
+			AND `Object_DATA`.`Classname` NOT LIKE '%Storage%'
+			AND `Object_DATA`.`Classname` NOT IN ('OutHouse_DZ', 'GunRack_DZ', 'WorkBench_DZ', 'Sandbag1_DZ', 'FireBarrel_DZ', 'DesertCamoNet_DZ', 'StickFence_DZ', 'LightPole_DZ', 'DeerStand_DZ', 'ForestLargeCamoNet_DZ', 'DesertLargeCamoNet_DZ', 'Plastic_Pole_EP1_DZ', 'Hedgehog_DZ', 'FuelPump_DZ', 'Fort_RazorWire', 'SandNest_DZ', 'ForestCamoNet_DZ', 'Fence_corrugated_DZ', 'CanvasHut_DZ', 'Generator_DZ', 'BagFenceRound_DZ')
+			AND FindVehicleKeysCount(Object_DATA.CharacterID) = 0";
+	$query_handle = $connect->prepare($unlockquery);
+	# EXECUTE THE QUERY
+	$query_handle->execute();
+
+#damage objcts
+if ($cleanup_damage_objects ==1){
+	$damagequery ="UPDATE `Object_DATA` SET `Damage`=$damage_amount WHERE `ObjectUID` <> 0 AND `CharacterID` <> 0 AND `Datestamp` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $damage_time DAY) AND ( (`Inventory` IS NULL) OR (`Inventory` = '[]') )";
+	$query_handle = $connect->prepare($damagequery);
+	# EXECUTE THE QUERY
+	$query_handle->execute();
+}
 #PLAYER CLEANUP (leaves last life alive)
 if ($cleanup_old_lives == 1){
 	#doing the player cleanup
