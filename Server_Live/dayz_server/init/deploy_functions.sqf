@@ -89,17 +89,20 @@
         _objPos = getPos _obj;
         if (surfaceIsWater _objPos) then { _objPos = getPosASL _obj; } else { _objPos = getPosATL _obj; };
 		_debug = getMarkerpos "respawn_west";
-		
-		/* Check hash of object trying to pack */
-		_obj call KK_fnc_checkHash;
+		_typeOf = typeOf _obj;
+		//delete ze vehicle!
+		deleteVehicle _obj;
+		_bag = createVehicle ["WeaponHolder",_objPos,[], 1, "CAN_COLLIDE"];
 
-		if (typeOf _obj == "MMT_CIV") then {
+		if (_typeOf == "MMT_CIV") then {
 			_origMat = ["ItemToolbox"];
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+
+				
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
-				_player reveal _bag;
+				
 
                 _bag call {
 				    _this setVariable [
@@ -114,13 +117,14 @@
 
 			} forEach _origMat;
 		};
-		if (typeOf _obj == "ATV_US_EP1") then {
+		if (_typeOf == "ATV_US_EP1") then {
 			_origMat = ["ItemToolbox","ItemToolbox","PartGeneric","PartWheel"];
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
-				_player reveal _bag;
+				
 
                 _bag call {
 				    _this setVariable [
@@ -136,13 +140,14 @@
 
 			} forEach _origMat;
 		};
-		if (typeOf _obj == "TT650_TK_CIV_EP1") then {
+		if (_typeOf == "TT650_TK_CIV_EP1") then {
 			_origMat = ["ItemToolbox","ItemToolbox","PartGeneric","PartEngine"];
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
-				_player reveal _bag;
+				
 
 
                 _bag call {
@@ -158,13 +163,14 @@
 
 			} forEach _origMat;
 		};
-		if (typeOf _obj == "350z_white_DZ") then {
+		if (_typeOf == "350z_white_DZ") then {
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartWheel"];
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
-				_player reveal _bag;
+				
 
                 _bag call {
 				    _this setVariable [
@@ -179,13 +185,14 @@
 
 			} forEach _origMat;
 		};
-		if (typeOf _obj == "BTR40_TK_GUE_EP1") then {
+		if (_typeOf == "BTR40_TK_GUE_EP1") then {
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartEngine"];
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
-				_player reveal _bag;
+				
 
                 _bag call {
 				    _this setVariable [
@@ -200,13 +207,14 @@
 
 			} forEach _origMat;
 		};
-		if (typeOf _obj == "BTR40_MG_TK_GUE_EP1") then {
+		if (_typeOf == "BTR40_MG_TK_GUE_EP1") then {
 			_origMat =  ["ItemToolbox","ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartEngine","Mk_48_DZ","100Rnd_762x51_M240"];
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
-				_player reveal _bag;
+				
 
                 _bag call {
 				    _this setVariable [
@@ -222,13 +230,14 @@
 			} forEach _origMat;
 			_tempclutter = createVehicle ["ClutterCutter_EP1",_objPos,[], 1, "CAN_COLLIDE"];
 		};
-		if (typeOf _obj == "HMMWV_DZ") then {
+		if (_typeOf == "HMMWV_DZ") then {
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartEngine","PartGeneric"];
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
-				_player reveal _bag;
+				
 
                 _bag call {
 				    _this setVariable [
@@ -243,13 +252,14 @@
 
 			} forEach _origMat;
 		};
-		if (typeOf _obj == "HMMWV_Armored_DZ") then {
+		if (_typeOf == "HMMWV_Armored_DZ") then {
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartEngine","PartGeneric","PartGeneric","Mk_48_DZ","100Rnd_762x51_M240"];
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };	
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
-				_player reveal _bag;
+				
 
                 _bag call {
 				    _this setVariable [
@@ -264,13 +274,14 @@
 
 			} forEach _origMat;
 		};
-		if (typeOf _obj == "CSJ_GyroC") then {
+		if (_typeOf == "CSJ_GyroC") then {
 			_origMat = ["ItemToolbox","PartVrotor","PartEngine"];
+
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
-				_player reveal _bag;
+				
 
                 _bag call {
 				    _this setVariable [
@@ -285,14 +296,14 @@
 
 			} forEach _origMat;
 		};
-		if (typeOf _obj == "AH6X_DZ") then {
+		if (_typeOf == "AH6X_DZ") then {
 			_origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric"];
-
+			
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
-				_player reveal _bag;
+				
 
                 _bag call {
 				    _this setVariable [
@@ -307,14 +318,14 @@
 
 			} forEach _origMat;
 		};
-		if (typeOf _obj == "AH6J_EP1_DZE") then {
+		if (_typeOf == "AH6J_EP1_DZE") then {
 			_origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartGeneric","ItemToolbox"];	
-	
+			
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
-				_player reveal _bag;
+				
 
                 _bag call {
 				    _this setVariable [
@@ -329,13 +340,14 @@
 
 			} forEach _origMat;
 		};
-		if (typeOf _obj == "Mi17_Civilian_DZ") then {
+		if (_typeOf == "Mi17_Civilian_DZ") then {
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartEngine","PartGeneric"];
+			
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
-				_player reveal _bag;
+				
 
                 _bag call {
 				    _this setVariable [
@@ -350,10 +362,11 @@
 
 			} forEach _origMat;
 		};
-		if (typeOf _obj == "UH1H_TK_EP1") then {
+		if (_typeOf == "UH1H_TK_EP1") then {
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartEngine","PartGeneric","PartGeneric"];
+			
 			{
-				_bag = createVehicle ["WeaponHolder_"+_x+"",_objPos,[], 1, "CAN_COLLIDE"];
+				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
 				_bag modelToWorld getPos player;
 				_bag setdir (getDir player);
 				player reveal _bag;
@@ -372,9 +385,8 @@
 			} forEach _origMat;
 		};
 
-	    _log = format ["OBJECT DEPLOY LOG: %1 packed up a %2 at %3.", name _player,str (typeOf _obj),mapGridPosition _player];
+	    _log = format ["OBJECT DEPLOY LOG: %1 packed up a %2 at %3.", name _player,str (_typeOf),mapGridPosition _player];
 		diag_log (_log);
 
-		//delete ze vehicle!
-		deleteVehicle _obj;
+		_player reveal _bag; //give player gear option early
 };
