@@ -35,7 +35,7 @@ my $cleanup_old_players 	= 1; #Deletes players from database completly.
 #------
 my $cleanup_old_lives 		= 1; #Removes old lives. Leaves the last remaining one to save stats.
 #------
-my $cleanup_objects 		= 0; #Deletes objects from database.
+my $cleanup_objects 		= 1; #Deletes objects from database.
 	my $object_from_creation_time =25; # days to delete if not updated after first build
 	my $object_after_creation_time = 18; # after first build time has passed, how many days before deletion
 #------
