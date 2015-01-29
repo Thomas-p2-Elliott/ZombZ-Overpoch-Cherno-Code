@@ -200,16 +200,16 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 
 	 if (_canDo && (speed player <= 1) && (_cursorTarget isKindOf "Plastic_Pole_EP1_DZ")) then {
 	 	 if (s_player_plotManagement < 0) then {
-		    _adminList = ["76561198147422604","76561197994454413","76561198143011904","76561197970715790","76561198049013006","76561198057349736"]; // Add admins here if you admins to able to manage all plotpoles
+		    //_adminList = ["007"]; //removed!
 		    _owner = _cursorTarget getVariable ["ownerPUID","0"];
 		    _friends = _cursorTarget getVariable ["plotfriends", []];
 		    _fuid = [];
 		    {
-		    _friendUID = _x select 0;
-		    _fuid = _fuid + [_friendUID];
+		    	_friendUID = _x select 0;
+		    	_fuid = _fuid + [_friendUID];
 		    } forEach _friends;
 		    _allowed = [_owner];    
-		    _allowed = [_owner] + _adminList + _fuid;
+		    _allowed = [_owner] + _fuid;
 		    if((getPlayerUID player) in _allowed)then{            
 		    s_player_plotManagement = player addAction ["<t color='#0059FF'>Manage Plot</t>", "plotManagement\initPlotManagement.sqf", [], 5, false];
 		    };
@@ -358,6 +358,15 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 					_lock = player addAction [format[localize "STR_EPOCH_ACTIONS_LOCK",_text], "\z\addons\dayz_code\actions\lock_veh.sqf",_cursorTarget, 1, true, true, "", ""];
 					s_player_lockunlock set [count s_player_lockunlock,_lock];
 					s_player_lockUnlock_crtl = 1;
+
+					if(_player_paint) then {
+						if (s_player_paint  < 0) then {
+							s_player_paint = player addAction ["Paint Vehicle", "Paint\player_paint_init.sqf",_cursorTarget, 2, true, true, "", ""];
+						};
+					} else {
+						player removeAction s_player_paint;
+						s_player_paint = -1;
+					}; 
 				};
 			};
 		};
@@ -382,7 +391,7 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	If(DZE_AllowCargoCheck) then {
 		if((_isVehicle || _isTent || _isnewstorage) && _isAlive && !_isMan && !locked _cursorTarget) then {
 			if (s_player_checkGear < 0) then {
-				s_player_checkGear = player addAction [localize "STR_EPOCH_PLAYER_CARGO", "\z\addons\dayz_code\actions\cargocheck.sqf",_cursorTarget, 1, true, true, "", ""];
+				s_player_checkGear = player addAction [localize "STR_EPOCH_PLAYER_CARGO", "actions\cargocheck.sqf",_cursorTarget, 1, true, true, "", ""];
 			};
 		} else {
 			player removeAction s_player_checkGear;
@@ -401,16 +410,6 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		s_player_flipveh = -1;
 	}; 
 
-	//Allow player to paint a vehicle
-	if(_player_paint) then {
-		if (s_player_paint  < 0) then {
-			s_player_paint = player addAction ["Paint Vehicle", "Paint\player_paint_init.sqf",_cursorTarget, 2, true, true, "", ""];
-		};
-	} else {
-		player removeAction s_player_paint;
-		s_player_paint = -1;
-	}; 
-	
 	//Allow player to fill jerrycan
 	if((_hasFuelE || _hasFuelBarrelE) && _isFuel) then {
 		if (s_player_fillfuel < 0) then {
