@@ -35,6 +35,8 @@ _key call server_hiveWrite;
 
 _object setVariable ["lastUpdate",time];
 _object setVariable ["ObjectUID", _uid,true];
+_object setVariable ["ObjectID", "0",true];
+
 // _object setVariable ["CharacterID",_charID,true];
 
 if (DZE_GodModeBase) then {

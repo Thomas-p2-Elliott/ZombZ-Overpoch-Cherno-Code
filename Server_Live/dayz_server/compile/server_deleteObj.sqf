@@ -16,7 +16,8 @@ if (isServer) then {
 		_key = format["CHILD:304:%1:",_id];
 		_key call server_hiveWrite;
 		diag_log(format["DELETE: %1 Deleted by ID: %2",_activatingPlayer,_id]);
-	} else  {
+	};
+	if (parseNumber _uid > 0) then {
 		_key = format["CHILD:310:%1:",_uid];
 		_key call server_hiveWrite;
 		diag_log(format["DELETE: %1 Deleted by UID: %2",_activatingPlayer,_uid]);
