@@ -55,6 +55,9 @@ fnc_removeExtraBars = 			compile preprocessFileLineNumbers "\z\addons\dayz_serve
 //PVP death messages
 player2_deathMessage =			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\player2_deathMessage.sqf";
 
+//deletes mags from full objects
+server_overfullObject = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_overfullObject.sqf";
+
 //notification system
 [] execVM 	"\z\addons\dayz_server\system\zombz_notifications.sqf"; 
 

@@ -62,8 +62,9 @@ if (isServer) then {
 	"PVDZE_obj_Trade"		addPublicVariableEventHandler {(_this select 1) spawn server_tradeObj};
 	"PVDZE_plr_TradeMenu"	addPublicVariableEventHandler {(_this select 1) spawn server_traders};
 	"PVDZE_plr_DeathB"		addPublicVariableEventHandler {(_this select 1) spawn server_deaths};
-
 	"PVDZE_log_lockUnlock" addPublicVariableEventHandler {(_this select 1) spawn server_logUnlockLockEvent};
+
+	"P2DZ_overfullObject" 	addPublicVariableEventHandler {(_this select 1) spawn server_overfullObject};
 };
 
 //Client only
