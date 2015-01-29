@@ -62,10 +62,10 @@ if (P2DZE_gearOnContainer) then {
 				if (_MagMax > 0) then {
 					_magazines = [];
 					_return = 0;			
-					_magazines = (getMagazineCargo _object) select 1;
+					_magazines = (getMagazineCargo _targ);
 					if (_d) then { diag_log(format["_magazines: %1",_magazines]); };
 
-					{ _return = _return + _x } count _magazines;
+					{ _return = _return + (1 max ((getNumber (configFile >> "CfgMagazines" >> _x >> "type")) / 256)) * (((_magazines) select 1) select _foreachindex); } forEach ((_magazines) select 0);
 					if (_d) then { diag_log(format["_return: %1",_return]); };
 
 					if (_return > (_MagMax - 1)) then {
@@ -151,10 +151,10 @@ if (P2DZE_gearOnContainer) then {
 							if (_MagMax > 0) then {
 								_magazines = [];
 								_return = 0;			
-								_magazines = (getMagazineCargo _object) select 1;
+								_magazines = (getMagazineCargo _targ);
 								if (_d) then { diag_log(format["_magazines: %1",_magazines]); };
 
-								{ _return = _return + _x } count _magazines;
+								{ _return = _return + (1 max ((getNumber (configFile >> "CfgMagazines" >> _x >> "type")) / 256)) * (((_magazines) select 1) select _foreachindex); } forEach ((_magazines) select 0);
 								if (_d) then { diag_log(format["_return: %1",_return]); };
 
 								if (_return > (_MagMax - 1)) then {

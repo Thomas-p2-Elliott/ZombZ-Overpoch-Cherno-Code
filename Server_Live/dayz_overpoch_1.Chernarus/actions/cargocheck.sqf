@@ -1,0 +1,14 @@
+private ["_vehicle","_class","_maxMagazines","_maxWeapons","_maxBackpacks","_magazineCount","_weaponsCount","_backpackCount","_magazineCount_raw","_weaponsCount_raw","_backpackCount_raw"];
+_vehicle = _this select 3;
+_class = typeOf _vehicle;
+_maxMagazines =	getNumber (configFile >> "CfgVehicles" >> _class >> "transportMaxMagazines");
+_maxWeapons =	getNumber (configFile >> "CfgVehicles" >> _class >> "transportMaxWeapons");
+_maxBackpacks =	getNumber (configFile >> "CfgVehicles" >> _class >> "transportmaxbackpacks");
+_magazineCount_raw = getMagazineCargo _vehicle;
+_weaponsCount_raw = getWeaponCargo _vehicle;
+_backpackCount_raw = getBackpackCargo _vehicle;
+_magazineCount = 0;
+{ _magazineCount = _magazineCount + (1 max ((getNumber (configFile >> "CfgMagazines" >> _x >> "type")) / 256)) * (((_magazineCount_raw) select 1) select _foreachindex); } forEach ((_magazineCount_raw) select 0);
+_weaponsCount = (_weaponsCount_raw select 1) call vehicle_gear_count;
+_backpackCount = (_backpackCount_raw select 1) call vehicle_gear_count;
+cutText [format[(localize "str_epoch_player_1"),_magazineCount,_maxMagazines,_weaponsCount,_maxWeapons,_backpackCount,_maxBackpacks], "PLAIN DOWN"];

@@ -17,8 +17,9 @@ _countMagazines = {
 	_magazines = [];
 	_return = 0;
 	
-	_magazines = (getMagazineCargo _object) select 1;
-	{ _return = _return + _x } count _magazines;
+	_magazines = getMagazineCargo _object;
+	{ _return = _return + (1 max ((getNumber (configFile >> "CfgMagazines" >> _x >> "type")) / 256)) * (((_magazines) select 1) select _foreachindex); } forEach ((_magazines) select 0);
+
 	_return;
 };
 
@@ -51,6 +52,22 @@ _setControlText = {
 	disableSerialization;
 	_control = (findDisplay 106) displayCtrl 156;
 	_control ctrlSetText format["%1 (%2/%3/%4)", _objectName, _freeSlots select 0, _freeSlots select 1, _freeSlots select 2];
+	if (isNil 'P2DZ_lastFullObjWarn') then { P2DZ_lastFullObjWarn = 1; };
+	if (isNil 'P2DZ_lastFullObjTime') then { P2DZ_lastFullObjTime = 1; };
+	if ((_freeSlots select 1) < 1) then {
+		if (((_freeSlots select 1) < 0) && ((diag_tickTime - P2DZ_lastFullObjTime) > 10)) then {
+			P2DZ_lastFullObjTime = diag_tickTime;
+			P2DZ_overfullObject = _object;
+			publicVariableServer "P2DZ_overfullObject";
+			["WARNING: OBJECT ITEMS DELETED",format["WARNING: This object had %1 free item slots left, items have been deleted!",(_freeSlots select 1)],"img\zz.paa",10] spawn P2DZ_guiNotif;
+		} else {
+			if ((diag_tickTime - P2DZ_lastFullObjWarn) > 60) then {
+				P2DZ_lastFullObjWarn = diag_tickTime;
+			 	//systemChat("WARNING: This object has less than 2 slots left, items will be deleted if you over-fill!");
+			 	["WARNING: OBJECT NEARLY FULL",format["WARNING: This object has %1 free item slots left, items will be DELETED if you over fill!",(_freeSlots select 1)],"img\zz.paa",10] spawn P2DZ_guiNotif;
+			};		
+		};
+	};
 };
 
 if (vehicle player != player) then {
@@ -231,11 +248,10 @@ if (P2DZE_gearOnContainer && ((({_x == "ItemGoldBar10oz"} count (magazines curso
 				if (_MagMax > 0) then {
 					_magazines = [];
 					_return = 0;			
-					_magazines = (getMagazineCargo _object) select 1;
+					_magazines = (getMagazineCargo _targ);
 					if (_d) then { diag_log(format["_magazines: %1",_magazines]); };
-					{ _return = _return + _x } count _magazines;
+					{ _return = _return + (1 max ((getNumber (configFile >> "CfgMagazines" >> _x >> "type")) / 256)) * (((_magazines) select 1) select _foreachindex); } forEach ((_magazines) select 0);					
 					if (_d) then { diag_log(format["_return: %1",_return]); };
-
 					if (_return > (_MagMax - 1)) then {
 						_canHoldMags = false;
 					} else {
@@ -252,8 +268,6 @@ if (P2DZE_gearOnContainer && ((({_x == "ItemGoldBar10oz"} count (magazines curso
 		_canHoldMags
 	};
 	
-	diag_log(format["P2DEBUG: _isOk: %1", _isOk]);
-
 	if (_isOk) then {
 		P2DZE_plr_gGold = _object;
 		publicVariableServer "P2DZE_plr_gGold";
