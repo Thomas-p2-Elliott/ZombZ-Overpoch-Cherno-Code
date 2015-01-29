@@ -36,8 +36,8 @@ my $cleanup_old_players 	= 1; #Deletes players from database completly.
 my $cleanup_old_lives 		= 1; #Removes old lives. Leaves the last remaining one to save stats.
 #------
 my $cleanup_objects 		= 0; #Deletes objects from database.
-	my $object_from_creation_time = 15; # days to delete if not updated after first build
-	my $object_after_creation_time = 10; # after first build time has passed, how many days before deletion
+	my $object_from_creation_time =25; # days to delete if not updated after first build
+	my $object_after_creation_time = 18; # after first build time has passed, how many days before deletion
 #------
 my $cleanup_player_data		= 1; #will clear out the player_data table if the UID is not in the main db, can be intensive
 #------
@@ -45,14 +45,26 @@ my $cleanup_player_login 	= 1; #will clear out the login table
 	my $player_login_months	= 0; # if set to 0 will clear all, if set to 1 then it will save 1 months worth 2 is 2 months, and so on.
 #---
 my $cleanup_damage_objects = 1; #damage the objects 
-	my $damage_time = 1; #amount of days to add damage (days)
+	my $damage_time = 3; #amount of days to add damage (days)
 	my $damage_amount = 0.1; # amount of damage to inflict per the value above
 #--
 my $unlockvehicles = 1; # unlocks vehicles where no key exists (e.g. player dies, key is lost)
 #---
 my $cleanup_destroyed = 1; #cleansup destroyed vehicles
-
-
+#---
+my $unlock_safes = 1; #Unlock safes
+	my $safeunlocktime_lastupdated =14;
+	my $safeunlocktime_firsplaced = 20;
+#-----------------------------------------------------------------------------------------------
+#Object Cleanups
+if ($unlock_safes == 1){
+	print "Cleaned up Old Objects.....\n";
+	$object_query = "UPDATE `Object_DATA` SET `characterID`='0' WHERE Classname='VaultStorageLocked' AND `LastUpdated` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $safeunlocktime_lastupdated) AND `Datestamp` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $safeunlocktime_firsplaced DAY);";
+	$query_handle2 = $connect->prepare($object_query);
+	$query_handle2->execute();
+}else{
+	print "Cleanup Objects Switched Off.\n"
+}
 #-----------------------------------------------------------------------------------------------
 #delete destroyed objects
 $destroyedquery = "DELETE FROM `Object_DATA` WHERE Damage = 1";
