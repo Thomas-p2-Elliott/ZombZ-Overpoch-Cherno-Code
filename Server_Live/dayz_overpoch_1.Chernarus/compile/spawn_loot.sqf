@@ -129,23 +129,59 @@ switch (_iClass) do {
 
 		if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: single: %1", _canType]; };
 	};
-	case "backpack":
+	case "backpacks":
 	{
 		//Item is single backpack
 		_itemTypes = [];
-		_itemTypes = ((getArray (missionConfigFile >> "cfgLoot" >> _iItem)) select 0);
-		
+		_itemTypes = ((getArray (missionConfigFile >> "cfgLoot" >> _iItem)));
+
 		_index = dayz_CLBase find _iItem;
 		_weights = dayz_CLChances select _index;
 		_cntWeights = count _weights;
-	    _index = floor(random _cntWeights);
+		_index = floor(random _cntWeights);
 		_index = _weights select _index;
 		_iItem = _itemTypes select _index;
-		[_iItem] call p2_checkWepBpslot;
+		_iItem = _iItem select 0;
 
 		_item = createVehicle [_iItem, _iPos, [], _radius, "CAN_COLLIDE"];
 
 		if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: backpack: %1", _iItem]; };
+	};
+	case "militarybackpacks":
+	{
+		//Item is single backpack
+		_itemTypes = [];
+		_itemTypes = ((getArray (missionConfigFile >> "cfgLoot" >> _iItem)));
+
+		_index = dayz_CLBase find _iItem;
+		_weights = dayz_CLChances select _index;
+		_cntWeights = count _weights;
+		_index = floor(random _cntWeights);
+		_index = _weights select _index;
+		_iItem = _itemTypes select _index;
+		_iItem = _iItem select 0;
+
+		_item = createVehicle [_iItem, _iPos, [], _radius, "CAN_COLLIDE"];
+
+		if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: backpack: %1", _iItem]; };
+	};
+	case "tents":
+	{
+		//Item is single backpack
+		_itemTypes = [];
+		_itemTypes = ((getArray (missionConfigFile >> "cfgLoot" >> _iItem)));
+
+		_index = dayz_CLBase find _iItem;
+		_weights = dayz_CLChances select _index;
+		_cntWeights = count _weights;
+		_index = floor(random _cntWeights);
+		_index = _weights select _index;
+		_iItem = _itemTypes select _index;
+		_iItem = _iItem select 0;
+
+		_item = createVehicle [_iItem, _iPos, [], _radius, "CAN_COLLIDE"];
+
+		if (P2DZE_debugLoot) then { diag_log format["P2DEBUG spawn_loot: tent: %1", _iItem]; };
 	};
 	case "cfglootweapon":
 	{

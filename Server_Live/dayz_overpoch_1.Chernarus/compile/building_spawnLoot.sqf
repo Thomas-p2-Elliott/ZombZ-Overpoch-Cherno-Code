@@ -81,7 +81,7 @@ _bias = (_bias + random(100 - _bias)) / 100;
 					_itemType = [_itemType select 0, ([_itemType select 1,_iPos] call p2_lootCheck), _itemType select 2];
 
 					[_itemType select 0, _itemType select 1 , _iPos, 0.0] call spawn_loot;
-					if (P2DZE_debugLoot) then { diag_log (format["SpawnLoot: Building: %4, LootType: %2/%3",_iPos,_itemType select 0,_itemType select 1,_type]); };
+					if (P2DZE_debugLoot) then { diag_log (format["BuildingSpawnLoot: %4, LootType: %2/%3",_iPos,_itemType select 0,_itemType select 1,_type]); };
 					dayz_currentWeaponHolders = dayz_currentWeaponHolders +1;
 					//loclout system
 					_obj setVariable ["looted",diag_tickTime + dayz_tickTimeOffset];
@@ -119,10 +119,8 @@ _positionsSmall = _posSmall call _ShuffleArray;
 
 					_itemType = [_itemType select 0, ([_itemType select 1,_iPos] call p2_lootCheck), _itemType select 2];
 
-					if (P2DZE_debugLoot) then { diag_log format["building_spawnLoot.sqf:SpawnLootSmall: _itemType %1", _itemType]; };
-
 					[_itemType select 0, _itemType select 1, _iPos, 0.0] call spawn_loot_small;
-					if (P2DZE_debugLoot) then { diag_log (format["SpawnLootSmall: Building: %4, LootType: %2/%3",_iPos,_itemType select 0,_itemType select 1,_type]); };
+					if (P2DZE_debugLoot) then { diag_log (format["BuildingSpawnLootSmall: %4, LootType: %2/%3",_iPos,_itemType select 0,_itemType select 1,_type]); };
 					dayz_currentWeaponHolders = dayz_currentWeaponHolders +1;
 					//loclout system
 					_obj setVariable ["looted",diag_tickTime + dayz_tickTimeOffset];
