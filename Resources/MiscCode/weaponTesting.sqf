@@ -514,3 +514,6 @@ for "_i" from 0 to (count _cfgweapons)-1 do
 			
 	 
 };
+
+diag_log("Working Weapons" + str WEAPONWORKS);
+diag_log("Broken Weapons" + str WEAPONBROKEN);
