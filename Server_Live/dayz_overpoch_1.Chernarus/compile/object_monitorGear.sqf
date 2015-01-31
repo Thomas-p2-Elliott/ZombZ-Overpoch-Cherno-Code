@@ -55,7 +55,7 @@ _setControlText = {
 	if (isNil 'P2DZ_lastFullObjWarn') then { P2DZ_lastFullObjWarn = 1; };
 	if (isNil 'P2DZ_lastFullObjTime') then { P2DZ_lastFullObjTime = 1; };
 	if ((_freeSlots select 1) < 1) then {
-		if (((_freeSlots select 1) < 0) && ((diag_tickTime - P2DZ_lastFullObjTime) > 10)) then {
+		if (((_freeSlots select 1) < 0) && ((diag_tickTime - P2DZ_lastFullObjTime) > 120)) then {
 			P2DZ_lastFullObjTime = diag_tickTime;
 			P2DZ_overfullObject = _object;
 			publicVariableServer "P2DZ_overfullObject";
