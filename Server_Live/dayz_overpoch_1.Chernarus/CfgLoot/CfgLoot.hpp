@@ -1155,19 +1155,20 @@ TWSWeaps[] = {
 		,{"WeaponHolder_ItemTentDomed2",0.33}
 	};
 	backpacks[] = {
-		{"DZ_Assault_Pack_EP1",0.22}
-		,{"DZ_Czech_Vest_Puch",0.2}
-		,{"DZ_TerminalPack_EP1",0.18}
-		,{"DZ_ALICE_Pack_EP1",0.16}
-		,{"DZ_TK_Assault_Pack_EP1",0.13}
-		,{"DZ_CompactPack_EP1",0.11}
+		{"DZ_Patrol_Pack_EP1",0.49}
+		,{"DZ_Assault_Pack_EP1",0.35}
+		,{"DZ_ALICE_Pack_EP1",0.09}
+		,{"DZ_TK_Assault_Pack_EP1",0.06}
+		,{"DZ_CivilBackpack_EP1",0.01}
 	};
 	militarybackpacks[] = {
-		{"DZ_British_ACU",0.3}
-		,{"DZ_GunBag_EP1",0.25}
-		,{"DZ_CivilBackpack_EP1",0.2}
-		,{"DZ_Backpack_EP1",0.15}
-		,{"DZ_LargeGunBag_EP1",0.1}
+		{"DZ_TerminalPack_EP1",0.30}
+		,{"DZ_ALICE_Pack_EP1",0.15}
+		,{"DZ_TK_Assault_Pack_EP1",0.15}
+		,{"DZ_CompactPack_EP1",0.20}
+		,{"DZ_British_ACU",0.14}
+		,{"DZ_GunBag_EP1",0.05}
+		,{"DZ_Backpack_EP1",0.01}
 	};
 	militaryammo[] = {
 		{"2000Rnd_762x51_M134",0.02}
