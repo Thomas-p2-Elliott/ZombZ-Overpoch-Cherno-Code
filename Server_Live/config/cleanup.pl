@@ -52,19 +52,32 @@ my $unlockvehicles = 1; # unlocks vehicles where no key exists (e.g. player dies
 #---
 my $cleanup_destroyed = 1; #cleansup destroyed vehicles
 #---
-my $unlock_safes = 1; #Unlock safes
+my $unlock_safes = 0; #Unlock safes
 	my $safeunlocktime_lastupdated =14;
 	my $safeunlocktime_firsplaced = 20;
+#---
+my $maintain_objects = 1; #maintains objects
+	my $maintain_time = 3; #Amount of days old to run it
 #-----------------------------------------------------------------------------------------------
+#Maintain stuff
+if ($maintain_objects ==1){
+	$maintainquery ="UPDATE `Object_DATA` SET `Damage`='0.1' WHERE `ObjectUID` <> 0 AND `CharacterID` <> 0 AND `LastUpdated` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $maintain_time DAY) AND ((`Inventory` IS NULL) OR (`Inventory` = '[]') OR (`Inventory` ='[[[],[]],[[],[]],[[],[]]]'));";
+	$query_handle = $connect->prepare($maintainquery);
+	# EXECUTE THE QUERY
+	$query_handle->execute();
+	print "Maintain Set On Objects.\n"
+}
 #Object Cleanups
 if ($unlock_safes == 1){
 	print "Cleaned up Old Objects.....\n";
-	$object_query = "UPDATE `Object_DATA` SET `characterID`='0' WHERE Classname='VaultStorageLocked' AND `LastUpdated` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $safeunlocktime_lastupdated) AND `Datestamp` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $safeunlocktime_firsplaced DAY);";
+	$object_query = "UPDATE `Object_DATA` SET `characterID`='0' WHERE Classname='VaultStorageLocked' AND `LastUpdated` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $safeunlocktime_lastupdated);";
 	$query_handle2 = $connect->prepare($object_query);
 	$query_handle2->execute();
 }else{
 	print "Cleanup Objects Switched Off.\n"
 }
+
+
 #-----------------------------------------------------------------------------------------------
 #delete destroyed objects
 $destroyedquery = "DELETE FROM `Object_DATA` WHERE Damage = 1";
