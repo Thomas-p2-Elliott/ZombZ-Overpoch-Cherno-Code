@@ -140,7 +140,7 @@ We now offer Humanity. Visit www.zombz.net to purchase Humanity packages, or to 
 Why be a hero? We give special perks to heroes.
 <br/> No infection chance when using a bloodbag.
 <br/>Full health from a single bloodbag.
-<br/>Heroes can fix legs, knockoutand bandage without needing any items.
+<br/>Heroes can fix legs, knockout and bandage without needing any items.
 <br/>Access To Hero Trader.
 <br/>Much better prices at the hero trader.
 <br/>Low Calibre bullet proof vest (can take a few low calibre shots to the chest).
