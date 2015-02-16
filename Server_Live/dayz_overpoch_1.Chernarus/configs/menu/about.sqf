@@ -111,7 +111,7 @@ case (_leftmenu Select 6):{
 case (_leftmenu Select 7):{ 
 "<t color='#01DFD7'>Bases</t>
 <br/><br/>
-We dont currently offer bases on Overpoch. You can build them. This may change as we release more servers. But some servers will remain with no purchases.
+We now offer base supplies. Contact an owner on teamspeack or post on our forums and an Owner will get in touch. We hope to have this automated and simplified soon.
 "
 };
 case (_leftmenu Select 8):{ 
@@ -129,13 +129,24 @@ We dont currently offer skins on Overpoch. This may change as we release more se
 case (_leftmenu Select 10):{ 
 "<t color='#01DFD7'>Gold</t>
 <br/><br/>
-We dont currently offer gold on Overpoch. This may change as we release more servers. But some servers will remain with no purchases.
+Contact an owner on teamspeak or post on our forums and an Owner will get in touch to discuss this. We hope to have this more simplified soon.
 "
 };
 case (_leftmenu Select 11):{ 
 "<t color='#01DFD7'>Humanity</t>
 <br/><br/>
-We dont currently offer humanity on Overpoch. This may change as we release more servers. But some servers will remain with no purchases.
+We now offer Humanity. Visit www.zombz.net to purchase Humanity packages, or to reset Humanity to 2500.
+<br/><br/>
+Why be a hero? We give special perks to heroes.
+<br/> No infection chance when using a bloodbag.
+<br/>Full health from a single bloodbag.
+<br/>Heroes can fix legs, knockoutand bandage without needing any items.
+<br/>Access To Hero Trader.
+<br/>Much better prices at the hero trader.
+<br/>Low Calibre bullet proof vest (can take a few low calibre shots to the chest).
+<br/>Hero Skin. (players are less likely to shoot a hero on site)
+<br/><br/>
+
 "
 };
 
