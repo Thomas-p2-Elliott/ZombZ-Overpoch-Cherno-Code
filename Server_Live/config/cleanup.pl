@@ -58,7 +58,26 @@ my $unlock_safes = 0; #Unlock safes
 #---
 my $maintain_objects = 1; #maintains objects
 	my $maintain_time = 3; #Amount of days old to run it
+
+my $backup_bases = 1;	#backs up bases to the table object_data_backup, incrementing each backup by 1. with backup 1 being the latest
+	my $backup_delete_time = 10; # amount of restarts to save data, the higher this value the more intesive;
 #-----------------------------------------------------------------------------------------------
+
+#-----------------------------------------------------------------------------------------------
+if ($backup_bases == 1){
+	print "Initiating Backup of Bases\n";
+	$countbackupquery = "UPDATE object_data_backup SET Backup=Backup +1;";
+	$query_handle2 = $connect->prepare($countbackupquery);
+	$query_handle2->execute();
+	print "Increased Increment of All Previous Backups\n";
+	$backuptablequery = "INSERT INTO object_data_backup (ObjectID,ObjectUID,Instance,Classname,Datestamp,LastUpdated,CharacterID,Worldspace,Inventory,Hitpoints,Fuel,Damage,Gold,Backup) SELECT *, 1 from object_data WHERE Worldspace NOT LIKE '%\"0\",\"0\"%';";
+	$query_handle2 = $connect->prepare($backuptablequery);
+	$query_handle2->execute();
+	print "Object Data Successfully Copied Over.\nNew Backup Set to 1\n";
+	$backupdelequery = "DELETE FROM object_data_backup WHERE backup > $backup_delete_time;";
+	$query_handle2 = $connect->prepare($backupdeletequery);
+	$query_handle2->execute();
+}
 #Maintain stuff
 if ($maintain_objects ==1){
 	$maintainquery ="UPDATE `Object_DATA` SET `Damage`='0.1' WHERE `ObjectUID` <> 0 AND `CharacterID` <> 0 AND `LastUpdated` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $maintain_time DAY) AND ((`Inventory` IS NULL) OR (`Inventory` = '[]') OR (`Inventory` ='[[[],[]],[[],[]],[[],[]]]'));";
@@ -70,7 +89,7 @@ if ($maintain_objects ==1){
 #Object Cleanups
 if ($unlock_safes == 1){
 	print "Cleaned up Old Objects.....\n";
-	$object_query = "UPDATE `Object_DATA` SET `characterID`='0' WHERE Classname='VaultStorageLocked' AND `LastUpdated` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $safeunlocktime_lastupdated);";
+	$object_query = "UPDATE `Object_DATA` SET `characterID`='0' WHERE Classname='VaultStorageLocked' AND `LastUpdated` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $safeunlocktime_lastupdated DAY);";
 	$query_handle2 = $connect->prepare($object_query);
 	$query_handle2->execute();
 }else{
