@@ -1,7 +1,7 @@
 /*%FSM<COMPILE "C:\Users\Player2\DayZ\Tools\BI Tool Drive\FSM Editor Personal Edition\scriptedFSM.cfg, DayZ Player Monitor">*/
 /*%FSM<HEAD>*/
 /*
-item0[] = {"init",0,250,-75.000000,-350.000000,25.000000,-300.000000,0.000000,"init"};
+item0[] = {"init",0,4346,-75.000000,-350.000000,25.000000,-300.000000,0.000000,"init"};
 item1[] = {"isServer",4,218,50.000000,-350.000000,150.000000,-300.000000,0.000000,"isServer"};
 item2[] = {"wait",2,250,50.000000,-275.000000,150.000000,-225.000000,0.000000,"wait"};
 item3[] = {"Allow_Conn",4,218,50.000000,-200.000000,150.000000,-150.000000,0.000000,"Allow" \n "Conn"};
@@ -34,7 +34,7 @@ item29[] = {"ERROR__Bad_Versi",2,250,175.000000,800.000000,275.000000,850.000000
 item30[] = {"Display_Ready",4,218,-175.000000,1050.000000,-75.000000,1100.000000,0.000000,"Display" \n "Ready"};
 item31[] = {"Preload_Display",2,250,-75.000000,1100.000000,25.000000,1150.000000,0.000000,"Preload" \n "Display"};
 item32[] = {"Preload_Done",4,218,-175.000000,1150.000000,-75.000000,1200.000000,0.000000,"Preload" \n "Done"};
-item33[] = {"Initialize",2,4346,-75.000000,1200.000000,25.000000,1250.000000,0.000000,"Initialize"};
+item33[] = {"Initialize",2,250,-75.000000,1200.000000,25.000000,1250.000000,0.000000,"Initialize"};
 item34[] = {"Finish",1,250,-75.000000,1300.000000,25.000000,1350.000000,0.000000,"Finish"};
 item35[] = {"True",8,218,25.000000,1250.000000,125.000000,1300.000000,0.000000,"True"};
 item36[] = {"Too_Long",4,218,300.000000,150.000000,400.000000,200.000000,0.000000,"Too" \n "Long"};
@@ -193,8 +193,8 @@ link97[] = {88,79};
 link98[] = {88,85};
 link99[] = {89,90};
 link100[] = {90,84};
-globals[] = {25.000000,1,0,0,0,640,480,1,157,6316128,1,-405.131836,204.468018,1618.694824,737.832825,618,869,1};
-window[] = {2,-1,-1,-1,-1,983,225,1677,225,3,636};
+globals[] = {25.000000,1,0,0,0,640,480,1,157,6316128,1,-431.686584,159.010773,-38.327637,-729.353394,524,613,1};
+window[] = {0,-1,-1,-1,-1,908,150,1602,150,1,542};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -218,10 +218,11 @@ class FSM
        "_timeStart = diag_tickTime;" \n
        "_readytoAuth = false;" \n
        "_startCheck = 0;" \n
-       "_debug = false;" \n
+       "if (isNil ""P2DZ_debugLoginFSM"") then { P2DZ_debugLoginFSM = false; };" \n
+       "_debug = P2DZE_debugLogin;" \n
        "" \n
        "if (_debug) then {" \n
-       "diag_log (""DAYZ: CLIENT IS RUNNING DAYZ_CODE "" + str(dayz_versionNo));" \n
+       "	diag_log (""DAYZ: CLIENT IS RUNNING DAYZ_CODE "" + str(dayz_versionNo));" \n
        "};" \n
        "" \n
        ""/*%FSM</STATEINIT""">*/;
@@ -276,14 +277,14 @@ class FSM
     class Loading
     {
       name = "Loading";
-      init = /*%FSM<STATEINIT""">*/"endLoadingScreen;" \n
+      init = /*%FSM<STATEINIT""">*/"//endLoadingScreen;" \n
        "if (_debug) then {" \n
        "diag_log (""PLOGIN: Initating"");" \n
        "};" \n
        "" \n
        "dayz_loadScreenMsg = ""ZombZ: "" + (localize ""str_player_13""); " \n
        "" \n
-       "progressLoadingScreen 0.2;" \n
+       "progressLoadingScreen 0.3;" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -340,6 +341,7 @@ class FSM
            "" \n
            "if (_gearSave) then {" \n
            "	closeDialog 0;" \n
+           "	if (_debug) then { diag_log(""PLOGIN: Dialog Closed"");" \n
            "};" \n
            "" \n
            "	_medical = player call player_sumMedical;" \n
@@ -560,7 +562,7 @@ class FSM
        "	_isHiveOk = _msg select 7;" \n
        "	_newPlayer = _msg select 8;" \n
        "	_isInfected = _msg select 9;" \n
-       "_debugMonSettings   = _msg select 10;" \n
+       "	_debugMonSettings   = _msg select 10;" \n
        "	diag_log (""PLAYER RESULT: "" + str(_isHiveOk));" \n
        "};" \n
        "" \n
@@ -664,15 +666,19 @@ class FSM
     class Phase_One
     {
       name = "Phase_One";
-      init = /*%FSM<STATEINIT""">*/"if ((!isNil ""DZE_defaultSkin"") && _isNew && (_isInfected == 0)) then {" \n
-       "	if (dayz_selectGender == ""Survivor2_DZ"") then {" \n
-       "		_rand = floor(random (count (DZE_defaultSkin select 0)));" \n
-       "		_model = getText (configFile >> ""CfgSurvival"" >> ""Skins"" >> ((DZE_defaultSkin select 0) select _rand) >> ""playerModel""); //MALE" \n
-       "	} else {" \n
-       "		_rand = floor(random (count (DZE_defaultSkin select 1)));" \n
-       "		_model = getText (configFile >> ""CfgSurvival"" >> ""Skins"" >> ((DZE_defaultSkin select 1) select _rand) >> ""playerModel""); //FEMALE" \n
+      init = /*%FSM<STATEINIT""">*/"//Set to female version of bandit/hero skin" \n
+       "if (_isNew) then {" \n
+       "	if (dayz_selectGender != ""Survivor2_DZ"") then {" \n
+       "		if (_model == ""Survivor3_DZ"") then {" \n
+       "			_model = ""SurvivorWurban_DZ"";" \n
+       "		};" \n
+       "		if (_model == ""Bandit1_DZ"") then {" \n
+       "			_model = ""BanditW2_DZ"";" \n
+       "		};" \n
        "	};" \n
        "};" \n
+       "" \n
+       "dayz_DisplayGenderSelect = false;" \n
        "" \n
        "dayz_playerName = name player;" \n
        "_model call player_switchModel;" \n
@@ -933,7 +939,7 @@ class FSM
       name = "Position";
       init = /*%FSM<STATEINIT""">*/"//Location" \n
        "_myLoc = getPosATL player;" \n
-       "" \n
+       "if (_debug) then { diag_log(""PLOGIN :Position Started""); };" \n
        "dayz_loadScreenMsg = ""ZombZ: Setup Completed, Loading Display..."";" \n
        "" \n
        "//GUI" \n
@@ -957,7 +963,8 @@ class FSM
        "	};" \n
        "};" \n
        "" \n
-       "call ui_changeDisplay;"/*%FSM</STATEINIT""">*/;
+       "call ui_changeDisplay;" \n
+       "if (_debug) then { diag_log(""PLOGIN :Position Finished""); };"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -989,7 +996,7 @@ class FSM
     {
       name = "Load_In";
       init = /*%FSM<STATEINIT""">*/"//Reveal action types" \n
-       "" \n
+       "if (_debug) then { diag_log(""PLOGIN: Load-In Started""); };" \n
        "{player reveal _x} count (nearestObjects [getPosATL player, dayz_reveal, 50]);" \n
        "" \n
        "dayz_clientPreload = true;" \n
@@ -1004,7 +1011,9 @@ class FSM
        "	} else {" \n
        "		 _id = [_x,1] spawn object_roadFlare " \n
        "	};" \n
-       " } count (allMissionObjects ""LitObject"");"/*%FSM</STATEINIT""">*/;
+       " } count (allMissionObjects ""LitObject"");" \n
+       "" \n
+       "if (_debug) then { diag_log(""PLOGIN: Load-In Finished""); };"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -1054,12 +1063,14 @@ class FSM
     class Preload_Display
     {
       name = "Preload_Display";
-      init = /*%FSM<STATEINIT""">*/"dayz_lastCheckBit = 0;" \n
+      init = /*%FSM<STATEINIT""">*/"if (_debug) then { diag_log(""PLOGIN: Pre-Load Display Started""); };" \n
+       "" \n
+       "dayz_lastCheckBit = 0;" \n
        "" \n
        "(findDisplay 46) displayAddEventHandler [""KeyDown"",""_this call compile preprocessFileLineNumbers """"actions\dayz_spaceInterrupt.sqf""""""];" \n
        "player disableConversation true;" \n
        "" \n
-       "eh_player_killed = player addeventhandler [""FiredNear"",{_this call player_weaponFiredNear;} ];" \n
+       "zzEhFn = player addeventhandler [""FiredNear"",{_this call player_weaponFiredNear;} ];" \n
        "//_eh_combat_projectilenear = player addEventHandler [""IncomingFire"",{_this call player_projectileNear;}];" \n
        "" \n
        "//Select Weapon" \n
@@ -1143,7 +1154,7 @@ class FSM
        "	};" \n
        "};" \n
        "" \n
-       ""/*%FSM</STATEINIT""">*/;
+       "if (_debug) then { diag_log(""PLOGIN: Pre-Load Display Finished""); };"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -1164,13 +1175,17 @@ class FSM
     class Initialize
     {
       name = "Initialize";
-      init = /*%FSM<STATEINIT""">*/"//Medical" \n
-       "dayz_medicalH = 	[] execVM ""\z\addons\dayz_code\medical\init_medical.sqf"";	//Medical Monitor Script (client only)" \n
+      init = /*%FSM<STATEINIT""">*/"if (_debug) then { diag_log(""PLOGIN: Final Initialize Started""); };" \n
+       "" \n
+       "//Medical" \n
+       "dayz_medicalH = [] execVM ""init\med_init.sqf"";	//Client Medical Loop" \n
        "[player] call fnc_usec_damageHandle;" \n
+       "" \n
        "if (r_player_unconscious) then {" \n
        "	r_player_timeout = player getVariable[""unconsciousTime"",0];" \n
        "	player playActionNow ""Die"";" \n
        "};" \n
+       "" \n
        "player addEventHandler [""AnimChanged"", { (_this) spawn p2_antiWallCrawl; }];" \n
        "" \n
        "player allowDamage true;" \n
@@ -1276,7 +1291,9 @@ class FSM
        "		sleep 1;" \n
        "		_counter = _counter + 1;" \n
        "	};" \n
-       "};"/*%FSM</STATEINIT""">*/;
+       "};" \n
+       "" \n
+       "if (_debug) then { diag_log(""PLOGIN: Final Initialize Finished""); };"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -1316,7 +1333,8 @@ class FSM
        "publicVariableServer ""PVDZE_plr_LoginRecord"";" \n
        "" \n
        "endLoadingScreen;" \n
-       ""/*%FSM</STATEINIT""">*/;
+       "" \n
+       "diag_log(""PLOGIN: Finished"");"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -1372,6 +1390,7 @@ class FSM
        "1 cutText ["""", ""BLACK"",0];" \n
        "endLoadingScreen;" \n
        "createDialog ""RscDisplayGenderSelect"";" \n
+       "dayz_DisplayGenderSelect = true;" \n
        "freshSpawn = 2;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -1393,7 +1412,14 @@ class FSM
     class Process
     {
       name = "Process";
-      init = /*%FSM<STATEINIT""">*/"_model = dayz_selectGender;"/*%FSM</STATEINIT""">*/;
+      init = /*%FSM<STATEINIT""">*/"if (dayz_selectGender != ""Survivor2_DZ"") then {" \n
+       "	if (_model == ""Survivor3_DZ"") then {" \n
+       "		_model = ""SurvivorWurban_DZ"";" \n
+       "	};" \n
+       "	if (_model == ""Bandit1_DZ"") then {" \n
+       "		_model = ""BanditW2_DZ"";" \n
+       "	};" \n
+       "};"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -1450,13 +1476,12 @@ class FSM
     class Stream
     {
       name = "Stream";
-      init = /*%FSM<STATEINIT""">*/"//stream in location" \n
-       "//[false] call stream_locationCheck;" \n
-       "" \n
+      init = /*%FSM<STATEINIT""">*/"if (_debug) then { diag_log(""PLOGIN :Stream Started""); };" \n
        "_zombies = (getPosATL player) nearEntities [""zZombie_Base"",25];" \n
        "{deleteVehicle _x} count _zombies;" \n
        "" \n
-       "endLoadingScreen;"/*%FSM</STATEINIT""">*/;
+       "endLoadingScreen;" \n
+       "if (_debug) then { diag_log(""PLOGIN :Stream Finished""); };"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
