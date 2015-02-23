@@ -54,12 +54,14 @@ Z_fillBuyList = {
 					if(_type == "trade_items")then{
 						_pic = getText (configFile >> 'CfgMagazines' >> _y2 >> 'picture');
 						_text = getText (configFile >> 'CfgMagazines' >> _y2 >> 'displayName');
+						if (isNil '_text') then { _text = _y2 }; if (_text == "Supply Crate") then { _text = _y2; };
 						Z_BuyArray set [count(Z_BuyArray) , [_y2,_type,_buy select 0,_text,_pic]];
 						_totalPrice = _totalPrice + (_buy select 0);																				
 					};
 					if(_type == "trade_weapons")then{
 						_pic = getText (configFile >> 'CfgWeapons' >> _y2 >> 'picture');
 						_text = getText (configFile >> 'CfgWeapons' >> _y2 >> 'displayName');
+						if (isNil '_text') then { _text = _y2 }; 
 						Z_BuyArray set [count(Z_BuyArray) , [_y2,_type,_buy select 0,_text,_pic]];
 						_totalPrice = _totalPrice + (_buy select 0);	
 					};
@@ -116,7 +118,7 @@ Z_checkArrayInConfig = {
 					_excists = isClass(missionConfigFile >> "CfgTraderCategory"  >> _cat >> _y2 );
 				};
 
-				_pthrough = ((_forEachIndex / ((count _arrayOfTraderCat) - 1)) * 100);
+				_pthrough = ((_forEachIndex / ((count _arrayOfTraderCat))) * 100);
 				ctrlSetText [7413, format["Scanning List %3/%4...(%1%2)", round _pthrough, "%", _forEachIndex, count _arrayOfTraderCat]];
 
 				if(_excists)exitWith{
@@ -144,6 +146,8 @@ Z_checkArrayInConfig = {
 					};
 					
 					if( isNil '_text')then{_text = _y;};
+					if (_text == "Supply Crate") then { _text = _y;	};
+
 					Z_SellableArray set [count(Z_SellableArray) , [_y,_type,_sell select 0,_text,_pic]];
 					_totalPrice = _totalPrice + (_sell select 0);				
 				};					
@@ -155,7 +159,8 @@ Z_checkArrayInConfig = {
 			_extraText = getText (configFile >> 'CfgVehicles' >> _extraText >> 'displayName');
 		};
 		if (isNil '_extraText')then{_extraText = _backUpText;};
-		
+		if (_extraText == "Supply Crate") then { _extraText = _backUpText;	};
+
 		_ctrltext = format["I would offer %1 %2.", _totalPrice,CurrencyName];
 		ctrlSetText [7413, _ctrltext];		
 		_ctrltext = format["I accept %1 items from %2...", count(Z_SellableArray) , _extraText];
