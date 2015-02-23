@@ -9,10 +9,10 @@ if (!(isClass (configFile >> "CfgVehicles" >> _model))) exitWith { cutText ['Err
 _old = player;
 player allowDamage false;
 
-player removeEventHandler ["FiredNear",eh_player_killed];
-player removeEventHandler ["HandleDamage",mydamage_eh1];
-player removeEventHandler ["Killed",mydamage_eh3];
-player removeEventHandler ["Fired",mydamage_eh2];
+player removeEventHandler ["FiredNear",zzEhFn];
+player removeEventHandler ["HandleDamage",zzEhDmg];
+player removeEventHandler ["Killed",zzEhKi];
+player removeEventHandler ["Fired",zzEhFi];
 
 _updates = 		player getVariable["updatePlayer",[false,false,false,false,false]];
 _updates set [0,true];
@@ -79,7 +79,7 @@ player setVariable["tagList",_tagList,true];
 
 call dayz_resetSelfActions;
 
-eh_player_killed = player addeventhandler ["FiredNear",{_this call player_weaponFiredNear;} ];
+zzEhFn = player addeventhandler ["FiredNear",{_this call player_weaponFiredNear;} ];
 player addEventHandler ["AnimChanged", { (_this) spawn p2_antiWallCrawl; }];
 [player] call fnc_usec_damageHandle;
 player allowDamage true;
