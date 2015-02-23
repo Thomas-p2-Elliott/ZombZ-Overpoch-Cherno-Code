@@ -32,4 +32,4 @@ PVDZ_OBJ_DEPLOY_PACK = [_obj,player];
 publicVariableServer "PVDZ_OBJ_DEPLOY_PACK";
 
 systemChat ("You have packed the " + typeOf _obj);
-systemChat ("Look on the ground for your materials!");
+systemChat ("Look on the ground or in your backpack for your materials!");
