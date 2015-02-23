@@ -2,7 +2,7 @@
 P2DZ_debugLockUnlock = true;
 
 
-private["_player", "_obj", "_objectID", "_objectUID", "_statusText", "_PUID", "_status","_log","_objGold","_gold"];
+private["_player", "_obj", "_objectID", "_objectUID", "_statusText", "_PUID", "_status","_objGold","_gold"];
 _player = 		_this select 0;
 _obj = 			_this select 1;
 _status = 		_this select 2;
@@ -124,7 +124,47 @@ if (!isNull(_newObject)) then {
 	diag_log("server_logUnlockLockEvent: ERROR: " + str _this);
 };
 
-_log = format["%1", str _this];
-_log call stats_logUnlock;
-
 deleteVehicle _obj;
+
+private["_plyrName","_plyrUID","_plyrLoc","_objName","_newObjName","_objLoc","_log","_log2"];
+_plyrName = name _player;
+_plyrUID = getPlayerUID _player;
+_plyrLoc = position _player;
+_objName = typeOf _obj;
+_newObjName = typeOf _newObject;
+_objLoc = position _obj;
+
+//Log Format:Database
+//	PlayerName, PlayerUID, Player Location, Lock/Unlock, Object ClassName, New Object Classname, Object ID, Object UID, Object Gold, Object Location, Server Number
+_log2 = format ["%1(_GLS_)%2(_GLS_)%3(_GLS_)%4(_GLS_)%5(_GLS_)%6(_GLS_)%7(_GLS_)%8(_GLS_)%9(_GLS_)%10(_GLS)%11",
+_plyrName,
+_plyrUID,
+_plyrLoc,
+_statusText,
+_objName,
+_newObjName,
+_objectID,
+_objectUID,
+_objGold,
+_objLoc,
+GORSYSERVERNUM];
+
+//Log Format:Human
+//	PlayerName, PlayerUID, Player Location, Lock/Unlock, Object ClassName, New Object Classname, Object ID, Object UID, Object Gold, Object Location, Server Number
+_log = format ["PlayerName:	(%1)	PlayerUID:	(%2)	PlayerLocation:	(%3)	Action:	(%4)	ObjectName:	(%5)	NewObjectName:	(%6)	ObjectID (Hive):	(%7)	ObjectUID(Hive):	(%8)	ObjectGold:	(%9)	ObjectLocation:	(%10)		ServerNumber:	(%11)",
+_plyrName,
+_plyrUID,
+_plyrLoc,
+_statusText,
+_objName,
+_newObjName,
+_objectID,
+_objectUID,
+_objGold,
+_objLoc,
+GORSYSERVERNUM];
+
+
+_log call stats_logUnlock;
+_log2 call stats_logUnlock;
+
