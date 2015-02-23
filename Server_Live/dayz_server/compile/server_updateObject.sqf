@@ -147,6 +147,7 @@ _object_killed = {
 	} else {
 		_key = format["CHILD:306:%1:%2:%3:",_objectID,_array,_damage];
 	};
+	
 	//diag_log ("HIVE: WRITE: "+ str(_key));
 	_key call server_hiveWrite;
 	_object setVariable ["needUpdate",false,true];
@@ -157,7 +158,7 @@ _object_killed = {
 		_objUID	= _object getVariable['ObjectUID','0'];
 		_worldSpace = getPosATL _object;
 		if (getPlayerUID _killer != "") then {
-			_name = if (alive _killer) then { name _killer; } else { format["OBJECT %1", _killer]; };
+			if (alive _killer) then { _name = name _killer; } else { _name = format["OBJECT %1", _killer]; };
 			_log = format["Vehicle killed: Vehicle %1 (TYPE: %2), CharacterID: %3, ObjectID: %4, ObjectUID: %5, Position: %6, Killer: %7 (UID: %8)", _object, (typeOf _object), _charID, _objID, _objUID, _worldSpace, _name, (getPlayerUID _killer)];
 			_log call stats_vehicleKills;
 
@@ -187,28 +188,67 @@ _object_repair = {
 };
 
 
+
 _object_gold = {
-	private["_objGoldVar","_key"];
+	private["_objGoldVar","_key","_d","_p2q","_p2a"];
+	_d = P2D_H;
+
 	_objGoldVar = _object getVariable ["ZombZGold", 0];
 	if (isNil "_objGoldVar") then { _objGoldVar = 0; };
 	if (!(typeName _objGoldVar == typeName 0)) then { _objGoldVar = 0; };
-	_objGoldVar = [_objGoldVar,0];
+	_p2q = nil; _p2q = false;
+	
+	//if (_d) then { diag_log(format["HIVE:	P2H_LGSR@Start:	%1 ", (P2H_LGSR)]); };
+
+	{
+	 	 if (_x select 1 == _object) then {
+			if ((_x select 2) == _objGoldVar && ((diag_tickTime - (_x select 0)) < 120)) then {
+				_p2q = true;
+				//if (_d) then { diag_log("HIVE: Data Ignored (Data Same as Recent(120s) send):_x: " + str _x); };
+			};
+		};
+	} forEach P2H_LGSR;
+
+	//will exit here if cache detects it as recent data
+	if (_p2q) exitWith { _p2q = nil; }; _p2q = nil;
+
+	//last gold save request array: [[diag_tickTime, Object, LastSavedObjectGold],...]
+	_p2a = false;
+
+	{
+	 	 if (_x select 1 == _object) then {
+			_p2a = true;
+			P2H_LGSR set [_foreachindex, [diag_tickTime,_object,_objGoldVar]];
+			//if (_d) then { diag_log(format["HIVE:	P2H_LGSR@UdateExisting:	%1 ", (P2H_LGSR)]); };
+		};
+		if (((diag_tickTime - (_x select 0)) > 120)) then {
+			P2H_LGSR set [_foreachindex, -1];
+			P2H_LGSR = P2H_LGSR - [-1];
+			//if (_d) then { diag_log(format["HIVE:	P2H_LGSR@RemoveOld:	%1 ", (P2H_LGSR)]); };
+		};
+	} forEach P2H_LGSR;
+
+	if (!_p2a) then {
+		P2H_LGSR set [count P2H_LGSR, [diag_tickTime,_object,_objGoldVar]];
+		//if (_d) then { diag_log(format["HIVE:	P2H_LGSR@AddNew:	%1 ", (P2H_LGSR)]); };
+	};
+
+	//if (_d) then { diag_log(format["HIVE:	P2H_LGSR@End:	%1 ", (P2H_LGSR)]); };
+
+	//0 to be used in future for...something...ATMs? LocalBoxes?! What?!
+	_objGoldVar = [_objGoldVar,0]; 
+
 	if (_objectID == "0") then {
 		_key = format["CHILD:323:%1:%2:",_uid,_objGoldVar];
 		//diag_log("P2DEBUG: _object_gold by UID");
-		//diag_log("HIVE: Data Sent:" + str _key);
+		if (_d) then { diag_log("HIVE:byUID: Data Sent:" + str _key); };
 	} else {
 		_key = format["CHILD:322:%1:%2:",_objectID,_objGoldVar];
 		//diag_log("P2DEBUG: _object_gold by objectID");
-		//diag_log("HIVE: Data Sent:" + str _key);
+		if (_d) then { diag_log("HIVE:byID: Data Sent:" + str _key); };
 	};
-	_key call server_hiveWrite;
 
-	if ((_objGoldVar select 0) > 0) then {
-		[_object,true] call fnc_removeExtraBars;
-	} else {
-		[_object,false] call fnc_removeExtraBars;
-	};
+	_key call server_hiveWrite;
 };
 
 
