@@ -29,9 +29,13 @@ public:
 	~SqlCharDataSource();
 
 	Sqf::Value fetchCharacterInitial( string playerId, int serverId, const string& playerName ) override;
+	Sqf::Value fetchPackages( string playerId, int serverId ) override;
 	Sqf::Value fetchCharacterDetails( int characterId ) override;
 	Sqf::Value fetchTraderObject( int traderObjectId, int action) override;
+	bool updateMorality(string playerUID, int morality) override;
 	bool updateDebugMonSettings(string playerUID, const Sqf::Value& debugMonSettings) override;
+	bool claimPackage(string playerUID, const Sqf::Value& packageArray) override;
+
 	bool updateCharacter( int characterId, int serverId, const FieldsType& fields ) override;
 	bool initCharacter( int characterId, const Sqf::Value& inventory, const Sqf::Value& backpack ) override;
 	bool killCharacter( int characterId, int duration, int infected ) override;
@@ -47,8 +51,11 @@ private:
 	SqlStatementID _stmtUpdateCharacterLastLogin;
 	SqlStatementID _stmtInsertNewCharacter;
 	SqlStatementID _stmtInitCharacter;
+	SqlStatementID _stmtChangePlyrSetting;
 	SqlStatementID _stmtKillCharacter;
 	SqlStatementID _stmtupdateDebugMonSettings;
+	SqlStatementID _stmtClaimPackage;
+	SqlStatementID _stmtUpdateMorality;
 	SqlStatementID _stmtRecordLogin;
 	SqlStatementID _stmtTradeObjectBuy;
 	SqlStatementID _stmtTradeObjectSell;

@@ -88,6 +88,8 @@ private:
 	Sqf::Value vehicleDamaged(Sqf::Parameters params);
 
 	Sqf::Value loadPlayer(Sqf::Parameters params);
+	Sqf::Value loadPackages(Sqf::Parameters params);
+
 	Sqf::Value loadCharacterDetails(Sqf::Parameters params);
 	
 	Sqf::Value loadTraderDetails(Sqf::Parameters params);
@@ -101,6 +103,8 @@ private:
 	Sqf::Value playerInit(Sqf::Parameters params);
 	Sqf::Value playerDeath(Sqf::Parameters params);
 	Sqf::Value playerUpdateDebugMon(Sqf::Parameters params);
+	Sqf::Value playerClaimPackage(Sqf::Parameters params);
+	Sqf::Value playerUpdateMorality(Sqf::Parameters params);
 
 	Sqf::Value dataRequest(Sqf::Parameters params, bool async = false);
 	Sqf::Value dataStatus(Sqf::Parameters params);

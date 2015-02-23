@@ -144,19 +144,25 @@ HiveExtApp::HiveExtApp(string suffixDir) : AppServer("HiveExt",suffixDir), _serv
 	handlers[398] = boost::bind(&HiveExtApp::tradeObject,this,_1);
 	handlers[399] = boost::bind(&HiveExtApp::loadTraderDetails,this,_1);
 	// End custom
-
+	//VARIOUS EDITS TO ADD GOLD TO CHAR DATA - BY PLAYER2
 	handlers[309] = boost::bind(&HiveExtApp::objectInventory,this,_1,true);
 	handlers[310] = boost::bind(&HiveExtApp::objectDelete,this,_1,true);
 	handlers[400] = boost::bind(&HiveExtApp::serverShutdown,this,_1);		//Shut down the hiveExt instance
 	//player/character loads
-	handlers[101] = boost::bind(&HiveExtApp::loadPlayer,this,_1);
+	handlers[101] = boost::bind(&HiveExtApp::loadPlayer,this,_1);			//now includes playerMorality & debugSetting & packageArray - player2
 	handlers[102] = boost::bind(&HiveExtApp::loadCharacterDetails,this,_1);
 	handlers[103] = boost::bind(&HiveExtApp::recordCharacterLogin,this,_1);
 	//character updates
 	handlers[201] = boost::bind(&HiveExtApp::playerUpdate,this,_1);
 	handlers[202] = boost::bind(&HiveExtApp::playerDeath,this,_1);
 	handlers[203] = boost::bind(&HiveExtApp::playerInit,this,_1);
-	handlers[222] = boost::bind(&HiveExtApp::playerUpdateDebugMon, this, _1);
+	handlers[222] = boost::bind(&HiveExtApp::playerUpdateDebugMon, this, _1); //sets debugMonSetting -player2
+	handlers[333] = boost::bind(&HiveExtApp::playerUpdateMorality, this, _1); //sets PlayerMorality -player2
+
+	//donator packages by player2
+	handlers[420] = boost::bind(&HiveExtApp::playerClaimPackage, this, _1); //sets packages array
+	handlers[421] = boost::bind(&HiveExtApp::loadPackages, this, _1);		//gets packages array
+
 }
 
 #include <boost/lexical_cast.hpp>
@@ -442,6 +448,13 @@ Sqf::Value HiveExtApp::loadPlayer( Sqf::Parameters params )
 	return _charData->fetchCharacterInitial(playerId,getServerId(),playerName);
 }
 
+Sqf::Value HiveExtApp::loadPackages(Sqf::Parameters params)
+{
+	string playerId = Sqf::GetStringAny(params.at(0));
+
+	return _charData->fetchPackages(playerId, getServerId());
+}
+
 Sqf::Value HiveExtApp::loadCharacterDetails( Sqf::Parameters params )
 {
 	int characterId = Sqf::GetIntAny(params.at(0));
@@ -624,6 +637,24 @@ Sqf::Value HiveExtApp::playerUpdateDebugMon(Sqf::Parameters params)
 	Sqf::Value debugMonSettings = boost::get<Sqf::Parameters>(params.at(1));
 
 	return ReturnBooleanStatus(_charData->updateDebugMonSettings(playerId, debugMonSettings));
+}
+
+Sqf::Value HiveExtApp::playerClaimPackage(Sqf::Parameters params)
+{
+	string playerId = Sqf::GetStringAny(params.at(0));
+	Sqf::Value packageArray = boost::get<Sqf::Parameters>(params.at(1));
+
+	return ReturnBooleanStatus(_charData->claimPackage(playerId, packageArray));
+}
+
+
+
+Sqf::Value HiveExtApp::playerUpdateMorality(Sqf::Parameters params)
+{
+	string playerId = Sqf::GetStringAny(params.at(0));
+	int morality = Sqf::GetIntAny(params.at(1));
+
+	return ReturnBooleanStatus(_charData->updateMorality(playerId, morality));
 }
 
 

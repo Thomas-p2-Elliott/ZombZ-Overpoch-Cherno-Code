@@ -31,13 +31,42 @@ SqlCharDataSource::SqlCharDataSource( Poco::Logger& logger, shared_ptr<Database>
 
 SqlCharDataSource::~SqlCharDataSource() {}
 
+Sqf::Value SqlCharDataSource::fetchPackages(string playerId, int serverId)
+{
+	Sqf::Value packageReturn = lexical_cast<Sqf::Value>("[]"); //Default donorPackages
+	{
+		auto packageRes(getDB()->queryParams(("SELECT `DonorPackages` FROM `Player_DATA` WHERE `" + _idFieldName + "`='%s'").c_str(), getDB()->escape(playerId).c_str()));
+
+		if (packageRes && packageRes->fetchRow())
+		{
+
+			try
+			{
+				packageReturn = lexical_cast<Sqf::Value>(packageRes->at(0).getString());
+			}
+			catch (bad_lexical_cast)
+			{
+				_logger.warning("Invalid donorPackages for PlayerUID('" + playerId + "'): " + packageRes->at(0).getString());
+			}
+		}
+	}
+
+	Sqf::Parameters packageRetVal;
+	packageRetVal.push_back(string("PASS"));
+	packageRetVal.push_back(packageReturn);
+	return packageRetVal;
+}
+
 Sqf::Value SqlCharDataSource::fetchCharacterInitial( string playerId, int serverId, const string& playerName )
 {
 	bool newPlayer = false;
 	Sqf::Value debugMonSettings = lexical_cast<Sqf::Value>("[0,0,0,0.2]"); //Default black debug monitor
+	Sqf::Value donorPackages = lexical_cast<Sqf::Value>("[]"); //Default donorPackages
+
+	int morality = -6666;	//default morality setting
 	//make sure player exists in db
 	{
-		auto playerRes(getDB()->queryParams(("SELECT `PlayerName`, `PlayerSex`, `DebugSetting` FROM `Player_DATA` WHERE `"+_idFieldName+"`='%s'").c_str(), getDB()->escape(playerId).c_str()));
+		auto playerRes(getDB()->queryParams(("SELECT `PlayerName`, `PlayerSex`, `DebugSetting`, `PlayerMorality`, `DonorPackages` FROM `Player_DATA` WHERE `"+_idFieldName+"`='%s'").c_str(), getDB()->escape(playerId).c_str()));
 		if (playerRes && playerRes->fetchRow())
 		{
 			newPlayer = false;
@@ -48,8 +77,28 @@ Sqf::Value SqlCharDataSource::fetchCharacterInitial( string playerId, int server
 			}
 			catch (bad_lexical_cast)
 			{
-				_logger.warning("Invalid DebugSetting for CharacterID('" + playerId + "'): " + playerRes->at(2).getString());
+				_logger.warning("Invalid DebugSetting for PlayerUID('" + playerId + "'): " + playerRes->at(2).getString());
 			}
+
+			//get donorPackages
+			try
+			{
+				donorPackages = lexical_cast<Sqf::Value>(playerRes->at(4).getString());
+			}
+			catch (bad_lexical_cast)
+			{
+				_logger.warning("Invalid donorPackages for PlayerUID('" + playerId + "'): " + playerRes->at(4).getString());
+			}
+
+			try
+			{
+				morality = boost::get<int>(lexical_cast<Sqf::Value>(playerRes->at(3).getInt32()));
+			}
+			catch (...)
+			{
+				morality = -6666;
+			}
+
 			//update player name if not current
 			if (playerRes->at(0).getString() != playerName)
 			{
@@ -246,6 +295,8 @@ Sqf::Value SqlCharDataSource::fetchCharacterInitial( string playerId, int server
 	retVal.push_back(0.96f);
 	retVal.push_back(debugMonSettings);
 	retVal.push_back(distanceFoot);
+	retVal.push_back(morality);
+	retVal.push_back(donorPackages);
 	return retVal;
 }
 
@@ -402,7 +453,8 @@ bool SqlCharDataSource::updateCharacter( int characterId, int serverId, const Fi
 
 bool SqlCharDataSource::initCharacter( int characterId, const Sqf::Value& inventory, const Sqf::Value& backpack )
 {
-	auto stmt = getDB()->makeStatement(_stmtInitCharacter, "UPDATE `Character_DATA` SET `Inventory` = ? , `Backpack` = ? WHERE `CharacterID` = ?");
+	auto stmt = getDB()->makeStatement(_stmtInitCharacter,
+		"UPDATE `Character_DATA` SET `Inventory` = ? , `Backpack` = ? WHERE `CharacterID` = ?");
 	stmt->addString(lexical_cast<string>(inventory));
 	stmt->addString(lexical_cast<string>(backpack));
 	stmt->addInt32(characterId);
@@ -428,8 +480,35 @@ bool SqlCharDataSource::killCharacter( int characterId, int duration, int infect
 bool SqlCharDataSource::updateDebugMonSettings(string playerUID, const Sqf::Value& debugMonSettings)
 {
 
-	auto stmt = getDB()->makeStatement(_stmtInitCharacter, "UPDATE `player_data` SET `DebugSetting` = ? WHERE `PlayerUID` = ?");
+	auto stmt = getDB()->makeStatement(_stmtChangePlyrSetting,
+		"UPDATE `player_data` SET `DebugSetting` = ? WHERE `PlayerUID` = ?");
 	stmt->addString(lexical_cast<string>(debugMonSettings));
+	stmt->addString(lexical_cast<string>(playerUID));
+	bool exRes = stmt->execute();
+	poco_assert(exRes == true);
+
+	return exRes;
+}
+
+bool SqlCharDataSource::claimPackage(string playerUID, const Sqf::Value& packageArray)
+{
+
+	auto stmt = getDB()->makeStatement(_stmtClaimPackage,
+		"UPDATE `player_data` SET `DonorPackages` = ? WHERE `PlayerUID` = ?");
+	stmt->addString(lexical_cast<string>(packageArray));
+	stmt->addString(lexical_cast<string>(playerUID));
+	bool exRes = stmt->execute();
+	poco_assert(exRes == true);
+
+	return exRes;
+}
+
+bool SqlCharDataSource::updateMorality(string playerUID, int morality)
+{
+
+	auto stmt = getDB()->makeStatement(_stmtUpdateMorality,
+		"UPDATE `player_data` SET `PlayerMorality` = ? WHERE `PlayerUID` = ?");
+	stmt->addInt32(morality);
 	stmt->addString(lexical_cast<string>(playerUID));
 	bool exRes = stmt->execute();
 	poco_assert(exRes == true);
