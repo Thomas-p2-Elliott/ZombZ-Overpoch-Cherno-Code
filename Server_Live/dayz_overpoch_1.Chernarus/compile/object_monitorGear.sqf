@@ -1,4 +1,4 @@
-private["_isOk","_countMagazines","_countWeapons","_countBackpacks","_countFreeSlots","_getControlText","_setControlText","_object","_objectName","_controlText","_magazinesMax","_weaponsMax","_backpacksMax","_distance","_isVehicle","_isMan","_isStorage","_isOK","_magazines","_weapons","_backpacks","_freeSlots","_timeout"];
+private["_isOk","_countMagazines","_countWeapons","_countBackpacks","_countFreeSlots","_getControlText","_setControlText","_object","_objectName","_controlText","_magazinesMax","_weaponsMax","_backpacksMax","_distance","_isVehicle","_isMan","_isStorage","_isOK","_magazines","_weapons","_backpacks","_freeSlots","_timeout","_cnt"];
 
 _isOk = false;
 
@@ -74,7 +74,7 @@ if (vehicle player != player) then {
 	_object = vehicle player;
 } else {
 	_object = cursorTarget;
-	if (_object isKindOf "WeaponHolder" && {(str(getMagazineCargo cursorTarget select 0) == "[""ItemGoldBar10oz""]")}) then {
+	if (_object isKindOf "WeaponHolder" && {("ItemGoldBar10oz" in (getMagazineCargo cursorTarget select 0))}) then {
 		P2DZE_gearOnWeaponHolder = true;
 	} else {
 		P2DZE_gearOnWeaponHolder = false;
@@ -210,7 +210,19 @@ if (!(typeName _gv == typeName 0)) then {
 	_gv = 0;
 };
 
-if (P2DZE_gearOnContainer && ((({_x == "ItemGoldBar10oz"} count (magazines cursorTarget)) < 1) && (({_x == "ItemGoldBar10oz"} count ((getMagazineCargo cursorTarget) select 0)) < 1)) && (_gv > 0)) then {
+_cnt = ({_x == "ItemGoldBar10oz"} count ((getMagazineCargo cursorTarget) select 0));
+
+if ((P2DZE_gearOnContainer || P2DZE_gearOnWeaponHolder) && (_cnt > 0) && (_gv < 1)) exitWith {
+	if ((diag_tickTime - P2DZE_LRR) >  10) then {
+		P2DZE_plr_rGold = _object;
+		publicVariableServer "P2DZE_plr_rGold";
+		P2DZE_LRR = diag_tickTime;
+		diag_log(format["Gold: %1 has gold item, but no gold value. Sending pubVar. Time Since Last: %2",typeOf _object, (diag_tickTime - P2DZE_LRR)]);
+		closeDialog 0;
+	};
+};
+
+if (P2DZE_gearOnContainer && ((({_x == "ItemGoldBar10oz"} count (magazines cursorTarget)) < 1) && (_cnt < 1)) && (_gv > 0)) then {
 	diag_log("P2DEBUG: object_monitorGear.sqf: Gold: " + (typeOf cursorTarget) + " had no gold item, not gonna go adding it. Checking some things before I ask the server to do it.");
 	//reset isOk val
 	_isOk = false;
@@ -269,9 +281,13 @@ if (P2DZE_gearOnContainer && ((({_x == "ItemGoldBar10oz"} count (magazines curso
 	};
 	
 	if (_isOk) then {
-		P2DZE_plr_gGold = _object;
-		publicVariableServer "P2DZE_plr_gGold";
-		systemChat(format["Gold: %1 has gold, but no gold item. Please re-open the gear menu to request a gold item.",typeOf _object]);
+		if ((diag_tickTime - P2DZE_LGR) >  10) then {
+			P2DZE_plr_gGold = _object;
+			publicVariableServer "P2DZE_plr_gGold";
+			P2DZE_LGR = diag_tickTime;
+			systemChat(format["Gold: %1 has gold, but no gold item. Please re-open the gear menu to request a gold item.",typeOf _object]);
+			closeDialog 0;
+		};
 	} else {
 		if (P2DZ_enableGoldSystemChat) then {
 			_magazines = [];
