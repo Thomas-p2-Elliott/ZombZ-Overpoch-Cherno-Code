@@ -21,8 +21,6 @@ if (isDedicated && !hasInterface || isServer) then {
 	DZE_FS_UseStaticVehicleSpawn = true;
 
 	//gold settings
-	P2DZ_giveNewSpawnsGold = true;		//server side var - give freshspawns gold? true/false
-	P2DZ_newSpawnGoldAmount = 5;		//new spawn gold amount
 	P2DZE_Gold_MaxPickup = 	(500 * 1000);	//max gold pickup (500k) - UNUSED FOR NOW
 
 	//Misc Map Spawn Settings
@@ -71,6 +69,10 @@ if (isDedicated && !hasInterface || isServer) then {
 	DZE_DeathMsgTitleText = false;
 	DZE_DeathMsgSide = false;
 	OldHeliCrash = true;
+
+	//misc vars
+	//last gold save request array: [diag_tickTime, Object, LastSavedObjectGold]
+	P2H_LGSR = [[0,objNull,0]];
 
 	//HashId System
 	_null = [] execVM "\z\addons\dayz_server\hashId.sqf";
