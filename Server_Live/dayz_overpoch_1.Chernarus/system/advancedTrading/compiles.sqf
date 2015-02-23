@@ -335,10 +335,7 @@ Z_SellItems = {
 			};
 
 		}count Z_SellArray;
-
-		PVDZE_obj_Trade = [player,0,1,"ZombZ",inTraderCity,"ItemGoldBar10oz","ZombZ",true,_p2s];
-		publicVariableServer  "PVDZE_obj_Trade";
-				 
+	 
 		if(Z_SellingFrom == 0)then{
 			_outcome = [unitBackpack player,_itemsArray,_weaponsArray] call ZUPA_fnc_removeWeaponsAndMagazinesCargo;
 		};
@@ -387,7 +384,11 @@ Z_SellItems = {
 			_total_currency_dry = call epoch_totalCurrency;
 			[player,(_total_currency_dry + _money)] call p2_gc;
 
-			systemChat format["[Trader] Received %1 %2", _money , CurrencyName];			
+			systemChat format["[Trader] Received %1 %2", _money , CurrencyName];
+			
+			if (((str inTraderCity == str "") || (str inTraderCity == str "Any") || (str inTraderCity == str "Unknown Trader City"))) then { inTraderCity = format["%1", mapGridPosition player]; };
+			PVDZE_obj_Trade = [player,0,1,"ZombZ",inTraderCity,"ItemGoldBar10oz","ZombZ",true,_p2s];
+			publicVariableServer  "PVDZE_obj_Trade";			
 		}else{
 			systemChat format["[Trader] The Money Value is not a number. Something went wrong. Sorry about that."];			
 		};									
@@ -546,6 +547,7 @@ Z_BuyItems = {
 					};					
 				} count Z_BuyingArray;									
 			};	
+			if (((str inTraderCity == str "") || (str inTraderCity == str "Any") || (str inTraderCity == str "Unknown Trader City"))) then { inTraderCity = format["%1", mapGridPosition player]; };
 
 			PVDZE_obj_Trade = [player,0,0,"ZombZ",inTraderCity,"ItemGoldBar10oz","ZombZ",true,_p2s];
 			publicVariableServer  "PVDZE_obj_Trade";
