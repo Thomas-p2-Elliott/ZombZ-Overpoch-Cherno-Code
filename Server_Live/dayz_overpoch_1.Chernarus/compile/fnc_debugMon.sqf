@@ -101,6 +101,82 @@ fnc_p2goldUI = {
 };
 
 
+
+
+fnc_p2flashGold = {
+	private["_in","_rt","_cl","_am","_fa","_di","_p","_r","_g"];
+	disableSerialization;
+	_in = nil; _r = 0; _g = 0; _p = "";
+	_in = _this;
+	_cl = _in select 0;
+	_am = _in select 1;
+	_rt = 5;
+
+	if (_cl) then {
+		_di = ((uiNamespace getVariable 'p2GoldUI') displayCtrl 8291);
+		_r = 1; _g = 0; _p = "";
+	} else {
+		_di = ((uiNamespace getVariable 'p2GoldUI') displayCtrl 8292);
+		_r = 0; _g = 1; _p = "+";
+	};
+
+	_di ctrlSetTextColor [_r,_g,0,1];
+	_di ctrlSetStructuredText parseText("<t align='right' size='0.95'>" + _p +  str _am + "</t>");
+
+	uiSleep (_rt - 1);
+	_fa = 1;
+	for "_i" from 1 to 100 do {
+		_fa = _fa - 0.01;
+		_di ctrlSetTextColor [_r,_g,0,_fa];
+		uiSleep 0.01;
+	};
+
+	_di ctrlSetStructuredText parseText(" ");
+}; 
+ 
+p2GoldFlashThread = nil;
+p2GoldFlashThread = [] spawn {
+	private["_p2o","_p2on","_p2n","_p2nn","_p2pm","_di","_rFT","_gFT","_dim","_dip"];
+	disableSerialization;
+	_di = nil; _rFT = nil; _gFT = nil;
+	waitUntil{_di = ((uiNamespace getVariable 'p2GoldUI') displayCtrl 8290); !isNil '_di'};
+	_di = ((uiNamespace getVariable 'p2GoldUI') displayCtrl 8290);
+	_dim = ((uiNamespace getVariable 'p2GoldUI') displayCtrl 8291);
+	_dip = ((uiNamespace getVariable 'p2GoldUI') displayCtrl 8292);
+	while {true} do {
+		_p2o = ctrlText _di;
+		waitUntil{(_p2o != ctrlText _di)};
+		_p2n = ctrlText _di; 
+		_p2on = parseNumber _p2o;
+		_p2nn = parseNumber _p2n;
+		_p2pm = 0;
+		if (_p2on < _p2nn) then {
+			_p2pm = _p2nn - _p2on;			 
+		} else {
+			_p2pm = _p2nn - _p2on;
+		};
+		if (_p2pm < 0) then {
+			if (!isNil '_rFT') then {
+				_p2pm = _p2pm + (parseNumber (ctrlText _dim));
+				terminate _rFT; _rFT = nil; 
+				_rFT = [true,_p2pm] spawn fnc_p2flashGold;
+			} else {
+				_rFT = [true,_p2pm] spawn fnc_p2flashGold;
+			};
+		} else {
+			if (!isNil '_gFT') then {
+				_p2pm = _p2pm + (parseNumber (ctrlText _dip));
+				terminate _gFT; _gFT = nil; 
+				_gFT = [false,_p2pm] spawn fnc_p2flashGold;
+			} else {
+				_gFT = [false,_p2pm] spawn fnc_p2flashGold;
+			};
+		};
+	}; 
+};
+
+
+
 fnc_debugFull = {
 private ["_p2p","_p2ps","_p2totalPlayers","_p2within2500","_p2mkills","_p2bKills","_p2zKills","_p2wep","_p2skin","_zombzVehCount","_zombzZedCount","_zombztimeToRestart","_pDir","_gpsP2osZombZ","_p2bl","_p2c"];
 	P2DZ_humanity = (player getVariable['humanity', 0]);
