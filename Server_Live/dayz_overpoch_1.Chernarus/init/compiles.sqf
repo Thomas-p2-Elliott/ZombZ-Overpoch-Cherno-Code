@@ -28,6 +28,10 @@ if (!isDedicated) then {
 	player_spawnCheck = 			compile preprocessFileLineNumbers "compile\player_spawnCheck.sqf";
 	fnc_usec_unconscious =			compile preprocessFileLineNumbers "compile\fn_unconscious.sqf";
 
+	/*Vehicle Anims*/
+	mv22_pack = compile preprocessFileLineNumbers "\ca\air2\MV22\scripts\pack.sqf";
+	uh1y_pack = compile preprocessFileLineNumbers "\ca\air2\UH1Y\Scripts\fold.sqf";
+
 	/*SideChat Disabler*/
 	P2DZ_really_loud_sounds = 	{[60,15] call fnc_usec_pitchWhine;for "_i" from 1 to 15 do {playSound format ["%1",_this select 0];};};
 	P2DZ_double_cut = 			{1 cutText [format ["%1",_this select 0],"PLAIN DOWN"];2 cutText [format ["%1",_this select 0],"PLAIN"];};
@@ -71,9 +75,6 @@ if (!isDedicated) then {
 
 	/*Death Messages */
 	player_deathMessage = 			compile preprocessFileLineNumbers "compile\player_deathMessage.sqf";
-
-	/* Menu Text Compile */
-	[] call compile preprocessFileLineNumbers "system\menu.sqf";
 
 	player_traderCity = 			compile preprocessFileLineNumbers "compile\player_traderCity.sqf";
 
@@ -146,8 +147,6 @@ if (!isDedicated) then {
 	wild_spawnZombies = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\wild_spawnZombies.sqf";			//Server compile, used for loiter behaviour
 
 	dog_findTargetAgent = 		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\dog_findTargetAgent.sqf";
-
-	//actions
 
 	player_copyKey =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_copyKey.sqf";
 	player_loadCrate =			compile preprocessFileLineNumbers "\z\addons\dayz_code\actions\player_loadCrate.sqf";
@@ -285,6 +284,26 @@ if (!isDedicated) then {
 Both Server & Client Side Scripts
 ---------------------------------------------------------------------------*/
 
+	/*---------------------------------------------------------------------------
+	DDOP Taser Pack - Damage fixed by Player2
+	---------------------------------------------------------------------------*/
+	[] spawn { 
+		DDOPP_taser_handleHit = nil;
+		waitUntil {!isNil "DDOPP_taser_handleHit"};
+		DDOPP_taser_handleHit = {
+		    private ["_shooter","_shooter","_bullet"];
+		    _victim    = _this select 0;
+		    _shooter   = _this select 3;
+		    _bullet    = _this select 4;
+			
+		    if (_bullet in DDOPP_taser_arrBullet) then {
+		        [_victim, _shooter, DDOPP_taser_koTime] spawn DDOPP_taser_victimFx;
+		    };
+		};
+	};
+	[] execVM "\ddopp_taserpack\scripts\init_taser.sqf";
+	player setVariable 	["isTazed", false, true];
+
 	//modified
 	local_lockUnlock =				compile preprocessFileLineNumbers "compile\local_lockUnlock.sqf";			//When vehicle is local to unit perform locking vehicle
 	spawn_loot =					compile preprocessFileLineNumbers "compile\spawn_loot.sqf";
@@ -413,7 +432,7 @@ Both Server & Client Side Scripts
 		if (isServer) then {
 			_unit addEventHandler ["local", {_this call zombie_findOwner}];
 		};
-		_id = _unit addeventhandler["HandleDamage", { _this call local_zombieDamage; _this call DDOPP_taser_handleHit; }];
+		_id = _unit addeventhandler["HandleDamage", {  _this call DDOPP_taser_handleHit; _this call local_zombieDamage; }];
 		_id = _unit addeventhandler["Killed", { [_this, "zombieKills"] call local_eventKill }];
 	};
 
