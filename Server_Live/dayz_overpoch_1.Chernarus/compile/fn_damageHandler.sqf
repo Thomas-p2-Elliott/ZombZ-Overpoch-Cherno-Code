@@ -10,15 +10,18 @@ _unconscious = _unit getVariable ["NORRN_unconscious", false];
 _source = _this select 3;
 _ammo = _this select 4;
 _type = [_damage,_ammo] call fnc_usec_damageType;
-
+_isAI = false;
 _isMinor = (_hit in USEC_MinorWounds);
 _isHeadHit = (_hit == "head_hit");
 //_evType = "";
 //_recordable = false;
 _isPlayer = (isPlayer _source);
+_isAI = ((_source isKindOf "Man") && (_ammo != "zombie") && !(isPlayer _source));
 _humanityHit = 0;
 _myKills = 0;
 _unitIsPlayer = _unit == player;
+
+if (isNil '_isAI') then { _isAI = false; };
 
 if (_unitIsPlayer) then {
 	if (_hit == "") then {
@@ -60,23 +63,17 @@ if (_damage > 0.4) then {
 		_scale = _scale + 500;
 	};
 	if ((isPlayer _source) && !(player == _source)) then {
-		_scale = _scale + 800;
-		if (_isHeadHit) then {
-			_scale = _scale + 500;
-		};
+		_scale = _scale + 600;
+	};
+	if (_isAI) then {
+		_scale = _scale + 150;
 	};
 	switch (_type) do {
 		case 1: {_scale = _scale + 200};
 		case 2: {_scale = _scale + 200};
 	};
 	if (_unitIsPlayer) then {
-		//Cause blood loss
-		//Log Damage
-		/*
-		if (DZE_Debug_Damage) then {
-			diag_log ("DAMAGE: player hit by " + typeOf _source + " in " + _hit + " with " + _ammo + " for " + str(_damage) + " scaled " + str(_damage * _scale));
-		};
-		*/
+		//cause blood loss
 		r_player_blood = r_player_blood - (_damage * _scale);
 	};
 };
@@ -154,7 +151,7 @@ if (_damage > 0.4) then {	//0.25
 				player setVariable["USEC_inPain",true,true];
 			};
 		};
-		if ((_damage > 1.5) && _isHeadHit) then {
+		if ((_damage > 1.75) && _isHeadHit && !(_isAI)) then {
 			[_source,"shothead"] spawn player_death;
 		};
 	};
@@ -194,10 +191,15 @@ if (_damage > 0.4) then {	//0.25
 		
 	};
 };
+
+
 if (_type == 1) then {
 	/*
 		BALISTIC DAMAGE
 	*/
+	if (_isAI) then {
+		_damage = _damage / 2;
+	};
 	if ((_damage > 0.01) && (_unitIsPlayer)) then {
 		//affect the player
 		[20,45] call fnc_usec_pitchWhine; //Visual , Sound
@@ -221,6 +223,9 @@ if (_type == 2) then {
 	/*
 		HIGH CALIBRE
 	*/
+	if (_isAI) then {
+		_damage = _damage / 2;
+	};
 	if (_damage > 4) then {
 		//serious ballistic damage
 		if (_unitIsPlayer) then {
@@ -242,11 +247,12 @@ if (!_unconscious && !_isMinor && ((_damage > 2) || ((_damage > 0.5) && _isHeadH
 	[_unit,_damage] call fnc_usec_damageUnconscious;
 };
 
+//taser fix - removed from damagehandler
 if ((_this select 4) in DDOPP_taser_arrBullet) then {
 	[(_this select 0), (_this select 3), DDOPP_taser_koTime] spawn DDOPP_taser_victimFx;
 };
 
 //diag_log("DAMAGED!");
 //diag_log ("DAMAGE: player hit by " + typeOf _source + " in " + _hit + " with " + _ammo + " for " + str(_damage) + " scaled " + str(_damage * _scale));
-//diag_log (format["P2DMG: Dmg: (%1) Source/TypeOf: (%2) / (%3) Ammo: %4 Scaled Dmg: %5 HitPoint: %6 DmgType: %7", 
-//			str(_damage), str(_source), str(typeOf _source), str(_ammo), str(_damage * _scale), str(_hit), str(_type)])
+//diag_log(format["P2DMG: Dmg: (%1) Source/TypeOf: (%2) / (%3) Ammo: %4 Scaled Dmg: %5 HitPoint: %6 DmgType: %7", 
+//			str(_damage), str(_source), str(typeOf _source), str(_ammo), str(_damage * _scale), str(_hit), str(_type)]);
