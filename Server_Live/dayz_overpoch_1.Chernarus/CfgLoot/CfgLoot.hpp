@@ -38,20 +38,13 @@ TWSWeaps
 LauncherWeaps
 */
 
+//removed excess acrs for balancing
+//todo: balance
 ACRLowWeaps[] = {
-
-{"FHQ_ACR_BLK_CCO_F",0.50}, 
-{"FHQ_ACR_BLK_HWS_GL_SD_F",0.50}, 
-{"FHQ_ACR_SNW_HWS_SD_F",0.50}, 
-{"FHQ_ACR_TAN_HWS_F",0.50}, 
-{"FHQ_ACR_WDL_HWS_F",0.50}, 
-{"FHQ_ACR_WDL_HAMR",0.50}, 
 {"RH_acraim",0.50}, 
 {"RH_acreotech",0.50}, 
 {"RH_acrbeotech",0.50}, 
 {"RH_acrbglaim",0.50}, 
-{"FHQ_ACR_BLK_CCO_GL_SD_F",0.50}, 
-{"FHQ_ACR_TAN_HWS_SD",0.50}, 
 {"RH_acr",0.50}, 
 {"RH_acrgl",0.50}, 
 {"RH_acrglaim",0.50}, 
@@ -59,229 +52,85 @@ ACRLowWeaps[] = {
 {"RH_acrb",0.50}, 
 {"RH_acrbgl",0.50}, 
 {"RH_acrbgleotech",0.50}, 
-{"FHQ_ACR_WDL_IRN_F",0.50}, 
-{"FHQ_ACR_WDL_IRN_SD",0.50}, 
-{"FHQ_ACR_WDL_IRN_SD_F",0.50}, 
-{"FHQ_ACR_WDL_IRN_GL",0.50}, 
-{"FHQ_ACR_WDL_IRN_GL_F",0.50}, 
-{"FHQ_ACR_WDL_IRN_GL_SD",0.50}, 
 {"FHQ_ACR_WDL_CCO",0.50}, 
-{"FHQ_ACR_WDL_CCO_F",0.50}, 
 {"FHQ_ACR_WDL_CCO_SD",0.50}, 
-{"FHQ_ACR_WDL_CCO_GL",0.50}, 
-{"FHQ_ACR_WDL_CCO_GL_F",0.50}, 
-{"FHQ_ACR_WDL_CCO_GL_SD",0.50}, 
-{"FHQ_ACR_WDL_CCO_GL_SD_F",0.50}, 
 {"FHQ_ACR_WDL_HWS",0.50}, 
-{"FHQ_ACR_WDL_HWS_GL",0.50}, 
-{"FHQ_ACR_WDL_HWS_GL_F",0.50}, 
 {"FHQ_ACR_WDL_HWS_SD",0.50}, 
-{"FHQ_ACR_WDL_HWS_GL_SD",0.50}, 
-{"FHQ_ACR_WDL_HWS_GL_SD_F",0.50}, 
 {"FHQ_ACR_BLK_IRN",0.50}, 
-{"FHQ_ACR_BLK_IRN_F",0.50}, 
 {"FHQ_ACR_BLK_IRN_SD",0.50}, 
-{"FHQ_ACR_BLK_IRN_SD_F",0.50}, 
-{"FHQ_ACR_BLK_IRN_GL",0.50}, 
-{"FHQ_ACR_BLK_IRN_GL_F",0.50}, 
-{"FHQ_ACR_BLK_IRN_GL_SD",0.50}, 
-{"FHQ_ACR_BLK_IRN_GL_SD_F",0.50}, 
 {"FHQ_ACR_BLK_CCO",0.50}, 
 {"FHQ_ACR_BLK_CCO_SD",0.50}, 
-{"FHQ_ACR_BLK_CCO_GL",0.50}, 
-{"FHQ_ACR_BLK_CCO_GL_F",0.50}, 
-{"FHQ_ACR_BLK_CCO_GL_SD",0.50}, 
 {"FHQ_ACR_BLK_HWS",0.50}, 
-{"FHQ_ACR_BLK_HWS_F",0.50}, 
-{"FHQ_ACR_BLK_HWS_GL",0.50}, 
-{"FHQ_ACR_BLK_HWS_GL_F",0.50}, 
 {"FHQ_ACR_BLK_HWS_SD",0.50}, 
-{"FHQ_ACR_BLK_HWS_SD_F",0.50}, 
-{"FHQ_ACR_BLK_HWS_GL_SD",0.50}, 
-{"FHQ_ACR_TAN_IRN",0.50}, 
-{"FHQ_ACR_TAN_IRN_F",0.50}, 
-{"FHQ_ACR_TAN_IRN_SD",0.50}, 
-{"FHQ_ACR_TAN_IRN_SD_F",0.50}, 
 {"FHQ_ACR_TAN_IRN_GL",0.50}, 
-{"FHQ_ACR_TAN_IRN_GL_F",0.50}, 
 {"FHQ_ACR_TAN_IRN_GL_SD",0.50}, 
-{"FHQ_ACR_TAN_IRN_GL_SD_F",0.50}, 
-{"FHQ_ACR_TAN_CCO",0.50}, 
-{"FHQ_ACR_TAN_CCO_F",0.50}, 
-{"FHQ_ACR_TAN_CCO_SD",0.50}, 
-{"FHQ_ACR_TAN_CCO_SD_F",0.50}, 
 {"FHQ_ACR_TAN_CCO_GL",0.50}, 
-{"FHQ_ACR_TAN_CCO_GL_F",0.50}, 
 {"FHQ_ACR_TAN_CCO_GL_SD",0.50}, 
-{"FHQ_ACR_TAN_HWS",0.50}, 
 {"FHQ_ACR_TAN_HWS_GL",0.50}, 
-{"FHQ_ACR_TAN_HWS_GL_F",0.50}, 
-{"FHQ_ACR_TAN_HWS_SD_F",0.50}, 
 {"FHQ_ACR_TAN_HWS_GL_SD",0.50}, 
-{"FHQ_ACR_TAN_HWS_GL_SD_F",0.50}, 
 {"FHQ_ACR_SNW_IRN",0.50}, 
-{"FHQ_ACR_SNW_IRN_F",0.50}, 
-{"FHQ_ACR_SNW_IRN_SD",0.50}, 
-{"FHQ_ACR_SNW_IRN_GL",0.50}, 
-{"FHQ_ACR_SNW_IRN_GL_F",0.50}, 
-{"FHQ_ACR_SNW_IRN_GL_SD",0.50}, 
-{"FHQ_ACR_SNW_IRN_GL_SD_F",0.50}, 
-{"FHQ_ACR_SNW_CCO",0.50}, 
-{"FHQ_ACR_SNW_CCO_F",0.50}, 
-{"FHQ_ACR_SNW_CCO_SD",0.50}, 
-{"FHQ_ACR_SNW_CCO_GL",0.50}, 
-{"FHQ_ACR_SNW_CCO_GL_F",0.50}, 
-{"FHQ_ACR_SNW_CCO_GL_SD",0.50}, 
-{"FHQ_ACR_SNW_CCO_GL_SD_F",0.50}, 
-{"FHQ_ACR_SNW_HWS",0.50}, 
-{"FHQ_ACR_SNW_HWS_F",0.50}, 
-{"FHQ_ACR_SNW_HWS_GL",0.50}, 
-{"FHQ_ACR_SNW_HWS_GL_F",0.50}, 
-{"FHQ_ACR_SNW_HWS_SD",0.50}, 
-{"FHQ_ACR_SNW_HWS_GL_SD",0.50}, 
-{"FHQ_ACR_SNW_HWS_GL_SD_F",0.50} 
+{"FHQ_ACR_SNW_IRN_SD",0.50} 
 };
 
-
-
+//removed excess acrs for balancing
+//todo: rebalance
 ACRHighWeaps[] = {
-
-{"FHQ_ACR_BLK_CCO_SD_F",0.50}, 
-{"FHQ_ACR_BLK_RCO_F",0.50}, 
-{"FHQ_ACR_BLK_G33_F",0.50}, 
-{"FHQ_ACR_BLK_HAMR_SD_F",0.50}, 
-{"FHQ_ACR_SNW_IRN_SD_F",0.50}, 
-{"FHQ_ACR_SNW_CCO_SD_F",0.50}, 
-{"FHQ_ACR_SNW_RCO_F",0.50}, 
-{"FHQ_ACR_TAN_CCO_GL_SD_F",0.50}, 
-{"FHQ_ACR_TAN_RCO_F",0.50}, 
-{"FHQ_ACR_TAN_G33_GL_SD_F",0.50}, 
-{"FHQ_ACR_TAN_HAMR_SD_F",0.50}, 
-{"FHQ_ACR_WDL_IRN_GL_SD_F",0.50}, 
-{"FHQ_ACR_WDL_CCO_SD_F",0.50}, 
-{"FHQ_ACR_WDL_RCO_F",0.50}, 
-{"FHQ_ACR_WDL_RCO_SD_F",0.50}, 
-{"FHQ_ACR_WDL_HWS_SD_F",0.50}, 
-{"FHQ_ACR_WDL_G33_F",0.50}, 
-{"FHQ_ACR_WDL_G33_SD_F",0.50}, 
-{"FHQ_ACR_WDL_HAMR_SD_F",0.50}, 
-{"FHQ_ACR_WDL_HAMR_GL_SD",0.50}, 
 {"RH_acracog",0.50}, 
 {"RH_acrbaim",0.50}, 
 {"RH_acrbacog",0.50}, 
 {"FHQ_ACR_BLK_RCO_SD",0.50}, 
-{"FHQ_ACR_TAN_RCO_GL_SD_F",0.50}, 
 {"RH_acrglacog",0.50}, 
 {"RH_acrbglacog",0.50}, 
 {"FHQ_ACR_WDL_RCO",0.50}, 
 {"FHQ_ACR_WDL_RCO_SD",0.50}, 
-{"FHQ_ACR_WDL_RCO_GL",0.50}, 
-{"FHQ_ACR_WDL_RCO_GL_F",0.50}, 
-{"FHQ_ACR_WDL_RCO_GL_SD",0.50}, 
-{"FHQ_ACR_WDL_RCO_GL_SD_F",0.50}, 
 {"FHQ_ACR_WDL_G33",0.50}, 
 {"FHQ_ACR_WDL_G33_SD",0.50}, 
-{"FHQ_ACR_WDL_G33_GL",0.50}, 
-{"FHQ_ACR_WDL_G33_GL_F",0.50}, 
-{"FHQ_ACR_WDL_G33_GL_SD",0.50}, 
-{"FHQ_ACR_WDL_G33_GL_SD_F",0.50}, 
-{"FHQ_ACR_WDL_HAMR_F",0.50}, 
 {"FHQ_ACR_WDL_HAMR_SD",0.50}, 
-{"FHQ_ACR_WDL_HAMR_GL",0.50}, 
-{"FHQ_ACR_WDL_HAMR_GL_F",0.50}, 
-{"FHQ_ACR_WDL_HAMR_GL_SD_F",0.50}, 
 {"FHQ_ACR_BLK_RCO",0.50}, 
-{"FHQ_ACR_BLK_RCO_SD_F",0.50}, 
-{"FHQ_ACR_BLK_RCO_GL",0.50}, 
-{"FHQ_ACR_BLK_RCO_GL_F",0.50}, 
-{"FHQ_ACR_BLK_RCO_GL_SD",0.50}, 
-{"FHQ_ACR_BLK_RCO_GL_SD_F",0.50}, 
 {"FHQ_ACR_BLK_G33",0.50}, 
 {"FHQ_ACR_BLK_G33_SD",0.50}, 
-{"FHQ_ACR_BLK_G33_SD_F",0.50}, 
-{"FHQ_ACR_BLK_G33_GL",0.50}, 
-{"FHQ_ACR_BLK_G33_GL_F",0.50}, 
-{"FHQ_ACR_BLK_G33_GL_SD",0.50}, 
-{"FHQ_ACR_BLK_G33_GL_SD_F",0.50}, 
 {"FHQ_ACR_BLK_HAMR",0.50}, 
-{"FHQ_ACR_BLK_HAMR_F",0.50}, 
 {"FHQ_ACR_BLK_HAMR_SD",0.50}, 
-{"FHQ_ACR_BLK_HAMR_GL",0.50}, 
-{"FHQ_ACR_BLK_HAMR_GL_F",0.50}, 
-{"FHQ_ACR_BLK_HAMR_GL_SD",0.50}, 
-{"FHQ_ACR_BLK_HAMR_GL_SD_F",0.50}, 
 {"FHQ_ACR_TAN_RCO",0.50}, 
-{"FHQ_ACR_TAN_RCO_SD",0.50}, 
-{"FHQ_ACR_TAN_RCO_SD_F",0.50}, 
-{"FHQ_ACR_TAN_RCO_GL",0.50}, 
-{"FHQ_ACR_TAN_RCO_GL_F",0.50}, 
-{"FHQ_ACR_TAN_RCO_GL_SD",0.50}, 
-{"FHQ_ACR_TAN_G33",0.50}, 
-{"FHQ_ACR_TAN_G33_F",0.50}, 
-{"FHQ_ACR_TAN_G33_SD",0.50}, 
-{"FHQ_ACR_TAN_G33_SD_F",0.50}, 
-{"FHQ_ACR_TAN_G33_GL",0.50}, 
-{"FHQ_ACR_TAN_G33_GL_F",0.50}, 
-{"FHQ_ACR_TAN_G33_GL_SD",0.50}, 
-{"FHQ_ACR_TAN_HAMR",0.50}, 
-{"FHQ_ACR_TAN_HAMR_F",0.50}, 
+{"FHQ_ACR_TAN_RCO_SD",0.50},
+{"FHQ_ACR_TAN_G33",0.50},
+{"FHQ_ACR_TAN_G33_SD",0.50},
+{"FHQ_ACR_TAN_HAMR",0.50},
 {"FHQ_ACR_TAN_HAMR_SD",0.50}, 
-{"FHQ_ACR_TAN_HAMR_GL",0.50}, 
-{"FHQ_ACR_TAN_HAMR_GL_F",0.50}, 
-{"FHQ_ACR_TAN_HAMR_GL_SD",0.50}, 
-{"FHQ_ACR_TAN_HAMR_GL_SD_F",0.50}, 
 {"FHQ_ACR_SNW_RCO",0.50}, 
 {"FHQ_ACR_SNW_RCO_SD",0.50}, 
-{"FHQ_ACR_SNW_RCO_SD_F",0.50}, 
-{"FHQ_ACR_SNW_RCO_GL",0.50}, 
-{"FHQ_ACR_SNW_RCO_GL_F",0.50}, 
-{"FHQ_ACR_SNW_RCO_GL_SD",0.50}, 
-{"FHQ_ACR_SNW_RCO_GL_SD_F",0.50}, 
 {"FHQ_ACR_SNW_G33",0.50}, 
-{"FHQ_ACR_SNW_G33_F",0.50}, 
 {"FHQ_ACR_SNW_G33_SD",0.50}, 
-{"FHQ_ACR_SNW_G33_SD_F",0.50}, 
-{"FHQ_ACR_SNW_G33_GL",0.50}, 
-{"FHQ_ACR_SNW_G33_GL_F",0.50}, 
-{"FHQ_ACR_SNW_G33_GL_SD",0.50}, 
-{"FHQ_ACR_SNW_G33_GL_SD_F",0.50}, 
-{"FHQ_ACR_SNW_HAMR",0.50}, 
-{"FHQ_ACR_SNW_HAMR_F",0.50}, 
-{"FHQ_ACR_SNW_HAMR_SD",0.50}, 
-{"FHQ_ACR_SNW_HAMR_SD_F",0.50}, 
-{"FHQ_ACR_SNW_HAMR_GL",0.50}, 
-{"FHQ_ACR_SNW_HAMR_GL_F",0.50}, 
-{"FHQ_ACR_SNW_HAMR_GL_SD",0.50}, 
-{"FHQ_ACR_SNW_HAMR_GL_SD_F",0.50} 
+{"FHQ_ACR_SNW_HAMR",0.50}
 };
 
 
 /* Done */
 ScarLowWeaps[] = {
-	{"SCAR_L_CQC",0.4},             
-	{"SCAR_H_CQC_CCO",0.15},       
-	{"SCAR_L_CQC_Holo",0.15},      
-	{"SCAR_L_STD_HOLO",0.15},      
-	{"SCAR_L_STD_Mk4CQT",0.1},      
+	{"SCAR_L_CQC",0.3},             
+	{"SCAR_H_CQC_CCO",0.13},       
+	{"SCAR_L_CQC_Holo",0.13},      
+	{"SCAR_L_STD_HOLO",0.13},
+	{"SCAR_L_STD_Mk4CQT",0.11},      
 	{"SCAR_L_CQC_EGLM_Holo",0.03}, 
-	{"SCAR_L_CQC_CCO_SD",0.02}     
+	{"SCAR_L_CQC_CCO_SD",0.02}
 };
 
 
 /* Done */
 ScarHighWeaps[] = {
-	{"SCAR_H_CQC_CCO_SD",0.75}, 
-	{"SCAR_L_STD_EGLM_RCO",0.08}, 
-	{"SCAR_H_LNG_Sniper",0.08},
-	{"SCAR_H_STD_EGLM_Spect",0.07},  
-	{"SCAR_H_LNG_Sniper_SD",0.02} 
+	{"SCAR_H_CQC_CCO_SD",0.55}, 
+	{"SCAR_L_STD_EGLM_RCO",0.13}, 
+	{"SCAR_H_LNG_Sniper",0.13},
+	{"SCAR_H_STD_EGLM_Spect",0.12},  
+	{"SCAR_H_LNG_Sniper_SD",0.07} 
 };
 
 
 /* Done */
 SniperMedWeaps[] = {
-	{"vil_DRM_BASE",0.2}, 
-	{"DMR_SKN",0.2}, 
+	{"vil_DRM_BASE",0.1}, 
+	{"DMR_SKN",0.3}, 
 	{"RH_sc2acog",0.15}, 
 	{"RH_sc2sp",0.15}, 
 	{"FHQ_RSASS_TAN",0.1}, 
@@ -297,7 +146,6 @@ SniperMedWeaps[] = {
 
 
 RiflesMedWeaps[] = {
-
 {"RH_sc2aim",0.50}, 
 {"RH_sc2eot",0.50}, 
 {"RH_sc2shd",0.50}, 
@@ -736,7 +584,7 @@ L85Weaps[] = {
 	{"BAF_L85A2_RIS_SUSAT",0.10}, 
 	{"BAF_L85A2_RIS_ACOG",0.10},  
 	{"BAF_L85A2_UGL_SUSAT",0.10}, 
-	{"BAF_L85A2_UGL_ACOG",0.10},  
+	{"BAF_L85A2_UGL_ACOG",0.10}  
 };
 
 /* Done */
@@ -818,29 +666,26 @@ MeleeWeaps[] = {
 
 /* Done */
 RocketWeaps[] = {
-     
-    {"Vil_RPO_A",0.14}, 
-    {"M136",0.12},		
+    {"Vil_RPO_A",0.18}, 
+    {"M136",0.16},		
     {"vilas_rpg22",0.12}, 
     {"Vil_RPG7V_PGO",0.09}, 
     {"Vil_RPG7d_PGO",0.09}, 
-    {"SMAW",0.08},  
     {"vil_Panzerfaust3",0.07}, 
     {"vil_CG84T",0.06}, 
     {"Vil_RPG16",0.19}, 
-    {"Vil_RPG29",0.03}, 
-    {"MAAWS",0.01} 
+    {"Vil_RPG29",0.04}
 };
 
 
 /* Done */
 UltraWeaps[] = {
-	{"revolver_gold_EP1",0.28}, 
-	{"RH_Deagleg",0.2}, 		
-	{"RH_anacg",0.24}, 			
-	{"Javelin",	0.05}, 			
-	{"MetisLauncher",0.05},		
-	{"AKS_GOLD",0.27} 			
+	{"revolver_gold_EP1",0.28},
+	{"RH_Deagleg",0.2},
+	{"RH_anacg",0.24},
+	{"Javelin",	0.03},
+	{"MetisLauncher",0.07},
+	{"AKS_GOLD",0.27}
 };
 
 /* Done */
@@ -866,6 +711,23 @@ LauncherWeaps[] = {
 	{"Mk13_EP1",0.35} 
 };
 
+/* Done */
+TWSWeaps[] = {
+	{"AKS_74_GOSHAWK",0.22}, 
+	{"BAF_L85A2_RIS_CWS",0.17}, 
+	{"SCAR_L_STD_EGLM_TWS",0.07}, 
+	{"SCAR_H_STD_TWS_SD",0.12}, 
+	{"m8_tws_sd",0.12},
+	{"m8_tws",0.10}, 
+	{"M249_TWS_EP1",0.03}, 
+	{"M110_TWS_EP1",0.02},
+	{"FHQ_ACR_WDL_TWS",0.03}, 
+	{"FHQ_ACR_WDL_TWS_SD",0.02}, 
+	{"FHQ_ACR_BLK_TWS",0.03}, 
+	{"FHQ_ACR_BLK_TWS_SD",0.02}, 
+	{"FHQ_ACR_TAN_TWS",0.03}, 
+	{"FHQ_ACR_TAN_TWS_SD",0.02}
+};
 
 NVweaps[] = {
 {"vil_PKM_N",0.50}, 
@@ -881,51 +743,6 @@ NVweaps[] = {
 {"vil_VAL_N",0.50}, 
 {"vil_AK_74_N",0.50} 
 };
-
-
-TWSWeaps[] = {
-{"BAF_L85A2_RIS_CWS",0.50}, 
-{"M249_TWS_EP1",0.50}, 
-{"AKS_74_GOSHAWK",0.50}, 
-{"M110_TWS_EP1",0.50}, 
-{"SCAR_L_STD_EGLM_TWS",0.50}, 
-{"SCAR_H_STD_TWS_SD",0.50}, 
-{"m8_tws_sd",0.50}, 
-{"m8_tws",0.50}, 
-{"FHQ_ACR_WDL_TWS",0.50}, 
-{"FHQ_ACR_WDL_TWS_F",0.50}, 
-{"FHQ_ACR_WDL_TWS_SD",0.50}, 
-{"FHQ_ACR_WDL_TWS_SD_F",0.50}, 
-{"FHQ_ACR_WDL_TWS_GL",0.50}, 
-{"FHQ_ACR_WDL_TWS_GL_F",0.50}, 
-{"FHQ_ACR_WDL_TWS_GL_SD",0.50}, 
-{"FHQ_ACR_WDL_TWS_GL_SD_F",0.50}, 
-{"FHQ_ACR_BLK_TWS",0.50}, 
-{"FHQ_ACR_BLK_TWS_F",0.50}, 
-{"FHQ_ACR_BLK_TWS_SD",0.50}, 
-{"FHQ_ACR_BLK_TWS_SD_F",0.50}, 
-{"FHQ_ACR_BLK_TWS_GL",0.50}, 
-{"FHQ_ACR_BLK_TWS_GL_F",0.50}, 
-{"FHQ_ACR_BLK_TWS_GL_SD",0.50}, 
-{"FHQ_ACR_BLK_TWS_GL_SD_F",0.50}, 
-{"FHQ_ACR_TAN_TWS",0.50}, 
-{"FHQ_ACR_TAN_TWS_F",0.50}, 
-{"FHQ_ACR_TAN_TWS_SD",0.50}, 
-{"FHQ_ACR_TAN_TWS_SD_F",0.50}, 
-{"FHQ_ACR_TAN_TWS_GL",0.50}, 
-{"FHQ_ACR_TAN_TWS_GL_F",0.50}, 
-{"FHQ_ACR_TAN_TWS_GL_SD",0.50}, 
-{"FHQ_ACR_TAN_TWS_GL_SD_F",0.50}, 
-{"FHQ_ACR_SNW_TWS",0.50}, 
-{"FHQ_ACR_SNW_TWS_F",0.50}, 
-{"FHQ_ACR_SNW_TWS_SD",0.50}, 
-{"FHQ_ACR_SNW_TWS_SD_F",0.50}, 
-{"FHQ_ACR_SNW_TWS_GL",0.50}, 
-{"FHQ_ACR_SNW_TWS_GL_F",0.50}, 
-{"FHQ_ACR_SNW_TWS_GL_SD",0.50}, 
-{"FHQ_ACR_SNW_TWS_GL_SD_F",0.50}
-};
-
 
 
 	trash[] = {
