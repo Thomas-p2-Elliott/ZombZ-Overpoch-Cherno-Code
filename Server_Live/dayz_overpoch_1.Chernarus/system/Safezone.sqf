@@ -17,7 +17,7 @@ private ["_EH_Fired","_vehGodThread","_vehWepDisableThread","_aBpT","_aBpT2","_s
 disableSerialization;	
 //Initialize values as empty
 p2sz_asC = 0; zombzsafezone = 0; 
-_plyr = objNull;  _EH_Fired = 0;
+_plyr = objNull;  _EH_Fired = 0; _EH_Dmg = 0;
 _vehGodThread = 0; _vehWepDisableThread = 0;
 _aBpT = 0; _aBpT2 = 0;
 _sLimit = 0; _timerThread = 0;
@@ -40,8 +40,8 @@ while {true} do {
 		if (p2sz_asC > 1) then { systemChat ("[ZombZ] Antispam - You must wait 30 seconds for god mode to become active again once you leave!");};
 		_plyr setVariable ['ZombZInSafeZone', true];
 		fnc_usec_damageHandler = { ZombZinSafeZone = 1; false };
-		_plyr removeAllEventHandlers "handleDamage";
-		_plyr addEventHandler ["handleDamage", { ZombZinSafeZone = 1; false}];
+		_plyr removeEventHandler ["HandleDamage",zzEhDmg];
+		_EH_Dmg = _plyr addEventHandler ["handleDamage", { ZombZinSafeZone = 1; false}];
 		_plyr allowDamage false;
 	};
 
@@ -249,13 +249,13 @@ while {true} do {
 	};
 
 	/* Change Clothes */
-	player_wearClothes = { ZombZinSafeZone = 1; systemChat ("[ZombZ] Changing clothes is disabled in Safezone Trader Area"); false };
+	player_wearClothes = 	{ ZombZinSafeZone = 1; systemChat ("[ZombZ] Changing clothes is disabled in Safezone Trader Area"); false };
 	/* Spawn Zeds */
 	building_spawnZombies =	{ ZombZinSafeZone = 1; false };
 	/*Spawn Loot */
 	building_spawnLoot =	{ ZombZinSafeZone = 1; false };
 	/*Zombie Attacks*/
-	player_zombieCheck = { ZombZinSafeZone = 1; false };
+	player_zombieCheck = 	{ ZombZinSafeZone = 1; false };
 
 
 	waitUntil {zombzsafezone < 1};
@@ -309,12 +309,12 @@ while {true} do {
 	_plyr removeEventHandler["Fired", _EH_Fired];
 
 	//Disable Player God Mode
-	_plyr setVariable ['ZombZInSafeZone', false];
-	fnc_usec_damageHandler = compile preprocessFileLineNumbers "compile\fn_damageHandler.sqf";
-	_plyr addEventHandler ["handleDamage", {true}];
-	_plyr removeAllEventHandlers "handleDamage";
-	_plyr addeventhandler ["HandleDamage",{_this call fnc_usec_damageHandler; _this call DDOPP_taser_handleHit; } ];
+	_plyr removeEventHandler ["handleDamage",_EH_Dmg];
+	[player] call fnc_usec_damageHandle;
 	_plyr allowDamage true;
+
+	//reset var
+	_plyr setVariable ['ZombZInSafeZone', false];
 
 	//check if player has entered safezone twice recently
 	if (p2sz_asC > 1) then {
