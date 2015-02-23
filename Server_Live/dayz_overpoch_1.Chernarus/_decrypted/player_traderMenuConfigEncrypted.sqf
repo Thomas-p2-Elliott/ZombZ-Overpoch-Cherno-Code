@@ -412,9 +412,7 @@ p2_gc = {
 		0
 	};
 
-	_zGold = [false,player] call p2_gv; 
 	_input = _this;
-
 	P2DZE_plr_giveChange = [_input select 0,_input select 1];
 	publicVariableServer 'P2DZE_plr_giveChange';
 };
