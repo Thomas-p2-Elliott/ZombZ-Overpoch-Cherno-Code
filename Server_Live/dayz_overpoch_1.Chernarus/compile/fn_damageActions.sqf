@@ -202,7 +202,7 @@ if (!isNull _menClose && _hasPatient && !r_drag_sqf && !r_action && !_inVehicle 
 		r_action = true;
 		_action = _unit addAction [localize "str_actions_medical_08", "\z\addons\dayz_code\medical\transfusion.sqf",[_unit], 0, true, true, "", ""];
 		r_player_actions set [count r_player_actions,_action];
-		playSound "administer_iv_02";
+		//playSound "administer_iv_02";
 	};
 	
 	//Repairs
