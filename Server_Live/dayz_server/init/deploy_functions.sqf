@@ -6,7 +6,7 @@
         _positn = _array select 0;
         _player = _array select 1;
         _select = _array select 2;
-        if (_select in ['Old_bike_TK_CIV_EP1','ATV_US_EP1','TT650_TK_CIV_EP1','350z_white_DZ','BTR40_TK_GUE_EP1','BTR40_MG_TK_GUE_EP1','HMMWV_DZ','HMMWV_Armored','CSJ_GyroC','AH6X_DZ','Mi17_Civilian_DZ','UH1H_TK_EP1']) then {
+        if (_select in ['Old_bike_TK_CIV_EP1','ATV_US_EP1','TT650_TK_CIV_EP1','350z_white','BTR40_TK_GUE_EP1','BTR40_MG_TK_GUE_EP1','HMMWV_DZ','HMMWV_Armored','CSJ_GyroC','AH6X_DZ','Mi17_Civilian_DZ','UH1H_TK_EP1']) then {
                
 				//turn old bike to mountain bike
                 if (_select == 'Old_bike_TK_CIV_EP1') then {	_select = "MMT_CIV" };
@@ -97,9 +97,23 @@
 		if (_typeOf == "MMT_CIV") then {
 			_origMat = ["ItemToolbox"];
 			{
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
 
-				
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				
@@ -121,7 +135,23 @@
 			_origMat = ["ItemToolbox","ItemToolbox","PartGeneric","PartWheel"];
 			{
 				
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
+
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				
@@ -144,7 +174,23 @@
 			_origMat = ["ItemToolbox","ItemToolbox","PartGeneric","PartEngine"];
 			{
 				
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
+
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				
@@ -163,11 +209,27 @@
 
 			} forEach _origMat;
 		};
-		if (_typeOf == "350z_white_DZ") then {
+		if (_typeOf == "350z_white") then {
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartWheel"];
 			{
 				
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
+
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				
@@ -189,7 +251,23 @@
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartEngine"];
 			{
 				
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
+
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				
@@ -211,7 +289,23 @@
 			_origMat =  ["ItemToolbox","ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartEngine","Mk_48_DZ","100Rnd_762x51_M240"];
 			{
 				
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
+
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				
@@ -234,7 +328,23 @@
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartEngine","PartGeneric"];
 			{
 				
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
+
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				
@@ -256,7 +366,23 @@
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","ItemToolbox","PartGeneric","PartEngine","PartGeneric","PartEngine","PartGeneric","PartGeneric","Mk_48_DZ","100Rnd_762x51_M240"];
 			{
 				
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };	
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
+
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				
@@ -278,7 +404,23 @@
 			_origMat = ["ItemToolbox","PartVrotor","PartEngine"];
 
 			{
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
+
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				
@@ -300,7 +442,23 @@
 			_origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric"];
 			
 			{
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
+
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				
@@ -322,7 +480,23 @@
 			_origMat = ["ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartGeneric","ItemToolbox"];	
 			
 			{
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
+
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				
@@ -344,7 +518,23 @@
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartEngine","PartGeneric"];
 			
 			{
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
+
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
 				_bag modelToWorld getPosATL _player;
 				_bag setdir (getDir _player);
 				
@@ -366,7 +556,24 @@
 			_origMat = ["ItemToolbox","ItemToolbox","ItemToolbox","PartEngine","PartVrotor","PartEngine","PartGeneric","PartEngine","PartGeneric","PartGeneric"];
 			
 			{
-				if (_x == "ItemToolbox") then { _bag addWeaponCargoGlobal [_x, 1]; } else { _bag addMagazineCargoGlobal [_x, 1] };
+				_bp = objNull; _freeBPSlots = 0;
+				_bp = unitBackpack _player;
+				_freeBPSlots = _bp call p2bpFreeSlotsCheck;
+
+				if (_x == "ItemToolbox") then { 
+					if (_freeBPSlots > 0) then {
+						_bp addWeaponCargoGlobal [_x, 1];
+					} else {
+						_bag addWeaponCargoGlobal [_x, 1]; 
+					};
+				} else {
+					if (_freeBPSlots > 0) then {
+						_bp addMagazineCargoGlobal [_x, 1];
+					} else {
+						_bag addMagazineCargoGlobal [_x, 1] 
+					};
+				};
+
 				_bag modelToWorld getPos player;
 				_bag setdir (getDir player);
 				player reveal _bag;
@@ -389,4 +596,53 @@
 		diag_log (_log);
 
 		_player reveal _bag; //give player gear option early
+};
+
+
+p2bpFreeSlotsCheck = {
+	private ["_bp","_allowedItems", "_allowedMags", "_allowedWeapons", "_magazines", "_currentMags", "_currentWeps", "_weapons", "_wepCargo", "_itemName","_ad"];
+	_bp = _this;
+	_allowedItems = 0;
+	if (isNil '_bp') exitWith { _allowedItems };
+	if (isNull _bp) exitWith { _allowedItems };
+
+	_allowedMags = 0;
+	_allowedWeapons = 0;
+	_magazines =[];
+	_currentMags = 0;
+	_currentWeps = 0;
+	_weapons = [];
+	_wepCargo = [[],[]];
+	_itemName = "";
+	_ad = false;
+
+	_allowedMags = getNumber (configFile >> 'CfgVehicles' >> (typeOf _bp) >> 'transportMaxMagazines');
+	_allowedWeapons = getNumber (configFile >> 'CfgVehicles' >> (typeOf _bp) >> 'transportMaxWeapons');
+	 
+	_magazines = getMagazineCargo _bp;
+	{ _currentMags = _currentMags + (1 max (((getNumber (configFile >> "CfgMagazines" >> _x >> "type")) / 256)) * (((_magazines) select 1) select _foreachindex)); } forEach ((_magazines) select 0);
+
+	_weapons = (getWeaponCargo _bp) select 1;
+	{ _currentWeps = _currentWeps + _x } count _weapons;
+
+	_wepCargo = (getWeaponCargo _bp);
+	_allowedItems = ((_allowedMags - _currentMags) -1);
+
+	{
+		_ad = false;
+		_itemName = (((_wepCargo) select 0) select _foreachindex);
+		if (((getNumber (configFile >> "CfgWeapons" >> _itemName >> "type"))) == 131072) then {
+			_allowedItems = _allowedItems - (_x * 1);
+			_ad = true;
+		};
+		if (((getNumber (configFile >> "CfgWeapons" >> _itemName >> "type"))) == 2) then {
+			_allowedItems = _allowedItems - (_x * 5);
+			_ad = true;
+		};
+		if (!_ad) then {
+			_allowedItems = _allowedItems - (_x * 10);
+		};
+	} forEach ((_wepCargo) select 1);
+
+	_allowedItems
 };
