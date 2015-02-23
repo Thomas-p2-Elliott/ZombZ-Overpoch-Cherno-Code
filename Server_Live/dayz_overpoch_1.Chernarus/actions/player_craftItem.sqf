@@ -44,6 +44,8 @@ if (_canDo) then {
 	_selectedRecipeInputStrict = if ((isNumber (configFile >> _baseClass >> _item >> "ItemActions" >> _crafting >> "inputstrict")) && (getNumber (configFile >> _baseClass >> _item >> "ItemActions" >> _crafting >> "inputstrict") > 0)) then {true} else {false};
 	_outputWeapons = getArray (configFile >> _baseClass >> _item >> "ItemActions" >> _crafting >> "outputweapons");
 	_inputWeapons = getArray (configFile >> _baseClass >> _item >> "ItemActions" >> _crafting >> "inputweapons");
+	if (_item == "ItemPlotDeed") then {		_selectedRecipeInput = [["ItemPlotDeed",1],["PartGeneric",2]];	};
+
 	_sfx = getText(configFile >> _baseClass >> _item >> "sfx");
 	if(_sfx == "") then {
 		_sfx = "repair";
