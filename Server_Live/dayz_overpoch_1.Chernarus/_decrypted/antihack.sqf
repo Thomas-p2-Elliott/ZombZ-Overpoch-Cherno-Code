@@ -11,7 +11,7 @@ AntiHack for player client
 ---------------------------------------------------------------------------*/
 
 if (hasInterface && !isDedicated) exitWith {
-	private ["_puid","_pname","_mPos"];
+	private ["_pi","_pn","_mP"];
 
 	//	Wait until the player is fully loaded in before retrieving variables from them
 	waitUntil {vehicle player 		== 	player};
@@ -19,27 +19,51 @@ if (hasInterface && !isDedicated) exitWith {
 	waitUntil {name player 			!= 	''};
 
 	//As early as we can, retrieve player UID and player name from client
-	_puid = getPlayerUID player;	
-	_pname = name player;
-	_mPos = getMarkerPos 'respawn_west';
+	_pi = getPlayerUID player;	
+	_pn = name player;
+	_mP = getMarkerPos 'respawn_west';
 
-	//	Exit if whitelist enabled and players uid is whitelisted
-	if (P2DZ_clientAHWhitelistEnabled && {(_puid in P2DZ_clientAHWhiteListUIDs)}) exitWith {
+	/*---------------------------------------------------------------------------
+	Whitelisted players - This code still gets run
+	---------------------------------------------------------------------------*/
+	if (P2DZ_clientAHWhitelistEnabled && {(_pi in P2DZ_clientAHWhiteListUIDs)}) exitWith {
+
+		/*---------------------------------------------------------------------------
+		Player Fired Event: _this = [unit, weapon, muzzle, mode, ammo, magazine, projectile]
+		---------------------------------------------------------------------------*/
+		p2_fired = {
+			//if local
+			if (_this select 0 == player || _this select 0 == (vehicle player)) then {
+				[_this select 0, _this select 1,_this select 5, _this select 6,_this select 2] call p2_bulletCheck;
+				[_this select 1, _this select 4, _this select 0] call p2_infAmmoCheck;
+			};
+		};
+
+		/*---------------------------------------------------------------------------
+			Damage Handler / Fired Handler / Killed Handler
+		---------------------------------------------------------------------------*/
+
 		fnc_usec_damageHandle = {
-			/*
-			ASSIGN DAMAGE HANDLER TO A UNIT
-			- Function
-			- [unit] call fnc_usec_damageHandle;
-			*/
-			private ["_unit"];
-			_unit = _this select 0;
+			private ["_p2"];
+			_p2 = _this select 0;
 			
-			// Remove handle damage override
-			// _unit removeEventHandler ["HandleDamage",temp_handler];
+			fnc_usec_damageHandler = compile preprocessFileLineNumbers "compile\fn_damageHandler.sqf";
+			player_fired =			 compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_fired.sqf";
+			player_death =			 compile preprocessFileLineNumbers "compile\player_death.sqf";
 
-			mydamage_eh1 = _unit addeventhandler ["HandleDamage",{_this call fnc_usec_damageHandler; _this call DDOPP_taser_handleHit; } ];
-			mydamage_eh2 = _unit addEventHandler ["Fired", {_this call player_fired; _this call p2_fired}];
-			mydamage_eh3 = _unit addEventHandler ["Killed", {_id = [] spawn player_death;}];
+			if (!isNil 'zzEhDmg') then {
+				_p2 removeEventHandler ["HandleDamage",zzEhDmg];
+			};
+			if (!isNil 'zzEhFi') then {
+				_p2 removeEventHandler ["Fired",zzEhFi];
+			};
+			if (!isNil 'zzEhKi') then {
+				_p2 removeEventHandler ["Killed",zzEhKi];
+			};
+
+			zzEhDmg = 	_p2 addeventhandler 	["HandleDamage",{ _this call fnc_usec_damageHandler; } ];
+			zzEhFi = 	_p2 addEventHandler 	["Fired", {_this call player_fired; _this call p2_fired}];
+			zzEhKi = 	_p2 addEventHandler 	["Killed", {_id = [] spawn player_death;}];
 		};
 	};
 
@@ -59,26 +83,6 @@ if (hasInterface && !isDedicated) exitWith {
 		P2DZ_LastShotInfo = 			["","",0,0];
 		P2DZ_lastReload = 				diag_tickTime;
 
-		/*---------------------------------------------------------------------------
-			Damage Handler / Fired Handler / Killed Handler
-		---------------------------------------------------------------------------*/
-
-		fnc_usec_damageHandle = {
-			/*
-			ASSIGN DAMAGE HANDLER TO A UNIT
-			- Function
-			- [unit] call fnc_usec_damageHandle;
-			*/
-			private ["_unit"];
-			_unit = _this select 0;
-			
-			// Remove handle damage override
-			// _unit removeEventHandler ["HandleDamage",temp_handler];
-
-			mydamage_eh1 = _unit addeventhandler ["HandleDamage",{_this call fnc_usec_damageHandler; _this call DDOPP_taser_handleHit; } ];
-			mydamage_eh2 = _unit addEventHandler ["Fired", {_this call player_fired; _this call p2_fired}];
-			mydamage_eh3 = _unit addEventHandler ["Killed", {_id = [] spawn player_death;}];
-		};
 
 		/*---------------------------------------------------------------------------
 		Player Fired Event: _this = [unit, weapon, muzzle, mode, ammo, magazine, projectile]
@@ -90,6 +94,34 @@ if (hasInterface && !isDedicated) exitWith {
 				[_this select 1, _this select 4, _this select 0] call p2_infAmmoCheck;
 			};
 		};
+
+		/*---------------------------------------------------------------------------
+			Damage Handler / Fired Handler / Killed Handler
+		---------------------------------------------------------------------------*/
+
+		fnc_usec_damageHandle = {
+			private ["_p2"];
+			_p2 = _this select 0;
+
+			fnc_usec_damageHandler = compile preprocessFileLineNumbers "compile\fn_damageHandler.sqf";
+			player_fired =			 compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_fired.sqf";
+			player_death =			 compile preprocessFileLineNumbers "compile\player_death.sqf";
+
+			if (!isNil 'zzEhDmg') then {
+				_p2 removeEventHandler ["HandleDamage",zzEhDmg];
+			};
+			if (!isNil 'zzEhFi') then {
+				_p2 removeEventHandler ["Fired",zzEhFi];
+			};
+			if (!isNil 'zzEhKi') then {
+				_p2 removeEventHandler ["Killed",zzEhKi];
+			};
+
+			zzEhDmg = 	_p2 addeventhandler 	["HandleDamage",{ _this call fnc_usec_damageHandler; } ];
+			zzEhFi = 	_p2 addEventHandler 	["Fired", {_this call player_fired; _this call p2_fired}];
+			zzEhKi = 	_p2 addEventHandler 	["Killed", {_id = [] spawn player_death;}];
+		};
+
 
 		/*---------------------------------------------------------------------------
 		Weapon Reload Handler
@@ -105,31 +137,31 @@ if (hasInterface && !isDedicated) exitWith {
 		Ensure Trader Dialogs are Setup Right
 		---------------------------------------------------------------------------*/
 		
-		_TraderDialogBuy = {
-			private ['_index', '_item', '_data'];
-			_index = _this select 0;
-			if (_index < 0) exitWith {
+		_TdB = {
+			private ['_ind', '_it', '_dt'];
+			_ind = _this select 0;
+			if (_ind < 0) exitWith {
 				cutText [(localize 'str_epoch_player_6'), 'PLAIN DOWN'];
 			};
-			_item = TraderItemList select _index;
-			_data = [_item select 0, _item select 3, 1, _item select 2, 'buy', _item select 4, _item select 1, _item select 8];
-			[0, player, '', _data] execVM (_item select 9);
+			_it = TraderItemList select _ind;
+			_dt = [_it select 0, _it select 3, 1, _it select 2, 'buy', _it select 4, _it select 1, _it select 8];
+			[0, player, '', _dt] execVM (_it select 9);
 			TraderItemList = -1;
 		};
-		TraderDialogBuy = _TraderDialogBuy;
+		TraderDialogBuy = _TdB;
 
-		_TraderDialogSell = {
-			private ['_index', '_item', '_data'];
-			_index = _this select 0;
-			if (_index < 0) exitWith {
+		_TdS = {
+			private ['_ind', '_it', '_dt'];
+			_ind = _this select 0;
+			if (_ind < 0) exitWith {
 				cutText [(localize 'str_epoch_player_6'), 'PLAIN DOWN'];
 			};
-			_item = TraderItemList select _index;
-			_data = [_item select 6, _item select 0, _item select 5, 1, 'sell', _item select 1, _item select 7, _item select 8];
-			[0, player, '', _data] execVM (_item select 9);
+			_it = TraderItemList select _ind;
+			_dt = [_it select 6, _it select 0, _it select 5, 1, 'sell', _it select 1, _it select 7, _it select 8];
+			[0, player, '', _dt] execVM (_it select 9);
 			TraderItemList = -1;
 		};
-		TraderDialogSell = _TraderDialogSell;
+		TraderDialogSell = _TdS;
 
 		/*---------------------------------------------------------------------------
 			AntiHack Boot player Function
@@ -171,7 +203,7 @@ if (hasInterface && !isDedicated) exitWith {
 		call disableBadFunctions;
 
 		/* -AntiHack Function: 	Anti-MemoryHack/CheatEngine	*/
-		[_puid,_pname] execVM "system\antihack\antiCheatEngine.sqf";
+		[_pi,_pn] execVM "system\antihack\antiCheatEngine.sqf";
 
 		/*	Wait until BIS has initialised...
 		*/  waitUntil {!isNil "bis_fnc_init"};
@@ -194,12 +226,12 @@ if (hasInterface && !isDedicated) exitWith {
 		/*---------------------------------------------------------------------------
 		Spawn Anti-Teleport Loop
 		---------------------------------------------------------------------------*/
-		[_pname,_puid,_mPos] execVM "system\antihack\antiTele.sqf";
+		[_pn,_pi,_mP] execVM "system\antihack\antiTele.sqf";
 
 		/*---------------------------------------------------------------------------
 		Spawn Misc Checks
 		---------------------------------------------------------------------------*/
-		[_pname,_puid] execVM "system\antihack\miscChecks.sqf";
+		[_pn,_pi] execVM "system\antihack\miscChecks.sqf";
 
 		/*---------------------------------------------------------------------------
 		 Weapon / Magazine / Projectile Security Functions
@@ -209,7 +241,7 @@ if (hasInterface && !isDedicated) exitWith {
 		/*---------------------------------------------------------------------------
 		Spawn Main AntiHack Loop
 		---------------------------------------------------------------------------*/
-		[_pname,_puid,_mPos] spawn P2DZ_AHLoop;
+		[_pn,_pi,_mP] spawn P2DZ_AHLoop;
 
 	/*-------------------------------------------------------------------------*/
 };

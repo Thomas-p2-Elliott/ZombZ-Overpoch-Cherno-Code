@@ -1,48 +1,45 @@
 P2DZ_AH_FunctionChecks = {
-	private ["_inSafeZoneVar","_TraderDialogBuy","_index","_item","_data","_TraderDialogSell","_ltxt","_puid","_inSafeZone","_result","_pname"];
-	_pname = _this select 0;
-	_puid = _this select 1;
+	private ["_TrB","_TrS","_lt","_pi","_pn"];
+	_pn = _this select 0;
+	_pi = _this select 1;
 	disableSerialization;
 
 	if (P2DZ_AHDebug) then {
 		diag_log(format["P2AntiHackDebug: %1", "P2DZ_AH_FunctionChecks"]);
 	};
 
-	_inSafeZoneVar = (player getVariable ["ZombZInSafeZone", false]);
-
-	_TraderDialogBuy = {
-		private ['_index', '_item', '_data'];
-		_index = _this select 0;
-		if (_index < 0) exitWith {
+	_TrB = {
+		private ['_in', '_it', '_dt'];
+		_in = _this select 0;
+		if (_in < 0) exitWith {
 			cutText [(localize 'str_epoch_player_6'), 'PLAIN DOWN'];
 		};
-		_item = TraderItemList select _index;
-		_data = [_item select 0, _item select 3, 1, _item select 2, 'buy', _item select 4, _item select 1, _item select 8];
-		[0, player, '', _data] execVM (_item select 9);
+		_it = TraderItemList select _in;
+		_dt = [_it select 0, _it select 3, 1, _it select 2, 'buy', _it select 4, _it select 1, _it select 8];
+		[0, player, '', _dt] execVM (_it select 9);
 		TraderItemList = -1;
 	};
-	TraderDialogBuy = _TraderDialogBuy;
+	TraderDialogBuy = _TrB;
 
-	_TraderDialogSell = {
-		private ['_index', '_item', '_data'];
-		_index = _this select 0;
-		if (_index < 0) exitWith {
+	_TrS = {
+		private ['_in', '_it', '_dt'];
+		_in = _this select 0;
+		if (_in < 0) exitWith {
 			cutText [(localize 'str_epoch_player_6'), 'PLAIN DOWN'];
 		};
-		_item = TraderItemList select _index;
-		_data = [_item select 6, _item select 0, _item select 5, 1, 'sell', _item select 1, _item select 7, _item select 8];
-		[0, player, '', _data] execVM (_item select 9);
+		_it = TraderItemList select _in;
+		_dt = [_it select 6, _it select 0, _it select 5, 1, 'sell', _it select 1, _it select 7, _it select 8];
+		[0, player, '', _dt] execVM (_it select 9);
 		TraderItemList = -1;
 	};
 
-	TraderDialogSell = _TraderDialogSell;
+	TraderDialogSell = _TrS;
 
 	if (!isNil 'TraderItemList') then
 	{
 		if (typeName TraderItemList == 'CODE') then
 		{
-			P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",
-				_pname, _puid,  ('Trader Menu - not near a Trader!'),  (format["#1 - %1 @%2",_ltxt,getPosATL player])];
+			P2DZ_fire = [_pn, _pi,  ('Trader Menu - Changed to Code!'),  (format["Suspect Code: %1",TraderItemList])];
 			publicVariableServer 'P2DZ_fire';
 			[] spawn P2DZ_AHKick;
 		};
@@ -51,10 +48,10 @@ P2DZ_AH_FunctionChecks = {
 	{
 		if ((str (fnc_usec_damageHandler) == '{}' || (([(str fnc_usec_damageHandler)] call KRON_strLen) < 500))) then 
 		{
-			if (!([str (fnc_usec_damageHandler), "ZombZinSafeZone"] call KRON_strInStr)) exitWith {
-				P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'fnc_usec_damageHandler', ('NotOriginal')];
+			if (!([str (fnc_usec_damageHandler), "ZombZinSafeZone"] call KRON_strInStr)) then {
+				P2DZ_fire = [_pn, _pi, 'fnc_usec_damageHandler changed', format['NotOriginal - God Mode? Suspect Code: %1',fnc_usec_damageHandler]];
 				publicVariableServer 'P2DZ_fire';
-				[] spawn P2DZ_AHKick;
+				[player] call fnc_usec_damageHandle;
 			};
 		};
 	};
@@ -63,60 +60,60 @@ P2DZ_AH_FunctionChecks = {
 	{
 		if ((str (fnc_usec_unconscious) == '{}' || (([(str fnc_usec_unconscious)] call KRON_strLen) < 500))) then 
 		{
-			if (!([str (fnc_usec_unconscious), "ZombZinSafeZone"] call KRON_strInStr)) exitWith {
-				P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'fnc_usec_unconscious', ('NotOriginal')];
+			if (!([str (fnc_usec_unconscious), "ZombZinSafeZone"] call KRON_strInStr)) then {
+				P2DZ_fire = [_pn, _pi, 'fnc_usec_unconscious changed', format['NotOriginal - Anti Knockout? Suspect Code: %1',fnc_usec_unconscious]];
 				publicVariableServer 'P2DZ_fire';
-				[] spawn P2DZ_AHKick;
+				fnc_usec_unconscious =	compile preprocessFileLineNumbers "compile\fn_unconscious.sqf";
 			};
 		};
 	};
 
 	if (!isNil 'player_zombieCheck') then 
 	{
-		if (isNil 'orig_player_zombieCheck') then 
+		if (isNil 'p2_zoCh') then 
 		{
-			orig_player_zombieCheck = str(player_zombieCheck);
+			p2_zoCh = str(player_zombieCheck);
 		};
 	};
-	if (!isNil 'orig_player_zombieCheck') then 
+	if (!isNil 'p2_zoCh') then 
 	{
-		if (str(player_zombieCheck) != orig_player_zombieCheck && (([(str player_zombieCheck)] call KRON_strLen) < 500)) exitWith 
+		if (str(player_zombieCheck) != p2_zoCh && (([(str player_zombieCheck)] call KRON_strLen) < 500)) then 
 		{
-			if (!([str (player_zombieCheck), "ZombZinSafeZone"] call KRON_strInStr)) exitWith {
-				P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'player_zombieCheck', ('NotOriginal')];
+			if (!([str (player_zombieCheck), "ZombZinSafeZone"] call KRON_strInStr)) then {
+				P2DZ_fire = [_pn, _pi, 'player_zombieCheck changed', format['NotOriginal - No Zed Aggro? Suspect Code: %1',player_zombieCheck]];
 				publicVariableServer 'P2DZ_fire';
-				[] spawn P2DZ_AHKick;
+				 
 			};
 		};
 	};
 	if (!isNil 'player_checkStealth') then 
 	{
-		if (isNil 'orig_player_checkStealth') then 
+		if (isNil 'p2_chSt') then 
 		{
-			orig_player_checkStealth = str(player_checkStealth);
+			p2_chSt = str(player_checkStealth);
 		};
 	};
-	if (!isNil 'orig_player_checkStealth') then 
+	if (!isNil 'p2_chSt') then 
 	{
-		if (str(player_checkStealth) != orig_player_checkStealth) exitWith 
+		if (str(player_checkStealth) != p2_chSt) then 
 		{
-			P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  'player_checkStealth',  ('NotOriginal')];
+			P2DZ_fire = [_pn, _pi,  'player_checkStealth changed', format['NotOriginal - No Zed Aggro? Suspect Code: %1',player_checkStealth]];
 			publicVariableServer 'P2DZ_fire';
 			[] spawn P2DZ_AHKick;
 		};
 	};
 	if (!isNil 'player_zombieAttack') then 
 	{
-		if (isNil 'orig_player_zombieAttack') then 
+		if (isNil 'p2_zoAt') then 
 		{
-			orig_player_zombieAttack = str(player_zombieAttack);
+			p2_zoAt = str(player_zombieAttack);
 		};
 	};
-	if (!isNil 'orig_player_zombieAttack') then 
+	if (!isNil 'p2_zoAt') then 
 	{
-		if (str(player_zombieAttack) != orig_player_zombieAttack) exitWith 
+		if (str(player_zombieAttack) != p2_zoAt) then 
 		{
-			P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  'player_zombieAttack',  ('NotOriginal')];
+			P2DZ_fire = [_pn, _pi,  'player_zombieAttack changed',  format['NotOriginal - No Zed Damage? Suspect Code: %1',player_zombieAttack]];
 			publicVariableServer 'P2DZ_fire';
 			[] spawn P2DZ_AHKick;
 		};
@@ -124,16 +121,16 @@ P2DZ_AH_FunctionChecks = {
 
 	if (!isNil 'gearDialog_create') then 
 	{
-		if (isNil 'orig_gearDialog_create') then 
+		if (isNil 'p2_geDiCr') then 
 		{
-			orig_gearDialog_create = str(gearDialog_create);
+			p2_geDiCr = str(gearDialog_create);
 		};
 	};
-	if (!isNil 'orig_gearDialog_create') then 
+	if (!isNil 'p2_geDiCr') then 
 	{
-		if (str(gearDialog_create) != orig_gearDialog_create) exitWith 
+		if (str(gearDialog_create) != p2_geDiCr) then 
 		{
-			P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid,  'gearDialog_create',  ('NotOriginal')];
+			P2DZ_fire = [_pn, _pi,  'gearDialog_create changed',  format['NotOriginal - Menu Hack? Suspect Code: %1',gearDialog_create]];
 			publicVariableServer 'P2DZ_fire';
 			[] spawn P2DZ_AHKick;
 		};
@@ -141,29 +138,28 @@ P2DZ_AH_FunctionChecks = {
 
 	if (!isNil 'player_humanityMorph') then
 	{
-		if (isNil 'oplayer_humanityMorph') then {oplayer_humanityMorph = player_humanityMorph};
+		if (isNil 'p2_huMo') then {p2_huMo = player_humanityMorph};
 		player_humanityMorph = {
+			private["_r"];
 			if (typeOf player == (_this select 2)) exitWith {cutText ['You already wear this Skin!', 'PLAIN'];};
 			closeDialog 0;closeDialog 0;closeDialog 0;
-			_result = _this spawn oplayer_humanityMorph;
-			_result
+			_r = _this spawn p2_huMo;
+			_r
 		};
 	};
 
-	_ltxt = lbtext [12001,0];
-	if (str _TraderDialogBuy != str TraderDialogBuy) then
+	_lt = lbtext [12001,0];
+	if (str _TrB != str TraderDialogBuy) then
 	{
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",
-			_pname, _puid,  ('TraderDialogBuy modified: '),  (format["%1 @%2 %3",_ltxt,getPosATL player,TraderDialogBuy])];
+		P2DZ_fire = [_pn, _pi,  ('TraderDialogBuy modified: '),  (format["Trader Text: %1, Player Pos: %2, Suspect Code: %3",_lt,getPosATL player,TraderDialogBuy])];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 
 	};
 
-	if (str _TraderDialogSell != str TraderDialogSell) then
+	if (str _TrS != str TraderDialogSell) then
 	{
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",
-			_pname, _puid,  ('TraderDialogSell modified: '),  (format["%1 @%2 %3",_ltxt,getPosATL player,TraderDialogSell])];
+		P2DZ_fire = [_pn, _pi,  ('TraderDialogSell modified: '),  (format["Trader Text: %1, Player Pos: %2, Suspect Code: %3",_lt,getPosATL player,TraderDialogSell])];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick;
 	};
