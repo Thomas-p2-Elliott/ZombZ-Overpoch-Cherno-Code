@@ -1,0 +1,10 @@
+private["_in","_m","_pid","_p2key"];
+_in = nil; _m = nil; _puid = nil;  _p2key = "";
+_in = _this;
+if (isNil '_in') exitWith { false };
+_pid = _this select 0; _m = _this select 1;
+if (isNil '_m' || isNil '_pid') exitWith { false };
+_p2key = format["CHILD:333:%1:%2:",_pid,_m];
+_p2key call server_hiveWrite;
+if (P2DZE_debugServerPlayerSync) then { diag_log(format["%1",format["HIVE: WRITE: (333/MoralityUpdate:%1:%2)",_pid,_m]]); };
+_p2key = nil;
