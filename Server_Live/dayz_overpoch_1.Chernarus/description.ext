@@ -1,4 +1,3 @@
-/*Custom Loot Tables By ZombZ.net Gorsy & DJ*/
 #include "CfgLoot\CfgBuildingLoot.hpp"
 #include "CfgServerTrader\CfgServerTrader.hpp"
 respawn = "BASE";
@@ -175,18 +174,6 @@ class CfgFunctions
 			};
 			class HideCtrl
 			{
-			};
-		};
-	};
-	class A3
-	{
-		class ArmaServerMonitor
-		{
-			file="ASM";
-			class ASM
-			{
-				ext=".fsm";
-				preInit=1;
 			};
 		};
 	};
