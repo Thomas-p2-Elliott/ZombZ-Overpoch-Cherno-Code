@@ -1,3 +1,423 @@
+KRON_Scramble = {
+	private ["_in","_out","_en","_p2out","_n"];
+	_in = _this;
+	_en  = _in select 1;
+	_out = _in select 0;
+	_pu =  _in select 2;
+	_n = 0;
+	if (_en > 0) then {
+		_out = [_out] call {
+			private["_in","_i","_arr","_out"];
+			_in=_this select 0;
+			_arr = toArray(_in);
+			_out=[];
+			for "_i" from 0 to (count _arr)-1 do {
+				_out=_out+[toString([_arr select _i])];
+			};
+			_out
+		};
+		_out = [str _out,'"','']  call {
+			private["_str","_old","_new","_out","_tmp","_jm","_la","_lo","_ln","_i"];
+			_str=_this select 0;
+			_arr=toArray(_str);
+			_la=count _arr;
+			_old=_this select 1;
+			_new=_this select 2;
+			_na=[_new] call {
+				private["_in","_i","_arr","_out"];
+				_in=_this select 0;
+				_arr = toArray(_in);
+				_out=[];
+				for "_i" from 0 to (count _arr)-1 do {
+					_out=_out+[toString([_arr select _i])];
+				};
+				_out
+			};
+			_lo=[_old] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {
+					private["_in","_i","_arr","_out"];
+					_in=_this select 0;
+					_arr = toArray(_in);
+					_out=[];
+					for "_i" from 0 to (count _arr)-1 do {
+						_out=_out+[toString([_arr select _i])];
+					};
+					_out
+				};
+				_len=count (_arr);
+				_len
+			};
+			_ln=[_new] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {	
+					private["_in","_i","_arr","_out"];
+					_in=_this select 0;
+					_arr = toArray(_in);
+					_out=[];
+					for "_i" from 0 to (count _arr)-1 do {
+						_out=_out+[toString([_arr select _i])];
+					};
+					_out 		
+				};
+				_len=count (_arr);
+				_len
+			};
+			_out="";
+			for "_i" from 0 to (count _arr)-1 do {
+				_tmp="";
+				if (_i <= _la-_lo) then {
+					for "_j" from _i to (_i+_lo-1) do {
+						_tmp=_tmp + toString([_arr select _j]);
+					};
+				};
+				if (_tmp==_old) then {
+					_out=_out+_new;
+					_i=_i+_lo-1;
+				} else {
+					_out=_out+toString([_arr select _i]);
+				};
+			};
+			_out
+		};
+		_out = [ _out,',.,','.'] call {
+			private["_str","_old","_new","_out","_tmp","_jm","_la","_lo","_ln","_i"];
+			_str=_this select 0;
+			_arr=toArray(_str);
+			_la=count _arr;
+			_old=_this select 1;
+			_new=_this select 2;
+			_na=[_new] call {
+				private["_in","_i","_arr","_out"];
+				_in=_this select 0;
+				_arr = toArray(_in);
+				_out=[];
+				for "_i" from 0 to (count _arr)-1 do {
+					_out=_out+[toString([_arr select _i])];
+				};
+				_out
+			};
+			_lo=[_old] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {
+					private["_in","_i","_arr","_out"];
+					_in=_this select 0;
+					_arr = toArray(_in);
+					_out=[];
+					for "_i" from 0 to (count _arr)-1 do {
+						_out=_out+[toString([_arr select _i])];
+					};
+					_out
+				};
+				_len=count (_arr);
+				_len
+			};
+			_ln=[_new] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {	
+					private["_in","_i","_arr","_out"];
+					_in=_this select 0;
+					_arr = toArray(_in);
+					_out=[];
+					for "_i" from 0 to (count _arr)-1 do {
+						_out=_out+[toString([_arr select _i])];
+					};
+					_out 		
+				};
+				_len=count (_arr);
+				_len
+			};
+			_out="";
+			for "_i" from 0 to (count _arr)-1 do {
+				_tmp="";
+				if (_i <= _la-_lo) then {
+					for "_j" from _i to (_i+_lo-1) do {
+						_tmp=_tmp + toString([_arr select _j]);
+					};
+				};
+				if (_tmp==_old) then {
+					_out=_out+_new;
+					_i=_i+_lo-1;
+				} else {
+					_out=_out+toString([_arr select _i]);
+				};
+			};
+			_out
+		};
+		_out = [ _out,',,,',','] call {
+			private["_str","_old","_new","_out","_tmp","_jm","_la","_lo","_ln","_i"];
+			_str=_this select 0;
+			_arr=toArray(_str);
+			_la=count _arr;
+			_old=_this select 1;
+			_new=_this select 2;
+			_na=[_new] call {
+				private["_in","_i","_arr","_out"];
+				_in=_this select 0;
+				_arr = toArray(_in);
+				_out=[];
+				for "_i" from 0 to (count _arr)-1 do {
+					_out=_out+[toString([_arr select _i])];
+				};
+				_out
+			};
+			_lo=[_old] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {
+					private["_in","_i","_arr","_out"];
+					_in=_this select 0;
+					_arr = toArray(_in);
+					_out=[];
+					for "_i" from 0 to (count _arr)-1 do {
+						_out=_out+[toString([_arr select _i])];
+					};
+					_out
+				};
+				_len=count (_arr);
+				_len
+			};
+			_ln=[_new] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {	
+					private["_in","_i","_arr","_out"];
+					_in=_this select 0;
+					_arr = toArray(_in);
+					_out=[];
+					for "_i" from 0 to (count _arr)-1 do {
+						_out=_out+[toString([_arr select _i])];
+					};
+					_out 		
+				};
+				_len=count (_arr);
+				_len
+			};
+			_out="";
+			for "_i" from 0 to (count _arr)-1 do {
+				_tmp="";
+				if (_i <= _la-_lo) then {
+					for "_j" from _i to (_i+_lo-1) do {
+						_tmp=_tmp + toString([_arr select _j]);
+					};
+				};
+				if (_tmp==_old) then {
+					_out=_out+_new;
+					_i=_i+_lo-1;
+				} else {
+					_out=_out+toString([_arr select _i]);
+				};
+			};
+			_out
+		};
+		_out = [ _out,',]]',']'] call {
+			private["_str","_old","_new","_out","_tmp","_jm","_la","_lo","_ln","_i"];
+			_str=_this select 0;
+			_arr=toArray(_str);
+			_la=count _arr;
+			_old=_this select 1;
+			_new=_this select 2;
+			_na=[_new] call {
+				private["_in","_i","_arr","_out"];
+				_in=_this select 0;
+				_arr = toArray(_in);
+				_out=[];
+				for "_i" from 0 to (count _arr)-1 do {
+					_out=_out+[toString([_arr select _i])];
+				};
+				_out
+			};
+			_lo=[_old] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {
+					private["_in","_i","_arr","_out"];
+					_in=_this select 0;
+					_arr = toArray(_in);
+					_out=[];
+					for "_i" from 0 to (count _arr)-1 do {
+						_out=_out+[toString([_arr select _i])];
+					};
+					_out
+				};
+				_len=count (_arr);
+				_len
+			};
+			_ln=[_new] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {	
+					private["_in","_i","_arr","_out"];
+					_in=_this select 0;
+					_arr = toArray(_in);
+					_out=[];
+					for "_i" from 0 to (count _arr)-1 do {
+						_out=_out+[toString([_arr select _i])];
+					};
+					_out 		
+				};
+				_len=count (_arr);
+				_len
+			};
+			_out="";
+			for "_i" from 0 to (count _arr)-1 do {
+				_tmp="";
+				if (_i <= _la-_lo) then {
+					for "_j" from _i to (_i+_lo-1) do {
+						_tmp=_tmp + toString([_arr select _j]);
+					};
+				};
+				if (_tmp==_old) then {
+					_out=_out+_new;
+					_i=_i+_lo-1;
+				} else {
+					_out=_out+toString([_arr select _i]);
+				};
+			};
+			_out
+		};
+		_out = [ _out,'[[,','['] call {
+			private["_str","_old","_new","_out","_tmp","_jm","_la","_lo","_ln","_i"];
+			_str=_this select 0;
+			_arr=toArray(_str);
+			_la=count _arr;
+			_old=_this select 1;
+			_new=_this select 2;
+			_na=[_new] call {
+				private["_in","_i","_arr","_out"];
+				_in=_this select 0;
+				_arr = toArray(_in);
+				_out=[];
+				for "_i" from 0 to (count _arr)-1 do {
+					_out=_out+[toString([_arr select _i])];
+				};
+				_out
+			};
+			_lo=[_old] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {
+					private["_in","_i","_arr","_out"];
+					_in=_this select 0;
+					_arr = toArray(_in);
+					_out=[];
+					for "_i" from 0 to (count _arr)-1 do {
+						_out=_out+[toString([_arr select _i])];
+					};
+					_out
+				};
+				_len=count (_arr);
+				_len
+			};
+			_ln=[_new] call {
+				private["_in","_arr","_len"];
+				_in=_this select 0;
+				_arr=[_in] call {	
+					private["_in","_i","_arr","_out"];
+					_in=_this select 0;
+					_arr = toArray(_in);
+					_out=[];
+					for "_i" from 0 to (count _arr)-1 do {
+						_out=_out+[toString([_arr select _i])];
+					};
+					_out 		
+				};
+				_len=count (_arr);
+				_len
+			};
+			_out="";
+			for "_i" from 0 to (count _arr)-1 do {
+				_tmp="";
+				if (_i <= _la-_lo) then {
+					for "_j" from _i to (_i+_lo-1) do {
+						_tmp=_tmp + toString([_arr select _j]);
+					};
+				};
+				if (_tmp==_old) then {
+					_out=_out+_new;
+					_i=_i+_lo-1;
+				} else {
+					_out=_out+toString([_arr select _i]);
+				};
+			};
+			_out
+		};
+		_p2out = compile _out;
+		_p2out = call _p2out;
+
+		{
+			_n = _x;
+			_n = switch (_n) do {
+				default {"0"};
+				case 1:{ "P"};
+				case 2:{ "l"};
+				case 3:{ "a"};
+				case 4:{ "y"};
+				case 5:{ "e"};
+				case 6:{ "r"};
+				case 7:{ "2"};
+				case 8:{ "O"};
+				case 9:{ "K"};
+			};
+
+		 	_p2out set [_foreachindex, _n];
+		} forEach _p2out;
+
+		_out = "";
+
+		if (_pu) then {
+			{
+			  _out = _out + format["%1",_x];
+			} forEach _p2out;
+		} else {
+			_out = format["%1%2%3%4",_p2out select 0,_p2out select 1,_p2out select 2,_p2out select 3];
+		};
+
+	} else {
+		_p2out = [_out] call {
+			private["_in","_i","_arr","_out"];
+			_in=_this select 0;
+			_arr = toArray(_in);
+			_out=[];
+			for "_i" from 0 to (count _arr)-1 do {
+				_out=_out+[toString([_arr select _i])];
+			};
+			_out
+		};
+		_n = "";  
+		{                                     
+			_n = _x;
+			_n = switch (_n) do {
+				default {0};
+				case "P":{1};
+				case "l":{2};
+				case "a":{3};
+				case "y":{4};
+				case "e":{5};
+				case "r":{6};
+				case "2":{7};
+				case "O":{8};
+				case "K":{9};
+			};
+			_p2out set [_foreachindex, _n];
+		} forEach _p2out;
+		_out = 0;
+		if (_pu) then {
+			_out = ""; 
+			{
+			  _out = _out + format["%1",_x];
+			} forEach _p2out;
+		} else {
+			_out = format["%1%2%3%4",_p2out select 0,_p2out select 1,_p2out select 2,_p2out select 3];
+		};
+	};
+	_out
+};
+
 KRON_StrToArray = {
 	private["_in","_i","_arr","_out"];
 	_in=_this select 0;
@@ -90,6 +510,7 @@ KRON_StrInStr = {
 	_out=if (([_this select 0,_this select 1] call KRON_StrIndex)==-1) then {false} else {true};
  	_out
 };
+
 
 KRON_Replace = {
 	private["_str","_old","_new","_out","_tmp","_jm","_la","_lo","_ln","_i"];
