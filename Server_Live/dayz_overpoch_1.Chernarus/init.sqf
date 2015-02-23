@@ -115,7 +115,9 @@ if (hasInterface && !isDedicated) then {
 	call compile preprocessFileLineNumbers "_clientConfig.sqf"; 
 	call compile preprocessFileLineNumbers "init\variables.sqf";
 	P2DZ_postVars = true;
+	progressLoadingScreen 0.1;
 	waitUntil{uiSleep 0.5; P2DZ_postVarsDone};
+	progressLoadingScreen 0.2;
 };
 
 //diag_log("P2DEBUG: Is Player Client: 	" + str p2d_client);
@@ -137,9 +139,6 @@ call compile preprocessFileLineNumbers "compile\fnc_server.sqf";
 progressLoadingScreen 1.0;
 
 "filmic" setToneMappingParams [0.153, 0.357, 0.231, 0.1573, 0.011, 3.750, 6, 4]; setToneMapping "Filmic";
-
-[] execVM "\ddopp_taserpack\scripts\init_taser.sqf";
-player setVariable 	["isTazed", false, true];
 
 /*---------------------------------------------------------------------------
 Server
@@ -176,7 +175,6 @@ if (!isDedicated) then {
 	call compile preprocessFileLineNumbers 	"compile\fnc_debugMon.sqf";
 	call compile preprocessFileLineNumbers 	"init\notifs_init.sqf";
 	[] execVM 								"system\SafeZone.sqf";
-
 };
 
 //#define RESEC_VERBOSE
