@@ -1,4 +1,4 @@
-private ["_isNearLootBuild","_location","_p2badpos","_isBad","_dir","_classname","_item","_hasrequireditem","_missing","_hastoolweapon","_cancel","_reason","_started","_finished","_animState","_isMedic","_dis","_sfx","_hasbuilditem","_tmpbuilt","_onLadder","_isWater","_require","_text","_offset","_IsNearPlot","_isOk","_location1","_location2","_counter","_limit","_proceed","_num_removed","_position","_object","_canBuildOnPlot","_friendlies","_nearestPole","_ownerID","_findNearestPoles","_findNearestPole","_distance","_classnametmp","_ghost","_isPole","_needText","_lockable","_zheightchanged","_rotate","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_combinationDisplay","_zheightdirection","_abort","_isNear","_need","_needNear","_vehicle","_inVehicle","_requireplot","_objHDiff","_isLandFireDZ","_isTankTrap","_playerID", "_playerUID","_ownerID"];
+private ["_sa","_isNearLootBuild","_location","_p2badpos","_isBad","_dir","_classname","_item","_hasrequireditem","_missing","_hastoolweapon","_cancel","_reason","_started","_finished","_animState","_isMedic","_dis","_sfx","_hasbuilditem","_tmpbuilt","_onLadder","_isWater","_require","_text","_offset","_IsNearPlot","_isOk","_location1","_location2","_counter","_limit","_proceed","_num_removed","_position","_object","_canBuildOnPlot","_friendlies","_nearestPole","_ownerID","_findNearestPoles","_findNearestPole","_distance","_classnametmp","_ghost","_isPole","_needText","_lockable","_zheightchanged","_rotate","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_combination_1_Display","_combinationDisplay","_zheightdirection","_abort","_isNear","_need","_needNear","_vehicle","_inVehicle","_requireplot","_objHDiff","_isLandFireDZ","_isTankTrap","_playerID", "_playerUID","_ownerID"];
 if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_40") , "PLAIN DOWN"]; };
 DZE_ActionInProgress = true;
 if((count ((getPosATL player) nearObjects ["All",DZE_PlotPole select 0])) >= DZE_BuildingLimit) exitWith {DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_41"), "PLAIN DOWN"];};
@@ -55,6 +55,7 @@ if (_onLadder) exitWith {DZE_ActionInProgress = false; cutText [localize "str_pl
 if (player getVariable["combattimeout", 0] >= time) exitWith {DZE_ActionInProgress = false; cutText [(localize "str_epoch_player_43"), "PLAIN DOWN"];};
 _item =	_this;
 _abort = false;
+_sa = false;
 _reason = "";
 _needNear = 	getArray (configFile >> "CfgMagazines" >> _item >> "ItemActions" >> "Build" >> "neednearby");
 {
@@ -420,10 +421,26 @@ if (_hasrequireditem) then {
 							_combination = format["%1%2%3%4",_combination_1,_combination_2,_combination_3,_combination_4];
 							dayz_combination = _combination;
 							_combinationDisplay = _combination;
+							_scrambleChar = nil; _scrambleChar = ""; _scrambleUID = nil; _scrambleUID = "";
+							_scrambleUID = 		[_OwnerUID,1,true]		call KRON_Scramble;
+							_scrambleChar = 	[_combination,1,false]	call KRON_Scramble;
+							dayz_combination = _scrambleChar;
+
+							//diag_log(format["P2Scramble:PlayerBuild: Encrypting: UID Mode: 					%1, 				Output: 	%2",_OwnerUID,	_scrambleUID]);
+							//diag_log(format["P2Scramble:PlayerBuild: Encrypting: CID Mode:  				%1, 				Output: 	%2",_combination,	_scrambleChar]);
+
+							_sa = false;
+							_tmpbuilt setVariable ["CharacterID",_scrambleChar,true];
+							_tmpbuilt setVariable ["ownerPUID",_scrambleUID,true];
 						};
 					};
-					_tmpbuilt setVariable ["CharacterID",_combination,true];
-					_tmpbuilt setVariable ["ownerPUID",_playerID,true];
+
+
+					if (_sa) then {
+						_tmpbuilt setVariable ["CharacterID",_combination,true];
+						_tmpbuilt setVariable ["ownerPUID",_OwnerUID,true];
+					};
+
 					PVDZE_obj_Publish = [_combination,_tmpbuilt,[_dir,_location,_playerUID],_classname,(p2pn + (random 10))];
 					publicVariableServer "PVDZE_obj_Publish";
 					cutText [format[(localize "str_epoch_player_140"),_combinationDisplay,_text], "PLAIN DOWN", 5];
