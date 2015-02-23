@@ -79,7 +79,7 @@ call compile ("
 			_b = _CECA2 select _i;
 			if (str _a != str (toArray _b)) then
 			{
-				P2DZ_fire = format['NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)',"+(str _pname)+", "+(str _puid)+",  ('CheatEngine'),  (str [_a,_b])];
+				P2DZ_fire = ["+(str _pname)+", "+(str _puid)+",  ('MemoryHack'),  (str [_a,_b])];
 				publicVariableServer 'P2DZ_fire';
 				[] spawn P2DZ_AHKick;
 			};
@@ -97,13 +97,13 @@ call compile ("
 			_OUL1 = toArray(str(getText(configFile >> _cname >> 'onUnload')));
 			if (str _OL != str _OL1) then
 			{
-				P2DZ_fire = format['NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)',"+(str _pname)+", "+(str _puid)+",  ('CheatEngine'),  (str [_OL1,_OL])];
+				P2DZ_fire = ["+(str _pname)+", "+(str _puid)+",  ('MemoryHack'),  (str [_OL1,_OL])];
 				publicVariableServer 'P2DZ_fire';
 				[] spawn P2DZ_AHKick;
 			};
 			if (str _OUL != str _OUL1) then
 			{
-				P2DZ_fire = format['NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)',"+(str _pname)+", "+(str _puid)+",  ('CheatEngine'),  (str [_OUL1,_OUL])];
+				P2DZ_fire = ["+(str _pname)+", "+(str _puid)+",  ('MemoryHack'),  (str [_OUL1,_OUL])];
 				publicVariableServer 'P2DZ_fire';
 				[] spawn P2DZ_AHKick;
 			};

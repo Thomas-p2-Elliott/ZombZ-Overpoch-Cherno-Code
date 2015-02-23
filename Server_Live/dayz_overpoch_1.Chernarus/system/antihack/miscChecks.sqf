@@ -1,4 +1,4 @@
-private ["_puid","_worldName","_plants","_other","_BadPlants","_obj","_size","_randvar2","_log","_return","_y","_time","_pname"];
+private['_pname','_puid'];
 _pname = _this select 0; _puid = _this select 1; 
 
 if (P2DZ_AHDebug) then {
@@ -13,7 +13,7 @@ call compile ("
 	[_x] spawn {
 		_x = _this select 0;
 		waitUntil {!(isNil _x)};
-		P2DZ_fire = format['NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)',"+(str _pname)+", " +(str _puid)+ ", 'GameFunction Broken: ',  (str(_x))];
+		P2DZ_fire =["+(str _pname)+", " +(str _puid)+ ", 'GameFunction Broken: ',  (str(_x))];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick; 
 	};
@@ -31,19 +31,16 @@ call compile ("
 'addMagazine','setDamage','setDammage','addEventHandler','getVariable','setVariable'];
 ");
 
-/*---------------------------------------------------------------------------
-Count 109 / 108 / 1001 / 1006
----------------------------------------------------------------------------*/
 call compile ("
 [] spawn {
-	private['_c1','_c2','_c3','_c4'];
+	private['_c1','_c2','_c3','_c4','_gg'];
 
 	_c1 = 0; 
 	_c2 = 0;
 	_c3 = 0;
 	_c4 = 0;
-
-	while{true} do {
+	_gg = true;
+	while{_gg} do {
 
 			_c1 = lbSize 109;
 			_c2 = lbSize 108;
@@ -51,7 +48,7 @@ call compile ("
 			_c4 = lbSize 1006;
 
 			if (_c1 > 70 || _c2 > 70 || _c3 > 70 || _c4 > 70) then {
-				P2DZ_fire = format['NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)', "+(str _pname)+", " +(str _puid)+ ", 'Bad Menu Size! SlothMenu!',  ([str _c1,str _c2,str _c3,str _c4])];
+				P2DZ_fire = ["+(str _pname)+", " +(str _puid)+ ", 'Bad Menu Size! SlothMenu!',  ([str _c1,str _c2,str _c3,str _c4])];
 				publicVariableServer 'P2DZ_fire';
 				[] spawn P2DZ_AHKick;
 			};
@@ -60,6 +57,20 @@ call compile ("
 };
 ");
 
+call compile ("
+	[] spawn {
+		private['_gg'];
+		_gg = true;
+		while {_gg} do {
+			private['_nil'];
+			_nil = [] spawn { onEachFrame {}; };
+			_nil = nil;
+		};
+	};
+");
+
+private ["_BadPlants","_obj","_size","_log","_pname","_puid","_plants","_other","_worldName"];
+_worldName = []; _plants = []; _BadPlants = [];
 _worldName = toArray worldName;
 uiSleep 25;
 _worldName resize 9;
@@ -85,7 +96,7 @@ if (_worldName == 'Chernarus') then
 	if (count _BadPlants > 1) then
 	{
 		_log = format['BadSize: %1 - Plants and/or Clutter pbo(s) removed..!',_BadPlants];
-		P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)", _pname, _puid, 'Plants/Clutter PBOs removed!',  (_BadPlants)];
+		P2DZ_fire = [_pname, _puid, 'Plants/Clutter PBOs removed!',  format['Removed Files: %1',(_BadPlants)]];
 		publicVariableServer 'P2DZ_fire';
 		[] spawn P2DZ_AHKick; 
 	};
@@ -108,14 +119,16 @@ if (!isNil 'player_lockVault') then
 	if (isNil 'oplayer_lockVault') then {oplayer_lockVault = player_lockVault;};
 	player_lockVault =
 	{
+		private['_y'];
 		_y = _this spawn oplayer_lockVault;
 		[] spawn {
-			_time = time + 10;
-			while {_time > time} do
+			private['_ztime','_log'];
+			_ztime = time + 10;
+			while {_ztime > time} do
 			{
 				if (!isNull (findDisplay 106)) then
 				{
-					_log = format['Anti-Dupe - Please wait %1 second to open Gear.',round (_time - time)];
+					_log = format['Anti-Dupe - Please wait %1 second to open Gear.',round (_ztime - time)];
 					cutText [_log,'PLAIN'];
 					(findDisplay 106) closeDisplay 0;
 					closeDialog 0;

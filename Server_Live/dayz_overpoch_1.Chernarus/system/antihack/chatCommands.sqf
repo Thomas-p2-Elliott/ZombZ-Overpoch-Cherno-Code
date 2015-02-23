@@ -85,6 +85,10 @@ P2DZ_chatCommands = {
 				systemChat '/dance, dance, /clubbing, clubbing, /excercise, excercise,';
 				systemChat '/killme, killme, /unstuck, unstuck';
 			};
+			if (_txt in ['exec','call','compile','player addMagazine','player addWeapon','spawn','[] spawn']) then
+			{
+				(_display) closeDisplay 0;
+			};
 		};
 	};
 };

@@ -71,7 +71,7 @@ while {11250 == 11250} do {
 	uisleep 0.1;
 };
 */
-//P2DZ_fire = format["NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)",_pname, _puid, 'AntiTeleport', 'Loop Exited'];
+//P2DZ_fire = [_pname, _puid, 'AntiTeleport', 'Loop Exited'];
 //publicVariableServer 'P2DZ_fire';
 //[] spawn P2DZ_AHKick;
 
