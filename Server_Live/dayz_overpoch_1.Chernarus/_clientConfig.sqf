@@ -39,17 +39,24 @@ if (hasInterface && !isDedicated) then {
 	//how often should we ask the server to save the char
 	DZE_SaveTime = 240;
 
+	//debug client login (FSM and login.sqf)?
+	P2DZE_debugLogin = true;
+
 	//default debug monitor colour - gets overwritten by hivedll but still needs to be declared!
 	P2DZE_debugCol = [0,0,0,0.2];
+
+	//Devs only
+	P2_REF = true;
 
 	//Loadscreen Timeout Length (Seconds) (Default: 120)
 	P2DZ_LoadingTimeOut = 300;
 
 	/* Default Client Performance/Visual Settings */
 
-	setViewdistance 1250;	//ViewDist
+	setViewdistance 1000;	//ViewDist
 	0 setovercast 0;		//Sky
 	0 setFog 0;				//Fog
+	setTerrainGrid 40;		//Terrain Detail
 
 
 	P2DZ_debugMonSleep = 0.4; //Debug Mon Refresh-Rate
@@ -91,9 +98,12 @@ if (hasInterface && !isDedicated) then {
 	P2DZE_hasGold = false;			// - gets modified by checkGoldItems & pickupgold & dropgold
 	P2DZE_gearOnContainer = false; // - gets modified in object_monitorGear.sqf
 	P2DZE_gearOnWeaponHolder = false; // - gets modified in object_monitorGear.sqf
+	P2DZE_LRR = 0; //last removal request
+	P2DZE_LGR = 0; //last give request
 	s_player_takeGold = -1;
 	P2DZ_debugSliderRange = 100;
 	P2DZ_dbCurMode = 1;
+	P2DZ_dbViewDist = 1000;
 	P2DZ_debugOff = false;
 	P2DZE_traderListLoading = false;
 	P2DZ_debugMonitor = false;
@@ -115,6 +125,7 @@ if (hasInterface && !isDedicated) then {
 	P2DZ_load8 = 	false;
 	P2DZ_load9 = 	false;
 	P2DZ_load10 =	false;
+	dayz_DisplayGenderSelect = true;
 
 	//Map Markers
 	[] spawn {
