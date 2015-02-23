@@ -69,6 +69,10 @@ KK_fnc_checkHash = {
         true;
     };
 
+    if (_this isKindOf "WeaponHolder") exitWith {
+        true;
+    };
+
     if ("hash_id" callExtension format [
         "%1:%2#%3", 
         netId _this, 
@@ -83,8 +87,10 @@ KK_fnc_checkHash = {
 };
 
 KK_fnc_checkHashGold = {
-   // "debug_console" callExtension format["Gold: %1 hash check", typeOf _this];
-
+    private["_dcout","_obj"];
+    _obj = _this;
+    diag_log(format["KK_fnc_checkHashGold: Input: %1",_obj]);
+    
     if ("hash_id" callExtension format [
         "%1:%2#%3", 
         netId _this, 
@@ -93,19 +99,118 @@ KK_fnc_checkHashGold = {
             (uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar])), "NULL"
         ]
     ] == "PASS") exitWith {true};
-    0 = _this spawn KK_fnc_logFailedGold;
-    //"debug_console" callExtension format["Gold: %1 FAILED #1001", typeOf _this];
-    diag_log("Deleting: " + str(_this));
-    deleteVehicle _this;
-    diag_log(format["Deleted: %1", _this]);
+    
+    diag_log(format["KK_fnc_checkHashGold: Obj without Hash: %1",_obj]);
+
+    [_obj,false] call fnc_removeExtraBars;
+
+    _dcout = {
+        //"debug_console" callExtension (format _this);
+        //log it
+        _this call stats_goldHashFails;
+    };  
+
+    _dcoutVar = [];
+
+    _dcoutVar set [count _dcoutVar, format[
+        "Vehicle => OBJ:%1, TYPE:%2, WEPS:%5 MAGS:%5 ",
+        _obj, typeOf _obj, netId _obj, getWeaponCargo _obj, getMagazineCargo _obj
+    ]]; //log vehicle and netId
+
+    _dcoutVar set [count _dcoutVar, format[
+        "Position => POS:%1, MAP:%2 ", 
+        position _obj, mapGridPosition _obj
+    ]]; //log veh position and map grid
+
+    {
+        if (owner _x == owner _obj) then {
+
+            _dcoutVar set [count _dcoutVar, format[
+                "Owner => ID:%1, NETID:%2, UID:%3, NAME:%4, OBJ:%5 ",
+                owner _x, netId _x, getPlayerUID _x, name _x, _x 
+            ]]; //log current owner
+
+        };
+    } count playableUnits;
+    {
+
+        _dcoutVar set [count _dcoutVar, format[
+            "Crew => OBJ:%1, NAME:%2, UID:%3, SEAT:%4 ", 
+            _x, name _x, getPlayerUID _x, assignedVehicleRole _x
+        ]]; //log current vehicle crew and vehicle seat
+
+    } count crew _obj;
+    {
+
+        if (
+            isPlayer _x && 
+            {_x distance _obj <= 100} && 
+            {!(_x in _obj)}
+        ) then {
+
+            _dcoutVar set [count _dcoutVar, format[
+                "Near => OBJ:%1, NAME:%2, UID:%3, DISTANCE:%4 ",
+                _x, name _x, getPlayerUID _x, _x distance _obj
+            ]]; //log near players and distance
+
+        };
+    } count playableUnits;
+    format["%1",_dcoutVar] call _dcout;
     false
 };
 
-KK_fnc_logFailedGold = {
-    _this setDamage 1; //destroy it
-    deleteVehicle _this; //delete it
-};
+/*Parameters:
+_unit - the vehicle providing cargo space [Object]
+_item - classname of item to remove [String]
+_count - number of items to remove [Number] (Default: 1)
 
+Returns:
+true on success, false otherwise (error or no such item in cargo)
+*/
+p2_removeMagCargoGlobal = {
+    private ["_unit", "_item", "_count", "_i", "_unit_allItems", "_unit_allItems_types", "_unit_allItems_count", "_item_type", "_item_count", "_returnVar","_gVal","_unitPos"];
+    _unit = _this select 0;
+    _item = _this select 1;
+    _count = _this select 2;
+    if (_count <= 0) exitWith { false; };
+    _unitPos = getPos _unit;
+    if (surfaceIsWater _unitPos) then { _unitPos = getPosASL _unit; } else { _unitPos = getPosATL _unit; };
+
+    if (_item == "ItemGoldBar10oz") then {
+        _gVal = _unit getVariable ["ZombZGold", 0];
+    };
+
+    _unit_allItems = getMagazineCargo _unit; 
+    _unit_allItems_types = _unit_allItems select 0; 
+    _unit_allItems_count = _unit_allItems select 1;
+
+    returnVar = false;
+
+    clearMagazineCargoGlobal _unit;
+ 
+    for [{_i=0}, {_i<(count _unit_allItems_types)}, {_i=_i+1}] do {
+        _item_type = _unit_allItems_types select _i;
+        _item_count = _unit_allItems_count select _i;
+
+        if (_item_type == _item) then { 
+            returnVar = true;
+
+            _item_count = _item_count - _count;
+            if (_item_count > 0) then {
+                _unit = nil;
+                _unit = "WeaponHolder" createVehicle _unitPos;
+                if (surfaceIsWater _unitPos) then { _unit setPosASL _unitPos; } else { _unit setPosATL _unitPos; };
+                _unit addMagazineCargoGlobal [_item_type, _item_count];
+            };
+        } else {
+
+            _unit = nil;
+            _unit = "WeaponHolder" createVehicle _unitPos;
+            if (surfaceIsWater _unitPos) then { _unit setPosASL _unitPos; } else { _unit setPosATL _unitPos; };
+            _unit addMagazineCargoGlobal [_item_type, _item_count];
+        };
+    };
+};
 
 /*---------------------------------------------------------------------------
 Security Numbers - Publish / Delete / Trade / Gold -
@@ -137,11 +242,11 @@ kk_fnc_logBadNum = {
     _log = "badNumber";
     _pObj = objNull;
     _inp = _this;
-    if (isNil '_inp' || ({(typeName _inp != typeName [])})) exitWith { diag_log("HackerLogError: Uknown Input."); };
+    if (isNil '_inp' || ({(typeName _inp != typeName "ARRAY")})) exitWith { diag_log("HackerLogError: Uknown Input."); };
     _type = _this select 1;
-    if (isNil '_type' || ({(typeName _type != typeName "")})) exitWith { diag_log("HackerLogError: Uknown Type Input."); };
+    if (isNil '_type' || ({(typeName _type != typeName "STRING")})) exitWith { diag_log("HackerLogError: Uknown Type Input."); };
     _inp = _this select 0;
-    if ((isNull _inp) || (typeName _inp != typeName "Player2")) exitWith { diag_log("HackerLogError: Uknown (Object or UID) Input."); };
+    if ((isNull _inp) || (typeName _inp != typeName "STRING")) exitWith { diag_log("HackerLogError: Uknown (Object or UID) Input."); };
     diag_Log("P2DEBUG: kk_fnc_logBadNum called:");
     diag_log(format["P2DEBUG:   %1",_this]);
     if (typeName _inp == typeName "Player2") then {
@@ -150,7 +255,7 @@ kk_fnc_logBadNum = {
             SillyNoobs = SillyNoobs + [_pUid];
         };
 
-        _log = format["NAME:   (%1)    UID: (%2)   COMMAND USED:   (%3)    PARAMS USED:    (%4)", "Unknown", _pUid,  _type,  "Params Unavailable"];
+        _log = ["Unknown", _pUid,  _type,  "Params Unavailable"];
         if (!isNil "_log") then {
             _log call stats_hackers;
         };
@@ -165,7 +270,7 @@ kk_fnc_logBadNum = {
             SillyNoobs = SillyNoobs + [_pUid];
         };
 
-        _log = format["NAME:   (%1)    UID: (%2)   COMMAND USED:   (%3)    PARAMS USED:    (%4)", _pName, _pUid,  _type,  "Params Unavailable"];
+        _log = [_pName, _pUid,  _type,  "Params Unavailable"];
         if (!isNil "_log") then {
             _log call stats_hackers;
         };

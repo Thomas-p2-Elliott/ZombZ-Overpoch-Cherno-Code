@@ -95,7 +95,7 @@ fnc_p2_RemoteExecute2 = {
 /*---------------------------------------------------------------------------
 Remotely Executed Scripts:
 ---------------------------------------------------------------------------*/
-//[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\mk.sqf";				//map markers: moved
+//[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\mk.sqf";
 //[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\menu\retrieveNews.sqf";	old
 //[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\menu\execute_re.sqf"; old
 //[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\gorsylobby.sqf"; needs update from gorsy
@@ -114,7 +114,6 @@ Use isNil to avoid over-writing. Client runs function from _clientConfig.sqf
 ---------------------------------------------------------------------------*/
 private ["_logBuilder","_agent","_pos"];
 
-
 call compile preprocessFileLineNumbers "compile\string_functions.sqf";							//Compile extra string functions
 
 call {
@@ -122,17 +121,16 @@ call {
 	AntiHack PublicVar for server
 	---------------------------------------------------------------------------*/
 	if (isDedicated && !hasInterface || isServer) exitWith {
-		private ["_found"];
+		private ["_humanLog","_dbLog"];
 		"P2DZ_fire" addPublicVariableEventHandler {
 			_x = _this select 1;
-			if (typeName _x == "STRING") then {
-				diag_log _x;
-				_found	=	[_x,"TELEPORT REVERT"] call KRON_StrInStr;
-				if (_found) then {
-					_x call stats_teleports;
-				} else {
-					_x call stats_hackers;
-				};
+			if (typeName _x == typeName []) then {
+				
+					_humanLog = format["NAME:	(%1)	UID:	(%2)	DETECTION TYPE:	(%3)	DETECTION DETAIL:	(%4)",_x select 0, _x select 1, _x select 2, _x select 3];
+					_dbLog = 	format["%1(_GLS_)%2(_GLS_)%3(_GLS_)%4", _x select 1, _x select 2, _x select 3, GORSYSERVERNUMBER];
+
+					_dbLog call stats_hackers;
+					_humanLog call stats_hackers_human;
 			};
 		};
 	};
