@@ -30,7 +30,7 @@ P2DZ_AHLoop = {
 		[_pname,_puid,_mPos] call P2DZ_AHLoop_Calls;
 	};
 
-	P2DZ_fire = format['NAME:	(%1)	UID: (%2)	COMMAND USED:	(%3)	PARAMS USED:	(%4)',(_pname), (_puid), 'P2DZ_AHLoop Exited', '{true} broken'];
+	P2DZ_fire = [(_pname), (_puid), 'P2DZ_AHLoop Exited', '{true} broken'];
 	publicVariableServer 'P2DZ_fire';
 	[] spawn P2DZ_AHKick;
 };
