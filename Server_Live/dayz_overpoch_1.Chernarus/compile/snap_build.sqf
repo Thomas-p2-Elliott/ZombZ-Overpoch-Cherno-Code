@@ -18,15 +18,17 @@ _objColorInactive = "#(argb,8,8,3)color(0.04,0.84,0.92,0.3,ca)";
 
 
 fnc_snapActionCleanup = {
-	private ["_s1","_s2","_s3","_cnt"];
+	private ["_s1","_s2","_s3","_cnt","_p2v"];
 	_s1 = _this select 0;
 	_s2 = _this select 1;
 	_s3 = _this select 2;
+	_p2v = "Disabled";
 	player removeAction s_player_toggleSnap; s_player_toggleSnap = -1;
 	player removeAction s_player_toggleSnapSelect; s_player_toggleSnapSelect = -1;
 	if (count s_player_toggleSnapSelectPoint != 0) then {{player removeAction _x;} count s_player_toggleSnapSelectPoint; s_player_toggleSnapSelectPoint=[]; snapActions = -1;};
+	if (snapActionState != "OFF") then { _p2v = "Enabled" } else { _p2v = "Disabled"; };
 	if (_s1 > 0) then {
-		s_player_toggleSnap = player addaction [format[("<t color=""#ffffff"">" + ("Snap: %1") +"</t>"),snapActionState],"compile\snap_build.sqf",[snapActionState,_object,_classname,_objectHelper],6,false,true];
+		s_player_toggleSnap = player addaction [format[("<t color=""#ffffff"">" + ("Snap: %1") +"</t>"),_p2v],"compile\snap_build.sqf",[snapActionState,_object,_classname,_objectHelper],6,false,true];
 	};
 	if (_s2 > 0) then {
 		s_player_toggleSnapSelect = player addaction [format[("<t color=""#ffffff"">" + ("Snap Point: %1") +"</t>"),snapActionStateSelect],"compile\snap_build.sqf",[snapActionStateSelect,_object,_classname,_objectHelper],5,false,true];
