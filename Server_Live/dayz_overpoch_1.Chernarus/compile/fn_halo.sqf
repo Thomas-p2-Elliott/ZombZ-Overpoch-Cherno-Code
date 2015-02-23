@@ -10,9 +10,24 @@ if (typename _this == typename objnull) then {
 	waituntil {(vehicle _unit) iskindof "ParachuteBase" || !isnil {_unit getvariable "bis_fnc_halo_now"}};
 	if (!local _unit) exitwith {};
 
+	if (!alive player) exitWith {
+		if (!isNil '_parachute') then {
+			if (isNull _parachute) then {
+				if ((typeOf _parachute) == "ParachuteWest") then {
+					deletevehicle _parachute; 
+				};
+			};
+		};
+		[objNull, player, rSwitchMove,"adthppnemstpsraswrfldnon_1"] call RE;
+		player switchmove "adthppnemstpsraswrfldnon_1";
+		player setvelocity [0,0,0];
+	};
+
 	_parachute = vehicle _unit;
 	if (_parachute != _unit) then {
-		deletevehicle _parachute;
+		if ((typeOf _parachute) == "ParachuteWest") then {
+			deletevehicle _parachute;
+		};
 	}; 
 
 	_dir = ([[0,0,0],velocity _unit] call bis_fnc_dirto);
@@ -105,12 +120,6 @@ if (typename _this == typename objnull) then {
 				};
 
 				player playmovenow _anim;
-				/*
-					if ((time - bis_fnc_halo_soundLoop) > 4.5) then {
-						playsound "BIS_HALO_Flapping";						//removed sound testing as enhancement
-						bis_fnc_halo_soundLoop = time;
-					};
-				*/
 				sleep 0.01;
 			};
 			//--- End
@@ -133,7 +142,7 @@ if (typename _this == typename objnull) then {
 				player setvelocity [0,0,0];
 			};
 
-			if (((position vehicle player select 2) < 2)) then {
+			if (((position vehicle player select 2) < 2) && (alive player)) then {
 				[player] spawn bis_fnc_halo;
 			};
 		};
@@ -157,7 +166,20 @@ if (typename _this == typename []) then {
 		_unit spawn bis_fnc_halo;
 	};
 	//-------------
-	
+
+	if (!alive player) exitWith {
+		[objNull, player, rSwitchMove,"adthppnemstpsraswrfldnon_1"] call RE;
+		player switchmove "adthppnemstpsraswrfldnon_1";
+		player setvelocity [0,0,0];
+		if (!isNil '_para') then {
+			if (isNull _para) then {
+				if ((typeOf _para) == "ParachuteWest") then {
+					deletevehicle _para; 
+				};
+			};
+		};
+	};
+
 	_para = objnull;
 	_vel = [];
 	_para = "ParachuteWest" createVehicle position _unit;
@@ -205,34 +227,48 @@ if (typename _this == typename []) then {
 		bis_fnc_halo_para_loop = {
             private ["_para","_fpsCoef","_dir"];
             if (!isnil {player getvariable "bis_fnc_halo_terminate"}) exitwith {};
-				if (time == bis_fnc_halo_para_loop_time) exitwith {}; //--- FPS too high
+            _para = vehicle player;
 
-				_para = vehicle player;
+        	if (!alive player) exitWith {
+				[objNull, player, rSwitchMove,"adthppnemstpsraswrfldnon_1"] call RE;
+				player switchmove "adthppnemstpsraswrfldnon_1";
+				player setvelocity [0,0,0];
+				if (!isNil '_para') then {
+					if (isNull _para) then {
+						if ((typeOf _para) == "ParachuteWest") then {
+							deletevehicle _para; 
+						};
+					};
+				};
+			};
+			if (time == bis_fnc_halo_para_loop_time) exitwith {}; //--- FPS too high
 
-				_fpsCoef = ((time - bis_fnc_halo_para_loop_time) * 20) / acctime; //Script is optimized for 20 FPS
-				bis_fnc_halo_para_loop_time = time;
+			_para = vehicle player;
 
-				bis_fnc_halo_para_velLimit = 0.3 * _fpsCoef;
-				bis_fnc_halo_para_velAdd = 0.002 * _fpsCoef;
-				bis_fnc_halo_para_dirLimit = 1.5 * _fpsCoef;
-				bis_fnc_halo_para_dirAdd = 0.03 * _fpsCoef;
+			_fpsCoef = ((time - bis_fnc_halo_para_loop_time) * 20) / acctime; //Script is optimized for 20 FPS
+			bis_fnc_halo_para_loop_time = time;
 
-				bis_fnc_halo_para_dir = bis_fnc_halo_para_dir * 0.98;
-				bis_fnc_halo_para_dirAbs = bis_fnc_halo_para_dirAbs + bis_fnc_halo_para_dir;
-				_para setdir bis_fnc_halo_para_dirAbs;
-				_dir = direction _para;
+			bis_fnc_halo_para_velLimit = 0.3 * _fpsCoef;
+			bis_fnc_halo_para_velAdd = 0.002 * _fpsCoef;
+			bis_fnc_halo_para_dirLimit = 1.5 * _fpsCoef;
+			bis_fnc_halo_para_dirAdd = 0.03 * _fpsCoef;
 
-				_para setposasl [
-					(getposasl _para select 0) + (sin _dir * (0.1 + bis_fnc_halo_para_vel)),
-					(getposasl _para select 1) + (cos _dir * (0.1 + bis_fnc_halo_para_vel)),
-					(getposasl _para select 2) - 0.01 - 0.1 * abs bis_fnc_halo_para_vel
-				];
+			bis_fnc_halo_para_dir = bis_fnc_halo_para_dir * 0.98;
+			bis_fnc_halo_para_dirAbs = bis_fnc_halo_para_dirAbs + bis_fnc_halo_para_dir;
+			_para setdir bis_fnc_halo_para_dirAbs;
+			_dir = direction _para;
 
-				[
-					_para,
-					(-bis_fnc_halo_para_vel * 75) + 0.5*(sin (time * 180)),
-					(+bis_fnc_halo_para_dir * 25) + 0.5*(cos (time * 180))
-				] call bis_fnc_setpitchbank;
+			_para setposasl [
+				(getposasl _para select 0) + (sin _dir * (0.1 + bis_fnc_halo_para_vel)),
+				(getposasl _para select 1) + (cos _dir * (0.1 + bis_fnc_halo_para_vel)),
+				(getposasl _para select 2) - 0.01 - 0.1 * abs bis_fnc_halo_para_vel
+			];
+
+			[
+				_para,
+				(-bis_fnc_halo_para_vel * 75) + 0.5*(sin (time * 180)),
+				(+bis_fnc_halo_para_dir * 25) + 0.5*(cos (time * 180))
+			] call bis_fnc_setpitchbank;
 		};
 
 		bis_fnc_halo_para_mousemoving_eh = (finddisplay 46) displayaddeventhandler ["mousemoving","_this call bis_fnc_halo_para_loop;"];
