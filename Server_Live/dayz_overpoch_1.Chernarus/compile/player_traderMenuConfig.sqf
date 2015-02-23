@@ -12,13 +12,13 @@ TraderCatList = -1;
 TraderItemList = -1;
 
 TraderDialogLoadItemList = {
-	private ["_index","_trader_id","_activatingPlayer","_distance","_objclass","_item_list","_pthrough","_dataAdded","_resultData"];
+	private ["_ind","_trader_id","_activatingPlayer","_distance","_objclass","_it_list","_pthrough","_dtAdded","_resultData"];
 	TraderItemList = -1;
-	_dataAdded = false;
-	_index = _this select 0;
+	_dtAdded = false;
+	_ind = _this select 0;
 
-	if (_index < 0) exitWith {};
-	//TraderCurrentCatIndex = _index;
+	if (_ind < 0) exitWith {};
+	//TraderCurrentCatIndex = _ind;
 
 	if (isNil 'P2DZE_traderListLoading') then {
 		P2DZE_traderListLoading = false;
@@ -31,7 +31,7 @@ TraderDialogLoadItemList = {
 
 		_pthrough = 0;
 
-		_trader_id = TraderCatList select _index;
+		_trader_id = TraderCatList select _ind;
 		_activatingPlayer = player;
 
 		lbClear TraderDialogItemList;
@@ -48,7 +48,7 @@ TraderDialogLoadItemList = {
 				{
 					if (_cfgTraderCategory == _x select 0) then {
 						_resultData = _x select 1;
-						_dataAdded = true;
+						_dtAdded = true;
 						PVDZE_plr_TradeMenuResult = _resultData;
 					};
 				} count P2DZE_cachedTraders;
@@ -56,7 +56,7 @@ TraderDialogLoadItemList = {
 		} else {
 			P2DZE_cachedTraders = [];
 		};
-		if (!_dataAdded) then {
+		if (!_dtAdded) then {
 			PVDZE_plr_TradeMenuResult = [];
 	
 			for "_i" from 0 to ((count _cfgTraderCategory) - 1) do {
@@ -84,9 +84,9 @@ TraderDialogLoadItemList = {
 				};
 
 				_class = _class call P2DZ_decryptFunction;
-				_data = [9999,[_class,_typeNum],99999,_buy,_sell,0,_trader_id,_type];
+				_dt = [9999,[_class,_typeNum],99999,_buy,_sell,0,_trader_id,_type];
 				
-				PVDZE_plr_TradeMenuResult set [count PVDZE_plr_TradeMenuResult, _data];			
+				PVDZE_plr_TradeMenuResult set [count PVDZE_plr_TradeMenuResult, _dt];			
 			};
 			
 			//cache traders
@@ -94,13 +94,13 @@ TraderDialogLoadItemList = {
 		};
 
 		lbClear TraderDialogItemList;
-		_item_list = [];
+		_it_list = [];
 		{
-			private ["_header", "_item", "_name", "_type", "_textPart", "_qty", "_buy", "_bqty", "_btype", "_sell", "_sqty", "_stype", "_mags", "_order", "_order", "_afile", "_File", "_count", "_magCount", "_magCount2", "_bag", "_bagclass", "_index", "_image"];
+			private ["_header", "_it", "_name", "_type", "_textPart", "_qty", "_buy", "_bqty", "_btype", "_sell", "_sqty", "_stype", "_mags", "_order", "_order", "_afile", "_File", "_count", "_magCount", "_magCount2", "_bag", "_bagclass", "_ind", "_image"];
 			_header = _x select 0; // "TRD"
-			_item = _x select 1;
-			_name = _item select 0;
-			_type = _item select 1;
+			_it = _x select 1;
+			_name = _it select 0;
+			_type = _it select 1;
 			switch (true) do {
 				case (_type == 1): {
 					_type = "CfgMagazines";
@@ -161,7 +161,7 @@ TraderDialogLoadItemList = {
 			_afile = _x select 7;
 			_File = "\z\addons\dayz_code\actions\" + _afile + ".sqf";
 				
-			if (_afile == "trade_items" || _afile == "trade_any_bicycle" || _afile == "trade_any_boat" || _afile == "trade_any_vehicle" || _afile == "trade_any_vehicle_free") then {
+			if (_afile == "trade_its" || _afile == "trade_any_bicycle" || _afile == "trade_any_boat" || _afile == "trade_any_vehicle" || _afile == "trade_any_vehicle_free") then {
 				_File = "actions\" + _afile + ".sqf";
 			};
 
@@ -196,10 +196,10 @@ TraderDialogLoadItemList = {
 				_count = {_x == _name} count weapons player;
 			};
 
-			_index = lbAdd [TraderDialogItemList, format["%1 (%2)", _textPart, _name]];
+			_ind = lbAdd [TraderDialogItemList, format["%1 (%2)", _textPart, _name]];
 
 			if (_count > 0) then {
-				lbSetColor [TraderDialogItemList, _index, [0, 1, 0, 1]];
+				lbSetColor [TraderDialogItemList, _ind, [0, 1, 0, 1]];
 			};
 
 			//Mag Highligting: Yellow for Main Weapon Magtype, Orange for other magtypes the weapon can use
@@ -214,17 +214,17 @@ TraderDialogLoadItemList = {
 				} count weapons player;
 
 				if (_magCount2 > 0) then {
-					lbSetColor [TraderDialogItemList, _index, [0.77, 1, 0, 1]];
+					lbSetColor [TraderDialogItemList, _ind, [0.77, 1, 0, 1]];
 				};
 				if (_magCount > 0) then {
-					lbSetColor [TraderDialogItemList, _index, [0.9, 1, 0, 1]];
+					lbSetColor [TraderDialogItemList, _ind, [0.9, 1, 0, 1]];
 				};
 			};
 
 			_image = getText(configFile >> _type >> _name >> "picture");
-			lbSetPicture [TraderDialogItemList, _index, _image];
+			lbSetPicture [TraderDialogItemList, _ind, _image];
 
-			_item_list set [count _item_list, [
+			_it_list set [count _it_list, [
 				_name,
 				_textPart,
 				_bqty,
@@ -240,44 +240,44 @@ TraderDialogLoadItemList = {
 
 		P2DZE_traderListLoading = false;
 
-		TraderItemList = _item_list;
+		TraderItemList = _it_list;
 	} else {
 		systemChat("[Trader Dialog] Please wait for the list to finish loading.");
 	};
 };
 
 TraderDialogShowPrices = {
-	private ["_index", "_item"];
-	_index = _this select 0;
-	if (_index < 0) exitWith {};
+	private ["_ind", "_it"];
+	_ind = _this select 0;
+	if (_ind < 0) exitWith {};
 	//diag_log(format["P2DEBUG: _this: (%1) / TraderItemList: (%2)", _this, TraderItemList]);
 	while {count TraderItemList < 1} do { uiSleep 1; };
-	_item = TraderItemList select _index;
+	_it = TraderItemList select _ind;
 
-	ctrlSetText [TraderDialogBuyPrice, format["%1 %2", _item select 2, _item select 4]];
-	ctrlSetText [TraderDialogSellPrice, format["%1 %2", _item select 5, _item select 7]];
+	ctrlSetText [TraderDialogBuyPrice, format["%1 %2", _it select 2, _it select 4]];
+	ctrlSetText [TraderDialogSellPrice, format["%1 %2", _it select 5, _it select 7]];
 };
 
 TraderDialogBuy = {
-	private ["_index", "_item", "_data"];
-	_index = _this select 0;
-	if (_index < 0) exitWith {
+	private ["_ind", "_it", "_dt"];
+	_ind = _this select 0;
+	if (_ind < 0) exitWith {
 		cutText [(localize "str_epoch_player_6"), "PLAIN DOWN"];
 	};
-	_item = TraderItemList select _index;
-	_data = [_item select 0, _item select 3, 1, _item select 2, "buy", _item select 4, _item select 1, _item select 8];
-	[0, player, '', _data] execVM (_item select 9);
+	_it = TraderItemList select _ind;
+	_dt = [_it select 0, _it select 3, 1, _it select 2, "buy", _it select 4, _it select 1, _it select 8];
+	[0, player, '', _dt] execVM (_it select 9);
 	TraderItemList = -1;
 };
 
 TraderDialogSell = {
-	private ["_index", "_item", "_data"];
-	_index = _this select 0;
-	if (_index < 0) exitWith {
+	private ["_ind", "_it", "_dt"];
+	_ind = _this select 0;
+	if (_ind < 0) exitWith {
 		cutText [(localize "str_epoch_player_6"), "PLAIN DOWN"];
 	};
-	_item = TraderItemList select _index;
-	_data = [_item select 6, _item select 0, _item select 5, 1, "sell", _item select 1, _item select 7, _item select 8];
-	[0, player, '', _data] execVM (_item select 9);
+	_it = TraderItemList select _ind;
+	_dt = [_it select 6, _it select 0, _it select 5, 1, "sell", _it select 1, _it select 7, _it select 8];
+	[0, player, '', _dt] execVM (_it select 9);
 	TraderItemList = -1;
 };
