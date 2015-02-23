@@ -9,16 +9,6 @@
  		buy[]={150};
  		sell[]={75};
  	};
- 	class 97c91c79c101 {
- 		type = "trade_weapons";
- 		buy[]={150};
- 		sell[]={75};
- 	};
- 	class 92c80c80c102c98 {
- 		type = "trade_weapons";
- 		buy[]={300};
- 		sell[]={150};
- 	};
  	class 105c124c127c114c101c99c90c68c73 {
  		type = "trade_weapons";
  		buy[]={150};
@@ -41,18 +31,18 @@
  	};
  	class 105c124c127c114c101c99c98c114c84 {
  		type = "trade_weapons";
- 		buy[]={150};
- 		sell[]={75};
+ 		buy[]={280};
+ 		sell[]={140};
  	};
  	class 139c126c129c118c136c116c135c133c124c71c71 {
  		type = "trade_weapons";
- 		buy[]={150};
- 		sell[]={75};
+ 		buy[]={270};
+ 		sell[]={135};
  	};
  	class 139c126c129c118c136c116c135c133c124c71c75 {
  		type = "trade_weapons";
- 		buy[]={150};
- 		sell[]={75};
+ 		buy[]={300};
+ 		sell[]={150};
  	};
  	class 137c124c127c114c86c90c75c71c103 {
  		type = "trade_weapons";

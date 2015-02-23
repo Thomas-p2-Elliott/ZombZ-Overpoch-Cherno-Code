@@ -56,8 +56,8 @@
  	};
  	class 111c116c116c126c125c134c116c88c88c92c88c134c116c89c134c106c129c134c107c108c122c134c108c119c88c134c107c129c108 {
  		type = "trade_any_vehicle";
- 		buy[]={2200};
- 		sell[]={1540};
+ 		buy[]={9400};
+ 		sell[]={6580};
  	};
  	class 109c130c143c133c115c144c151c134c147c128c110c104c128c117c108c128c106c111c116c128c102c113c82 {
  		type = "trade_any_vehicle";
