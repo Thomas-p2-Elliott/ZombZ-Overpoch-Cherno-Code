@@ -42,7 +42,7 @@ if (str _m != "No Display") then {
 
 
 	// "View Distance"
-	_vdV = 1500;
+	_vdV = 1000;
 	_vdV = viewDistance;
 	_vdV = switch (true) do {
  		default { 3 };
