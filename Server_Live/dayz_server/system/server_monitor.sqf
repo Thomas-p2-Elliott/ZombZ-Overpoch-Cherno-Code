@@ -1,4 +1,4 @@
-private ["_goldArray","_gold","_nul","_result","_pos","_wsDone","_dir","_isOK","_countr","_objWpnTypes","_objWpnQty","_dam","_selection","_totalvehicles","_object","_idKey","_type","_ownerID","_worldspace","_inventory","_hitPoints","_fuel","_damage","_key","_vehLimit","_hiveResponse","_objectCount","_codeCount","_data","_status","_val","_traderid","_retrader","_traderData","_id","_lockable","_debugMarkerPosition","_vehicle_0","_bQty","_vQty","_BuildingQueue","_objectQueue","_superkey","_shutdown","_res","_hiveLoaded","_ownerPUID","_contents","_itemCount","_goldBarCount","_itemType","_addBackCount"];
+private ["_sa","_goldArray","_gold","_nul","_result","_pos","_wsDone","_dir","_isOK","_countr","_objWpnTypes","_objWpnQty","_dam","_selection","_totalvehicles","_object","_idKey","_type","_ownerID","_worldspace","_inventory","_hitPoints","_fuel","_damage","_key","_vehLimit","_hiveResponse","_objectCount","_codeCount","_data","_status","_val","_traderid","_retrader","_traderData","_id","_lockable","_debugMarkerPosition","_vehicle_0","_bQty","_vQty","_BuildingQueue","_objectQueue","_superkey","_shutdown","_res","_hiveLoaded","_ownerPUID","_contents","_itemCount","_goldBarCount","_itemType","_addBackCount"];
 
 dayz_versionNo = 		getText(configFile >> "CfgMods" >> "DayZ" >> "version");
 dayz_hiveVersionNo = 	getNumber(configFile >> "CfgMods" >> "DayZ" >> "hiveVersion");
@@ -33,7 +33,7 @@ if (isServer && isNil "sm_done") then {
 	_hiveResponse = [];
 
 	for "_i" from 1 to 5 do {
-		//diag_log "HIVE: trying to get objects";
+		diag_log "HIVE: trying to get objects:";
 		_key = format["CHILD:302:%1:", dayZ_instance];
 		_hiveResponse = _key call server_hiveReadWrite;  
 		if ((((isnil "_hiveResponse") || {(typeName _hiveResponse != "ARRAY")}) || {((typeName (_hiveResponse select 1)) != "SCALAR")})) then {
@@ -41,16 +41,15 @@ if (isServer && isNil "sm_done") then {
 				_superkey = profileNamespace getVariable "SUPERKEY";
 				_shutdown = format["CHILD:400:%1:", _superkey];
 				_res = _shutdown call server_hiveReadWrite;
-				//diag_log ("HIVE: attempt to kill.. HiveExt response:"+str(_res));
+				diag_log ("HIVE: attempt to kill.. HiveExt response:"+str(_res));
 			} else {
-				//diag_log ("HIVE: connection problem... HiveExt response:"+str(_hiveResponse));
-			
+				diag_log ("HIVE: connection problem... HiveExt response:"+str(_hiveResponse));
 			};
 			_hiveResponse = ["",0];
 		} 
 		else {
 			if (P2DZE_serverStreamObjsEnabled) then {
-				//diag_log ("HIVE: found "+str(_hiveResponse select 1)+" objects" );
+				diag_log ("HIVE: found "+str(_hiveResponse select 1)+" objects" );
 				_i = 99; // break
 			};
 		};
@@ -73,7 +72,7 @@ if (isServer && isNil "sm_done") then {
 		_vQty = 0;
 		for "_i" from 1 to _objectCount do {
 			_hiveResponse = _key call server_hiveReadWriteLarge;
-			//diag_log (format["HIVE dbg %1 %2", typeName _hiveResponse, _hiveResponse]);
+			diag_log (format["HIVE: Loading Objects:	Contents: ((%1):%2)", typeName _hiveResponse, _hiveResponse]);
 			if ((_hiveResponse select 2) isKindOf "ModularItems") then {
 				_BuildingQueue set [_bQty,_hiveResponse];
 				_bQty = _bQty + 1;
@@ -82,24 +81,28 @@ if (isServer && isNil "sm_done") then {
 				_vQty = _vQty + 1;
 			};
 		};
-		//diag_log ("HIVE: got " + str(_bQty) + " Epoch Objects and " + str(_vQty) + " Vehicles");
+		diag_log ("HIVE: got " + str(_bQty) + " Epoch Objects and " + str(_vQty) + " Vehicles");
 	};
+
+	//p2serverMonStartTime = diag_tickTime;
+	//diag_log format["P2DEBUG: Server_monitor: Loop Start Time:							 %1", diag_tickTime];
 	
 	// # NOW SPAWN OBJECTS #
 	_totalvehicles = 0;
 	{
-		_idKey = 		_x select 1;
-		_type =			_x select 2;
-		_ownerID = 		_x select 3;
-
-		_worldspace = 	_x select 4;
-		_inventory =	_x select 5;
-		_hitPoints =	_x select 6;
-		_fuel =			_x select 7;
-		_damage = 		_x select 8;
-
+		_idKey = 			_x select 1;
+		_type =				_x select 2;
+		_ownerID = 			_x select 3;
+		_worldspace = 		_x select 4;
+		_inventory =		_x select 5;
+		_hitPoints =		_x select 6;
+		_fuel =				_x select 7;
+		_damage = 			_x select 8;
 		_goldArray = 		_x select 9;
 		_gold =				_goldArray select 0;
+
+		p2serverMonObjStartTime = diag_tickTime;
+		//diag_log format["P2DEBUG: Server_monitor: (Obj Read) Start Time:						 %1, 	objID: %2", diag_tickTime - p2serverMonStartTime, _idKey];
 
 		_dir = 0;
 		_pos = [0,0,0];
@@ -132,9 +135,7 @@ if (isServer && isNil "sm_done") then {
 			_ownerPUID = _ownerID;
 		};
 		
-		// diag_log format["Server_monitor: [ObjectID = %1]  [ClassID = %2] [_ownerPUID = %3]", _idKey, _type, _ownerPUID];
-		
-
+		//diag_log format["Server_monitor: [ObjectID = %1]  [ClassID = %2] [_ownerPUID = %3]", _idKey, _type, _ownerPUID];
 
 		if (_damage < 1) then {
 			//diag_log format["OBJ: %1 - %2", _idKey,_type];
@@ -175,7 +176,6 @@ if (isServer && isNil "sm_done") then {
 
 			_object setVariable ["lastUpdate",time];
 			_object setVariable ["ObjectID", _idKey, true];
-			_object setVariable ["OwnerPUID", _ownerPUID, true];
 
 			if (typeOf (_object) in  DZE_DoorsLocked) then {
     			_object setVariable ["doorfriends", _inventory, true];
@@ -190,6 +190,7 @@ if (isServer && isNil "sm_done") then {
 				_lockable = getNumber(configFile >> "CfgVehicles" >> _type >> "lockable");
 			};
 
+			_sa = true;
 			// fix for leading zero issues on safe codes after restart
 			if (_lockable == 4) then {
 				_codeCount = (count (toArray _ownerID));
@@ -201,6 +202,21 @@ if (isServer && isNil "sm_done") then {
 				};
 				if(_codeCount == 1) then {
 					_ownerID = format["000%1", _ownerID];
+				};
+
+				_scrambleChar = nil; _scrambleChar = ""; _scrambleUID = nil; _scrambleUID = "";
+				_scrambleUID = 		[_ownerPUID,1,true]		call KRON_Scramble;
+				_scrambleChar = 	[_ownerID,1,false]		call KRON_Scramble;
+
+				//diag_log(format["P2Scramble:ServerMon: Encrypting: UID Mode: 				%1, 				Output: 	%2",_ownerPUID,	_scrambleUID]);
+				//diag_log(format["P2Scramble:ServerMon: Encrypting: CID Mode:  				%1, 				Output: 	%2",_ownerID,	_scrambleChar]);
+
+				if (!isNil '_scrambleUID') then {
+					if (!isNil '_scrambleChar') then {
+						_sa = false;
+						_object setVariable ["CharacterID", _scrambleChar, true];
+						_object setVariable ["OwnerPUID", 	_scrambleUID, true];
+					};
 				};
 			};
 
@@ -214,8 +230,11 @@ if (isServer && isNil "sm_done") then {
 				};
 			};
 
-			_object setVariable ["CharacterID", _ownerID, true];
-			
+			if (_sa) then {
+				_object setVariable ["CharacterID", _ownerID, true];
+				_object setVariable ["OwnerPUID", _ownerPUID, true];
+			};
+
 			clearWeaponCargoGlobal  _object;
 			clearMagazineCargoGlobal  _object;
 			_object setVehicleAmmo DZE_vehicleAmmo;
@@ -359,6 +378,12 @@ if (isServer && isNil "sm_done") then {
 				processInitCommands;
 			};
 		};
+
+		if ((diag_tickTime - p2serverMonObjStartTime) > 0.1) then {
+			diag_log format["P2DEBUG: Run Time:							 %1", diag_tickTime - p2serverMonObjStartTime];
+			diag_log format[">	objID: %1, objType: %2, objGold: %3", _idKey, _type, _goldArray];
+		};
+
 	} forEach (_BuildingQueue + _objectQueue);
 	// # END SPAWN OBJECTS #
 
