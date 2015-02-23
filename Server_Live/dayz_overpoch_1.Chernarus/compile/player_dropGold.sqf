@@ -104,8 +104,6 @@ if (P2DZE_gearOnContainer) then {
 					systemChat(format["Gold: %1 dropped to %2.",_amount,(typeOf _object)]);
 				};
 			};
-
-
 		} else {
 			disableSerialization;
 			_control = (findDisplay 106) displayCtrl 156;
@@ -193,7 +191,6 @@ if (P2DZE_gearOnContainer) then {
 							systemChat(format["Gold: %1 dropped to %2.",_amount,(typeOf _x)]);
 						};
 					};
-
 				};
 
 			} forEach _nearObjects;
