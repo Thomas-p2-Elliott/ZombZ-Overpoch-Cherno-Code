@@ -113,7 +113,9 @@ while {r_autoTrade} do {
 		
 		// Continue with trade.
 		if (isNil "_part_in") then { _part_in = "Unknown Item" };
-		if (isNil "inTraderCity") then { inTraderCity = "Unknown Trader City" };
+
+		if (isNil "inTraderCity") then { inTraderCity = "" };
+		if (((str inTraderCity == str "") || (str inTraderCity == str "Any") || (str inTraderCity == str "Unknown Trader City"))) then { inTraderCity = format["%1", mapGridPosition player]; };
 		if(_bos == 1) then {
 			// Selling
 			PVDZE_obj_Trade = [_activatingPlayer,_traderID,_bos,_part_in,inTraderCity,_part_out,_qty_out];
