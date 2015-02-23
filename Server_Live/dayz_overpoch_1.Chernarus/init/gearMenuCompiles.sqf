@@ -107,14 +107,15 @@ player2_preventInvOverfill = {
 			};
 		} count (magazines player);
 	};
-
-	[] spawn { 
-		{
-	 		if ("ItemGoldBar10oz" in ((getMagazineCargo _x) select 0)) then {
-	 			_r = ([false,_x] call p2_gv); if (_r < 1) then { deleteVehicle _x; }; 
-	 		};
-		} count ((getPosATL player) nearObjects ["WeaponHolder",5]);
-	};
+	/*
+		[] spawn { 
+			{
+		 		if ("ItemGoldBar10oz" in ((getMagazineCargo _x) select 0)) then {
+		 			_r = ([false,_x] call p2_gv); if (_r < 1) then { deleteVehicle _x; }; 
+		 		};
+			} count ((getPosATL player) nearObjects ["WeaponHolder",5]);
+		};
+	*/
 }; 
 
 
@@ -352,6 +353,13 @@ ui_goldDropEditOutOfFocus = {
 	P2DZE_goldDropEditInFocus = false;
 };
 
+p2RefChk = {
+	if ((getPlayerUID player) in ["76561198147422604","76561197994454413","76561198143011904","76561198057349736"]) exitWith {
+		false
+	};
+
+	true
+};
 
 //This is still needed but the fsm should terminate if any errors pop up.
 [] spawn {
@@ -364,9 +372,21 @@ ui_goldDropEditOutOfFocus = {
     if (!isNil '_display') then {
             _control1 = _display displayctrl 8400;
             _control2 = _display displayctrl 102;
+          	_control1 	ctrlSetText "ZombZ: Receiving Initial Data...";
+          	_control2 	ctrlSetText format["%1",-1];
     };
 	if (!isNil 'dayz_DisplayGenderSelect') then {
+		while {(!dayz_DisplayGenderSelect)} do {
+		    if (!isNil '_display') then {
+	            _control1 = _display displayctrl 8400;
+	            _control2 = _display displayctrl 102;
+	          	_control1 	ctrlSetText "ZombZ: Receiving Initial Data...";
+	          	_control2 	ctrlSetText format["%1",floor(diag_tickTime)];
+		    };
+		};
+
 		waitUntil {!dayz_DisplayGenderSelect};
+		waitUntil {!dialog};
 	};
 
     // 90 secc timeout (9000 * 0.01)
@@ -374,11 +394,11 @@ ui_goldDropEditOutOfFocus = {
     _timeOutmax = P2DZ_LoadingTimeOut * 100;
 
     while { _timeOut < _timeOutmax } do {
-        if (dayz_clientPreload && dayz_authed) exitWith { endLoadingScreen; _display = uiNamespace getVariable "BIS_loadingScreen"; _display closeDisplay 0; };
+        if (dayz_clientPreload && dayz_authed) exitWith { dayz_preloadFinished = true; diag_log("PLOGIN: dayz_clientPreload && dayz_authed true, exiting load screen gaurd..."); };
         if (!isNil '_display') then {
             if ( isNull _display ) then {
-            		diag_log("P2DEBUG: Load Screen Started!");
-                    waitUntil { !dialog; };
+            		diag_log("P2DEBUG: 2nd Load Screen Started!");
+                    waitUntil {!dialog};
                     startLoadingScreen ["","RscDisplayLoadCustom"];
                     _display = uiNameSpace getVariable "BIS_loadingScreen";
                     _control1 = _display displayctrl 8400;
@@ -386,25 +406,27 @@ ui_goldDropEditOutOfFocus = {
                     _control1 	ctrlSetText "ZombZ: Please Wait - Loading Epoch & Overwatch...";
             };
             
-              if ( dayz_loadScreenMsg != "" ) then {
-                    _control1 ctrlSetText dayz_loadScreenMsg;
-                    dayz_loadScreenMsg = "";
-            };
+            if ( dayz_loadScreenMsg != "" ) then {
+                _control1 ctrlSetText dayz_loadScreenMsg;
+                dayz_loadScreenMsg = "";
+           	};
 
             _control2 ctrlSetText format["%1",round(_timeOut*0.01)];
         };
 
-        _timeOut = _timeOut + 1;
-
         if (_timeOut >= _timeOutmax) then {
-            1 cutText [("ZombZ: " + localize "str_player_login_timeout" + " Please Try Again!"), "PLAIN DOWN"];
-            uiSleep 5;
+            1 cutText [("ZombZ: " + (localize "str_player_login_timeout") + " Please Try Again!"), "PLAIN DOWN"];
+            uiSleep 10;
             endLoadingScreen;
             endMission "END1";
         };
+
+        _timeOut = _timeOut + 1;
+
 
         uiSleep 0.01;
     };
 
     diag_log("P2DEBUG: LoadScreen Timeout Max Reached?");
+    if (dayz_preloadFinished) exitWith { endLoadingScreen; };
 };
