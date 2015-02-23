@@ -3,7 +3,7 @@
 	Usage: [_obj] spawn player_unlockVault;
 	Made for DayZ Epoch please ask permission to use/edit/distrubute email vbawol@veteranbastards.com.
 */
-private ["_objectID","_objectUID","_obj","_ownerID","_dir","_pos","_holder","_weapons","_magazines","_backpacks","_objWpnTypes","_objWpnQty","_countr","_alreadyPacking","_playerNear","_playerID","_claimedBy","_unlockedClass","_text","_nul","_objType","_characterID","_playerUID"];
+private ["_combination2","_combination","_objectID","_objectUID","_obj","_ownerID","_dir","_pos","_holder","_weapons","_magazines","_backpacks","_objWpnTypes","_objWpnQty","_countr","_alreadyPacking","_playerNear","_playerID","_claimedBy","_unlockedClass","_text","_nul","_objType","_characterID","_playerUID"];
 
 if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_21") , "PLAIN DOWN"]; };
 DZE_ActionInProgress = true;
@@ -32,19 +32,34 @@ _text = 		getText (configFile >> "CfgVehicles" >> _objType >> "displayName");
 _alreadyPacking = _obj getVariable["packing",0];
 _claimedBy = _obj getVariable["claimed","0"];
 _characterID = _obj getVariable["CharacterID","0"];
-_ownerID = _obj getVariable["ownerPUID","0"];;
+_ownerID = _obj getVariable["ownerPUID","0"];
+
+sleep 0.1;
+_scrambledUid = nil; _scrambledUid = ""; _scrambled2CharId = nil; _scrambled2CharId = "";
+
+_scrambledUid = 	[_ownerID,0,true]		call KRON_Scramble;
+_scrambled2CharId = [_characterID,0,false]	call KRON_Scramble;
+
+//diag_log(format["P2Scramble:UnlockVault: Decrypting: UID Mode: 			%1, 				Output: %2",_ownerID,_scrambledUid]);
+//diag_log(format["P2Scramble:UnlockVault: Decrypting: CID Mode: 			%1, 				Output: %2",_characterID,_scrambled2CharId]);
+
+sleep 0.1;
+
 _objGold = 	[true,_obj] call p2_gv;
 _objGold = 	(floor(_objGold));
 if (DZE_APlotforLife) then {
 	_playerUID = [player] call FNC_GetPlayerUID;
 }else{
 	_playerUID = dayz_characterID;
+	_scrambled2CharId = _scrambledUid;
 };
 
 if (_alreadyPacking == 1) exitWith {DZE_ActionInProgress = false; cutText [format[(localize "str_epoch_player_124"),_text], "PLAIN DOWN"]};
 
+//diag_log(format["P2Scramble:UnlockVault: dayz_combination:	%1,	_scrambled2CharId:	%2,	_scrambledUid:	%3,	_playerUID:	%4",dayz_combination,_scrambled2CharId,_scrambledUid,_playerUID]);
+
 // Prompt user for password if _ownerID != _playerUID
-if ((_characterID == dayz_combination) || (_ownerID == _playerUID)) then {
+if ((_scrambled2CharId == dayz_combination) || (_scrambledUid == _playerUID)) then {
 
 	// Check if any players are nearby if not allow player to claim item.
 	_playerNear = {isPlayer _x} count (player nearEntities ["CAManBase", 6]) > 1;
@@ -93,11 +108,6 @@ if ((_characterID == dayz_combination) || (_ownerID == _playerUID)) then {
 			_holder setdir _dir;
 			_holder setPosATL _pos;
 			player reveal _holder;
-
-
-			//sleep 1;
-			// Remove locked vault
-			//deleteVehicle _obj; 		//moved to server side
 
 			_holder setVariable["CharacterID",_characterID,true];
 			_holder setVariable["ObjectID",_objectID,true];

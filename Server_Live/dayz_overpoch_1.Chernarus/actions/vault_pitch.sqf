@@ -2,7 +2,7 @@
 	DayZ Safe
 	Made for DayZ Epoch please ask permission to use/edit/distrubute email vbawol@veteranbastards.com.
 */
-private ["_distance","_isNearLootBuild","_tent","_location","_isOk","_cancel","_location3","_location4","_location1","_location2","_counter","_pondPos","_isPond","_ppos","_hastentitem","_dir","_building","_isBuilding","_playerPos","_item","_offset_x","_offset_y","_offset_z","_offset_z_attach","_config","_text","_tmpvault","_vault_location","_objectsPond","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_removed","_playerUID","_OwnerUID"];
+private ["_scrambled2","_scrambled","_distance","_isNearLootBuild","_tent","_location","_isOk","_cancel","_location3","_location4","_location1","_location2","_counter","_pondPos","_isPond","_ppos","_hastentitem","_dir","_building","_isBuilding","_playerPos","_item","_offset_x","_offset_y","_offset_z","_offset_z_attach","_config","_text","_tmpvault","_vault_location","_objectsPond","_combination_1","_combination_2","_combination_3","_combination_4","_combination","_removed","_playerUID","_OwnerUID"];
 //check if can pitch here
 
 if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_108") , "PLAIN DOWN"]; };
@@ -213,9 +213,15 @@ if(!_cancel) then {
 
 			// Format Combination
 			_combination = format["%1%2%3%4",_combination_1,_combination_2,_combination_3,_combination_4];
+			_scrambleChar = nil; _scrambleChar = ""; _scrambleUID = nil; _scrambleUID = "";
+			_scrambleUID = 	[_OwnerUID,1,true]		call KRON_Scramble;
+			_scrambleChar = [_combination,1,false]		call KRON_Scramble;
 
-			_tent setVariable ["CharacterID",_combination,true];
-			_tent setVariable ["ownerPUID",_OwnerUID,true];
+			//diag_log(format["P2Scramble:VaultPitch: Encrypting: UID Mode: 				%1, 				Output: 	%2",_OwnerUID,	_scrambleUID]);
+			//diag_log(format["P2Scramble:VaultPitch: Encrypting: CID Mode:  				%1, 				Output: 	%2",_combination,	_scrambleChar]);
+
+			_tent setVariable ["ownerPUID",_scrambleUID,true];
+			_tent setVariable ["CharacterID",_scrambleChar,true];
 			_tent setVariable ["OEMPos",_location,true];
 
 			//["PVDZE_obj_Publish",[_combination,_tent,[_dir,_location],"VaultStorageLocked"]] call callRpcProcedure;
