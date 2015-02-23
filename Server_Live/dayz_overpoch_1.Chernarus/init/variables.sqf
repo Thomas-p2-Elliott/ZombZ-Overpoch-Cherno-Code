@@ -246,7 +246,14 @@ dayz_resetSelfActions = {
 	s_player_manageDoor = -1;
 	s_player_takeGold = -1;
 	s_player_paint = -1;
-
+	mv22_fold = -1;
+	mv22_unfold = -1;
+	mv22_open = -1;
+	mv22_close = -1;
+	suv_close = -1;
+	suv_open = -1;
+	uh1y_fold = -1;
+	uh1y_unfold = -1;
 };
 call dayz_resetSelfActions;
 
@@ -297,6 +304,7 @@ r_action_targets = 		[];
 r_pitchWhine = 			false;
 r_isBandit =			false;
 isInTraderCity =		false;
+
 NORRN_dropAction =		-1;
 DZE_PROTOBOX = objNull;
 zombzsafezone = 0;
@@ -448,7 +456,7 @@ DZE_UnLockedStorage = ["VaultStorage","LockboxStorage"];
 DZE_maintainClasses = ["ModularItems","DZE_Housebase","LightPole_DZ","BuiltItems","Plastic_Pole_EP1_DZ","Fence_corrugated_DZ","CanvasHut_DZ","ParkBench_DZ","MetalGate_DZ","StickFence_DZ","DesertCamoNet_DZ","ForestCamoNet_DZ","DesertLargeCamoNet_DZ","ForestLargeCamoNet_DZ","DeerStand_DZ","Scaffolding_DZ","FireBarrel_DZ"];
 
 // List of removable items that require crowbar
-DZE_isRemovable = ["Fence_corrugated_DZ","M240Nest_DZ","ParkBench_DZ","Plastic_Pole_EP1_DZ","FireBarrel_DZ","Scaffolding_DZ"];
+DZE_isRemovable = ["OutHouse_DZ","Wooden_shed_DZ","WoodShack_DZ","StorageShed_DZ","GunRack_DZ","WoodCrate_DZ","MetalGate_DZ","DeerStand_DZ","StickFence_DZ","Fence_corrugated_DZ","M240Nest_DZ","ParkBench_DZ","Plastic_Pole_EP1_DZ","FireBarrel_DZ","Scaffolding_DZ"];
 DZE_isWreck = ["SKODAWreck","HMMWVWreck","UralWreck","datsun01Wreck","hiluxWreck","datsun02Wreck","UAZWreck","Land_Misc_Garb_Heap_EP1","Fort_Barricade_EP1","Rubbish2"];
 DZE_isWreckBuilding = ["Land_wreck_cinder","Land_wood_wreck_quarter","Land_wood_wreck_floor","Land_wood_wreck_third","Land_wood_wreck_frame","Land_iron_vein_wreck","Land_silver_vein_wreck","Land_gold_vein_wreck","Land_ammo_supply_wreck"];
 DZE_isNewStorage = ["VaultStorage","OutHouse_DZ","Wooden_shed_DZ","WoodShack_DZ","StorageShed_DZ","GunRack_DZ","WoodCrate_DZ"];
