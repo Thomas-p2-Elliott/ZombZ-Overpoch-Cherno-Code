@@ -241,8 +241,9 @@ fnc_usec_recoverUncons = {
 	r_player_handler1 = false;
 
 	sleep 0.5;
+	diag_log("rec: close0");
 
-	disableUserInput false;
+	endLoadingScreen;
 	[objNull,player,rSwitchMove,"AinjPpneMstpSnonWnonDnon"] call RE;
 	player switchMove "AinjPpneMstpSnonWnonDnon";
 	player playMoveNow "AmovPpneMstpSnonWnonDnon_healed";
