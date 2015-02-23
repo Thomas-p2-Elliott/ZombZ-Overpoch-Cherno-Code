@@ -97,7 +97,7 @@ class p2_options
 			y = 0.362554 * safezoneH + safezoneY;
 			w = 0.107422 * safezoneW;
 			h = 0.0274893 * safezoneH;
-			onLBSelChanged = "switch (_this select 1) do {			default { setViewDistance 1500; };			case 0: { setViewDistance 500;	};			case 1: { setViewDistance 750;	};			case 2: { setViewDistance 1000;	};			case 3: { setViewDistance 1250;	};			case 4: { setViewDistance 1500;	};			case 5: { setViewDistance 1750;	};			case 6: { setViewDistance 2000;	};			case 7: { setViewDistance 2500;	};			case 8: { setViewDistance 3000;	};		};";
+			onLBSelChanged = "switch (_this select 1) do {			default { setViewDistance 1000; };			case 0: { setViewDistance 500;	};			case 1: { setViewDistance 750;	};			case 2: { setViewDistance 1000;	};			case 3: { setViewDistance 1250;	};			case 4: { setViewDistance 1500;	};			case 5: { setViewDistance 1750;	};			case 6: { setViewDistance 2000;	};			case 7: { setViewDistance 2500;	};			case 8: { setViewDistance 3000;	};		}; player setVariable ['P2_viewDist', viewDistance, true]; ";
 		};
 		class p2_cfgEventNotifications: p2Combo
 		{
