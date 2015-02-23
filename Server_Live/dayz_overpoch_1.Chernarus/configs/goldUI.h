@@ -39,6 +39,29 @@ class Rscp2GoldGuiTxt
 	shadow = 2;
 };
 
+class Rscp2GoldGuiTxtF: Rscp2GoldGuiTxt
+{
+	access = 0;
+	type = 13;
+	idc = -1;
+	style = 0;
+	colorText[] = {0.8784,0.8471,0.651,0.75};
+	class Attributes
+	{
+		font = "Zeppelin32";
+		color = "#e0d8a6";
+		align = "center";
+		shadow = 1;
+	};
+	x = 0;
+	y = 0;
+    w = 0.1;
+    h = 0.2;
+	text = "";
+	size = 0.04;
+    sizeEx = 0.04;
+	shadow = 2;
+};
 
 class p2goldUI
 {
@@ -63,6 +86,23 @@ class p2goldUI
 			x = 0.881984 * safezoneW + safezoneX;
 			y = 0.6055 * safezoneH + safezoneY;
 			w = 0.0729273 * safezoneW;
+		};
+		class tminus: Rscp2GoldGuiTxtF
+		{
+			idc = 8291;
+			x = 0.881984 * safezoneW + safezoneX;
+			y = 0.6260 * safezoneH + safezoneY;
+			w = 0.0729273 * safezoneW;
+			colorText[] = {0,0.8784,0,0.8};
+
+		};
+		class tplus: Rscp2GoldGuiTxtF
+		{
+			idc = 8292;
+			x = 0.881984 * safezoneW + safezoneX;
+			y = 0.5850 * safezoneH + safezoneY;
+			w = 0.0729273 * safezoneW;
+			colorText[] = {0.8784,0,0,0.8};
 		};
 	};
 };
