@@ -37,6 +37,8 @@ if (_canPickLight && !dayz_hasLight && !_isPZombie) then {
 	s_player_removeflare = -1;
 };
 
+#include "animatedVehicles.sqf"
+
 if (DZE_HeliLift) then {
 	_hasAttached = _vehicle getVariable["hasAttached",false];
 	if(_inVehicle && (_vehicle isKindOf "Air") && ((([_vehicle] call FNC_getPos) select 2) < 30) && (speed _vehicle < 5) && (typeName _hasAttached == "OBJECT")) then {
@@ -189,7 +191,7 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		if(_cursorTarget isKindOf _x) then {_isFuel = true;};
 	} count dayz_fuelsources;
 
-	// diag_log ("OWNERID = " + _ownerID + " CHARID = " + dayz_characterID + " " + str(_ownerID == dayz_characterID));
+	//diag_log ("OWNERID = " + _ownerID + " CHARID = " + dayz_characterID + " " + str(_ownerID == dayz_characterID));
 	
 	// logic vars
 	_player_flipveh = false;
@@ -199,6 +201,8 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	_player_paint = false;
 
 	 if (_canDo && (speed player <= 1) && (_cursorTarget isKindOf "Plastic_Pole_EP1_DZ")) then {
+	 	_player_checkBuildHealth = true;
+
 	 	 if (s_player_plotManagement < 0) then {
 		    //_adminList = ["007"]; //removed!
 		    _owner = _cursorTarget getVariable ["ownerPUID","0"];
@@ -211,29 +215,33 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		    _allowed = [_owner];    
 		    _allowed = [_owner] + _fuid;
 		    if((getPlayerUID player) in _allowed)then{            
-		    s_player_plotManagement = player addAction ["<t color='#0059FF'>Manage Plot</t>", "plotManagement\initPlotManagement.sqf", [], 5, false];
+		    	s_player_plotManagement = player addAction ["<t color='#0059FF'>Manage Plot</t>", "plotManagement\initPlotManagement.sqf", [], 5, false];
 		    };
 		 };
 
 		 _plotDistance = (DZE_PlotPole select 0);
 		_PlotsmarkersNear = count (nearestObjects [_cursorTarget, ["Land_coneLight"], _PlotDistance]);
 
+		_isowner = [player, _cursorTarget] call FNC_check_owner;
+
 		if (s_player_plot_boundary_on < 0) then {
 			If (_PlotsmarkersNear == 0 ) then{
-				s_player_plot_boundary_on = player addAction ["Show plot boundary", "actions\object_showPlotRadius.sqf", "", 1, false];
+				If (( _isowner select 0 )) then {
+					s_player_plot_boundary_on = player addAction ["Show plot boundary", "actions\object_showPlotRadius.sqf", "", 1, false];
+				};
 			};
 		 };	
 		 if (s_player_plot_boundary_off < 0) then {
 			If (_PlotsmarkersNear > 0 ) then{
-				s_player_plot_boundary_off = player addAction ["Remove plot boundary", "actions\object_removePlotRadius.sqf", "", 1, false];
+				If (( _isowner select 0 )) then {
+					s_player_plot_boundary_off = player addAction ["Remove plot boundary", "actions\object_removePlotRadius.sqf", "", 1, false];
+				};
 			};
 		};
 		if (s_player_plot_take_ownership < 0) then {
-			if (DZE_APlotforLife) then {
-				_isowner = [player, _cursorTarget] call FNC_check_owner;
-				If (( _isowner select 0 )) then{
-					s_player_plot_take_ownership = player addAction ["Take plot items ownership", "actions\plot_take_ownership.sqf", "", 1, false];
-				};
+			_isowner = [player, _cursorTarget] call FNC_check_owner;
+			If (( _isowner select 0 )) then {
+				s_player_plot_take_ownership = player addAction ["Take plot items ownership", "actions\plot_take_ownership.sqf", "", 1, false];
 			};
 		};
 	 } else {
@@ -315,17 +323,28 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	
 	};
 
-	//allow player to check buildings health by player2 & lupo
-	if (_player_checkBuildHealth) then {
-		if (s_player_checkBuild < 0) then {
-			s_player_checkBuild = player addAction ["Check Damage", "actions\player2_checkHealth.sqf", _cursorTarget, 1, true, true, "", ""];
+	/* Remove Scroll Removal for Plot Poles */
+	if(_player_deleteBuild) then {
+		if (_cursorTarget isKindOf "Plastic_Pole_EP1_DZ") then {
+			_owner = _cursorTarget getVariable ["ownerPUID","0"];
+		    _friends = _cursorTarget getVariable ["plotfriends", []];
+		    _fuid = [];
+		    {
+		    	_friendUID = _x select 0;
+		    	_fuid = _fuid + [_friendUID];
+		    } forEach _friends;
+		    _allowed = [_owner];    
+		    _allowed = [_owner] + _fuid;
+		    if((getPlayerUID player) in _allowed) then {            
+				_player_deleteBuild = true;
+			} else {
+				_player_deleteBuild = false;
+			};
 		};
-	} else {
-		player removeAction s_player_checkBuild;
-		s_player_checkBuild = -1;
 	};
 
 	if(_player_deleteBuild) then {
+		_player_checkBuildHealth = true;
 		if (s_player_deleteBuild < 0) then {
 			s_player_deleteBuild = player addAction [format[localize "str_actions_delete",_text], "actions\remove.sqf",_cursorTarget, 1, true, true, "", ""];
 		};
@@ -535,6 +554,7 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	
 	//Packing my tent
 	if(_isTent && (player distance _cursorTarget < 3)) then {
+		_player_checkBuildHealth = true;
 		if (_ownerID == _playerUID) then {
 			if (s_player_packtent < 0) then {
 				s_player_packtent = player addAction [localize "str_actions_self_07", "\z\addons\dayz_code\actions\tent_pack.sqf",_cursorTarget, 0, false, true, "",""];
@@ -551,8 +571,20 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		s_player_packtent = -1;
 	};
 
+	if (_typeOfCursorTarget == "VaultStorageLocked" || _typeOfCursorTarget == "VaultStorage") then {
+		_oldCharId = _characterID;
+		_oldUid = 	_ownerID;
+		_characterID = [_characterID,0,false]	call KRON_Scramble;
+		_ownerID =   [_ownerID,0,true]	call KRON_Scramble;
+
+		//diag_log(format["P2Scramble:selfA: Decrypting: UID Mode: 			%1, 				Output: %2",_oldUid,_ownerID]);
+		//diag_log(format["P2Scramble:selfA: Decrypting: CID Mode: 			%1, 				Output: %2",_oldCharId,_characterID]);
+		//diag_log(format["P2Scramble:selfA: dayz_combination:	%1,	_characterID:	%2,	_ownerID:	%3,	_playerUID:	%4",dayz_combination,_characterID,_ownerID,_playerUID]);
+	};
+
 	//Allow owner to unlock vault
 	if((_typeOfCursorTarget in DZE_LockableStorage) && _characterID != "0" && (player distance _cursorTarget < 3)) then {
+		_player_checkBuildHealth = true;
 		if (s_player_unlockvault < 0) then {
 			if(_typeOfCursorTarget in DZE_LockedStorage) then {
 				if(_characterID == dayz_combination || _ownerID == _playerUID) then {
@@ -576,19 +608,21 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		s_player_unlockvault = -1;
 	};
 
+
 	//Allow manage door
 	if((_typeOfCursorTarget in DZE_DoorsLocked)) then {
+		_player_checkBuildHealth = true;
 		if (s_player_manageDoor < 0) then {		 
-	     s_player_manageDoor = player addAction ["<t color='#0059FF'>Manage Door</t>", "doorManagement\initDoorManagement.sqf", _cursorTarget, 5, false];
+	    	s_player_manageDoor = player addAction ["<t color='#0059FF'>Manage Door</t>", "doorManagement\initDoorManagement.sqf", _cursorTarget, 5, false];
 		};
 	} else {
-			player removeAction s_player_manageDoor;
-			s_player_manageDoor = -1;
+		player removeAction s_player_manageDoor;
+		s_player_manageDoor = -1;
 	};
 	
 	//Allow owner to pack vault
 	if(_typeOfCursorTarget in DZE_UnLockedStorage && _characterID != "0" && (player distance _cursorTarget < 3)) then {
-
+		_player_checkBuildHealth = true;
 		if (s_player_lockvault < 0) then {
 			if(_characterID == dayz_combination || _ownerID == dayz_playerUID) then {
 				s_player_lockvault = player addAction [format[localize "STR_EPOCH_ACTIONS_LOCK",_text], "\z\addons\dayz_code\actions\vault_lock.sqf",_cursorTarget, 0, false, true, "",""];
@@ -604,7 +638,14 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		s_player_lockvault = -1;
 	};
 
-	
+	if (_typeOfCursorTarget == "VaultStorageLocked" || _typeOfCursorTarget == "VaultStorage") then {
+		if (!isNil '_oldCharId') then {
+			_characterID = _oldCharId;
+		};
+		if (!isNil '_oldUid') then {
+			_ownerID = 	_oldUid;
+		};
+	};
 
     //Player Deaths
 	if(_typeOfCursorTarget == "Info_Board_EP1") then {
@@ -643,6 +684,7 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 
 	// inplace upgrade tool
 	if ((_cursorTarget isKindOf "ModularItems") || (_cursorTarget isKindOf "Land_DZE_WoodDoor_Base") || (_cursorTarget isKindOf "CinderWallDoor_DZ_Base")) then {
+		_player_checkBuildHealth = true;
 		if ((s_player_lastTarget select 0) != _cursorTarget) then {
 			if (s_player_upgrade_build > 0) then {
 				player removeAction s_player_upgrade_build;
@@ -661,6 +703,7 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 	
 	// downgrade system
 	if((_isDestructable || _cursorTarget isKindOf "Land_DZE_WoodDoorLocked_Base" || _cursorTarget isKindOf "CinderWallDoorLocked_DZ_Base") && (DZE_Lock_Door == _characterID)) then {
+		_player_checkBuildHealth = true;
 		if ((s_player_lastTarget select 1) != _cursorTarget) then {
 			if (s_player_downgrade_build > 0) then {	
 				player removeAction s_player_downgrade_build;
@@ -679,6 +722,7 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 
 	//Start Generator
 	if(_cursorTarget isKindOf "Generator_DZ") then {
+		_player_checkBuildHealth = true;
 		if (s_player_fillgen < 0) then {
 			
 			// check if not running 
@@ -702,6 +746,7 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 
     //Sleep
 	if(_isTent && _ownerID == _playerUID) then {
+		_player_checkBuildHealth = true;
 		if ((s_player_sleep < 0) && (player distance _cursorTarget < 3)) then {
 			s_player_sleep = player addAction [localize "str_actions_self_sleep", "\z\addons\dayz_code\actions\player_sleep.sqf",_cursorTarget, 0, false, true, "",""];
 		};
@@ -709,6 +754,26 @@ if (!isNull cursorTarget && !_inVehicle && !_isPZombie && (player distance curso
 		player removeAction s_player_sleep;
 		s_player_sleep = -1;
 	};
+
+	//lower distance of checkhealth for plot poles to 2m
+	if (_player_checkBuildHealth) then {
+		if ((_cursorTarget isKindOf "Plastic_Pole_EP1_DZ")) then {
+			if (!(player distance _cursorTarget < 1.2)) then {
+				_player_checkBuildHealth = false;
+			};
+		};
+	};
+
+	//allow player to check buildings health by player2 & lupo
+	if (_player_checkBuildHealth) then {
+		if (s_player_checkBuild < 0) then {
+			s_player_checkBuild = player addAction ["Check Damage", "actions\player2_checkHealth.sqf", _cursorTarget, 1, true, true, "", ""];
+		};
+	} else {
+		player removeAction s_player_checkBuild;
+		s_player_checkBuild = -1;
+	};
+
 
 	//Repairing Vehicles
 	if ((dayz_myCursorTarget != _cursorTarget) && _isVehicle && !_isMan && _hasToolbox && (damage _cursorTarget < 1) && !_isDisallowRepair) then {
