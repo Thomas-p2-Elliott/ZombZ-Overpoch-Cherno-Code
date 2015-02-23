@@ -18,10 +18,6 @@ _clientID = 	owner _player;
 _price = format ["%2x %1",_currency,_qty];
 _name = if (alive _player) then { name _player; } else { "Dead Player"; };
 
-
-
-
-
 if (_buyorsell == 0) then { //Buy
 
 //	diag_log format["EPOCH SERVERTRADE: Player: %1 (%2) bought a %3 in/at %4 for %5", _name, (getPlayerUID _player), _classname, _traderCity, _price];
@@ -44,6 +40,8 @@ if (_buyorsell == 0) then { //Buy
 	_hour = 		_currentTime select 3;
 	_mins = 		_currentTime select 4;
 	_secs = 		_currentTime select 5;
+	if (isNil '_traderCity') then { _traderCity = ""; };
+	if (((str _traderCity == str "") || (str _traderCity == str "Any") || (str _traderCity == str "Unknown Trader City"))) then { _traderCity = format["%1", mapGridPosition _player]; };
 
 	if (_advanced) then {
 		_p2s = _this select 8;
@@ -55,7 +53,8 @@ if (_buyorsell == 0) then { //Buy
 				{
 					_name = _x;
 					_count = _countList select _foreachindex;
-					_price = _priceList select _foreachindex;
+					_qty = _priceList select _foreachindex;
+					_price = format ["%2x %1",_currency,_qty];
 
 				  	for "_i" from 1 to _count do {
 		
@@ -106,8 +105,8 @@ if (_buyorsell == 0) then { //Buy
 	_mins = 		_currentTime select 4;
 	_secs = 		_currentTime select 5;
 
-
-
+	if (isNil '_traderCity') then { _traderCity = ""; };
+	if (((str _traderCity == str "") || (str _traderCity == str "Any") || (str _traderCity == str "Unknown Trader City"))) then { _traderCity = format["%1", mapGridPosition _player]; };
 
 	if (_advanced) then {
 		_p2s = _this select 8;
@@ -119,7 +118,8 @@ if (_buyorsell == 0) then { //Buy
 				{
 					_name = _x;
 					_count = _countList select _foreachindex;
-					_price = _priceList select _foreachindex;
+					_qty = _priceList select _foreachindex;
+					_price = format ["%2x %1",_currency,_qty];
 
 				  	for "_i" from 1 to _count do {
 		
