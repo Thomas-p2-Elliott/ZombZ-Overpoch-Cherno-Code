@@ -116,12 +116,13 @@ if (count _worldspace > 0) then {
 
 //set debug mon settings values
 if (isNil '_debugMonSettings') then {
-	if (typeName _debugMonSettings != typeName []) then { 			_debugMonSettings = [0,0,0,0.2,2]; };
+	if (typeName _debugMonSettings != typeName []) then { 			_debugMonSettings = [0,0,0,0.2,2,1000]; };
 
 	//diag_log("server_playerSetup: _debugMonSettings: " + str _debugMonSettings);
+	_viewDist = 1000;
 	_debugMode = _debugMonSettings select 4;
 	_debugColours = [(_debugMonSettings select 0), (_debugMonSettings select 1), (_debugMonSettings select 2), (_debugMonSettings select 3)];
-
+	_viewDist = _debugMonSettings select 5;
 	//Vaildate settings before saving to player
 
 	if (((_debugMonSettings select 4) > 3) || ((_debugMonSettings select 4) < 1) ) then {
@@ -137,6 +138,7 @@ if (isNil '_debugMonSettings') then {
 	_playerObj setVariable["P2_DebugMonMode",(_debugMode),true];
 	//save for client and save for serverJIP checks
 	_playerObj setVariable["P2_DebugMonColours",(_debugColours),true];
+	_playerObj setVariable["P2_viewDist",(_viewDist),true];
 
 };
 
