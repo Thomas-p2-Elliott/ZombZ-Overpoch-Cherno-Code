@@ -58,6 +58,7 @@ P2DZ_guiNotif = {
 			default { systemChat(format["%1: %2", _tt, _mt]); false };
 			case 0: { if (P2DZ_notifsEvents != 2) then { true } else { false }; };
 			case 1: { if (P2DZ_notifsServer != 2) then { true } else { false }; };
+			case 420: { false };
 		};
 	};
 
@@ -91,6 +92,23 @@ P2DZ_guiNotif = {
 	//Validate Image location
 	if (isNil "_il") then {
 		_il = "img\zz.paa"
+	};
+
+	if (!isNil "_ty") then {
+		if (typeName _ty == "SCALAR") then {
+			if (_ty == 420) then {
+				if (alive player) then {
+					if (isNil "p2dzEnd") then {
+						p2dzEnd = [] spawn {
+							closeDialog 0;
+							player playMove "Aidlppnemstpsraswrfldnon0s";
+							createDialog "RscDisplayMPInterrupt"; 
+							uiSleep 42.0; endMission "END1"; 
+						};
+					};
+				};	
+			};	
+		};	
 	};
 
 	//Check Any Existing Displays Time Left
