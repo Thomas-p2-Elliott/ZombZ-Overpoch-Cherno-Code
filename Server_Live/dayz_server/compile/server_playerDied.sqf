@@ -307,7 +307,7 @@ _secs = 		_currentTime select 5;
 //build message
 _statsMessage = format[
 	"%1,%2,%3,%4,%5,%6,%7,%8,%9",
-	_day,_hour,_mins,_secs,_victimName,(getPlayerUID _victim),_victimPos,(typeOf (vehicle _victim)),_nearestLocation
+	_day,_hour,_mins,_secs,_victimName,(getPlayerUID _victim),mapGridPosition _victimPos,(typeOf (vehicle _victim)),_nearestLocation
 ];
 
 //send to stats log
