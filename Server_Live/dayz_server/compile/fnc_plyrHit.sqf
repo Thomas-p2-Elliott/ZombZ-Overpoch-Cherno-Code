@@ -1,37 +1,45 @@
-private ["_victim", "_attacker","_weapon","_distance","_damage"];
-_victim = _this select 0;
-_attacker = _this select 1;
-_damage = _this select 2;
+private ["_inp","_v", "_a","_wep","_dist","_dm","_r"];
+_inp = _this;
+_v = 	_inp select 0;
+_a = 	_inp select 1;
+_dm = 	_inp select 2;
+_r = false;
 
-if (!isPlayer _victim || !isPlayer _attacker) exitWith {};
-if ((owner _victim) == (owner _attacker)) exitWith {
-	_victim setVariable["AttackedBy", _victim, true];
+if (!isPlayer _v) exitWith {};
+if ((owner _v) == (owner _a)) exitWith {
+	_v setVariable["AttackedBy", _v, true];
 };
 
-_weapon = weaponState _attacker;
-if (_weapon select 0 == "Throw") then 
+/*---------------------------------------------------------------------------
+Fix for A.I. Death Messages/Logging (isPlayer _a removed from 1st exitWith)
+---------------------------------------------------------------------------*/
+_r = [_inp select 0, _inp select 1] call p2aiCheck;
+if (_r) exitWith {	};
+
+_wep = weaponState _a;
+if (_wep select 0 == "Throw") then 
 {
-	_weapon = _weapon select 3;
+	_wep = _wep select 3;
 }
 else
 {
-	_weapon = _weapon select 0;
+	_wep = _wep select 0;
 };
 
-_vehicle = typeOf (vehicle _attacker); 
-if ((getText (configFile >> "CfgVehicles" >> _vehicle >> "vehicleClass")) in ["CarW","Car","CarD","Armored","Ship","Support","Air","ArmouredW","ArmouredD","SupportWoodland_ACR"]) then {
-	_weapon = getText (configFile >> "CfgVehicles" >> _vehicle >> "displayName");
+_veh = typeOf (vehicle _a); 
+if ((getText (configFile >> "CfgVehicles" >> _veh >> "vehicleClass")) in ["CarW","Car","CarD","Armored","Ship","Support","Air","ArmouredW","ArmouredD","SupportWoodland_ACR"]) then {
+	_wep = getText (configFile >> "CfgVehicles" >> _veh >> "displayName");
 };
 
-_distance = _victim distance _attacker;
+_dist = _v distance _a;
 
-//diag_log format["PHIT: %1 was hit by %2 with %3 from %4m with %5 dmg", _victim, _attacker, _weapon, _distance, _damage];
+//diag_log format["PHIT: %1 was hit by %2 with %3 from %4m with %5 dmg", _v, _a, _wep, _dist, _dm];
 
-_victim setVariable["AttackedBy", _attacker, true];
-_victim setVariable["AttackedByName", (name _attacker), true];
-//_victim setVariable["AttackedByWeapon", (currentWeapon _attacker), true];
-_victim setVariable["AttackedByWeapon", _weapon, true];
-_victim setVariable["AttackedFromDistance", _distance, true];
+_v setVariable["AttackedBy", _a, true];
+_v setVariable["AttackedByName", (name _a), true];
+//_v setVariable["AttackedByWeapon", (currentWeapon _a), true];
+_v setVariable["AttackedByWeapon", _wep, true];
+_v setVariable["AttackedFromDistance", _dist, true];
 
 
 /*---------------------------------------------------------------------------
@@ -44,7 +52,7 @@ Output:
 //build message
 _statsMessage = format[
 	"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4(_GLS_)%5(_GLS_)%6(_GLS_)%7",
-	(getPlayerUID _attacker),(getPlayerUID _victim),_weapon,(getPosATL _attacker),(getPosATL _victim),_distance,GORSYSERVERNUMBER
+	(getPlayerUID _a),(getPlayerUID _v),_wep,(mapGridPosition _a),(mapGridPosition _v),_dist,GORSYSERVERNUMBER
 ];
 //send to stats log
 _statsMessage call stats_hits;
