@@ -1,8 +1,16 @@
 private ["_dikCode","_handled","_objs","_primaryWeapon","_secondaryWeapon","_nearbyObjects","_shift","_ctrl","_alt","_dropPrimary","_dropSecondary","_iItem","_removed","_iPos","_radius","_item","_vehicle","_inVehicle","_onLadder","_canDo"];
 _dikCode = 	_this select 1;
+_shift = 	_this select 2;
+_ctrl = 	_this select 3;
+_alt =		_this select 4;
 _handled = false;
 
-//Debugging Output: diag_log(format["P2DEBUG: Key: %1",_this]);
+//Debugging Output: diag_log(format["P2DEBUG: Key: %1, ShiftState: %2",_this select 1, _this select 2]);
+
+/* Server UI Prevention */
+if (_shift && _dikCode == 0x19) then {
+	_handled = true;
+};
 
 /* Exploit Prevention */
 
@@ -42,7 +50,7 @@ if (_dikCode in actionKeys "Prone") then {
 };
 
 //Prevent exploit of drag body
-if ((_dikCode in actionKeys "Prone") && r_drag_sqf) exitWith { force_dropBody = true; };
+if ((_dikCode in actionKeys "Prone")  && r_drag_sqf) exitWith { force_dropBody = true; };
 if ((_dikCode in actionKeys "Crouch") && r_drag_sqf) exitWith { force_dropBody = true; };
 
 
@@ -88,10 +96,6 @@ if (P2DZ_disableTalkButton) then {
 		};
 	};
 };
-
-_shift = 	_this select 2;
-_ctrl = 	_this select 3;
-_alt =		_this select 4;
 
 /* Gear Menu */
 if ((_dikCode in actionKeys "Gear") && (vehicle player != player) && !_shift && !_ctrl && !_alt && !dialog) then {
