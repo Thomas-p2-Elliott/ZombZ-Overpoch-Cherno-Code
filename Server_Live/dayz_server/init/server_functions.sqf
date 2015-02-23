@@ -75,6 +75,73 @@ onPlayerConnected 			{[_uid,_name] call server_onPlayerConnect;};
 onPlayerDisconnected 		{[_uid,_name] call server_onPlayerDisconnect;};
 
 /*---------------------------------------------------------------------------
+Sends notification to player if they are out of sync with server
+---------------------------------------------------------------------------*/
+p2_syncCheck = {
+	private["_u","_o"];
+	_u = nil; _m = "";
+	_u = 	_this;
+	if (isNil '_u') exitWith { };
+	if (typeName _u != "OBJECT") exitWith { };
+	if (isNull _u) exitWith { };
+	if (!alive _u) exitWith { };
+	_o = owner _u;
+	if (isNil '_o') exitWith { };
+	if (typeName _o != "SCALAR") exitWith { };
+	P2DZE_guiMsg = ["<t color='#F05032'>WARNING!</t>",("<t size='1.2' color='#F05032'>You will be kicked in 30 seconds.</t><t size='0.95'> This is to prevent possible gear/character loss. Your character has lost sync with the hive. </t>"),"img\zz.paa",30,420]; 
+	P2DZE_systemChat = [2,("WARNING: You will be kicked in 30 seconds. This is to prevent possible gear/character loss. Your character has lost sync with the hive.")];
+	_o publicVariableClient "P2DZE_systemChat"; 
+	_o publicVariableClient "P2DZE_guiMsg";
+}; 
+
+/*---------------------------------------------------------------------------
+AI Attacker Fix for Kill Messages
+---------------------------------------------------------------------------*/
+p2aiCheck = {
+	private ["_in","_v","_a","_w","_d","_m"];
+	_in = 		_this;
+	if (isNil '_in') exitWith {false};
+	if (typeName _in != typeName []) exitWith {false};
+	_v = 		_in select 0;
+	_a = 		_in select 1;
+	if (isNil '_v') exitWith {false};
+	if (isNil '_a') exitWith {false};
+	if (isNull _v) exitWith {false}; 
+	if (isNull _a) exitWith {false};
+	if (isPlayer _a) exitWith {false};
+	if ((_a isKindOf "zZombie_Base")) exitWith {false};
+	if (!(_a isKindOf "Man")) exitWith {false};
+
+	_w = [];	_d = 100;	_m = "";
+	
+	_w = weaponState _a;
+	if (_w select 0 == "Throw") then 
+	{
+		_w = _w select 3;
+	}
+	else
+	{
+		_w = _w select 0;
+	};
+
+	_d = _v distance _a;
+
+	_v setVariable["AttackedBy", _a, true];
+	_v setVariable["AttackedByName", "A.I.", true];
+	_v setVariable["AttackedByWeapon", _w, true];
+	_v setVariable["AttackedFromDistance", _d, true];
+
+	_m = format[
+		"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4(_GLS_)%5(_GLS_)%6(_GLS_)%7",
+		(getPlayerUID _a),(getPlayerUID _v),_w,(mapGridPosition _a),(mapGridPosition _v),_d,GORSYSERVERNUMBER
+	];
+
+	_m call stats_hits;
+
+	true
+};
+
+/*---------------------------------------------------------------------------
 Vehicle Painting
 ---------------------------------------------------------------------------*/
 "PVDZE_veh_Colour" addPublicVariableEventHandler {

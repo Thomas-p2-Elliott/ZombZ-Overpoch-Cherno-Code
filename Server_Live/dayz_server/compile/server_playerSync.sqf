@@ -1,5 +1,4 @@
 private ["_rand","_currentCharATMCard","_currentCharGoldArr","_currentCharGold","_playerUID","_key2","_result","_debugMonSettings","_empty","_name","_playerwasNearby","_character","_magazines","_force","_characterID","_charPos","_isInVehicle","_timeSince","_humanity","_debug","_distance","_isNewMed","_isNewPos","_isNewGear","_playerPos","_playerGear","_playerBackp","_medical","_distanceFoot","_distanceFootCurrent","_distanceFootPrevious","_lastPos","_backpack","_kills","_killsB","_killsH","_headShots","_lastTime","_timeGross","_timeLeft","_currentWpn","_currentAnim","_config","_onLadder","_isTerminal","_currentModel","_modelChk","_muzzles","_temp","_currentState","_array","_key","_pos","_forceGear","_friendlies"];
-
 _character = 	_this select 0;
 _magazines = 	_this select 1;
 
@@ -16,6 +15,8 @@ if (isNull _character) exitWith {
 	diag_log ("Player is Null FAILED: Exiting, player sync: " + str(_character));
 };
 
+if (P2DZE_debugServerPlayerSync) then { diag_log(format["Sync: Input: %1",_this]); };
+
 _characterID =	_character getVariable ["CharacterID","0"];
 _charPos = 		getPosATL _character;
 _isInVehicle = 	vehicle _character != _character;
@@ -26,14 +27,23 @@ _humanity =		0;
 _name = if (alive _character) then { name _character; } else { "Dead Player"; };
 if (_character isKindOf "Animal") exitWith {
 	diag_log ("ERROR: Cannot Sync Character " + (_name) + " is an Animal class");
+	false
 };
 
 if (isnil "_characterID") exitWith {
-	diag_log ("ERROR: Cannot Sync Character " + (_name) + " has nil characterID");	
+	diag_log ("ERROR: Cannot Sync Character " + (_name) + " has nil characterID");
+
+	_character call p2_syncCheck; 	//Send notification to out of sync character
+
+	false
 };
 
 if (_characterID == "0") exitWith {
 	diag_log ("ERROR: Cannot Sync Character " + (_name) + " as no characterID");
+
+	_character call p2_syncCheck; 	//Send notification to out of sync character
+
+	false
 };
 
 private["_debug","_distance"];
@@ -120,9 +130,10 @@ if (_characterID != "0") then {
 
 		_debugMode = 			_character getVariable ["P2_DebugMonMode",2]; 
 		_debugColours = 		_character getVariable ["P2_DebugMonColours",[0,0,0,0.2]]; 
+		_viewDist = 			_character getVariable ["P2_viewDist",1000]; 
 
 		_currentCharGold = 		["ZombZGold",	_character] 	call server_getDiff2;
-		if (P2DZE_debugServerPlayerSync) then { diag_log format["_currentCharGold: %1",_currentCharGold]; };
+		//if (P2DZE_debugServerPlayerSync) then { diag_log format["Sync: _currentCharGold: %1",_currentCharGold]; };
 			
 		_kills = 				["zombieKills",	_character] 	call server_getDiff;
 		_killsB = 				["banditKills",	_character] 	call server_getDiff;
@@ -136,7 +147,7 @@ if (_characterID != "0") then {
 
 		//_currentCharATMCard = _character getVariable ["ZombZATMCard",0]; unused
 		_currentCharGold = 		_character getVariable["ZombZGold_CHK", 	13]; 
-		if (P2DZE_debugServerPlayerSync) then { diag_log format["_currentCharGold_CHK: %1",_currentCharGold]; };
+		//if (P2DZE_debugServerPlayerSync) then { diag_log format["Sync: _currentCharGold_CHK: %1",_currentCharGold]; };
 
 
 		_kills = 				_character getVariable["zombieKills_CHK",	13];
@@ -147,7 +158,7 @@ if (_characterID != "0") then {
 		_distanceFootPrevious = _character getVariable["distanceFoot_CHK", 	13];
 
 		//set debug mon array
-		_debugMonSettings = 	[(_debugColours select 0), (_debugColours select 1), (_debugColours select 2), (_debugColours select 3), _debugMode];
+		_debugMonSettings = 	[(_debugColours select 0), (_debugColours select 1), (_debugColours select 2), (_debugColours select 3), _debugMode, _viewDist];
 		_rand = 0;
 		_rand = random 1;
 
@@ -169,7 +180,6 @@ if (_characterID != "0") then {
 						_key2 call server_hiveWrite;
 
 						if (P2DZE_debugServerPlayerSync) then { diag_log ("HIVE: WRITE: "+ str(_key2) + " / " + _playerUID); };
-						//diag_log ("P2DEBUG: HIVE: WRITE: "+ str(_key2) + " / " + _playerUID);
 					};
 				};
 			};
@@ -249,13 +259,17 @@ if (_characterID != "0") then {
 			} count (_playerPos select 1);
 			_playerPos set [1,_array];
 		};
+
+		private["_p2sm"];
+		_p2sm = false;
 		if (!isNull _character) then {
 			if (alive _character) then {
 				//Wait for HIVE to be free
 				//Send request
 				_key = format["CHILD:201:%1:%2:%3:%4:%5:%6:%7:%8:%9:%10:%11:%12:%13:%14:%15:%16:%17:",_characterID,_playerPos,_playerGear,_playerBackp,_medical,false,false,_kills,_headShots,_distanceFoot,_timeSince,_currentState,_killsH,_killsB,_currentModel,_humanity,_currentCharGoldArr];
 				if (P2DZE_debugServerPlayerSync) then { diag_log ("HIVE: WRITE: "+ str(_key) + " / " + _characterID); };
-				_key call server_hiveWrite;			
+				_key call server_hiveWrite;
+				_p2sm = true;	
 			};
 		};
 
@@ -274,6 +288,15 @@ if (_characterID != "0") then {
 			[_x, "gear"] call server_updateObject;
 		} count nearestObjects [_pos, dayz_updateObjects, 10];
 		//[_charPos] call server_updateNearbyObjects;
+
+		//Update player morality
+		if (_p2sm) then {
+			private["_p2key"];	_p2key = "";
+			_p2key = format["CHILD:333:%1:%2:",_playerUID,_humanity];
+			_p2key call server_hiveWrite;
+			if (P2DZE_debugServerPlayerSync) then { diag_log(format["%1",format["HIVE: WRITE: (333/MoralityUpdate:%1:%2)",_playerUID,_humanity]]); };
+			_p2key = nil;
+		}; 	_p2sm = nil;
 
 		//Reset timer
 		if (_timeSince > 0) then {
