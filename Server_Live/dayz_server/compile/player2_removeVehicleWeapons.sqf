@@ -4,7 +4,6 @@ if (isNil "DZE_vehicleAmmo") then { DZE_vehicleAmmo = 0; };
 //add m134 cannon back on removal?
 P2DZ_addNewWeaponsOnRemoval = true;
 
-P2DZ_debugWepRemovals = false;
 
 //To Use:
 // _obj call player2_removeVehicleWeapons;

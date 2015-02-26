@@ -34,6 +34,9 @@ if (isDedicated && !hasInterface || isServer) then {
 	DynamicVehicleFuelHigh	= 		15;
 	DynamicVehicleFuelLow =			0;
 
+	//debug lock unlock
+	P2DZ_debugLockUnlock = true;
+
 	//debug server player sync
 	P2DZE_debugServerPlayerSync = false;
 
@@ -48,6 +51,9 @@ if (isDedicated && !hasInterface || isServer) then {
 
 	//enable mapp markers for static veh spawned (only first player in can see)
 	P2DZ_staticSpawnMarkers = false;
+
+	//debug wep removals
+	P2DZ_debugWepRemovals = false;
 
 	//Static vehicle spawns duplicate vehicle distance check (meters)
 	P2DZ_StaticVehSpawns_DupeDistanceCheck = 7.5;

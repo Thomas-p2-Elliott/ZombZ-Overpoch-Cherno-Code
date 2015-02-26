@@ -1,7 +1,5 @@
 //server_logUnlockLockEvent.sqf by player2
-P2DZ_debugLockUnlock = true;
-
-
+//P2DZ_debugLockUnlock = true;
 private["_player", "_obj", "_objectID", "_objectUID", "_statusText", "_PUID", "_status","_objGold","_gold"];
 _player = 		_this select 0;
 _obj = 			_this select 1;

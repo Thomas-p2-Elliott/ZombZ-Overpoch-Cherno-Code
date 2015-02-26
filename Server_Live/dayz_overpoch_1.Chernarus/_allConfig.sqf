@@ -3,7 +3,7 @@ Global Settings - Client, Server, and Headless Client
 ---------------------------------------------------------------------------*/
 
 //Instance Number used by the database
-dayZ_instance =	11;		
+dayZ_instance =	11;
 
 //Set the server number - Used for gold logs
 GORSYSERVERNUMBER = 5;
@@ -12,7 +12,7 @@ GORSYSERVERNUMBER = 5;
 P2DZ_serverName = "1";
 
 //Server notification file name
-ZombZ_Notif_File_Name = "notification_op1";
+ZombZ_Notif_File_Name = "notification_op5";
 
 //Spawn Location Settings
 spawnShoremode = 1; 		// Default = 1 (on shore)
@@ -31,7 +31,10 @@ dayz_dusk = 18;
 //Amount of ammo for vehicles to have
 DZE_vehicleAmmo = 0;
 
-P2DZ_postVars = false; //early var
+//early vars for init.sqf
+P2DZ_postVars = 	false; P2DZ_postVarsDone = false;
+P2DZ_postCompiles = false; P2DZ_postCompilesDone = false;
+P2DZ_AHDecrypted = false;
 
 //Enable client antihack whitelist (development only, not for live use!)
 P2DZ_clientAHWhitelistEnabled = false;

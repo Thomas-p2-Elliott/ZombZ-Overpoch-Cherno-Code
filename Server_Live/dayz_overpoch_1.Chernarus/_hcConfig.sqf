@@ -14,6 +14,10 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
 	//Set Headless Folder Path
 	P2HC_Path = "\zombzHC\addons\";
 	//P2HC_Path = "HC\";
+
+	//Global vars used by code
+	P2AIMajName = "";
+	P2AIMinName = "";
 };
 
 /*---------------------------------------------------------------------------

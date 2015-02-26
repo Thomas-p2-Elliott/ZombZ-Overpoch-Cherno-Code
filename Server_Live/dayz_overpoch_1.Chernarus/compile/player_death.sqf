@@ -1,6 +1,13 @@
 private ["_pGold", "_display", "_body", "_playerID", "_myGroup"];
 disableSerialization;
 
+/*
+if (format["%1",(uiNameSpace getVariable "BIS_loadingScreen")] != "No display") then {
+	endLoadingScreen;
+	diag_log(format["P2DEBUG: %1","player_death: Close KO Screen"]);
+};	
+*/
+
 if (deathHandled) exitWith {};
 deathHandled = true;
 
