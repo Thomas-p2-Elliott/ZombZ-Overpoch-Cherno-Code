@@ -121,12 +121,20 @@ call {
 	AntiHack PublicVar for server
 	---------------------------------------------------------------------------*/
 	if (isDedicated && !hasInterface || isServer) exitWith {
-		private ["_humanLog","_dbLog"];
+		private ["_humanLog","_dbLog","_currentTime","_day","_hour","_mins","_secs"];
 		"P2DZ_fire" addPublicVariableEventHandler {
 			_x = _this select 1;
 			if (typeName _x == typeName []) then {
-				
+					
+					_currentTime = "real_date" callExtension "+";
+					_currentTime = call compile _currentTime;
+					_day = 			_currentTime select 2;
+					_hour = 		_currentTime select 3;
+					_mins = 		_currentTime select 4;
+					_secs = 		_currentTime select 5;
 					_humanLog = format["NAME:	(%1)	UID:	(%2)	DETECTION TYPE:	(%3)	DETECTION DETAIL:	(%4)",_x select 0, _x select 1, _x select 2, _x select 3];
+					_humanLog = format["%1/%2:%3:%4:	%5", _day,_hour,_mins,_secs, _humanLog];
+
 					_dbLog = 	format["%1(_GLS_)%2(_GLS_)%3(_GLS_)%4", _x select 1, _x select 2, _x select 3, GORSYSERVERNUMBER];
 
 					_dbLog call stats_hackers;
