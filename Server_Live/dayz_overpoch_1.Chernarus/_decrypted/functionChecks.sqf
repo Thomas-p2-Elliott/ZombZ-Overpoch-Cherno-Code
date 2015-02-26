@@ -51,7 +51,11 @@ P2DZ_AH_FunctionChecks = {
 			if (!([str (fnc_usec_damageHandler), "ZombZinSafeZone"] call KRON_strInStr)) then {
 				P2DZ_fire = [_pn, _pi, 'fnc_usec_damageHandler changed', format['NotOriginal - God Mode? Suspect Code: %1',fnc_usec_damageHandler]];
 				publicVariableServer 'P2DZ_fire';
-				[player] call fnc_usec_damageHandle;
+				if (!isNil 'fnc_usec_damageHandle') then {
+					[player] call fnc_usec_damageHandle;
+				} else {
+					endMission "END1";
+				};
 			};
 		};
 	};
@@ -63,7 +67,11 @@ P2DZ_AH_FunctionChecks = {
 			if (!([str (fnc_usec_unconscious), "ZombZinSafeZone"] call KRON_strInStr)) then {
 				P2DZ_fire = [_pn, _pi, 'fnc_usec_unconscious changed', format['NotOriginal - Anti Knockout? Suspect Code: %1',fnc_usec_unconscious]];
 				publicVariableServer 'P2DZ_fire';
-				fnc_usec_unconscious =	compile preprocessFileLineNumbers "compile\fn_unconscious.sqf";
+				if (!isNil 'fnc_usec_damageHandle') then {
+					[player] call fnc_usec_damageHandle;
+				} else {
+					endMission "END1";
+				};
 			};
 		};
 	};
