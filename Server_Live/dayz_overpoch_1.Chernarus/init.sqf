@@ -27,6 +27,9 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
 
 	diag_log("Init.sqf: ZombZ Headless Client");
 
+	//Make sure headless is in civillian slot
+	[] spawn { waitUntil{ uiSleep 5; ((format["%1", (side player)]) != "UNKNOWN")}; if ((format["%1", (side player)]) != "CIV") then { endMission "END1"; }; };
+	
 	//Wait for BIS Functions to load	
   	waitUntil {!isNil "BIS_fnc_init"}; 
 
@@ -77,7 +80,6 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
 /*---------------------------------------------------------------------------
 Dedicated Server
 ---------------------------------------------------------------------------*/
-
 if (isDedicated && !hasInterface || isServer) then {
 	p2d_server = true;
 
@@ -111,18 +113,31 @@ Client / Player
 ---------------------------------------------------------------------------*/
 
 if (hasInterface && !isDedicated) then {
+	((uiNameSpace getVariable "BIS_loadingScreen") displayctrl 102) ctrlSetText "ZombZ: Please Wait - Loading Epoch & Overwatch...";
+	progressLoadingScreen 0.1;
+
 	p2d_client = 	true;
 	call compile preprocessFileLineNumbers "_clientConfig.sqf"; 
 	call compile preprocessFileLineNumbers "init\variables.sqf";
 	P2DZ_postVars = true;
-	progressLoadingScreen 0.1;
-	waitUntil{uiSleep 0.5; P2DZ_postVarsDone};
-	progressLoadingScreen 0.2;
-};
 
-//diag_log("P2DEBUG: Is Player Client: 	" + str p2d_client);
-//diag_log("P2DEBUG: Is Dedicatd Server: 	" + str p2d_server);
-//diag_log("P2DEBUG: Is Headless Client: 	" + str p2d_headless);
+	if (isNil 'P2DZ_loginCheck') then {	P2DZ_loginCheck = false; };
+	_launchTime = diag_tickTime;
+	waitUntil{	
+		if ((diag_tickTime - _launchTime) > 5) then {
+			endLoadingScreen; 
+			for "_i" from 0 to 10 do {	systemChat("KICK REASON: Encryption Engine Failed to Load - Please Re-Connect!");	};
+			endMission "END1";
+		};
+		uiSleep 0.5;
+		P2DZ_loginCheck
+	};
+
+	progressLoadingScreen 0.2;
+
+	waitUntil{uiSleep 0.5; P2DZ_postVarsDone};
+	progressLoadingScreen 0.3;
+};
 
 //Load in compiled functions
 P2DZ_loadInitDone = true;
@@ -141,7 +156,7 @@ progressLoadingScreen 1.0;
 "filmic" setToneMappingParams [0.153, 0.357, 0.231, 0.1573, 0.011, 3.750, 6, 4]; setToneMapping "Filmic";
 
 /*---------------------------------------------------------------------------
-Server
+Dedicated Server
 ---------------------------------------------------------------------------*/
 if (isServer) then {
 	//Compile vehicle configs
@@ -175,6 +190,9 @@ if (!isDedicated) then {
 	call compile preprocessFileLineNumbers 	"compile\fnc_debugMon.sqf";
 	call compile preprocessFileLineNumbers 	"init\notifs_init.sqf";
 	[] execVM 								"system\SafeZone.sqf";
+
+	//Make sure player is not in civillian (headless) slot
+	[] spawn { waitUntil{ uiSleep 5; ((format["%1", (side player)]) != "UNKNOWN")}; if ((format["%1", (side player)]) == "CIV") then { endMission "END1"; }; };
 };
 
 //#define RESEC_VERBOSE
