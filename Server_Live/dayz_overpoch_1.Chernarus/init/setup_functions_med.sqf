@@ -1,5 +1,4 @@
 fnc_usec_pitchWhine = {
-	
 	private ["_visual","_sound"];
 	_visual = _this select 0;
 	_sound = _this select 1;
@@ -12,7 +11,7 @@ fnc_usec_pitchWhine = {
 	};
 	r_pitchWhine = true;
 	[] spawn {
-		sleep 16; //default: 32
+		uiSleep 16; //default: 32
 		r_pitchWhine = false;
 	};
 };
@@ -24,6 +23,7 @@ fnc_usec_damageUnconscious = {
 	_inVehicle = (vehicle _unit != _unit);
 	if ((_unit == player) || (vehicle player != player)) then {
 		r_player_timeout = round((((random 2) max 0.1) * _damage) * 20);
+		r_player_timeout = r_player_timeout min 90;
 		r_player_unconscious = true;
 		player setVariable["medForceUpdate",true,true];
 		player setVariable ["unconsciousTime", r_player_timeout, true];
@@ -47,8 +47,6 @@ fnc_usec_damageUnconscious = {
 		_unit playActionNow "Die";
 	};
 };
-
-//Action Handlers added to init file
 
 fnc_usec_bulletHit = {
 	private["_commit"];
@@ -115,7 +113,7 @@ fnc_med_publicBlood = {
 	while {(r_player_injured || r_player_infected) && r_player_blood > 0} do {
 		player setVariable["USEC_BloodQty",r_player_blood,true];
 		player setVariable["medForceUpdate",true];
-		sleep 5;
+		uiSleep 5;
 	};
 };
 
@@ -149,7 +147,7 @@ fnc_usec_playerBleed = {
 			{player setVariable[_x,false,true];} count USEC_woundHit;
 			player setVariable ["USEC_injured",false,true];
 		};
-		sleep 1;
+		uiSleep 1;
 	};
 };
 
@@ -209,14 +207,14 @@ fnc_usec_damageBleed = {
 			_source setDropInterval 0.02;
 			_point attachTo [_unit,_modelPos,_wound];
 			
-			sleep 5;
+			uiSleep 5;
 			
 			while {((_unit getVariable["USEC_injured",true]) && (alive _unit))} do {
 				scopeName "loop";
 				if (vehicle _unit != _unit) then {
 					BreakOut "loop";
 				};
-				sleep 1;
+				uiSleep 1;
 			};
 			deleteVehicle _source;
 			deleteVehicle _point;
@@ -231,6 +229,8 @@ fnc_usec_damageBleed = {
 };
 
 fnc_usec_recoverUncons = {
+	diag_log(format["P2DEBUG: %1","fnc_usec_recoverUncons Run"]);
+
 	player setVariable ["NORRN_unconscious",false,true];
 	player setVariable ["unconsciousTime",0,true];
 	player setVariable ["USEC_isCardiac",false,true];
@@ -240,11 +240,17 @@ fnc_usec_recoverUncons = {
 	r_player_cardiac = false;
 	r_player_handler1 = false;
 
-	sleep 0.5;
-	diag_log("rec: close0");
+	uiSleep 0.5;
 
-	endLoadingScreen;
 	[objNull,player,rSwitchMove,"AinjPpneMstpSnonWnonDnon"] call RE;
 	player switchMove "AinjPpneMstpSnonWnonDnon";
-	player playMoveNow "AmovPpneMstpSnonWnonDnon_healed";
+
+
+	if (format["%1",(uiNameSpace getVariable "BIS_loadingScreen")] != "No display") then {
+		endLoadingScreen;
+		diag_log(format["P2DEBUG: %1","fnc_usec_recoverUncons: Close Screen"]);
+	};	
+
+	uiSleep 0.5;
+	player switchMove "AmovPpneMstpSnonWnonDnon_healed";
 };
