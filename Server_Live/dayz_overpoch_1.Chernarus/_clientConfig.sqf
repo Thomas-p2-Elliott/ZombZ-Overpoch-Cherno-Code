@@ -49,7 +49,7 @@ if (hasInterface && !isDedicated) then {
 	P2_REF = true;
 
 	//Loadscreen Timeout Length (Seconds) (Default: 120)
-	P2DZ_LoadingTimeOut = 300;
+	P2DZ_LoadingTimeOut = 120;
 
 	/* Default Client Performance/Visual Settings */
 
