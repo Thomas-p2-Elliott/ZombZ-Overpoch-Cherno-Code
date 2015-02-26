@@ -1,14 +1,4 @@
 /*---------------------------------------------------------------------------
-    Hash Id Functions
-----------------------
-Description:
-    Generates
----------------------------------------------------------------------------*/
-/* This generates the server hash - should be run ONCE on server startup */
-
-
-  
-/*---------------------------------------------------------------------------
 Server Anti-Hack Loops on Players & Vehicles
 ---------------------------------------------------------------------------*/
 P2DZE_alreadyChecked = [];
@@ -29,7 +19,6 @@ private["_missionVehicles"];
                 _x call KK_fnc_checkHash;
                 P2DZE_alreadyChecked = P2DZE_alreadyChecked + [_x];
                 //"debug_console" callExtension format["Obj: %1 Added to Safe List #1111", typeOf _x];
-
             } else {
                 //"debug_console" callExtension format["Obj: %1 Has already been Checked #0101", typeOf _x];
             };
@@ -39,39 +28,18 @@ private["_missionVehicles"];
     PDZE_Hash_Check = nil;
 };
 
-
-
-/* TO ADD A HASH TO AN OBJECT ADD THIS CODE - DO NOT MAKE A FUNCTION JUST COPY PASTE WHERE OBJECTS ARE CREATED */
-/*
-
-_obj call {
-    _this setVariable [
-        uiNamespace getVariable "hashId_var",
-        "hash_id" callExtension format [
-            "%1:%2",
-            netId _this,
-            typeOf _this
-        ]
-    ];
-};
-
-
-*/
-
-KK_fnc_makeRandomId = {
-     "hash_id" callExtension "rID"
-};
-
 KK_fnc_checkHash = {
-   // "debug_console" callExtension format["Obj: %1 hash check", typeOf _this];
-
-    if (_this isKindOf "Man") exitWith {
-        true;
-    };
-
-    if (_this isKindOf "WeaponHolder") exitWith {
-        true;
-    };
+    private["_p2"];
+    // "debug_console" callExtension format["Obj: %1 hash check", typeOf _this];
+    _p2 = false;
+    if (_this isKindOf "Man") exitWith {true};
+    if (_this isKindOf "WeaponHolder") exitWith {true};
+    {
+        if (owner _x == owner _this) then {
+            if (str _x == "HeadlessClient") exitWith { _p2=true; };
+        };
+    } count playableUnits;
+    if (_p2) exitWith {true};
 
     if ("hash_id" callExtension format [
         "%1:%2#%3", 
@@ -89,7 +57,7 @@ KK_fnc_checkHash = {
 KK_fnc_checkHashGold = {
     private["_dcout","_obj"];
     _obj = _this;
-    diag_log(format["KK_fnc_checkHashGold: Input: %1",_obj]);
+    //diag_log(format["KK_fnc_checkHashGold: Input: %1",_obj]);
     
     if ("hash_id" callExtension format [
         "%1:%2#%3", 
@@ -100,7 +68,7 @@ KK_fnc_checkHashGold = {
         ]
     ] == "PASS") exitWith {true};
     
-    diag_log(format["KK_fnc_checkHashGold: Obj without Hash: %1",_obj]);
+    //diag_log(format["KK_fnc_checkHashGold: Obj without Hash: %1",_obj]);
 
     [_obj,false] call fnc_removeExtraBars;
 
