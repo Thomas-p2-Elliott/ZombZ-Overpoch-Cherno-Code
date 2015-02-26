@@ -38,8 +38,7 @@
 1 "Parachute" !="ParachuteWest" !="ParachuteC" //under monitoring
 1 "Land_"!"Land_coneLight"!="Land_Fire_DZ" !="Land_HBarrier1_DZ" !="Land_HBarrier1Preview" !="Land_HBarrier3_DZ" !="Land_HBarrier3ePreview" !="Land_HBarrier1_DZ" !="Land_HBarrier1Preview" !="Land_fortified_nest_smallPreview" !="Land_DZE_WoodDoor" !="Land_DZE_LargeWoodDoor" !="Land_DZE_GarageWoodDoor" !="Land_DZE_WoodDoorLocked" !="Land_DZE_LargeWoodDoorLocked" !="Land_DZE_GarageWoodDoorLocked"
 1 "BBarracks"
-1 "_ep1" !"Sheep02_EP1"!"Soldier_Sniper_PMC_DZ"!"Functionary1_EP1_DZ"!"Goat01_EP1"!"Goat02_EP1"!"Pilot_EP1_DZ"!!="US_Delta_Force_Marksman_EP1" !"DZ_LargeGunBag_EP1"!="Cow01_EP1" !="Sheep01_EP1"!="Plastic_Pole_EP1_DZ"!="Sign_sphere10cm_EP1"!="Sign_arrow_down_large_EP1"!"DZ_CompactPack_EP1"!"DZ_GunBag_EP"!"DZ_CompactPack_EP1"!"CZ_Special_Forces_GL_DES_EP1_DZ"!"UN_CDF_Soldier_Officer_EP"!"TK_INS_Warlord_EP1_DZ"
-!="DZ_Patrol_Pack_EP1" !="DZ_CivilBackpack_EP1" !="CZ_VestPouch_EP1" !="DZ_ALICE_Pack_EP1" !="DZ_Backpack_EP1" !="DZ_Assault_Pack_EP1" !="DZ_TK_Assault_Pack_EP1"
+1 "_ep1" !"Sheep02_EP1"!"Soldier_Sniper_PMC_DZ"!"Functionary1_EP1_DZ"!"Goat01_EP1"!"Goat02_EP1"!"Pilot_EP1_DZ"!!="US_Delta_Force_Marksman_EP1" !"DZ_LargeGunBag_EP1"!="Cow01_EP1" !="Sheep01_EP1"!="Plastic_Pole_EP1_DZ"!="Sign_sphere10cm_EP1"!="Sign_arrow_down_large_EP1"!"DZ_CompactPack_EP1"!"DZ_GunBag_EP"!"DZ_CompactPack_EP1"!"CZ_Special_Forces_GL_DES_EP1_DZ"!"UN_CDF_Soldier_Officer_EP"!"TK_INS_Warlord_EP1_DZ"!="DZ_Patrol_Pack_EP1" !="DZ_CivilBackpack_EP1" !="CZ_VestPouch_EP1" !="DZ_ALICE_Pack_EP1" !="DZ_Backpack_EP1" !="DZ_Assault_Pack_EP1" !="DZ_TK_Assault_Pack_EP1"
 1 "_baf"
 1 "_pmc" !"Soldier_Sniper_PMC_DZ"!"Soldier_Bodyguard_AA12_PMC_DZ" !="Soldier_Bodyguard_M4_PMC"!"Soldier_TL_PMC_DZ"!"CZ_Special_Forces_GL_DES_EP1_DZ"
 1 "cz_" !="CZ_VestPouch_EP1"!"CZ_Special_Forces_GL_DES_EP1_DZ"
