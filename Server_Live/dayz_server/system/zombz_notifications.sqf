@@ -1,10 +1,6 @@
 diag_log("ZombZ Server: P2DEBUG: zombz_notifications.sqf");
 
-
 "Arma2Net.Unmanaged" callExtension "Load";
-
-//Global Variable - Test Server Only
-//ZombZ_Notif_File_Name = "notification_op1"; - Moved to server config
 
 if (isNil "ZombZ_Notif_File_Name") then {
 	ZombZ_Notif_File_Name = "notification_op5";
@@ -28,6 +24,7 @@ notif_Loop = {
 		_gotMsg = (call compile _result);
 		if (isNil "_gotMsg") then {
 			P2DZE_OldGuiMsg = [];
+			_gotMsg = P2DZE_OldGuiMsg;
 		};
 
 		if (!(str(_gotMsg) == str(P2DZE_OldGuiMsg))) then {
