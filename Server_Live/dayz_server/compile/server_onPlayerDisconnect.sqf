@@ -37,7 +37,7 @@ if (!isNull _playerObj) then {
 	if ((_timeout - time) > 0) then {
 
 		_playerObj setVariable["NORRN_unconscious",true, true];
-		_playerObj setVariable["unconsciousTime",15,true];
+		_playerObj setVariable["unconsciousTime",90,true];
 	
 		//diag_log format["COMBAT LOGGED: %4/%1 (%2) at location %3", _playerName,_timeout,(getPos _playerObj),_playerUID];
 	
