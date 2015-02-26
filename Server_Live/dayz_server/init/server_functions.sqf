@@ -840,17 +840,21 @@ dayz_perform_purge = {
 
 dayz_perform_purge_player = {
 
-	private ["_countr","_backpack","_backpackType","_backpackWpn","_backpackMag","_objWpnTypes","_objWpnQty","_location","_dir","_holder","_weapons","_magazines"];
-    diag_log ("Purging player: " + str(_this));	
+	private ["_zGold","_countr","_backpack","_backpackType","_backpackWpn","_backpackMag","_objWpnTypes","_objWpnQty","_location","_dir","_holder","_weapons","_magazines"];
+    //diag_log ("Purging player: " + str(_this));	
 
 	if(!isNull(_this)) then {
+
+		//get object gold (if isnil we add it to _holder later)
+		_zGold = nil;
+		_zGold = _this getVariable ["ZombZGold", nil];
 
 		_location = getPosATL _this;
 		_dir = getDir _this;
 
 		_holder = createVehicle ["GraveDZE", _location, [], 0, "CAN_COLLIDE"];
 
-		_veh call {
+		_holder call {
 		    _this setVariable [
 		        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
 		        "hash_id" callExtension format [
@@ -859,7 +863,7 @@ dayz_perform_purge_player = {
 		            typeOf _this
 		        ]
 		    ];
-		};	
+		};
 
 		_holder setDir _dir;
 		_holder setPosATL _location;
@@ -907,6 +911,13 @@ dayz_perform_purge_player = {
 	{ 
 		_holder addMagazineCargoGlobal [_x, 1];
 	} count _magazines;
+
+	//add gold to grave
+	if (!isNil '_zGold') then {
+		_holder setVariable ["ZombZGold", _zGold, true];
+	};
+
+	//purge object
 	_group = group _this;
 	_this removeAllMPEventHandlers "mpkilled";
 	_this removeAllMPEventHandlers "mphit";
@@ -1091,20 +1102,9 @@ server_spawnCleanAnimals = {
 	};
 };
 
-P2DZ_debugLockUnlock = true;
 server_logUnlockLockEvent = compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_logUnlockLockEvent.sqf";
 
 [] execVM 											"\z\addons\dayz_server\system\antihack_functions.sqf";
 [] execvm 											"\z\addons\dayz_server\init\deploy_functions.sqf";
 [] execvm 											"\z\addons\dayz_server\init\goldEventHandlers.sqf";
 [] execvm 											"\z\addons\dayz_server\p2re\p2re_init.sqf";
-
-if (AHe) exitWith {
-	[] spawn {
-		waituntil{!isNil "sm_done"};
-		waituntil{(sm_done)};
-		diag_log("P2DEBUG: server: sm_done = true");
-		diag_log("P2DEBUG: loading antihack on test server");
-		#include "AH.sqf";
-	};
-};
