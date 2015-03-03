@@ -126,7 +126,7 @@ if (hasInterface && !isDedicated) then {
 	waitUntil{	
 		if ((diag_tickTime - _launchTime) > 5) then {
 			endLoadingScreen; 
-			for "_i" from 0 to 10 do {	systemChat("KICK REASON: Encryption Engine Failed to Load - Please Re-Connect!");	};
+			for "_i" from 0 to 10 do {	systemChat("KICK REASON: Server did not respond in time - Please Re-Connect!");	};
 			endMission "END1";
 		};
 		uiSleep 0.5;

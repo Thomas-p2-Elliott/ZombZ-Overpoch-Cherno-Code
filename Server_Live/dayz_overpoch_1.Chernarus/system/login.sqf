@@ -259,7 +259,7 @@ uiSleep 10;
 
 //tell player about debug mon colour / mode
 if (random 1 > 0.49) then {
-	systemChat("Did you know: You can change your debug monitor mode by pressing F5!");
+	systemChat("Did you know: You can change your debug/stats panel mode by pressing the F5 key!");
 } else {
-	systemChat("Did you know: You can change your debug monitor color by pressing F6!");
+	systemChat("Did you know: You can change your debug/stats panel color by pressing the F6 key!");
 };
