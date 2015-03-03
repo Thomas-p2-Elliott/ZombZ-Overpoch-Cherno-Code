@@ -230,7 +230,7 @@ fnc_usec_damageBleed = {
 
 fnc_usec_recoverUncons = {
 	diag_log(format["P2DEBUG: %1","fnc_usec_recoverUncons Run"]);
-
+	disableUserInput false;
 	player setVariable ["NORRN_unconscious",false,true];
 	player setVariable ["unconsciousTime",0,true];
 	player setVariable ["USEC_isCardiac",false,true];
