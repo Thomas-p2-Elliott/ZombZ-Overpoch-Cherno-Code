@@ -189,8 +189,13 @@ if (!isDedicated) then {
 	//System
 	player_spawn_1 =			compile preprocessFileLineNumbers "\z\addons\dayz_code\system\player_spawn_1.sqf";
 	player_spawn_2 =			compile preprocessFileLineNumbers "\z\addons\dayz_code\system\player_spawn_2.sqf";
-	onPreloadStarted 			"dayz_preloadFinished = false;";
-	onPreloadFinished 			"dayz_preloadFinished = true;";
+
+	/*Pre-Loader Stuff*/
+	preLoadfirstRun = true;
+	preLoadfirstRun2 = true;
+	onPreloadStarted 			" if (preLoadfirstRun) then { 	dayz_preloadFinished = false; 	preLoadfirstRun = false; diag_log('P2DEBUG: onPreloadStarted: dayz_preloadFinished = false');	} else { 	diag_log('P2DEBUG: onPreloadStarted:  preLoadfirstRun...Already did this.'); 	}; ";
+	onPreloadFinished 			" if (preLoadfirstRun2) then {	dayz_preloadFinished = true; 	preLoadfirstRun2 = false; diag_log('P2DEBUG: onPreloadFinished: dayz_preloadFinished = true'); 	} else { 	diag_log('P2DEBUG: onPreloadFinished: preLoadfirstRun2...Already did this.'); 	}; ";
+	diag_log("P2DEBUG: onPreloadFinished & onPreloadStarted set-up.");
 
 	// helper functions
 	player_hasTools =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\fn_hasTools.sqf";

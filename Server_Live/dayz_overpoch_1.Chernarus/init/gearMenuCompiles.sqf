@@ -363,25 +363,26 @@ p2RefChk = {
 
 //This is still needed but the fsm should terminate if any errors pop up.
 [] spawn {
-    private["_timeOut","_timeOutMax","_display","_control1","_control2","_text"];
+    private["_timeOut","_timeOutMax","_display","_control1","_control2","_text","_lMsg"];
     disableSerialization;
     _timeOut = 0;
     dayz_loadScreenMsg = "";
+    _lMsg = "ZombZ: Receiving Initial Data...";
     diag_log "DEBUG: loadscreen guard started.";
     _display = uiNameSpace getVariable "BIS_loadingScreen";
     if (!isNil '_display') then {
             _control1 = _display displayctrl 8400;
             _control2 = _display displayctrl 102;
-          	_control1 	ctrlSetText "ZombZ: Receiving Initial Data...";
-          	_control2 	ctrlSetText format["%1",-1];
+          	_control1 	ctrlSetText _lMsg;
+          	_control2 	ctrlSetText format["%1",_lMsg];
     };
 	if (!isNil 'dayz_DisplayGenderSelect') then {
 		while {(!dayz_DisplayGenderSelect)} do {
 		    if (!isNil '_display') then {
 	            _control1 = _display displayctrl 8400;
 	            _control2 = _display displayctrl 102;
-	          	_control1 	ctrlSetText "ZombZ: Receiving Initial Data...";
-	          	_control2 	ctrlSetText format["%1",floor(diag_tickTime)];
+	          	_control1 	ctrlSetText _lMsg;
+	          	_control2 	ctrlSetText format["%2...%1",floor(diag_tickTime), _lMsg];
 		    };
 		};
 
@@ -394,7 +395,11 @@ p2RefChk = {
     _timeOutmax = P2DZ_LoadingTimeOut * 100;
 
     while { _timeOut < _timeOutmax } do {
-        if (dayz_clientPreload && dayz_authed) exitWith { dayz_preloadFinished = true; diag_log("PLOGIN: dayz_clientPreload && dayz_authed true, exiting load screen gaurd..."); };
+        if (dayz_clientPreload && dayz_authed) exitWith { 
+        	diag_log("PLOGIN: dayz_clientPreload && dayz_authed true, exiting load screen gaurd...");
+       	 	endLoadingScreen;
+        };
+
         if (!isNil '_display') then {
             if ( isNull _display ) then {
             		diag_log("P2DEBUG: 2nd Load Screen Started!");
@@ -403,15 +408,19 @@ p2RefChk = {
                     _display = uiNameSpace getVariable "BIS_loadingScreen";
                     _control1 = _display displayctrl 8400;
                     _control2 = _display displayctrl 102;
-                    _control1 	ctrlSetText "ZombZ: Please Wait - Loading Epoch & Overwatch...";
+                    _lMsg = "ZombZ: Please Wait - Loading Epoch & Overwatch...";
+                    _control1 	ctrlSetText _lMsg;
+                    _control2 	ctrlSetText _lMsg;
+
             };
             
             if ( dayz_loadScreenMsg != "" ) then {
                 _control1 ctrlSetText dayz_loadScreenMsg;
+                _lMsg = dayz_loadScreenMsg;
                 dayz_loadScreenMsg = "";
            	};
 
-            _control2 ctrlSetText format["%1",round(_timeOut*0.01)];
+            _control2 ctrlSetText format["%2 %1",round(_timeOut*0.01),_lMsg];
         };
 
         if (_timeOut >= _timeOutmax) then {
