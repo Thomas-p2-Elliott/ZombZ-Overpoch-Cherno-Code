@@ -5,7 +5,14 @@ _ctrl = 	_this select 3;
 _alt =		_this select 4;
 _handled = false;
 
-//Debugging Output: diag_log(format["P2DEBUG: Key: %1, ShiftState: %2",_this select 1, _this select 2]);
+//Debugging Output: 
+//diag_log(format["P2DEBUG: Key: %1, ShiftState: %2",_this select 1, _this select 2]);
+
+/* Nil Input Breakage Prevention */
+if (isNil '_dikCode') exitWith { 	diag_log("P2DEBUG: Nil _dikCode"); 	_handled = true; dayz_lastCheckBit = diag_tickTime; _handled };
+if (isNil '_shift') exitWith { 		diag_log("P2DEBUG: Nil _shift"); 	_handled = true; dayz_lastCheckBit = diag_tickTime; _handled };
+if (isNil '_ctrl') exitWith { 		diag_log("P2DEBUG: Nil _ctrl"); 	_handled = true; dayz_lastCheckBit = diag_tickTime; _handled };
+if (isNil '_alt') exitWith { 		diag_log("P2DEBUG: Nil _alt"); 		_handled = true; dayz_lastCheckBit = diag_tickTime; _handled };
 
 /* Server UI Prevention */
 if (_shift && _dikCode == 0x19) then {
