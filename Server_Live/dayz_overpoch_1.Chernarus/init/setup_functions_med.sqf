@@ -230,27 +230,30 @@ fnc_usec_damageBleed = {
 
 fnc_usec_recoverUncons = {
 	diag_log(format["P2DEBUG: %1","fnc_usec_recoverUncons Run"]);
-	disableUserInput false;
-	player setVariable ["NORRN_unconscious",false,true];
-	player setVariable ["unconsciousTime",0,true];
-	player setVariable ["USEC_isCardiac",false,true];
-	// player setVariable["medForceUpdate",true,true];
+	if (!r_player_dead) then {
+		disableUserInput false;
+		
+		player setVariable ["NORRN_unconscious",false,true];
+		player setVariable ["unconsciousTime",0,true];
+		player setVariable ["USEC_isCardiac",false,true];
+		// player setVariable["medForceUpdate",true,true];
 
-	r_player_unconscious = false;
-	r_player_cardiac = false;
-	r_player_handler1 = false;
+		r_player_unconscious = false;
+		r_player_cardiac = false;
+		r_player_handler1 = false;
 
-	uiSleep 0.5;
+		uiSleep 0.5;
 
-	[objNull,player,rSwitchMove,"AinjPpneMstpSnonWnonDnon"] call RE;
-	player switchMove "AinjPpneMstpSnonWnonDnon";
+		[objNull,player,rSwitchMove,"AinjPpneMstpSnonWnonDnon"] call RE;
+		player switchMove "AinjPpneMstpSnonWnonDnon";
 
 
-	if (format["%1",(uiNameSpace getVariable "BIS_loadingScreen")] != "No display") then {
-		endLoadingScreen;
-		diag_log(format["P2DEBUG: %1","fnc_usec_recoverUncons: Close Screen"]);
-	};	
+		if (format["%1",(uiNameSpace getVariable "BIS_loadingScreen")] != "No display") then {
+			endLoadingScreen;
+			diag_log(format["P2DEBUG: %1","fnc_usec_recoverUncons: Close Screen"]);
+		};	
 
-	uiSleep 0.5;
-	player switchMove "AmovPpneMstpSnonWnonDnon_healed";
+		uiSleep 0.5;
+		player switchMove "AmovPpneMstpSnonWnonDnon_healed";
+	};
 };
