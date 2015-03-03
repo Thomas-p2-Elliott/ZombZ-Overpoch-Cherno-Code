@@ -4,7 +4,7 @@ _m = "No Display";
 _m = uiNamespace getVariable ["p2_options", "No Display"];
 
 if (str _m != "No Display") then {
-	private["_p", "_bg", "_nt", "_vd", "_en", "_kn", "_sn", "_db", "_ntV", "_vdV", "_nA", "_nB", "_c", "_dbV"];
+	private["_p", "_bg", "_nt", "_vd", "_en", "_kn", "_sn", "_db", "_ntV", "_vdV", "_nA", "_nB", "_c", "_dbV", "_bgc"];
 	_p = player;
 
 	// "ListBox Control Vars"
@@ -115,12 +115,12 @@ if (str _m != "No Display") then {
 
 
 	// "Background Colour"
-
 	_bg = [8850,8851,8852];
+	_bgc = P2DZE_debugCol;
+	if (isNil '_bgc') then { _bgc = [0,0,0,0.2]; };
 	{
-	  	((_m) displayCtrl _x) ctrlSetBackgroundColor hFC;
+	  	((_m) displayCtrl _x) ctrlSetBackgroundColor _bgc;
 	} count _bg;
-  
 };   
  
 
