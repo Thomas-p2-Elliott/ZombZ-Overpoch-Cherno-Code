@@ -30,6 +30,10 @@ if (_character isKindOf "Animal") exitWith {
 	false
 };
 
+if ((format["%1", (side _character)]) == "CIV") exitWith {
+	diag_log("P2DEBUG: Player " + (_name) + " is Headless Client, no sync required!");
+};
+
 if (isnil "_characterID") exitWith {
 	diag_log ("ERROR: Cannot Sync Character " + (_name) + " has nil characterID");
 
