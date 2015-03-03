@@ -592,7 +592,7 @@ if(!isDedicated) then {
 		DZE_ForceNameTagsOff = false;
 	};
 	if(isNil "DZE_ForceNameTagsInTrader") then {
-		DZE_ForceNameTagsInTrader = false;
+		DZE_ForceNameTagsInTrader = true;
 	};
 	if(isNil "DZE_HaloJump") then {
 		DZE_HaloJump = true;

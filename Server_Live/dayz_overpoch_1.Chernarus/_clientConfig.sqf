@@ -28,7 +28,7 @@ if (hasInterface && !isDedicated) then {
 	DZE_ForceNameTagsOff = false;
 
 	//force name tags in trader?
-	DZE_ForceNameTagsInTrader = false;
+	DZE_ForceNameTagsInTrader = true;
 
 	//enable halo jump from heli?
 	DZE_HaloJump = true;
