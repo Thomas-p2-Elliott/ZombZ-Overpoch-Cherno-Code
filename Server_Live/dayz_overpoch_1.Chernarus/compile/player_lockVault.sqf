@@ -21,9 +21,9 @@ _text = 	getText (configFile >> "CfgVehicles" >> _objType >> "displayName");
 if(isNull _obj) exitWith { DZE_ActionInProgress = false; };
 [1,1] call dayz_HungerThirst;
 player playActionNow "Medic";
-sleep 1;
+uiSleep 1;
 [player,"tentpack",0,false] call dayz_zombieSpeak;
-sleep 5;
+uiSleep 5;
 
 _nearPlayers = _obj nearEntities ["Man", 9];
 _playerNear = ({isPlayer _x} count _nearPlayers) > 1;
