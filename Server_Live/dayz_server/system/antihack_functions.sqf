@@ -127,59 +127,6 @@ KK_fnc_checkHashGold = {
     false
 };
 
-/*Parameters:
-_unit - the vehicle providing cargo space [Object]
-_item - classname of item to remove [String]
-_count - number of items to remove [Number] (Default: 1)
-
-Returns:
-true on success, false otherwise (error or no such item in cargo)
-*/
-p2_removeMagCargoGlobal = {
-    private ["_unit", "_item", "_count", "_i", "_unit_allItems", "_unit_allItems_types", "_unit_allItems_count", "_item_type", "_item_count", "_returnVar","_gVal","_unitPos"];
-    _unit = _this select 0;
-    _item = _this select 1;
-    _count = _this select 2;
-    if (_count <= 0) exitWith { false; };
-    _unitPos = getPos _unit;
-    if (surfaceIsWater _unitPos) then { _unitPos = getPosASL _unit; } else { _unitPos = getPosATL _unit; };
-
-    if (_item == "ItemGoldBar10oz") then {
-        _gVal = _unit getVariable ["ZombZGold", 0];
-    };
-
-    _unit_allItems = getMagazineCargo _unit; 
-    _unit_allItems_types = _unit_allItems select 0; 
-    _unit_allItems_count = _unit_allItems select 1;
-
-    returnVar = false;
-
-    clearMagazineCargoGlobal _unit;
- 
-    for [{_i=0}, {_i<(count _unit_allItems_types)}, {_i=_i+1}] do {
-        _item_type = _unit_allItems_types select _i;
-        _item_count = _unit_allItems_count select _i;
-
-        if (_item_type == _item) then { 
-            returnVar = true;
-
-            _item_count = _item_count - _count;
-            if (_item_count > 0) then {
-                _unit = nil;
-                _unit = "WeaponHolder" createVehicle _unitPos;
-                if (surfaceIsWater _unitPos) then { _unit setPosASL _unitPos; } else { _unit setPosATL _unitPos; };
-                _unit addMagazineCargoGlobal [_item_type, _item_count];
-            };
-        } else {
-
-            _unit = nil;
-            _unit = "WeaponHolder" createVehicle _unitPos;
-            if (surfaceIsWater _unitPos) then { _unit setPosASL _unitPos; } else { _unit setPosATL _unitPos; };
-            _unit addMagazineCargoGlobal [_item_type, _item_count];
-        };
-    };
-};
-
 /*---------------------------------------------------------------------------
 Security Numbers - Publish / Delete / Trade / Gold -
 ---------------------------------------------------------------------------*/

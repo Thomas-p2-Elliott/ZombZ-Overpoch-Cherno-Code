@@ -3,22 +3,28 @@ Remove Gold from players backpack
 
 Inputs:
 	Player Backpack (Object)
+
+Outputs:
+	(Debugging Mode) RPT Log Entry
 ---------------------------------------------------------------------------*/
 "P2DZE_plr_bpGold"		addPublicVariableEventHandler {_id = (_this select 1) spawn P2DZE_removeGoldFromBackpack};
-
 P2DZE_removeGoldFromBackpack = {
-		private["_backpack"];
-		_backpack = _this;
-		if (P2DZE_goldItemHandlingDebug) then {
-			diag_log(format["P2DZE_removeGoldFromBackpack:	PlayerBackpack Object: %1",_backpack]);
-		};
-		[_this,false] call fnc_removeExtraBars;
+	private["_backpack"];
+	_backpack = _this;
+	if (P2DZE_goldItemHandlingDebug) then {
+		diag_log(format["P2DEBUG:	PlayerBackpack Object: %1",_backpack]);
+	};
+	[_this,false] call fnc_removeExtraBars;
 };
 
 /*---------------------------------------------------------------------------
-Add Gold To Player Body
-	Inputs:
-		Player Body (Object)
+Add Gold To Object or Unit
+
+Inputs:
+	Object / Unit
+
+Outputs:
+	(Debugging Mode) RPT Log Entry
 ---------------------------------------------------------------------------*/
 "P2DZE_plr_gGold"		addPublicVariableEventHandler {_id = (_this select 1) spawn P2DZE_giveGoldItem};
 P2DZE_giveGoldItem = {
@@ -26,16 +32,22 @@ P2DZE_giveGoldItem = {
 	_obj = _this;
 	if (!isNil "_obj") then {
 		if (!isNull _obj) then {
-			_obj addMagazine "ItemGoldBar10oz";
 			if (P2DZE_goldItemHandlingDebug) then {
-				diag_log(format["P2DEBUG: Giving Gold Bar Item to Obj: %1",(typeOf _obj)]);
+				diag_log(format["P2DEBUG: 	Giving Gold Bar Item to Obj or Unit: %1",(typeOf _obj)]);
 			};
+			[_obj,true] call fnc_removeExtraBars;
 		};
 	};
 };
 
 /*---------------------------------------------------------------------------
-Remove 0 Gold Bar Item from Object
+Remove 0 Gold Bar Item from Object or Unit
+
+Inputs:
+	Object / Unit
+
+Outputs:
+	(Debugging Mode) RPT Log Entry
 ---------------------------------------------------------------------------*/
 "P2DZE_plr_rGold"		addPublicVariableEventHandler {_id = (_this select 1) spawn P2DZE_delGoldItem};
 P2DZE_delGoldItem = {
@@ -43,10 +55,10 @@ P2DZE_delGoldItem = {
 	_obj = _this;
 	if (!isNil "_obj") then {
 		if (!isNull _obj) then {
-			[_obj, false] call fnc_removeExtraBars;
 			if (P2DZE_goldItemHandlingDebug) then {
-				diag_log(format["P2DEBUG: Removing Gold Bar Item to Obj: %1",(typeOf _obj)]);
+				diag_log(format["P2DEBUG: 	Removing Gold Bar Item to Obj or Unit: %1",(typeOf _obj)]);
 			};
+			[_obj, false] call fnc_removeExtraBars;
 		};
 	};
 };
@@ -58,12 +70,15 @@ Inputs:
 	Player
 	Object
 	Amount to Drop
+
+Outputs:
+	Gold Stat Logs for Database Processing via GLS
+	(Debugging Mode) RPT Log Entries
 ---------------------------------------------------------------------------*/
 "P2DZE_plr_dropGold"		addPublicVariableEventHandler {_id = (_this select 1) spawn P2DZE_dropGold};
 
 P2DZE_dropGold = {
 	private ["_unit","_object","_item","_iPos","_input","_amount","_radius","_newObjGold","_newPlyrGold","_plyrGoldVar","_objGoldVar","_near","_currentTime","_day","_hour","_mins","_secs","_statsMessage"];
-
 	_unit = objNull;
 	_object = objNull;
 	_item = objNull;
@@ -308,9 +323,12 @@ P2DZE_dropGold = {
 Pickup Gold
 
 Inputs:
+	Player
+	Object
 
-Player
-Object
+Outputs:
+	Gold Stat Logs for Database Processing via GLS
+	(Debugging Mode) RPT Log Entries
 ---------------------------------------------------------------------------*/
 "P2DZE_plr_pickupGold"		addPublicVariableEventHandler {_id = (_this select 1) spawn P2DZE_pickupGold};
 
@@ -564,4 +582,116 @@ P2DZE_giveChange = {
 			};
 		};
 	};
+};
+
+/*
+
+	Remove Magazine (Globally) from a Weapon Holder
+	by Deleting and Re-Creating a new WeaponHolder
+
+	Parameters:
+	_unit - the vehicle providing cargo space [Object]
+	_item - classname of item to remove [String]
+	_count - number of items to remove [Number] (Default: 1)
+
+	Returns:
+	true on success, false otherwise (error or no such item in cargo)
+
+*/
+
+p2_remMag_WepHolder = {
+    private ["_unit", "_item", "_count", "_i", "_unit_allItems", "_unit_allItems_types", "_unit_allItems_count", "_item_type", "_item_count", "_returnVar","_gVal","_unitPos"];
+    _unit = _this select 0;
+    _item = _this select 1;
+    _count = _this select 2;
+    if (_count <= 0) exitWith { false; };
+    _unitPos = getPos _unit;
+    if (surfaceIsWater _unitPos) then { _unitPos = getPosASL _unit; } else { _unitPos = getPosATL _unit; };
+
+    if (_item == "ItemGoldBar10oz") then {
+        _gVal = _unit getVariable ["ZombZGold", 0];
+    };
+
+    _unit_allItems = getMagazineCargo _unit; 
+    _unit_allItems_types = _unit_allItems select 0; 
+    _unit_allItems_count = _unit_allItems select 1;
+
+    returnVar = false;
+
+    clearMagazineCargoGlobal _unit;
+ 
+    for [{_i=0}, {_i<(count _unit_allItems_types)}, {_i=_i+1}] do {
+        _item_type = _unit_allItems_types select _i;
+        _item_count = _unit_allItems_count select _i;
+
+        if (_item_type == _item) then { 
+            returnVar = true;
+
+            _item_count = _item_count - _count;
+            if (_item_count > 0) then {
+                _unit = nil;
+                _unit = "WeaponHolder" createVehicle _unitPos;
+                if (surfaceIsWater _unitPos) then { _unit setPosASL _unitPos; } else { _unit setPosATL _unitPos; };
+                _unit addMagazineCargoGlobal [_item_type, _item_count];
+            };
+        } else {
+
+            _unit = nil;
+            _unit = "WeaponHolder" createVehicle _unitPos;
+            if (surfaceIsWater _unitPos) then { _unit setPosASL _unitPos; } else { _unit setPosATL _unitPos; };
+            _unit addMagazineCargoGlobal [_item_type, _item_count];
+        };
+    };
+};
+
+/*
+
+	Remove Magazine (Globally) from an Object/Vehicle
+	by clearing magazine cargo and re-adding magazines
+
+	Parameters:
+	_unit - the vehicle providing cargo space [Object]
+	_item - classname of item to remove [String]
+	_count - number of items to remove [Number] (Default: 1)
+
+	Returns:
+	true on success, false otherwise (error or no such item in cargo)
+*/
+
+p2_remMag = {
+    private ["_unit", "_item", "_count", "_i", "_unit_allItems", "_unit_allItems_types", "_unit_allItems_count", "_item_type", "_item_count", "_returnVar","_gVal","_unitPos"];
+    _unit = _this select 0;
+    _item = _this select 1;
+    _count = _this select 2;
+    if (_count <= 0) exitWith { false; };
+    _unitPos = getPos _unit;
+    if (surfaceIsWater _unitPos) then { _unitPos = getPosASL _unit; } else { _unitPos = getPosATL _unit; };
+
+    if (_item == "ItemGoldBar10oz") then {
+        _gVal = _unit getVariable ["ZombZGold", 0];
+    };
+
+    _unit_allItems = getMagazineCargo _unit; 
+    _unit_allItems_types = _unit_allItems select 0; 
+    _unit_allItems_count = _unit_allItems select 1;
+
+    returnVar = false;
+
+    clearMagazineCargoGlobal _unit;
+ 
+    for [{_i=0}, {_i<(count _unit_allItems_types)}, {_i=_i+1}] do {
+        _item_type = _unit_allItems_types select _i;
+        _item_count = _unit_allItems_count select _i;
+
+        if (_item_type == _item) then { 
+            returnVar = true;
+
+            _item_count = _item_count - _count;
+            if (_item_count > 0) then {
+                _unit addMagazineCargoGlobal [_item_type, _item_count];
+            };
+        } else {
+            _unit addMagazineCargoGlobal [_item_type, _item_count];
+        };
+    };
 };
