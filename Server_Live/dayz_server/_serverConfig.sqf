@@ -35,7 +35,7 @@ if (isDedicated && !hasInterface || isServer) then {
 	DynamicVehicleFuelLow =			0;
 
 	//debug lock unlock
-	P2DZ_debugLockUnlock = true;
+	P2DZ_debugLockUnlock = false;
 
 	//debug server player sync
 	P2DZE_debugServerPlayerSync = false;

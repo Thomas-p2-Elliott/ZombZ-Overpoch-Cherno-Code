@@ -143,9 +143,9 @@ _objName,
 _newObjName,
 _objectID,
 _objectUID,
-_objGold,
+_gold,
 _objLoc,
-GORSYSERVERNUM];
+GORSYSERVERNUMBER];
 
 //Log Format:Human
 //	PlayerName, PlayerUID, Player Location, Lock/Unlock, Object ClassName, New Object Classname, Object ID, Object UID, Object Gold, Object Location, Server Number
@@ -158,10 +158,9 @@ _objName,
 _newObjName,
 _objectID,
 _objectUID,
-_objGold,
+_gold,
 _objLoc,
-GORSYSERVERNUM];
-
+GORSYSERVERNUMBER];
 
 _log call stats_logUnlock;
 _log2 call stats_logUnlock;
