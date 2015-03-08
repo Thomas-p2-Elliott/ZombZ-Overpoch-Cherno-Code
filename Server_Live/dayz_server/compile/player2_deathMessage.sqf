@@ -38,8 +38,8 @@ _mins = 		_currentTime select 4;
 _secs = 		_currentTime select 5;
 
 //get position of killer and victim
-_killerPos = ([_killer] call FNC_GetPos);
-_victimPos = ([_victim] call FNC_GetPos);
+//_killerPos = ([_killer] call FNC_GetPos);
+//_victimPos = ([_victim] call FNC_GetPos);
 
 /* Check if the killer used a vehicle */
 
@@ -188,10 +188,9 @@ Output:
 _killerUID = [_killer] call FNC_GetPlayerUID;
 _victimUID = [_victim] call FNC_GetPlayerUID;
 
-
 _statsMessage = format[
 	"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4(_GLS_)%5(_GLS_)%6(_GLS_)%7",
-	_killerUID,_victimUID,_weaponClassname,_killerPos,_victimPos,_killerdistance,GORSYSERVERNUMBER
+	_killerUID,_victimUID,_weaponClassname,(mapGridPosition _killer),(mapGridPosition _victim),_killerdistance,GORSYSERVERNUMBER
 ];
 //send to stats log
 _statsMessage call stats_kills;

@@ -37,7 +37,7 @@ s_player_packvault = 1;
 
 _scrambledUid = nil; _scrambledUid = ""; _scrambled2CharId = nil; _scrambled2CharId = ""; _r2 = nil; _r3 = nil;
 _scrambledUid = 	[_PlayerUID,1,true]		call KRON_Scramble;
-diag_log(format["P2Scramble:packVault: Encrypting: UID Mode: 			%1, 				Output: %2",_PlayerUID,_scrambledUid]);
+//diag_log(format["P2Scramble:packVault: Encrypting: UID Mode: 			%1, 				Output: %2",_PlayerUID,_scrambledUid]);
 
 if (!isNil 'dayz_combination') then {
 	if (dayz_combination != "") then {
@@ -47,7 +47,7 @@ if (!isNil 'dayz_combination') then {
 			if (!isNil "_r3") then {
 				if (_r3) then {
 					_scrambled2CharId = [dayz_combination,1,false]	call KRON_Scramble;
-					diag_log(format["P2Scramble:packVault: Encrypting: CID Mode: 			%1, 				Output: %2",dayz_combination,_scrambled2CharId]);
+					//diag_log(format["P2Scramble:packVault: Encrypting: CID Mode: 			%1, 				Output: %2",dayz_combination,_scrambled2CharId]);
 				};
 			};
 		};
