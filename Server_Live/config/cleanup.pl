@@ -35,7 +35,7 @@ my $cleanup_old_players 	= 1; #Deletes players from database completly.
 #------
 my $cleanup_old_lives 		= 1; #Removes old lives. Leaves the last remaining one to save stats.
 #------
-my $cleanup_objects 		= 1; #Deletes objects from database.
+my $cleanup_objects 		= 0; #Deletes objects from database.
 	my $object_from_creation_time =25; # days to delete if not updated after first build
 	my $object_after_creation_time = 18; # after first build time has passed, how many days before deletion
 #------
@@ -44,13 +44,13 @@ my $cleanup_player_data		= 1; #will clear out the player_data table if the UID i
 my $cleanup_player_login 	= 1; #will clear out the login table
 	my $player_login_months	= 0; # if set to 0 will clear all, if set to 1 then it will save 1 months worth 2 is 2 months, and so on.
 #---
-my $cleanup_damage_objects = 1; #damage the objects 
+my $damage_objects = 1; #damage the objects 
 	my $damage_time = 3; #amount of days to add damage (days)
 	my $damage_amount = 0.1; # amount of damage to inflict per the value above
 #--
-my $unlockvehicles = 1; # unlocks vehicles where no key exists (e.g. player dies, key is lost)
+my $unlockvehicles = 0; # unlocks vehicles where no key exists (e.g. player dies, key is lost)
 #---
-my $cleanup_destroyed = 1; #cleansup destroyed vehicles
+my $cleanup_destroyed = 0; #cleansup destroyed vehicles
 #---
 my $unlock_safes = 0; #Unlock safes
 	my $safeunlocktime_lastupdated =14;
@@ -60,7 +60,7 @@ my $maintain_objects = 1; #maintains objects
 	my $maintain_time = 3; #Amount of days old to run it
 
 my $backup_bases = 1;	#backs up bases to the table object_data_backup, incrementing each backup by 1. with backup 1 being the latest
-	my $backup_delete_time = 10; # amount of restarts to save data, the higher this value the more intesive;
+	my $backup_delete_time = 40; # amount of restarts to save data, the higher this value the more intesive;
 #-----------------------------------------------------------------------------------------------
 
 #-----------------------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ if ($backup_bases == 1){
 	$query_handle2 = $connect->prepare($backuptablequery);
 	$query_handle2->execute();
 	print "Object Data Successfully Copied Over.\nNew Backup Set to 1\n";
-	$backupdelequery = "DELETE FROM object_data_backup WHERE backup > $backup_delete_time;";
+	$backupdelequery = "DELETE FROM object_data_backup WHERE backup > '$backup_delete_time';";
 	$query_handle2 = $connect->prepare($backupdeletequery);
 	$query_handle2->execute();
 }
@@ -98,11 +98,15 @@ if ($unlock_safes == 1){
 
 
 #-----------------------------------------------------------------------------------------------
+if ($cleanup_destroyed == 1){
 #delete destroyed objects
-$destroyedquery = "DELETE FROM `Object_DATA` WHERE Damage = 1";
+$destroyedquery = "DELETE FROM `Object_DATA` WHERE Damage = '1'";
 	$query_handle = $connect->prepare($destroyedquery);
 	# EXECUTE THE QUERY
-	$query_handle->execute();
+	#$query_handle->execute();
+}
+
+if ($unlockvehicles == 1){	
 #unlock vehicles
 $unlockquery ="UPDATE
 			`Object_DATA`
@@ -122,14 +126,14 @@ $unlockquery ="UPDATE
 			AND FindVehicleKeysCount(Object_DATA.CharacterID) = 0";
 	$query_handle = $connect->prepare($unlockquery);
 	# EXECUTE THE QUERY
-	$query_handle->execute();
-
+	#$query_handle->execute();
+}
 #damage objcts
-if ($cleanup_damage_objects ==1){
-	$damagequery ="UPDATE `Object_DATA` SET `Damage`=$damage_amount WHERE `ObjectUID` <> 0 AND `CharacterID` <> 0 AND `Datestamp` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $damage_time DAY) AND ( (`Inventory` IS NULL) OR (`Inventory` = '[]') )";
+if ($damage_objects ==1){
+	$damagequery ="UPDATE `Object_DATA` SET `Damage`=$damage_amount WHERE `ObjectUID` <> 0 AND `CharacterID` <> 0 AND `LastUpdated` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $damage_time DAY) AND Damage='0'( (`Inventory` IS NULL) OR (`Inventory` = '[]') )";
 	$query_handle = $connect->prepare($damagequery);
 	# EXECUTE THE QUERY
-	$query_handle->execute();
+	#$query_handle->execute();
 }
 #PLAYER CLEANUP (leaves last life alive)
 if ($cleanup_old_lives == 1){
@@ -189,7 +193,7 @@ if ($cleanup_objects == 1){
 	print "Cleaned up Old Objects.....\n";
 	$object_query = "DELETE FROM `Object_DATA` WHERE `LastUpdated` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $object_after_creation_time DAY) AND `Datestamp` < DATE_SUB(CURRENT_TIMESTAMP, INTERVAL $object_from_creation_time DAY);";
 	$query_handle2 = $connect->prepare($object_query);
-	$query_handle2->execute();
+	#$query_handle2->execute();
 }else{
 	print "Cleanup Objects Switched Off.\n"
 }
