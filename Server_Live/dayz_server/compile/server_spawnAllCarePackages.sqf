@@ -1,4 +1,4 @@
-private ["_crashModel", "_lootTable", "_guaranteedLoot", "_randomizedLoot", "_frequency", "_variance", "_spawnChance", "_spawnMarker", "_spawnRadius", "_spawnFire", "_fadeFire", "_d",  "_crashName",  "_position",  "_config", "_num", "_itemTypes", "_itemChance", "_weights", "_cntWeights", "_index", "_lootRadius", "_radiusMultiplier", "_itemType", "_iClass", "_iType", "_item2", "_lootPos", "_nearBy"];
+private ["_crashModel", "_lootTable", "_guaranteedLoot", "_randomizedLoot", "_frequency", "_variance", "_spawnChance", "_spawnMarker", "_spawnRadius", "_d", "_nade", "_crashName",  "_position",  "_config", "_num", "_itemTypes", "_itemChance", "_weights", "_cntWeights", "_index", "_lootRadius", "_radiusMultiplier", "_itemType", "_iClass", "_iType", "_item2", "_lootPos", "_nearBy"];
 
 //_crashModel	= _this select 0;
 //_lootTable	= _this select 1;
@@ -9,12 +9,9 @@ _variance	= _this select 3;
 _spawnChance	= _this select 4;
 _spawnMarker	= _this select 5;
 _spawnRadius	= _this select 6;
-_spawnFire	= _this select 7;
-_fadeFire	= _this select 8;
-_d = P2DZE_debugCrashSites;
 
-//debugging
-_d = true;
+if (isNil 'P2DZE_debugCarePackages') then { P2DZE_debugCarePackages = false; };
+_d = P2DZE_debugCarePackages;
 
 if (_d) then { diag_log("CAREPACKAGE: Starting spawn logic for Player2's Care Package Spawner"); };
 
@@ -25,22 +22,26 @@ while {1 == 1} do {
 	_timeToSpawn = time + _frequency + _timeAdjust;
 
 	//Adding some Random systems
-	_crashModel = ["UH60Wreck_DZ","UH1Wreck_DZ","UH60_NAVY_Wreck_DZ","UH60_ARMY_Wreck_DZ","UH60_NAVY_Wreck_burned_DZ","UH60_ARMY_Wreck_burned_DZ"] call BIS_fnc_selectRandom;
+	_carePackage = ["Military","Medical","Industrial","BaseBuilding"] call BIS_fnc_selectRandom;
 
+	_crashName	= _carePackage;
+	_crashModel = "Misc_cargo_cont_net3";
 
-	switch (_crashModel) do {
-		default 							{ _lootTable = [1,1] call fnc_specialLoot; };
-		case "UH60Wreck_DZ": 				{ _lootTable = [1,1] call fnc_specialLoot; };
-		case "UH1Wreck_DZ": 				{ _lootTable = [1,1] call fnc_specialLoot; };
-		case "UH60_NAVY_Wreck_DZ": 			{ _lootTable = [1,2] call fnc_specialLoot; };
-		case "UH60_NAVY_Wreck_burned_DZ": 	{ _lootTable = [1,2] call fnc_specialLoot; };
-		case "UH60_ARMY_Wreck_DZ": 			{ _lootTable = [1,3] call fnc_specialLoot; };
-		case "UH60_ARMY_Wreck_burned_DZ": 	{ _lootTable = [1,3] call fnc_specialLoot; };
+	if (_d) then { diag_log(format["CAREPACKAGE: %1%2 chance to spawn '%3' with loot table '%4' in %5 seconds", round(_spawnChance * 100), '%', _crashName, _crashModel, (_timeToSpawn - time)]); };
+
+	switch (_carePackage) do {
+		default 							{ _lootTable = [2,1] call fnc_specialLoot; _nade = "SmokeShellGreen"; };
+		case "Military": 					{ _lootTable = [2,1] call fnc_specialLoot; _nade = "SmokeShellGreen"; };
+		case "Medical": 					{ _lootTable = [2,2] call fnc_specialLoot; _nade = "SmokeShellRed"; };
+		case "Industrial": 					{ _lootTable = [2,3] call fnc_specialLoot; _nade = "SmokeShellYellow"; };
+		case "BaseBuilding": 				{ _lootTable = [2,4] call fnc_specialLoot; _nade = "SmokeShellPurple"; };
 	};
 
-	_crashName	= getText (configFile >> "CfgVehicles" >> _crashModel >> "displayName");
-
-	if (_d) then { diag_log(format["CRASHSPAWNER: %1%2 chance to spawn '%3' with loot table '%4' in %5 seconds", round(_spawnChance * 100), '%', _crashName, _crashModel, _timeToSpawn]); };
+	if (_d) then { 
+		diag_log(format["---- CAREPACKAGE: %1 --- Loot Table:", _crashName]);
+	 	diag_log(format["	%1",_lootTable]);
+	 	diag_log(format["----"]); 
+	 };
 
 	// Apprehensive about using one giant long sleep here given server time variances over the life of the server daemon
 	while {time < _timeToSpawn} do {
@@ -54,7 +55,7 @@ while {1 == 1} do {
 
 		_position = [getMarkerPos _spawnMarker,0,_spawnRadius,10,0,2000,0] call BIS_fnc_findSafePos;
 
-		if (_d) then { diag_log(format["---- Heli Crash: %1 --- Pos: %2 --- Loot: ", _crashName,_position]); };
+		if (_d) then { diag_log(format["---- CAREPACKAGE: %1 --- Pos: %2", _crashName,_position]); };
 
 		_crash = createVehicle [_crashModel,_position, [], 0, "CAN_COLLIDE"];
 		// Randomize the direction the wreck is facing
@@ -95,23 +96,13 @@ while {1 == 1} do {
 
         _num = (round(random _randomizedLoot)) + _guaranteedLoot;
 
-		if (_spawnFire) then {
-			//["PVDZE_obj_Fire",[_crash,2,time,false,_fadeFire]] call broadcastRpcCallAll;
-			PVDZE_obj_Fire = [_crash,2,time,false,_fadeFire];
-			publicVariable "PVDZE_obj_Fire";
-			_crash setvariable ["fadeFire",_fadeFire,true];
-		};
-
-
-
 		_itemTypes =	_lootTable select 0;
 		_itemChance =	_lootTable select 1;
 		_weights = [_itemTypes,_itemChance] call fnc_buildWeightedArray;
 		_cntWeights = count _weights;
 		_index = _weights call BIS_fnc_selectRandom;
 
-		_lootRadius = 0.45;
-		_radiusMultiplier = 12;
+		_lootRadius = 0.9;
 
 		for "_x" from 1 to _num do {
 			_index = floor(random _cntWeights);
@@ -171,7 +162,7 @@ while {1 == 1} do {
 
 		};
 
-		diag_log("---------------------------------------------");
+		if (_d) then { diag_log("---------------------------------------------"); };
 
 		// ReammoBox is preferred parent class here, as WeaponHolder wouldn't match MedBox0 && other such items.
 		_nearBy = _position nearObjects ["ReammoBox", sizeOf(_crashModel) + 15];
@@ -194,6 +185,28 @@ while {1 == 1} do {
 			_cookie = objNull;
 
 		} count _nearBy;
+
+		[_nade,[_adjustedPos select 0, _adjustedPos select 1, 0]] spawn {
+			private["_smoke","_in","_pos"];
+			while {true} do {
+				_in = _this;
+				_pos = _in select 1;
+				_smoke = (_in select 0) createVehicle _pos;
+				_smoke enableSimulation false;
+				_smoke setPos _pos;
+				_smoke call {
+				    _this setVariable [
+				        uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),
+				        "hash_id" callExtension format [
+				            "%1:%2",
+				            netId _this,
+				            typeOf _this
+				        ]
+				    ];
+				};
+				waitUntil{uiSleep 5; isNull _smoke};
+			};
+		};
 
 	};
 };
