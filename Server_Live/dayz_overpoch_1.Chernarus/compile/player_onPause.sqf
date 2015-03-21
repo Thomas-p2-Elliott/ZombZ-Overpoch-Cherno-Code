@@ -49,8 +49,8 @@ while {!isNull _di} do {
 	_b5 ctrlAddEventHandler 				["ButtonClick","disableSerialization; _di = findDisplay 49; if (!((str _di) == 'No display')) then { _di closeDisplay 1; }; if (!dialog) then {	createDialog 'p2_options'; } else { closeDialog 0; uiSleep 0.1; createDialog 'p2_options'; }; "];
     
     _ti = diag_tickTime;
-    if (!isNil 'P2_REF') then { P2_REF = false; };
-    if (!isNil 'p2RefChk') then { P2_REF = false; };
+    if (isNil 'P2_REF') then { P2_REF = false; };
+    if (isNil 'p2RefChk') then { P2_REF = false; };
     if (P2_REF) then {	_r = _ti call p2RefChk;	};
     if (isNil '_r') then { _r = true; };
     if (!_r) then {	_bAb ctrlEnable true; };
