@@ -6,8 +6,8 @@ _victimName = 		_this select 3;
 _weapon = 			_this select 4;
 _distance =			_this select 5;
 _nearestLocation =  _this select 6;
-_killerPos = 		[];
-_victimPos =		[];
+_killerPos = 		"";
+_victimPos =		"";
 _currentTime = 		[];
 _isCar =			false;
 _isHeli =			false;
@@ -38,8 +38,8 @@ _mins = 		_currentTime select 4;
 _secs = 		_currentTime select 5;
 
 //get position of killer and victim
-//_killerPos = ([_killer] call FNC_GetPos);
-//_victimPos = ([_victim] call FNC_GetPos);
+_killerPos = (mapGridPosition _killer);
+_victimPos = (mapGridPosition _victim);
 
 /* Check if the killer used a vehicle */
 
@@ -152,8 +152,8 @@ if (!isNil "_victimName" && !isNil "_killerName" && !isNil "_killerDistance" && 
 		 str[_victimName,_killerName,_killerDistance,_picture,_weaponClassname,_nearestLocation]]); 
 	};
 
-	P2DZE_DeathMessage_GUI = [_victimName,_killerName,_killerDistance,_picture];
-	publicVariable "P2DZE_DeathMessage_GUI";
+	P2DZ_DeathMessage_GUI = [_victimName,_killerName,_killerDistance,_picture];
+	publicVariable "P2DZ_DeathMessage_GUI";
 
 	switch (ceil(random 10)) do {
 		case (1): 	{ _adjective = 'murdered'; 		};
@@ -188,9 +188,10 @@ Output:
 _killerUID = [_killer] call FNC_GetPlayerUID;
 _victimUID = [_victim] call FNC_GetPlayerUID;
 
+
 _statsMessage = format[
 	"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4(_GLS_)%5(_GLS_)%6(_GLS_)%7",
-	_killerUID,_victimUID,_weaponClassname,(mapGridPosition _killer),(mapGridPosition _victim),_killerdistance,GORSYSERVERNUMBER
+	_killerUID,_victimUID,_weaponClassname,_killerPos,_victimPos,_killerdistance,GORSYSERVERNUMBER
 ];
 //send to stats log
 _statsMessage call stats_kills;
