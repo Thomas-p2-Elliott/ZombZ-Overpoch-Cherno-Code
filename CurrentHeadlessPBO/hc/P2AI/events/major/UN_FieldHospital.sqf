@@ -27,7 +27,7 @@ if (isNil "_nearestLocation") then { _nearestLocation = "Wilderness" };
 P2DZE_guiMsg = [
 	"Event Notification: Major Mission",
 	format["Bandits have overrun a U.N. field hospital at %1, kill them for humanity and their loot!", _gps],
-	"img\un.paa",
+	"p2_notifs\img\un.paa",
 	5,
 	0
 ];
@@ -77,7 +77,7 @@ uiSleep 5;
 P2DZE_guiMsg = [
 	"Event Notification: Major Mission",
 	format["The bandits are defeated, the U.N. field hospital at %1 is now under survivor control!", _gps],
-	"img\un.paa",
+	"p2_notifs\img\un.paa",
 	5,
 	0
 ];
