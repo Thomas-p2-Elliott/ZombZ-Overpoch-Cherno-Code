@@ -80,8 +80,7 @@ if (display_text > 4) then {
 	[] spawn {display_text0 = false;sleep 10;display_text0 = true;};
 };
 
-_fullmessage = format [
-"<t color='#ffffff' align='left' size='0.66'>%1</t><img align='left' size='1' image='%2'/><t color='#ffffff' align='left' size='0.66'>(%4m) %3</t>", 
+_fullmessage = format ["<t color='#ffffff' align='left' size='0.66'>%1</t><img align='left' size='1' image='%2'/><t color='#ffffff' align='left' size='0.66'>(%4m) %3</t>", 
 _killerName, _picture, _victimName, _killerDist];
 
 [
