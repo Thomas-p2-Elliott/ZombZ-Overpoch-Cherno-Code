@@ -23,7 +23,7 @@ if (count _parsedLogin1 > 9) then {
 	if (P2DZE_debugLogin) then { diag_log format ["P2DEBUG: dayzPlayerLogin:	_charID (%1)	_inventory (%2)	_backpack (%3)	_survival (%4)	_isNew (%5)	_version (%6)	_model (%7)	_isHiveOk (%8)	_newPlayer (%9)	_isInfected (%10) _debugMonSettings: (%11)",
 												_charID,	_inventory,		_backpack,		_survival,		_isNew,			_version,		_model,		_isHiveOk,		_newPlayer,		_isInfected, _debugMonSettings]; };
 } else {
-if (P2DZE_debugLogin) then { 	diag_log ("P2DEBUG: NEW PLAYER! HiveOK: " + str(_isHiveOk));
+	if (P2DZE_debugLogin) then { 	diag_log ("P2DEBUG: NEW PLAYER! HiveOK: " + str(_isHiveOk));
 	diag_log format ["P2DEBUG: dayzPlayerLogin:	_charID (%1)	_inventory (%2)	_backpack (%3)	_survival (%4)	_isNew (%5)	_version (%6)	_model (%7) _debugMonSettings (%8)",
 												_charID,	_inventory,		_backpack,		_survival,		_isNew,			_version,		_model, _debugMonSettings]; };
 };
@@ -36,14 +36,36 @@ _hours = floor (_totalMins / 60);
 _mins =  (_totalMins - (_hours * 60));
 dayz_Survived = [_days,_hours,_mins];
 
-//	Removed for now
-//_model		= _parsedLogin1 select 6;
-//[_model,_humanity] call p2_fnc_skinLvlCheck;
+/*---------------------------------------------------------------------------
+BlackScreen Login Fix
+---------------------------------------------------------------------------*/
+[] spawn {
+	waitUntil{!isNil "dayzPlayerLogin2"};
+	waitUntil{count (dayzPlayerLogin2) > 0};
+
+	p2dzguiWaitO = diag_tickTime;
+	p2dzguiWait = diag_tickTime;
+
+	while {(!(dayz_preloadFinished))} do
+	{
+		p2dzguiWait = diag_tickTime;
+
+		if (
+		 ((p2dzguiWait - p2dzguiWaitO) > 15) &&
+		 (!(dayz_preloadFinished)) &&
+		 (isNil 'dayz_gui') &&
+		 (!isNil 'dayz_monitor1') &&
+		 ((!isNil 'P2DZ_postCompilesDone') && ({(P2DZ_postCompilesDone)}))
+		) then {
+			dayz_preloadFinished = true; 
+			diag_log("P2DEBUG: login.sqf: Force fixing blackcreen login caused by lack of dayz_preloadFinished = true after 15 secs");
+		};
+		uiSleep 1;
+	};
+
+};
 
 if (_isNew) then {
-
-	//Give player random loadout (Leave backpack slots empty for bandit/hero additions)
-
 	DZE_haloSpawn = true; //enable halo spawn
 	haloSelect = -1;
 
@@ -151,7 +173,6 @@ if (_isNew) then {
 	//Wait until they're fully loaded in
 	waitUntil{!isNil 'dayz_gui'};
 
-
 	_world = toUpper(worldName); //toUpper(getText (configFile >> "CfgWorlds" >> (worldName) >> "description"));
 	_nearestCity = nearestLocations [([player] call FNC_GetPos), ["NameCityCapital","NameCity","NameVillage","NameLocal"],1000];
 	Dayz_logonTown = "Wilderness";
@@ -178,8 +199,12 @@ if (_isNew) then {
 
 	//Intro Credits Finished
 };
+
+
 //double check this one m8
-waitUntil{!isNil 'dayz_gui'};
+waitUntil{
+	!isNil 'dayz_gui'
+};
 
 //Spawn watermark
 _pic = "img\watermark.paa";
