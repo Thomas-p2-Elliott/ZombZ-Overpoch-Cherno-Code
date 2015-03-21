@@ -106,13 +106,6 @@ if (P2DZ_serverName == "Test") then {
 	[] call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2re\scripts\rcode_hc.sqf";
 };
 
-/*---------------------------------------------------------------------------
-Encrypted Script Execution
-
-Uses publicVariable, gets broadcast to client prior to init.sqf is run
-Use isNil to avoid over-writing. Client runs function from _clientConfig.sqf
----------------------------------------------------------------------------*/
-private ["_logBuilder","_agent","_pos"];
 
 call compile preprocessFileLineNumbers "compile\string_functions.sqf";							//Compile extra string functions
 
@@ -143,109 +136,7 @@ call {
 		};
 	};
 };
-/*-------------------------------------------------------------------------*/
 
-_logBuilder = ("
-	P2DZ_postVars = 	false; P2DZ_postVarsDone = false;
-	P2DZ_postCompiles = false; P2DZ_postCompilesDone = false;
-	call compile preprocessFileLineNumbers ""compile\string_functions.sqf"";
-	{
-		private[""_n"",""_d"",""_1"",""_2""];
-		_n = _this;
-		_1 = [""0"",""1"",""2"",""3"",""4"",""5"",""6"",""7"",""8"",""9""];
-		_2 = [""e"", ""x"", ""v"", ""m"", ""s"", ""p"", ""a"", ""w"", ""n"", ""c""];
-		_d = 0;
-		{
-			_n = [_n,_2 select _d,_1 select _d] call { 
-				private[""_str"",""_old"",""_new"",""_out"",""_tmp"",""_jm"",""_la"",""_lo"",""_ln"",""_i""];
-				_str=_this select 0;
-				_arr=toArray(_str);
-				_la=count _arr;
-				_old=_this select 1;
-				_new=_this select 2;
-				_na=[_new] call {
-					private[""_in"",""_i"",""_arr"",""_out""];
-					_in=_this select 0;
-					_arr = toArray(_in);
-					_out=[];
-					for ""_i"" from 0 to (count _arr)-1 do {
-						_out=_out+[toString([_arr select _i])];
-					};
-					_out
-				};
-				_lo=[_old] call {	private[""_in"",""_arr"",""_len""];
-				_in=_this select 0;
-				_arr=[_in] call {	private[""_in"",""_i"",""_arr"",""_out""];
-				_in=_this select 0;
-				_arr = toArray(_in);
-				_out=[];
-				for ""_i"" from 0 to (count _arr)-1 do {
-					_out=_out+[toString([_arr select _i])];
-				};
-				_out};
-				_len=count (_arr);
-				_len};
-				_ln=[_new] call {	private[""_in"",""_arr"",""_len""];
-				_in=_this select 0;
-				_arr=[_in] call {	private[""_in"",""_i"",""_arr"",""_out""];
-				_in=_this select 0;
-				_arr = toArray(_in);
-				_out=[];
-				for ""_i"" from 0 to (count _arr)-1 do {
-					_out=_out+[toString([_arr select _i])];
-				};
-				_out};
-				_len=count (_arr);
-				_len};
-				_out="""";
-				for ""_i"" from 0 to (count _arr)-1 do {
-					_tmp="""";
-					if (_i <= _la-_lo) then {
-						for ""_j"" from _i to (_i+_lo-1) do {
-							_tmp=_tmp + toString([_arr select _j]);
-						};
-					};
-					if (_tmp==_old) then {
-						_out=_out+_new;
-						_i=_i+_lo-1;
-					} else {
-						_out=_out+toString([_arr select _i]);
-					};
-				};
-				_out
-			};
-			_d = _d + 1;
-		} forEach _1;
-		_n = call compile _n;
-		_d = 0;
-		{
-			_n set [_d, _x - 19];
-			_d = _d + 1;
-		} forEach _n;
-		_n
-	} call compile preprocessFileLineNumbers ""_encrypted\init_encrypted.sqf"";
-
-	p2pn = 3213; p2tn = 4243; p2dn = 1303;
-");
-
-//Pulish security number
-p2pn  = 3213;
-/* Files that use p2pn: 
-Server:
-	publishFullObject
-	publishObject
-	swapObject
-	publishVehicle3
-Client:
-	player_build
-	player_build_publish
-	player_buildingDowngrade
-	player_upgrade
-	player_upgradeVehicle
-	plot_take_ownership
-	tent_pitch
-	vault_pitch
-*/
 
 //Trade security number
 p2tn = 4243;
@@ -269,14 +160,50 @@ Client:
 	player_packVault
 */
 
+//Pulish security number
+p2pn  = 3213;
+/* Files that use p2pn: 
+Server:
+	publishFullObject
+	publishObject
+	swapObject
+	publishVehicle3
+Client:
+	player_build
+	player_build_publish
+	player_buildingDowngrade
+	player_upgrade
+	player_upgradeVehicle
+	plot_take_ownership
+	tent_pitch
+	vault_pitch
+*/
 
-P2DZ_logBuilder = _logBuilder;
+/*-------------------------------------------------------------------------*/
 
+/*---------------------------------------------------------------------------
+Encrypted Script Execution
+
+Uses publicVariable, gets broadcast to client prior to init.sqf is run
+Use isNil to avoid over-writing. Client runs function from _clientConfig.sqf
+---------------------------------------------------------------------------*/
 //Send to players
-publicVariable "P2DZ_logBuilder";
 private["_rExec"];
 _rExec = compile ("
-	call compile P2DZ_logBuilder;
+	diag_log(format['%1: %2: %3',diag_tickTime,'P2DEBUG','preInit']);
+	if (isNil 'P2DZ_postVars') then { P2DZ_postVars = false; };
+	if (isNil 'P2DZ_postVarsDone') then { P2DZ_postVarsDone = false; };
+	if (isNil 'P2DZ_postCompiles') then { P2DZ_postCompiles = false; };
+	if (isNil 'P2DZ_postCompilesDone') then { P2DZ_postCompilesDone = false; };
+	call compile preprocessFileLineNumbers ""compile\string_functions.sqf"";
+	
+	[(str [""0"",""1"",""2"",""3"",""4"",""5"",""6"",""7"",""8"",""9""]),
+	(str [""e"", ""x"", ""v"", ""m"", ""s"", ""p"", ""a"", ""w"", ""n"", ""c""]),
+	""- 19""] call compile preprocessFileLineNumbers ""_encrypted\init_encrypted.sqf"";
+
+	p2pn = 3213; p2tn = 4243; p2dn = 1303;
 ");
 
 ["P2DZ_logBuilder",_rExec] call fnc_p2_RemoteExecute;
+
+
