@@ -29,12 +29,12 @@ if (!isNil '_zin') then {
                 _zdmg = (_znumber / 100) * damage _zin;
                 _zdmg = _zdmg * 100;
                 comment "systemChat(format['%1 Damage: %2 / %3', _zname, _zdmg, _znumber])";
-                [_zname,format["Damage: %1 / %2",_zdmg,_znumber],"img\zz.paa",5] spawn P2DZ_guiNotif;
+                [_zname,format["Damage: %1 / %2",_zdmg,_znumber],"p2_notifs\img\zz.paa",5] spawn P2DZ_guiNotif;
             } else {
                 _zdmg = damage _zin;
                 _zdmg = _zdmg * 100;
                 comment "systemChat(format['%1 Damage: %2 / %3', _zname, _zdmg, '100']);";
-                [_zname,format["Damage: %1 / %2",_zdmg,"100"],"img\zz.paa",5] spawn P2DZ_guiNotif;
+                [_zname,format["Damage: %1 / %2",_zdmg,"100"],"p2_notifs\img\zz.paa",5] spawn P2DZ_guiNotif;
             };
         };    
     };
