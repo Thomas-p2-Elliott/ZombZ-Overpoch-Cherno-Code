@@ -1154,4 +1154,3 @@ server_logUnlockLockEvent = compile preprocessFileLineNumbers "\z\addons\dayz_se
 [] execVM 											"\z\addons\dayz_server\system\antihack_functions.sqf";
 [] execvm 											"\z\addons\dayz_server\init\deploy_functions.sqf";
 [] execvm 											"\z\addons\dayz_server\init\goldEventHandlers.sqf";
-[] execvm 											"\z\addons\dayz_server\p2re\p2re_init.sqf";
