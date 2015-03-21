@@ -53,7 +53,7 @@ _p2require = false;
 _p2require = call {
 	private ["_distance", "_canBuildOnPlot", "_playerID", "_findNearestPoles", "_findNearestPole", "_IsNearPlot", "_nearestPole", "_ownerID", "_friendlies", "_fuid", "_friendUID", "_builder"];
 	_findNearestPoles = []; _findNearestPole = [];
-	_distance = 55; _distance = DZE_PlotPole select 1;
+	_distance = 55; _distance = DZE_PlotPole select 0;
 	_canBuildOnPlot = false;
 	_playerID = "";  _playerID = getPlayerUID player;
 	_IsNearPlot = 0; _nearestPole = objNull; _ownerID = "";
