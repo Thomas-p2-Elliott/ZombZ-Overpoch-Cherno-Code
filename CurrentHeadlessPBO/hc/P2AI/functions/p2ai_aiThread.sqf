@@ -32,18 +32,18 @@ if (isNil '_centerPos') then {
 };
 
 //Set up sleep times
-_sleepTimeMax = 6;
-_sleepTimeMin = 3;
+_sleepTimeMax = 12;
+_sleepTimeMin = 8;
 
 //if roofai, sleep less, turn more.
 if (_roofAI) then {
-	_sleepTimeMin = 1;
-	_sleepTimeMax = 3;
+	_sleepTimeMin = 4;
+	_sleepTimeMax = 8;
 };
 
 while {alive _ai} do 
 {
-	private["_sleepTime","_turnChance","_bestDist","_cDist","_bDistNum","_count","_closestPlayer"];
+	private["_sleepTime","_turnChance","_bestDist","_cDist","_bDistNum","_count","_closestPlayer","_suppress","_targetDist"];
 	//generate random sleeptime to offset the ai shooting
 	_sleepTime = random _sleepTimeMax;
 	_sleepTime = _sleepTimeMin + _sleepTime;
@@ -55,57 +55,65 @@ while {alive _ai} do
 
 	//find closest player to AI
 	{ 
-		if (alive _x) then {
-			if (name _x != "www.ZombZ.net") then {
+		if (alive _x && _x != player) then {
+			_isAI = _x getVariable["P2AIAI",false];
+			sleep 0.01;
+			if (!_isAI) then {
 
 				_cDist =  (getPosASL _ai) distance (getPosASL _x);
+
 				if (_bestDist > _cDist) then {
 					_bDistNum = _count;
 					_bestDist = _cDist;
 				};
-				_count = _count + 1;
 			};
 		};
-	} count playableUnits;
+		_count = _count + 1;
+	} count allUnits;
 
 	//select closest player from created bdistnum
-	_closestPlayer = playableUnits select _bDistNum;
+	_closestPlayer = allUnits select _bDistNum;
 	//make sure real value was returned, if not set to null
 	if (isNil '_closestPlayer') then { _closestPlayer = objNull };
 	//make sure object isnt null
 	if (!isNull _closestPlayer) then {
-		//reveal enemey
-		_ai reveal [(vehicle _closestPlayer), 4];
+		_targetDist = ((getPosASL _ai) distance (getPosASL _closestPlayer));
+		if (_targetDist < 1500) then {
+			//reveal enemey
+			_ai reveal [(vehicle _closestPlayer), 4];
 
-		//watch enemey
-		_ai doWatch (vehicle _closestPlayer);
+			//watch enemey
+			_ai doWatch (vehicle _closestPlayer);
 
-		//target enemey
-		_ai doTarget (vehicle _closestPlayer);
+			//target enemey
+			_ai doTarget (vehicle _closestPlayer);
 
-		//order units to fire when ready
-		_ai doFire (vehicle _closestPlayer);
+			//order units to fire when ready
+			_ai doFire (vehicle _closestPlayer);
 
-		//give ai a chance to turn if not on roof
-		if (_roofAI) then { _turnChance = 1; } else {
-			_turnChance = random 1;
-		};
+			//give ai a chance to turn if not on roof
+			if (_roofAI) then { _turnChance = 1; } else {
+				_turnChance = random 1;
+			};
 
-		//face towards enemey 50% chance, 100% for roof ai
-		if (_turnChance > 0.5) then {
-			private["_p1","_p2","_dx","_dy","_heading"];
-			_p1 = getPos _ai; 						//unit position
-			_p2 = getPos (vehicle _closestPlayer); 	//target position
-			_dx = (_p2 select 0) - (_p1 select 0); 
-			_dy = (_p2 select 1) - (_p1 select 1); 
-			_heading = _dx atan2 _dy; 
-			if (_heading < 0) then {_heading = _heading + 360}; 
-			_ai setDir _heading;
+			//give chance of supressing fire
+			_suppress = false;
+			_suppress = switch (true) do {
+		 		default { false };
+		 		case ((_turnChance > 0.95) && (_targetDist < 1000)): { true };
+		 		case ((_turnChance > 0.9) && (_targetDist < 500)): { true };
+		 		case ((_turnChance > 0.8) && (_targetDist < 400)): { true };
+		 		case ((_turnChance > 0.7) && (_targetDist < 300)): { true };
+			};
+
+			if (_suppress) then {
+				_ai suppressFor (_sleepTimeMin - 1);
+			};
 		};
 	};
 
 	//if AI wanders too far from mision, tell em to go back
-	if (((getPos _ai) distance _centerPos) > 150) then {
+	if (((getPos _ai) distance _centerPos) > 125) then {
 		_ai moveTo _centerPos;
 		_ai doMove _centerPos;
 	};
