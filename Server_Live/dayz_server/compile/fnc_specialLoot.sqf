@@ -26,7 +26,7 @@ Care Package Subtypes:
 Infected Camp Subtypes: 
 	1 = Default
 ---------------------------------------------------------------------------------------*/
-private["_eventType","_eventSubType","_itemTypes","_lootTable","_itemChance"];
+private ["_eventType","_eventSubType","_itemTypes","_lootTable","_itemChance"];
 
 _eventType = _this select 0;
 _eventSubType = _this select 1;
@@ -43,7 +43,7 @@ switch (_eventType) do {
  				Description: Standard / Classic UH1Y/UH60 ( http://tinyurl.com/q4zses4 / http://tinyurl.com/ljgw3yu) Wreck Model 
  				LootTable:	Best of the best with L85's, LMGs, MedRifles, And ACRs
  				*/
-				case 1: 				{ 
+			case 1: 				{ 
 				_itemTypes = [
 							//Crashsite Specific Weapons
 							["ScarHighWeaps", "custom_weapon"],		
@@ -234,8 +234,8 @@ switch (_eventType) do {
 							    0.02,
 							    0.02,
 							    0.09,
-							    0.01,
-							    0.20,
+							    0.04,
+							    0.17,
 							    0.08,
 
 							    //Backpacks = 5%
@@ -257,29 +257,32 @@ switch (_eventType) do {
 			*/
 			case 1: 				{ 
 				_itemTypes = [
-							//Weapons
+							//Pistols (10%)
 							["PistolMilWeaps", "custom_weapon"],
-							["PistolTopWeaps", "custom_weapon"],			
+							["PistolTopWeaps", "custom_weapon"],
+							//Good Low Power Rifles (9%)
 							["AKHighWeaps", "custom_weapon"],									
 							["ScarLowWeaps", "custom_weapon"],		
 							["HK416Weaps", "custom_weapon"],
+							//Decent Rifles (6%) 
 							["RiflesMedWeaps", "custom_weapon"],		
 							["ACRHighWeaps", "custom_weapon"],		
-							["LMGWeaps", "custom_weapon"],	
+							["LMGWeaps", "custom_weapon"],
+							//Low Power Rifles (12%)
 							["L85Weaps", "custom_weapon"],		
-							["LMGWeaps", "custom_weapon"],		
 							["M4Weaps", "custom_weapon"],	
 							["M8Weaps", "custom_weapon"],					
 							["G36Weaps", "custom_weapon"],					
 							["MasWeaps", "custom_weapon"],	
-							["SVDWeaps", "custom_weapon"],					
+							["SVDWeaps", "custom_weapon"],
+							//High Power, Top Rifles (8%)
 							["HMGWeaps", "custom_weapon"],					
 							["ScarHighWeaps", "custom_weapon"],					
 							["HK417Weaps", "custom_weapon"],					
-							["SniperMedWeaps", "custom_weapon"],	
+							["SniperTopWeaps", "custom_weapon"],	
 							["LauncherWeaps", "custom_weapon"],						
-							["RocketWeaps", "custom_weapon"],	
-							//Misc Loot
+							["RocketWeaps", "custom_weapon"],
+							//Misc Loot (45%)
 							["MedBox0", "object"],						
 							["AmmoBoxSmall_762", "object"],							
 							["AmmoBoxSmall_556", "object"],								
@@ -288,210 +291,283 @@ switch (_eventType) do {
 							["militaryammo","militaryammo"],
 							["militarypilot","militarypilot"],
 							["policeman","policeman"],
-							//Backpacks
+							//Backpacks (5%)
 							["militarybackpacks","militarybackpacks"],
-							//Skins
+							//Skins (5%)
 							["militaryclothes", "militaryclothes"]
 				];
 
 				_itemChance = [ 
-								//Weapons = 45%
-								//Pistols (10%)
-								0.05,
-								0.05,
-								//Good Low Power Rifles (9%) ((19%))
-								0.03,
-								0.03,
-								0.03,
-								//Decent Rifles (6%) ((25%))
-								0.02,
-								0.02,
-								0.02,
-								//Low Power Rifles (12%) ((37%))
-								0.02,
-								0.02,
-								0.02,
-								0.02,
-								0.02,
-								0.02,
-								//High Power, Top Rifles (8%) ((%45))
-								0.03,
-								0.02,
-								0.02,
-								0.02,
-								0.02,
-								0.02,
-								0.02,
-
-							    ///Misc. Loot = 45%
-							    0.02,
-							    0.01,
-							    0.02,
-							    0.02,
-							    0.09,
-							    0.01,
-							    0.20,
-							    0.08,
-
-							    //Backpacks = 5%
-							    0.05,
-
-							    //Skins Total = 5%
-							    0.05
+							//Weapons = 45%
+							//Pistols (10%)
+							0.08, //PistolsMilWeaps
+							0.02, //PistolsTopWeaps
+							//Good Low Power Rifles (9%) ((19%))
+							0.03, //AKHighWeaps
+							0.03, //ScarLowWeaps
+							0.03, //HK416Weaps
+							//Decent Rifles (6%) ((25%))
+							0.02, //RiflesMedWeaps
+							0.02, //ACRHighWeaps
+							0.02, //LMGWeaps
+							//Low Power Rifles (12%) ((37%))
+							0.02, //L85Weaps
+							0.02, //M4Weaps
+							0.02, //M8Weaps
+							0.02, //G36Weaps
+							0.02, //MasWeaps
+							0.02, //SVDWeaps
+							//High Power, Top Rifles (8%) ((%45))
+							0.03, //HMG Weaps
+							0.02, //ScarHighWeaps
+							0.03, //HK417Weaps
+							0.01, //SniperTopWeaps
+							0.02, //LauncherWeaps
+							0.02, //RocketWeaps
+							///Misc. Loot = 45% (90%)
+							0.02, //MedBox
+							0.01, //AmmoBox (762)
+							0.01, //AmmoBox (556)
+							0.02, //RangeFinders
+							0.08, //Hospital Loot
+							0.06, //Military Ammo Pile
+							0.17, //Military Pilot Loot Pile
+							0.08, //Policeman Loot Pile
+							//Backpacks = 5% (95%)
+							0.05, //MilitaryBackpacks
+							//Skins Total = 5% (100%)
+							//MilitaryClothes
+							0.05
 				];
  				
  				_lootTable = [_itemTypes,_itemChance]; 
  			};
- 			//Medical Care Package
+
+			/*
+				Medical Care Package
+			*/
 			case 2: 				{ 
-				_itemTypes = [["MedBox0", "object"],["AmmoBoxSmall_556", "object"],["AmmoBoxSmall_762", "object"],["FoodBox0", "object"],["", "hospital"],["DZ_CivilBackpack_EP1", "object"],["", "medical"]];
-				_itemChance = [0.09,0.01,0.01,0.06,0.06,0.01,0.06];  
+				_itemTypes = [
+					["", "medical"],						//40%
+					["", "hospital"],						//35%
+					["FoodBox0", "object"],					//12%
+					["MedBox0", "object"],					//8%
+					["AmmoBoxSmall_556", "object"],			//2%
+					["AmmoBoxSmall_762", "object"],			//2%
+					["DZ_CivilBackpack_EP1", "object"]		//1%
+				];
+
+				_itemChance = [
+					0.40,
+					0.35,
+					0.12,
+					0.08,
+					0.02,
+					0.02,
+					0.01
+				];  
 				_lootTable = [_itemTypes,_itemChance]; 
  			};
  			
 
- 			//Industrial Care Package
-			
-			case 3: 				{		
-		 		_itemTypes = [
-		 		["PartFueltank","magazine"],
-				["PartWheel", "magazine"],
-				["PartGeneric", "magazine"], 
-				["PartEngine", "magazine"],
-				["PartWoodPile", "magazine"],
-				["PartVRotor", "magazine"],
-				["PartGlass", "magazine"],
-				["ItemJerrycanEmpty", "magazine"],
-				["ItemJerrycan", "magazine"],
-				["ItemGenerator", "magazine"],
-				["ItemSandbag", "magazine"],
-				["ItemTankTrap", "magazine"],
-				["ItemWire", "magazine"],
-				["ItemMixOil", "magazine"],
-				["CSGAS", "magazine"],
-				["ItemJerryMixed", "magazine"],
-				["ItemJerryMixed4", "magazine"],
-				["ItemJerryMixed3", "magazine"],
-				["ItemJerryMixed2", "magazine"],
-				["ItemJerryMixed1", "magazine"],
-				["ItemOilBarrel", "magazine"],
-				["ItemFuelBarrel", "magazine"],
-				["ItemFuelBarrelEmpty", "magazine"],
-				["CinderBlocks", "magazine"],
-				["MortarBucket", "magazine"],
-				["ItemLightBulb", "magazine"],
-				["ItemHotwireKit", "magazine"]
-		 		];
-            	
-            	_itemChance = [
+ 			/*
+				Industrial Care Package
+			*/
+			case 3: 				{ 
+				_itemTypes = [
+					//Vehicle Parts (30%)
+					["partGeneric", "magazine"],
+					["PartWheel", "magazine"],
+					["PartGlass", "magazine"],
+					["PartEngine", "magazine"],
+					["PartFueltank", "magazine"],
+					["PartVRotor", "magazine"],
+					//Vanilla Industrial (20%)
+					["ItemSandbag", "magazine"],
+					["ItemWire", "magazine"],
+					["ItemCanvas", "magazine"],
+					["", "industrial"],
+					//Building Supplies (20%) 
+					["", "industrial"],
+					["CinderBlocks", "magazine"],
+					["MortarBucket", "magazine"],
+					["ItemTankTrap", "magazine"],
+					["PartWoodPlywood", "magazine"],
+					["PartWoodLumber", "magazine"],
+					["", "industrial"],
+					//Components, Rare Comonents (15%)
+					["ItemMixOil","magazine"],		
+					["ItemJerryCanEmpty","magazine"],	
+					["ItemFuelBarrelEmpty","magazine"],					
+					["ItemJerryCan","magazine"],					
+					["ItemFuelBarrel","magazine"],
+					//Tools (10%)
+					["ItemMatchbox_DZE","weapon"],					
+					["ItemHatchet_DZE","weapon"],					
+					["ItemShovel","weapon"],					
+					["ItemFishingPole","weapon"],	
+					["ItemSledge","weapon"],						
+					["ItemCrowbar","weapon"],
+					["ItemKeyKit","weapon"],
+					//Backpacks (5%)
+					["militarybackpacks", "militarybackpacks"]
+				];
 
-						0.2,
-						0.2,
-						0.2,
-						0.2,
-						0.02,
-						0.02,
-						0.2,
-						0.08,
-						0.03,
-						0.02,
-						0.02,
-						0.02,
-						0.02,
-						0.01,
-						0.01,
-						0.01,
-						0.01,
-						0.01,
-						0.01,
-						0.01,
-						0.01,
-						0.01,
-						0.02,
-						0.03,
-						0.02,
-						0.02,
-						0.02
-						 
-							];   
+				_itemChance = [ 
+					//Vehicle Parts = (30%) ((20%))
+					0.07, //Scrap
+					0.05, //Wheel
+					0.04, //Glass
+					0.06, //Engine
+					0.03, //Fueltank
+					0.05, //Rotor
+					//Vanilla Industrial (20%) ((50%))
+					0.04, //Sandbag
+					0.04, //Wire
+					0.03, //Canvas
+					0.09, //Industrial
+					//Building Supplies (20%) ((70%))
+					0.02, //Industrial
+					0.02, //CinderBlocks
+					0.02, //MortarBucket
+					0.02, //TankTrap
+					0.05, //Plywood
+					0.05, //Lumber
+					0.02, //Industrial
+					//Components (11%) ((81%))
+					0.03, //Oil
+					0.04, //JerryCanEmpty
+					0.04, //FuelBarrelEmpty
+					//Rare Components (4%) ((85%))
+					0.02, //JerryCan Full
+					0.02, //FuelBarrel Full
+					//Tools (10%) ((95%))
+					0.02, //Matchbox
+					0.02, //Hatchet
+					0.01, //Shovel
+					0.02, //Fishing Pole
+					0.01, //Sledge
+					0.02, //KeyKit
+					///Backpacks (5%) ((100%))
+					//MilitaryBackpacks
+					0.05 
+				];
  				_lootTable = [_itemTypes,_itemChance]; 
  			};
- 			
-
-
- 			//Base Building Care Package
-			
+ 			/*
+ 				Base Building Care Package
+ 			*/
 			case 4: 				{ 
 				_itemTypes = [
-					["ChainSaw", "weapon"],         			//Super Rare like rare as hell fucking mega silly rare
-					["metal_floor_kit", "magazine"],  			//SuperFuckingRare
-					["cinder_door_kit", "magazine"],        	//Rare
-					["ItemPlotDeed", "magazine"],    			//Rare
-					["CinderWall_DZ", "magazine"],          	//Rare
-					["CinderWallDoorway_DZ", "magazine"],   	//Rare
-					["WoodLargeWall_DZ", "magazine"],       	//Rare
-					["Fence_corrugated_DZ", "magazine"],    	//Rare
-					["30m_plot_kit","magazine"],  				//Uncommon
-					["Land_HBarrier_large", "building"],		//Uncommon
-					["OutHouse_DZ", "magazine"],     			//Uncommon
-					["cinder_wall_kit", "magazine"],        	//Uncommon
-					["ItemWoodWallWithDoor", "magazine"],  		//Uncommon
-					["Land_HBarrier1", "building"],         	//Uncommon
-					["ItemComboLock", "magazine"],    			//Uncommon
-					["WoodFloor_DZ", "magazine"],    			//Uncommon
-					["WoodLadder_DZ", "magazine"],          	//Uncommon
-					["WeaponHolder_MeleeCrowbar", "weapon"],  	//Uncommon
-					["ParLumbertWood", "magazine"],     		//Common
-					["PartWoodPlywood", "magazine"],        	//Common
-					["ItemTankTrap", "magazine"],           	//Common
-					["CinderBlocks", "magazine"],    			//Common
-					["MortarBucket", "magazine"]            	//Common
+					//Minor Items (50%)
+					["CinderBlocks", "magazine"],
+					["MortarBucket", "magazine"],
+					["PartWoodLumber", "magazine"],
+					["PartWoodPlywood", "magazine"],
+					["ItemTankTrap", "magazine"],
+					["PartPlankPack", "magazine"],
+					["PartPlywoodPack", "magazine"],
+					["ItemCorrugated", "magazine"],
+					["ItemBurlap", "magazine"],
+					["ItemCanvas", "magazine"],
+					["ItemSandbagExLarge", "magazine"],
+					["ItemWoodLadder", "magazine"],
+					["ItemWoodLadder", "magazine"],
+					["ItemWoodStairsSupport", "magazine"],
+					["ItemTankTrap", "magazine"],
+					//Kits (25%) ((75%))
+					["ItemScaffoldingKit", "magazine"],
+					["m240_nest_kit", "magazine"],
+					["fuel_pump_kit", "magazine"],
+					["park_bench_kit", "magazine"],
+					["sun_shade_kit", "magazine"],
+					["forest_net_kit", "magazine"],
+					["ItemFireBarrel_kit", "magazine"],
+					["rusty_gate_kit", "magazine"],
+					["sandbag_nest_kit", "magazine"],
+					["forest_large_net_kit", "magazine"],
+					["workbench_kit", "magazine"],
+					["m240_nest_kit", "magazine"],
+					["deer_stand_kit", "magazine"],
+					["BagFenceRound_DZ_kit", "magazine"],
+					//Major Items  (10%) ((85%))
+					["ItemPole", "magazine"],
+					["ItemLockbox", "magazine"],
+					["bulk_PartGenericHalf", "magazine"],
+					["bulk_ItemWireHalf", "magazine"],
+					["bulk_ItemTankTrapHalf", "magazine"],
+					["bulk_ItemSandbag", "magazine"],
+					["ItemSandbagExLarge5x", "magazine"],
+					["ItemOilBarrel", "magazine"],
+					["ItemFuelBarrel", "magazine"],
+					//Rare  (6%) ((96%))
+					["cinder_wall_kit", "magazine"],
+					["ItemVault", "magazine"],
+					["ItemPlotDeed", "magazine"],
+					//Backpacks (2%) ((98%))
+					["militarybackpacks", "militarybackpacks"],
+					//Super Rare  (2%)
+					["ItemComboLock", "magazine"],
+					["metal_floor_kit", "magazine"]
 				];
 				_itemChance = [ 
-					0.01,
-					0.02,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.03,
-					0.04,
-					0.04,
-					0.04,
-					0.04,
-					0.04,
-					0.04,
-					0.04,
-					0.04,
-					0.04,
-					0.05,
-					0.08,
-					0.08,
-					0.08,
-					0.07,
-					0.07
+					//Minor Items (40%)
+						0.05,
+						0.04,
+						0.04,
+						0.04,
+						0.04,
+						0.04,
+						0.04,
+						0.04,
+						0.04,
+						0.04,
+						0.03,
+						0.03,
+						0.03,
+						//Kits (25%) ((75%))
+						0.01,
+						0.03,
+						0.03,
+						0.01,
+						0.01,
+						0.03,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						0.02,
+						0.02,
+						0.01,
+						0.01,
+						0.02,
+						//Major Items  (10%) ((85%))
+						0.02,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						0.01,
+						//Rare  (6%) ((96%))
+						0.02,
+						0.02,
+						0.02,
+						//Backpacks (2%) ((98%))
+						0.02,
+						//Super Rare  (2%) ((100%))
+						0.01,
+						0.01
 				]; 
 
 				_lootTable = [_itemTypes,_itemChance]; 
  			};
 		}; 
 	};
-	
 
-	case 3: { 
-	
-
-	//Infected Camp Loot
-		switch (_eventSubType) do {
- 			//Default
-			case 1: 				{ 	
-				_itemTypes = [["DMR_DZ", "weapon"],["BAF_LRR_scoped", "object"],["BAF_LRR_scoped_W", "weapon"],["MedBox0", "object"],["AmmoBoxSmall_762", "object"],["Skin_Soldier1_DZ", "magazine"],["Skin_Camo27_DZ", "magazine"],["M136", "weapon"],["Skin_Camo27_DZ", "magazine"],["Skin_Camo27_DZ", "magazine"],["M136", "weapon"],["Skin_Camo25_DZ", "magazine"],["M136", "weapon"],["Skin_Camo25_DZ", "magazine"],["Skin_Camo25_DZ", "magazine"],["Skin_Camo25_DZ", "magazine"],["Skin_Camo25_DZ", "magazine"],["Skin_Camo26_DZ", "magazine"],["Skin_Camo26_DZ", "magazine"],["Skin_Camo26_DZ", "magazine"],["Skin_Camo25_DZ", "magazine"],["Skin_Camo26_DZ", "magazine"],["Skin_Camo27_DZ", "magazine"],["Skin_Camo18_DZ", "magazine"],["Skin_Camo19_DZ", "magazine"],["DZ_CivilBackpack_EP1", "object"],["DZ_CivilBackpack_EP1", "object"],["DZ_CivilBackpack_EP1", "object"],["Skin_Camo23_DZ", "magazine"],["M136", "weapon"],["Skin_Sniper1_DZ", "magazine"],["Skin_Sniper2_DZ", "magazine"],["Skin_Sniper3_DZ", "magazine"],["Skin_Sniper4_DZ", "magazine"],["Skin_Sniper5_DZ", "magazine"],["Skin_Sniper6_DZ", "magazine"],["vil_USP45SD", "weapon"],["vil_uzi_SD", "weapon"],["vil_uzimini_SD", "weapon"],["vil_apssd", "weapon"],["RH_m9csd", "weapon"],["RH_uspsd", "weapon"],["RH_mk22sd", "weapon"],["RH_deagle", "weapon"],["RH_Deagles", "weapon"],["RH_Deaglem", "weapon"],["RH_Deaglemz", "weapon"],["RH_Deaglemzb", "weapon"],["RH_anac", "weapon"],["RH_anacg", "weapon"],["RH_bull", "weapon"],["RH_python", "weapon"],["AK_107_pso", "weapon"],["RH_hk417sdaim", "weapon"],["RH_hk417sdeotech", "weapon"],["RH_hk417sdacog", "weapon"],["RH_hk417sdsp", "weapon"],["RH_massdaim", "weapon"],["RH_massdeotech", "weapon"],["RH_massdacog", "weapon"],["RH_masbsdaim", "weapon"],["RH_masbsdeotech", "weapon"],["RH_masbsdacog", "weapon"],["RH_acrbglacog", "weapon"],["RH_m14eot", "weapon"],["RH_m21", "weapon"],["RH_sc2eot", "weapon"],["RH_sc2shd", "weapon"],["RH_sc2sp", "weapon"],["RH_m1seot", "weapon"],["RH_m1sshd", "weapon"],["RH_m1ssp", "weapon"],["m8_sharpshooter", "weapon"],["m8_SAW", "weapon"],["SCAR_H_STD_EGLM_Spect", "weapon"],["SCAR_H_LNG_Sniper", "weapon"],["SCAR_H_LNG_Sniper_SD", "weapon"],["SCAR_L_STD_EGLM_RCO", "weapon"],["M136", "weapon"],["SCAR_L_CQC_CCO_SD", "weapon"],["SCAR_H_CQC_CCO_SD", "weapon"],["FHQ_ACR_WDL_HAMR_SD", "weapon"],["FHQ_ACR_WDL_RCO_SD", "weapon"],["FHQ_ACR_BLK_HAMR_SD", "weapon"],["FHQ_ACR_BLK_RCO_SD", "weapon"],["FHQ_ACR_TAN_RCO_SD", "weapon"],["FHQ_ACR_TAN_HAMR_SD", "weapon"],["FHQ_ACR_SNW_RCO_GL_SD", "weapon"],["FHQ_ACR_SNW_HAMR_SD", "weapon"],["vil_RPD", "weapon"],["vil_AK_74m_EOT_FSB_60", "weapon"],["vil_Minimi", "weapon"],["vil_Mg3", "weapon"],["vil_M4_EOT", "weapon"],["VSS_vintorez", "weapon"],["USSR_cheytacM200", "weapon"],["DZ_CivilBackpack_EP1", "object"],["FHQ_MSR_DESERT", "weapon"],["FHQ_RSASS_TAN", "weapon"],["FHQ_XM2010_DESERT", "weapon"],["DZ_CivilBackpack_EP1", "object"]];
- 				_itemChance = [0.01,0.02,0.01,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.03,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.03,0.01,0.01,0.01,0.01,0.01,0.01];
- 				_lootTable = [_itemTypes,_itemChance]; 
- 			};
-		}; 
-	};
 };
 
 
@@ -504,38 +580,40 @@ Both TWS & UltraWeaps reduced by 90% and have random selection put in their plac
 ---------------------------------------------------------------------------*/
 
 _itemTypes = _itemTypes call {
+	private["_reitemTypes","_c"];
+	_reitemTypes = _this;
 	if ((round(random 100)) > 10) exitWith {
-		private["_itemTypes"];
-		_itemTypes = _this;
 		_c = 0;
 		{	
  			if ((_x select 0) == "TWSWeaps") exitWith {
-				_itemTypes set [_c,(["PistolTopWeaps", "custom_weapon"])];
-				_itemTypes set [_c,(_itemTypes call BIS_fnc_selectRandom)];
-				_itemTypes;
+				_reitemTypes set [_c,(["PistolTopWeaps", "custom_weapon"])];
+				_reitemTypes set [_c,(_reitemTypes call BIS_fnc_selectRandom)];
+				_reitemTypes;
 			};
 			_c = _c + 1;
-		} count _itemTypes;
+		} count _reitemTypes;
+		_reitemTypes
 	};
-	_this
+	_reitemTypes
 };
 
 
 _itemTypes = _itemTypes call {
+	private["_reitemTypes","_c"];
+	_reitemTypes = _this;
 	if ((round(random 100)) > 10) exitWith {
-		private["_itemTypes"];
-		_itemTypes = _this;
 		_c = 0;
 		{	
 			if ((_x select 0) == "UltraWeaps") exitWith {
-				_itemTypes set [_c,(["PistolTopWeaps", "custom_weapon"])];
-				_itemTypes set [_c,(_itemTypes call BIS_fnc_selectRandom)];
-				_itemTypes;
+				_reitemTypes set [_c,(["PistolTopWeaps", "custom_weapon"])];
+				_reitemTypes set [_c,(_reitemTypes call BIS_fnc_selectRandom)];
+				_reitemTypes;
 			};
 			_c = _c + 1;
-		} count _itemTypes;
+		} count _reitemTypes;
+		_reitemTypes
 	};
-	_this
+	_reitemTypes
 };
 	
 _lootTable = [_itemTypes,_itemChance];
