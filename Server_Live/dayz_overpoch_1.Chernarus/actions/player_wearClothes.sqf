@@ -1,6 +1,6 @@
 /*_item spawn player_wearClothes;
 Added Female skin changes - DayZ Epoch - vbawol
-Altered By DeejayCrazy for www.ZombZ.net*/
+Altered By DeejayCrazy & Then Fixed by Player2 for www.ZombZ.net*/
 private ["_item","_onLadder","_hasclothesitem","_config","_text","_myModel","_itemNew","_currentSex","_newSex","_model","_playerNear","_skinpkg"];
 DZE_ActionInProgress = false;
 if(DZE_ActionInProgress) exitWith { cutText [(localize "str_epoch_player_83") , "PLAIN DOWN"] };
@@ -38,7 +38,11 @@ _newConfig = if (!isClass(configFile >> "CfgMagazines" >> _itemNew)) then {
 	(configFile >> "CfgMagazines")
 };
 
-if (!isClass (_newConfig >> _itemNew)) exitWith {DZE_ActionInProgress = false; cutText ["Can not find new skin...", "PLAIN DOWN"]};
+//diag_log(format['%1: %2: %3','P2DEBUG','player_wearClothes, _myModel',_myModel]);
+//diag_log(format['%1: %2: %3','P2DEBUG','player_wearClothes, _skinpkg',_skinpkg]);
+//diag_log(format['%1: %2: %3','P2DEBUG','player_wearClothes, _item',_item]);
+//diag_log(format['%1: %2: %3','P2DEBUG','player_wearClothes, _newConfig',_newConfig]);
+//diag_log(format['%1: %2: %3','P2DEBUG','player_wearClothes, _itemNew',_itemNew]);
 
 _currentSex = if (isClass(configFile >> "CfgSurvival" >> "Skins" >> _itemNew)) then {
 	getText (configFile >> "CfgSurvival" >> "Skins" >> _itemNew >> "sex")
@@ -52,6 +56,27 @@ _newSex = if (isClass(configFile >> "CfgSurvival" >> "Skins" >> _item)) then {
 	getText (missionConfigFile >> "ZombZSkins" >> _item >> "sex")
 };
 
+
+//diag_log(format['%1: %2: %3','P2DEBUG','player_wearClothes, _currentSex',_currentSex]);
+//diag_log(format['%1: %2: %3','P2DEBUG','player_wearClothes, _newSex',_newSex]);
+
+if (_myModel == "Survivor3_DZ") then {
+	_currentSex = "male";
+	_itemNew == "Skin_Soldier_TL_PMC_DZ";
+	//diag_log(format['%1: %2: %3','P2DEBUG','player_wearClothes, sex set to male','for Survivor3_DZ']);
+};
+
+if (isNil '_currentSex') then {
+	_currentSex = "male";
+	//diag_log(format['%1: %2: %3','P2DEBUG','player_wearClothes, sex set to blank','due to no information']);
+};
+
+if (_currentSex == "") then {
+	_currentSex = "male";
+	//diag_log(format['%1: %2: %3','P2DEBUG','player_wearClothes, sex set to male','due to blank information']);
+};
+
+
 if(_currentSex != _newSex) exitWith {
 	cutText [(localize "str_epoch_player_86"), "PLAIN DOWN"];
 };
@@ -62,10 +87,19 @@ _model = if (isClass(configFile >> "CfgSurvival" >> "Skins" >> _item)) then {
 	getText (missionConfigFile >> "ZombZSkins" >> _item >> "playerModel")
 };
 
+//diag_log(format['%1: %2: %3','P2DEBUG','player_wearClothes, _model',_model]);
+
+if (!isClass (configFile >> "CfgVehicles" >> _model)) exitWith {DZE_ActionInProgress = false; cutText ["Can not find new model...", "PLAIN DOWN"]};
+
 if (_model != _myModel) then {
 	if(([player,_skinpkg] call BIS_fnc_invRemove) == 1) then {
 		if (!isClass(configFile >> "CfgMagazines" >> _itemNew)) then {
-			player addMagazine getText(missionConfigFile >> "ZombZSkins" >> _itemNew >> "package");
+			if (isClass (configFile >> "CfgMagazines " >> getText(missionConfigFile >> "ZombZSkins" >> _itemNew >> "package"))) then {
+				player addMagazine getText(missionConfigFile >> "ZombZSkins" >> _itemNew >> "package");
+			} else {
+				cutText ["Can not find old skin package...", "PLAIN DOWN"];
+				player addMagazine "Skin_Soldier1_DZ";
+			};
 		} else {
 			player addMagazine _itemNew;
 		};
