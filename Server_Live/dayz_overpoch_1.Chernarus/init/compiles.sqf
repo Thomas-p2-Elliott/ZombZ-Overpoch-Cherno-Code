@@ -93,6 +93,8 @@ if (!isDedicated) then {
 	p2_randomMags =					compile preprocessFileLineNumbers "compile\p2_randomMags.sqf";
 	player_humanityMorph =			compile preprocessFileLineNumbers "compile\player_humanityMorph.sqf";
 	player_craftItem =				compile preprocessFileLineNumbers "actions\player_craftItem.sqf";
+	player_fired =					compile preprocessFileLineNumbers "compile\player_fired.sqf";			//Runs when player fires. Alerts nearby Zeds depending on calibre && audial rating
+
 
 	BIS_Effects_Burn = 				compile preprocessFile "\ca\Data\ParticleEffects\SCRIPTS\destruction\burn.sqf";
 	player_throwObject = 			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_throwObject.sqf";
@@ -104,7 +106,6 @@ if (!isDedicated) then {
 	building_spawnZombies =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\building_spawnZombies.sqf";
 	player_harvest =				compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_harvest.sqf";
 	player_switchModel =			compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_switchModel.sqf";
-	player_fired =					compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_fired.sqf";			//Runs when player fires. Alerts nearby Zeds depending on calibre && audial rating
 	player_removeNearby =    		compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\object_removeNearby.sqf";
 
 	player_removeTankTrap = {
@@ -184,7 +185,6 @@ if (!isDedicated) then {
 
 	player_plotPreview = 		compile preprocessFileLineNumbers "actions\object_showPlotRadius.sqf";
 	player_upgradeVehicle =		compile preprocessFileLineNumbers "compile\player_upgradeVehicle.sqf";
-
 
 	//System
 	player_spawn_1 =			compile preprocessFileLineNumbers "\z\addons\dayz_code\system\player_spawn_1.sqf";
@@ -280,9 +280,21 @@ if (!isDedicated) then {
         };
     };
 
-	dayz_originalPlayer = player;
+    P2DZ_sysChat = {
+		private["_t","_m"];
+		_t = _this select 0;
+		_m = _this select 1;
 
-	progressLoadingScreen 0.8;
+		switch (_t) do {
+			default { };
+			case 0: { 	if (P2DZ_notifsEvents != 0) then { 	systemChat(_m); }; };
+			case 1: { 	if (P2DZ_notifsKills  != 0) then { 	systemChat(_m); }; };
+			case 2: { 	if (P2DZ_notifsServer != 0) then { 	systemChat(_m); }; };
+		};
+	};
+
+
+	dayz_originalPlayer = player;
 };
 
 /*---------------------------------------------------------------------------

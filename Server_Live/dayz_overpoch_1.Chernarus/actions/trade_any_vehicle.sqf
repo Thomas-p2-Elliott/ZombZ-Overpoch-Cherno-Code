@@ -76,7 +76,7 @@ if (_finished) then {
 		if (_part_in isKindOf "Ship") then {
 			_distance = dayz_sellDistance_boat;
 		};
-		_count = {(typeOf _x) == _part_in} count (nearestObjects [(getPosATL player), [_part_in], _distance]);
+		_count = ({(((typeOf _x) == _part_in) && {(!(_x getVariable ["Deployed",false]))})} count (nearestObjects [(getPosATL player), [_part_in], _distance]));
 		if (_count >= _qty_in) then {
 			_canAfford = true;
 		};
@@ -221,7 +221,7 @@ if (_finished) then {
 
 				_notSetup = (_objectID == "0" && _objectUID == "0");
 
-				if(local _obj && !isNull _obj && alive _obj && !_notSetup) then {
+				if(local _obj && !isNull _obj && alive _obj && !_notSetup && {(!(_obj getVariable ["Deployed",false]))}) then {
 
 					if(_okToSell) then {
 

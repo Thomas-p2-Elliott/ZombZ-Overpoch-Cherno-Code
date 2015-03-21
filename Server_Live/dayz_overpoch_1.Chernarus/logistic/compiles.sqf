@@ -44,7 +44,7 @@ if (!isDedicated) then {
 		if !(P2LOG_CFG_ALLOW_FROMPLOT) then  { 	
 			_pos = getPosASL _target;
 
-			_distance = DZE_PlotPole select 1;
+			_distance = DZE_PlotPole select 0;
 			
 			// check for near plot
 			_findNearestPoles = nearestObjects [_pos, ["Plastic_Pole_EP1_DZ"], _distance];

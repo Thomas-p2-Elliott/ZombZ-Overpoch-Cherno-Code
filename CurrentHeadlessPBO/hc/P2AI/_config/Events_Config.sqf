@@ -87,6 +87,11 @@ P2AIMinorArray = ["RU_Convoy","RU_Outpost","RU_HuntingParty"];
 
 //End of Configuration!
 
+if (isNil 'P2AI_MissionsEnabled') then {
+  diag_log("ERROR: P2AI_MissionsEnabled was not set-up and has been set to false. No A.I will spawn at devils castle.");
+  P2AI_MissionsEnabled = false;
+};
+
 /*---------------------------------------------------------------------------
 Debug Logging
 ---------------------------------------------------------------------------*/

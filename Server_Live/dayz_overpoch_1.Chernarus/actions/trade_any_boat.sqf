@@ -194,7 +194,7 @@ if (_finished) then {
 
 				_notSetup = (_objectID == "0" && _objectUID == "0");
 
-				if(local _obj && !isNull _obj && alive _obj && !_notSetup) then {
+				if(local _obj && !isNull _obj && alive _obj && !_notSetup && {(!(_obj getVariable ["Deployed",false]))}) then {
 
 					PVDZE_obj_Delete = [_objectID,_objectUID,_activatingPlayer, p2dn + (random 10)];
 					publicVariableServer "PVDZE_obj_Delete";

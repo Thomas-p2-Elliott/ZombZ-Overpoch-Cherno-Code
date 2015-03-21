@@ -15,8 +15,12 @@ EAST setFriend [WEST,0];
 EAST setFriend [CIVILIAN,0];
 CIVILIAN setFriend [EAST,0];
 
-P2AI_hunterAI = true; //Enable 'Hunter' AI - AI That will move towards, flank, etc the enemy, leaving its waypoints
-P2AI_hunterAIPercent = 15; //Percent of AI that should move towards the enemy
+if (isNil 'P2AI_hunterAI') then {
+    P2AI_hunterAI = true; //Enable 'Hunter' AI - AI That will move towards, flank, etc the enemy, leaving its waypoints
+};
+if (isNil 'P2AI_hunterAIPercent') then {
+    P2AI_hunterAIPercent = 15; //Percent of AI that should move towards the enemy
+};
 
 //AI Skill Levels
 P2AISkill = [["aimingAccuracy",0.05],

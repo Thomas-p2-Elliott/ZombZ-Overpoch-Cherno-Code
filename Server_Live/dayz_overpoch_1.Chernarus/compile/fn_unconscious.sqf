@@ -1,4 +1,4 @@
-private ["_ttSet", "_totalTimeout", "_screenDisp", "_txtCtrl"];
+private ["_ttSet", "_screenDisp", "_txtCtrl", "_totalTimeout", "_nul1", "_nul2", "_nul3", "_nul4"];
 disableSerialization;
 
 //Make sure KO thread isn't already running
@@ -80,7 +80,7 @@ if ((!r_player_handler1) && (r_handlerCount == 0)) then {
 			if (!r_player_dead) then {
 				r_player_unconscious = false;
 				player setVariable["NORRN_unconscious", false];
-				_nul = [] spawn fnc_usec_recoverUncons;
+				_nul1 = [] spawn fnc_usec_recoverUncons;
 			};
 
 			//Regardless of dead/alive, close loading/ko screen
@@ -88,7 +88,7 @@ if ((!r_player_handler1) && (r_handlerCount == 0)) then {
 				endLoadingScreen;
 				r_player_unconscious = false;
 				player setVariable["NORRN_unconscious", false];
-				_nul = [] spawn fnc_usec_recoverUncons;
+				_nul2 = [] spawn fnc_usec_recoverUncons;
 
 				diag_log(format["P2DEBUG: %1","fn_unconscious:	Close Screen (Timer Ran out)"]);
 			};	
@@ -98,7 +98,7 @@ if ((!r_player_handler1) && (r_handlerCount == 0)) then {
 		if (!(player getVariable ["NORRN_unconscious", true])) then {
 			r_player_unconscious = false;
 			player setVariable["NORRN_unconscious", false];
-			_nul = [] spawn fnc_usec_recoverUncons;
+			_nul3 = [] spawn fnc_usec_recoverUncons;
 
 			if (format["%1",(uiNameSpace getVariable "BIS_loadingScreen")] != "No display") then {
 				endLoadingScreen;
@@ -110,7 +110,7 @@ if ((!r_player_handler1) && (r_handlerCount == 0)) then {
 		if(animationState player == "AmovPpneMstpSnonWnonDnon_healed") then {
 			r_player_unconscious = false;
 			player setVariable["NORRN_unconscious", false];
-			_nul = [] spawn fnc_usec_recoverUncons;
+			_nul4 = [] spawn fnc_usec_recoverUncons;
 
 			if (format["%1",(uiNameSpace getVariable "BIS_loadingScreen")] != "No display") then {
 				endLoadingScreen;
@@ -125,6 +125,8 @@ if ((!r_player_handler1) && (r_handlerCount == 0)) then {
 	//Save Vars
 	r_player_unconscious = false;
 	player setVariable["NORRN_unconscious", false];
+	//Run recover ko thread
+	_nul5 = [] spawn fnc_usec_recoverUncons;
 
 	//Fade Sound & Colour back in
 	if (!r_player_injured && ((r_player_blood/r_player_bloodTotal) >= 0.5)) then {

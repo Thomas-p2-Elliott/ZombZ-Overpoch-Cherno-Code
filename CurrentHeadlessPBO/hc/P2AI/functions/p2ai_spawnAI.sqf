@@ -151,7 +151,7 @@ for "_x" from 1 to _unitcount do {
 	_gearmagazines = _aigear select 0;
 	
 	//Lets add it to the Unit
-	for "_i" from 1 to 6 do {
+	for "_i" from 1 to 8 do {
 		_unit addMagazine _magazine;
 	};
 

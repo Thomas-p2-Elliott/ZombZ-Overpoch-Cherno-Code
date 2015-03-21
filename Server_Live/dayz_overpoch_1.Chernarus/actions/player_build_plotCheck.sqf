@@ -14,9 +14,12 @@ _ownerID = 0;
 _friendlies = [];
 
 if(_isPole) then { //check if object is plotpole and adjust distance accordingly 
-	_distance = DZE_PlotPole select 1;
+	_distance = ((DZE_PlotPole select 1) + DZE_plotWalkDist);
+	diag_log(format['%1: %2: %3','P2DEBUG','player_build_plotCheck, isPole, Min Distance from other Plots: ', _distance]);
+
 } else {
 	_distance = DZE_PlotPole select 0;
+	diag_log(format['%1: %2: %3','P2DEBUG','player_build_plotCheck, isNotPole, Min Distance from other Plots: ', _distance]);
 };
 
 // check for near plotpoles
@@ -80,7 +83,7 @@ _passArray = [_IsNearPlot,_nearestPole,_ownerID,_friendlies]; //create new array
 // End script if item is plot pole and another one exists within defined radius
 if(_isPole && _IsNearPlot > 0) exitWith { 
 	DZE_ActionInProgress = false;
-	cutText [(format [localize "str_epoch_player_44", DZE_PlotPole select 1]) , "PLAIN DOWN"];
+	cutText [(format["Cannot build plot pole within %1m of an existing plot boundary / area.", DZE_PlotPole select 0]), "PLAIN DOWN"];
 	_passArray
 };
 

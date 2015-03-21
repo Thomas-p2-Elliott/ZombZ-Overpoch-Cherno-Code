@@ -84,8 +84,13 @@ P2DZ_AH_PlayerChecks = {
 	if (deathHandled) then
 	{
 		[] spawn {
-			uiSleep 25;
-			(findDisplay 46) closeDisplay 0;
+			systemChat("You are dead! Returning to lobby in 5 seconds...");
+			diag_log("You are dead! Returning to lobby in 5 seconds...");
+			uiSleep 5;
+			if (format["%1",(uiNameSpace getVariable "BIS_loadingScreen")] != "No display") then {
+				endLoadingScreen;
+			};
+			endMission "END1";
 		};
 	};
 

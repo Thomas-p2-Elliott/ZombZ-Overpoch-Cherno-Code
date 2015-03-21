@@ -59,7 +59,7 @@ sleep 5;
 P2DZE_guiMsg = [
     "Event Notification: Special Mission",
     "Bandits have fortified Devils Castle and stashed stolen U.N. special forces weapons inside! Kill them and take the loot!",
-    "img\ru.paa",
+    "p2_notifs\img\ru.paa",
     10,
     0
 ];

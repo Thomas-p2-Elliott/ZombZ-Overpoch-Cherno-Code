@@ -458,37 +458,38 @@ if (isServer && isNil "sm_done") then {
 		[] spawn spawn_mineveins;
 	};
 
+
+	/*---------------------------------------------------------------------------
+	Helicopter CrashSites
+	---------------------------------------------------------------------------*/
+
  	if (P2DZ_HC_HeliCrashes) then {
  		diag_log("P2DEBUG: HeliCrashes Running On Headless Client instead of Server!");
  		dayz_MapArea = 11000;					//Size of map
 		HeliCrashArea = dayz_MapArea / 2;		//Size of heli crashsite area (7km for Chernarus)
-        P2DZ_heliCrashSites_guaranteedLoot =    8;              
-        P2DZ_heliCrashSites_randomizedLoot =    4;              
+        P2DZ_heliCrashSites_guaranteedLoot =    10;              
+        P2DZ_heliCrashSites_randomizedLoot =    6;              
         P2DZ_heliCrashSites_spawnFire =         true;          
-        P2DZ_heliCrashSites_fadeFire =          false;          
+        P2DZ_heliCrashSites_fadeFire =          false;       
+        P2DZ_heliCrashSites_spawnChance =		1;   
         server_spawnCrashSite  =      compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnCrashSiteHC.sqf";
 
  	} else {
 
+
 		server_spawnCrashSite  =    	compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnCrashSite.sqf";
 
 		/* Live Server Settings: 3 Hour restart
-
-		Description: 
-			Spawns are given a 75% chance of appearing between 4 and 8 times per restart
-			At Intervals between 22 mins 30 seconds and 37 mins 30 seconds
-			Each crash site will spawn 6 garantueed loot items with up to 3 additional items
 		*/
-		P2DZ_heliCrashSites_guaranteedLoot = 	6; 				//How many loot piles will Spawn
-	 	P2DZ_heliCrashSites_randomizedLoot =  	3; 				//How many possible (randomized) additional loot piles could spawn
-	 	P2DZ_heliCrashSites_frequency =			(22.5 * 60); 	//How often they should be given a chance to spawn in secs, eg 60sec for 1 every 1min
-	 	P2DZ_heliCrashSites_variance = 			(15 * 60); 		//How much  possible additional randomized time to add to the frequency time for each spawn chance in secs
-	 	P2DZ_heliCrashSites_spawnChacne =		0.75; 			//Chance between 0-1 of crashsite spawning when it gets a chance to
+		P2DZ_heliCrashSites_guaranteedLoot = 	10; 				//How many loot piles will Spawn
+	 	P2DZ_heliCrashSites_randomizedLoot =  	6; 				//How many possible (randomized) additional loot piles could spawn
+	 	P2DZ_heliCrashSites_frequency =         (20 * 60);      //How often they should be given a chance to spawn in secs, eg 1 = 60 sec for 1 every 1min
+		P2DZ_heliCrashSites_variance =          (5 * 60);      //How much randomized time to +/- the frequency time by for each spawn chance in secs	 	P2DZ_heliCrashSites_spawnChacne =		0.75; 			//Chance between 0-1 of crashsite spawning when it gets a chance to
 	 	P2DZ_heliCrashSites_spawnMarker =		'center';		//Center point of spawn radius
-	 	P2DZ_heliCrashSites_spawnRadius =   	HeliCrashArea; 	//Size of radius where they can spawn
+	 	P2DZ_heliCrashSites_spawnRadius =   	dayz_MapArea / 2; 	//Size of radius where they can spawn
 	 	P2DZ_heliCrashSites_spawnFire =			true; 			//Add smoke to them?
 	 	P2DZ_heliCrashSites_fadeFire =			false; 			//Fade smoke over time?
-		
+		P2DZ_heliCrashSites_spawnChance =		1;
 	 	/*	Test Server Settings: !!!!!!!!!!!! 1 every 10 Minutes!!!!!!!!!! WARNING !!!!!!!! 8 Loot piles garantueed.
 	 	*/ /*
 	  	P2DZ_heliCrashSites_guaranteedLoot = 	8; 				//How many loot piles will Spawn
@@ -500,11 +501,10 @@ if (isServer && isNil "sm_done") then {
 	 	P2DZ_heliCrashSites_spawnRadius =   	HeliCrashArea; 	//Size of radius where they can spawn
 	 	P2DZ_heliCrashSites_spawnFire =			true; 			//Add smoke to them?
 	 	P2DZ_heliCrashSites_fadeFire =			false; 			//Fade smoke over time?
-		
 		 */
 
 		//Spawn Server CrashSites:
-		_nul = 	[P2DZ_heliCrashSites_guaranteedLoot,
+		_nul1 = [P2DZ_heliCrashSites_guaranteedLoot,
 				P2DZ_heliCrashSites_randomizedLoot,
 				P2DZ_heliCrashSites_frequency,
 				P2DZ_heliCrashSites_variance,
@@ -513,11 +513,46 @@ if (isServer && isNil "sm_done") then {
 				P2DZ_heliCrashSites_spawnRadius,
 				P2DZ_heliCrashSites_spawnFire,
 				P2DZ_heliCrashSites_fadeFire] spawn server_spawnCrashSite;
+
  	};
 
+
+ 	/*---------------------------------------------------------------------------
+ 	Care Packages
+ 	---------------------------------------------------------------------------*/
+	server_spawnCarePackages  =    	compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_spawnAllCarePackages.sqf";
+
+	/* Live Server Settings: 3 Hour restart
+		*/
+	P2DZ_carePackages_guaranteedLoot = 		12; 				//How many loot piles will Spawn
+ 	P2DZ_carePackages_randomizedLoot =  	2;					//How many possible (randomized) additional loot piles could spawn
+ 	P2DZ_carePackages_frequency =    		(15 * 60);      	//How often they should be given a chance to spawn in secs, eg 1 = 60 sec for 1 every 1min
+	P2DZ_carePackages_variance =     		(5 * 60);      		//How much randomized time to +/- the frequency time by for each spawn chance in secs	 	P2DZ_carePackages_spawnChacne =		0.75; 			//Chance between 0-1 of crashsite spawning when it gets a chance to
+ 	P2DZ_carePackages_spawnMarker =			'center';			//Center point of spawn radius
+ 	P2DZ_carePackages_spawnRadius =   		dayz_MapArea / 2.5;	//Size of radius where they can spawn
+ 	P2DZ_carePackages_spawnChance = 1;
+
+ 	/*	Test Server Settings: !!!!!!!!!!!!
+
+	P2DZ_carePackages_guaranteedLoot = 		12; 				//How many loot piles will Spawn
+ 	P2DZ_carePackages_randomizedLoot =  	0; 					//How many possible (randomized) additional loot piles could spawn
+ 	P2DZ_carePackages_frequency =    		(3 * 60);      		//How often they should be given a chance to spawn in secs, eg 1 = 60 sec for 1 every 1min
+	P2DZ_carePackages_variance =     		(1 * 60);      		//How much randomized time to +/- the frequency time by for each spawn chance in secs	 	P2DZ_carePackages_spawnChacne =		0.75; 			//Chance between 0-1 of crashsite spawning when it gets a chance to
+ 	P2DZ_carePackages_spawnMarker =			'center';			//Center point of spawn radius
+ 	P2DZ_carePackages_spawnRadius =   		dayz_MapArea / 2.5; //Size of radius where they can spawn
+	P2DZ_carePackages_spawnChance = 1; 	*/ 
+
+
+	//Spawn Server CarePackages:
+	_nul2 = [P2DZ_carePackages_guaranteedLoot,
+			P2DZ_carePackages_randomizedLoot,
+			P2DZ_carePackages_frequency,
+			P2DZ_carePackages_variance,
+			P2DZ_carePackages_spawnChance,
+			P2DZ_carePackages_spawnMarker,
+			P2DZ_carePackages_spawnRadius] spawn server_spawnCarePackages;
+
 	if (isDedicated) then {
-		// Epoch Events
-		_id = [] spawn server_spawnEvents;
 		// server cleanup
 		[] spawn {
 			private ["_id"];
@@ -568,52 +603,4 @@ if (isServer && isNil "sm_done") then {
 	allowConnection = true;	
 	sm_done = true;
 	publicVariable "sm_done";
-
-
-
-/*
-
-    //Bases
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base1.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base2.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base3.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base4.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base5.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base6.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base7.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base8.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base9.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base10.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base11.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base12.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base13.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base14.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base15.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base16.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base17.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base18.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base19.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base20.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base21.sqf"; 
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base22.sqf"; 
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base23.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base24.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base25.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base26.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base27.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base28.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base29.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base30.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base31.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base32.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base33.sqf";
-	call compile preProcessFileLineNumbers "\z\addons\dayz_server\buildings\bases\base34.sqf";
-*/
-
-	//Buildings
-	//	Moved to MPMissions\.\buildings\init_buildings.sqf
-	//
-	//	InFile Changes/Replacements (ReGex must be enabled in sublime/npp++ replace! < = Start, > = End):
-	//		<_this;\n> -> <_this;\n   _this setVariable [uiNamespace getVariable (format ["hashIdVar%1", P2DZE_randHashVar]),"hash_id" callExtension format ["%1:%2",netId _this,typeOf _this]];\n>
-
 };

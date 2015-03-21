@@ -1,8 +1,6 @@
 /*---------------------------------------------------------------------------
 Devils Castle Missions
 ---------------------------------------------------------------------------*/
-// Do you want AI Fortress at Devils Castle?
-P2AI_Devils_Enabled = true;
 //amount of AI to keep at fortress
 P2AI_DcAI_Amount = 20; 
 //amount of minutes before respawn check
@@ -83,5 +81,11 @@ P2AI_Castle_RoofAIPosList = [
   [6919.23, 11434.3,32.5514],
   [6908.68, 11429.6,32.0327]
 ];
+
+if (isNil 'P2AI_Devils_Enabled') then {
+  diag_log("ERROR: P2AI_Devils_Enabled was not set-up and has been set to false. No A.I will spawn at devils castle.");
+  P2AI_Devils_Enabled = false;
+};
+
 private["_f","_d"]; _f = "Castle_Config"; _d = (P2AI_debugStatic);
 if (_d) then { diag_log(format["[P2AI]:%1: DevilsCastleMission Config Loaded, P2AI_Devils_Enabled:  %2", _f, P2AI_Devils_Enabled]); };

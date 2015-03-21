@@ -161,7 +161,7 @@ TraderDialogLoadItemList = {
 			_afile = _x select 7;
 			_File = "\z\addons\dayz_code\actions\" + _afile + ".sqf";
 				
-			if (_afile == "trade_its" || _afile == "trade_any_bicycle" || _afile == "trade_any_boat" || _afile == "trade_any_vehicle" || _afile == "trade_any_vehicle_free") then {
+			if (_afile == "trade_items" || _afile == "trade_any_bicycle" || _afile == "trade_any_boat" || _afile == "trade_any_vehicle" || _afile == "trade_any_vehicle_free") then {
 				_File = "actions\" + _afile + ".sqf";
 			};
 

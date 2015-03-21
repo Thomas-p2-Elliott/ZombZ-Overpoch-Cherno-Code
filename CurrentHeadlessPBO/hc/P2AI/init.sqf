@@ -30,12 +30,31 @@ waitUntil {!isNil "BIS_fnc_findSafePos"};
 File & Debugging Configuration
 ---------------------------------------------------------------------------*/
 
+//Moved to _hcConfig.sqf
+/*
 P2AI_FileLocation = ("" + (P2HC_Path) + "P2AI");	//disclude last slash
 
-P2AI_debugEvents = 	false;
-P2AI_debugStatic = 	false;
+P2AI_debugEvents = 	true;
+P2AI_debugStatic = 	true;
 P2AI_debugAI = 		false;
-P2AI_debug = 		false;
+P2AI_debug = 		true;
+*/
+
+if (isNil 'P2AI_FileLocation') then {
+	P2AI_FileLocation = ("" + (P2HC_Path) + "P2AI");
+};
+if (isNil 'P2AI_debugEvents') then {
+	P2AI_debugEvents = false;
+};
+if (isNil 'P2AI_debugStatic') then {
+	P2AI_debugStatic = false;
+};
+if (isNil 'P2AI_debugAI') then {
+	P2AI_debugStatic = false;
+};
+if (isNil 'P2AI_debug') then {
+	P2AI_debug = false;
+};
 
 /*---------------------------------------------------------------------------
 Debugging Log Output
@@ -146,9 +165,11 @@ if (_d) then { diag_log(format["[P2AI]:%1: Functions Loaded", _f]); };
 Launch Loops
 ---------------------------------------------------------------------------*/
 
-if (_d) then { diag_log(format["[P2AI]:%1: Spawning Loops", _f]); };
-[] spawn compile preprocessFileLineNumbers format["%1\functions\p2ai_eventLoops.sqf",P2AI_FileLocation];
-if (_d) then { diag_log(format["[P2AI]:%1: Loops Started", _f]); };
+if (P2AI_MissionsEnabled) then {
+	if (_d) then { diag_log(format["[P2AI]:%1: A.I. Missions Enabled, Spawning Loops", _f]); };
+	[] spawn compile preprocessFileLineNumbers format["%1\functions\p2ai_eventLoops.sqf",P2AI_FileLocation];
+	if (_d) then { diag_log(format["[P2AI]:%1:  A.I. Missions Enabled, Loops Started", _f]); };
+};
 
 /*---------------------------------------------------------------------------
 DevilsCastle Mission

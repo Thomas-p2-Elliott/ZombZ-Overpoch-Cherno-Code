@@ -59,12 +59,12 @@ _setControlText = {
 			P2DZ_lastFullObjTime = diag_tickTime;
 			P2DZ_overfullObject = _object;
 			publicVariableServer "P2DZ_overfullObject";
-			["WARNING: OBJECT ITEMS DELETED",format["WARNING: This object had %1 free item slots left, items have been deleted!",(_freeSlots select 1)],"img\zz.paa",10] spawn P2DZ_guiNotif;
+			["WARNING: OBJECT ITEMS DELETED",format["WARNING: This object had %1 free item slots left, items have been deleted!",(_freeSlots select 1)],"p2_notifs\img\zz.paa",10] spawn P2DZ_guiNotif;
 		} else {
 			if ((diag_tickTime - P2DZ_lastFullObjWarn) > 60) then {
 				P2DZ_lastFullObjWarn = diag_tickTime;
 			 	//systemChat("WARNING: This object has less than 2 slots left, items will be deleted if you over-fill!");
-			 	["WARNING: OBJECT NEARLY FULL",format["WARNING: This object has %1 free item slots left, items will be DELETED if you over fill!",(_freeSlots select 1)],"img\zz.paa",10] spawn P2DZ_guiNotif;
+			 	["WARNING: OBJECT NEARLY FULL",format["WARNING: This object has %1 free item slots left, items will be DELETED if you over fill!",(_freeSlots select 1)],"p2_notifs\img\zz.paa",10] spawn P2DZ_guiNotif;
 			};		
 		};
 	};

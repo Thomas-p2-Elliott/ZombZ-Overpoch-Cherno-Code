@@ -32,7 +32,7 @@ if (isDedicated && !hasInterface || isServer) then {
 	DynamicVehicleDamageLow = 		0; // Default: 0
 	DynamicVehicleDamageHigh = 		0; // Default: 100
 	DynamicVehicleFuelHigh	= 		15;
-	DynamicVehicleFuelLow =			0;
+	DynamicVehicleFuelLow =			1;
 
 	//debug lock unlock
 	P2DZ_debugLockUnlock = false;
@@ -45,6 +45,9 @@ if (isDedicated && !hasInterface || isServer) then {
 
 	//debug crashsites
 	P2DZE_debugCrashSites = false;
+
+	//debug care packages
+	P2DZE_debugCarePackages = false;
 
 	//enable debug output for static vehicle spawns?
 	P2DZ_Debug_StaticVehSpawns = false;

@@ -1,7 +1,7 @@
 /*%FSM<COMPILE "C:\Users\Player2\DayZ\Tools\BI Tool Drive\FSM Editor Personal Edition\scriptedFSM.cfg, DayZ Player Monitor">*/
 /*%FSM<HEAD>*/
 /*
-item0[] = {"init",0,4346,-75.000000,-350.000000,25.000000,-300.000000,0.000000,"init"};
+item0[] = {"init",0,250,-75.000000,-350.000000,25.000000,-300.000000,0.000000,"init"};
 item1[] = {"isServer",4,218,50.000000,-350.000000,150.000000,-300.000000,0.000000,"isServer"};
 item2[] = {"wait",2,250,50.000000,-275.000000,150.000000,-225.000000,0.000000,"wait"};
 item3[] = {"Allow_Conn",4,218,50.000000,-200.000000,150.000000,-150.000000,0.000000,"Allow" \n "Conn"};
@@ -34,7 +34,7 @@ item29[] = {"ERROR__Bad_Versi",2,250,175.000000,800.000000,275.000000,850.000000
 item30[] = {"Display_Ready",4,218,-175.000000,1050.000000,-75.000000,1100.000000,0.000000,"Display" \n "Ready"};
 item31[] = {"Preload_Display",2,250,-75.000000,1100.000000,25.000000,1150.000000,0.000000,"Preload" \n "Display"};
 item32[] = {"Preload_Done",4,218,-175.000000,1150.000000,-75.000000,1200.000000,0.000000,"Preload" \n "Done"};
-item33[] = {"Initialize",2,250,-75.000000,1200.000000,25.000000,1250.000000,0.000000,"Initialize"};
+item33[] = {"Initialize",2,4346,-75.000000,1200.000000,25.000000,1250.000000,0.000000,"Initialize"};
 item34[] = {"Finish",1,250,-75.000000,1300.000000,25.000000,1350.000000,0.000000,"Finish"};
 item35[] = {"True",8,218,25.000000,1250.000000,125.000000,1300.000000,0.000000,"True"};
 item36[] = {"Too_Long",4,218,300.000000,150.000000,400.000000,200.000000,0.000000,"Too" \n "Long"};
@@ -193,8 +193,8 @@ link97[] = {88,79};
 link98[] = {88,85};
 link99[] = {89,90};
 link100[] = {90,84};
-globals[] = {25.000000,1,0,0,0,640,480,1,157,6316128,1,-431.686584,159.010773,-38.327637,-729.353394,524,613,1};
-window[] = {0,-1,-1,-1,-1,908,150,1602,150,1,542};
+globals[] = {25.000000,1,0,0,0,640,480,1,157,6316128,1,-289.918701,107.298058,1401.629395,936.946411,524,613,1};
+window[] = {0,-1,-1,-1,-1,958,132,1584,200,1,542};
 *//*%FSM</HEAD>*/
 class FSM
 {
@@ -212,17 +212,16 @@ class FSM
        "//player setPosATL [-2148,6655,0];" \n
        "//DayZ Mod 1.8.1;" \n
        "" \n
-       "progressLoadingScreen 0.1;" \n
        "0 cutText ["""",""BLACK""];" \n
        "_spawnSelection = 9;" \n
        "_timeStart = diag_tickTime;" \n
        "_readytoAuth = false;" \n
        "_startCheck = 0;" \n
        "if (isNil ""P2DZ_debugLoginFSM"") then { P2DZ_debugLoginFSM = false; };" \n
-       "_debug = P2DZE_debugLogin;" \n
+       "_debug = P2DZ_debugLoginFSM;" \n
        "" \n
        "if (_debug) then {" \n
-       "	diag_log (""DAYZ: CLIENT IS RUNNING DAYZ_CODE "" + str(dayz_versionNo));" \n
+       "	diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""init"",dayz_versionNo]);" \n
        "};" \n
        "" \n
        ""/*%FSM</STATEINIT""">*/;
@@ -279,13 +278,10 @@ class FSM
       name = "Loading";
       init = /*%FSM<STATEINIT""">*/"//endLoadingScreen;" \n
        "if (_debug) then {" \n
-       "diag_log (""PLOGIN: Initating"");" \n
+       "diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Initialized"",""Loading""]);" \n
        "};" \n
        "" \n
-       "dayz_loadScreenMsg = ""ZombZ: "" + (localize ""str_player_13""); " \n
-       "" \n
-       "progressLoadingScreen 0.3;" \n
-       ""/*%FSM</STATEINIT""">*/;
+       "dayz_loadScreenMsg = ""ZombZ: "" + (localize ""str_player_13""); "/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -341,7 +337,7 @@ class FSM
            "" \n
            "if (_gearSave) then {" \n
            "	closeDialog 0;" \n
-           "	if (_debug) then { diag_log(""PLOGIN: Dialog Closed"");" \n
+           "	if (_debug) then { diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Initialized"",""Closed Dialog""]);" \n
            "};" \n
            "" \n
            "	_medical = player call player_sumMedical;" \n
@@ -391,7 +387,7 @@ class FSM
            "	if (isServer) then {" \n
            "		PVDZE_plr_Save call server_playerSync;" \n
            "	};" \n
-           "						" \n
+           "	diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Initialized: PlayerSync"",PVDZE_plr_Save]);	" \n
            "	dayz_lastSave = diag_tickTime;" \n
            "	dayz_Magazines = [];" \n
            "};"/*%FSM</ACTION""">*/;
@@ -405,7 +401,7 @@ class FSM
     {
       name = "Prepare";
       init = /*%FSM<STATEINIT""">*/"if (_debug) then {" \n
-       "diag_log (""PLOGIN: Player Model Exists"");" \n
+       "diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Prepare"",""Player Model Exists""]);" \n
        "};"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -428,11 +424,9 @@ class FSM
     {
       name = "Collect";
       init = /*%FSM<STATEINIT""">*/"if (_debug) then {" \n
-       "diag_log (""PLOGIN: Player Ready"");" \n
+       "diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Collect: Player Ready, LoadScreen Msg: "",""ZombZ: "" + (localize ""str_player_13"")]);" \n
        "};" \n
        "dayz_loadScreenMsg = ""ZombZ: "" + (localize ""str_player_13""); " \n
-       "" \n
-       "progressLoadingScreen 0.3;" \n
        "" \n
        "_playerUID = getPlayerUID player;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -490,11 +484,11 @@ class FSM
     {
       name = "Request";
       init = /*%FSM<STATEINIT""">*/"if (_debug) then {" \n
-       "diag_log (""PLOGIN: Requesting Authentication... ("" + _playerUID + "")"");" \n
+       "diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Requesting Authentication"",(localize ""str_player_15"")]);" \n
        "};" \n
        "dayz_loadScreenMsg = ""ZombZ: "" + (localize ""str_player_15"");" \n
        "" \n
-       "progressLoadingScreen 0.7;" \n
+       "progressLoadingScreen 0.6;" \n
        "" \n
        "_msg = [];" \n
        "" \n
@@ -541,7 +535,6 @@ class FSM
       name = "Parse_Login";
       init = /*%FSM<STATEINIT""">*/"dayz_authed = true;" \n
        "" \n
-       "progressLoadingScreen 0.6;" \n
        "_charID		= _msg select 0;" \n
        "_inventory	= _msg select 1;" \n
        "_backpack	= _msg select 2;" \n
@@ -563,24 +556,21 @@ class FSM
        "	_newPlayer = _msg select 8;" \n
        "	_isInfected = _msg select 9;" \n
        "	_debugMonSettings   = _msg select 10;" \n
-       "	diag_log (""PLAYER RESULT: "" + str(_isHiveOk));" \n
        "};" \n
        "" \n
        "dayz_loadScreenMsg = ""ZombZ: "" + (localize ""str_player_17""); " \n
-       "progressLoadingScreen 0.8;" \n
+       "" \n
        "if (_debug) then {" \n
-       "diag_log (""PLOGIN: authenticated with : "" + str(_msg));" \n
+       "diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Authentification Received"",_msg]);" \n
        "};" \n
        "//Not Equal Failure" \n
        "" \n
        "if (isNil ""_model"") then {" \n
        "	_model = ""Survivor2_DZ"";" \n
-       "	diag_log (""PLOGIN: Model was nil, loading as survivor"");" \n
        "};" \n
        "" \n
        "if (_model == """") then {" \n
        "	_model = ""Survivor2_DZ"";" \n
-       "	diag_log (""PLOGIN: Model was empty, loading as survivor"");" \n
        "};" \n
        "" \n
        "if (_model == ""Survivor1_DZ"") then {" \n
@@ -590,7 +580,9 @@ class FSM
        "_isHack = false;" \n
        "if (_model == ""hacker"") then {" \n
        "	_isHack = true;" \n
-       "};"/*%FSM</STATEINIT""">*/;
+       "};" \n
+       "" \n
+       "progressLoadingScreen 0.7;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -763,19 +755,15 @@ class FSM
        "//[""PVDZE_plr_Login2"",[_charID,player,_playerUID]] call callRpcProcedure;" \n
        "" \n
        "if (_debug) then {" \n
-       "	diag_log ""Attempting Phase two / Requesting Character Data from server with..."";" \n
-       "	diag_log(""CharID: "" + str _charID);" \n
-       "	diag_log(""Player OBJ: "" + str player);" \n
-       "	diag_log(""PlayerUID: "" + str _playerUID);" \n
-       "	diag_log(""SpawnSelection: "" + str _spawnSelection);" \n
-       "	diag_log(""DebugMonSettings: "" + str _debugMonSettings);" \n
+       "	diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Character Data: Requesting"",[_charID,player,_playerUID,_spawnSelection,_debugMonSettings]]);" \n
        "};" \n
        "" \n
        "PVDZE_plr_Login2 = [_charID,player,_playerUID,_spawnSelection,_debugMonSettings];" \n
        "publicVariableServer ""PVDZE_plr_Login2"";" \n
        "" \n
        "dayz_loadScreenMsg =  ""ZombZ: Requesting Character data from server"";" \n
-       "progressLoadingScreen 0.9;" \n
+       "" \n
+       "progressLoadingScreen 0.8;" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
@@ -800,7 +788,7 @@ class FSM
       name = "Phase_Two";
       init = /*%FSM<STATEINIT""">*/"dayz_loadScreenMsg =  ""ZombZ: Character Data received from server""; " \n
        "if (_debug) then {" \n
-       "diag_log ""Character Data received from server! Starting Phase Two..."";" \n
+       "diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Character Data: Received"",dayzPlayerLogin2]);" \n
        "};" \n
        "_worldspace = 	dayzPlayerLogin2 select 0;" \n
        "_state =			dayzPlayerLogin2 select 1;" \n
@@ -882,7 +870,9 @@ class FSM
        "//Hunger/Thirst" \n
        "_messing =			player getVariable[""messing"",[0,0]];" \n
        "dayz_hunger = 	_messing select 0;" \n
-       "dayz_thirst = 		_messing select 1;"/*%FSM</STATEINIT""">*/;
+       "dayz_thirst = 		_messing select 1;" \n
+       "" \n
+       "progressLoadingScreen 0.9;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -939,7 +929,7 @@ class FSM
       name = "Position";
       init = /*%FSM<STATEINIT""">*/"//Location" \n
        "_myLoc = getPosATL player;" \n
-       "if (_debug) then { diag_log(""PLOGIN :Position Started""); };" \n
+       "if (_debug) then { diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Position: Started, LoadScreen: "",dayz_loadScreenMsg]); };" \n
        "dayz_loadScreenMsg = ""ZombZ: Setup Completed, Loading Display..."";" \n
        "" \n
        "//GUI" \n
@@ -964,7 +954,9 @@ class FSM
        "};" \n
        "" \n
        "call ui_changeDisplay;" \n
-       "if (_debug) then { diag_log(""PLOGIN :Position Finished""); };"/*%FSM</STATEINIT""">*/;
+       "if (_debug) then { diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Position: Finished, LoadScreen: "",dayz_loadScreenMsg]); };" \n
+       "" \n
+       "progressLoadingScreen 1.0;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -995,8 +987,10 @@ class FSM
     class Load_In
     {
       name = "Load_In";
-      init = /*%FSM<STATEINIT""">*/"//Reveal action types" \n
-       "if (_debug) then { diag_log(""PLOGIN: Load-In Started""); };" \n
+      init = /*%FSM<STATEINIT""">*/"progressLoadingScreen 0.2;" \n
+       "" \n
+       "//Reveal action types" \n
+       "if (_debug) then { diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Load-In: Started, LoadScreen: "",dayz_loadScreenMsg]); };" \n
        "{player reveal _x} count (nearestObjects [getPosATL player, dayz_reveal, 50]);" \n
        "" \n
        "dayz_clientPreload = true;" \n
@@ -1013,7 +1007,9 @@ class FSM
        "	};" \n
        " } count (allMissionObjects ""LitObject"");" \n
        "" \n
-       "if (_debug) then { diag_log(""PLOGIN: Load-In Finished""); };"/*%FSM</STATEINIT""">*/;
+       "if (_debug) then { diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Load-In: Finished, LoadScreen: "",dayz_loadScreenMsg]); };" \n
+       "" \n
+       "progressLoadingScreen 0.3;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -1063,7 +1059,8 @@ class FSM
     class Preload_Display
     {
       name = "Preload_Display";
-      init = /*%FSM<STATEINIT""">*/"if (_debug) then { diag_log(""PLOGIN: Pre-Load Display Started""); };" \n
+      init = /*%FSM<STATEINIT""">*/"if (_debug) then { diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Pre-Load: Started, LoadScreen: "",dayz_loadScreenMsg]); };" \n
+       "progressLoadingScreen 0.5;" \n
        "" \n
        "dayz_lastCheckBit = 0;" \n
        "" \n
@@ -1154,7 +1151,9 @@ class FSM
        "	};" \n
        "};" \n
        "" \n
-       "if (_debug) then { diag_log(""PLOGIN: Pre-Load Display Finished""); };"/*%FSM</STATEINIT""">*/;
+       "if (_debug) then { diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Pre-Load: Finished, LoadScreen: "",dayz_loadScreenMsg]); };" \n
+       "" \n
+       "progressLoadingScreen 0.6;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -1175,7 +1174,8 @@ class FSM
     class Initialize
     {
       name = "Initialize";
-      init = /*%FSM<STATEINIT""">*/"if (_debug) then { diag_log(""PLOGIN: Final Initialize Started""); };" \n
+      init = /*%FSM<STATEINIT""">*/"if (_debug) then { diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Final-Init: Started, LoadScreen: "",dayz_loadScreenMsg]); };" \n
+       "progressLoadingScreen 0.7;" \n
        "" \n
        "//Medical" \n
        "dayz_medicalH = [] execVM ""init\med_init.sqf"";	//Client Medical Loop" \n
@@ -1293,7 +1293,10 @@ class FSM
        "	};" \n
        "};" \n
        "" \n
-       "if (_debug) then { diag_log(""PLOGIN: Final Initialize Finished""); };"/*%FSM</STATEINIT""">*/;
+       "" \n
+       "progressLoadingScreen 0.8;" \n
+       "" \n
+       "if (_debug) then { diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Final-Init: Finished, LoadScreen: "",dayz_loadScreenMsg]); };"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -1324,7 +1327,9 @@ class FSM
     class Finish
     {
       name = "Finish";
-      init = /*%FSM<STATEINIT""">*/"dayzGearSave = true;" \n
+      init = /*%FSM<STATEINIT""">*/"progressLoadingScreen 1.0;" \n
+       "" \n
+       "dayzGearSave = true;" \n
        "dayz_myPosition = getPosATL player;" \n
        "" \n
        "//[""PVDZE_plr_LoginRecord"",[_playerUID,_charID,0]] call callRpcProcedure;" \n
@@ -1334,7 +1339,7 @@ class FSM
        "" \n
        "endLoadingScreen;" \n
        "" \n
-       "diag_log(""PLOGIN: Finished"");"/*%FSM</STATEINIT""">*/;
+       "diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Finish: EndLoadingScreen LoadScreen: "",dayz_loadScreenMsg]);"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -1346,7 +1351,7 @@ class FSM
     {
       name = "Enable_Sim";
       init = /*%FSM<STATEINIT""">*/"if (_debug) then {" \n
-       "diag_log (""PLOGIN: Enable Sim"");" \n
+       "diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Enable Sim: LoadScreen: "",dayz_loadScreenMsg]);" \n
        "};" \n
        "" \n
        "_myEpochAnim = getText(configFile >> ""CfgPatches"" >> ""dayz_anim"" >> ""dayzVersion"");" \n
@@ -1476,12 +1481,12 @@ class FSM
     class Stream
     {
       name = "Stream";
-      init = /*%FSM<STATEINIT""">*/"if (_debug) then { diag_log(""PLOGIN :Stream Started""); };" \n
+      init = /*%FSM<STATEINIT""">*/"if (_debug) then { diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Stream: Started, LoadScreen: "",dayz_loadScreenMsg]); };" \n
        "_zombies = (getPosATL player) nearEntities [""zZombie_Base"",25];" \n
        "{deleteVehicle _x} count _zombies;" \n
        "" \n
        "endLoadingScreen;" \n
-       "if (_debug) then { diag_log(""PLOGIN :Stream Finished""); };"/*%FSM</STATEINIT""">*/;
+       "if (_debug) then { diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Stream: Finished, LoadScreen: "",dayz_loadScreenMsg]); };"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
       class Links
       {
@@ -1502,7 +1507,7 @@ class FSM
     class Retry
     {
       name = "Retry";
-      init = /*%FSM<STATEINIT""">*/"diag_log (""PLOGIN: Retrying Authentication... ("" + _playerUID + "")"");" \n
+      init = /*%FSM<STATEINIT""">*/"diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Retrying Authentification: UID: "",_playerUID]);" \n
        "dayz_loadScreenMsg = (localize ""str_player_14"");" \n
        "" \n
        "_AuthAttempt = _AuthAttempt +1;" \n
@@ -1538,7 +1543,7 @@ class FSM
     class get_ready_to_clo
     {
       name = "get_ready_to_clo";
-      init = /*%FSM<STATEINIT""">*/"diag_log (""PLOGIN: Authentication Failed ("" + _playerUID + "")"");" \n
+      init = /*%FSM<STATEINIT""">*/"diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Authentification Failed: UID: "",_playerUID]);" \n
        "dayz_loadScreenMsg = (localize ""str_player_32"");" \n
        "" \n
        "progressLoadingScreen 1;" \n
@@ -1639,7 +1644,7 @@ class FSM
       init = /*%FSM<STATEINIT""">*/"_myTime = diag_tickTime;" \n
        "dayz_loadScreenMsg = (""ZombZ: Waiting for Server to Load..."");" \n
        "if (_debug) then {" \n
-       "diag_log ""PLOGIN: Waiting for ZombZ.net to start authentication"";" \n
+       "diag_log(format[""%1: %2: %3: %4"",diag_tickTime,""P2STARTUP: FSM"",""Waiting for Server to Load...Message:"",dayz_loadScreenMsg]);" \n
        "};" \n
        "progressLoadingScreen 0.5;"/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;
@@ -1768,7 +1773,6 @@ class FSM
        "" \n
        "if (DZE_haloSpawn) then {" \n
        " createDialog ""halo_dialog"";" \n
-       "diag_log(""P2DEBUG: Created halo selection dialog"");" \n
        "};" \n
        ""/*%FSM</STATEINIT""">*/;
       precondition = /*%FSM<STATEPRECONDITION""">*/""/*%FSM</STATEPRECONDITION""">*/;

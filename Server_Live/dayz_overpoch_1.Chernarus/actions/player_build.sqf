@@ -125,7 +125,7 @@ _isLandFireDZ = (_classname == "Land_Fire_DZ");
 _distance = DZE_PlotPole select 0;
 _needText = localize "str_epoch_player_246";
 if(_isPole) then {
-	_distance = DZE_PlotPole select 1;
+	_distance = ((DZE_PlotPole select 1) + DZE_plotWalkDist);
 	cutText ["Press [Space Bar] to Place the Plot Pole!", "PLAIN DOWN"];
 };
 _findNearestPoles = nearestObjects [(vehicle player), ["Plastic_Pole_EP1_DZ"], _distance];
@@ -136,7 +136,7 @@ _findNearestPole = [];
 	};
 } count _findNearestPoles;
 _IsNearPlot = count (_findNearestPole);
-if(_isPole && _IsNearPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText [(format [localize "str_epoch_player_44", DZE_PlotPole select 1]) , "PLAIN DOWN"]; };
+if(_isPole && _IsNearPlot > 0) exitWith {  DZE_ActionInProgress = false; cutText [(format["Cannot build plot pole within %1m of an existing plot boundary / area.", DZE_PlotPole select 0]), "PLAIN DOWN"]; };
 if(_IsNearPlot == 0) then {
 	if(_requireplot == 0 || _isLandFireDZ) then {
 		_canBuildOnPlot = true;

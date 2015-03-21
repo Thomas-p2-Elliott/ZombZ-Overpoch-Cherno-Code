@@ -48,7 +48,7 @@ if (hasInterface && !isDedicated) exitWith {
 			_p2 = _this select 0;
 			
 			fnc_usec_damageHandler = compile preprocessFileLineNumbers "compile\fn_damageHandler.sqf";
-			player_fired =			 compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_fired.sqf";
+			player_fired =			 compile preprocessFileLineNumbers "compile\player_fired.sqf";
 			player_death =			 compile preprocessFileLineNumbers "compile\player_death.sqf";
 
 			if (!isNil 'zzEhDmg') then {
@@ -104,7 +104,7 @@ if (hasInterface && !isDedicated) exitWith {
 			_p2 = _this select 0;
 
 			fnc_usec_damageHandler = compile preprocessFileLineNumbers "compile\fn_damageHandler.sqf";
-			player_fired =			 compile preprocessFileLineNumbers "\z\addons\dayz_code\compile\player_fired.sqf";
+			player_fired =			 compile preprocessFileLineNumbers "compile\player_fired.sqf";
 			player_death =			 compile preprocessFileLineNumbers "compile\player_death.sqf";
 
 			if (!isNil 'zzEhDmg') then {
@@ -168,10 +168,9 @@ if (hasInterface && !isDedicated) exitWith {
 		---------------------------------------------------------------------------*/
 
 		P2DZ_AHKick = {
-			endMission "END1";
-			disableSerialization;
-			for '_j' from 0 to 99 do {(findDisplay _j) closeDisplay 0;};
-			//createCenter sideEnemy; // will crash their game if enabled!
+			systemChat("AntiHack: Something went wrong! You will be Kicked to lobby. Please reconnect!");
+			diag_log("AntiHack: Something went wrong! You will be Kicked to lobby. Please reconnect!");
+			uiSleep 2; endMission "END1";
 		};
 
 		/*---------------------------------------------------------------------------

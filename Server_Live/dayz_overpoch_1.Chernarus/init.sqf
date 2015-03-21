@@ -18,8 +18,26 @@ p2d_client = false;
 p2d_server = false;
 p2d_headless = false;
 
+//debug server/client startup
+p2d_startup = true;
 
-/*---------------------------------------------------------------------------
+//debugging line
+if (p2d_startup) then {
+	diag_log(format['%1: %2: %3: %4: %5',
+					diag_tickTime,
+					'P2STARTUP',
+					'init',
+					'Started...allConfig Loaded, LoadScreen Started, BlackFade Started',
+					format["isServer: %1, isClient: %2, isHeadless: %3",
+					(hasInterface && !isDedicated), (isDedicated && !hasInterface || isServer), (!hasInterface && !isDedicated && !isServer)]]);
+};
+
+
+//Custom Buildings/Map Objects Creation (Now Local)
+//Includes P2LOS (Player2's Local Object System)
+_nil2 = 					[] execVM "buildings\init_buildings.sqf";
+
+/*--------------------------------------------------------------------------
 Headless Client
 ---------------------------------------------------------------------------*/
 if (!hasInterface && !isDedicated && !isServer) exitWith {
@@ -50,7 +68,7 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
 	};
 
 	/* HeadlessClient A.I. Missions by Player2 */
-	if (P2DZ_HC_AIMissions_Enabled) then {
+	if (P2DZ_HC_AI_Enabled) then {
 		diag_log(format["P2DEBUG: %1 Executing AI Missions!", (getPlayerUID player)]);
 		[] execVM ("" + (P2HC_Path) + "P2AI\init.sqf");
 	};
@@ -90,7 +108,7 @@ if (isDedicated && !hasInterface || isServer) then {
 	};
 
 	/* HeadlessClient A.I. Missions by Player2 */
-	if (P2DZ_HC_AIMissions_Enabled) then {
+	if (P2DZ_HC_AI_Enabled) then {
 		//diag_log(format["P2DEBUG: %1 Executing AI Missions!", (getPlayerUID player)]);
 		[] execVM "HC\P2AI\init.sqf";
 	};
@@ -113,8 +131,13 @@ Client / Player
 ---------------------------------------------------------------------------*/
 
 if (hasInterface && !isDedicated) then {
-	((uiNameSpace getVariable "BIS_loadingScreen") displayctrl 102) ctrlSetText "ZombZ: Please Wait - Loading Epoch & Overwatch...";
-	progressLoadingScreen 0.1;
+	//debugging line
+	if (p2d_startup) then {
+		diag_log(format['%1: %2: %3',diag_tickTime,'P2STARTUP: init','Starting Loading Screen Progression (0.1)']);
+	};
+
+	progressLoadingScreen 0.01;
+	((uiNameSpace getVariable "BIS_loadingScreen") displayctrl 102) ctrlSetText "ZombZ: Please Wait - Receving Initial Data...";
 
 	p2d_client = 	true;
 	call compile preprocessFileLineNumbers "_clientConfig.sqf"; 
@@ -122,36 +145,62 @@ if (hasInterface && !isDedicated) then {
 	P2DZ_postVars = true;
 
 	if (isNil 'P2DZ_loginCheck') then {	P2DZ_loginCheck = false; };
-	_launchTime = diag_tickTime;
-	waitUntil{	
-		if ((diag_tickTime - _launchTime) > 5) then {
-			endLoadingScreen; 
-			for "_i" from 0 to 10 do {	systemChat("KICK REASON: Server did not respond in time - Please Re-Connect!");	};
-			endMission "END1";
+	[] spawn {
+		private["_launchTime"];
+		_launchTime = diag_tickTime;
+		waitUntil{
+			if ((diag_tickTime - _launchTime) > 10) then { 
+				[] spawn {
+					diag_log("KICK REASON: Server did not respond in time - Please Re-Connect!");
+					for "_i" from 0 to 10 do {
+						uiSleep 1;
+						endLoadingScreen;
+						closeDialog 0;
+					 	systemChat("KICK REASON: Server did not respond in time - Please Re-Connect!");	
+					}; 
+					
+					endMission "END1"; 
+				};
+			};
+			P2DZ_loginCheck
 		};
-		uiSleep 0.5;
+	};	
+	waitUntil{	
+		uiSleep 0.33;
 		P2DZ_loginCheck
 	};
 
-	progressLoadingScreen 0.2;
+	//debugging line
+	if (p2d_startup) then {
+		diag_log(format['%1: %2: %3',diag_tickTime,'P2STARTUP: init','Past LoginCheck Var, waiting for postVarsDone, progress loading screen 0.15']);
+	};
 
 	waitUntil{uiSleep 0.5; P2DZ_postVarsDone};
-	progressLoadingScreen 0.3;
+	((uiNameSpace getVariable "BIS_loadingScreen") displayctrl 102) ctrlSetText "ZombZ: Please Wait - Compiling DayZ Epoch & Overwatch Code...";
+	progressLoadingScreen 0.2;
+
+	//debugging line
+	if (p2d_startup) then {
+		diag_log(format['%1: %2: %3',diag_tickTime,'P2STARTUP: init','done waiting for postVarsDone, progress loading screen 0.3']);
+	};
+};
+
+//debugging line
+if (p2d_startup) then {
+	diag_log(format['%1: %2: %3',diag_tickTime,'P2STARTUP: init','Starting publicEH, med functions, string functions, compiles, server traders, taser functions & loading buildings...']);
 };
 
 //Load in compiled functions
 P2DZ_loadInitDone = true;
-progressLoadingScreen 0.6;
+progressLoadingScreen 0.25;
 call compile preprocessFileLineNumbers "init\publicEH.sqf";										//Initilize the publicVariable event handlers
-progressLoadingScreen 0.7;
 call compile preprocessFileLineNumbers "init\setup_functions_med.sqf";							//Functions used by CLIENT for medical
-progressLoadingScreen 0.8;
 call compile preprocessFileLineNumbers "compile\string_functions.sqf";							//Compile extra string functions
+progressLoadingScreen 0.275;
 call compile preprocessFileLineNumbers "init\compiles.sqf";										//Compile regular functions
-progressLoadingScreen 0.9;
 call compile preprocessFileLineNumbers "server_traders.sqf";									//Compile trader configs
 call compile preprocessFileLineNumbers "compile\fnc_server.sqf";
-progressLoadingScreen 1.0;
+progressLoadingScreen 0.3;
 
 "filmic" setToneMappingParams [0.153, 0.357, 0.231, 0.1573, 0.011, 3.750, 6, 4]; setToneMapping "Filmic";
 
@@ -159,6 +208,11 @@ progressLoadingScreen 1.0;
 Dedicated Server
 ---------------------------------------------------------------------------*/
 if (isServer) then {
+	//debugging line
+	if (p2d_startup) then {
+		diag_log(format['%1: %2: %3',diag_tickTime,'P2STARTUP: init','Calling dynamic_vehicle & static veh spawns, waiting for static veh spawns to finish']);
+	};
+
 	//Compile vehicle configs
 	call compile preprocessFileLineNumbers "\z\addons\dayz_server\missions\DayZ_Epoch_11.Chernarus\dynamic_vehicle.sqf";
 	if (true) then {
@@ -166,9 +220,14 @@ if (isServer) then {
 		_handle = 				[] execVM "\z\addons\dayz_server\FS_SpawnVehicles\FS_StaticVehicleSpawnCompiles.sqf";
 		waitUntil{scriptDone _handle};
 	};
+
+	//debugging line
+	if (p2d_startup) then {
+		diag_log(format['%1: %2: %3',diag_tickTime,'P2STARTUP: init','Static veh spawns finished, loading mission, buildings & server mon (hive)']);
+	};
+
 	// Add trader citys & custom buildings
 	_nil = 						[] execVM "\z\addons\dayz_server\missions\DayZ_Epoch_11.Chernarus\mission.sqf";
-	_nil2 = 					[] execVM "buildings\init_buildings.sqf";
 	//Execute server monitor
 	_serverMonitor = 			[] execVM "\z\addons\dayz_server\system\server_monitor_preExec.sqf";
 };
@@ -178,24 +237,67 @@ Client
 ---------------------------------------------------------------------------*/
 
 if (!isDedicated) then {
+	//debugging line
+	if (p2d_startup) then {
+		diag_log(format['%1: %2: %3',diag_tickTime,'P2STARTUP: init','Compiles Finished, waiting for postCompiles']);
+	};
+
 	P2DZ_postCompiles = true;
 	waitUntil {uiSleep 0.5; 				P2DZ_postCompilesDone};
+	progressLoadingScreen 0.35;
+
+	//debugging line
+	if (p2d_startup) then {
+		diag_log(format['%1: %2: %3',diag_tickTime,'P2STARTUP: init','past postCompiles, starting login.sqf & waiting for dayz_loadScreenMsg']);
+	};
+
 	[] execVM 								"system\login.sqf";	
 	0 fadeSound 0;
 	waitUntil {!isNil 						"dayz_loadScreenMsg"};
+	((uiNameSpace getVariable "BIS_loadingScreen") displayctrl 102) ctrlSetText "ZombZ: Please Wait - Connecting to Hive...";
+	progressLoadingScreen 0.375;
+
+	//debugging line
+	if (p2d_startup) then {
+		diag_log(format['%1: %2: %3',diag_tickTime,'P2STARTUP: init','Past loadScreenMsg wait, spawning player_monitor, deploy actions, notifs, safezone, & respawn handler, then check if player in headless slot']);
+	};
+
 	dayz_loadScreenMsg = 					("ZombZ: " + localize "STR_AUTHENTICATING");
 	_id = player addEventHandler 			["Respawn", {_id = [] spawn player_death;}];
+	progressLoadingScreen 0.4;
 	_playerMonitor = [] execVM 				"system\player_monitor.sqf";	
+
 	[] 	execVM 								"compile\fn_deployActions.sqf";	
 	call compile preprocessFileLineNumbers 	"compile\fnc_debugMon.sqf";
-	call compile preprocessFileLineNumbers 	"init\notifs_init.sqf";
 	[] execVM 								"system\SafeZone.sqf";
 
 	//Make sure player is not in civillian (headless) slot
 	[] spawn { waitUntil{ uiSleep 5; ((format["%1", (side player)]) != "UNKNOWN")}; if ((format["%1", (side player)]) == "CIV") then { endMission "END1"; }; };
 };
 
-//#define RESEC_VERBOSE
-//#include "\z\addons\dayz_code\system\REsec.sqf"
-#include "system\BIS_Effects\init.sqf"
+/*---------------------------------------------------------------------------
+Player2's Notification System (Modular)
+---------------------------------------------------------------------------*/
+/* 		Server Side (Server PBO) 
+	Files: 			
+		ServerPBO\p2_notifs\server_init.sqf
+		ServerPBO\p2_notifs\server_loop.sqf
+	Configuration:
+		ZombZ_Notif_File_Name = "file_name";
+*/ if (isDedicated && !hasInterface || isServer) then { call compile preprocessFileLineNumbers "\z\addons\dayz_server\p2_notifs\server_init.sqf"; };
+/* 		Client Side (Mission PBO) 
+	Files: 
+		MissionPBO\p2_notifs\client_init.sqf
+		MissionPBO\p2_notifs\client_notif.sqf
+		MissionPBO\p2_notifs\p2notif.h
+		MissionPBO\p2_notifs\img\un.paa
+		MissionPBO\p2_notifs\img\ru.paa
+		MissionPBO\p2_notifs\img\zz.paa
+	Configuration: 
+		Add this to MissionPBO\description.ext:
+			class RscTitles {  #include "p2_notifs\p2notif.h" };
+*/ if (hasInterface && !isDedicated) then { 			call compile preprocessFileLineNumbers "p2_notifs\client_init.sqf"; };
+/*--End of Notif System----------------------------------------------------*/
 
+//Include BIS Effects
+#include "system\BIS_Effects\init.sqf"

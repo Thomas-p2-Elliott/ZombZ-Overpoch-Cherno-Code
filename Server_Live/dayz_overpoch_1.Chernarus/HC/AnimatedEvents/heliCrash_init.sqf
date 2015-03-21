@@ -13,14 +13,14 @@ Previous Version Authors:
 /*---------------------------------------------------------------------------
 Configuration
 ---------------------------------------------------------------------------*/
-P2DZ_heliCrashSites_guaranteedLoot =           6;       //Garantueed loot pile amount
-P2DZ_heliCrashSites_randomizedLoot =           3;       //Randomized loot pile amount
+P2DZ_heliCrashSites_guaranteedLoot =           10;       //Garantueed loot pile amount
+P2DZ_heliCrashSites_randomizedLoot =           6;       //Randomized loot pile amount
 P2DZ_heliCrashSites_spawnFire =             true;       //HeliCrash Smoke?
 P2DZ_heliCrashSites_fadeFire =             false;       //Fade smoke over time?
-dayz_MapArea =                             11000;       //Size of map
+dayz_MapArea =                             10000;       //Size of map
 HeliCrashArea =                 dayz_MapArea / 2;       //Size of heli crashsite area (5km for Chernarus)
-P2DZ_heliCrashSites_frequency =         (30 * 60);      //How often they should be given a chance to spawn in secs, eg 60sec for 1 every 1min
-P2DZ_heliCrashSites_variance =          (10 * 60);      //How much randomized time to +/- the frequency time by for each spawn chance in secs
+P2DZ_heliCrashSites_frequency =         (20 * 60);      //How often they should be given a chance to spawn in secs, eg 1 = 60 sec for 1 every 1min
+P2DZ_heliCrashSites_variance =          (5 * 60);      //How much randomized time to +/- the frequency time by for each spawn chance in secs
 P2DZ_heliCrashSites_spawnChance =       1;              //Chance between 0-1 of crashsite spawning when it gets a chance to
 P2DZ_heliCrashSites_spawnMarker =       'center';       //Center point of spawn radius
 P2DZ_heliCrashSites_spawnRadius =       HeliCrashArea;  //Size of radius where they can spawn
@@ -90,7 +90,7 @@ if (!hasInterface && !isDedicated && !isServer) then {
             _timeAdjust = round((random(_variance * 2)) - _variance);
             _timeToSpawn = time + _frequency + _timeAdjust;
             
-            ((format["CRASHSPAWNER: %1%2 chance to spawn in %3 seconds", round(_spawnChance * 100), '%', _timeToSpawn])) call P2DZ_HC_debugCrashOutput;
+            ((format["CRASHSPAWNER: %1%2 chance to spawn in %3 seconds", round(_spawnChance * 100), '%',  (_timeToSpawn - time)])) call P2DZ_HC_debugCrashOutput;
 
             while {time < _timeToSpawn} do {
                 uiSleep 5;

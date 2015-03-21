@@ -1,14 +1,64 @@
 waituntil {!isnil "bis_fnc_init"};
 
 BIS_MPF_remoteExecutionServer = {
+	private["_unit","_uid","_log"];
+	_uid = nil; _unit = nil; _log = false;
 	if ((_this select 1) select 2 == "JIPrequest") then {
 		[nil,(_this select 1) select 0,"loc",rJIPEXEC,[any,any,"per","execVM","ca\Modules\Functions\init.sqf"]] call RE;
+	};
+	if ((_this select 1) select 2 != "say") then {
+		if ((_this select 1) select 2 != "switchmove") then {
+			_log = true; _unit = ((_this select 1) select 1);
+			if (!isNil '_unit') then {
+				if (typeName _unit == 'OBJECT') then {
+					if (!isNull _unit) then {
+						if (isPlayer _unit) then {
+							_uid = getPlayerUID _unit;
+							if (!isNil '_uid') then {
+								if (typeName _uid == 'STRING') then {
+									diag_log(format['%1: %2: (%4):(%3)',diag_tickTime,'REXEC',_this,_uid]); _log = false;
+								};
+							};
+						};
+					};
+				};
+			} else {
+				_unit = ((_this select 1) select 0);
+				if (!isNil '_unit') then {
+					if (typeName _unit == 'OBJECT') then {
+						if (!isNull _unit) then {
+							if (isPlayer _unit) then {
+								_uid = getPlayerUID _unit;
+								if (!isNil '_uid') then {
+									if (typeName _uid == 'STRING') then {
+										diag_log(format['%1: %2: (%4):(%3)',diag_tickTime,'REXEC',_this,_uid]); _log = false;
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+	if (_log) then {
+		diag_log(format['%1: %2: %3',diag_tickTime,'REXEC',_this]); _log = false;
 	};
 };
 
 /* Logging Functions */
 p2net_log2 =	compile preprocessFileLineNumbers 	"\z\addons\dayz_server\init\p2net_logFunction.sqf";
 p2net_log1 =	compile preprocessFileLineNumbers 	"\z\addons\dayz_server\init\p2net_logFunction.sqf";
+
+/*---------------------------------------------------------------------------
+P2REXEC
+---------------------------------------------------------------------------*/
+//debugging line
+if (p2d_startup) then {
+	diag_log(format['%1: %2: %3',diag_tickTime,'P2STARTUP: server_functions','Starting p2re_init.sqf']);
+};
+
+[] execvm 											"\z\addons\dayz_server\p2re\p2re_init.sqf";
 
 /*Regular Functions */
 BIS_Effects_Burn =				{};
@@ -58,9 +108,6 @@ player2_deathMessage =			compile preprocessFileLineNumbers "\z\addons\dayz_serve
 //deletes mags from full objects
 server_overfullObject = 			compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_overfullObject.sqf";
 
-//notification system
-[] execVM 	"\z\addons\dayz_server\system\zombz_notifications.sqf"; 
-
 //player2 stats logger compiles
 call compile preprocessFileLineNumbers "\z\addons\dayz_server\compile\server_statsLogger.sqf";
 
@@ -88,7 +135,7 @@ p2_syncCheck = {
 	_o = owner _u;
 	if (isNil '_o') exitWith { };
 	if (typeName _o != "SCALAR") exitWith { };
-	P2DZE_guiMsg = ["<t color='#F05032'>WARNING!</t>",("<t size='1.2' color='#F05032'>You will be kicked in 30 seconds.</t><t size='0.95'> This is to prevent possible gear/character loss. Your character has lost sync with the hive. </t>"),"img\zz.paa",30,420]; 
+	P2DZE_guiMsg = ["<t color='#F05032'>WARNING!</t>",("<t size='1.2' color='#F05032'>You will be kicked in 30 seconds.</t><t size='0.95'> This is to prevent possible gear/character loss. Your character has lost sync with the hive. </t>"),"p2_notifs\img\zz.paa",30,420]; 
 	P2DZE_systemChat = [2,("WARNING: You will be kicked in 30 seconds. This is to prevent possible gear/character loss. Your character has lost sync with the hive.")];
 	_o publicVariableClient "P2DZE_systemChat"; 
 	_o publicVariableClient "P2DZE_guiMsg";
@@ -1107,4 +1154,3 @@ server_logUnlockLockEvent = compile preprocessFileLineNumbers "\z\addons\dayz_se
 [] execVM 											"\z\addons\dayz_server\system\antihack_functions.sqf";
 [] execvm 											"\z\addons\dayz_server\init\deploy_functions.sqf";
 [] execvm 											"\z\addons\dayz_server\init\goldEventHandlers.sqf";
-[] execvm 											"\z\addons\dayz_server\p2re\p2re_init.sqf";

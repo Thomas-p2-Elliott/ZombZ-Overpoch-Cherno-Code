@@ -81,7 +81,6 @@ if (!isDedicated) then {
 	"norrnRaDrag"			addPublicVariableEventHandler {(_this select 1) execVM "\z\addons\dayz_code\medical\publicEH\animDrag.sqf"};
 	"norrnRnoAnim"			addPublicVariableEventHandler {(_this select 1) execVM "\z\addons\dayz_code\medical\publicEH\noAnim.sqf"};
 	'P2DZE_systemChat'	 	addPublicVariableEventHandler {(_this select 1) call P2DZ_sysChat; };
-	'P2DZE_guiMsg'	 		addPublicVariableEventHandler { _id2 = (_this select 1) spawn P2DZ_guiNotif; };
 	'P2DZE_miniMsg'			addPublicVariableEventHandler {	_id = (_this select 1) spawn p2_miniMsg; };
 
 	p2_antiWallCrawl = compile preprocessFileLineNumbers "compile\p2_antiWallCrawl.sqf";

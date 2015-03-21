@@ -367,7 +367,7 @@ p2RefChk = {
     disableSerialization;
     _timeOut = 0;
     dayz_loadScreenMsg = "";
-    _lMsg = "ZombZ: Receiving Initial Data...";
+    _lMsg = "ZombZ: Waiting for Character Data...";
     diag_log "DEBUG: loadscreen guard started.";
     _display = uiNameSpace getVariable "BIS_loadingScreen";
     if (!isNil '_display') then {
@@ -408,7 +408,7 @@ p2RefChk = {
                     _display = uiNameSpace getVariable "BIS_loadingScreen";
                     _control1 = _display displayctrl 8400;
                     _control2 = _display displayctrl 102;
-                    _lMsg = "ZombZ: Please Wait - Loading Epoch & Overwatch...";
+                    _lMsg = "ZombZ: Please Wait - Creating Character...";
                     _control1 	ctrlSetText _lMsg;
                     _control2 	ctrlSetText _lMsg;
 
@@ -416,6 +416,8 @@ p2RefChk = {
             
             if ( dayz_loadScreenMsg != "" ) then {
                 _control1 ctrlSetText dayz_loadScreenMsg;
+                _control2 ctrlSetText dayz_loadScreenMsg;
+                diag_log("P2DEBUG: LoadScreenMsg Set To: " + (str dayz_loadScreenMsg));
                 _lMsg = dayz_loadScreenMsg;
                 dayz_loadScreenMsg = "";
            	};

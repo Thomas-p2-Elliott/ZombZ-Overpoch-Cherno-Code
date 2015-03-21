@@ -55,15 +55,15 @@ P2DZ_AHLoop_Calls = {
 		};
 		/*
 
-			0.5 Second
+			10 Second
 
 		*/	
-		if ( (diag_tickTime - P2DZ_AH_loopTimeLast_500) > 5 ) then { 	
+		if ( (diag_tickTime - P2DZ_AH_loopTimeLast_500) > 10 ) then { 	
 			//Code Executions:
 			[_pname,_puid,dayz_characterID,_mPos] 	call P2DZ_AH_PlayerChecks;
 			[_pname,_puid] 							call P2DZ_AH_FunctionChecks;
 			[_pname,_puid] 							call P2DZ_AH_BannedCommands;
-			//[_pname,_puid]							call P2DZ_AH_MenuChecks;
+			[_pname,_puid]							call P2DZ_AH_MenuChecks;
 
 			//Timer
 			P2DZ_AH_loopTimeLast_500 = diag_tickTime; 
