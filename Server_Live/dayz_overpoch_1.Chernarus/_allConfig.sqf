@@ -12,7 +12,7 @@ GORSYSERVERNUMBER = 5;
 P2DZ_serverName = "1";
 
 //Server notification file name
-ZombZ_Notif_File_Name = "notification_op5";
+ZombZ_Notif_File_Name = "notification_op1";
 
 //Spawn Location Settings
 spawnShoremode = 1; 		// Default = 1 (on shore)
@@ -111,11 +111,14 @@ DZE_FriendlySaving = true;
 //allow building on roads with true, disallow with false
 DZE_BuildOnRoads = false;
 
-//plot dimensions / plot radius, plot exclusion zone for other plots
-DZE_PlotPole = [55,65];
+//plot dimensions / plot radius aka plot exclusion zone for other plots
+DZE_PlotPole = [55,110];
+
+//plot walk distance / max dist player can in theory walk while placing an object (real is 10m, 15 is safety)
+DZE_plotWalkDist = 15;
 
 //plot maintenance area effect dimensions
-DZE_maintainRange = ((DZE_PlotPole select 0)+20);
+DZE_maintainRange = ((DZE_PlotPole select 0) + DZE_plotWalkDist);
 
 //damage needed before maint option appears
 DZE_DamageBeforeMaint = 0.09;
@@ -200,8 +203,8 @@ if ((!hasInterface && !isDedicated && !isServer) || (isDedicated && !hasInterfac
 	//enable headless client heli crashes?
 	P2DZ_HC_HeliCrashes = true;
 
-	//enable headless client ai missions
-	P2DZ_HC_AIMissions_Enabled = true;
+	//enable headless client bandit AI
+	P2DZ_HC_AI_Enabled = true;
 };
 
 /*---------------------------------------------------------------------------
@@ -226,7 +229,11 @@ DZE_Debug_Damage = false;
 //fn_selfActions.sqf
 P2DZE_debugSelfActions = false;
 
-P2DZE_debugLogin = false;
+//debug login sqf scripts
+P2DZE_debugLogin = true;
+
+//debug login fsm
+P2DZ_debugLoginFSM = true;
 
 //vehicleinspect.sqf
 P2DZE_deugVehIns = false;
