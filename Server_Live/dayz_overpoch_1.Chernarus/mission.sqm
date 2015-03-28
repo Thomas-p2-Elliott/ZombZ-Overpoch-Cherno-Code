@@ -54,7 +54,9 @@ class Mission
 		"st_evasive",
 		"frb",
 		"sbh_paranoia",
-		"map_eu"
+		"map_eu",
+		"aif_arma1buildings",
+	 	"mbg_killhouses"
 	};
 	addOnsAuto[]=
 	{
@@ -101,7 +103,9 @@ class Mission
 		"st_evasive",
 		"frb",
 		"sbh_paranoia",
-		"map_eu"
+		"map_eu",
+		"aif_arma1buildings",
+	 	"mbg_killhouses"
 	};
 	randomSeed=11171215;
 	class Intel
