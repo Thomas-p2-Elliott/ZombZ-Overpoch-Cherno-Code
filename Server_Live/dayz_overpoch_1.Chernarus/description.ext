@@ -178,7 +178,7 @@ class CfgFunctions
 		};
 	};
 };
-/*Custom Sounds + DayZ_Sfx sounds fix by DJ*/
+/*Custom Sounds by Player2*/
 class CfgSounds
 {
     sounds[] =
