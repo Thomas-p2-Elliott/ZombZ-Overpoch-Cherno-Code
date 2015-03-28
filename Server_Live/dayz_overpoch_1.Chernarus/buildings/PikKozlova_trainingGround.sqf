@@ -1,0 +1,11 @@
+["SandNest_DZ",[8756.4326, 2297.7815, -0.017774269],255.09671,"PikKoz_218"] call P2LOS_createVeh;
+["Land_Fort_Watchtower_EP1",[8729.5469, 2342.1611, -1.7642975e-005],231.76723,"PikKoz_226","this setvectorup [0,0,1]"] call P2LOS_createVeh;
+["MBG_Killhouse_3_InEditor",[8684.124, 2291.5369, -0.30908585],-96.867538,"PikKoz_237","this setvectorup [0,0,1]"] call P2LOS_createVeh;
+["MBG_Killhouse_1_InEditor",[8701.1289, 2302.7947, 0.51576835],84.999817,"PikKoz_238","this setvectorup [0,0,1]"] call P2LOS_createVeh;
+["MBG_Killhouse_4_InEditor",[8728.6855, 2282.2256, 0.13493502],138.51968,"PikKoz_247","this setvectorup [0,0,1]"] call P2LOS_createVeh;
+["MBG_Warehouse_InEditor",[8688.2813, 2340.6816, 0.34688014],-130.20583,"PikKoz_323","this setvectorup [0,0,1]"] call P2LOS_createVeh;
+["Land_MBG_Shoothouse_1",[8686.5186, 2334.9353, 0.84359419],-39.963284,"PikKoz_324"] call P2LOS_createVeh;
+["CampEast",[8742.6846, 2291.1145, -1.2874603e-005],142.41537,"PikKoz_336"] call P2LOS_createVeh;
+["Land_Mil_Barracks_i",[8739.7402, 2319.4143, 8.1062317e-006],231.60899,"PikKoz_338","this setvectorup [0,0,1]"] call P2LOS_createVeh;
+["Land_Mil_Guardhouse",[8771.0596, 2283.7515, 3.2424927e-005],134.61514,"PikKoz_339"] call P2LOS_createVeh;
+["ZavoraAnim",[8765.6621, 2290.6072, 4.6253204e-005],44.362045,"PikKoz_348"] call P2LOS_createVeh;

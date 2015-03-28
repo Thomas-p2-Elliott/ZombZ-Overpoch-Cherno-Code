@@ -1,21 +1,21 @@
 /*---------------------------------------------------------------------------
-Local Buildings Animation Fixes by Player2
-
-Theory: Local object animations don't get sent across network, so player closing firestation doors for cover will not get cover
-as the enemy will not see the door close...
-
-Solution:
-Force all doors open for all objects with doors at all times on all players
-
-
-How? For each object created call a check to see if it has doors that can be opened
-if it has doors add it to a list with all the open door animations it has available
-then play them open door animations in a constant loop
+Player2's Local Object System
 ---------------------------------------------------------------------------*/
-/*Important: For this to work you MUST include: OBJECT call P2LOS_OpenDoors_CheckObject per object on its creation*/
+/* How-To:
+ Use P2LOS_createVeh to spawn in buildings
+ Set P2LOS_finishedCreating to true after all buildings have been spawned in */
+
+/* Global Vars */
 P2DZ_customBuildingCount_Global = 0; P2DZ_customBuildingCount_Local = 0;
-P2LOS_createVeh = compile preprocessFileLineNumbers "P2LOS\createVeh.sqf";
-call compile preprocessFileLineNumbers "P2LOS\OpenDoors.sqf";
+P2LOS_finishedCreating = false;
+
+/* Functions */
+P2LOS_createVeh = 	compile preprocessFileLineNumbers "P2LOS\createVeh.sqf";
+
+/* Executions */
+//OpenDoors for Local Objects (Client-side Loop)
+call 				compile preprocessFileLineNumbers "P2LOS\OpenDoors.sqf";
+
 /*---------------------------------------------------------------------------*/
 
 call compile preprocessFileLineNumbers "buildings\Drozhino.sqf"; //Pos: [3847.0142, 4787.8877, 1.5258789e-005]
@@ -49,62 +49,28 @@ call compile preprocessFileLineNumbers "buildings\Berezino.sqf"; //Pos: [13065.5
 call compile preprocessFileLineNumbers "buildings\Elektro1.sqf"; //Pos: [11036.93, 2705.0854, -0.45178086]
 call compile preprocessFileLineNumbers "buildings\KamyshovoRoadblock.sqf"; //Pos: [12985.606, 3800.031, -1.6689301e-005]
 call compile preprocessFileLineNumbers "buildings\Kamenka.sqf"; //Pos: [1924.1563, 2186.6108, 6.6757202e-006]
+call compile preprocessFileLineNumbers "buildings\PikKozlova_trainingGround.sqf"; //Pos: [8737.1816, 2335.4153, -1.4305115e-005]
+call compile preprocessFileLineNumbers "buildings\PikKozlova_trainingGround_items.sqf"; //Pos: [8737.1816, 2335.4153, -1.4305115e-005]
 
+/* ZombZ Flag - Pik Kozlova Training Ground */
+private["_o2"];
+_o2 = nil; _o2 = objNull;
+_o2 = "FlagCarrierBIS_EP1" createVehicleLocal [8737.1816, 2335.4153, -1.4305115e-005];
+_o2 setPos [8737.1816, 2335.4153, -1.4305115e-005];
+_o2 setFlagTexture "img\logo.paa";
+
+/* 	ZombZ Community Flags @ All Traders && Wholesalers */
+{
+	private["_o"];
+	_o = nil; _o = objNull;
+	_o = "FlagCarrierBIS_EP1" createVehicleLocal _x;
+	_o setPos _x;
+	_o setFlagTexture "img\logo.paa";
+} count [[6321.55,7791.93,0.00411987],[11473.7,11365,0.00146484],[4056.55,11662.1,0.0017395],[12048.2,12649.3,0.00143433],[12943.2,12759.2,0.00134277],[1623.79,7798.52,0.00152588],[4361.21,2261.7,0.00143886],[8008.73,2905.32,0.00109911],[13434.3,5443.32,0.000936985],[13530,6356.39,0.00143886]];
+
+
+/*---------------------------------------------------------------------------*/
+
+P2LOS_finishedCreating = true;
 diag_log(format['%1: %2: %3','P2DEBUG','Custom Map Objects Created (Local)',P2DZ_customBuildingCount_Local]);
 diag_log(format['%1: %2: %3','P2DEBUG','Custom Map Objects Created (Global)',P2DZ_customBuildingCount_Global]);
-
-/* 		
-	ZombZ Community Flags by Player2
-	Added to All Traders
-*/
-
-private ["_f1", "_f2", "_f3", "_f4", "_f5", "_f6", "_f7", "_f8", "_f9", "_f10"];
-// Starry Trader
-_f1 =  "FlagCarrierBIS_EP1" createVehicleLocal [6321.55,7791.93,0.00411987];
-_f1 setFlagTexture 'img\logo.paa';  
-_f1 setPos [6321.55,7791.93,0.00411987];
-
-//Klen Trader 
-_f2 =  "FlagCarrierBIS_EP1" createVehicleLocal [11473.7,11365,0.00146484];
-_f2 setFlagTexture 'img\logo.paa';  
-_f2 setPos [11473.7,11365,0.00146484];
-
-//Bash Trader
-_f3 =  "FlagCarrierBIS_EP1" createVehicleLocal [4056.55,11662.1,0.0017395];
-_f3 setFlagTexture 'img\logo.paa';  
-_f3 setPos [4056.55,11662.1,0.0017395];
-
-//NEAF Aircraft Dealer
-_f4 =  "FlagCarrierBIS_EP1" createVehicleLocal [12048.2,12649.3,0.00143433];
-_f4 setFlagTexture 'img\logo.paa';  
-_f4 setPos [12048.2,12649.3,0.00143433];
-
-//Hero Trader
-_f5 =  "FlagCarrierBIS_EP1" createVehicleLocal [12943.2,12759.2,0.00134277];
-_f5 setFlagTexture 'img\logo.paa';  
-_f5 setPos [12943.2,12759.2,0.00134277];
-
-//Bandit Trader
-_f6 =  "FlagCarrierBIS_EP1" createVehicleLocal [1623.79,7798.52,0.00152588];
-_f6 setFlagTexture 'img\logo.paa';  
-_f6 setPos [1623.79,7798.52,0.00152588];
-
-//Balota Wholesaler
-_f7 =  "FlagCarrierBIS_EP1" createVehicleLocal [4361.21,2261.7,0.00143886];
-_f7 setFlagTexture 'img\logo.paa';  
-_f7 setPos [4361.21,2261.7,0.00143886];
-
-//Cherno Boat Dealer
-_f8 =  "FlagCarrierBIS_EP1" createVehicleLocal [8008.73,2905.32,0.00109911];
-_f8 setFlagTexture 'img\logo.paa';  
-_f8 setPos [8008.73,2905.32,0.00109911];
-
-//Solnichy Boat Dealer
-_f9 =  "FlagCarrierBIS_EP1" createVehicleLocal [13434.3,5443.32,0.000936985];
-_f9 setFlagTexture 'img\logo.paa';  
-_f9 setPos [13434.3,5443.32,0.000936985];
-
-//Solnichy Wholesaler
-_f10 =  "FlagCarrierBIS_EP1" createVehicleLocal [13530,6356.39,0.00143886];
-_f10 setFlagTexture 'img\logo.paa';  
-_f10 setPos [13530,6356.39,0.00143886];
