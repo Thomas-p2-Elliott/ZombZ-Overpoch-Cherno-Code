@@ -28,7 +28,7 @@ if (!hasInterface && !isDedicated && !isServer) exitWith {
 	  	//enable/disable P2AI? Requires Global Server/HC setting; See: _allConfig.sqf
 
 		//enable AI missions? (requires P2AI)
-		P2AI_MissionsEnabled = false;
+		P2AI_MissionsEnabled = true;
 		diag_log(format['%1: %2: %3','[P2AI]:Events_Config','P2AI_MissionsEnabled',P2AI_MissionsEnabled]);
 
 		//enable Devils Castle AI? (requires P2AI)
