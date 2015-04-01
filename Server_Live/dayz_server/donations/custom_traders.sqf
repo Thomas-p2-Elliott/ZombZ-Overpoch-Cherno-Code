@@ -3,11 +3,11 @@
 
 
 /*
-_unit_17 = objNull;
+_cTrader_1 = objNull;
 if (true) then
 {
   _this = createAgent ["RU_Villager3", [7996.1021, 2899.0759, 0.6355527], [], 0, "CAN_COLLIDE"];
-  _unit_17 = _this;
+  _cTrader_1 = _this;
 
   _this setDir 86.85891;
   _this setVehicleInit "this allowDammage false; this disableAI 'FSM'; this disableAI 'MOVE'; this disableAI 'AUTOTARGET'; this disableAI 'TARGET'; this setBehaviour 'CARELESS'; this forceSpeed 0;";
