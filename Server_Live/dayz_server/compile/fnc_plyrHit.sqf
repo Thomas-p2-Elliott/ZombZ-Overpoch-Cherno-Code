@@ -41,6 +41,17 @@ _v setVariable["AttackedByName", (name _a), true];
 _v setVariable["AttackedByWeapon", _wep, true];
 _v setVariable["AttackedFromDistance", _dist, true];
 
+/* TOM PLEASE CHECK
+//gorsy debug kill punishment
+_gridPosA = mapGridPosition getPos _a;
+_convert = parseNumber _gridPosA;
+
+if ( _convert > 400000) then {
+	_splat = [655.216,74.605,10000];
+	(getPlayerUID _a) setPos _splat;	
+};
+*/
+
 
 /*---------------------------------------------------------------------------
 Stats Logging
