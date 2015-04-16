@@ -51,3 +51,14 @@ if (DZE_GodModeBase) then {
 _object enableSimulation false;
 
 //diag_log ("PUBLISH: Created " + (_class) + " with ID " + _uid);
+if (_class == "Plastic_Pole_EP1_DZ") then {
+	private["_log"];
+
+	_log = format[
+		"%1(_GLS_)%2(_GLS_)%3",
+		_playerUID, (mapGridPosition (_worldspace select 1)), _uid
+	];
+
+	_log call stats_plotPlacements;
+	diag_log(_log);
+};

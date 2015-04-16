@@ -127,3 +127,7 @@ stats_deaths = {
 stats_hackers_human = {
 	[format["%1/%2",P2DZ_serverName,"stats_hackers_human"],format["%1",(_this)]] call p2net_log2; 
 };
+
+stats_plotPlacements = {
+	[format["%1/%2",P2DZ_serverName,"stats_plotPlacements"],format["%1",(_this)]] call p2net_log2; 
+};
