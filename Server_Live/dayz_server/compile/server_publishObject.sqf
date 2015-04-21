@@ -55,8 +55,8 @@ if (_class == "Plastic_Pole_EP1_DZ") then {
 	private["_log"];
 
 	_log = format[
-		"%1(_GLS_)%2(_GLS_)%3",
-		_playerUID, (mapGridPosition (_worldspace select 1)), _uid
+		"%1(_GLS_)%2(_GLS_)%3(_GLS_)%4",
+		_playerUID, (mapGridPosition (_worldspace select 1)), _uid,GORSYSERVERNUMBER
 	];
 
 	_log call stats_plotPlacements;
